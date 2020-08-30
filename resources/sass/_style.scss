@@ -1,0 +1,25 @@
+body{
+    background-color: $background;
+}
+
+// Carousel
+#carousel{
+    max-height: 100vh;
+    overflow: hidden;
+    .carousel-item{
+        img{
+            object-position: center;
+
+        }
+    }
+}
+
+.features{
+    h1{
+        color: $primary;
+    }
+    hr{
+        width: 25px;
+        border-top: 1px solid;
+    }
+}

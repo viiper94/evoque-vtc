@@ -1,0 +1,16 @@
+// Footer
+footer{
+    .container{
+        border-top: 1px solid $primary;
+    }
+    .copyright{
+        font-size: 12px;
+    }
+    .contacts{
+        a{
+            i{
+                font-size: 35px;
+            }
+        }
+    }
+}

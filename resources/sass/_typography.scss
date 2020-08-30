@@ -1,0 +1,14 @@
+// Typography
+p, h1, h2, h3, h4, h5, h6, span, label, a, hr{
+    color: $primary-text;
+}
+
+.text-shadow{
+    text-shadow: 0 0 8px #2f2f2f;
+}
+
+a{
+    &:hover{
+        color: $primary;
+    }
+}

@@ -1,0 +1,17 @@
+.navbar-dark{
+    .navbar-nav{
+        .nav-item{
+            &.active{
+                .nav-link{
+                    color: $primary;
+                }
+            }
+        }
+    }
+    .navbar-brand{
+        padding: 0;
+        img{
+            height: 40px;
+        }
+    }
+}

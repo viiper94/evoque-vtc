@@ -1,1 +1,16 @@
-//
+@import "~bootstrap/scss/bootstrap.scss";
+
+// Variables
+//@import 'variables';
+
+// Fonts
+//@import 'fonts';
+
+// reset
+*{
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    font-family: $font-family-sans-serif;
+}

@@ -1,10 +1,12 @@
+@import 'variables';
+
 // reset
 *{
     margin: 0;
     padding: 0;
     outline: 0;
     border: 0;
-    //font-family: $font-family-sans-serif;
+    font-family: $font-family-sans-serif;
 }
 
 @import "~bootstrap/scss/bootstrap.scss";
@@ -13,11 +15,14 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
-//@import 'fonts';
+@import 'fonts';
 
-@import 'variables';
 @import "typography";
 @import "navbar";
 @import "footer";
 @import "scrollbar";
-@import "style";
+@import "forms";
+
+@import "home";
+@import "apply";
+@import "rules";

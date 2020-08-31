@@ -21,3 +21,22 @@ ul.rules{
         }
     }
 }
+@media (max-width: 768px){
+    ul.rules {
+        h1{
+            &.paragraph-number {
+                text-align: left;
+                border-right: none;
+            }
+            &.paragraph-title{
+                line-height: inherit;
+            }
+        }
+        .blockquote{
+            margin-left: auto;
+            p{
+                line-height: 35px;
+            }
+        }
+    }
+}

@@ -5,10 +5,10 @@
 <div class="container mt-5">
     <ul class="rules pt-5">
         <li class="p-1 row">
-            <h1 class="paragraph-number display-2 pr-5">§1</h1>
-            <h1 class="paragraph-title pl-5">Должен знать каждый</h1>
+            <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§1</h1>
+            <h1 class="paragraph-title pl-md-5 pl-sm-1">Должен знать каждый</h1>
             <blockquote class="blockquote">
-                <p class="ml-5">
+                <p class="ml-md-5">
                     <b>1.1</b> ВТК "EVOQUE" в сокращении читается и произностится <b>Эвок</b> и является словом несклоняемым. <br>
                     <b>1.2</b> Не знание данных правил не освобождает от ответственности, лицо нарушившее правила будет привлечено к штрафным санкциям вплоть до увольнения из ВТК без права на восстановление. <br>
                     <b>1.3</b> Данные правила могут быть изменены в любой момент. <br>
@@ -17,10 +17,10 @@
             </blockquote>
         </li>
         <li class="p-2 row mt-5">
-            <h1 class="paragraph-number display-2 pr-5">§2</h1>
-            <h1 class="paragraph-title pl-5">Вступление в ВТК</h1>
+            <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§2</h1>
+            <h1 class="paragraph-title pl-md-5 pl-sm-1">Вступление в ВТК</h1>
             <blockquote class="blockquote">
-                <p class="ml-5">
+                <p class="ml-md-5">
                     <b>2.1</b> Заявление на приём в компанию вы можете оставить перейдя вот по <a href="{{ route('apply') }}">этой ссылке</a> или нажав на соответствующую картинку в Основном Меню компании. <br>
                     <b>2.2</b> Администрация может отказать в приёме без объяснения причины! <br>
                     <b>2.3</b> В обязательном порядке изучите данные правила. <br>
@@ -37,10 +37,10 @@
             </blockquote>
         </li>
         <li class="p-3 row mt-5">
-            <h1 class="paragraph-number display-2 pr-5">§3</h1>
-            <h1 class="paragraph-title pl-5">Правила конвоев</h1>
+            <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§3</h1>
+            <h1 class="paragraph-title pl-md-5 pl-sm-1">Правила конвоев</h1>
             <blockquote class="blockquote">
-                <p class="ml-5">
+                <p class="ml-md-5">
                     <b>3.1</b> При подготовке к конвою вы обязаны зайти в TeamSpeak 3 и находиться там до конца мероприятия. <br>
                     <b>3.2</b> При участии в официальных конвоях компании в профиле TruckersMP должен стоять префикс [EVOQUE] далее ваш никнейм. <br>
                     <b>3.3</b> Всю информацию по конвою (старт, отдых, финиш, время, сервер, кто ведущий, какой тягач, окрас и груз) и другую информацию вы сможете найти в закрытой группе для сотрудников компании примерно за 24 часа до мероприятия. <br>

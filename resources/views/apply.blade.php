@@ -53,21 +53,21 @@
     <section id="apply-form" class="pt-5 mb-5">
         <form action="#" method="post">
             <div class="row">
-                <div class="form-group col">
+                <div class="form-group col-md-6 col-sm-12">
                     <label for="name">Имя и фамилия</label>
                     <input type="text" class="form-control" id="name" required>
                 </div>
-                <div class="form-group col">
+                <div class="form-group col-md-6 col-sm-12">
                     <label for="nickname">Игровой ник</label>
                     <input type="text" class="form-control" id="nickname" required>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col">
+                <div class="form-group col-md-6 col-sm-12">
                     <label for="age">Ваш возраст</label>
                     <input type="number" class="form-control" id="age" min="10" required>
                 </div>
-                <div class="form-group col">
+                <div class="form-group col-md-6 col-sm-12">
                     <label for="hours_played">Сколько сыграно часов в ETS2 в Steam</label>
                     <input type="number" class="form-control" id="hours_played" min="0" required>
                 </div>

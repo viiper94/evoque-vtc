@@ -1,4 +1,8 @@
 .navbar-dark{
+    .navbar-toggler{
+        border: none;
+        outline: none;
+    }
     .navbar-nav{
         .nav-item{
             &.active{

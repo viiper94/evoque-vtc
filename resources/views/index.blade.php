@@ -88,7 +88,7 @@
     <section class="apply mt-5 mb-5 pt-5 pb-5">
         <div class="apply-wrapper text-center">
             <h1 class="mb-5">Заинтересован? Присоединяйся!</h1>
-            <a class="btn btn-outline-warning btn-lg" href="#">Вступить</a>
+            <a class="btn btn-outline-warning btn-lg" href="{{ route('apply') }}">Вступить</a>
         </div>
     </section>
 </div>

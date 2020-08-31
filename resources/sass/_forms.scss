@@ -1,0 +1,22 @@
+// Forms
+.form-control{
+    border-color: $primary;
+    background: $background-lighten-1;
+    color: $primary-text;
+    &:focus{
+        background: $background;
+        color: $primary-text;
+    }
+}
+.custom-control-input{
+    &:checked ~ .custom-control-label::before{
+        color: $primary-text;
+    }
+    &:not(:disabled):active ~ .custom-control-label::before{
+        background-color: $background-lighten-3;
+    }
+}
+.custom-control-label::before{
+    background-color: $background-lighten-1;
+    border: $primary solid 1px;
+}

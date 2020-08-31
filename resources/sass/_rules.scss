@@ -1,0 +1,23 @@
+// Rules page
+ul.rules{
+    h1{
+        &.paragraph-number{
+            width: 150px;
+            text-align: right;
+            border-right: 1px solid $primary-text;
+        }
+        &.paragraph-title{
+            line-height: 105px;
+        }
+        color: $primary;
+    }
+    .blockquote{
+        margin-left: 150px;
+        p{
+            line-height: 35px;
+            b, a{
+                color: $primary;
+            }
+        }
+    }
+}

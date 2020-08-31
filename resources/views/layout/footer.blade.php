@@ -11,10 +11,10 @@
                         <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Правила</a>
+                        <a class="nav-link" href="{{ route('rules') }}">Правила</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">О нас</a>
+                        <a class="nav-link" href="{{ route('home') }}">О нас</a>
                     </li>
                 </ul>
             </div>

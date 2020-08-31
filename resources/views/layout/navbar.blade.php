@@ -10,7 +10,7 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-uppercase font-weight-bold text-shadow">
                     <li class="nav-item @if(Request::is('/'))active @endif">
-                        <a class="nav-link" href="#">@lang('navbar.about')</a>
+                        <a class="nav-link" href="{{ route('home') }}">@lang('navbar.about')</a>
                     </li>
                     <li class="nav-item @if(Request::is('/rules'))active @endif">
                         <a class="nav-link" href="{{ route('rules') }}">@lang('navbar.rules')</a>

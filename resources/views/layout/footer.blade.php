@@ -2,13 +2,13 @@
     <div class="container pt-5 pb-5 pl-5 pr-5">
         <div class="row">
             <div class="col-md-3 col-sm-12 row flex-column justify-content-center align-items-center ml-0">
-                <h1>@lang('general.vtc_evoque')</h1>
+                <h2>@lang('general.vtc_evoque')</h2>
                 <span class="copyright">Все права защищены &copy; {{ date('Y') }}</span>
             </div>
             <div class="col-md-3 col-sm-12">
                 <ul class="nav flex-column text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Вступить</a>
+                        <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Правила</a>
@@ -24,7 +24,7 @@
                         <a class="nav-link" href="#">Команда</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Галлерея</a>
+                        <a class="nav-link" href="#">Жалоба на водителя</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Для сотрудников</a>

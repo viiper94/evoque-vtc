@@ -1,0 +1,45 @@
+// Apply page
+.apply-requirements{
+    .with-img{
+        background-image: url(/assets/img/actros-600.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right bottom;
+    }
+    h1{
+        margin-left: 73px;
+        color: $primary;
+    }
+    ul li{
+        .icon-wrapper{
+            border-right: 1px solid $primary-text;
+            width: 60px;
+            i{
+                color: $primary;
+                font-size: 35px;
+            }
+        }
+        p{
+            line-height: 37px;
+            margin: 0 30px;
+            flex: 1;
+            font-size: 20px;
+        }
+    }
+}
+
+.apply-call-to-action{
+    a{
+        display: block;
+        width: 60px;
+        height: 60px;
+        background: none;
+        outline: none;
+        border: none;
+        border-radius: 50%;
+    }
+    i{
+        color: $primary;
+        font-size: 60px;
+    }
+}

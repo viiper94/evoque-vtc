@@ -18,4 +18,8 @@ class Controller extends BaseController{
         return view('rules');
     }
 
+    public function apply(){
+        return view('apply');
+    }
+
 }

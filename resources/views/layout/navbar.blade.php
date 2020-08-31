@@ -16,7 +16,7 @@
                         <a class="nav-link" href="#">@lang('navbar.rules')</a>
                     </li>
                     <li class="nav-item @if(Request::is('/apply'))active @endif">
-                        <a class="nav-link" href="#">@lang('navbar.apply')</a>
+                        <a class="nav-link" href="{{ route('apply') }}">@lang('navbar.apply')</a>
                     </li>
                     <li class="nav-item @if(Request::is('/login'))active @endif">
                         <a class="nav-link" href="#">@lang('navbar.login')<i class="fas fa-sign-in-alt"></i></a>

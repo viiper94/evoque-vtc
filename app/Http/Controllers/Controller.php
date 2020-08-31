@@ -14,4 +14,8 @@ class Controller extends BaseController{
         return view('index');
     }
 
+    public function rules(){
+        return view('rules');
+    }
+
 }

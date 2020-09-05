@@ -13663,7 +13663,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_js_bootstrap_min__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_js_bootstrap_min__WEBPACK_IMPORTED_MODULE_1__);
 
 
-console.log(jquery__WEBPACK_IMPORTED_MODULE_0___default()(undefined));
 
 /***/ }),
 

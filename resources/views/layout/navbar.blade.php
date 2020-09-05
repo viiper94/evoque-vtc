@@ -12,13 +12,16 @@
                     <li class="nav-item @if(Request::is('/'))active @endif">
                         <a class="nav-link" href="{{ route('home') }}">@lang('navbar.about')</a>
                     </li>
-                    <li class="nav-item @if(Request::is('/rules'))active @endif">
+                    <li class="nav-item @if(Request::is('convoys'))active @endif">
+                        <a class="nav-link" href="{{ route('convoys') }}">@lang('navbar.convoys')</a>
+                    </li>
+                    <li class="nav-item @if(Request::is('rules'))active @endif">
                         <a class="nav-link" href="{{ route('rules') }}">@lang('navbar.rules')</a>
                     </li>
-                    <li class="nav-item @if(Request::is('/apply'))active @endif">
+                    <li class="nav-item @if(Request::is('apply'))active @endif">
                         <a class="nav-link" href="{{ route('apply') }}">@lang('navbar.apply')</a>
                     </li>
-                    <li class="nav-item @if(Request::is('/login'))active @endif">
+                    <li class="nav-item @if(Request::is('login'))active @endif">
                         <a class="nav-link" href="#">@lang('navbar.login')<i class="fas fa-sign-in-alt"></i></a>
                     </li>
                 </ul>

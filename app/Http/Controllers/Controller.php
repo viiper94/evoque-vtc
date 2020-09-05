@@ -14,7 +14,7 @@ class Controller extends BaseController{
         return view('index');
     }
 
-    public function rules(){
+    public function rulesNobodyRead(){
         return view('rules');
     }
 

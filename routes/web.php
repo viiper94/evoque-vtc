@@ -18,3 +18,6 @@ Route::get('/', 'Controller@index')->name('home');
 Route::get('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules', 'Controller@rulesNobodyRead')->name('rules');
 Route::get('/convoys', 'Controller@convoys')->name('convoys');
+
+Route::get('auth/steam', 'AuthController@redirectToSteam')->name('auth.steam');
+Route::get('auth/steam/handle', 'AuthController@handle')->name('auth.steam.handle');

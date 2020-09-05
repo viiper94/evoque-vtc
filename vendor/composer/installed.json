@@ -1261,6 +1261,63 @@
         ]
     },
     {
+        "name": "invisnik/laravel-steam-auth",
+        "version": "v4.2.0",
+        "version_normalized": "4.2.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/invisnik/laravel-steam-auth.git",
+            "reference": "cb4c5c68ad32e2372d85ce2cca52db7b676a0e7d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/invisnik/laravel-steam-auth/zipball/cb4c5c68ad32e2372d85ce2cca52db7b676a0e7d",
+            "reference": "cb4c5c68ad32e2372d85ce2cca52db7b676a0e7d",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "^6.3",
+            "illuminate/http": "^5.8|^6.0|^7.0",
+            "illuminate/routing": "^5.8|^6.0|^7.0",
+            "illuminate/support": "^5.8|^6.0|^7.0",
+            "php": "^7.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^7.0"
+        },
+        "time": "2020-03-06T11:14:56+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Invisnik\\LaravelSteamAuth\\SteamServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Invisnik\\LaravelSteamAuth\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nikita Brytkov",
+                "email": "invis.nik@gmail.com"
+            }
+        ],
+        "description": "Laravel Steam Auth",
+        "keywords": [
+            "auth",
+            "laravel",
+            "steam"
+        ]
+    },
+    {
         "name": "laravel/framework",
         "version": "v7.27.0",
         "version_normalized": "7.27.0.0",

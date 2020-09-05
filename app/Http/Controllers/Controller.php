@@ -22,4 +22,8 @@ class Controller extends BaseController{
         return view('apply');
     }
 
+    public function convoys(){
+        return view('convoys');
+    }
+
 }

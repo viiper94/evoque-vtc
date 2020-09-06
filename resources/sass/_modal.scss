@@ -1,0 +1,19 @@
+// Modal
+.modal-content-dark{
+    background-color: $background;
+    color: $primary-text;
+    .close{
+        &:focus{
+            outline: none;
+        }
+        i{
+            color: $primary-text;
+        }
+    }
+    .modal-header{
+        border-bottom-color: $background-lighten-2;
+    }
+    .modal-footer{
+        border-top-color: $background-lighten-2;
+    }
+}

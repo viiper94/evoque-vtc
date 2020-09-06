@@ -16,14 +16,17 @@
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/brands";
 @import 'fonts';
-@import 'helpers';
 
+// Common
+@import 'helpers';
 @import "typography";
 @import "navbar";
 @import "footer";
 @import "scrollbar";
 @import "forms";
+@import "modal";
 
+// Pages
 @import "home";
 @import "apply";
 @import "rules";

@@ -7,9 +7,41 @@ body{
     max-height: 100vh;
     overflow: hidden;
     .carousel-item{
+        max-height: 100vh;
         img{
             object-position: center;
-
+        }
+        .carousel-caption{
+            h1{
+                color: $primary;
+            }
+            p{
+                color: white;
+            }
+            &.center-center{
+                top: calc(50% - 160px/2);
+                bottom: auto;
+            }
+            &.top-center{
+                top: 10%;
+                bottom: auto;
+            }
+            &.top-right{
+                top: 10%;
+                right: 10%;
+                left: auto;
+                bottom: auto;
+            }
+        }
+    }
+    .carousel-control-prev, .carousel-control-next{
+        i{
+            font-size: 35px;
+        }
+    }
+    .carousel-indicators{
+        li.active{
+            background-color: $primary;
         }
     }
 }

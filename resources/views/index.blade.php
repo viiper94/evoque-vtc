@@ -9,34 +9,58 @@
         <li data-target="#carousel" data-slide-to="2"></li>
         <li data-target="#carousel" data-slide-to="3"></li>
         <li data-target="#carousel" data-slide-to="4"></li>
-        <li data-target="#carousel" data-slide-to="6"></li>
+        <li data-target="#carousel" data-slide-to="5"></li>
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="/assets/img/carousel/1.jpg" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block text-shadow">
+                <h1 class="display-3">Мы - EVOQUE</h1>
+                <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
+            </div>
         </div>
         <div class="carousel-item">
             <img src="/assets/img/carousel/2.jpg" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block text-shadow">
+                <h1 class="display-3">Мы - EVOQUE</h1>
+                <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
+            </div>
         </div>
         <div class="carousel-item">
             <img src="/assets/img/carousel/3.jpg" class="d-block w-100">
+            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+                <h1 class="display-3">Мы - EVOQUE</h1>
+                <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
+            </div>
         </div>
         <div class="carousel-item">
             <img src="/assets/img/carousel/4.jpg" class="d-block w-100">
+            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+                <h1 class="display-3">Мы - EVOQUE</h1>
+                <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
+            </div>
         </div>
         <div class="carousel-item">
             <img src="/assets/img/carousel/5.jpg" class="d-block w-100">
+            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+                <h1 class="display-3">Мы - EVOQUE</h1>
+                <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
+            </div>
         </div>
         <div class="carousel-item">
             <img src="/assets/img/carousel/6.png" class="d-block w-100">
+            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+                <h1 class="display-3">Мы - EVOQUE</h1>
+                <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
+            </div>
         </div>
     </div>
     <a class="carousel-control-prev text-shadow" href="#carousel" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <i class="fas fa-chevron-left"></i>
         <span class="sr-only">Вперед</span>
     </a>
     <a class="carousel-control-next text-shadow" href="#carousel" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <i class="fas fa-chevron-right"></i>
         <span class="sr-only">Назад</span>
     </a>
 </div>

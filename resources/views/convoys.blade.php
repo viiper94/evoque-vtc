@@ -64,7 +64,7 @@
             </ul>
         </section>
         <section class="route col-md-6 col-sm-12">
-            <a href="/images/convoys/1.jpg" target="_blank"><img src="/images/convoys/1.jpg" class="text-shadow-m"></a>
+            <a href="https://i.imgur.com/8iYAV4Y.jpg" target="_blank"><img src="https://i.imgur.com/8iYAV4Y.jpg" class="text-shadow-m"></a>
         </section>
     </div>
 
@@ -144,7 +144,7 @@
             </ul>
         </section>
         <section class="route col-md-6 col-sm-12">
-            <a href="/images/convoys/1-trailer.jpg" target="_blank"><img src="/images/convoys/1-trailer.jpg" class="text-shadow-m"></a>
+            <a href="https://i.imgur.com/AHMnExu.png" target="_blank"><img src="https://i.imgur.com/AHMnExu.png" class="text-shadow-m"></a>
         </section>
     </div>
 

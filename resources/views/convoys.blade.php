@@ -160,7 +160,7 @@
 
 <!-- TS3 overlay modal -->
 <div class="modal fade" id="ts3-overlay-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
         <div class="modal-content modal-content-dark">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Установки и настройка оверлея TSNotifier для TeamSpeak 3</h5>
@@ -182,11 +182,11 @@
                     </li>
                     <li>
                         <p>Ищите программу TSNotifier в трее (она обозначена как TS).<br>
-                            <img src="/assets/img/modals/ts3-overlay/4.jpg"></p>
+                            <img src="/assets/img/modals/ts3-overlay4.jpg"></p>
                     </li>
                     <li>
                         <p>Кликните правой клавишей мыши по ней и ищите строчку <b>Edit gamesettings.ini</b> и один раз кликните левой кнопкой мыши по ней. Должен открыться блокнот.<br>
-                            <img src="/assets/img/modals/ts3-overlay/5.jpg"></p>
+                            <img src="/assets/img/modals/ts3-overlay5.jpg"></p>
                     </li>
                     <li>
                         <p>Ищите 2 строчки: <br>

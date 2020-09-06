@@ -140,7 +140,7 @@
                     <li>
                         <p><b>Снимите</b> голочку с пункта <b>Скрывать общее время в игре, даже если видны другие данные об играх</b>.<br>
                             На скриншоте снизу показан финальный результат.<br>
-                            <img src="/assets/img/modals/steam-privacy/2.jpg"></p>
+                            <img src="/assets/img/modals/steam-privacy2.jpg"></p>
                     </li>
                     <li>
                         <p>Готово! Данные автоматически сохранятся.</p>
@@ -152,8 +152,8 @@
 </div>
 
 <!-- Ban history modal -->
-<div class="modal fade" id="steam-privacy-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
+<div class="modal fade" id="ban-history-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
         <div class="modal-content modal-content-dark">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Как открыть историю банов в TruckersMP?</h5>
@@ -162,24 +162,26 @@
                 </button>
             </div>
             <div class="modal-body">
+                <p>По умолчанию список банов на TruckersMP не виден для других пользователей.<br>
+                    Чтобы открыть список банов — нужно:</p>
                 <ol class="pl-4">
                     <li>
-                        <p>Зайдите в настройки своего профиля TruckersMP. <br>
-                            <a href="https://truckersmp.com/profile/settings" target="_blank">https://truckersmp.com/profile/settings</a></p>
+                        <p>Зайдите под своими данными в свой профиль на TruckersMP.</p>
                     </li>
                     <li>
-                        <p>Перейдите в раздел <b>Приватность</b>.</p>
+                        <p>Перейдите по пунктам меню <b>Account > Settings</b><br>
+                            или по ссылке - <a href="https://truckersmp.com/profile/settings" target="_blank">https://truckersmp.com/profile/settings</a></p>
                     </li>
                     <li>
-                        <p>Установите параметр <b>Мой профиль</b> и <b>Доступ к игровой информации</b> в значение <b>Открытый</b>.</p>
+                        <p>В открывшемся меню настроек, промотайте страницу вниз и<br>
+                            установите галочку напротив пункта <b>Display your bans on your profile and API</b>.<br>
+                            <img src="/assets/img/modals/ban-history.jpg"></p>
                     </li>
                     <li>
-                        <p><b>Снимите</b> голочку с пункта <b>Скрывать общее время в игре, даже если видны другие данные об играх</b>.<br>
-                            На скриншоте снизу показан финальный результат.<br>
-                            <img src="/assets/img/modals/steam-privacy/2.jpg"></p>
+                        <p>Нажмите <b>Save</b> для сохранения настроек профиля.</p>
                     </li>
                     <li>
-                        <p>Готово! Данные автоматически сохранятся.</p>
+                        <p>Готово!</p>
                     </li>
                 </ol>
             </div>

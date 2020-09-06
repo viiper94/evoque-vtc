@@ -25,14 +25,14 @@
                         <i class="fab fa-steam-symbol"></i>
                     </div>
                     <p>Ваш профиль в Steam не должен быть скрытым<br>
-                        <a href="#how-steam" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
+                        <button data-toggle="modal" data-target="#steam-privacy-modal" class="btn btn-outline-warning btn-sm">Как открыть?</button></p>
                 </li>
                 <li class="row mt-5" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
                         <i class="fas fa-truck-pickup"></i>
                     </div>
                     <p>Ваша история банов на сайте TruckersMP должна быть открыта<br>
-                        <a href="#how-tmp" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
+                        <a data-toggle="modal" data-target="#ban-history-modal" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
                 </li>
                 <li class="row mt-5">
                     <div class="icon-wrapper">
@@ -113,6 +113,78 @@
             </div>
         </form>
     </section>
+</div>
+
+<!-- Steam privacy modal -->
+<div class="modal fade" id="steam-privacy-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
+        <div class="modal-content modal-content-dark">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Как открыть профиль в Steam?</h5>
+                <button type="button" class="close text-shadow" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ol class="pl-4">
+                    <li>
+                        <p>Зайдите в свой Steam профиль через браузер или клиент. <br>
+                            Зайдите в раздел <a href="https://steamcommunity.com/id/14/edit/settings">редактирвания профиля</a>.</p>
+                    </li>
+                    <li>
+                        <p>Перейдите в раздел <b>Приватность</b>.</p>
+                    </li>
+                    <li>
+                        <p>Установите параметр <b>Мой профиль</b> и <b>Доступ к игровой информации</b> в значение <b>Открытый</b>.</p>
+                    </li>
+                    <li>
+                        <p><b>Снимите</b> голочку с пункта <b>Скрывать общее время в игре, даже если видны другие данные об играх</b>.<br>
+                            На скриншоте снизу показан финальный результат.<br>
+                            <img src="/assets/img/modals/steam-privacy/2.jpg"></p>
+                    </li>
+                    <li>
+                        <p>Готово! Данные автоматически сохранятся.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Ban history modal -->
+<div class="modal fade" id="steam-privacy-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
+        <div class="modal-content modal-content-dark">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Как открыть историю банов в TruckersMP?</h5>
+                <button type="button" class="close text-shadow" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ol class="pl-4">
+                    <li>
+                        <p>Зайдите в настройки своего профиля TruckersMP. <br>
+                            <a href="https://truckersmp.com/profile/settings" target="_blank">https://truckersmp.com/profile/settings</a></p>
+                    </li>
+                    <li>
+                        <p>Перейдите в раздел <b>Приватность</b>.</p>
+                    </li>
+                    <li>
+                        <p>Установите параметр <b>Мой профиль</b> и <b>Доступ к игровой информации</b> в значение <b>Открытый</b>.</p>
+                    </li>
+                    <li>
+                        <p><b>Снимите</b> голочку с пункта <b>Скрывать общее время в игре, даже если видны другие данные об играх</b>.<br>
+                            На скриншоте снизу показан финальный результат.<br>
+                            <img src="/assets/img/modals/steam-privacy/2.jpg"></p>
+                    </li>
+                    <li>
+                        <p>Готово! Данные автоматически сохранятся.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </div>
 
 @endsection

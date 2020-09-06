@@ -17137,18 +17137,21 @@ footer .contacts a i {
   font-size: 35px;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+.modal-body::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 10px;
   height: 10px;
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+.modal-body::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 0;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+.modal-body::-webkit-scrollbar-thumb {
   cursor: pointer;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.25);
@@ -17156,11 +17159,13 @@ body::-webkit-scrollbar-thumb {
   transition: color 0.2s ease;
 }
 
-body::-webkit-scrollbar-thumb:window-inactive {
+body::-webkit-scrollbar-thumb:window-inactive,
+.modal-body::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(0, 0, 0, 0.15);
 }
 
-body::-webkit-scrollbar-thumb:hover {
+body::-webkit-scrollbar-thumb:hover,
+.modal-body::-webkit-scrollbar-thumb:hover {
   background: rgba(128, 135, 139, 0.8);
 }
 
@@ -17186,6 +17191,27 @@ body::-webkit-scrollbar-thumb:hover {
 .custom-control-label::before {
   background-color: #333333;
   border: #e4c501 solid 1px;
+}
+
+.modal-content-dark {
+  background-color: #333333;
+  color: #bbbbbb;
+}
+
+.modal-content-dark .close:focus {
+  outline: none;
+}
+
+.modal-content-dark .close i {
+  color: #bbbbbb;
+}
+
+.modal-content-dark .modal-header {
+  border-bottom-color: #424242;
+}
+
+.modal-content-dark .modal-footer {
+  border-top-color: #424242;
 }
 
 body {

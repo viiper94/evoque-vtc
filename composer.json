@@ -9,13 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3",
         "invisnik/laravel-steam-auth": "^4.2",
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.2"
+        "laravel/ui": "^2.2",
+        "truckersmp/api-client": "^1.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.4",

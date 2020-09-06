@@ -1,0 +1,28 @@
+// Helpers
+.btn-outline-warning{
+    color: $primary;
+    border-color: $primary;
+    &:hover{
+        background-color: $primary;
+        border-color: $primary;
+    }
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active{
+        background-color: $primary-darker;
+        border-color: $primary-darker;
+    }
+}
+
+.btn-warning{
+    background-color: $primary;
+    border-color: $primary;
+    &:hover{
+        background-color: $primary-lighten;
+        border-color: $primary-lighten;
+    }
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active{
+        background-color: $primary-darker;
+        border-color: $primary-darker;
+    }
+}

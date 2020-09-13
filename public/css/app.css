@@ -17119,12 +17119,8 @@ a:hover {
 
 .navbar-dark .navbar-nav .nav-item .nav-link.avatar img {
   width: 35px;
-  border-radius: 50%;
+  border-radius: 12%;
   vertical-align: text-top;
-}
-
-.navbar-dark .navbar-nav .nav-item .nav-link.avatar span {
-  padding: 0.5rem 1rem;
 }
 
 .navbar-dark .navbar-brand {

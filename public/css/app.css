@@ -17117,6 +17117,16 @@ a:hover {
   color: rgba(255, 255, 255, 0.8);
 }
 
+.navbar-dark .navbar-nav .nav-item .nav-link.avatar img {
+  width: 35px;
+  border-radius: 50%;
+  vertical-align: text-top;
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link.avatar span {
+  padding: 0.5rem 1rem;
+}
+
 .navbar-dark .navbar-brand {
   padding: 0;
 }

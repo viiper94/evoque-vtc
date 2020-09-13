@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div id="carousel" class="carousel slide" data-ride="carousel">
+<div id="carousel" class="carousel slide text-shadow-m" data-ride="carousel">
     <ol class="carousel-indicators">
         <li data-target="#carousel" data-slide-to="0" class="active"></li>
         <li data-target="#carousel" data-slide-to="1"></li>

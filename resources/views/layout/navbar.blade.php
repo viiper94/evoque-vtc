@@ -26,11 +26,11 @@
                             <a class="nav-link" href="{{ route('auth.steam') }}">@lang('navbar.login') <i class="fab fa-steam"></i></a>
                         </li>
                     @else
-                        <li class="nav-item @if(Request::is('evoque'))active @endif">
-                            <a class="nav-link" href="{{ route('evoque') }}">@lang('navbar.login')</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('profile') }}">@lang('navbar.profile')</a>
                         </li>
                         <li class="nav-item @if(Request::is('profile'))active @endif">
-                            <a class="nav-link" href="{{ route('profile') }}"><img src="{{ Auth::user()->image }}" alt="Профиль"></a>
+                            <a class="nav-link avatar p-0" href="{{ route('profile') }}"><img src="{{ Auth::user()->image }}" alt="Профиль"></a>
                         </li>
                     @endguest
                 </ul>

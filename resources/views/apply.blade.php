@@ -106,7 +106,7 @@
             </div>
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="requirements_agreed">
-                <label class="custom-control-label" for="requirements_agreed">Сменить окраску грузовика на официальную, поставить префикс в Steam и поменять номерной знак на сайте World of Trucks по требованию компании готов.</label>
+                <label class="custom-control-label" for="requirements_agreed">Сменить окрас грузовика на официальный, поставить префикс в профиле на сайте TruckersMP и поменять номерной знак на сайте World of Trucks по требованию компании готов.</label>
             </div>
             <div class="row justify-content-center">
                 <button type="submit" class="btn btn-outline-warning btn-lg">Отправить</button>

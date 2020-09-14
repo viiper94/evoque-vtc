@@ -16,4 +16,12 @@ class Member extends Model{
         'user_id'
     ];
 
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function role(){
+        return $this->belongsToMany('App\Role', 'role_member');
+    }
+
 }

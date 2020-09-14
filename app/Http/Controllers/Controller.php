@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Member;
+use App\Role;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -24,6 +26,10 @@ class Controller extends BaseController{
 
     public function convoys(){
         return view('convoys');
+    }
+
+    public function members(){
+        return view('members', ['members' => Member::with(['user', 'role'])->get()]);
     }
 
 }

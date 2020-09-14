@@ -21,7 +21,7 @@
             <div class="col-md-3 col-sm-12">
                 <ul class="nav flex-column text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Команда</a>
+                        <a class="nav-link" href="{{ route('members') }}">Команда</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Жалоба на водителя</a>

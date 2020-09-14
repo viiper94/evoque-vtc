@@ -21,5 +21,7 @@ Route::get('/', 'Controller@index')->name('home');
 Route::get('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules', 'Controller@rulesNobodyRead')->name('rules');
 Route::get('/convoys', 'Controller@convoys')->name('convoys');
+Route::get('/members', 'Controller@members')->name('members');
+
 Route::get('/evoque', 'EvoqueController@index')->name('evoque');
 Route::get('/profile', 'EvoqueController@profile')->name('profile');

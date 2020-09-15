@@ -33,7 +33,10 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'isAdmin' => 'boolean',
-    ];
+    protected $casts = [];
+
+    public function member(){
+        return $this->hasOne('App\Member');
+    }
+
 }

@@ -81,7 +81,7 @@
             <p>конвоев ежедневно</p>
         </div>
         <div class="feature col-md-4 col-sm-12">
-            <h1 class="display-2 font-weight-bold">34</h1>
+            <h1 class="display-2 font-weight-bold">{{ $members_count }}</h1>
             <hr class="m-auto pb-3">
             <p>опытных водителя</p>
         </div>

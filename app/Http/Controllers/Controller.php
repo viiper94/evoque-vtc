@@ -13,7 +13,9 @@ class Controller extends BaseController{
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function index(){
-        return view('index');
+        return view('index', [
+            'members_count' => Member::where('visible', 1)->count()
+        ]);
     }
 
     public function rulesNobodyRead(){

@@ -13,7 +13,7 @@
                         <a class="nav-link" href="{{ route('home') }}">@lang('navbar.about')</a>
                     </li>
                     <li class="nav-item @if(Request::is('convoys'))active @endif">
-                        <a class="nav-link" href="{{ route('convoys') }}">@lang('navbar.convoys')</a>
+                        <a class="nav-link" href="{{ route('convoys') }}">@lang('navbar.convoy')</a>
                     </li>
                     <li class="nav-item @if(Request::is('rules'))active @endif">
                         <a class="nav-link" href="{{ route('rules') }}">@lang('navbar.rules')</a>

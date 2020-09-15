@@ -6,7 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model{
 
-    public $fillable = ['group', 'title'];
+    public $fillable = [
+        'group',
+        'title',
+        'admin',
+        'manage_members',
+        'manage_convoys',
+        'manage_table',
+        'manage_rp'
+    ];
 
     public $casts = [
         'admin' => 'boolean',

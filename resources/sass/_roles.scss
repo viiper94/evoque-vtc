@@ -1,0 +1,24 @@
+// Roles
+.roles{
+    h2{
+        color: $primary;
+    }
+}
+.roles-table{
+    td{
+        max-width: 400px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &.role-title{
+            color: $primary;
+        }
+    }
+    i{
+        font-size: 20px;
+        margin: 0 5px;
+        &.active{
+            color: $primary;
+        }
+    }
+}

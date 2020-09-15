@@ -4,6 +4,7 @@
 
     <div class="container members mt-5">
         @foreach($roles as $role_group)
+            @if(count($role_group[0]->members) < 1) @continue @endif
             <section class="pt-5 pb-5">
                 <h2 class="text-center">{{ $role_group[0]->group }}</h2>
                 <div class="row justify-content-center">

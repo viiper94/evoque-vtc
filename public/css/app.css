@@ -17225,6 +17225,10 @@ body::-webkit-scrollbar-thumb:hover,
   border-top-color: #424242;
 }
 
+.table-dark {
+  background-color: #333333;
+}
+
 body {
   background-color: #333333;
 }
@@ -17446,6 +17450,30 @@ ul.rules .blockquote p a {
 
 .members h2,
 .members .member-nickname {
+  color: #e4c501;
+}
+
+.roles h2 {
+  color: #e4c501;
+}
+
+.roles-table td {
+  max-width: 400px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.roles-table td.role-title {
+  color: #e4c501;
+}
+
+.roles-table i {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.roles-table i.active {
   color: #e4c501;
 }
 

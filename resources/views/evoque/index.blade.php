@@ -1,4 +1,4 @@
-@extends('layout.index')
+@extends('evoque.layout.index')
 
 @section('content')
 

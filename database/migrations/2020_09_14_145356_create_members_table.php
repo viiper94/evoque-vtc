@@ -17,7 +17,7 @@ class CreateMembersTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('nickname')->nullable();
-            $table->dateTime('join_date')->nullable();
+            $table->date('join_date')->nullable();
             $table->integer('role_id')->default(0);
             $table->date('birth_date')->nullable();
             $table->integer('convoys')->default(0);

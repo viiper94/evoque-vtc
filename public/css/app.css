@@ -17068,6 +17068,11 @@ readers do not read off random characters that represent icons */
   border-color: #bfa001;
 }
 
+.card-dark {
+  background-color: #424242;
+  border-color: #424242;
+}
+
 p,
 h1,
 h2,
@@ -17420,5 +17425,27 @@ ul.rules .blockquote p a {
   .ts-download {
     margin: 1rem 0;
   }
+}
+
+.members .card {
+  min-width: 230px;
+}
+
+.members .card .member-links i {
+  font-size: 25px;
+}
+
+.members .card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.members .card .card-body .member-roles {
+  flex: 1;
+}
+
+.members h2,
+.members .member-nickname {
+  color: #e4c501;
 }
 

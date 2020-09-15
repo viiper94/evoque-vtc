@@ -8,4 +8,8 @@ class Role extends Model{
 
     public $fillable = ['group', 'title'];
 
+    public function members(){
+        return $this->belongsToMany('App\Member', 'role_member');
+    }
+
 }

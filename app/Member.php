@@ -7,7 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model{
 
     public $casts = [
-        'visible' => 'boolean'
+        'visible' => 'boolean',
+//        'join_date' => 'date:j M, Y',
+
+    ];
+
+    protected $dates = [
+        'join_date',
+        'created_at',
+        'updated_at'
     ];
 
     public $fillable = [

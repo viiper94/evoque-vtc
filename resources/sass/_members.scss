@@ -1,0 +1,19 @@
+// Members
+.members{
+    .card{
+        min-width: 230px;
+        .member-links i{
+            font-size: 25px;
+        }
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            .member-roles{
+                flex: 1;
+            }
+        }
+    }
+    h2, .member-nickname{
+        color: $primary;
+    }
+}

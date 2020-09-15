@@ -29,7 +29,9 @@ class Controller extends BaseController{
     }
 
     public function members(){
-        return view('members', ['members' => Member::with(['user', 'role'])->get()]);
+        return view('members', [
+            'roles' => Role::with(['members', 'members.user', 'members.role'])->get()->groupBy('group')
+        ]);
     }
 
 }

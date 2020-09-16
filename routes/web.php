@@ -24,19 +24,20 @@ Route::get('/convoys', 'Controller@convoys')->name('convoys');
 Route::get('/members', 'Controller@members')->name('members');
 
 Route::get('/profile', 'EvoqueController@profile')->name('profile');
-Route::get('/evoque', 'EvoqueController@index')->name('evoque');
+Route::get('/evoque', 'EvoqueController@members')->name('evoque.members');
 Route::get('/evoque/rules', 'EvoqueController@rules')->name('evoque.rules');
 Route::get('/evoque/convoys', 'EvoqueController@convoys')->name('evoque.convoys');
-Route::get('/evoque/table', 'EvoqueController@table')->name('evoque.table');
 Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');
+
+Route::get('/evoque/admin', 'AdminController@admin')->name('evoque.admin');
 
 Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');
 Route::get('/evoque/admin/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.admin.applications.accept.recruitment');
 Route::get('/evoque/admin/applications/deleteRecruitment/{id}', 'ApplicationsController@deleteRecruitment')->name('evoque.admin.applications.delete.recruitment');
 
-Route::get('/evoque/admin', 'AdminController@admin')->name('evoque.admin');
-
 Route::get('/evoque/admin/roles', 'RolesController@roles')->name('evoque.admin.roles');
 Route::any('/evoque/admin/roles/edit/{id}', 'RolesController@edit')->name('evoque.admin.roles.edit');
 Route::get('/evoque/admin/roles/delete/{id}', 'RolesController@delete')->name('evoque.admin.roles.delete');
 Route::any('/evoque/admin/roles/add', 'RolesController@add')->name('evoque.admin.roles.add');
+
+Route::get('/evoque/admin/users', 'UsersController@index')->name('evoque.admin.users');

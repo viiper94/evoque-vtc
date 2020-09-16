@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Member;
+use App\Recruitment;
 use App\Role;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController{
@@ -22,7 +24,30 @@ class Controller extends BaseController{
         return view('rules');
     }
 
-    public function apply(){
+    public function apply(Request $request){
+        if($request->post()){
+            $this->validate($request, [
+                'name' => 'required|string',
+                'nickname' => 'required|string',
+                'age' => 'required|numeric',
+                'hours_played' => 'required|numeric',
+                'vk_link' => 'required|url',
+                'steam_link' => 'required|url',
+                'tmp_link' => 'required|url',
+                'rules_agreed' => 'required',
+                'requirements_agreed' => 'required',
+            ]);
+            $application = new Recruitment();
+            $application->fill($request->post());
+            $application->have_mic = $request->input('have_mic') == 'on';
+            $application->have_ts3 = $request->input('have_ts3') == 'on';
+            $application->have_ats = $request->input('have_ats') == 'on';
+            $application->referral = htmlentities(trim($request->input('referral')));
+            $application->status = 0;
+            return $application->save() ?
+                redirect()->route('home')->with(['success' => 'Заявка успешно подана!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
         return view('apply');
     }
 

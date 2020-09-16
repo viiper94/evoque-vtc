@@ -15,7 +15,16 @@ class Recruitment extends Model{
     ];
 
     protected $fillable = [
-        
+        'name',
+        'nickname',
+        'age',
+        'hours_played',
+        'vk_link',
+        'steam_link',
+        'tmp_link',
+        'have_mic',
+        'have_ts3',
+        'have_ats'
     ];
 
 }

@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="container mt-5">
+    @include('layout.alert')
     <section class="apply-requirements row pt-5 pb-5">
         <div class="col mr-5 with-img"></div>
         <div class="col ml-5">
@@ -51,65 +52,97 @@
     </section>
 
     <section id="apply-form" class="pt-5 mb-5">
-        <form action="#" method="post">
+        <form action="#" method="post" class="application-form">
+            @csrf
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="name">Имя и фамилия</label>
-                    <input type="text" class="form-control" id="name" required>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                    @if($errors->has('name'))
+                        <small class="form-text">{{ $errors->first('name') }}</small>
+                    @endif
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="nickname">Игровой ник</label>
-                    <input type="text" class="form-control" id="nickname" required>
+                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ old('nickname') }}" required>
+                    @if($errors->has('nickname'))
+                        <small class="form-text">{{ $errors->first('nickname') }}</small>
+                    @endif
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="age">Ваш возраст</label>
-                    <input type="number" class="form-control" id="age" min="10" required>
+                    <input type="number" class="form-control" name="age" id="age" min="10" value="{{ old('age') }}" required>
+                    @if($errors->has('age'))
+                        <small class="form-text">{{ $errors->first('age') }}</small>
+                    @endif
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="hours_played">Сколько сыграно часов в ETS2 в Steam</label>
-                    <input type="number" class="form-control" id="hours_played" min="0" required>
+                    <input type="number" class="form-control" id="hours_played" name="hours_played" value="{{ old('hours_played') }}" min="0" required>
+                    @if($errors->has('hours_played'))
+                        <small class="form-text">{{ $errors->first('hours_played') }}</small>
+                    @endif
                 </div>
             </div>
             <div class="form-group">
                 <label for="vk_link">Ссылка на Ваш профиль ВКонтакте</label>
-                <input type="url" class="form-control" id="vk_link" required>
+                <input type="url" class="form-control" id="vk_link" name="vk_link" value="{{ old('vk_link') }}" required>
+                @if($errors->has('vk_link'))
+                    <small class="form-text">{{ $errors->first('vk_link') }}</small>
+                @endif
             </div>
             <div class="form-group">
                 <label for="steam_link">Аккаунт Steam</label>
-                <input type="url" class="form-control" id="steam_link" required>
+                <input type="url" class="form-control" id="steam_link" name="steam_link" value="{{ old('steam_link') }}" required>
+                @if($errors->has('steam_link'))
+                    <small class="form-text">{{ $errors->first('steam_link') }}</small>
+                @endif
             </div>
             <div class="form-group">
                 <label for="tmp_link">Аккаунт на TruckersMP</label>
-                <input type="url" class="form-control" id="tmp_link" required>
+                <input type="url" class="form-control" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
+                @if($errors->has('tmp_link'))
+                    <small class="form-text">{{ $errors->first('tmp_link') }}</small>
+                @endif
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="have_mic">
+                <input type="checkbox" class="custom-control-input" id="have_mic" name="have_mic" @if(old('have_mic')) checked @endif>
                 <label class="custom-control-label" for="have_mic">Микрофон</label>
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="have_ts3">
+                <input type="checkbox" class="custom-control-input" id="have_ts3" name="have_ts3" @if(old('have_ts3')) checked @endif>
                 <label class="custom-control-label" for="have_ts3">TeamSpeak 3</label>
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="have_ats">
+                <input type="checkbox" class="custom-control-input" id="have_ats" name="have_ats" @if(old('have_ats')) checked @endif>
                 <label class="custom-control-label" for="have_ats">Наличие American Truck Simulator</label>
             </div>
             <div class="form-group">
                 <label for="referral">Откуда Вы узнали о нас?</label>
-                <textarea class="form-control" id="referral" rows="5"></textarea>
+                <textarea class="form-control" id="referral" rows="5" name="referral" value="{{ old('referral') }}"></textarea>
+                @if($errors->has('referral'))
+                    <small class="form-text">{{ $errors->first('referral') }}</small>
+                @endif
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="rules_agreed">
-                <label class="custom-control-label" for="rules_agreed">Правила мультиплеера и основные правила ВТК обязуюсь соблюдать!</label>
+                <input type="checkbox" class="custom-control-input" id="rules_agreed" name="rules_agreed">
+                <label class="custom-control-label" for="rules_agreed">Правила мультиплеера и основные правила ВТК обязуюсь соблюдать!
+                    @if($errors->has('rules_agreed'))
+                        <small class="form-text">{{ $errors->first('rules_agreed') }}</small>
+                @endif
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="requirements_agreed">
-                <label class="custom-control-label" for="requirements_agreed">Сменить окрас грузовика на официальный, поставить префикс в профиле на сайте TruckersMP и поменять номерной знак на сайте World of Trucks по требованию компании готов.</label>
+                <input type="checkbox" class="custom-control-input" id="requirements_agreed" name="requirements_agreed">
+                <label class="custom-control-label" for="requirements_agreed">Сменить окрас грузовика на официальный,
+                    поставить префикс в профиле на сайте TruckersMP и поменять номерной знак на сайте World of Trucks по требованию компании готов.</label>
+                @if($errors->has('requirements_agreed'))
+                    <small class="form-text">{{ $errors->first('requirements_agreed') }}</small>
+                @endif
             </div>
             <div class="row justify-content-center">
-                <button type="submit" class="btn btn-outline-warning btn-lg">Отправить</button>
+                <button type="submit" class="btn btn-outline-warning btn-lg disabled">Отправить</button>
             </div>
         </form>
     </section>

@@ -18,7 +18,7 @@ Route::get('auth/steam', 'Auth\SteamAuthController@redirectToSteam')->name('auth
 Route::get('auth/steam/handle', 'Auth\SteamAuthController@handle')->name('auth.steam.handle');
 
 Route::get('/', 'Controller@index')->name('home');
-Route::get('/apply', 'Controller@apply')->name('apply');
+Route::any('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules', 'Controller@rulesNobodyRead')->name('rules');
 Route::get('/convoys', 'Controller@convoys')->name('convoys');
 Route::get('/members', 'Controller@members')->name('members');
@@ -29,7 +29,10 @@ Route::get('/evoque/rules', 'EvoqueController@rules')->name('evoque.rules');
 Route::get('/evoque/convoys', 'EvoqueController@convoys')->name('evoque.convoys');
 Route::get('/evoque/table', 'EvoqueController@table')->name('evoque.table');
 Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');
-Route::get('/evoque/applications', 'ApplicationsController@index')->name('evoque.applications');
+
+Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');
+Route::get('/evoque/admin/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.admin.applications.accept.recruitment');
+Route::get('/evoque/admin/applications/deleteRecruitment/{id}', 'ApplicationsController@deleteRecruitment')->name('evoque.admin.applications.delete.recruitment');
 
 Route::get('/evoque/admin', 'AdminController@admin')->name('evoque.admin');
 

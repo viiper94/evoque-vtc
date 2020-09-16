@@ -17500,6 +17500,16 @@ ul.rules .blockquote p a {
   color: #e4c501;
 }
 
+table.users td.user-image {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+}
+
+table.users td.user-image img {
+  height: 49px;
+}
+
 .applications {
   display: flex;
   justify-content: center;
@@ -17518,7 +17528,8 @@ ul.rules .blockquote p a {
 .applications .card:not(.new) h4,
 .applications .card:not(.new) h5,
 .applications .card:not(.new) h6,
-.applications .card:not(.new) a {
+.applications .card:not(.new) a,
+.applications .card:not(.new) small {
   color: #757575;
 }
 

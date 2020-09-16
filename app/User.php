@@ -33,7 +33,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'birth_date' => 'date'
+    ];
 
     public function member(){
         return $this->hasOne('App\Member');

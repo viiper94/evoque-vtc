@@ -10,28 +10,29 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-uppercase font-weight-bold text-shadow">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">@lang('navbar.evoque.home')</a>
+                        <a class="nav-link" href="{{ route('home') }}">Главная</a>
                     </li>
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.convoys')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.convoys') }}">@lang('navbar.evoque.convoys')</a>
+                        <a class="nav-link" href="{{ route('evoque.convoys') }}">Конвои</a>
                     </li>
-                    <li class="nav-item @if(Route::current()->getName() === 'evoque.applications')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.applications') }}">@lang('navbar.evoque.applications')</a>
-                    </li>
+{{--                    <li class="nav-item @if(Route::current()->getName() === 'evoque.applications')active @endif">--}}
+{{--                        <a class="nav-link" href="{{ route('evoque.applications') }}">@lang('navbar.evoque.applications')</a>--}}
+{{--                    </li>--}}
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.rules')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.rules') }}">@lang('navbar.rules')</a>
+                        <a class="nav-link" href="{{ route('evoque.rules') }}">Правила</a>
                     </li>
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.table')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.table') }}">@lang('navbar.evoque.table')</a>
+                        <a class="nav-link" href="{{ route('evoque.table') }}">Таблица</a>
                     </li>
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.rp')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.rp') }}">@lang('navbar.evoque.rp')</a>
+                        <a class="nav-link" href="{{ route('evoque.rp') }}">Рейтинговые перевозки</a>
                     </li>
                     @can('admin')
                         <li class="nav-item dropdown @if(Request::is('evoque/admin/*'))active @endif">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navbar.evoque.admin')</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>
+                                <a class="dropdown-item" href="{{ route('evoque.admin.applications') }}">Заявки</a>
                             </div>
                         </li>
                     @endcan

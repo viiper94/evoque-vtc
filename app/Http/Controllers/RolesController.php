@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RolesController extends Controller{
 
     public function roles(){
+        if(Gate::denies('admin')) abort(403);
         return view('evoque.admin.roles.index', [
             'roles' => Role::with('members')->get()
         ]);
     }
 
     public function edit(Request $request, $id){
+        if(Gate::denies('admin')) abort(403);
         $role = Role::findOrFail($id);
         if($request->post() && $id){
             $this->validate($request, [
@@ -37,6 +40,7 @@ class RolesController extends Controller{
     }
 
     public function add(Request $request){
+        if(Gate::denies('admin')) abort(403);
         $role = new Role;
         if($request->post()){
             $this->validate($request, [
@@ -59,6 +63,7 @@ class RolesController extends Controller{
     }
 
     public function delete(Request $request, $id){
+        if(Gate::denies('admin')) abort(403);
         if($id){
             $role = Role::with('members')->where('id', $id)->first();
             $role->members()->detach();

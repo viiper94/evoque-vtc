@@ -21,8 +21,8 @@
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.rules')active @endif">
                         <a class="nav-link" href="{{ route('evoque.rules') }}">Правила</a>
                     </li>
-                    <li class="nav-item @if(Route::current()->getName() === 'evoque.table')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.table') }}">Таблица</a>
+                    <li class="nav-item @if(Route::current()->getName() === 'evoque.members')active @endif">
+                        <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                     </li>
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.rp')active @endif">
                         <a class="nav-link" href="{{ route('evoque.rp') }}">Рейтинговые перевозки</a>
@@ -31,8 +31,9 @@
                         <li class="nav-item dropdown @if(Request::is('evoque/admin/*'))active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>
                                 <a class="dropdown-item" href="{{ route('evoque.admin.applications') }}">Заявки</a>
+                                <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>
+                                <a class="dropdown-item" href="{{ route('evoque.admin.users') }}">Пользователи</a>
                             </div>
                         </li>
                     @endcan

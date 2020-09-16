@@ -27,7 +27,7 @@
                         <a class="nav-link" href="#">Жалоба на водителя</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('evoque') }}">Для сотрудников</a>
+                        <a class="nav-link" href="{{ route('evoque.members') }}">Для сотрудников</a>
                     </li>
                 </ul>
             </div>

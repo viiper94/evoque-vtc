@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class EvoqueController extends Controller{
 
-    public function index(){
-        return view('evoque.index');
+    public function members(){
+        return view('evoque.members');
     }
 
     public function profile(){

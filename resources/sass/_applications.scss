@@ -1,0 +1,34 @@
+// Applications
+.applications{
+    display: flex;
+    justify-content: center;
+    .card{
+        width: 320px;
+        &:not(.new){
+            span, p, label, h1, h2, h3, h4, h5, h6, a, small{
+                color: $primary-text-darker;
+            }
+            a:hover, i.active{
+                color: $primary-text;
+            }
+        }
+        &.new .card-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            b{
+                color: $primary;
+            }
+        }
+        .card-actions{
+            padding: 1.25rem;
+        }
+        i{
+            font-size: 25px;
+            width: 29px;
+            text-align: center;
+            &.active{
+                color: $primary;
+            }
+        }
+    }
+}

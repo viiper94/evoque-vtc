@@ -17128,6 +17128,21 @@ a:hover {
   vertical-align: text-top;
 }
 
+.navbar-dark .navbar-nav .nav-item .dropdown-menu {
+  background-color: #424242;
+}
+
+.navbar-dark .navbar-nav .nav-item .dropdown-menu .dropdown-item {
+  font-weight: bold;
+  color: #bbbbbb;
+}
+
+.navbar-dark .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover,
+.navbar-dark .navbar-nav .nav-item .dropdown-menu .dropdown-item:focus {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #424242;
+}
+
 .navbar-dark .navbar-brand {
   padding: 0;
 }

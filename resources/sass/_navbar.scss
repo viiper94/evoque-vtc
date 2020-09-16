@@ -23,6 +23,17 @@
                     vertical-align: text-top;
                 }
             }
+            .dropdown-menu{
+                background-color: $background-lighten-2;
+                .dropdown-item{
+                    font-weight: bold;
+                    color: $primary-text;
+                    &:hover, &:focus{
+                        color: rgba(255, 255, 255, 0.8);
+                        background-color: $background-lighten-2;
+                    }
+                }
+            }
         }
     }
     .navbar-brand{

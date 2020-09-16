@@ -42,3 +42,5 @@ Route::any('/evoque/admin/roles/add', 'RolesController@add')->name('evoque.admin
 
 Route::get('/evoque/admin/users', 'UsersController@index')->name('evoque.admin.users');
 Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->name('evoque.admin.users.setAsMember');
+
+Route::get('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');

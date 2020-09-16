@@ -17476,6 +17476,32 @@ ul.rules .blockquote p a {
   color: #e4c501;
 }
 
+.members-table table td,
+.members-table table th {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.members-table table td.plate-img,
+.members-table table th.plate-img {
+  width: 228px;
+}
+
+.members-table table td.plate-img img,
+.members-table table th.plate-img img {
+  height: 49px;
+}
+
+.members-table table td.icon-link,
+.members-table table th.icon-link {
+  padding-top: 10px;
+  padding-bottom: 9px;
+}
+
+.members-table table i {
+  font-size: 25px;
+}
+
 .roles h2 {
   color: #e4c501;
 }

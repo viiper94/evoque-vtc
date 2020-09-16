@@ -17,3 +17,25 @@
         color: $primary;
     }
 }
+
+.members-table{
+    table{
+        td, th{
+            white-space: nowrap;
+            text-align: center;
+            &.plate-img{
+                width: 228px;
+                img{
+                    height: 49px;
+                }
+            }
+            &.icon-link{
+                padding-top: 10px;
+                padding-bottom: 9px;
+            }
+        }
+        i{
+            font-size: 25px;
+        }
+    }
+}

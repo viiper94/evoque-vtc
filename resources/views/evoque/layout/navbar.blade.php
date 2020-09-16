@@ -28,8 +28,11 @@
                         <a class="nav-link" href="{{ route('evoque.rp') }}">@lang('navbar.evoque.rp')</a>
                     </li>
                     @can('admin')
-                        <li class="nav-item @if(Request::is('evoque.admin'))active @endif">
-                            <a class="nav-link" href="{{ route('evoque.admin') }}">@lang('navbar.evoque.admin')</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@lang('navbar.evoque.admin')</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>
+                            </div>
                         </li>
                     @endcan
                     <li class="nav-item @if(Request::is('profile'))active @endif">

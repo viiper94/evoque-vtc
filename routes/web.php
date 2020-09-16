@@ -29,7 +29,7 @@ Route::get('/evoque/rules', 'EvoqueController@rules')->name('evoque.rules');
 Route::get('/evoque/convoys', 'EvoqueController@convoys')->name('evoque.convoys');
 Route::get('/evoque/table', 'EvoqueController@table')->name('evoque.table');
 Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');
-Route::get('/evoque/applications', 'EvoqueController@applications')->name('evoque.applications');
+Route::get('/evoque/applications', 'ApplicationsController@index')->name('evoque.applications');
 
 Route::get('/evoque/admin', 'AdminController@admin')->name('evoque.admin');
 

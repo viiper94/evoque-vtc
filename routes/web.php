@@ -24,7 +24,7 @@ Route::get('/convoys', 'Controller@convoys')->name('convoys');
 Route::get('/members', 'Controller@members')->name('members');
 
 Route::get('/profile', 'EvoqueController@profile')->name('profile');
-Route::get('/evoque', 'EvoqueController@members')->name('evoque.members');
+Route::get('/evoque', 'MembersController@index')->name('evoque.members');
 Route::get('/evoque/rules', 'EvoqueController@rules')->name('evoque.rules');
 Route::get('/evoque/convoys', 'EvoqueController@convoys')->name('evoque.convoys');
 Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');

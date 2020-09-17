@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container pt-5 pb-5 roles">
-        <h2 class="mt-3 mb-3">Управление ролями</h2>
+        <h2 class="mt-3 mb-3 text-primary">Управление ролями</h2>
         <table class="table table-dark table-hover roles-table">
             <thead>
                 <tr>

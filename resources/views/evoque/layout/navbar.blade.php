@@ -19,13 +19,13 @@
 {{--                        <a class="nav-link" href="{{ route('evoque.applications') }}">@lang('navbar.evoque.applications')</a>--}}
 {{--                    </li>--}}
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.rules')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.rules') }}">Правила</a>
+                        <a class="nav-link" href="#">Правила</a>
                     </li>
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.members')active @endif">
                         <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                     </li>
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.rp')active @endif">
-                        <a class="nav-link" href="{{ route('evoque.rp') }}">Рейтинговые перевозки</a>
+                        <a class="nav-link" href="#">Рейтинговые перевозки</a>
                     </li>
                     @can('admin')
                         <li class="nav-item dropdown @if(Request::is('evoque/admin/*'))active @endif">

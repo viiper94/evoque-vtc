@@ -32,7 +32,10 @@ class Member extends Model{
     }
 
     public function getPlace(){
-        return implode('/', array_filter([$this->user->city, $this->user->country]));
+        if(isset($this->user->city) || isset($this->user->country)){
+            return implode('/', array_filter([$this->user->city, $this->user->country]));
+        }
+        return '–';
     }
 
     public function isOwner(){

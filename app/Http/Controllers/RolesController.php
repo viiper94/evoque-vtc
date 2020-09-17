@@ -11,7 +11,7 @@ class RolesController extends Controller{
 
     public function roles(){
         if(Gate::denies('admin')) abort(403);
-        return view('evoque.admin.roles.index', [
+        return view('evoque.roles.index', [
             'roles' => Role::with('members')->get()
         ]);
     }
@@ -34,7 +34,7 @@ class RolesController extends Controller{
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно отредактирована!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        return view('evoque.admin.roles.edit', [
+        return view('evoque.roles.edit', [
             'role' => $role
         ]);
     }
@@ -57,7 +57,7 @@ class RolesController extends Controller{
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно добавлена!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        return view('evoque.admin.roles.edit', [
+        return view('evoque.roles.edit', [
             'role' => $role
         ]);
     }

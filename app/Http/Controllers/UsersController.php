@@ -13,7 +13,7 @@ class UsersController extends Controller{
 
     public function index(){
         if(Gate::denies('manage_members')) abort(403);
-        return view('evoque.admin.users', [
+        return view('evoque.users', [
             'users' => User::with('member')->orderBy('created_at', 'desc')->get()
         ]);
     }

@@ -17164,20 +17164,23 @@ footer .contacts a i {
 }
 
 body::-webkit-scrollbar,
-.modal-body::-webkit-scrollbar {
+.modal-body::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 10px;
   height: 10px;
 }
 
 body::-webkit-scrollbar-track,
-.modal-body::-webkit-scrollbar-track {
+.modal-body::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 0;
 }
 
 body::-webkit-scrollbar-thumb,
-.modal-body::-webkit-scrollbar-thumb {
+.modal-body::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
   cursor: pointer;
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.25);
@@ -17186,12 +17189,14 @@ body::-webkit-scrollbar-thumb,
 }
 
 body::-webkit-scrollbar-thumb:window-inactive,
-.modal-body::-webkit-scrollbar-thumb:window-inactive {
+.modal-body::-webkit-scrollbar-thumb:window-inactive,
+.table-responsive::-webkit-scrollbar-thumb:window-inactive {
   background: rgba(0, 0, 0, 0.15);
 }
 
 body::-webkit-scrollbar-thumb:hover,
-.modal-body::-webkit-scrollbar-thumb:hover {
+.modal-body::-webkit-scrollbar-thumb:hover,
+.table-responsive::-webkit-scrollbar-thumb:hover {
   background: rgba(128, 135, 139, 0.8);
 }
 

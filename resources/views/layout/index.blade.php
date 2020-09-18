@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}" media="screen,projection"/>
+    @include('layout.scripts')
     <title>@lang('general.vtc_evoque')</title>
 </head>
 <body>
@@ -17,7 +18,6 @@
 
     @include('layout.footer')
 
-    @include('layout.scripts')
 
 </body>
 </html>

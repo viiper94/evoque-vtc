@@ -17258,6 +17258,10 @@ select::-webkit-scrollbar-thumb:hover {
   background-color: #333333;
 }
 
+.card .card-actions {
+  padding: 1.25rem;
+}
+
 body {
   background-color: #333333;
 }
@@ -17464,6 +17468,33 @@ ul.rules .blockquote p a {
   }
 }
 
+.convoys .card {
+  width: 400px;
+}
+
+.convoys .card:not(.upcoming) span,
+.convoys .card:not(.upcoming) p,
+.convoys .card:not(.upcoming) label,
+.convoys .card:not(.upcoming) h1,
+.convoys .card:not(.upcoming) h2,
+.convoys .card:not(.upcoming) h3,
+.convoys .card:not(.upcoming) h4,
+.convoys .card:not(.upcoming) h5,
+.convoys .card:not(.upcoming) h6,
+.convoys .card:not(.upcoming) a,
+.convoys .card:not(.upcoming) small {
+  color: #757575;
+}
+
+.convoys .card:not(.upcoming) a:hover,
+.convoys .card:not(.upcoming) i.active {
+  color: #bbbbbb;
+}
+
+.convoys .card a:not(.btn) {
+  text-decoration: underline;
+}
+
 .members .card {
   min-width: 230px;
 }
@@ -17581,10 +17612,6 @@ table.users td.user-image img {
 
 .applications .card.new .card-text b {
   color: #e4c501;
-}
-
-.applications .card .card-actions {
-  padding: 1.25rem;
 }
 
 .applications .card i {

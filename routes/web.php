@@ -45,3 +45,6 @@ Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->na
 Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
 
 Route::get('/evoque/convoys', 'ConvoysController@index')->name('evoque.convoys');
+Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
+Route::get('/evoque/admin/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');
+Route::any('/evoque/admin/convoys/edit/{id}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Convoy;
 use App\Member;
 use App\Recruitment;
 use App\Role;
@@ -52,7 +53,9 @@ class Controller extends BaseController{
     }
 
     public function convoys(){
-        return view('convoys');
+        return view('convoys', [
+            'convoy' => Convoy::where(['visible' => '1', 'public' => '1'])->first()
+        ]);
     }
 
     public function members(){

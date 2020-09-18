@@ -44,3 +44,21 @@
         margin: 1rem 0;
     }
 }
+
+// Admin convoys
+.convoys{
+    .card{
+        width: 400px;
+        &:not(.upcoming){
+            span, p, label, h1, h2, h3, h4, h5, h6, a, small{
+                color: $primary-text-darker;
+            }
+            a:hover, i.active{
+                color: $primary-text;
+            }
+        }
+        a:not(.btn){
+            text-decoration: underline;
+        }
+    }
+}

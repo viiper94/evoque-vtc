@@ -3,14 +3,23 @@
 @section('content')
 
 <div class="container pt-5">
-    <h1 class="convoy-title text-center pt-5 pb-5">Открытый конвой ВТК EVOQUE 01.09.20</h1>
+    <h1 class="convoy-title text-center pt-5 pb-5">{{ $convoy->title }} {{ $convoy->start_time->isoFormat('L') }}</h1>
     <div class="row mb-5">
         <section class="convoy-info col-md-6 col-sm-12 text-right">
             <ul>
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
+                        <p>Дата:</p>
+                        <h4>{{ $convoy->start_time->isoFormat('LL') }}</h4>
+                    </div>
+                    <div class="convoy-icon pl-5 pr-4 text-left">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </li>
+                <li class="row justify-content-end">
+                    <div class="mr-4 mb-4">
                         <p>Место старта:</p>
-                        <h2>Глазго (Glasgow) - WGCC</h2>
+                        <h2>{{ $convoy->start }}</h2>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
                         <i class="fas fa-map-marker"></i>
@@ -19,7 +28,7 @@
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
                         <p>Место отдыха:</p>
-                        <h2>Дувр (Dover) - eAcres</h2>
+                        <h2>{{ $convoy->rest }}</h2>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
                         <i class="fas fa-map-marked-alt"></i>
@@ -28,7 +37,7 @@
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
                         <p>Место финиша:</p>
-                        <h2>Реймс (Reims) - eAcres</h2>
+                        <h2>{{ $convoy->finish }}</h2>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
                         <i class="fas fa-map-marker-alt"></i>
@@ -37,7 +46,7 @@
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
                         <p>Встречаемся на сервере:</p>
-                        <h4>Simulation 1</h4>
+                        <h4>{{ $convoy->server }}</h4>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
                         <i class="fas fa-server"></i>
@@ -46,7 +55,7 @@
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
                         <p>Начало конвоя:</p>
-                        <h4>19:00 по МСК</h4>
+                        <h4>{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h4>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
                         <i class="fas fa-hourglass-half"></i>
@@ -55,7 +64,7 @@
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
                         <p>Выезд с места старта:</p>
-                        <h4>19:30 по МСК</h4>
+                        <h4>{{ $convoy->start_time->format('H:i') }} по МСК</h4>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
                         <i class="fas fa-clock"></i>
@@ -64,7 +73,7 @@
             </ul>
         </section>
         <section class="route col-md-6 col-sm-12">
-            <a href="https://i.imgur.com/8iYAV4Y.jpg" target="_blank"><img src="https://i.imgur.com/8iYAV4Y.jpg" class="text-shadow-m"></a>
+            <a href="{{ $convoy->route }}" target="_blank"><img src="{{ $convoy->route }}" class="text-shadow-m"></a>
         </section>
     </div>
 
@@ -111,42 +120,59 @@
         <hr class="m-auto">
     </section>
 
-    <div class="row mb-5 mt-5">
-        <section class="convoy-info col-md-6 col-sm-12 text-right">
-            <ul class="mb-0">
-                <li class="row justify-content-end">
-                    <div class="mr-4 mb-4">
-                        <p>Полуприцеп:</p>
-                        <h2>Шторный</h2>
-                    </div>
-                    <div class="convoy-icon pl-5 pr-4 text-left">
-                        <i class="fas fa-trailer"></i>
-                    </div>
-                </li>
-                <li class="row justify-content-end">
-                    <div class="mr-4 mb-4">
-                        <p>Окрас:</p>
-                        <h4>Trameri</h4>
-                    </div>
-                    <div class="convoy-icon pl-5 pr-4 text-left">
-                        <i class="fas fa-fill"></i>
-                    </div>
-                </li>
-                <li class="row justify-content-end">
-                    <div class="mr-4 mb-4">
-                        <p>Груз:</p>
-                        <h4>&mdash;</h4>
-                    </div>
-                    <div class="convoy-icon pl-5 pr-4 text-left">
-                        <i class="fas fa-truck-loading"></i>
-                    </div>
-                </li>
-            </ul>
-        </section>
-        <section class="route col-md-6 col-sm-12">
-            <a href="https://i.imgur.com/AHMnExu.png" target="_blank"><img src="https://i.imgur.com/AHMnExu.png" class="text-shadow-m"></a>
-        </section>
-    </div>
+    @if(isset($convoy->trailer))
+        <div class="row mb-5 mt-5">
+            <section class="convoy-info col-md-6 col-sm-12 text-right">
+                <ul class="mb-0">
+                    <li class="row justify-content-end">
+                        <div class="mr-4 mb-4">
+                            <p>Полуприцеп:</p>
+                            <h2>{{ $convoy->trailer }}</h2>
+                        </div>
+                        <div class="convoy-icon pl-5 pr-4 text-left">
+                            <i class="fas fa-trailer"></i>
+                        </div>
+                    </li>
+                    @if(isset($convoy->trailer_tuning))
+                        <li class="row justify-content-end">
+                            <div class="mr-4 mb-4">
+                                <p>Окрас:</p>
+                                <h4>{{ $convoy->trailer_tuning }}</h4>
+                            </div>
+                            <div class="convoy-icon pl-5 pr-4 text-left">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </li>
+                    @endif
+                    @if(isset($convoy->trailer_paint))
+                        <li class="row justify-content-end">
+                            <div class="mr-4 mb-4">
+                                <p>Окрас:</p>
+                                <h4>{{ $convoy->trailer_paint }}</h4>
+                            </div>
+                            <div class="convoy-icon pl-5 pr-4 text-left">
+                                <i class="fas fa-fill"></i>
+                            </div>
+                        </li>
+                    @endif
+                    @if(isset($convoy->trailer_cargo))
+                        <li class="row justify-content-end">
+                            <div class="mr-4 mb-4">
+                                <p>Груз:</p>
+                                <h4>{{ $convoy->trailer_cargo }}</h4>
+                            </div>
+                            <div class="convoy-icon pl-5 pr-4 text-left">
+                                <i class="fas fa-truck-loading"></i>
+                            </div>
+                        </li>
+                    @endif
+                </ul>
+            </section>
+            <section class="route col-md-6 col-sm-12">
+                <a href="{{ $convoy->trailer_image }}" target="_blank"><img src="{{ $convoy->trailer_image }}" class="text-shadow-m"></a>
+            </section>
+        </div>
+    @endif
 
     <section class="convoy-note pb-5 m-auto">
         <hr class="m-auto">

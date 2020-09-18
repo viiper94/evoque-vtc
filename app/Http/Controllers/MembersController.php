@@ -11,7 +11,9 @@ class MembersController extends Controller{
 
     public function index(){
         return view('evoque.members.index', [
-            'roles' => Role::with(['members', 'members.user', 'members.role'])->get()->groupBy('group')
+            'roles' => Role::with(['members', 'members.user', 'members.role' => function($query){
+                $query->where('visible', '1');
+            }])->where('visible', 1)->get()->groupBy('group')
         ]);
     }
 

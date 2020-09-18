@@ -13,6 +13,7 @@
                     <th scope="col">Участников</th>
                     <th scope="col">Права</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,13 @@
                             <i class="fas fa-route @if($role->manage_convoys)active @endif"></i>
                             <i class="fas fa-list-alt @if($role->manage_table)active @endif"></i>
                             <i class="fas fa-truck-moving @if($role->manage_rp)active @endif"></i>
+                        </td>
+                        <td>
+                            @if($role->visible)
+                                <i class="fas fa-eye"></i>
+                            @else
+                                <i class="fas fa-eye-slash"></i>
+                            @endif
                         </td>
                         <td>
                             <a href="{{ route('evoque.admin.roles.edit', $role->id) }}"><i class="fas fa-pen-square"></i></a>

@@ -33,6 +33,10 @@
                 <input type="checkbox" class="custom-control-input" id="manage_rp" name="manage_rp" @if($role->manage_rp)checked @endif>
                 <label class="custom-control-label" for="manage_rp">Может модерировать рейтинговые перевозки</label>
             </div>
+            <div class="custom-control custom-checkbox mb-2">
+                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($role->visible) checked @endif>
+                <label class="custom-control-label" for="visible">Показывать эту роль</label>
+            </div>
             <button type="submit" class="btn btn-outline-warning">Сохранить</button>
         </form>
     </div>

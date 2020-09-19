@@ -79,4 +79,12 @@ class ConvoysController extends Controller{
         ]);
     }
 
+    public function delete(Request $request, $id){
+        if(Gate::denies('manage_convoys')) abort(403);
+        $convoy = Convoy::findOrFail($id);
+        return $convoy->delete() ?
+            redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно удалён!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
 }

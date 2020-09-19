@@ -60,7 +60,9 @@ class Controller extends BaseController{
 
     public function members(){
         return view('members', [
-            'roles' => Role::with(['members', 'members.user', 'members.role' => function($query){
+            'roles' => Role::with(['members' => function($query){
+                $query->where('visible', 1);
+            }, 'members.user', 'members.role' => function($query){
                 $query->where('visible', 1);
             }])->where('visible', 1)->get()->groupBy('group')
         ]);

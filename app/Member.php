@@ -50,4 +50,12 @@ class Member extends Model{
         return false;
     }
 
+    public function topRole(){
+        $index = 99;
+        foreach($this->role as $role){
+            if ($role->id < $index) $index = $role->id;
+        }
+        return $index;
+    }
+
 }

@@ -65,6 +65,7 @@ class ConvoysController extends Controller{
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
             $convoy->public = $request->input('public') === 'on';
+            $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             return $convoy->save() ?
                 redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

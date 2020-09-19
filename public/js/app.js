@@ -13664,6 +13664,15 @@ __webpack_require__.r(__webpack_exports__);
 
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rules_agreed, #requirements_agreed').change(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('#rules_agreed').prop('checked') && jquery__WEBPACK_IMPORTED_MODULE_0___default()('#requirements_agreed').prop('checked')) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#submit_btn').prop('disabled', false).removeClass('disabled');
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#submit_btn').prop('disabled', true).addClass('disabled');
+    }
+  });
+});
 
 /***/ }),
 

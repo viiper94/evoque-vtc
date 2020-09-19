@@ -48,4 +48,10 @@
     small{
         color: red;
     }
+    .btn-outline-warning.disabled, .btn-outline-warning:disabled{
+        opacity: 0.25;
+        &:hover{
+            background-color: transparent;
+        }
+    }
 }

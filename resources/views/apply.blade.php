@@ -142,7 +142,7 @@
                 @endif
             </div>
             <div class="row justify-content-center">
-                <button type="submit" class="btn btn-outline-warning btn-lg disabled">Отправить</button>
+                <button type="submit" id="submit_btn" class="btn btn-outline-warning btn-lg disabled" disabled>Отправить</button>
             </div>
         </form>
     </section>

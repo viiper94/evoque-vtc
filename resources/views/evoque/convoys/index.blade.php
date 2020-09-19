@@ -3,10 +3,11 @@
 @section('content')
     <div class="container pt-5 members-table">
         @include('layout.alert')
+        <h2 class="text-primary ml-3">Все конвои</h2>
         @can('manage_convoys')
             <a href="{{ route('evoque.admin.convoy.add') }}" class="btn btn-outline-warning ml-3 mt-3">Создать конвой</a>
         @endcan
-        <div class="convoys mt-5 mb-5">
+        <div class="convoys mt-3 mb-5">
             @foreach($convoys as $convoy)
                 <div class="m-3 card card-dark text-shadow-m @if($convoy->public == 1 && $convoy->isUpcoming())border-primary @endif @if($convoy->isUpcoming())upcoming @endif">
                     <h5 class="card-header">{{ $convoy->title }}</h5>

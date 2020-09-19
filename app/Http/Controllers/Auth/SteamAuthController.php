@@ -89,7 +89,6 @@ class SteamAuthController extends Controller
         }
 
         return User::create([
-            'nickname' => $steam_info->personaname,
             'name' => $steam_info->realname,
             'image' => $steam_info->avatarfull,
             'steamid64' => $steam_info->steamID64,

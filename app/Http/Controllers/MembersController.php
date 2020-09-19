@@ -33,7 +33,7 @@ class MembersController extends Controller{
         }
         return view('evoque.members.edit', [
             'member' => Member::with('role', 'user')->where('id', $id)->first(),
-            'roles' => Role::all()
+            'roles' => Role::where('visible', '1')->get()
         ]);
     }
 

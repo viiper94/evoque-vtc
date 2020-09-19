@@ -18,15 +18,15 @@
 {{--                    <li class="nav-item @if(Route::current()->getName() === 'evoque.applications')active @endif">--}}
 {{--                        <a class="nav-link" href="{{ route('evoque.applications') }}">@lang('navbar.evoque.applications')</a>--}}
 {{--                    </li>--}}
-                    <li class="nav-item @if(Route::current()->getName() === 'evoque.rules')active @endif">
-                        <a class="nav-link" href="#">Правила</a>
-                    </li>
+{{--                    <li class="nav-item @if(Route::current()->getName() === 'evoque.rules')active @endif">--}}
+{{--                        <a class="nav-link" href="#">Правила</a>--}}
+{{--                    </li>--}}
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.members')active @endif">
                         <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                     </li>
-                    <li class="nav-item @if(Route::current()->getName() === 'evoque.rp')active @endif">
-                        <a class="nav-link" href="#">Рейтинговые перевозки</a>
-                    </li>
+{{--                    <li class="nav-item @if(Route::current()->getName() === 'evoque.rp')active @endif">--}}
+{{--                        <a class="nav-link" href="#">Рейтинговые перевозки</a>--}}
+{{--                    </li>--}}
                     @can('admin')
                         <li class="nav-item dropdown @if(Request::is('evoque/admin/*'))active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
@@ -38,7 +38,7 @@
                         </li>
                     @endcan
                     <li class="nav-item @if(Request::is('profile'))active @endif">
-                        <a class="nav-link avatar p-0" href="{{ route('profile') }}"><img src="{{ Auth::user()->image }}" alt="Профиль"></a>
+                        <a class="nav-link avatar p-0" href="#"><img src="{{ Auth::user()->image }}" alt="Профиль"></a>
                     </li>
                 </ul>
             </div>

@@ -30,7 +30,7 @@
                             <a class="nav-link" href="{{ route('evoque.members') }}">@lang('navbar.company')</a>
                         </li>
                         <li class="nav-item @if(Request::is('profile'))active @endif">
-                            <a class="nav-link avatar p-0" href="{{ route('profile') }}"><img src="{{ Auth::user()->image }}" alt="Профиль"></a>
+                            <a class="nav-link avatar p-0" href="#"><img src="{{ Auth::user()->image }}" alt="Профиль"></a>
                         </li>
                     @endguest
                 </ul>

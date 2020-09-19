@@ -26,9 +26,11 @@
                             @if($convoy->public)
                                 <a href="{{ route('convoys') }}" class="btn btn-outline-success" target="_blank">Смотреть</a>
                             @endif
-                            <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning">Редактировать</a>
-                            <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
-                               onclick="return confirm('Удалить этот конвой?')">Удалить</a>
+                            @can('manage_convoys')
+                                <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning">Редактировать</a>
+                                <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
+                                   onclick="return confirm('Удалить этот конвой?')">Удалить</a>
+                            @endcan
                         </div>
                     @endcan
                 </div>

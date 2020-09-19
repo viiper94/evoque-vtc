@@ -1,6 +1,7 @@
 @extends('evoque.layout.index')
 
-@section('script')
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
     <script src="/js/jquery.datetimepicker.full.min.js"></script>
 @endsection
 
@@ -26,8 +27,8 @@
                 @endif
             </div>
             <div class="form-group">
-                <label for="start_time">Время выезда</label>
-                <input type="text" class="form-control" id="start_time" name="start_time" value="{{ $convoy->start_time }}" required>
+                <label for="datetimepicker">Время выезда</label>
+                <input type="text" class="form-control" id="datetimepicker" name="start_time" value="{{ $convoy->start_time->format('d.m.Y H:i') }}" autocomplete="off" required>
                 @if($errors->has('start_time'))
                     <small class="form-text">{{ $errors->first('start_time') }}</small>
                 @endif
@@ -149,5 +150,31 @@
             <button class="btn btn-outline-warning btn-lg" type="submit">Сохранить конвой</button>
         </form>
     </div>
+
+    <script>
+        $('#datetimepicker').datetimepicker({
+            i18n:{
+                ru:{
+                    months:[
+                        'Январь','Февраль','Март','Апрель',
+                        'Май','Июнь','Июль','Август',
+                        'Сентябрь','Октябрь','Ноябрь','Декабрь',
+                    ],
+                    dayOfWeek:[
+                        "Вс", "Пн", "Вт", "Ср",
+                        "Чт", "Пт", "Сб",
+                    ]
+                }
+            },
+            format: 'd.m.Y H:i',
+            lang: 'ru',
+            minDate: '0',
+            step: 30,
+            theme: 'dark',
+            dayOfWeekStart: '1',
+            defaultTime: '19:30'
+        });
+        $.datetimepicker.setLocale('ru');
+    </script>
 
 @endsection

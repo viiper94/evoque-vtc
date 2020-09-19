@@ -9,7 +9,6 @@ class Convoy extends Model{
 
     protected $fillable = [
         'title',
-        'start_time',
         'start',
         'rest',
         'finish',
@@ -28,7 +27,14 @@ class Convoy extends Model{
     ];
 
     protected $casts = [
-        'start_time' => 'dateTime'
+        'visible' => 'boolean'
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'start_time'
     ];
 
     public function isUpcoming(){

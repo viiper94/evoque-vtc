@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Convoy;
 use App\Member;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use TruckersMP\APIClient\Client;
@@ -32,14 +33,17 @@ class ConvoysController extends Controller{
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
             $convoy->public = $request->input('public') === 'on';
+            $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             return $convoy->save() ?
                 redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно создан!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $tmp = new Client();
         $servers = $tmp->servers()->get();
+        $convoy = new Convoy();
+        $convoy->start_time = Carbon::now();
         return view('evoque.convoys.edit', [
-            'convoy' => new Convoy(),
+            'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::all()
         ]);

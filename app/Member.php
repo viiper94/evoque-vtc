@@ -18,6 +18,7 @@ class Member extends Model{
     ];
 
     public $fillable = [
+        'user_id',
         'nickname',
         'join_date',
         'convoys',

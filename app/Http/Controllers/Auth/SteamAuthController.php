@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Member;
+use Carbon\Carbon;
 use Invisnik\LaravelSteamAuth\SteamAuth;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +24,7 @@ class SteamAuthController extends Controller
      *
      * @var string
      */
-    protected $redirectURL = '/evoque';
+    protected $redirectURL = '/';
 
     /**
      * AuthController constructor.
@@ -88,11 +90,19 @@ class SteamAuthController extends Controller
             return $user;
         }
 
-        return User::create([
+        $user = User::create([
             'name' => $steam_info->realname,
             'image' => $steam_info->avatarfull,
             'steamid64' => $steam_info->steamID64,
             'truckersmp_id' => $tmp_info->getId()
         ]);
+        $member = Member::create([
+            'user_id' => $user->id,
+            'nickname' => str_replace('[EVOQUE] ', '', $tmp_info->getName()),
+            'join_date' => Carbon::now(),
+        ]);
+        $member->role()->attach('14');
+        $member->save();
+        return $user;
     }
 }

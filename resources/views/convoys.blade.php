@@ -156,11 +156,11 @@
                                 </div>
                             </li>
                         @endif
-                        @if(isset($convoy->trailer_cargo))
+                        @if(isset($convoy->cargo))
                             <li class="row justify-content-end">
                                 <div class="mr-4 mb-4">
                                     <p>Груз:</p>
-                                    <h4>{{ $convoy->trailer_cargo }}</h4>
+                                    <h4>{{ $convoy->cargo }}</h4>
                                 </div>
                                 <div class="convoy-icon pl-5 pr-4 text-left">
                                     <i class="fas fa-truck-loading"></i>

@@ -17,7 +17,7 @@
                             Старт: <b>{{ $convoy->start }}</b><br>
                             Финиш: <b>{{ $convoy->finish }}</b><br>
                             Сервер: <b>{{ $convoy->server }}</b><br>
-                            Связь: <b>{{ $convoy->communication }}</b><br>
+                            Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
                             <a href="{{ $convoy->route }}" target="_blank">Маршрут</a>
                         </p>
                     </div>

@@ -27,6 +27,8 @@ class ConvoysController extends Controller{
                 'rest' => 'required|string',
                 'finish' => 'required|string',
                 'communication' => 'required|string',
+                'communication_link' => 'required|string',
+                'communication_channel' => 'required|string',
                 'route' => 'required|url',
             ]);
             $convoy = new Convoy();

@@ -90,27 +90,38 @@
             <ul class="col-md-6 col-sm-12 text-right mb-0">
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
-                        <p>Связь ведём через TeamSpeak 3:</p>
-                        <a href="http://invite.teamspeak.com/evoque.ts3srv.ru" target="_blank"><h2>evoque.ts3srv.ru</h2></a>
+                        <p>Связь ведём через {{ $convoy->communication }}:</p>
+                        <a href="{{ $convoy->getCommunicationLink() }}" target="_blank"><h2>{{ $convoy->communication_link }}</h2></a>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
-                        <i class="fab fa-teamspeak"></i>
+                        @if($convoy->communication === 'TeamSpeak 3')
+                            <i class="fab fa-teamspeak"></i>
+                        @elseif($convoy->communication === 'Discord')
+                            <i class="fab fa-discord"></i>
+                        @endif
                     </div>
                 </li>
                 <li class="row justify-content-end">
                     <div class="mr-4">
                         <p>Канал на сервере:</p>
-                        <h4>Открытый конвой ВТК "EVOQUE"</h4>
+                        <h4>{{ $convoy->communication_channel }}</h4>
                     </div>
                     <div class="convoy-icon pl-5 pr-4 text-left">
                         <i class="fas fa-list-alt"></i>
                     </div>
                 </li>
             </ul>
-            <div class="ts-download col-md-6 col-sm-12 row flex-column align-items-center justify-content-center">
-                <a href="https://teamspeak.com/ru/downloads/" target="_blank" class="btn btn-warning btn-lg mb-2">Скачать TeamSpeak 3</a>
-                <button data-toggle="modal" data-target="#ts3-overlay-modal" class="btn btn-outline-warning mt-2">Как настроить оверлей для TS3?</button>
-            </div>
+            @if($convoy->communication === 'TeamSpeak 3')
+                <div class="ts-download col-md-6 col-sm-12 row flex-column align-items-center justify-content-center">
+                    <a href="https://teamspeak.com/ru/downloads/" target="_blank" class="btn btn-warning btn-lg mb-2"><i class="fas fa-download"></i> Скачать TeamSpeak 3</a>
+                    <button data-toggle="modal" data-target="#ts3-overlay-modal" class="btn btn-outline-warning mt-2">Как настроить оверлей для TS3?</button>
+                </div>
+            @elseif($convoy->communication === 'Discord')
+                <div class="ts-download col-md-6 col-sm-12 row flex-column align-items-center justify-content-center">
+                    <a href="https://discord.com/download" target="_blank" class="btn btn-warning btn-lg mb-2"><i class="fas fa-download"></i> Скачать Discord</a>
+                </div>
+            @endif
+
         </section>
 
         <section class="convoy-note pb-5 pt-5 m-auto">

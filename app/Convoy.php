@@ -14,6 +14,8 @@ class Convoy extends Model{
         'finish',
         'server',
         'communication',
+        'communication_link',
+        'communication_channel',
         'lead',
         'truck',
         'truck_tuning',
@@ -40,6 +42,14 @@ class Convoy extends Model{
     public function isUpcoming(){
         $now = Carbon::now();
         return $now->subMinutes(45)->lessThan($this->start_time);
+    }
+
+    public function getCommunicationLink(){
+        $href = '';
+        if($this->communication === 'TeamSpeak 3'){
+            $href .= 'https://invite.teamspeak.com/';
+        }
+        return $href . $this->communication_link;
     }
 
 }

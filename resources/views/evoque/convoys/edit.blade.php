@@ -8,7 +8,13 @@
 @section('content')
 
     <div class="container pt-5">
-        <h2 class="text-primary">Новый конвой</h2>
+        <h2 class="text-primary">
+            @if($convoy->title)
+                Редактирование конвоя
+            @else
+                Новый конвой
+            @endif
+        </h2>
         <form method="post" class="mb-5">
             @csrf
             <div class="custom-control custom-checkbox mb-2">
@@ -25,6 +31,16 @@
                 @if($errors->has('title'))
                     <small class="form-text">{{ $errors->first('title') }}</small>
                 @endif
+            </div>
+            <div class="form-group">
+                <label for="server">Сервер</label>
+                <select class="form-control" id="server" name="server" required>
+                    @foreach($servers as $server)
+                        <option value="{{ $server->getName() }}" @if($server->getName() === $convoy->server) selected @endif >
+                            [{{ $server->getGame() }}] {{ $server->getName() }} ({{ $server->getPlayers() }}/{{ $server->getMaxPlayers() }})
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="datetimepicker">Время выезда</label>
@@ -62,22 +78,27 @@
                     <small class="form-text">{{ $errors->first('finish') }}</small>
                 @endif
             </div>
-            <h3 class="text-primary">Инфо</h3>
-            <div class="form-group">
-                <label for="server">Сервер</label>
-                <select class="form-control" id="server" name="server" required>
-                    @foreach($servers as $server)
-                        <option value="{{ $server->getName() }}" @if($server->getName() === $convoy->server) selected @endif >
-                            [{{ $server->getGame() }}] {{ $server->getName() }} ({{ $server->getPlayers() }}/{{ $server->getMaxPlayers() }})
-                        </option>
-                    @endforeach
-                </select>
+            <h3 class="text-primary">Связь</h3>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3" @if($convoy->communication == 'TeamSpeak 3' || $convoy->communication == '') checked @endif>
+                <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord" @if($convoy->communication == 'Discord') checked @endif>
+                <label class="custom-control-label" for="communication-discord">Discord</label>
             </div>
             <div class="form-group">
-                <label for="communication">Связь</label>
-                <input type="text" class="form-control" id="communication" name="communication" value="{{ $convoy->communication }}" required>
-                @if($errors->has('communication'))
-                    <small class="form-text">{{ $errors->first('communication') }}</small>
+                <label for="communication_program">Ссылка на сервер</label>
+                <input type="text" class="form-control" id="communication_link" name="communication_link" value="{{ $convoy->communication_link }}" required>
+                @if($errors->has('communication_link'))
+                    <small class="form-text">{{ $errors->first('communication_link') }}</small>
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="communication_channel">Канал на сервере</label>
+                <input type="text" class="form-control" id="communication_channel" name="communication_channel" value="{{ $convoy->communication_channel }}" required>
+                @if($errors->has('communication_channel'))
+                    <small class="form-text">{{ $errors->first('communication_channel') }}</small>
                 @endif
             </div>
             <div class="form-group">
@@ -172,7 +193,8 @@
             step: 30,
             theme: 'dark',
             dayOfWeekStart: '1',
-            defaultTime: '19:30'
+            defaultTime: '19:30',
+            scrollInput: false
         });
         $.datetimepicker.setLocale('ru');
     </script>

@@ -1,5 +1,10 @@
 @extends('evoque.layout.index')
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
+    <script src="/js/jquery.datetimepicker.full.min.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container pt-5">
@@ -27,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="join_date">Дата присоединения</label>
-                <input type="text" class="form-control" id="join_date" name="join_date" value="{{ $member->join_date }}">
+                <input type="text" class="form-control" id="join_date" name="join_date" value="{{ $member->join_date->format('d.m.Y') }}">
                 @if($errors->has('join_date'))
                     <small class="form-text">{{ $errors->first('join_date') }}</small>
                 @endif
@@ -72,7 +77,7 @@
             </div>
             <div class="form-group">
                 <label for="on_vacation_till">В отпуске до</label>
-                <input type="text" class="form-control" id="on_vacation_till" name="on_vacation_till" value="{{ $member->on_vacation_till }}">
+                <input type="text" class="form-control" id="on_vacation_till" name="on_vacation_till" value="{{ $member->on_vacation_till ? $member->on_vacation_till->format('d.m.Y') : '' }}">
                 @if($errors->has('on_vacation_till'))
                     <small class="form-text">{{ $errors->first('on_vacation_till') }}</small>
                 @endif
@@ -82,5 +87,32 @@
             </div>
         </form>
     </div>
+
+    <script>
+        $('#join_date, #on_vacation_till').datetimepicker({
+            i18n:{
+                ru:{
+                    months:[
+                        'Январь','Февраль','Март','Апрель',
+                        'Май','Июнь','Июль','Август',
+                        'Сентябрь','Октябрь','Ноябрь','Декабрь',
+                    ],
+                    dayOfWeek:[
+                        "Вс", "Пн", "Вт", "Ср",
+                        "Чт", "Пт", "Сб",
+                    ]
+                }
+            },
+            format: 'd.m.Y',
+            lang: 'ru',
+            step: 30,
+            theme: 'dark',
+            dayOfWeekStart: '1',
+            defaultTime: '19:30',
+            timepicker: false,
+            scrollInput: false
+        });
+        $.datetimepicker.setLocale('ru');
+    </script>
 
 @endsection

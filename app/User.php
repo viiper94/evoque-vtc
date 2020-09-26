@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'steamid64', 'truckersmp_id', 'nickname', 'image'
+        'name', 'steamid64', 'truckersmp_id', 'nickname', 'image', 'city', 'country', 'vk'
     ];
 
     /**
@@ -33,8 +33,10 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'birth_date' => 'date'
+    protected $dates = [
+        'birth_date',
+        'created_at',
+        'updated_at'
     ];
 
     public function member(){

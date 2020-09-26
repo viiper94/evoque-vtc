@@ -19,16 +19,21 @@ Route::get('auth/steam/handle', 'Auth\SteamAuthController@handle')->name('auth.s
 
 Route::get('/', 'Controller@index')->name('home');
 Route::any('/apply', 'Controller@apply')->name('apply');
-Route::get('/rules', 'Controller@rulesNobodyRead')->name('rules');
+Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
 Route::get('/convoys', 'Controller@convoys')->name('convoys');
 Route::get('/members', 'Controller@members')->name('members');
 
 Route::get('/profile', 'EvoqueController@profile')->name('profile');
-Route::get('/evoque', 'MembersController@index')->name('evoque.members');
-Route::get('/evoque/rules', 'EvoqueController@rules')->name('evoque.rules');
-Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');
 
-Route::get('/evoque/admin', 'AdminController@admin')->name('evoque.admin');
+Route::get('/evoque', 'MembersController@index')->name('evoque.members');
+Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
+
+Route::get('/evoque/rules/{type}', 'RulesController@index')->name('evoque.rules');
+Route::any('/evoque/admin/rules/edit/{id}', 'RulesController@edit')->name('evoque.rules.edit');
+Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
+Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');
+
+Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');
 
 Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');
 Route::get('/evoque/admin/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.admin.applications.accept.recruitment');
@@ -42,7 +47,6 @@ Route::any('/evoque/admin/roles/add', 'RolesController@add')->name('evoque.admin
 Route::get('/evoque/admin/users', 'UsersController@index')->name('evoque.admin.users');
 Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->name('evoque.admin.users.setAsMember');
 
-Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
 
 Route::get('/evoque/convoys', 'ConvoysController@index')->name('evoque.convoys');
 Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');

@@ -19,7 +19,7 @@
 {{--                        <a class="nav-link" href="{{ route('evoque.applications') }}">@lang('navbar.evoque.applications')</a>--}}
 {{--                    </li>--}}
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.rules')active @endif">
-                        <a class="nav-link" href="#">Правила</a>
+                        <a class="nav-link" href="{{ route('evoque.rules', 'private') }}">Правила</a>
                     </li>
                     <li class="nav-item @if(Route::current()->getName() === 'evoque.members')active @endif">
                         <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>

@@ -21,10 +21,6 @@ class Controller extends BaseController{
         ]);
     }
 
-    public function rulesNobodyRead(){
-        return view('rules');
-    }
-
     public function apply(Request $request){
         if($request->post()){
             $this->validate($request, [

@@ -43,13 +43,19 @@
                                         {{ $item->title }}@if(!$loop->last),@endif
                                     @endforeach
                                 </td>
-                                <td> @cannot('admin'){{ $member->scores }} @else {{ '∞' }} @endcannot </td>
+                                <td>{{ $member->hasScores() ? $member->scores : '∞' }}</td>
                                 <td>{{ $member->isOwner() ? '∞' : $member->money }}</td>
                                 <td>{{ $member->convoys }}</td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('LL') }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td class="plate-img p-0"><img src="{{ $member->plate }}"></td>
-                                <td><a href="{{ route('profile') }}/{{ $member->user->id }}" target="_blank">{{ $member->user->name }}</a></td>
+                                <td>
+                                    @can('manage_members')
+                                        <a href="{{ route('evoque.profile', $member->user->id) }}" target="_blank">{{ $member->user->name }}</a>
+                                    @else
+                                        {{ $member->user->name }}
+                                    @endcan
+                                </td>
                                 <td>{{ $member->getPlace() }}</td>
                                 <td class="icon-link">
                                     @isset($member->user->vk_link)

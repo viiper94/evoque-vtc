@@ -51,6 +51,13 @@ class Member extends Model{
         return false;
     }
 
+    public function hasScores(){
+        foreach($this->role as $role){
+            if($role->service) return false;
+        }
+        return true;
+    }
+
     public function topRole(){
         $index = 99;
         foreach($this->role as $role){

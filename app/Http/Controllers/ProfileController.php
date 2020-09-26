@@ -5,16 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Member;
 use App\Role;
+use App\User;
 use Carbon\Carbon;
-use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProfileController extends Controller{
 
     public function profile(Request $request, $id = null){
         if(Auth::guest()) abort(404);
-        return view('evoque.profile.index');
+        if($id && Gate::check('manage_members')){
+            $user = User::findOrFail($id);
+        }else{
+            $user = Auth::user();
+        };
+        return view('evoque.profile.index', [
+            'user' => $user
+        ]);
     }
 
     public function edit(Request $request){

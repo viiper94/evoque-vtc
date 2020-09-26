@@ -17635,3 +17635,19 @@ table.users td.user-image img {
   color: #e4c501;
 }
 
+.profile .avatar {
+  border-right: 1px solid #e4c501;
+}
+
+.profile .avatar img {
+  width: 190px;
+}
+
+.profile .info b {
+  color: #e4c501;
+}
+
+.profile .info .user-links i {
+  font-size: 30px;
+}
+

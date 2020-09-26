@@ -1,0 +1,17 @@
+// Profile
+.profile{
+    .avatar{
+        border-right: 1px solid $primary;
+        img{
+            width: 190px;
+        }
+    }
+    .info{
+        b{
+            color: $primary;
+        }
+        .user-links i{
+            font-size: 30px;
+        }
+    }
+}

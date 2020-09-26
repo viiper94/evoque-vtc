@@ -9,14 +9,18 @@
             <li class="p-1 row">
                 <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§{{ $paragraph->paragraph }} </h1>
                 <h1 class="paragraph-title pl-md-5 pl-sm-1">{{ $paragraph->title }}
-                    @can('admin')
-                        <a href="{{ route('evoque.rules.edit', $paragraph->id) }}" class="btn btn-sm text-primary"><i class="fas fa-edit"></i></a>
-                    @endcan
                 </h1>
                 <blockquote class="blockquote">
                     <p class="ml-md-5">
                         {!! $paragraph->text !!}
                     </p>
+                    @can('admin')
+                        <p class="ml-md-5">
+                            <a href="{{ route('evoque.rules.edit', $paragraph->id) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Редактировать</a>
+                            <a href="{{ route('evoque.rules.delete', $paragraph->id) }}" class="btn btn-outline-danger"
+                               onclick="return confirm('Удалить этот параграф правил?')"><i class="fas fa-trash"></i> Удалить</a>
+                        </p>
+                    @endcan
                 </blockquote>
             </li>
         @endforeach

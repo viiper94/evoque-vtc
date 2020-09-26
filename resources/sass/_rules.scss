@@ -15,7 +15,7 @@ ul.rules{
         margin-left: 150px;
         p{
             line-height: 35px;
-            b, a, strong{
+            b, a:not(.btn), strong{
                 color: $primary;
             }
         }

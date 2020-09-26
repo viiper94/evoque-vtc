@@ -16,8 +16,8 @@ class RulesController extends Controller{
     }
 
     public function edit(Request $request, $id){
+        if(Gate::denies('admin')) abort(403);
         if($request->post()){
-            if(Gate::denies('admin')) abort(403);
             $this->validate($request, [
                 'paragraph' => 'required|numeric',
                 'title' => 'required|string',
@@ -36,8 +36,8 @@ class RulesController extends Controller{
     }
 
     public function add(Request $request){
+        if(Gate::denies('admin')) abort(403);
         if($request->post()){
-            if(Gate::denies('admin')) abort(403);
             $this->validate($request, [
                 'paragraph' => 'required|numeric',
                 'title' => 'required|string',
@@ -56,7 +56,12 @@ class RulesController extends Controller{
     }
 
     public function delete(Request $request, $id){
-
+        if(Gate::denies('admin')) abort(403);
+        $p = Rules::findOrFail($id);
+        $redirect = $p->public ? 'public' : 'private';
+        return $p->delete() ?
+            redirect()->route('rules', $redirect)->with(['success' => 'Параграф правил успешно удалён!']) :
+            redirect()->back()->withErrors([',Возникла ошибка =(']);
     }
 
 }

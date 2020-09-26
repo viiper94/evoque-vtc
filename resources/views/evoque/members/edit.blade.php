@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label for="join_date">Дата присоединения</label>
-                <input type="text" class="form-control" id="join_date" name="join_date" value="{{ $member->join_date->format('d.m.Y') }}">
+                <input type="text" class="form-control" id="join_date" name="join_date" value="{{ $member->join_date->format('d.m.Y') }}" autocomplete="off">
                 @if($errors->has('join_date'))
                     <small class="form-text">{{ $errors->first('join_date') }}</small>
                 @endif
@@ -77,7 +77,7 @@
             </div>
             <div class="form-group">
                 <label for="on_vacation_till">В отпуске до</label>
-                <input type="text" class="form-control" id="on_vacation_till" name="on_vacation_till" value="{{ $member->on_vacation_till ? $member->on_vacation_till->format('d.m.Y') : '' }}">
+                <input type="text" class="form-control" id="on_vacation_till" name="on_vacation_till" value="{{ $member->on_vacation_till ? $member->on_vacation_till->format('d.m.Y') : '' }}" autocomplete="off">
                 @if($errors->has('on_vacation_till'))
                     <small class="form-text">{{ $errors->first('on_vacation_till') }}</small>
                 @endif

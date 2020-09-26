@@ -13,7 +13,7 @@
 </head>
 <body>
 
-    @include('evoque.layout.navbar')
+    @include('layout.navbar')
 
     @yield('content')
 

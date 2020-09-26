@@ -9,28 +9,67 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-uppercase font-weight-bold text-shadow">
-                    <li class="nav-item @if(Request::is('/'))active @endif">
-                        <a class="nav-link" href="{{ route('home') }}">@lang('navbar.about')</a>
-                    </li>
-                    <li class="nav-item @if(Request::is('convoys'))active @endif">
-                        <a class="nav-link" href="{{ route('convoys') }}">@lang('navbar.convoy')</a>
-                    </li>
-                    <li class="nav-item @if(Request::is('rules'))active @endif">
-                        <a class="nav-link" href="{{ route('rules') }}">@lang('navbar.rules')</a>
-                    </li>
-                    <li class="nav-item @if(Request::is('apply'))active @endif">
-                        <a class="nav-link" href="{{ route('apply') }}">@lang('navbar.apply')</a>
-                    </li>
                     @guest
+                        <li class="nav-item @if(Route::current()->getName() === 'home')active @endif">
+                            <a class="nav-link" href="{{ route('home') }}">О нас</a>
+                        </li>
+                        <li class="nav-item @if(Route::current()->getName() === 'convoys')active @endif">
+                            <a class="nav-link" href="{{ route('convoys') }}">Конвой</a>
+                        </li>
+                        <li class="nav-item @if(Request::is('rules'))active @endif">
+                            <a class="nav-link" href="{{ route('rules') }}">Правила</a>
+                        </li>
+                        <li class="nav-item @if(Request::is('apply'))active @endif">
+                            <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
+                        </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('auth.steam') }}">@lang('navbar.login') <i class="fab fa-steam"></i></a>
+                            <a class="nav-link" href="{{ route('auth.steam') }}">Войти <i class="fab fa-steam"></i></a>
                         </li>
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('evoque.members') }}">@lang('navbar.company')</a>
+                        <li class="nav-item @if(Route::current()->getName() === 'home')active @endif">
+                            <a class="nav-link" href="{{ route('home') }}">Главная</a>
                         </li>
-                        <li class="nav-item @if(Request::is('profile'))active @endif">
-                            <a class="nav-link avatar p-0" href="#"><img src="{{ Auth::user()->image }}" alt="Профиль"></a>
+                        <li class="nav-item @if(Route::current()->getName() === 'evoque.convoys')active @endif">
+                            <a class="nav-link" href="{{ route('evoque.convoys') }}">Конвои</a>
+                        </li>
+                        <li class="nav-item dropdown @if(Route::current()->getName() === 'evoque.rules')active @endif">
+                            <a class="nav-link dropdown-toggle" href="#" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
+                            <div class="dropdown-menu" aria-labelledby="rulesDropdown">
+                                <a class="dropdown-item" href="{{ route('evoque.rules', 'private') }}">Закрытые правила</a>
+                                <a class="dropdown-item" href="{{ route('evoque.rules', 'public') }}">Публичные правила</a>
+                            </div>
+                        </li>
+{{--                        <li class="nav-item @if(Route::current()->getName() === 'evoque.applications')active @endif">--}}
+{{--                            <a class="nav-link" href="{{ route('evoque.applications') }}">Заявки</a>--}}
+{{--                        </li>--}}
+                        <li class="nav-item @if(Route::current()->getName() === 'evoque.members')active @endif">
+                            <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
+                        </li>
+                        <li class="nav-item @if(Route::current()->getName() === 'evoque.rp')active @endif">
+                            <a class="nav-link" href="#">Рейтинговые перевозки</a>
+                        </li>
+                        @can('admin')
+                            <li class="nav-item dropdown @if(Request::is('evoque/admin/*'))active @endif">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
+                                <div class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <a class="dropdown-item" href="{{ route('evoque.admin.applications') }}">Заявки</a>
+                                    <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>
+                                    <a class="dropdown-item" href="{{ route('evoque.admin.users') }}">Пользователи</a>
+                                </div>
+                            </li>
+                        @endcan
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle avatar p-0" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ Auth::user()->image }}" alt="Профиль">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="profileDropdown">
+                                <form method="post" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a class="dropdown-item" href="{{ route('evoque.profile') }}">Профиль</a>
+                                    <a class="dropdown-item" href="{{ route('evoque.profile.edit') }}">Редактировать</a>
+                                    <button type="submit" class="dropdown-item">Выйти <i class="fas fa-sign-out-alt"></i></button>
+                                </form>
+                            </div>
                         </li>
                     @endguest
                 </ul>

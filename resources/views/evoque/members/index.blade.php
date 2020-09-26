@@ -51,7 +51,7 @@
                                 <td class="plate-img p-0"><img src="{{ $member->plate }}"></td>
                                 <td>
                                     @can('manage_members')
-                                        <a href="#" target="_blank">{{ $member->user->name }}</a>
+                                        <a href="{{ route('evoque.profile', $member->user->id) }}" target="_blank">{{ $member->user->name }}</a>
                                     @else
                                         {{ $member->user->name }}
                                     @endcan

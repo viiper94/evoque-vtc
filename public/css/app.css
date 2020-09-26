@@ -17122,17 +17122,23 @@ a:hover {
   vertical-align: text-top;
 }
 
+.navbar-dark .navbar-nav .nav-item .nav-link.avatar.dropdown-toggle::after {
+  display: none;
+}
+
 .navbar-dark .navbar-nav .nav-item .dropdown-menu {
   background-color: #424242;
 }
 
 .navbar-dark .navbar-nav .nav-item .dropdown-menu .dropdown-item {
+  text-transform: uppercase;
   font-weight: bold;
   color: #bbbbbb;
 }
 
 .navbar-dark .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover,
 .navbar-dark .navbar-nav .nav-item .dropdown-menu .dropdown-item:focus {
+  outline: none;
   color: rgba(255, 255, 255, 0.8);
   background-color: #424242;
 }
@@ -17398,7 +17404,7 @@ ul.rules .blockquote p {
 }
 
 ul.rules .blockquote p b,
-ul.rules .blockquote p a,
+ul.rules .blockquote p a:not(.btn),
 ul.rules .blockquote p strong {
   color: #e4c501;
 }

@@ -23,6 +23,7 @@ class Role extends Model{
         'manage_table' => 'boolean',
         'manage_rp' => 'boolean',
         'visible' => 'boolean',
+        'service' => 'boolean',
     ];
 
     public function members(){

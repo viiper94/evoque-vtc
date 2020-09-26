@@ -17398,7 +17398,8 @@ ul.rules .blockquote p {
 }
 
 ul.rules .blockquote p b,
-ul.rules .blockquote p a {
+ul.rules .blockquote p a,
+ul.rules .blockquote p strong {
   color: #e4c501;
 }
 

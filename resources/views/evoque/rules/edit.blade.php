@@ -46,7 +46,9 @@
                     <small class="form-text">{{ $errors->first('text') }}</small>
                 @endif
             </div>
-            <button type="submit" class="btn btn-lg btn-outline-warning">Сохранить</button>
+            <button type="submit" class="btn btn-outline-warning">Сохранить</button>
+            <a href="{{ route('evoque.rules.delete', $rules->id) }}" class="btn btn-outline-danger"
+               onclick="return confirm('Удалить этот параграф правил?')"><i class="fas fa-trash"></i> Удалить</a>
         </form>
 
     </div>

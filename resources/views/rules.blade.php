@@ -17,8 +17,6 @@
                     @can('admin')
                         <p class="ml-md-5">
                             <a href="{{ route('evoque.rules.edit', $paragraph->id) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Редактировать</a>
-                            <a href="{{ route('evoque.rules.delete', $paragraph->id) }}" class="btn btn-outline-danger"
-                               onclick="return confirm('Удалить этот параграф правил?')"><i class="fas fa-trash"></i> Удалить</a>
                         </p>
                     @endcan
                 </blockquote>

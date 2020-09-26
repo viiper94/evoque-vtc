@@ -6,12 +6,14 @@ use App\Convoy;
 use App\Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use TruckersMP\APIClient\Client;
 
 class ConvoysController extends Controller{
 
     public function index(){
+        if(Auth::guest()) abort(403);
         return view('evoque.convoys.index', [
             'convoys' => Convoy::all()
         ]);

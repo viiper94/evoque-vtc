@@ -6,11 +6,13 @@ use App\Member;
 use App\Role;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class MembersController extends Controller{
 
     public function index(){
+        if(Auth::guest()) abort(403);
         return view('evoque.members.index', [
             'roles' => Role::with(['members', 'members.user', 'members.role' => function($query){
                 $query->where('visible', '1');

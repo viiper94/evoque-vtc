@@ -17473,14 +17473,23 @@ ul.rules .blockquote p strong {
   font-style: italic;
 }
 
+.convoy-note ol li {
+  color: #bbbbbb;
+  margin-top: 10px;
+}
+
+.convoy-note ol li b {
+  color: #e4c501;
+}
+
 @media (max-width: 768px) {
   .ts-download {
     margin: 1rem 0;
   }
 }
 
-.convoys .card {
-  width: 400px;
+.convoys .card.upcoming .convoy-date {
+  color: #e4c501;
 }
 
 .convoys .card:not(.upcoming) span,
@@ -17504,6 +17513,24 @@ ul.rules .blockquote p strong {
 
 .convoys .card a:not(.btn) {
   text-decoration: underline;
+}
+
+.private-convoys p {
+  font-style: normal;
+  font-weight: bold;
+  margin-bottom: 0;
+}
+
+.private-convoys a:not(.btn) {
+  color: #e4c501;
+}
+
+.private-convoys .convoy-info > div:first-child {
+  border-right: 1px solid #e4c501;
+}
+
+.private-convoys .convoy-info img {
+  width: 100%;
 }
 
 .members .card {

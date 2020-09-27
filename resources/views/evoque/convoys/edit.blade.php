@@ -104,9 +104,9 @@
             <div class="form-group">
                 <label for="lead">Ведущий</label>
                 <select class="form-control" id="lead" name="lead">
-                    <option value="0" @if($convoy->lead === '0') selected @endif >На месте разберёмся</option>
+                    <option value="На месте разберёмся" @if($convoy->lead === 'На месте разберёмся') selected @endif >На месте разберёмся</option>
                     @foreach($members as $member)
-                        <option value="{{ $member->id }}" @if($member->id === $convoy->lead) selected @endif >[EVOQUE] {{ $member->nickname }}</option>
+                        <option value="{{ $member->nickname }}" @if($member->nickname === $convoy->lead) selected @endif >{{ $member->nickname }}</option>
                     @endforeach
                 </select>
             </div>
@@ -176,8 +176,10 @@
                 @endif
             </div>
             <button class="btn btn-outline-warning" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
-            <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
-               onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
+            @if($convoy->title)
+                <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
+                   onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
+            @endif
         </form>
     </div>
 

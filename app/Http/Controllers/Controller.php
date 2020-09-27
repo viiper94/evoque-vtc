@@ -48,12 +48,6 @@ class Controller extends BaseController{
         return view('apply');
     }
 
-    public function convoys(){
-        return view('convoys', [
-            'convoy' => Convoy::where(['visible' => '1', 'public' => '1'])->first()
-        ]);
-    }
-
     public function members(){
         return view('members', [
             'roles' => Role::with(['members' => function($query){

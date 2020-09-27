@@ -14,7 +14,7 @@
                             <a class="nav-link" href="{{ route('home') }}">О нас</a>
                         </li>
                         <li class="nav-item @if(Route::current()->getName() === 'convoys')active @endif">
-                            <a class="nav-link" href="{{ route('convoy') }}">Конвой</a>
+                            <a class="nav-link" href="{{ route('convoys') }}">Конвой</a>
                         </li>
                         <li class="nav-item @if(Request::is('rules'))active @endif">
                             <a class="nav-link" href="{{ route('rules') }}">Правила</a>
@@ -32,8 +32,9 @@
                         <li class="nav-item dropdown @if(Route::current()->getName() === 'evoque.convoys')active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Конвои</a>
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
-                                <a class="dropdown-item" href="{{ route('evoque.convoys') }}">Регламенты</a>
+                                <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
+                                <a class="dropdown-item" href="{{ route('evoque.convoys') }}">Редактирование</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown @if(Route::current()->getName() === 'evoque.rules')active @endif">

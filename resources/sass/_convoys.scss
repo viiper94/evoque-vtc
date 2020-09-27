@@ -38,6 +38,15 @@
     p{
         font-style: italic;
     }
+    ol{
+        li{
+            color: $primary-text;
+            margin-top: 10px;
+            b{
+                color: $primary;
+            }
+        }
+    }
 }
 @media (max-width: 768px) {
     .ts-download{
@@ -48,7 +57,9 @@
 // Admin convoys
 .convoys{
     .card{
-        width: 400px;
+        &.upcoming .convoy-date{
+            color: $primary;
+        }
         &:not(.upcoming){
             span, p, label, h1, h2, h3, h4, h5, h6, a, small{
                 color: $primary-text-darker;
@@ -59,6 +70,24 @@
         }
         a:not(.btn){
             text-decoration: underline;
+        }
+    }
+}
+.private-convoys{
+    p{
+        font-style: normal;
+        font-weight: bold;
+        margin-bottom: 0;
+    }
+    a:not(.btn){
+        color: $primary;
+    }
+    .convoy-info {
+        & > div:first-child{
+            border-right: 1px solid $primary;
+        }
+        img{
+            width: 100%;
         }
     }
 }

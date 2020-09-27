@@ -13,10 +13,28 @@ use TruckersMP\APIClient\Client;
 class ConvoysController extends Controller{
 
     public function index(){
-        if(Auth::guest()) abort(403);
+        if(Gate::denies('manage_convoys')) abort(403);
         return view('evoque.convoys.index', [
-            'convoys' => Convoy::all()
+            'convoys' => Convoy::orderBy('start_time')->get()
         ]);
+    }
+
+    public function convoys(Request $request){
+        if(Auth::check()){
+            $convoys = Convoy::where('visible', '1')->orderBy('start_time')->get();
+            $grouped = array();
+            foreach($convoys as $convoy){
+                $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
+                if(count($grouped) >= 5) break;
+            }
+            return view('evoque.convoys.private', [
+                'grouped' => array_reverse($grouped)
+            ]);
+        }else{
+            return view('convoys', [
+                'convoy' => Convoy::where(['visible' => '1', 'public' => '1'])->first()
+            ]);
+        }
     }
 
     public function add(Request $request){
@@ -31,7 +49,7 @@ class ConvoysController extends Controller{
                 'communication' => 'required|string',
                 'communication_link' => 'required|string',
                 'communication_channel' => 'required|string',
-                'route' => 'required|url',
+                'route' => 'required|url'
             ]);
             $convoy = new Convoy();
             $convoy->fill($request->post());

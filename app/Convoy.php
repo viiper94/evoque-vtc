@@ -20,6 +20,7 @@ class Convoy extends Model{
         'truck',
         'truck_tuning',
         'truck_paint',
+        'truck_image',
         'trailer',
         'trailer_tuning',
         'trailer_paint',

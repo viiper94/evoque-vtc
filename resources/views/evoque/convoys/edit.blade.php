@@ -112,6 +112,13 @@
             </div>
             <h3 class="text-primary">Тягач</h3>
             <div class="form-group">
+                <label for="truck_image">Изображение тягача (ссылка)</label>
+                <input type="text" class="form-control" id="truck_image" name="truck_image" value="{{ $convoy->truck_image }}">
+                @if($errors->has('truck_image'))
+                    <small class="form-text">{{ $errors->first('truck_image') }}</small>
+                @endif
+            </div>
+            <div class="form-group">
                 <label for="truck">Марка</label>
                 <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}">
                 @if($errors->has('truck'))
@@ -168,7 +175,9 @@
                     <small class="form-text">{{ $errors->first('cargo') }}</small>
                 @endif
             </div>
-            <button class="btn btn-outline-warning btn-lg" type="submit">Сохранить конвой</button>
+            <button class="btn btn-outline-warning" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
+            <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
+               onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
         </form>
     </div>
 

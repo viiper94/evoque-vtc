@@ -47,10 +47,14 @@
                             @if($convoy->truck_image)
                                 <a href="{{ $convoy->truck_image }}" target="_blank"><img src="{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m"></a>
                             @endif
-                            <p>Тюнинг:</p>
-                            <h3>{{ $convoy->truck_tuning }}</h3>
-                            <p>Окрас:</p>
-                            <h3>{{ $convoy->truck_paint }}</h3>
+                            @if($convoy->truck_tuning)
+                                <p>Тюнинг:</p>
+                                <h3>{{ $convoy->truck_tuning }}</h3>
+                            @endif
+                            @if($convoy->truck_paint)
+                                <p>Окрас:</p>
+                                <h3>{{ $convoy->truck_paint }}</h3>
+                            @endif
                         </div>
                         <div class="col-sm-6 pl-5">
                             <p>Прицеп:</p>
@@ -58,12 +62,18 @@
                             @if($convoy->trailer_image)
                                 <a href="{{ $convoy->trailer_image }}" target="_blank"><img src="{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m"></a>
                             @endif
+                            @if($convoy->trailer_tuning)
                             <p>Тюнинг:</p>
                             <h3>{{ $convoy->trailer_tuning }}</h3>
+                            @endif
+                            @if($convoy->trailer_paint)
                             <p>Окрас:</p>
                             <h3>{{ $convoy->trailer_paint }}</h3>
+                            @endif
+                            @if($convoy->cargo)
                             <p>Груз:</p>
                             <h3>{{ $convoy->cargo }}</h3>
+                            @endif
                         </div>
                         <section class="convoy-note pb-5 pt-5 m-auto">
                             <hr class="m-auto">

@@ -29,12 +29,14 @@
                         <li class="nav-item @if(Route::current()->getName() === 'home')active @endif">
                             <a class="nav-link" href="{{ route('home') }}">Главная</a>
                         </li>
-                        <li class="nav-item dropdown @if(Route::current()->getName() === 'evoque.convoys')active @endif">
+                        <li class="nav-item dropdown @if(in_array(Route::current()->getName(), ['evoque.convoys', 'convoys']))active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Конвои</a>
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
                                 <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
-                                <a class="dropdown-item" href="{{ route('evoque.convoys') }}">Редактирование</a>
+                                @can('manage_convoys')
+                                    <a class="dropdown-item" href="{{ route('evoque.convoys') }}">Редактирование</a>
+                                @endcan
                             </div>
                         </li>
                         <li class="nav-item dropdown @if(Route::current()->getName() === 'evoque.rules')active @endif">

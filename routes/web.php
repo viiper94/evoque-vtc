@@ -20,7 +20,6 @@ Route::get('auth/steam/handle', 'Auth\SteamAuthController@handle')->name('auth.s
 Route::get('/', 'Controller@index')->name('home');
 Route::any('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
-Route::get('/convoys', 'Controller@convoys')->name('convoys');
 Route::get('/members', 'Controller@members')->name('members');
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
@@ -48,7 +47,9 @@ Route::any('/evoque/admin/roles/add', 'RolesController@add')->name('evoque.admin
 Route::get('/evoque/admin/users', 'UsersController@index')->name('evoque.admin.users');
 Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->name('evoque.admin.users.setAsMember');
 
+Route::get('/convoy/{id?}', 'ConvoysController@convoy')->name('convoy');
 Route::get('/evoque/convoys', 'ConvoysController@index')->name('evoque.convoys');
+Route::get('/evoque/convoys/plans', 'ConvoysController@plans')->name('evoque.convoys.plans');
 Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
 Route::get('/evoque/admin/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');
 Route::any('/evoque/admin/convoys/edit/{id}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');

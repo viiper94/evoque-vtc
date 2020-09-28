@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1
--- Час створення: Вер 26 2020 р., 16:02
--- Версія сервера: 10.4.11-MariaDB
--- Версія PHP: 7.4.3
+-- Хост: viiper94.mysql.ukraine.com.ua
+-- Час створення: Вер 28 2020 р., 11:17
+-- Версія сервера: 5.7.16-10-log
+-- Версія PHP: 7.0.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,10 +36,10 @@ CREATE TABLE `applications` (
   `new_plate_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `new_nickname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `new_rp_profile` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `reason` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reason` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -50,8 +50,8 @@ CREATE TABLE `applications` (
 
 CREATE TABLE `convoys` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `public` tinyint(1) NOT NULL DEFAULT 0,
-  `visible` tinyint(1) NOT NULL DEFAULT 1,
+  `public` tinyint(1) NOT NULL DEFAULT '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_time` datetime NOT NULL,
   `start` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -61,11 +61,12 @@ CREATE TABLE `convoys` (
   `communication` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lead` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `truck` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `truck_tuning` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `truck_paint` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `truck_tuning` text COLLATE utf8mb4_unicode_ci,
+  `truck_paint` text COLLATE utf8mb4_unicode_ci,
+  `truck_image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `trailer` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `trailer_tuning` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `trailer_paint` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trailer_tuning` text COLLATE utf8mb4_unicode_ci,
+  `trailer_paint` text COLLATE utf8mb4_unicode_ci,
   `trailer_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cargo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `route` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -79,8 +80,10 @@ CREATE TABLE `convoys` (
 -- Дамп даних таблиці `convoys`
 --
 
-INSERT INTO `convoys` (`id`, `public`, `visible`, `title`, `start_time`, `start`, `rest`, `finish`, `server`, `communication`, `lead`, `truck`, `truck_tuning`, `truck_paint`, `trailer`, `trailer_tuning`, `trailer_paint`, `trailer_image`, `cargo`, `route`, `created_at`, `updated_at`, `communication_link`, `communication_channel`) VALUES
-(3, 1, 1, 'Открытый конвой ВТК EVOQUE 01.09.20', '2020-09-20 18:28:00', 'Глазго (Glasgow) - WGCC', 'Мажейкяй (Mažeikiai) [IBP]', 'Реймс (Reims) - eAcres', 'Simulation 1', 'Discord', '0', NULL, NULL, NULL, 'Платформа', NULL, NULL, 'https://i.imgur.com/AHMnExu.png', 'Бетонные лестницы', 'https://i.imgur.com/8iYAV4Y.jpg', '2020-09-20 15:29:54', '2020-09-20 15:59:08', 'https://discord.gg/Gj53a8d', 'Открытый конвой ВТК \"EVOQUE\"');
+INSERT INTO `convoys` (`id`, `public`, `visible`, `title`, `start_time`, `start`, `rest`, `finish`, `server`, `communication`, `lead`, `truck`, `truck_tuning`, `truck_paint`, `truck_image`, `trailer`, `trailer_tuning`, `trailer_paint`, `trailer_image`, `cargo`, `route`, `created_at`, `updated_at`, `communication_link`, `communication_channel`) VALUES
+(3, 0, 1, 'Совместный конвой с =Fortuna Express=', '2020-09-25 20:00:00', 'Страсбург (Strassbourg) - WGCC', 'Льеж (Liège) - TREE-ET', 'Нюрнберг (Nürnberg) - eAcres', 'Simulation 1', 'Discord', 'Виталя 43RUS', 'Mercedes-Benz Actros', 'Как в моде и на фото', 'Официальный', 'https://i.imgur.com/1oNEhyC.png', 'Фургон', 'Как в моде и на фото', 'Официальный', 'https://i.imgur.com/AHMnExu.png', NULL, 'https://i.imgur.com/GJripll.png', '2020-09-20 15:29:54', '2020-09-27 15:13:11', 'https://discord.gg/BY63fr8', 'Совместный конвой'),
+(4, 0, 1, 'Вечерний конвой', '2020-09-26 19:30:00', 'Париж (Paris) - Voitureux', 'Через 50 минут найдем место', 'Ливорно (Livorno) - Libellula (DLC Italia)', 'Simulation 1', 'TeamSpeak 3', 'На месте разберёмся', 'Любой', 'Любой', 'Официальный', NULL, 'Шторник', '3 оси', 'Официальный', 'https://i.imgur.com/SzVaw1A.png', 'По желанию', 'https://i.imgur.com/LPUI9QZ.png', '2020-09-27 15:15:21', '2020-09-27 15:15:21', 'evoque.ts3srv.ru', 'EVOQUE'),
+(5, 0, 1, 'Открытый конвой от ВТК \"АЛЛО КЛИНИКА\"', '2020-09-27 20:00:00', 'Милан (Milano) - Cargotras', 'Точка 3 - WGCC', 'Реймс (Reims) - Stein Bruch', 'Simulation 1', 'Discord', 'На месте разберёмся', 'Любой', 'Любой', 'Официальный', NULL, 'Топливная цистерна', NULL, 'Любой', 'https://i.imgur.com/Cv4LLVO.png', NULL, 'https://i.imgur.com/UP3AwJM.png', '2020-09-27 15:18:01', '2020-09-27 15:18:01', 'https://discord.gg/kh2G56e', 'Открытый конвой ETS2');
 
 -- --------------------------------------------------------
 
@@ -93,13 +96,13 @@ CREATE TABLE `members` (
   `user_id` int(11) NOT NULL,
   `nickname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `join_date` datetime DEFAULT NULL,
-  `convoys` int(11) NOT NULL DEFAULT 0,
-  `scores` int(11) NOT NULL DEFAULT 0,
-  `money` int(11) NOT NULL DEFAULT 0,
-  `vacations` int(11) NOT NULL DEFAULT 0,
+  `convoys` int(11) NOT NULL DEFAULT '0',
+  `scores` int(11) NOT NULL DEFAULT '0',
+  `money` int(11) NOT NULL DEFAULT '0',
+  `vacations` int(11) NOT NULL DEFAULT '0',
   `on_vacation_till` date DEFAULT NULL,
   `plate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `visible` tinyint(1) DEFAULT 1,
+  `visible` tinyint(1) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -109,9 +112,9 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`id`, `user_id`, `nickname`, `join_date`, `convoys`, `scores`, `money`, `vacations`, `on_vacation_till`, `plate`, `visible`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Виталя 43RUS', '2016-11-01 00:00:00', 0, 0, 0, 0, NULL, 'https://i.imgur.com/TEQ2HNQ.png', 1, '2020-09-19 20:43:14', '2020-09-20 15:03:26'),
-(2, 2, 'Norines', '2020-09-20 08:06:08', 0, 0, 0, 0, NULL, NULL, 1, '2020-09-20 05:06:08', '2020-09-20 05:06:08'),
-(5, 3, 'Mayday', '2018-08-25 00:00:00', 0, 0, 0, 0, NULL, 'https://i.imgur.com/IQa3An2.png', 1, '2020-09-19 20:31:48', '2020-09-26 13:38:50');
+(1, 1, 'Виталя 43RUS', '2016-11-01 00:00:00', 2, 0, 0, 1, NULL, 'https://i.imgur.com/TEQ2HNQ.png', 1, '2020-09-19 20:43:14', '2020-09-27 18:01:18'),
+(2, 2, 'Norines', '2016-11-01 00:00:00', 2, 0, 54, 0, NULL, 'https://i.imgur.com/qfiHPlI.png', 1, '2020-09-20 05:06:08', '2020-09-27 18:02:45'),
+(5, 3, 'Mayday', '2018-08-25 00:00:00', 3, 354, 15, 1, NULL, 'https://i.imgur.com/IQa3An2.png', 1, '2020-09-19 20:31:48', '2020-09-27 18:02:18');
 
 -- --------------------------------------------------------
 
@@ -167,10 +170,10 @@ CREATE TABLE `recruitment` (
   `vk_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `steam_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tmp_link` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `have_mic` tinyint(1) NOT NULL DEFAULT 0,
-  `have_ts3` tinyint(1) NOT NULL DEFAULT 0,
-  `have_ats` tinyint(1) NOT NULL DEFAULT 0,
-  `referral` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `have_mic` tinyint(1) NOT NULL DEFAULT '0',
+  `have_ts3` tinyint(1) NOT NULL DEFAULT '0',
+  `have_ats` tinyint(1) NOT NULL DEFAULT '0',
+  `referral` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'recruitment'
@@ -188,13 +191,13 @@ CREATE TABLE `roles` (
   `group` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT 0,
-  `manage_members` tinyint(1) NOT NULL DEFAULT 0,
-  `manage_convoys` tinyint(1) NOT NULL DEFAULT 0,
-  `manage_table` tinyint(1) NOT NULL DEFAULT 0,
-  `manage_rp` tinyint(1) NOT NULL DEFAULT 0,
-  `visible` tinyint(1) NOT NULL DEFAULT 1,
-  `service` tinyint(1) NOT NULL DEFAULT 0
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
+  `manage_members` tinyint(1) NOT NULL DEFAULT '0',
+  `manage_convoys` tinyint(1) NOT NULL DEFAULT '0',
+  `manage_table` tinyint(1) NOT NULL DEFAULT '0',
+  `manage_rp` tinyint(1) NOT NULL DEFAULT '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `service` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -234,13 +237,13 @@ CREATE TABLE `role_member` (
 --
 
 INSERT INTO `role_member` (`member_id`, `role_id`) VALUES
-(2, 2),
-(2, 4),
+(3, 15),
 (1, 1),
 (1, 3),
-(3, 15),
 (5, 9),
-(5, 15);
+(5, 15),
+(2, 2),
+(2, 4);
 
 -- --------------------------------------------------------
 
@@ -253,8 +256,8 @@ CREATE TABLE `rules` (
   `paragraph` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `public` tinyint(1) NOT NULL DEFAULT 0,
-  `history` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `public` tinyint(1) NOT NULL DEFAULT '0',
+  `history` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -264,7 +267,7 @@ CREATE TABLE `rules` (
 --
 
 INSERT INTO `rules` (`id`, `paragraph`, `title`, `text`, `public`, `history`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Должен сука знать каждый', '<strong>1.1</strong> Компания звётся <strong>Эвок </strong>блядь, а не эвоки или эвокьюе!<br /><strong>1.2</strong>&nbsp;Не знание данных правил не освобождает от ответственности, лицо нарушившее правила будет привлечено к штрафным санкциям вплоть до увольнения из ВТК без права на восстановление.<br /><strong>1.3</strong>&nbsp;Данные правила могут быть изменены в любой момент.<br /><strong>1.4</strong>&nbsp;Связь осуществляется через программу голосового общения TeamSpeak 3. Наш адрес сервера: <strong>evoque.ts3srv.ru</strong>.', 1, NULL, '2020-09-25 15:17:42', '2020-09-25 15:34:09'),
+(1, 1, 'Должен сука знать каждый', '<strong>1.1</strong> Компания звётся <strong>Эвок</strong>,&nbsp;блядь, а не эвоки или эвокьюе!<br /><strong>1.2</strong>&nbsp;Не знание данных правил не освобождает от ответственности, лицо нарушившее правила будет привлечено к штрафным санкциям вплоть до увольнения из ВТК без права на восстановление.<br /><strong>1.3</strong>&nbsp;Данные правила могут быть изменены в любой момент.<br /><strong>1.4</strong>&nbsp;Связь осуществляется через программу голосового общения TeamSpeak 3. Наш адрес сервера: <strong>evoque.ts3srv.ru</strong>.', 1, NULL, '2020-09-25 15:17:42', '2020-09-26 19:15:10'),
 (2, 2, 'Вступление в ВТК', '<strong>2.1</strong>&nbsp;Заявление на приём в компанию вы можете оставить перейдя вот по&nbsp;<a href=\"/apply\">этой ссылке</a>&nbsp;или нажав на соответствующую картинку в Основном Меню компании.<br /><strong>2.2</strong>&nbsp;Администрация может отказать в приёме без объяснения причины!<br /><strong>2.3</strong>&nbsp;В обязательном порядке изучите данные правила.<br /><strong>2.4</strong>&nbsp;При заполнении заявки на вступление вы должны предоставить достоверные данные по всем пунктам заявки.<br /><strong>2.5</strong>&nbsp;На момент написания заявки ваш возраст должен быть не менее 17 лет.<br /><strong>2.6</strong>&nbsp;На момент написания заявки вы не должны состоять в других ВТК, на вашей странице в ВК не должно быть групп сторонних ВТК, кроме официальных сообществ ETS2MP и ATSMP.<br /><strong>2.7</strong>&nbsp;Ваши личные сообщения и группы должны быть открытыми. Ваш профиль в steam не должен быть скрытым, в личном кабинете на сайте TruckersMP ваша история банов должна быть открыта.<br /><strong>2.8</strong>&nbsp;Мы проверяем все заявки на наличие банов на сайте truckersmp.com. И можем отказать в приёме если в течении 365-ти прошедших дней у вас имеется 3 и более нарушений.<br /><strong>2.9</strong>&nbsp;Запрещено использовать ники, содержащие оскорбления, брань, также ники без текста, ники используемые администрацией, названия правоохранительных органов, имена политиков как ныне живущих, так и покойных. (выписка из правил мультиплеера)<br /><strong>2.10</strong>&nbsp;После одобрения вашей заявки наш Отдел кадров попросит вас зайти на наш сервер TeamSpeak 3 и далее объяснит основные моменты присутствия в ВТК, а так же предложит изучить Основные правила ВТК &quot;EVOQUE&quot;.<br /><strong>2.11</strong>&nbsp;После вступления вам предстоит пройти испытательный срок. Это нужно для того, чтобы вы поняли принципы нашей работы и мы присмотрелись к вам. Испытательный срок это 4 официальных конвоя за 10 календарных дней (от старта до финиша).<br /><strong>2.12</strong>&nbsp;При вступлении в компанию будучи на Испытательном сроке вы обязаны в настройках TAB во вкладке General в поле Player Tag прописать префикс - [EVOQUE].', 1, NULL, '2020-09-25 15:34:36', '2020-09-25 15:35:08'),
 (3, 3, 'Правила конвоев', '<strong>3.1</strong>&nbsp;При подготовке к конвою вы обязаны зайти в TeamSpeak 3 и находиться там до конца мероприятия.<br /><strong>3.2</strong>&nbsp;При участии в официальных конвоях компании в профиле TruckersMP должен стоять префикс [EVOQUE] далее ваш никнейм.<br /><strong>3.3</strong>&nbsp;Всю информацию по конвою (старт, отдых, финиш, время, сервер, кто ведущий, какой тягач, окрас и груз) и другую информацию вы сможете найти в закрытой группе для сотрудников компании примерно за 24 часа до мероприятия.<br /><strong>3.4</strong>&nbsp;На всех остановках ведущий определяет место на базе для стоянки всех тягачей. Парковка происходит по одному в порядке движения в колонне. Чтобы не толпиться на въезде, все заезжают на базу и ждут своей очереди.<br /><strong>3.5</strong>&nbsp;Если вы опоздали на старт или не смогли вовремя вернуться с перекура, вы можете продолжить движение в колонне, НО - когда догоните колонну вы обязаны спросить разрешение у ведущего, после его одобрения вы встаёте строго перед замыкающим колонны. Если это Открытый или совместный конвой, то вы можете опередить всю колонну и встать перед замыкающим компании. Но, обязательно при опережении предупреждаете опережаемых о своём намерении его обойти. На тонких обгон запрещен!!<br /><strong>3.6</strong>&nbsp;Запрещено дублировать или передавать третьим лицам информацию о закрытых конвоях компании.<br /><strong>3.7</strong>&nbsp;Запрещено на всех официальных конвоях использовать нецензурную брань (мат), как в Тим Спике, так и в чате игры. Запрещено оскорблять других сотрудников по политической, половой или расовой дискриминации.<br /><strong>3.8</strong>&nbsp;Ваш никнейм в профиле TruckersMP и TeamSpeak 3 должен совпадать.<br /><strong>3.9</strong>&nbsp;Дистанция во время конвоя между тягачами от 50 до 100 метров по TAB. На каждый конвой определяется своя дистанция. Информацию смотреть в закрытой группе.<br /><strong>3.10</strong>&nbsp;Запрещено приходить на конвой в состоянии алкогольного или наркотического опьянения.<br /><strong>3.11</strong>&nbsp;Запрещено преднамеренно таранить или блокировать других участников движения, а так же оскорблять в чате или рации. Если вас подрезали, или протаранили для этого есть система репортов на сайте TruckersMP.<br /><strong>3.12</strong>&nbsp;На всех конвоях без исключений обязателен ближний свет фар в любое время суток. В ночное время разрешается использовать дальний свет предварительно спросив идущего перед вами человека о том не мешает ли ему ваш свет.<br /><strong>3.13</strong>&nbsp;Проблесковые маячки запрещены!<br /><strong>3.14</strong>&nbsp;Сигналить &quot;встречкам&quot; и &quot;попуткам&quot; запрещено, за исключением аварийных ситуаций.<br /><strong>3.15</strong>&nbsp;Участник конвоя может в любой момент покинуть конвой на дозаправку или уйти вовсе предварительно уведомив ведущего колонны.', 1, NULL, '2020-09-25 15:35:57', '2020-09-25 15:38:33'),
 (4, 1, 'Должен знать каждый', '<strong>1.1&nbsp;</strong>ВТК &quot;EVOQUE&quot; в сокращении читается и говорится&nbsp;<strong>Эвок</strong>&nbsp;и является словом несклоняемым, если вы услышали неправильное произношение нашей компании, то пожалуйста поправьте того человека в правильную сторону.<br /><strong>1.2</strong>&nbsp;Не знание данных правил не освобождает от ответственности, лицо нарушившее правила будет привлечено к штрафным санкциям вплоть до увольнения из ВТК без права на восстановление.<br /><strong>1.3</strong>&nbsp;Данные правила могут быть изменены в любой момент.<br /><strong>1.4</strong>&nbsp;Запрещено при нахождении в нашей компании состоять в других ВТК.<br /><strong>1.5</strong>&nbsp;Вы обязаны знать и соблюдать правила ВТК и правила мультиплеера.<br /><strong>1.6</strong>&nbsp;Обо всех случаях клеветы и оскорблений в адрес ВТК и сотрудников со стороны других людей сообщать руководству ВТК EVOQUE.<br /><strong>1.7</strong>&nbsp;Выход из закрытой группы равно увольнение из ВТК без права на востановление', 0, NULL, '2020-09-26 10:41:08', '2020-09-26 10:41:08'),
@@ -289,7 +292,7 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci,
   `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
@@ -301,7 +304,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `steamid64`, `truckersmp_id`, `remember_token`, `created_at`, `updated_at`, `image`, `city`, `country`, `birth_date`, `vk`) VALUES
-(1, 'Виталий', '76561198097619642', '348684', 'Ge6Wh6W278y8jFbVjQmyBZAUHU8H3TRemQFIWfGmw0xxm7Cysi5IlkSGpW2E', '2020-09-19 20:43:14', '2020-09-19 20:43:14', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/12/126ce455630072d94b4978ef1938d6622504297a_full.jpg', NULL, NULL, NULL, NULL),
+(1, 'Виталий Коробейников', '76561198097619642', '348684', 'Ge6Wh6W278y8jFbVjQmyBZAUHU8H3TRemQFIWfGmw0xxm7Cysi5IlkSGpW2E', '2020-09-19 20:43:14', '2020-09-28 04:32:03', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/12/126ce455630072d94b4978ef1938d6622504297a_full.jpg', 'Киров', 'Россия', '1990-01-01', 'https://vk.com/wutnik'),
 (2, 'Вячеслав', '76561198155191405', '68916', 'DT3yeHhyL5eWD6S7OZtmhWyzA4PYQllpfdZUGuddaB6edJqOH37SonPQGJqC', '2020-09-20 05:06:08', '2020-09-20 05:06:08', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/18/1820bffa9cece4e074e11fcca1e5c53e8a233c42_full.jpg', NULL, NULL, NULL, NULL),
 (3, 'Євгеній Зайчук', '76561198042812354', '131815', 'XGKskCPCclBVXhJYu1udyDcLKMtnlPVIgnaQYmHjYSR43N0xSN3JBmqeLT47', '2020-09-19 20:31:48', '2020-09-26 13:34:29', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/18/18447df61d77a6184f4918b0879cb8a694932c9e_full.jpg', 'Київ', 'Україна', '1994-10-03', 'https://vk.com/viiper94');
 
@@ -373,7 +376,7 @@ ALTER TABLE `applications`
 -- AUTO_INCREMENT для таблиці `convoys`
 --
 ALTER TABLE `convoys`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблиці `members`

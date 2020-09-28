@@ -59,7 +59,7 @@
             </div>
             <div class="form-group">
                 <label for="scores">Баллы</label>
-                <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}" required>
+                <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}">
                 @if($errors->has('scores'))
                     <small class="form-text">{{ $errors->first('scores') }}</small>
                 @endif

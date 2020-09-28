@@ -47,7 +47,7 @@
                                         {{ $item->title }}@if(!$loop->last),@endif
                                     @endforeach
                                 </td>
-                                <td>{{ $member->hasScores() ? $member->scores : '∞' }}</td>
+                                <td>{{ $member->scores ?? '∞' }}</td>
                                 <td>{{ $member->isOwner() ? '∞' : $member->money }}</td>
                                 <td>{{ $member->convoys }}</td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>

@@ -27,7 +27,6 @@ class MembersController extends Controller{
                 'nickname' => 'required|string',
                 'join_date' => 'required|date_format:d.m.Y',
                 'convoys' => 'required|numeric',
-                'scores' => 'required|numeric',
                 'money' => 'required|numeric',
                 'vacations' => 'required|numeric',
                 'plate' => 'required|url',

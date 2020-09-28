@@ -38,10 +38,6 @@
                 <label class="custom-control-label" for="manage_rp">Может модерировать рейтинговые перевозки</label>
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="service" name="service" @if($role->service) checked @endif>
-                <label class="custom-control-label" for="service">Сервисная роль (имеет ∞ баллов)</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($role->visible) checked @endif>
                 <label class="custom-control-label" for="visible">Показывать эту роль</label>
             </div>

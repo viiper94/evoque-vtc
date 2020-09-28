@@ -22,8 +22,7 @@ class Role extends Model{
         'manage_convoys' => 'boolean',
         'manage_table' => 'boolean',
         'manage_rp' => 'boolean',
-        'visible' => 'boolean',
-        'service' => 'boolean',
+        'visible' => 'boolean'
     ];
 
     public function members(){

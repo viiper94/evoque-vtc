@@ -1,4 +1,8 @@
-@extends('evoque.layout.index')
+@extends('layout.index')
+
+@section('title')
+    Роли | @lang('general.vtc_evoque')
+@endsection
 
 @section('content')
 

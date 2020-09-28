@@ -1,5 +1,9 @@
 @extends('layout.index')
 
+@section('title')
+    Открытый конвой @lang('general.vtc_evoque')
+@endsection
+
 @section('content')
 
 <div class="container pt-5">

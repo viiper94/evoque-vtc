@@ -1,4 +1,8 @@
-@extends('evoque.layout.index')
+@extends('layout.index')
+
+@section('title')
+        Все конвои | @lang('general.vtc_evoque')
+@endsection
 
 @section('content')
     <div class="container pt-5 members-table">

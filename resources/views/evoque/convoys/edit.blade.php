@@ -1,4 +1,13 @@
-@extends('evoque.layout.index')
+@extends('layout.index')
+
+@section('title')
+    @if($convoy->title)
+        Редактирование конвоя
+    @else
+        Новый конвой
+    @endif
+    | @lang('general.vtc_evoque')
+@endsection
 
 @section('assets')
     <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">

@@ -1,5 +1,9 @@
 @extends('layout.index')
 
+@section('title')
+    Вступить в @lang('general.vtc_evoque')
+@endsection
+
 @section('content')
 
 <div class="container mt-5">

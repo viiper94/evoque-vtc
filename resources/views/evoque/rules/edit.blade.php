@@ -1,4 +1,8 @@
-@extends('evoque.layout.index')
+@extends('layout.index')
+
+@section('title')
+    Редактирование правил | @lang('general.vtc_evoque')
+@endsection
 
 @section('assets')
     <script src="/js/ckeditor/ckeditor.js"></script>

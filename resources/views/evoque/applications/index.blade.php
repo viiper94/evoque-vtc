@@ -1,4 +1,8 @@
-@extends('evoque.layout.index')
+@extends('layout.index')
+
+@section('title')
+    Заявки | @lang('general.vtc_evoque')
+@endsection
 
 @section('content')
 
@@ -44,7 +48,9 @@
                 </div>
             @endforeach
         @else
-            <h2 class="text-primary">Еще нет заявок</h2>
+            <div class="row justify-content-center pt-5 pb-5">
+                <h2 class="text-primary">Еще нет заявок</h2>
+            </div>
         @endif
     </div>
 

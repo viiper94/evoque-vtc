@@ -1,4 +1,8 @@
-@extends('evoque.layout.index')
+@extends('layout.index')
+
+@section('title')
+    Редактирование роли | @lang('general.vtc_evoque')
+@endsection
 
 @section('content')
 

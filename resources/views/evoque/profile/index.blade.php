@@ -1,5 +1,9 @@
 @extends('layout.index')
 
+@section('title')
+    Мой профиль | @lang('general.vtc_evoque')
+@endsection
+
 @section('content')
 
     <div class="container pt-5 pb-5 profile">

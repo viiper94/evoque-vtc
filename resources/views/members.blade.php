@@ -1,5 +1,9 @@
 @extends('layout.index')
 
+@section('title')
+    Сотрудники @lang('general.vtc_evoque')
+@endsection
+
 @section('content')
 
     <div class="container members mt-5">

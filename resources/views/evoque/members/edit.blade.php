@@ -1,4 +1,8 @@
-@extends('evoque.layout.index')
+@extends('layout.index')
+
+@section('title')
+    Редактирование сотрудника | @lang('general.vtc_evoque')
+@endsection
 
 @section('assets')
     <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">

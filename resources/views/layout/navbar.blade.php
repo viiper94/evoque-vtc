@@ -10,16 +10,16 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-uppercase font-weight-bold text-shadow">
                     @guest
-                        <li class="nav-item @if(Route::current()->getName() === 'home')active @endif">
+                        <li class="nav-item @if(Route::current() && Route::current()->getName() === 'home')active @endif">
                             <a class="nav-link" href="{{ route('home') }}">О нас</a>
                         </li>
-                        <li class="nav-item @if(Route::current()->getName() === 'convoys')active @endif">
+                        <li class="nav-item @if(Route::current() && Route::current()->getName() === 'convoys')active @endif">
                             <a class="nav-link" href="{{ route('convoys') }}">Конвой</a>
                         </li>
-                        <li class="nav-item @if(Request::is('rules'))active @endif">
+                        <li class="nav-item @if(Route::current() && Request::is('rules'))active @endif">
                             <a class="nav-link" href="{{ route('rules') }}">Правила</a>
                         </li>
-                        <li class="nav-item @if(Request::is('apply'))active @endif">
+                        <li class="nav-item @if(Route::current() && Request::is('apply'))active @endif">
                             <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                         </li>
                         <li class="nav-item">
@@ -29,7 +29,7 @@
                         <li class="nav-item @if(Route::current()->getName() === 'home')active @endif">
                             <a class="nav-link" href="{{ route('home') }}">Главная</a>
                         </li>
-                        <li class="nav-item dropdown @if(in_array(Route::current()->getName(), ['evoque.convoys', 'convoys']))active @endif">
+                        <li class="nav-item dropdown @if(Route::current() && in_array(Route::current()->getName(), ['evoque.convoys', 'convoys']))active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Конвои</a>
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
                                 <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
@@ -39,7 +39,7 @@
                                 @endcan
                             </div>
                         </li>
-                        <li class="nav-item dropdown @if(Route::current()->getName() === 'evoque.rules')active @endif">
+                        <li class="nav-item dropdown @if(Route::current() && Route::current()->getName() === 'evoque.rules')active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
                             <div class="dropdown-menu" aria-labelledby="rulesDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.rules', 'private') }}">Закрытые правила</a>
@@ -49,10 +49,10 @@
 {{--                        <li class="nav-item @if(Route::current()->getName() === 'evoque.applications')active @endif">--}}
 {{--                            <a class="nav-link" href="{{ route('evoque.applications') }}">Заявки</a>--}}
 {{--                        </li>--}}
-                        <li class="nav-item @if(Route::current()->getName() === 'evoque.members')active @endif">
+                        <li class="nav-item @if(Route::current() && Route::current()->getName() === 'evoque.members')active @endif">
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
-                        <li class="nav-item @if(Route::current()->getName() === 'evoque.rp')active @endif">
+                        <li class="nav-item @if(Route::current() && Route::current()->getName() === 'evoque.rp')active @endif">
                             <a class="nav-link" href="#">Рейтинговые перевозки</a>
                         </li>
                         @can('admin')

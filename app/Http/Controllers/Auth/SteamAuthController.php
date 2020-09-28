@@ -63,7 +63,7 @@ class SteamAuthController extends Controller
 
                 if($tmp_info->getCompanyId() !== 11682){
                     return redirect(route('home'))
-                        ->withErrors('error', trans('general.not_member'));
+                        ->withErrors([trans('general.not_member')]);
                 }
 
                 $user = $this->findOrNewUser($steam_info, $tmp_info);

@@ -46,7 +46,7 @@
                                 <td>{{ $member->hasScores() ? $member->scores : '∞' }}</td>
                                 <td>{{ $member->isOwner() ? '∞' : $member->money }}</td>
                                 <td>{{ $member->convoys }}</td>
-                                <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('LL') }}</td>
+                                <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td class="plate-img p-0"><img src="{{ $member->plate }}"></td>
                                 <td>
@@ -71,7 +71,7 @@
                                         <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
                                     @endcan
                                 </td>
-                                <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('LL') }}</td>
+                                <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>
                             </tr>
                         @endif
                     @endforeach

@@ -194,7 +194,9 @@
             <hr class="m-auto">
         </section>
     @else
-        <h1 class="text-center text-primary p-4">Ближайших открытых конвоев еще нет!</h1>
+        <div class="row justify-content-center pt-5 pb-5">
+            <h1 class="text-center text-primary m-5">Ближайших открытых конвоев еще нет!</h1>
+        </div>
     @endif
 
 

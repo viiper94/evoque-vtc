@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Gate;
 class MembersController extends Controller{
 
     public function index(){
-        if(Auth::guest()) abort(403);
+        if(Auth::guest()) return redirect()->route('auth.steam');
         return view('evoque.members.index', [
             'roles' => Role::with(['members', 'members.user', 'members.role' => function($query){
                 $query->where('visible', '1');

@@ -1,4 +1,9 @@
 // Forms
+form{
+    small{
+        color: red;
+    }
+}
 .form-control{
     border-color: $primary;
     background: $background-lighten-1;

@@ -17205,6 +17205,10 @@ select::-webkit-scrollbar-thumb:hover {
   background: rgba(128, 135, 139, 0.8);
 }
 
+form small {
+  color: red;
+}
+
 .form-control {
   border-color: #e4c501;
   background: #333333;
@@ -17365,10 +17369,6 @@ body {
 .apply-call-to-action i {
   color: #e4c501;
   font-size: 60px;
-}
-
-.application-form small {
-  color: red;
 }
 
 .application-form .btn-outline-warning.disabled,
@@ -17556,7 +17556,7 @@ ul.rules .blockquote p strong {
 }
 
 .members-table table {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .members-table table td,

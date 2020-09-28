@@ -20,13 +20,15 @@
 
 .members-table{
     table{
+        font-size: 12px;
         td, th{
             white-space: nowrap;
             text-align: center;
+            vertical-align: middle;
             &.plate-img{
-                width: 228px;
+                width: 215px;
                 img{
-                    height: 49px;
+                    height: 46px;
                 }
             }
             &.icon-link{

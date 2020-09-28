@@ -30,7 +30,7 @@
             <div class="col-sm-6 info pl-sm-5 pt-3 pb-3">
                 <h1 class="text-primary">{{ $user->name }}</h1>
                 @if($user->member)
-                    <h3>[EVOQUE] {{ $user->member->nickname }}</h3>
+                    <h3>{{ $user->member->nickname }}</h3>
                 @endif
                 @if($user->city)
                     <h6 class="pt-4">Город:</h6>

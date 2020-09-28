@@ -59,14 +59,14 @@
             </div>
             <div class="form-group">
                 <label for="scores">Баллы</label>
-                <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}">
+                <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}" placeholder="∞">
                 @if($errors->has('scores'))
                     <small class="form-text">{{ $errors->first('scores') }}</small>
                 @endif
             </div>
             <div class="form-group">
                 <label for="money">Эвики</label>
-                <input type="number" class="form-control" id="money" name="money" value="{{ $member->money }}" required>
+                <input type="number" class="form-control" id="money" name="money" value="{{ $member->money }}" placeholder="∞">
                 @if($errors->has('money'))
                     <small class="form-text">{{ $errors->first('money') }}</small>
                 @endif

@@ -15,6 +15,7 @@ class ModifyMembersTable extends Migration
     {
         Schema::table('members', function (Blueprint $table) {
             $table->integer('scores')->default(0)->nullable()->change();
+            $table->integer('money')->default(0)->nullable()->change();
         });
     }
 
@@ -25,8 +26,6 @@ class ModifyMembersTable extends Migration
      */
     public function down()
     {
-        Schema::table('members', function (Blueprint $table) {
-            $table->integer('scores')->default(0)->nullable(false)->change();
-        });
+        //
     }
 }

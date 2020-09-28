@@ -48,7 +48,7 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $member->scores ?? '∞' }}</td>
-                                <td>{{ $member->isOwner() ? '∞' : $member->money }}</td>
+                                <td>{{ $member->money ?? '∞' }}</td>
                                 <td>{{ $member->convoys }}</td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>

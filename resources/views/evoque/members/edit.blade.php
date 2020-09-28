@@ -66,7 +66,7 @@
             </div>
             <div class="form-group">
                 <label for="money">Эвики</label>
-                <input type="number" class="form-control" id="money" name="money" value="{{ $member->money }}" placeholder="∞">
+                <input type="text" class="form-control" id="money" name="money" value="{{ $member->money }}" placeholder="∞">
                 @if($errors->has('money'))
                     <small class="form-text">{{ $errors->first('money') }}</small>
                 @endif
@@ -87,7 +87,11 @@
                 @endif
             </div>
             <div class="row justify-content-center">
-                <button type="submit" class="btn btn-outline-warning btn-lg">Сохранить</button>
+                <button type="submit" class="btn btn-outline-warning btn-lg"><i class="fas fa-save"></i> Сохранить</button>
+                @if(\Illuminate\Support\Facades\Auth::user()->id !== $member->user->id && Gate::forUser($member->user)->denies('admin'))
+                    <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-danger ml-5"
+                       onclick="return confirm('Уволить этого сотрудника?')"><i class="fas fa-user-times"></i> Уволить</a>
+                @endif
             </div>
         </form>
     </div>

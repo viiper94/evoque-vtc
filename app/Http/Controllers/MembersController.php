@@ -49,4 +49,15 @@ class MembersController extends Controller{
         ]);
     }
 
+    public function fire(Request $request, $id){
+        if(Gate::denies('manage_members')) abort(403);
+        $member = Member::with(['user', 'role'])->where('id', $id)->first();
+        $member->role()->detach();
+        $member->user->remember_token = null;
+        $member->user->save();
+        return $member->delete() ?
+            redirect()->route('evoque.members')->with(['success' => 'Сотрудник уволен!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
 }

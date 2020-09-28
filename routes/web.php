@@ -27,6 +27,7 @@ Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.p
 
 Route::get('/evoque', 'MembersController@index')->name('evoque.members');
 Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
+Route::any('/evoque/admin/member/fire/{id}', 'MembersController@fire')->name('evoque.admin.members.fire');
 
 Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');
 Route::any('/evoque/admin/rules/edit/{id}', 'RulesController@edit')->name('evoque.rules.edit');

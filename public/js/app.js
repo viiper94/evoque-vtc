@@ -13672,6 +13672,13 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#submit_btn').prop('disabled', true).addClass('disabled');
     }
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#scores').keyup(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#scores').val() === '') {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#sort').prop('checked', true);
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#sort').prop('checked', false);
+    }
+  });
 });
 
 /***/ }),
@@ -13694,8 +13701,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -21,7 +21,9 @@ class ConvoysController extends Controller{
 
     public function convoys(Request $request){
         if(Auth::check()){
-            $convoys = Convoy::where('visible', '1')->orderBy('start_time')->get();
+            $operator = '<';
+            if(Carbon::now()->format('H') >= '21') $operator = '<=';
+            $convoys = Convoy::where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->get();
             $grouped = array();
             foreach($convoys as $convoy){
                 $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;

@@ -6,12 +6,13 @@
 
 @section('content')
 
+    @include('layout.alert')
     <div class="container pt-5 pb-5 profile">
         <div class="row mt-5">
             <div class="col-sm-6 avatar text-right pr-sm-5 pt-3 pb-3">
                 <img src="{{ $user->image }}" alt="{{ $user->name }}" class="text-shadow-m">
                 <div class="mt-3">
-                    <a href="#" class="btn btn-sm btn-outline-warning"><i class="fas fa-sync-alt"></i> Обновить Steam аватар</a>
+                    <a href="{{ route('evoque.profile.updateAvatar') }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-sync-alt"></i> Обновить Steam аватар</a>
                 </div>
                 @if(\Illuminate\Support\Facades\Auth::user()->id === $user->id)
                     <div class="mt-2">

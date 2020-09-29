@@ -23,6 +23,7 @@ Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
 Route::get('/members', 'Controller@members')->name('members');
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
+Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');
 Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.profile');
 
 Route::get('/evoque', 'MembersController@index')->name('evoque.members');

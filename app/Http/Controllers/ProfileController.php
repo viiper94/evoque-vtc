@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Member;
 use App\Role;
+use App\Steam;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Relisoft\Steam\Src\Api\Player;
 
 class ProfileController extends Controller{
 
@@ -44,6 +46,22 @@ class ProfileController extends Controller{
         return view('evoque.profile.edit', [
             'user' => Auth::user()
         ]);
+    }
+
+    public function updateAvatar(){
+        if(Auth::guest()) abort(404);
+
+        $client = new Steam();
+        $player = $client->getPlayerData(Auth::user()->steamid64);
+
+        if($player){
+            $user = User::findOrFail(Auth::user()->id);
+            $user->image = $player['avatarfull'];
+            return $user->save() ?
+                redirect()->route('evoque.profile')->with(['success' => 'Аватар успешно обновлён!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
+        return redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

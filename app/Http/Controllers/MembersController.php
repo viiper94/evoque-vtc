@@ -14,7 +14,9 @@ class MembersController extends Controller{
     public function index(){
         if(Auth::guest()) return redirect()->route('auth.steam');
         return view('evoque.members.index', [
-            'roles' => Role::with(['members', 'members.user', 'members.role' => function($query){
+            'roles' => Role::with(['members' => function($query){
+                $query->orderBy('sort', 'desc')->orderBy('scores', 'desc')->orderBy('join_date', 'asc');
+            }, 'members.user', 'members.role' => function($query){
                 $query->where('visible', '1');
             }])->where('visible', 1)->get()->groupBy('group')
         ]);
@@ -33,6 +35,7 @@ class MembersController extends Controller{
             $member = Member::findOrFail($id);
             $member->fill($request->post());
             $member->visible = $request->input('visible') === 'on';
+            $member->sort = $request->input('sort') === 'on';
             $member->join_date = Carbon::parse($request->input('join_date'))->format('Y-m-d');
             $member->on_vacation_till = $request->input('on_vacation_till') ? Carbon::parse($request->input('on_vacation_till'))->format('Y-m-d') : null;
             $member->role()->detach();

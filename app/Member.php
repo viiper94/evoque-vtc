@@ -8,6 +8,7 @@ class Member extends Model{
 
     public $casts = [
         'visible' => 'boolean',
+        'sort' => 'boolean',
     ];
 
     protected $dates = [
@@ -27,6 +28,7 @@ class Member extends Model{
         'vacations',
         'on_vacation_till',
         'plate',
+        'sort',
     ];
 
     public function user(){

@@ -57,6 +57,10 @@
                     <small class="form-text">{{ $errors->first('convoys') }}</small>
                 @endif
             </div>
+            <div class="custom-control custom-checkbox mb-2">
+                <input type="checkbox" class="custom-control-input" id="sort" name="sort" @if($member->sort) checked @endif>
+                <label class="custom-control-label" for="sort">Показывать вверху списка</label>
+            </div>
             <div class="form-group">
                 <label for="scores">Баллы</label>
                 <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}" placeholder="∞">

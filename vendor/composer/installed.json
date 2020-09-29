@@ -1404,7 +1404,7 @@
                 "dev-master": "6.5-dev"
             }
         },
-        "installation-source": "dist",
+        "installation-source": "source",
         "autoload": {
             "psr-4": {
                 "GuzzleHttp\\": "src/"
@@ -3451,17 +3451,17 @@
     },
     {
         "name": "phpspec/prophecy",
-        "version": "1.12.0",
-        "version_normalized": "1.12.0.0",
+        "version": "1.12.1",
+        "version_normalized": "1.12.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/phpspec/prophecy.git",
-            "reference": "765cd5d5d237525f8bbadaec5dc161c83a369119"
+            "reference": "8ce87516be71aae9b956f81906aaf0338e0d8a2d"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/765cd5d5d237525f8bbadaec5dc161c83a369119",
-            "reference": "765cd5d5d237525f8bbadaec5dc161c83a369119",
+            "url": "https://api.github.com/repos/phpspec/prophecy/zipball/8ce87516be71aae9b956f81906aaf0338e0d8a2d",
+            "reference": "8ce87516be71aae9b956f81906aaf0338e0d8a2d",
             "shasum": ""
         },
         "require": {
@@ -3475,7 +3475,7 @@
             "phpspec/phpspec": "^6.0",
             "phpunit/phpunit": "^8.0 || ^9.0 <9.3"
         },
-        "time": "2020-09-28T12:23:07+00:00",
+        "time": "2020-09-29T09:10:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {

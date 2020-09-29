@@ -40,15 +40,15 @@
                         @if($member->topRole() == $role->id)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $member->nickname }}</td>
-                                <td>{{ $member->user->birth_date ? $member->user->birth_date->age .' '. trans_choice('год|года|лет', $member->user->birth_date->age) : '–' }}</td>
+                                <td><b>{{ $member->nickname }}</b></td>
+                                <td><b>{{ $member->user->birth_date ? $member->user->birth_date->age .' '. trans_choice('год|года|лет', $member->user->birth_date->age) : '–' }}</b></td>
                                 <td>
                                     @foreach($member->role as $item)
                                         {{ $item->title }}@if(!$loop->last),@endif
                                     @endforeach
                                 </td>
-                                <td>{{ $member->scores ?? '∞' }}</td>
-                                <td>{{ $member->money ?? '∞' }}</td>
+                                <td><b>{{ $member->scores ?? '∞' }}</b></td>
+                                <td><b>{{ $member->money ?? '∞' }}</b></td>
                                 <td>{{ $member->convoys }}</td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>

@@ -49,7 +49,7 @@
                 <div class="user-links pt-4">
                     <a href="{{ $user->vk }}" target="_blank"><i class="fab fa-vk"></i></a>
                     <a href="https://steamcommunity.com/profiles/{{ $user->steamid64 }}" target="_blank" class="ml-2"><i class="fab fa-steam-square"></i></a>
-                    <a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank" class="ml-2"><i class="icon-truckersmp"></i></a>
+                    <a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank" class="ml-2"><i class="fas fa-truck-pickup"></i></a>
                 </div>
             </div>
         </div>

@@ -61,7 +61,7 @@
                                     @endcan
                                 </td>
                                 <td>{{ $member->getPlace() }}</td>
-                                <td class="icon-link d-flex justify-content-center">
+                                <td class="icon-link">
                                     @isset($member->user->vk)
                                         <a href="{{ $member->user->vk }}" target="_blank" class="mr-3"><i class="fab fa-vk"></i></a>
                                     @endisset
@@ -69,10 +69,10 @@
                                         <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank" class="mr-3"><i class="fab fa-steam-square"></i></a>
                                     @endisset
                                     @isset($member->user->truckersmp_id)
-                                        <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank" class="mr-3"><i class="icon-truckersmp"></i></a>
+                                        <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
                                     @endisset
                                     @can('manage_members')
-                                        <a href="{{ route('evoque.admin.members.edit', $member->id) }}"><i class="fas fa-user-edit"></i></a>
+                                        <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
                                     @endcan
                                 </td>
                                 <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>

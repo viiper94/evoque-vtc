@@ -17219,10 +17219,6 @@ footer .contacts a i {
   font-size: 35px;
 }
 
-footer .contacts a i.icon-truckersmp:before {
-  vertical-align: top;
-}
-
 body::-webkit-scrollbar,
 .modal-body::-webkit-scrollbar,
 .table-responsive::-webkit-scrollbar,
@@ -17640,7 +17636,6 @@ ul.rules .blockquote p strong {
 .members-table table th.icon-link {
   padding-top: 10px;
   padding-bottom: 9px;
-  align-items: center;
 }
 
 .members-table table i {

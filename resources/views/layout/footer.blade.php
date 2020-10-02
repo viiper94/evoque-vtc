@@ -43,6 +43,9 @@
                     <div class="teamspeak">
                         <a href="http://invite.teamspeak.com/evoque.ts3srv.ru" target="_blank" class="pl-3 pr-2"><i class="fab fa-teamspeak"></i></a>
                     </div>
+                    <div class="teamspeak">
+                        <a href="https://truckersmp.com/vtc/11682" target="_blank" class="pl-3 pr-2"><i class="fas fa-truck-pickup"></i></a>
+                    </div>
                 </div>
             </div>
         </div>

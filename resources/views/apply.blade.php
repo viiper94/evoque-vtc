@@ -34,14 +34,14 @@
                 </li>
                 <li class="row mt-5" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
-                        <i class="icon-truckersmp"></i>
+                        <i class="fas fa-ban"></i>
                     </div>
                     <p>Ваша история банов на сайте TruckersMP должна быть открыта<br>
                         <a data-toggle="modal" data-target="#ban-history-modal" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
                 </li>
                 <li class="row mt-5">
                     <div class="icon-wrapper">
-                        <i class="fas fa-ban"></i>
+                        <i class="fas fa-history"></i>
                     </div>
                     <p>Не более 2-х наказаний в истории банов на сайте TruckersMP</p>
                 </li>

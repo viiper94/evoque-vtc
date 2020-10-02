@@ -34,7 +34,7 @@
                 </li>
                 <li class="row mt-5" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
-                        <i class="fas fa-truck-pickup"></i>
+                        <i class="icon-truckersmp"></i>
                     </div>
                     <p>Ваша история банов на сайте TruckersMP должна быть открыта<br>
                         <a data-toggle="modal" data-target="#ban-history-modal" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>

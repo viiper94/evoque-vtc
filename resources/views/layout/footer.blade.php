@@ -35,13 +35,16 @@
                 <h2>Наши контакты</h2>
                 <div class="contacts row">
                     <div class="vk">
-                        <a href="https://vk.com/evoquevtc" target="_blank" class="pl-3 pr-2"><i class="fab fa-vk"></i></a>
+                        <a href="https://vk.com/evoquevtc" target="_blank" class="pl-3 pr-2 d-block"><i class="fab fa-vk"></i></a>
                     </div>
                     <div class="discord">
-                        <a href="https://discord.com/invite/Gj53a8d" target="_blank" class="pl-3 pr-2"><i class="fab fa-discord"></i></a>
+                        <a href="https://discord.com/invite/Gj53a8d" target="_blank" class="pl-3 pr-2 d-block"><i class="fab fa-discord"></i></a>
                     </div>
                     <div class="teamspeak">
-                        <a href="http://invite.teamspeak.com/evoque.ts3srv.ru" target="_blank" class="pl-3 pr-2"><i class="fab fa-teamspeak"></i></a>
+                        <a href="http://invite.teamspeak.com/evoque.ts3srv.ru" target="_blank" class="pl-3 pr-2 d-block"><i class="fab fa-teamspeak"></i></a>
+                    </div>
+                    <div class="truckersmp">
+                        <a href="https://truckersmp.com/vtc/11682" target="_blank" class="pl-3 pr-2 d-block"><i class="icon-truckersmp"></i></a>
                     </div>
                 </div>
             </div>

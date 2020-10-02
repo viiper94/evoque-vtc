@@ -36,7 +36,13 @@
                         <td><a href="{{ $user->vk }}" target="_blank">{{ $user->vk }}</a></td>
                         <td><a href="https://steamcommunity.com/profiles/{{ $user->steamid64 }}" target="_blank">{{ $user->steamid64 }}</a></td>
                         <td><a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank">{{ $user->truckersmp_id }}</a></td>
-                        <td><i class="fas fa-{{ $user->member ? 'check' : 'times' }}"></i></td>
+                        <td>
+                            @if(!$user->member)
+                                <i class="fas fa-times"></i>
+                            @else
+                                <i class="icon-evoque text-primary"></i>
+                            @endif
+                        </td>
                         <td>{{ $user->created_at->isoFormat('DD.MM.Y HH:mm') }}</td>
                         <td>
                             @if(!$user->member)

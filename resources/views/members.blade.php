@@ -31,7 +31,7 @@
                                         </p>
                                         <div class="member-links text-center">
                                             <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank"><i class="fab fa-steam-square"></i></a>
-                                            <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
+                                            <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank" class="ml-2"><i class="icon-truckersmp"></i></a>
                                         </div>
                                     </div>
                                 </div>

@@ -13679,6 +13679,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#sort').prop('checked', false);
     }
   });
+
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.member-scores.add-score')) {}
 });
 
 /***/ }),

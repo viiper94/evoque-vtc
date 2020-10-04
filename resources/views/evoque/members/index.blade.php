@@ -47,7 +47,12 @@
                                         {{ $item->title }}@if(!$loop->last),@endif
                                     @endforeach
                                 </td>
-                                <td><b>{{ $member->scores ?? '∞' }}</b></td>
+                                <td class="member-scores">
+                                    @can('manage_table')
+                                        <a class="add-score" data-member-id="{{ $member->id }}"><i class="fas fa-plus"></i></a>
+                                    @endcan
+                                    <b>{{ $member->scores ?? '∞' }}</b>
+                                </td>
                                 <td><b>{{ $member->money ?? '∞' }}</b></td>
                                 <td>{{ $member->convoys }}</td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>

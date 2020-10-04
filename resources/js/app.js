@@ -21,4 +21,14 @@ $(document).ready(function(){
         }
     });
 
+    if($('.member-scores.add-score')){
+        $('.member-scores.add-score').click(function(){
+            if(confirm('Добавить 1 бал?')){
+                $.ajax({
+
+                });
+            }
+        });
+    }
+
 });

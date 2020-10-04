@@ -17617,6 +17617,7 @@ ul.rules .blockquote p strong {
 
 .members-table table td,
 .members-table table th {
+  position: relative;
   white-space: nowrap;
   text-align: center;
   vertical-align: middle;
@@ -17636,6 +17637,19 @@ ul.rules .blockquote p strong {
 .members-table table th.icon-link {
   padding-top: 10px;
   padding-bottom: 9px;
+}
+
+.members-table table td.member-scores .add-score,
+.members-table table th.member-scores .add-score {
+  display: none;
+  position: absolute;
+  left: 5px;
+  top: 10px;
+}
+
+.members-table table td.member-scores:hover .add-score,
+.members-table table th.member-scores:hover .add-score {
+  display: block;
 }
 
 .members-table table i {

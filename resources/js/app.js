@@ -21,14 +21,34 @@ $(document).ready(function(){
         }
     });
 
-    if($('.member-scores.add-score')){
-        $('.member-scores.add-score').click(function(){
-            if(confirm('Добавить 1 бал?')){
+    if($('.member-scores .add-score')){
+        $('.member-scores .add-score').click(function(){
+            let button = $(this);
+            if(confirm('Добавить 1 бал для '+ button.data('nickname') +'?')){
                 $.ajax({
+                    cache: false,
+                    dataType : 'json',
+                    type : 'POST',
+                    data : {
+                        '_token' : button.data('token'),
+                        'member' : button.data('id')
+                    },
+                    url : 'addscore',
+                    beforeSend : function(){
+                        button.parent().find('.scores-number').html(getPreloaderHtml());
+                    },
+                    success : function(response){
 
+                    }
                 });
             }
         });
     }
 
 });
+
+function getPreloaderHtml(){
+    return "<div class=\"spinner-border spinner-border-sm text-warning\" role=\"status\">\n" +
+        "  <span class=\"sr-only\">Loading...</span>\n" +
+        "</div>";
+}

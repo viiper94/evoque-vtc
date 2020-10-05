@@ -17650,6 +17650,7 @@ ul.rules .blockquote p strong {
 .members-table table td.member-scores:hover .add-score,
 .members-table table th.member-scores:hover .add-score {
   display: block;
+  cursor: pointer;
 }
 
 .members-table table i {

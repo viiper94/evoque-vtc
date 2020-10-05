@@ -13680,8 +13680,32 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     }
   });
 
-  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.member-scores.add-score')) {}
+  if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('.member-scores .add-score')) {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.member-scores .add-score').click(function () {
+      var button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+
+      if (confirm('Добавить 1 бал для ' + button.data('nickname') + '?')) {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+          cache: false,
+          dataType: 'json',
+          type: 'POST',
+          data: {
+            '_token': button.data('token'),
+            'member': button.data('id')
+          },
+          beforeSend: function beforeSend() {
+            button.parent().find('.scores-number').html(getPreloaderHtml());
+          },
+          success: function success(response) {}
+        });
+      }
+    });
+  }
 });
+
+function getPreloaderHtml() {
+  return "<div class=\"spinner-border spinner-border-sm text-warning\" role=\"status\">\n" + "  <span class=\"sr-only\">Loading...</span>\n" + "</div>";
+}
 
 /***/ }),
 
@@ -13703,8 +13727,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

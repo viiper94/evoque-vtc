@@ -49,9 +49,13 @@
                                 </td>
                                 <td class="member-scores">
                                     @can('manage_table')
-                                        <a class="add-score" data-member-id="{{ $member->id }}"><i class="fas fa-plus"></i></a>
+                                        @if($member->scores)
+                                            <a class="add-score text-shadow" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        @endif
                                     @endcan
-                                    <b>{{ $member->scores ?? '∞' }}</b>
+                                    <b class="scores-number">{{ $member->scores ?? '∞' }}</b>
                                 </td>
                                 <td><b>{{ $member->money ?? '∞' }}</b></td>
                                 <td>{{ $member->convoys }}</td>

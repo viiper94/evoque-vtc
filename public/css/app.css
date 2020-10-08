@@ -17639,18 +17639,30 @@ ul.rules .blockquote p strong {
   padding-bottom: 9px;
 }
 
-.members-table table td.member-scores .add-score,
-.members-table table th.member-scores .add-score {
+.members-table table td.member-scores .add-btn,
+.members-table table td.member-money .add-btn,
+.members-table table th.member-scores .add-btn,
+.members-table table th.member-money .add-btn {
   display: none;
   position: absolute;
   left: 5px;
   top: 10px;
 }
 
-.members-table table td.member-scores:hover .add-score,
-.members-table table th.member-scores:hover .add-score {
+.members-table table td.member-scores:hover .add-btn,
+.members-table table td.member-money:hover .add-btn,
+.members-table table th.member-scores:hover .add-btn,
+.members-table table th.member-money:hover .add-btn {
   display: block;
   cursor: pointer;
+}
+
+.members-table table td.member-scores:hover .add-btn.disabled,
+.members-table table td.member-money:hover .add-btn.disabled,
+.members-table table th.member-scores:hover .add-btn.disabled,
+.members-table table th.member-money:hover .add-btn.disabled {
+  opacity: 0.1;
+  cursor: default;
 }
 
 .members-table table i {

@@ -63,4 +63,27 @@ class MembersController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function add(Request $request){
+        if($request->ajax()){
+            $member = Member::find($request->input('member'));
+            if($request->input('target') === 'бал'){
+                $scores = $member->scores;
+                $member->scores += 1;
+                return response()->json([
+                    'scores' => $member->save() ? $member->scores : $scores,
+                    'status' => 'OK'
+                ]);
+            }elseif($request->input('target') === 'эвика'){
+                $money = $member->money;
+                $member->money += 0.5;
+                return response()->json([
+                    'scores' => $member->save() ? $member->money : $money,
+                    'status' => 'OK'
+                ]);
+            }
+
+        }
+        return false;
+    }
+
 }

@@ -49,15 +49,24 @@
                                 </td>
                                 <td class="member-scores">
                                     @can('manage_table')
-                                        @if($member->scores)
-                                            <a class="add-score text-shadow" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                        @if($member->scores !== null)
+                                            <a class="add-btn text-shadow" data-target="бал" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         @endif
                                     @endcan
-                                    <b class="scores-number">{{ $member->scores ?? '∞' }}</b>
+                                    <b class="number">{{ $member->scores ?? '∞' }}</b>
                                 </td>
-                                <td><b>{{ $member->money ?? '∞' }}</b></td>
+                                <td class="member-money">
+                                    @can('manage_table')
+                                        @if($member->money !== null)
+                                            <a class="add-btn text-shadow" data-target="эвика" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                                <i class="fas fa-plus"></i>
+                                            </a>
+                                        @endif
+                                    @endcan
+                                    <b class="number">{{ $member->money ?? '∞' }}</b>
+                                </td>
                                 <td>{{ $member->convoys }}</td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>

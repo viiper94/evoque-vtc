@@ -21,29 +21,32 @@ $(document).ready(function(){
         }
     });
 
-    if($('.member-scores .add-score')){
-        $('.member-scores .add-score').click(function(){
-            let button = $(this);
-            if(confirm('Добавить 1 бал для '+ button.data('nickname') +'?')){
-                $.ajax({
-                    cache: false,
-                    dataType : 'json',
-                    type : 'POST',
-                    data : {
-                        '_token' : button.data('token'),
-                        'member' : button.data('id')
-                    },
-                    url : 'addscore',
-                    beforeSend : function(){
-                        button.parent().find('.scores-number').html(getPreloaderHtml());
-                    },
-                    success : function(response){
-
-                    }
-                });
-            }
-        });
-    }
+    $(document).on('click', 'td .add-btn:not(.disabled)', function(){
+        let button = $(this);
+        if(confirm('Добавить '+ (button.data('target') === 'бал' ? '1 ' : '0.5 ') + button.data('target') +' для '+ button.data('nickname') +'?')){
+            $.ajax({
+                cache: false,
+                dataType : 'json',
+                type : 'POST',
+                data : {
+                    '_token' : button.data('token'),
+                    'target' : button.data('target'),
+                    'member' : button.data('id')
+                },
+                url : 'evoque/add',
+                beforeSend : function(){
+                    button.parent().find('.number').html(getPreloaderHtml());
+                    button.addClass('disabled');
+                },
+                success : function(response){
+                    button.parent().find('.number').html(response.scores);
+                },
+                complete : function(){
+                    button.removeClass('disabled');
+                }
+            });
+        }
+    });
 
 });
 

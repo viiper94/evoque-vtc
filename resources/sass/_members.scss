@@ -36,16 +36,20 @@
                 padding-top: 10px;
                 padding-bottom: 9px;
             }
-            &.member-scores{
-                .add-score{
+            &.member-scores, &.member-money{
+                .add-btn{
                     display: none;
                     position: absolute;
                     left: 5px;
                     top: 10px;
                 }
-                &:hover .add-score{
+                &:hover .add-btn{
                     display: block;
                     cursor: pointer;
+                    &.disabled{
+                        opacity: .1;
+                        cursor: default;
+                    }
                 }
             }
         }

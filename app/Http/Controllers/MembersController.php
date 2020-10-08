@@ -32,6 +32,7 @@ class MembersController extends Controller{
                 'vacations' => 'required|numeric',
                 'plate' => 'required|url',
             ]);
+            // TODO filter photo links
             $member = Member::findOrFail($id);
             $member->fill($request->post());
             $member->visible = $request->input('visible') === 'on';
@@ -85,5 +86,7 @@ class MembersController extends Controller{
         }
         return false;
     }
+
+    // TODO Members history
 
 }

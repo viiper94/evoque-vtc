@@ -58,4 +58,6 @@ class Controller extends BaseController{
         ]);
     }
 
+    // TODO autofill steam account by tmp account on apply page
+
 }

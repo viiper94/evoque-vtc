@@ -21,6 +21,8 @@ Route::get('/', 'Controller@index')->name('home');
 Route::any('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
 Route::get('/members', 'Controller@members')->name('members');
+// TODO KB system
+// TODO member report page
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
 Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');
@@ -37,6 +39,7 @@ Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('e
 Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');
 
 Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');
+// TODO RP system
 
 Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');
 Route::get('/evoque/admin/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.admin.applications.accept.recruitment');

@@ -53,6 +53,8 @@ class ConvoysController extends Controller{
                 'communication_channel' => 'required|string',
                 'route' => 'required|url'
             ]);
+            // TODO filter photo links
+            // TODO Multiple route images
             $convoy = new Convoy();
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
@@ -85,6 +87,8 @@ class ConvoysController extends Controller{
                 'communication' => 'required|string',
                 'route' => 'required|url',
             ]);
+            // TODO filter photo links
+            // TODO Multiple route images
             $convoy = Convoy::findOrFail($id);
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
@@ -111,4 +115,6 @@ class ConvoysController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    // TODO Convoys screen TAB system
+    // TODO Convoy plans page
 }

@@ -35,4 +35,6 @@ class ApplicationsController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);;
     }
 
+    // TODO Applications for members (vacation, plate change, firing)
+
 }

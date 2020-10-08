@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Member extends Model{
+class Member extends Model implements Auditable{
+
+    use \OwenIt\Auditing\Auditable;
 
     public $casts = [
         'visible' => 'boolean',

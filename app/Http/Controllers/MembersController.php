@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Member;
 use App\Role;
 use Carbon\Carbon;
@@ -48,7 +49,9 @@ class MembersController extends Controller{
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.members.edit', [
-            'member' => Member::with('role', 'user')->where('id', $id)->first(),
+            'member' => Member::with(['role', 'user', 'audits' => function($query){
+                $query->limit(10)->orderBy('created_at', 'desc');
+            }, 'audits.user.member'])->where('id', $id)->first(),
             'roles' => Role::all()
         ]);
     }

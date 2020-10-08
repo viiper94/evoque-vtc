@@ -16,6 +16,8 @@
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
+        "laravelista/lumen-vendor-publish": "^7.0",
+        "owen-it/laravel-auditing": "^11.0",
         "truckersmp/api-client": "^1.2"
     },
     "require-dev": {

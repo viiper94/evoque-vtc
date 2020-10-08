@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Rules;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class RulesController extends Controller{
 
@@ -63,6 +64,14 @@ class RulesController extends Controller{
         return $p->delete() ?
             redirect()->route('rules', $redirect)->with(['success' => 'Параграф правил успешно удалён!']) :
             redirect()->back()->withErrors([',Возникла ошибка =(']);
+    }
+
+    public function changelog(Request $request, $id){
+        $paragraph = Rules::find($id);
+        return view('evoque.rules.changelog', [
+            'paragraph' => $paragraph,
+            'changelog' => $paragraph->audits()->with(['user', 'user.member'])->orderBy('created_at', 'desc')->get()
+        ]);
     }
 
 }

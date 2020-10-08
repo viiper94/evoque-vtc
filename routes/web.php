@@ -34,6 +34,7 @@ Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.
 Route::any('/evoque/admin/member/fire/{id}', 'MembersController@fire')->name('evoque.admin.members.fire');
 
 Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');
+Route::get('/evoque/changelog/{id}', 'RulesController@changelog')->name('evoque.rules.changelog');
 Route::any('/evoque/admin/rules/edit/{id}', 'RulesController@edit')->name('evoque.rules.edit');
 Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
 Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');

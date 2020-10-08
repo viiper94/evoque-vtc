@@ -21,6 +21,7 @@
                     @can('admin')
                         <p class="ml-md-5">
                             <a href="{{ route('evoque.rules.edit', $paragraph->id) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Редактировать</a>
+                            <a href="{{ route('evoque.rules.changelog', $paragraph->id) }}" class="btn btn-outline-info"><i class="fas fa-history"></i> История</a>
                         </p>
                     @endcan
                 </blockquote>

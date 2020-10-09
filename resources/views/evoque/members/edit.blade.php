@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="roles">Должность</label>
+                        <label for="roles">Должность (выбрать несколько с зажатым Ctrl)</label>
                         <select multiple class="form-control" id="roles" name="roles[]" size="14">
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}" @if($member->role->contains($role->id)) selected @endif >{{ $role->title }}</option>
@@ -61,7 +61,7 @@
             </div>
             <div class="row">
                 <h5 class="col-12">Игровая статистика</h5>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="scores">Баллы</label>
                         <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}" placeholder="∞">
@@ -70,7 +70,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="money">Эвики</label>
                         <input type="text" class="form-control" id="money" name="money" value="{{ $member->money }}" placeholder="∞">
@@ -79,13 +79,15 @@
                         @endif
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="convoys">Посещение конвоев</label>
-                <input type="number" class="form-control" id="convoys" name="convoys" value="{{ $member->convoys }}" required>
-                @if($errors->has('convoys'))
-                    <small class="form-text">{{ $errors->first('convoys') }}</small>
-                @endif
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="convoys">Посещение конвоев</label>
+                        <input type="number" class="form-control" id="convoys" name="convoys" value="{{ $member->convoys }}" required>
+                        @if($errors->has('convoys'))
+                            <small class="form-text">{{ $errors->first('convoys') }}</small>
+                        @endif
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <h5 class="col-12">Отпуски</h5>

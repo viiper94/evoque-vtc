@@ -1,10 +1,13 @@
 import $ from "jquery"
+import bsCustomFileInput from 'bs-custom-file-input'
+
 window.$ = window.jQuery = require('jquery');
 
 import "bootstrap/dist/js/bootstrap.min";
 
 $(document).ready(function(){
 
+    bsCustomFileInput.init();
     $('#rules_agreed, #requirements_agreed').change(function(){
         if($('#rules_agreed').prop('checked') && $('#requirements_agreed').prop('checked')){
             $('#submit_btn').prop('disabled', false).removeClass('disabled');

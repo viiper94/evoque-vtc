@@ -119,32 +119,34 @@
             </div>
         </form>
         <div class="member-changelog">
-            <h3 class="text-primary">История изменений</h3>
-            @foreach($member->audits as $item)
-                <div class="changelog-item mb-3">
-                    <table class="table table-dark table-bordered table-hover">
-                        <thead>
-                        <tr>
-                            <th colspan="3" class="text-primary">Отредактировал {{ $item->user->member->nickname }}, {{ $item->created_at->format('d.m.Y в H:i') }}</th>
-                        </tr>
-                        <tr>
-                            <th scope="col">Параметр</th>
-                            <th scope="col">Было</th>
-                            <th scope="col">Стало</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($item->old_values as $key => $value)
+            @if(count($member->audits) > 0)
+                <h3 class="text-primary">История изменений</h3>
+                @foreach($member->audits as $item)
+                    <div class="changelog-item mb-3">
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
                             <tr>
-                                <td>{{ $key }}</td>
-                                <td>{!! $value !!}</td>
-                                <td>{!! $item->new_values[$key] !!}</td>
+                                <th colspan="3" class="text-primary">Отредактировал {{ $item->user->member->nickname }}, {{ $item->created_at->format('d.m.Y в H:i') }}</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            @endforeach
+                            <tr>
+                                <th scope="col">Параметр</th>
+                                <th scope="col">Было</th>
+                                <th scope="col">Стало</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($item->old_values as $key => $value)
+                                <tr>
+                                    <td>{{ $key }}</td>
+                                    <td>{!! $value !!}</td>
+                                    <td>{!! $item->new_values[$key] !!}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 

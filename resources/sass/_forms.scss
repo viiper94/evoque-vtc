@@ -25,3 +25,21 @@ form{
     background-color: $background-lighten-1;
     border: $primary solid 1px;
 }
+.custom-file.custom-file-dark{
+    .custom-file-label{
+        background-color: $background-lighten-2;
+        border-color: $background-lighten-2;
+        color: $primary-text;
+        &::after{
+            content: "Открыть";
+            background-color: $background-lighten-3;
+            color: $primary-text;
+        }
+    }
+    .custom-file-input{
+        cursor: pointer;
+        &[required] + .custom-file-label{
+            border-color: $primary;
+        }
+    }
+}

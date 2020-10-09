@@ -17289,6 +17289,26 @@ form small {
   border: #e4c501 solid 1px;
 }
 
+.custom-file.custom-file-dark .custom-file-label {
+  background-color: #424242;
+  border-color: #424242;
+  color: #bbbbbb;
+}
+
+.custom-file.custom-file-dark .custom-file-label::after {
+  content: "\41E\442\43A\440\44B\442\44C";
+  background-color: #515151;
+  color: #bbbbbb;
+}
+
+.custom-file.custom-file-dark .custom-file-input {
+  cursor: pointer;
+}
+
+.custom-file.custom-file-dark .custom-file-input[required] + .custom-file-label {
+  border-color: #e4c501;
+}
+
 .modal-content-dark {
   background-color: #333333;
   color: #bbbbbb;
@@ -17529,12 +17549,14 @@ ul.rules .blockquote p strong {
   font-style: italic;
 }
 
-.convoy-note ol li {
+.convoy-note ol li,
+.convoy-note ul li {
   color: #bbbbbb;
   margin-top: 10px;
 }
 
-.convoy-note ol li b {
+.convoy-note ol li b,
+.convoy-note ul li b {
   color: #e4c501;
 }
 

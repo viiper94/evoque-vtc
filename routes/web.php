@@ -39,8 +39,9 @@ Route::any('/evoque/admin/rules/edit/{id}', 'RulesController@edit')->name('evoqu
 Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
 Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');
 
-Route::get('/evoque/rp', 'EvoqueController@rp')->name('evoque.rp');
-// TODO RP system
+Route::any('/evoque/rp/report', 'RpController@report')->name('evoque.rp.report');
+Route::get('/evoque/admin/rp', 'RpController@report')->name('evoque.admin.rp');
+Route::get('/evoque/rp/{game?}', 'RpController@index')->name('evoque.rp');
 
 Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');
 Route::get('/evoque/admin/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.admin.applications.accept.recruitment');

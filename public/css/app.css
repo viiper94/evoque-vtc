@@ -17642,7 +17642,7 @@ ul.rules .blockquote p strong {
 }
 
 .members .card {
-  min-width: 230px;
+  width: 270px;
 }
 
 .members .card .member-links i {

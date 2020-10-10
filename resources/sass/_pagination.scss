@@ -1,0 +1,25 @@
+// Pagination
+.pagination-dark{
+    .page-item{
+        &, &.active{
+            .page-link{
+                background-color: $background-lighten-2;
+                border-color: $background-lighten-2;
+                color: $primary-text;
+                &:focus{
+                    outline: none;
+                    box-shadow: none;
+                }
+            }
+        }
+        &.active{
+            .page-link{
+                color: $primary;
+                font-weight: bold;
+            }
+        }
+        &.disabled .page-link{
+            color: $primary-text-darker;
+        }
+    }
+}

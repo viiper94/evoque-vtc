@@ -40,7 +40,7 @@ Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('e
 Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');
 
 Route::any('/evoque/rp/report', 'RpController@report')->name('evoque.rp.report');
-Route::get('/evoque/admin/rp', 'RpController@report')->name('evoque.admin.rp');
+Route::get('/evoque/rp/moderating', 'RpController@report')->name('evoque.admin.rp');
 Route::get('/evoque/rp/{game?}', 'RpController@index')->name('evoque.rp');
 
 Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');

@@ -17276,6 +17276,14 @@ form small {
   color: #bbbbbb;
 }
 
+.form-control[readonly] {
+  background: #424242;
+}
+
+.form-control[readonly]:focus {
+  box-shadow: none;
+}
+
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #bbbbbb;
 }
@@ -17340,6 +17348,28 @@ form small {
 
 .card .card-actions {
   padding: 1.25rem;
+}
+
+.pagination-dark .page-item .page-link,
+.pagination-dark .page-item.active .page-link {
+  background-color: #424242;
+  border-color: #424242;
+  color: #bbbbbb;
+}
+
+.pagination-dark .page-item .page-link:focus,
+.pagination-dark .page-item.active .page-link:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.pagination-dark .page-item.active .page-link {
+  color: #e4c501;
+  font-weight: bold;
+}
+
+.pagination-dark .page-item.disabled .page-link {
+  color: #757575;
 }
 
 body {

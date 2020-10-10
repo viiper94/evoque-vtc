@@ -57,10 +57,7 @@
                             <div class="dropdown-menu" aria-labelledby="rpDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ets2') }}">Статистика ETS2</a>
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ats') }}">Статистика ATS</a>
-                                <a class="dropdown-item" href="{{ route('evoque.rp.report') }}">Подать отчёт</a>
-                                @can('manage_rp')
-                                    <a class="dropdown-item" href="{{ route('evoque.admin.rp') }}">Модерация</a>
-                                @endcan
+                                <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">Отчёты</a>
                             </div>
                         </li>
                         @can('admin')

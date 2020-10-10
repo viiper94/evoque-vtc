@@ -39,8 +39,11 @@ Route::any('/evoque/admin/rules/edit/{id}', 'RulesController@edit')->name('evoqu
 Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
 Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');
 
-Route::any('/evoque/rp/report', 'RpController@report')->name('evoque.rp.report');
-Route::get('/evoque/rp/moderating', 'RpController@report')->name('evoque.admin.rp');
+Route::get('/evoque/rp/reports', 'RpController@reports')->name('evoque.rp.reports');
+Route::any('/evoque/rp/reports/add', 'RpController@addReport')->name('evoque.rp.reports.add');
+Route::any('/evoque/rp/reports/accept/{id}', 'RpController@acceptReport')->name('evoque.rp.reports.accept');
+Route::get('/evoque/rp/reports/delete/{id}', 'RpController@deleteReport')->name('evoque.rp.reports.delete');
+Route::any('/evoque/rp/reports/edit/{id}', 'RpController@editReport')->name('evoque.rp.reports.edit');
 Route::get('/evoque/rp/{game?}', 'RpController@index')->name('evoque.rp');
 
 Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');

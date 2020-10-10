@@ -12,6 +12,12 @@ form{
         background: $background;
         color: $primary-text;
     }
+    &[readonly]{
+        background: $background-lighten-2;
+        &:focus{
+            box-shadow: none;
+        }
+    }
 }
 .custom-control-input{
     &:checked ~ .custom-control-label::before{

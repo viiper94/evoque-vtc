@@ -13887,6 +13887,20 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       });
     }
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #distance, .report-accept #weight').keyup(function () {
+    var distance = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #distance').val();
+    var weight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #weight').val();
+
+    if (distance !== '' && weight !== '') {
+      var k = 0;
+      if (weight <= 19 && weight >= 15) k = 0.1;
+      if (weight <= 25 && weight >= 20) k = 0.3;
+      if (weight <= 32 && weight >= 26) k = 0.5;
+      if (weight >= 33) k = 0.7;
+      var bonus = distance * k;
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #bonus').val(bonus);
+    }
+  });
 });
 
 function getPreloaderHtml() {
@@ -13913,8 +13927,8 @@ function getPreloaderHtml() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

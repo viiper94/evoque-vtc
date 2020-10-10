@@ -19,6 +19,7 @@ class CreateRpReportsTable extends Migration
             $table->text('images');
             $table->string('game')->default('ets2');
             $table->text('note')->nullable();
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

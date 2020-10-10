@@ -31,7 +31,31 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                @php $i = 1; @endphp
+                @foreach($roles as $role_group)
+                    @if(count($role_group[0]->members) < 1) @continue @endif
+                    <tr>
+                        <th colspan="10" class="text-center text-primary">{{ $role_group[0]->group }}</th>
+                    </tr>
+                    @foreach($role_group as $role)
+                        @foreach($role->members as $member)
+                            @if($member->topRole() == $role->id && $member->stat)
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td><b>{{ $member->nickname }}</b></td>
+                                    <td>{{ $member->stat->level }}</td>
+                                    <td>{{ $member->stat->distance_total }} км</td>
+                                    <td>{{ $member->stat->weight_total }} т</td>
+                                    <td>{{ $member->stat->quantity_total }}</td>
+                                    <td>{{ $member->stat->distance }} км</td>
+                                    <td>{{ $member->stat->bonus }} км</td>
+                                    <td>{{ $member->stat->weight }} т</td>
+                                    <td>{{ $member->stat->quantity }}</td>
+                                </tr>
+                            @endif
+                        @endforeach
+                    @endforeach
+                @endforeach
                 </tbody>
             </table>
         </div>

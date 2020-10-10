@@ -42,6 +42,10 @@ class Member extends Model implements Auditable{
         return $this->belongsToMany('App\Role', 'role_member');
     }
 
+    public function stat(){
+        return $this->hasOne('App\RpStats');
+    }
+
     public function getPlace(){
         if(isset($this->user->city) || isset($this->user->country)){
             return implode('/', array_filter([$this->user->city, $this->user->country]));

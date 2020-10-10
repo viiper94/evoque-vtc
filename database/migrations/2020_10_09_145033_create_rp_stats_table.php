@@ -17,9 +17,14 @@ class CreateRpStatsTable extends Migration
             $table->id();
             $table->integer('member_id');
             $table->integer('distance')->default(0)->nullable();
+            $table->integer('distance_total')->default(0)->nullable();
             $table->integer('weight')->default(0)->nullable();
+            $table->integer('weight_total')->default(0)->nullable();
             $table->integer('quantity')->default(0)->nullable();
+            $table->integer('quantity_total')->default(0)->nullable();
             $table->integer('level')->nullable();
+            $table->float('bonus')->nullable();
+            $table->string('game')->default('ets2');
             $table->timestamps();
         });
     }

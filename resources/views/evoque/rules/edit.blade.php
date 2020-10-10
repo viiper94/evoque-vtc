@@ -51,8 +51,10 @@
                 @endif
             </div>
             <button type="submit" class="btn btn-outline-warning">Сохранить</button>
-            <a href="{{ route('evoque.rules.delete', $rules->id) }}" class="btn btn-outline-danger"
-               onclick="return confirm('Удалить этот параграф правил?')"><i class="fas fa-trash"></i> Удалить</a>
+            @if($rules->paragraph)
+                <a href="{{ route('evoque.rules.delete', $rules->id) }}" class="btn btn-outline-danger"
+                   onclick="return confirm('Удалить этот параграф правил?')"><i class="fas fa-trash"></i> Удалить</a>
+            @endif
         </form>
 
     </div>

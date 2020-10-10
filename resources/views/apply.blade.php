@@ -43,7 +43,7 @@
                     <div class="icon-wrapper">
                         <i class="fas fa-history"></i>
                     </div>
-                    <p>Не более 2-х наказаний в истории банов на сайте TruckersMP</p>
+                    <p>Не более 2-х активных наказаний в истории банов на сайте TruckersMP</p>
                 </li>
             </ul>
         </div>

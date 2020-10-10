@@ -45,11 +45,11 @@
                                     <td><b>{{ $member->nickname }}</b></td>
                                     <td>{{ $member->stat->level }}</td>
                                     <td>{{ $member->stat->distance_total }} км</td>
-                                    <td>{{ $member->stat->weight_total }} т</td>
+                                    <td>{{ $member->stat->weight_total }} кг</td>
                                     <td>{{ $member->stat->quantity_total }}</td>
                                     <td>{{ $member->stat->distance }} км</td>
                                     <td>{{ $member->stat->bonus }} км</td>
-                                    <td>{{ $member->stat->weight }} т</td>
+                                    <td>{{ $member->stat->weight }} кг</td>
                                     <td>{{ $member->stat->quantity }}</td>
                                 </tr>
                             @endif

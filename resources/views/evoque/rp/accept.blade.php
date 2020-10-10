@@ -19,14 +19,14 @@
         <form method="post">
             @csrf
             <div class="form-group">
-                <label for="distance">Пройденая дистанция</label>
+                <label for="distance">Пройденая дистанция, км</label>
                 <input type="number" class="form-control" id="distance" name="distance">
                 @if($errors->has('distance'))
                     <small class="form-text">{{ $errors->first('distance') }}</small>
                 @endif
             </div>
             <div class="form-group">
-                <label for="weight">Перевезённый вес</label>
+                <label for="weight">Перевезённый вес, кг</label>
                 <input type="number" class="form-control" id="weight" name="weight">
                 @if($errors->has('weight'))
                     <small class="form-text">{{ $errors->first('weight') }}</small>

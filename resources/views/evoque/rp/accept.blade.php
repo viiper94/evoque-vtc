@@ -26,8 +26,8 @@
                 @endif
             </div>
             <div class="form-group">
-                <label for="weight">Перевезённый вес, кг</label>
-                <input type="number" class="form-control" id="weight" name="weight">
+                <label for="weight">Перевезённый вес</label>
+                <input type="number" class="form-control" id="weight" name="weight" placeholder="В тоннах!">
                 @if($errors->has('weight'))
                     <small class="form-text">{{ $errors->first('weight') }}</small>
                 @endif

@@ -11,16 +11,6 @@
         <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <div class="row justify-content-center mt-3">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" required>
-                        <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" required>
-                        <label class="custom-control-label" for="game-ats">American Truck Simulator</label>
-                    </div>
-                </div>
                 <h4>Скриншоты</h4>
                 <div class="custom-file custom-file-dark mt-3 mb-3">
                     <input type="file" class="custom-file-input" id="start-screen" name="start-screen" required>
@@ -35,7 +25,15 @@
                     <label class="custom-file-label" for="new-id-screen">Скрин с новым ID</label>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="custom-control custom-radio">
+                <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" required>
+                <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" required>
+                <label class="custom-control-label" for="game-ats">American Truck Simulator</label>
+            </div>
+            <div class="form-group mt-4">
                 <label for="referral">Дополнительная информация</label>
                 <textarea class="form-control" id="note" rows="3" name="note">{{ old('note') }}</textarea>
                 @if($errors->has('note'))

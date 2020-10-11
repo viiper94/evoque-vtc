@@ -8,8 +8,8 @@
 
     <div class="container-fluid pt-5 members-table">
         @include('layout.alert')
-        <h2 class="pt-3 text-center text-primary">Статистика рейтинговых перевозок</h2>
-        <div class="table-responsive mb-5">
+        <h2 class="pt-3 text-center text-primary">Статистика рейтинговых перевозок по {{ strtoupper($game) }}</h2>
+        <div class="table-responsive">
             <table class="table table-dark table-bordered table-hover">
                 <thead>
                 <tr>
@@ -59,6 +59,13 @@
                 </tbody>
             </table>
         </div>
+        @can('manage_rp')
+            <div class="row justify-content-center mb-5">
+                <a href="{{ route('evoque.rp.reset') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg">
+                    <i class="fas fa-sync-alt"></i> Подвести итоги недели
+                </a>
+            </div>
+        @endcan
     </div>
 
 @endsection

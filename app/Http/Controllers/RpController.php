@@ -19,7 +19,8 @@ class RpController extends Controller{
                 $query->where('visible', '1');
             }, 'members.stat' => function($query) use ($game){
                 $query->where('game', $game);
-            }])->where('visible', 1)->get()->groupBy('group')
+            }])->where('visible', 1)->get()->groupBy('group'),
+            'game' => $game
         ]);
     }
 

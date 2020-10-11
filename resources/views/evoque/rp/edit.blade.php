@@ -8,32 +8,34 @@
 
     <div class="container rp-report pt-5 pb-5">
         @include('layout.alert')
+        <h2 class="text-primary text-center">Отчёт о перевозке</h2>
         <form method="post" enctype="multipart/form-data">
             @csrf
-            <h4>Скриншоты</h4>
+            <h4>1. Загрузите скриншоты</h4>
             <div class="row">
                 <div class="form-group col-md-4 col-xs-12">
-                    <div class="custom-file custom-file-dark mt-3 mb-3">
+                    <div class="custom-file custom-file-dark mb-3">
                         <input type="file" class="custom-file-input uploader" id="start-screen" name="start-screen" accept="image/*" required>
                         <label class="custom-file-label" for="start-screen">Скрин со старта*</label>
                     </div>
                     <img src="/images/rp/image-placeholder.jpg" alt="Скрин со старта" class="w-100" id="start-screen-preview">
                 </div>
                 <div class="form-group col-md-4 col-xs-12">
-                    <div class="custom-file custom-file-dark mt-3 mb-3">
+                    <div class="custom-file custom-file-dark mb-3">
                         <input type="file" class="custom-file-input uploader" id="finish-screen" name="finish-screen" accept="image/*" required>
                         <label class="custom-file-label" for="finish-screen">Скрин с финиша*</label>
                     </div>
                     <img src="/images/rp/image-placeholder.jpg" alt="Скрин с финиша" class="w-100" id="finish-screen-preview">
                 </div>
                 <div class="form-group col-md-4 col-xs-12">
-                    <div class="custom-file custom-file-dark mt-3 mb-3">
+                    <div class="custom-file custom-file-dark mb-3">
                         <input type="file" class="custom-file-input uploader" id="new-id-screen" accept="image/*" name="new-id-screen">
                         <label class="custom-file-label" for="new-id-screen">Скрин с новым ID</label>
                     </div>
                     <img src="/images/rp/image-placeholder.jpg" alt="Скрин с новым ID" class="w-100" id="new-id-screen-preview">
                 </div>
             </div>
+            <h4>2. Виберите игру</h4>
             <div class="custom-control custom-radio">
                 <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" required>
                 <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>
@@ -42,9 +44,9 @@
                 <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" required>
                 <label class="custom-control-label" for="game-ats">American Truck Simulator</label>
             </div>
-            <div class="form-group mt-4">
-                <label for="referral">Дополнительная информация</label>
-                <textarea class="form-control" id="note" rows="3" name="note">{{ old('note') }}</textarea>
+            <h4 class="mt-4">3. Дополнительная информация</h4>
+            <div class="form-group">
+                <textarea class="form-control" id="note" rows="3" name="note" placeholder="Не обязательно">{{ old('note') }}</textarea>
                 @if($errors->has('note'))
                     <small class="form-text">{{ $errors->first('note') }}</small>
                 @endif

@@ -13901,10 +13901,27 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #bonus').val(bonus);
     }
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.uploader').change(function () {
+    readURL(this, '#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id') + '-preview');
+  });
 });
 
 function getPreloaderHtml() {
   return "<div class=\"spinner-border spinner-border-sm text-warning\" role=\"status\">\n" + "  <span class=\"sr-only\">Loading...</span>\n" + "</div>";
+}
+
+function readURL(input, selector) {
+  if (selector === undefined) selector = '#preview';
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(selector).attr('src', e.target.result);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
 }
 
 /***/ }),
@@ -13927,8 +13944,8 @@ function getPreloaderHtml() {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -10,19 +10,28 @@
         @include('layout.alert')
         <form method="post" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">
-                <h4>Скриншоты</h4>
-                <div class="custom-file custom-file-dark mt-3 mb-3">
-                    <input type="file" class="custom-file-input" id="start-screen" name="start-screen" required>
-                    <label class="custom-file-label" for="start-screen">Скрин со старта*</label>
+            <h4>Скриншоты</h4>
+            <div class="row">
+                <div class="form-group col-md-4 col-xs-12">
+                    <div class="custom-file custom-file-dark mt-3 mb-3">
+                        <input type="file" class="custom-file-input uploader" id="start-screen" name="start-screen" accept="image/*" required>
+                        <label class="custom-file-label" for="start-screen">Скрин со старта*</label>
+                    </div>
+                    <img src="/images/rp/image-placeholder.jpg" alt="Скрин со старта" class="w-100" id="start-screen-preview">
                 </div>
-                <div class="custom-file custom-file-dark mt-3 mb-3">
-                    <input type="file" class="custom-file-input" id="finish-screen" name="finish-screen" required>
-                    <label class="custom-file-label" for="finish-screen">Скрин с финиша*</label>
+                <div class="form-group col-md-4 col-xs-12">
+                    <div class="custom-file custom-file-dark mt-3 mb-3">
+                        <input type="file" class="custom-file-input uploader" id="finish-screen" name="finish-screen" accept="image/*" required>
+                        <label class="custom-file-label" for="finish-screen">Скрин с финиша*</label>
+                    </div>
+                    <img src="/images/rp/image-placeholder.jpg" alt="Скрин с финиша" class="w-100" id="finish-screen-preview">
                 </div>
-                <div class="custom-file custom-file-dark mt-3 mb-3">
-                    <input type="file" class="custom-file-input" id="new-id-screen" name="new-id-screen">
-                    <label class="custom-file-label" for="new-id-screen">Скрин с новым ID</label>
+                <div class="form-group col-md-4 col-xs-12">
+                    <div class="custom-file custom-file-dark mt-3 mb-3">
+                        <input type="file" class="custom-file-input uploader" id="new-id-screen" accept="image/*" name="new-id-screen">
+                        <label class="custom-file-label" for="new-id-screen">Скрин с новым ID</label>
+                    </div>
+                    <img src="/images/rp/image-placeholder.jpg" alt="Скрин с новым ID" class="w-100" id="new-id-screen-preview">
                 </div>
             </div>
             <div class="custom-control custom-radio">

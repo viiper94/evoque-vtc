@@ -13,9 +13,11 @@
         @else
             <h2 class="text-primary ml-3 text-center">Мои отчёты рейтинговых перевозок</h2>
         @endcan
-        <div class="row justify-content-center">
-            <a href="{{ route('evoque.rp.reports.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Новый отчет</a>
-        </div>
+        @can('do_rp')
+            <div class="row justify-content-center">
+                <a href="{{ route('evoque.rp.reports.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Новый отчет</a>
+            </div>
+        @endcan
         <div class="rp-reports pt-3 pb-5">
             @foreach($reports as $report)
                 <div class="card card-dark text-shadow-m m-3 p-0 @if(!$report->status)border-primary @endif">

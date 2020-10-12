@@ -60,5 +60,12 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('do_rp', function($user){
+            foreach($user->member->role as $role){
+                if($role->do_rp && !$user->member->onVacation() || $role->admin) return true;
+            }
+            return false;
+        });
+
     }
 }

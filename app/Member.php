@@ -61,4 +61,8 @@ class Member extends Model implements Auditable{
         return $index;
     }
 
+    public function onVacation(){
+        return isset($this->on_vacation_till) && $this->on_vacation_till->isFuture();
+    }
+
 }

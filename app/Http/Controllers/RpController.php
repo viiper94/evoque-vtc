@@ -14,7 +14,6 @@ class RpController extends Controller{
     public function index($game = 'ets2'){
         if(Auth::guest()) abort(404);
         return view('evoque.rp.index', [
-//            'stats' => RpStats::with(['member', 'member.user'])->where('game', $game)->get(),
             'roles' => Role::with(['members', 'members.role' => function($query){
                 $query->where('visible', '1');
             }, 'members.stat' => function($query) use ($game){
@@ -33,6 +32,7 @@ class RpController extends Controller{
 
     public function addReport(Request $request){
         if(Auth::guest()) abort(404);
+        if(Gate::denies('do_rp')) abort(403);
         $report = new RpReport();
         if($request->post()){
             $this->validate($request, [

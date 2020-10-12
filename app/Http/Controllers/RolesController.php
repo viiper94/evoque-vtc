@@ -30,6 +30,7 @@ class RolesController extends Controller{
             $role->manage_convoys = $request->input('manage_convoys') == 'on';
             $role->manage_table = $request->input('manage_table') == 'on';
             $role->manage_rp = $request->input('manage_rp') == 'on';
+            $role->do_rp = $request->input('do_rp') == 'on';
             $role->visible = $request->input('visible') == 'on';
             return $role->save() ?
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно отредактирована!']) :
@@ -54,6 +55,7 @@ class RolesController extends Controller{
             $role->manage_convoys = $request->input('manage_convoys') == 'on';
             $role->manage_table = $request->input('manage_table') == 'on';
             $role->manage_rp = $request->input('manage_rp') == 'on';
+            $role->do_rp = $request->input('do_rp') == 'on';
             $role->visible = $request->input('visible') == 'on';
             return $role->save() ?
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно добавлена!']) :

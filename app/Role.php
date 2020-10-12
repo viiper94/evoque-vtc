@@ -13,7 +13,8 @@ class Role extends Model{
         'manage_members',
         'manage_convoys',
         'manage_table',
-        'manage_rp'
+        'manage_rp',
+        'do_rp',
     ];
 
     public $casts = [
@@ -22,6 +23,7 @@ class Role extends Model{
         'manage_convoys' => 'boolean',
         'manage_table' => 'boolean',
         'manage_rp' => 'boolean',
+        'do_rp' => 'boolean',
         'visible' => 'boolean'
     ];
 

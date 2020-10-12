@@ -28,11 +28,12 @@
                         <td>{{ $role->group }}</td>
                         <td>{{ count($role->members) }}</td>
                         <td>
-                            <i class="fas fa-crown @if($role->admin)active @endif"></i>
+                            <i class="icon-evoque @if($role->admin)active @endif"></i>
                             <i class="fas fa-users-cog @if($role->manage_members)active @endif"></i>
                             <i class="fas fa-route @if($role->manage_convoys)active @endif"></i>
-                            <i class="fas fa-list-alt @if($role->manage_table)active @endif"></i>
-                            <i class="fas fa-truck-moving @if($role->manage_rp)active @endif"></i>
+                            <i class="fas fa-table @if($role->manage_table)active @endif"></i>
+                            <i class="fas fa-tasks @if($role->manage_rp)active @endif"></i>
+                            <i class="fas fa-truck-moving @if($role->do_rp)active @endif"></i>
                         </td>
                         <td>
                             @if($role->visible)

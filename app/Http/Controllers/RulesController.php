@@ -11,7 +11,7 @@ class RulesController extends Controller{
 
     public function index($type = 'public'){
         return view('rules', [
-            'rules' => Rules::where('public', $type === 'public' ? '1' : '0')->orderBy('paragraph')->get(),
+            'rules' => Rules::with('audits')->where('public', $type === 'public' ? '1' : '0')->orderBy('paragraph')->get(),
             'public' => $type === 'public'
         ]);
     }

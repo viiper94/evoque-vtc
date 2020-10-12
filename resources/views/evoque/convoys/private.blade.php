@@ -21,15 +21,18 @@
                     <div class="row convoy-info pt-5">
                         <div class="col-sm-6 pr-5 text-right">
                             <p>Старт:</p>
-                            <h3>{{ $convoy->start }}</h3>
-                            <p>Перерыв:</p>
-                            <h3>{{ $convoy->rest }}</h3>
-                            <p>Финиш:</p>
-                            <h3>{{ $convoy->finish }}</h3>
-                            <p>Сбор:</p>
+                            <h3>{{ $convoy->start_city }}</h3>
+                            <h5>{{ $convoy->start_company }}</h5>
+                            <p class="mt-4">Перерыв:</p>
+                            <h3>{{ $convoy->rest_city }}</h3>
+                            <h5>{{ $convoy->rest_company }}</h5>
+                            <p class="mt-4">Финиш:</p>
+                            <h3>{{ $convoy->finish_city }}</h3>
+                            <h5>{{ $convoy->finish_company }}</h5>
+                            <p class="mt-4">Сбор:</p>
                             <h3 >{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h3>
                             <p>Выезд:</p>
-                            <h3>{{ $convoy->start_time->format('H:i') }} по МСК</h3>
+                            <h3>{{ $convoy->start_time->format('H:i  ') }} по МСК</h3>
                         </div>
                         <div class="col-sm-6 pl-5">
                             <p>Сервер:</p>
@@ -44,6 +47,9 @@
                             @endif
                         </div>
                     </div>
+                    @if($convoy->dlc)
+                        <h4 class=" mt-5 text-center"><i class="fas fa-exclamation-triangle text-danger"></i> Для участия требуется DLC {{ implode(', ', $convoy->dlc) }}</h4>
+                    @endif
                     <div class="row convoy-info pt-5">
                         <div class="col-sm-6 pr-5 text-right">
                             <p>Тягач:</p>
@@ -77,6 +83,23 @@
                             @if($convoy->cargo)
                             <p>Груз:</p>
                             <h3>{{ $convoy->cargo }}</h3>
+                            @endif
+                            <p class="mt-4">Прицеп без ДЛС:</p>
+                            <h3>{{ $convoy->alt_trailer }}</h3>
+                            @if($convoy->alt_trailer_image)
+                                <a href="{{ $convoy->alt_trailer_image }}" target="_blank"><img src="{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m"></a>
+                            @endif
+                            @if($convoy->alt_trailer_tuning)
+                            <p>Тюнинг:</p>
+                            <h3>{{ $convoy->alt_trailer_tuning }}</h3>
+                            @endif
+                            @if($convoy->alt_trailer_paint)
+                            <p>Окрас:</p>
+                            <h3>{{ $convoy->alt_trailer_paint }}</h3>
+                            @endif
+                            @if($convoy->alt_cargo)
+                            <p>Груз:</p>
+                            <h3>{{ $convoy->alt_cargo }}</h3>
                             @endif
                         </div>
                         <section class="convoy-note pb-5 pt-5 m-auto">

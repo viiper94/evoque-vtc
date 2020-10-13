@@ -73,33 +73,35 @@
                                 <a href="{{ $convoy->trailer_image }}" target="_blank"><img src="{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m"></a>
                             @endif
                             @if($convoy->trailer_tuning)
-                            <p>Тюнинг:</p>
-                            <h3>{{ $convoy->trailer_tuning }}</h3>
+                                <p>Тюнинг:</p>
+                                <h3>{{ $convoy->trailer_tuning }}</h3>
                             @endif
                             @if($convoy->trailer_paint)
-                            <p>Окрас:</p>
-                            <h3>{{ $convoy->trailer_paint }}</h3>
+                                <p>Окрас:</p>
+                                <h3>{{ $convoy->trailer_paint }}</h3>
                             @endif
                             @if($convoy->cargo)
-                            <p>Груз:</p>
-                            <h3>{{ $convoy->cargo }}</h3>
+                                <p>Груз:</p>
+                                <h3>{{ $convoy->cargo }}</h3>
                             @endif
-                            <p class="mt-4">Прицеп без ДЛС:</p>
-                            <h3>{{ $convoy->alt_trailer }}</h3>
-                            @if($convoy->alt_trailer_image)
-                                <a href="{{ $convoy->alt_trailer_image }}" target="_blank"><img src="{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m"></a>
-                            @endif
-                            @if($convoy->alt_trailer_tuning)
-                            <p>Тюнинг:</p>
-                            <h3>{{ $convoy->alt_trailer_tuning }}</h3>
-                            @endif
-                            @if($convoy->alt_trailer_paint)
-                            <p>Окрас:</p>
-                            <h3>{{ $convoy->alt_trailer_paint }}</h3>
-                            @endif
-                            @if($convoy->alt_cargo)
-                            <p>Груз:</p>
-                            <h3>{{ $convoy->alt_cargo }}</h3>
+                            @if($convoy->alt_trailer)
+                                <p class="mt-4">Прицеп без ДЛС:</p>
+                                <h3>{{ $convoy->alt_trailer }}</h3>
+                                @if($convoy->alt_trailer_image)
+                                    <a href="{{ $convoy->alt_trailer_image }}" target="_blank"><img src="{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m"></a>
+                                @endif
+                                @if($convoy->alt_trailer_tuning)
+                                    <p>Тюнинг:</p>
+                                    <h3>{{ $convoy->alt_trailer_tuning }}</h3>
+                                @endif
+                                @if($convoy->alt_trailer_paint)
+                                    <p>Окрас:</p>
+                                    <h3>{{ $convoy->alt_trailer_paint }}</h3>
+                                @endif
+                                @if($convoy->alt_cargo)
+                                    <p>Груз:</p>
+                                    <h3>{{ $convoy->alt_cargo }}</h3>
+                                @endif
                             @endif
                         </div>
                         <section class="convoy-note pb-5 pt-5 m-auto">

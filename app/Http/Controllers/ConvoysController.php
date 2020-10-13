@@ -109,7 +109,7 @@ class ConvoysController extends Controller{
             foreach($request->files as $key => $file){
                 $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
                 $file->move(public_path('/images/convoys/'), $name);
-                $convoy->$key = '/images/convoys/'.$name;
+                $convoy->$key = $name;
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             return $convoy->save() ?
@@ -141,7 +141,7 @@ class ConvoysController extends Controller{
             foreach($request->files as $key => $file){
                 $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
                 $file->move(public_path('/images/convoys/'), $name);
-                $convoy->$key = '/images/convoys/'.$name;
+                $convoy->$key = $name;
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             return $convoy->save() ?

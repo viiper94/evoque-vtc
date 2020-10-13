@@ -67,7 +67,7 @@
                             <input type="file" class="custom-file-input uploader" id="route" name="route" accept="image/*">
                             <label class="custom-file-label" for="route">Изображение маршрута</label>
                         </div>
-                        <img src="{{ $convoy->route ? $convoy->route : "/images/convoys/image-placeholder.jpg" }}" class="w-100" id="route-preview">
+                        <img src="/images/convoys/{{ $convoy->route ? $convoy->route : "image-placeholder.jpg" }}" class="w-100" id="route-preview">
                         @if($errors->has('route'))
                             <small class="form-text">{{ $errors->first('route') }}</small>
                         @endif
@@ -178,7 +178,7 @@
                             <input type="file" class="custom-file-input uploader" id="truck_image" name="truck_image" accept="image/*">
                             <label class="custom-file-label" for="truck_image">Изображение тягача</label>
                         </div>
-                        <img src="{{ $convoy->truck_image ? $convoy->truck_image : "/images/convoys/image-placeholder.jpg" }}" class="w-100" id="truck_image-preview">
+                        <img src="/images/convoys/{{ $convoy->truck_image ? $convoy->truck_image : "image-placeholder.jpg" }}" class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif
@@ -215,7 +215,7 @@
                             <input type="file" class="custom-file-input uploader" id="trailer_image" name="trailer_image" accept="image/*">
                             <label class="custom-file-label" for="trailer_image">Изображение прицепа</label>
                         </div>
-                        <img src="{{ $convoy->trailer_image ? $convoy->trailer_image : "/images/convoys/image-placeholder.jpg" }}" class="w-100" id="trailer_image-preview">
+                        <img src="/images/convoys/{{ $convoy->trailer_image ? $convoy->trailer_image : "image-placeholder.jpg" }}" class="w-100" id="trailer_image-preview">
                         @if($errors->has('trailer_image'))
                             <small class="form-text">{{ $errors->first('trailer_image') }}</small>
                         @endif
@@ -259,7 +259,7 @@
                             <input type="file" class="custom-file-input uploader" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
                             <label class="custom-file-label" for="alt_trailer_image">Изображение прицепа</label>
                         </div>
-                        <img src="{{ $convoy->alt_trailer_image ? $convoy->alt_trailer_image : "/images/convoys/image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
+                        <img src="/images/convoys/{{ $convoy->alt_trailer_image ? $convoy->alt_trailer_image : "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
                         @if($errors->has('alt_trailer_image'))
                             <small class="form-text">{{ $errors->first('alt_trailer_image') }}</small>
                         @endif

@@ -125,7 +125,7 @@
             </div>
             <div class="form-group">
                 <label for="referral">Откуда Вы узнали о нас?</label>
-                <textarea class="form-control" id="referral" rows="5" name="referral">old('referral')</textarea>
+                <textarea class="form-control" id="referral" rows="5" name="referral">{{ old('referral') }}</textarea>
                 @if($errors->has('referral'))
                     <small class="form-text">{{ $errors->first('referral') }}</small>
                 @endif

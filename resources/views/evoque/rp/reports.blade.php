@@ -4,6 +4,11 @@
     Отчёт рейтинговых перевозок | @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
+    <script src="/js/fotorama-4.6.4/fotorama.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container pt-5">
@@ -25,11 +30,11 @@
                     <div class="card-body">
                         <p class="card-text"><b>{{ $report->game === 'ets2' ? 'Euro Truck Simulator 2' : 'American Truck Simulator' }}</b></p>
                         <div class="row">
-                            @foreach($report->images as $image)
-                                <a href="/images/rp/{{ $image }}" class="col-xs-12 col-md-{{ 12/count($report->images) }}" target="_blank">
-                                    <img src="/images/rp/{{ $image }}" style="max-width: 100%" class="text-shadow-m">
-                                </a>
-                            @endforeach
+                            <div class="fotorama" data-allowfullscreen="true" data-fit="cover" data-nav="thumbs" data-maxheight="500">
+                                @foreach($report->images as $image)
+                                    <img src="/images/rp/{{ $image }}">
+                                @endforeach
+                            </div>
                         </div>
                         @if($report->note)
                             <p>Дополнительная информация:<br>

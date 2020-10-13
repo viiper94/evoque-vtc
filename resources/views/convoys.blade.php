@@ -4,6 +4,11 @@
     Открытый конвой @lang('general.vtc_evoque')
 @endsection
 
+{{--@section('assets')--}}
+{{--    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">--}}
+{{--    <script src="/js/fotorama-4.6.4/fotorama.js"></script>--}}
+{{--@endsection--}}
+
 @section('content')
 
 <div class="container pt-5">
@@ -81,7 +86,14 @@
                 </ul>
             </section>
             <section class="route col-md-6 col-sm-12">
-                <a href="{{ $convoy->route }}" target="_blank"><img src="{{ $convoy->route }}" class="text-shadow-m"></a>
+{{--                <div class="fotorama w-100 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">--}}
+{{--                    @foreach($convoy->route as $item)--}}
+{{--                        <img src="/images/convoys/{{ $item }}">--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
+                @foreach($convoy->route as $item)
+                    <a href="/images/convoys/{{ $item }}" target="_blank"><img src="/images/convoys/{{ $item }}" class="text-shadow-m"></a>
+                @endforeach
             </section>
         </div>
 
@@ -145,56 +157,77 @@
             <hr class="m-auto">
         </section>
 
-        @if(isset($convoy->trailer))
+        @if(isset($convoy->truck) && $convoy->truck_public)
             <div class="row mb-5 mt-5">
                 <section class="convoy-info col-md-6 col-sm-12 text-right">
                     <ul class="mb-0">
                         <li class="row justify-content-end">
                             <div class="mr-4 mb-4">
-                                <p>Полуприцеп:</p>
+                                <p>Тягач:</p>
+                                <h2>{{ $convoy->truck }}</h2>
+                            </div>
+                            <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
+                                <i class="fas fa-truck-pickup"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <section class="route col-md-6 col-sm-12">
+                    <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->truck_image }}" class="text-shadow-m"></a>
+                </section>
+            </div>
+        @endif
+
+        @if(isset($convoy->trailer) && $convoy->trailer_public)
+            <div class="row mb-5 mt-5">
+                <section class="convoy-info col-md-6 col-sm-12 text-right">
+                    <ul class="mb-0">
+                        <li class="row justify-content-end">
+                            <div class="mr-4 mb-4">
+                                <p>Прицеп:</p>
                                 <h2>{{ $convoy->trailer }}</h2>
                             </div>
                             <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
                                 <i class="fas fa-trailer"></i>
                             </div>
                         </li>
-                        @if(isset($convoy->trailer_tuning))
-                            <li class="row justify-content-end">
-                                <div class="mr-4 mb-4">
-                                    <p>Окрас:</p>
-                                    <h4>{{ $convoy->trailer_tuning }}</h4>
-                                </div>
-                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </li>
-                        @endif
-                        @if(isset($convoy->trailer_paint))
-                            <li class="row justify-content-end">
-                                <div class="mr-4 mb-4">
-                                    <p>Окрас:</p>
-                                    <h4>{{ $convoy->trailer_paint }}</h4>
-                                </div>
-                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
-                                    <i class="fas fa-fill"></i>
-                                </div>
-                            </li>
-                        @endif
-                        @if(isset($convoy->cargo))
-                            <li class="row justify-content-end">
-                                <div class="mr-4 mb-4">
-                                    <p>Груз:</p>
-                                    <h4>{{ $convoy->cargo }}</h4>
-                                </div>
-                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
-                                    <i class="fas fa-truck-loading"></i>
-                                </div>
-                            </li>
-                        @endif
+{{--                        @if(isset($convoy->trailer_tuning))--}}
+{{--                            <li class="row justify-content-end">--}}
+{{--                                <div class="mr-4 mb-4">--}}
+{{--                                    <p>Окрас:</p>--}}
+{{--                                    <h4>{{ $convoy->trailer_tuning }}</h4>--}}
+{{--                                </div>--}}
+{{--                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">--}}
+{{--                                    <i class="fas fa-star"></i>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
+{{--                        @if(isset($convoy->trailer_paint))--}}
+{{--                            <li class="row justify-content-end">--}}
+{{--                                <div class="mr-4 mb-4">--}}
+{{--                                    <p>Окрас:</p>--}}
+{{--                                    <h4>{{ $convoy->trailer_paint }}</h4>--}}
+{{--                                </div>--}}
+{{--                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">--}}
+{{--                                    <i class="fas fa-fill"></i>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
+{{--                        @if(isset($convoy->cargo))--}}
+{{--                            <li class="row justify-content-end">--}}
+{{--                                <div class="mr-4 mb-4">--}}
+{{--                                    <p>Груз:</p>--}}
+{{--                                    <h4>{{ $convoy->cargo }}</h4>--}}
+{{--                                </div>--}}
+{{--                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">--}}
+{{--                                    <i class="fas fa-truck-loading"></i>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
                     </ul>
                 </section>
                 <section class="route col-md-6 col-sm-12">
-                    <a href="{{ $convoy->trailer_image }}" target="_blank"><img src="{{ $convoy->trailer_image }}" class="text-shadow-m"></a>
+                    <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" class="text-shadow-m"></a>
                 </section>
             </div>
         @endif
@@ -211,7 +244,6 @@
             <h1 class="text-center text-primary m-5">Ближайших открытых конвоев еще нет!</h1>
         </div>
     @endif
-
 
 </div>
 

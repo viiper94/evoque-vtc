@@ -32,12 +32,12 @@ class ConvoysController extends Controller{
         'lead' => 'nullable|string',
 
         'truck_image' => 'nullable|image',
-        'truck' => 'nullable|string',
+        'truck' => 'required|string',
         'truck_tuning' => 'nullable|string',
         'truck_paint' => 'nullable|string',
 
         'trailer_image' => 'nullable|image',
-        'trailer' => 'nullable|string',
+        'trailer' => 'required|string',
         'trailer_tuning' => 'nullable|string',
         'trailer_paint' => 'nullable|string',
         'cargo' => 'nullable|string',
@@ -76,8 +76,8 @@ class ConvoysController extends Controller{
         ]);
     }
 
-    public function convoys(Request $request){
-        if(Auth::check()){
+    public function convoys(Request $request, $public = false){
+        if(Auth::check() && !$public){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
             $convoys = Convoy::where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->get();

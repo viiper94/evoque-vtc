@@ -7,7 +7,7 @@
 @section('content')
     <div class="container pt-5 members-table">
         @include('layout.alert')
-        <h1 class="text-primary ml-3 text-center">Все конвои</h1>
+        <h1 class="mt-3 text-primary ml-3 text-center">Все конвои</h1>
         <div class="row justify-content-center">
             <a href="{{ route('evoque.admin.convoy.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Создать конвой</a>
         </div>

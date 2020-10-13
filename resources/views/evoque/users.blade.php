@@ -8,7 +8,7 @@
 
     <div class="container-fluid pt-5">
         @include('layout.alert')
-        <h2 class="pt-3 text-center text-primary">Все пользователи</h2>
+        <h2 class="mt-3 text-center text-primary">Все пользователи</h2>
         <div class="table-responsive mb-5">
             <table class="users table table-dark table-hover text-center"><thead>
                 <tr>

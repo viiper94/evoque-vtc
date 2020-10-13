@@ -8,7 +8,7 @@
 
     <div class="container rp-report pt-5 pb-5">
         @include('layout.alert')
-        <h2 class="text-primary text-center">Отчёт о перевозке</h2>
+        <h2 class="mt-3 text-primary text-center">Отчёт о перевозке</h2>
         <form method="post" enctype="multipart/form-data">
             @csrf
             <h4>1. Загрузите скриншоты</h4>

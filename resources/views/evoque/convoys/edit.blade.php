@@ -18,7 +18,7 @@
 
     <div class="container pt-5">
         @include('layout.alert')
-        <h2 class="text-primary">
+        <h2 class="mt-3 text-primary">
             @if($convoy->title)
                 Редактирование конвоя
             @else

@@ -10,9 +10,9 @@
         @include('layout.alert')
         @if(count($applications) > 0)
             @cannot('manage_members')
-                <h2 class="pt-3 text-primary">Мои заявки</h2>
+                <h2 class="mt-3 text-primary">Мои заявки</h2>
             @else
-                <h2 class="pt-3 text-primary">Все заявки</h2>
+                <h2 class="mt-3 text-primary">Все заявки</h2>
             @endcan
             <div class="applications pb-5">
                 @foreach($applications as $application)

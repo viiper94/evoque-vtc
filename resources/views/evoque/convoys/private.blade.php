@@ -8,7 +8,7 @@
 
     <div class="container pt-5 pb-5 private-convoys">
         @foreach($grouped as $day => $convoys)
-            <h1 class="mt-5 text-primary text-center">Регламент на {{ ucfirst($day) }}</h1>
+            <h1 class="mt-3 text-primary text-center">Регламент на {{ ucfirst($day) }}</h1>
             @foreach($convoys as $convoy)
                 <div class="item pt-5 pb-5">
                     <section class="convoy-note pb-3 pt-3 m-auto">

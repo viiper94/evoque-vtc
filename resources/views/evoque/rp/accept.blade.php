@@ -8,7 +8,7 @@
 
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
-        <h2 class="text-primary">Прием отчёта от {{ $report->member->nickname }}</h2>
+        <h2 class="mt-3 text-primary">Прием отчёта от {{ $report->member->nickname }}</h2>
         <div class="row mb-5">
             @foreach($report->images as $image)
                 <a href="/images/rp/{{ $image }}" class="col-xs-12 col-md-{{ 12/count($report->images) }}" target="_blank">

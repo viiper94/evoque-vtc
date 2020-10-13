@@ -7,6 +7,7 @@
 @section('content')
 
     <div class="container pt-5 pb-5">
+        <h3 class="mt-3 text-primary">Редактирование роли</h3>
         <form method="post">
             @csrf
             <div class="form-group">
@@ -41,7 +42,7 @@
                 <input type="checkbox" class="custom-control-input" id="do_rp" name="do_rp" @if($role->do_rp)checked @endif>
                 <label class="custom-control-label" for="do_rp">Может делать рейтинговые перевозки</label>
             </div>
-            <div class="custom-control custom-checkbox mb-2">
+            <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($role->visible) checked @endif>
                 <label class="custom-control-label" for="visible">Показывать эту роль</label>
             </div>

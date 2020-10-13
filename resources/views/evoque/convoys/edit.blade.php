@@ -186,7 +186,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}" placeholder="Марка">
+                        <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}" placeholder="Марка" required>
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
@@ -223,7 +223,7 @@
                 </div>
                 <div class="col-md-7">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $convoy->trailer }}" placeholder="Тип">
+                        <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $convoy->trailer }}" placeholder="Тип" required>
                         @if($errors->has('trailer'))
                             <small class="form-text">{{ $errors->first('trailer') }}</small>
                         @endif

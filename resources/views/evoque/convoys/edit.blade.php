@@ -194,7 +194,7 @@
                         <label class="custom-control-label" for="truck_public">Показывать для всех</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}" placeholder="Марка" required>
+                        <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}" placeholder="Марка">
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
@@ -235,7 +235,7 @@
                         <label class="custom-control-label" for="trailer_public">Показывать для всех</label>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $convoy->trailer }}" placeholder="Тип" required>
+                        <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $convoy->trailer }}" placeholder="Тип">
                         @if($errors->has('trailer'))
                             <small class="form-text">{{ $errors->first('trailer') }}</small>
                         @endif

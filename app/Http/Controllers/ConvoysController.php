@@ -33,12 +33,12 @@ class ConvoysController extends Controller{
         'lead' => 'nullable|string',
 
         'truck_image' => 'nullable|image',
-        'truck' => 'required|string',
+        'truck' => 'nullable|string',
         'truck_tuning' => 'nullable|string',
         'truck_paint' => 'nullable|string',
 
         'trailer_image' => 'nullable|image',
-        'trailer' => 'required|string',
+        'trailer' => 'nullable|string',
         'trailer_tuning' => 'nullable|string',
         'trailer_paint' => 'nullable|string',
         'cargo' => 'nullable|string',

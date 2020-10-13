@@ -61,17 +61,21 @@
             </div>
             <h3 class="text-primary">Маршрут</h3>
             <div class="row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input uploader" id="route" name="route" accept="image/*">
-                            <label class="custom-file-label" for="route">Изображение маршрута</label>
-                        </div>
-                        <img src="/images/convoys/{{ $convoy->route ? $convoy->route : "image-placeholder.jpg" }}" class="w-100" id="route-preview">
-                        @if($errors->has('route'))
-                            <small class="form-text">{{ $errors->first('route') }}</small>
+                <div class="col-md-5 route-images">
+                    @foreach($convoy->route as $index => $image)
+                        @if($loop->last)
+                            @php $image_index = $index @endphp
                         @endif
-                    </div>
+                        <div class="form-group">
+                            <div class="custom-file custom-file-dark mb-3">
+                                <input type="file" class="custom-file-input uploader" id="route-{{ $index }}" name="route[]" accept="image/*">
+                                <label class="custom-file-label" for="route-{{ $index }}">Изображение маршрута</label>
+                            </div>
+                            <img src="/images/convoys/{{ $image ?? "image-placeholder.jpg" }}" class="w-100" id="route-{{ $index }}-preview">
+                        </div>
+                    @endforeach
+                    <button type="button" class="btn btn-sm btn-outline-warning" id="add-convoy-img" data-target="route_images" data-index="{{ $image_index ?? 0 }}"><i class="fas fa-plus"></i> Еще картинку</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="delete-convoy-img" data-target="route_images" onclick="return confirm('Удалить все картинки?')"><i class="fas fa-trash"></i> Удалить все картинки</button>
                 </div>
                 <div class="col-md-7">
                     <div class="form-row">
@@ -122,23 +126,23 @@
                             @endif
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="dlc">Необходимые ДЛС (удерживать Ctrl для выбора нескольких)</label>
+                        <select class="form-control" size="10" name="dlc[]" id="dlc" multiple>
+                            @foreach($dlc as $game => $list)
+                                <option disabled>{{ strtoupper($game) }}</option>
+                                @foreach($list as $item)
+                                    <option value="{{ $item }}" @if(is_array($convoy->dlc) && in_array($item, $convoy->dlc)) selected @endif>{{ $item }}</option>
+                                @endforeach
+                            @endforeach
+                        </select>
+                        @if($errors->has('dlc'))
+                            <small class="form-text">{{ $errors->first('dlc') }}</small>
+                        @endif
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="dlc">Необходимые ДЛС (удерживать Ctrl для выбора нескольких)</label>
-                <select class="form-control" size="10" name="dlc[]" id="dlc" multiple>
-                    @foreach($dlc as $game => $list)
-                        <option disabled>{{ strtoupper($game) }}</option>
-                        @foreach($list as $item)
-                            <option value="{{ $item }}" @if(is_array($convoy->dlc) && in_array($item, $convoy->dlc)) selected @endif>{{ $item }}</option>
-                        @endforeach
-                    @endforeach
-                </select>
-                @if($errors->has('dlc'))
-                    <small class="form-text">{{ $errors->first('dlc') }}</small>
-                @endif
-            </div>
-            <h3 class="text-primary">Связь</h3>
+            <h3 class="mt-5 text-primary">Связь</h3>
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3" @if($convoy->communication == 'TeamSpeak 3' || $convoy->communication == '') checked @endif>
                 <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
@@ -185,6 +189,10 @@
                     </div>
                 </div>
                 <div class="col-md-7">
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public" @if($convoy->truck_public) checked @endif>
+                        <label class="custom-control-label" for="truck_public">Показывать для всех</label>
+                    </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}" placeholder="Марка" required>
                         @if($errors->has('truck'))
@@ -222,6 +230,10 @@
                     </div>
                 </div>
                 <div class="col-md-7">
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="trailer_public" name="trailer_public" @if($convoy->trailer_public) checked @endif>
+                        <label class="custom-control-label" for="trailer_public">Показывать для всех</label>
+                    </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $convoy->trailer }}" placeholder="Тип" required>
                         @if($errors->has('trailer'))
@@ -297,10 +309,6 @@
             </div>
             <div class="row justify-content-center">
                 <button class="btn btn-outline-warning mx-1" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
-                @if($convoy->title)
-                    <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
-                       onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
-                @endif
             </div>
 
         </form>
@@ -331,6 +339,16 @@
             scrollInput: false
         });
         $.datetimepicker.setLocale('ru');
+    </script>
+
+    <script type="text/html" id="route_images_template">
+        <div class="form-group">
+            <div class="custom-file custom-file-dark mb-3">
+                <input type="file" class="custom-file-input uploader" id="route-%i%" name="route[]" accept="image/*">
+                <label class="custom-file-label" for="route-%i%">Еще одно изображение маршрута</label>
+            </div>
+            <img src="/images/convoys/image-placeholder.jpg" class="w-100" id="route-%i%-preview">
+        </div>
     </script>
 
 @endsection

@@ -65,8 +65,31 @@ $(document).ready(function(){
         }
     });
 
-    $('.uploader').change(function(){
+    $(document).on('change', '.uploader', function(){
         readURL(this, '#' + $(this).attr('id') + '-preview');
+    });
+
+    $('#add-convoy-img').click(function(){
+        if($('input[id^=route-]').length >= 4){
+            $(this).html('<i class="fas fa-times"></i> Угомонись уже, хватит!');
+            return false;
+        }
+        let index = $(this).data('index')+1;
+        $(this).data('index', index);
+        let template = $('#'+$(this).data('target')+'_template').html().replace(/%i%/g, index);
+        $(this).before(template);
+        bsCustomFileInput.init();
+        return true;
+    });
+
+    $('#delete-convoy-img').click(function(){
+        $('.route-images .form-group').remove();
+        let index = 0;
+        $('#add-convoy-img').data('index', index).html('<i class="fas fa-plus"></i> Еще картинку');
+        let template = $('#'+$(this).data('target')+'_template').html().replace(/%i%/g, index).replace('Еще одно ', '');
+        $('#add-convoy-img').before(template);
+        bsCustomFileInput.init();
+        return true;
     });
 
 });

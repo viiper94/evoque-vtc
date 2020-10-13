@@ -4,6 +4,11 @@
     Регламент конвоев | @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
+    <script src="/js/fotorama-4.6.4/fotorama.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container pt-5 pb-5 private-convoys">
@@ -55,7 +60,7 @@
                             <p>Тягач:</p>
                             <h3>{{ $convoy->truck }}</h3>
                             @if($convoy->truck_image)
-                                <a href="{{ $convoy->truck_image }}" target="_blank"><img src="{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m"></a>
+                                <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m"></a>
                             @endif
                             @if($convoy->truck_tuning)
                                 <p>Тюнинг:</p>
@@ -70,7 +75,7 @@
                             <p>Прицеп:</p>
                             <h3>{{ $convoy->trailer }}</h3>
                             @if($convoy->trailer_image)
-                                <a href="{{ $convoy->trailer_image }}" target="_blank"><img src="{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m"></a>
+                                <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m"></a>
                             @endif
                             @if($convoy->trailer_tuning)
                                 <p>Тюнинг:</p>
@@ -88,7 +93,7 @@
                                 <p class="mt-4">Прицеп без ДЛС:</p>
                                 <h3>{{ $convoy->alt_trailer }}</h3>
                                 @if($convoy->alt_trailer_image)
-                                    <a href="{{ $convoy->alt_trailer_image }}" target="_blank"><img src="{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m"></a>
+                                    <a href="/images/convoys/{{ $convoy->alt_trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m"></a>
                                 @endif
                                 @if($convoy->alt_trailer_tuning)
                                     <p>Тюнинг:</p>
@@ -123,9 +128,13 @@
                             </blockquote>
                             <hr class="m-auto">
                         </section>
-                        <div class="row text-center">
-                            <a href="{{ $convoy->route }}" target="_blank" class="text-shadow-m"><img src="{{ $convoy->route }}" alt="{{ $convoy->title }}"></a>
-                        </div>
+                        <section class="w-100">
+                            <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
+                                @foreach($convoy->route as $item)
+                                    <img src="/images/convoys/{{ $item }}">
+                                @endforeach
+                            </div>
+                        </section>
                     </div>
                 </div>
             @endforeach

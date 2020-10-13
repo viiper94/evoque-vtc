@@ -37,6 +37,7 @@ class Convoy extends Model{
     protected $casts = [
         'visible' => 'boolean',
         'dlc' => 'array',
+        'route' => 'array',
     ];
 
     protected $dates = [

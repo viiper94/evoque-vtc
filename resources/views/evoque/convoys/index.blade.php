@@ -23,11 +23,12 @@
                             Финиш: <b>{{ $convoy->finish }}</b><br>
                             Сервер: <b>{{ $convoy->server }}</b><br>
                             Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
-                            <a href="{{ $convoy->route }}" target="_blank">Маршрут</a>
                         </p>
                     </div>
                     <div class="card-actions">
                         <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning"><i class="fas fa-edit"></i> Редактировать</a>
+                        <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
+                           onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
                     </div>
                 </div>
             @endforeach

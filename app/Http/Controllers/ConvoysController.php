@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use TruckersMP\APIClient\Client;
 
 class ConvoysController extends Controller{
@@ -17,7 +18,7 @@ class ConvoysController extends Controller{
         'start_time' => 'required|date',
         'server' => 'required|string',
 
-        'route' => 'nullable|image',
+        'route' => 'nullable|array',
         'start_city' => 'required|string',
         'start_company' => 'nullable|string',
         'rest_city' => 'required|string',
@@ -106,10 +107,18 @@ class ConvoysController extends Controller{
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
             $convoy->public = $request->input('public') === 'on';
+            $convoy->truck_public = $request->input('truck_public') === 'on';
+            $convoy->trailer_public = $request->input('trailer_public') === 'on';
             foreach($request->files as $key => $file){
-                $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
-                $file->move(public_path('/images/convoys/'), $name);
-                $convoy->$key = $name;
+                if($key === 'route' && is_array($file)){
+                    $route_images = array();
+                    foreach($file as $i => $route){
+                        $route_images[] = $this->saveImage($route);
+                    }
+                    $convoy->route = $route_images;
+                }else{
+                    $convoy->$key = $this->saveImage($file);
+                }
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             return $convoy->save() ?
@@ -120,6 +129,8 @@ class ConvoysController extends Controller{
         $servers = $tmp->servers()->get();
         $convoy = new Convoy();
         $convoy->start_time = Carbon::now();
+        $convoy->trailer_public = true;
+        $convoy->route = ['1' => null];
         return view('evoque.convoys.edit', [
             'convoy' => $convoy,
             'servers' => $servers,
@@ -138,10 +149,18 @@ class ConvoysController extends Controller{
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
             $convoy->public = $request->input('public') === 'on';
+            $convoy->truck_public = $request->input('truck_public') === 'on';
+            $convoy->trailer_public = $request->input('trailer_public') === 'on';
             foreach($request->files as $key => $file){
-                $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
-                $file->move(public_path('/images/convoys/'), $name);
-                $convoy->$key = $name;
+                if($key === 'route' && is_array($file)){
+                    $route_images = array();
+                    foreach($file as $i => $route){
+                        $route_images[] = $this->saveImage($route);
+                    }
+                    $convoy->route = $route_images;
+                }else{
+                    $convoy->$key = $this->saveImage($file);
+                }
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             return $convoy->save() ?
@@ -169,4 +188,11 @@ class ConvoysController extends Controller{
 
     // TODO Convoys screen TAB system
     // TODO Convoy plans page
+
+    private function saveImage(UploadedFile $file, $path = '/images/convoys/'){
+        $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
+        $file->move(public_path('/images/convoys/'), $name);
+        return $name;
+    }
+
 }

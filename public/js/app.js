@@ -13901,8 +13901,30 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #bonus').val(bonus);
     }
   });
-  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.uploader').change(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('change', '.uploader', function () {
     readURL(this, '#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id') + '-preview');
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').click(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[id^=route-]').length >= 4) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).html('<i class="fas fa-times"></i> Угомонись уже, хватит!');
+      return false;
+    }
+
+    var index = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('index') + 1;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('index', index);
+    var template = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target') + '_template').html().replace(/%i%/g, index);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).before(template);
+    bs_custom_file_input__WEBPACK_IMPORTED_MODULE_1___default.a.init();
+    return true;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#delete-convoy-img').click(function () {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.route-images .form-group').remove();
+    var index = 0;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').data('index', index).html('<i class="fas fa-plus"></i> Еще картинку');
+    var template = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target') + '_template').html().replace(/%i%/g, index).replace('Еще одно ', '');
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').before(template);
+    bs_custom_file_input__WEBPACK_IMPORTED_MODULE_1___default.a.init();
+    return true;
   });
 });
 
@@ -13944,8 +13966,8 @@ function readURL(input, selector) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

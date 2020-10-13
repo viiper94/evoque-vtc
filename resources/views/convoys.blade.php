@@ -17,34 +17,37 @@
                             <p>Дата:</p>
                             <h4>{{ $convoy->start_time->isoFormat('LL') }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pr-4 text-left">
+                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
                         <div class="mr-4 mb-4">
                             <p>Место старта:</p>
-                            <h2>{{ $convoy->start }}</h2>
+                            <h2>{{ $convoy->start_city }}</h2>
+                            <h4>{{ $convoy->start_company }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pr-4 text-left">
+                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-map-marker"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
                         <div class="mr-4 mb-4">
                             <p>Место отдыха:</p>
-                            <h2>{{ $convoy->rest }}</h2>
+                            <h2>{{ $convoy->rest_city }}</h2>
+                            <h4>{{ $convoy->rest_company }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pr-4 text-left">
+                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-map-marked-alt"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
                         <div class="mr-4 mb-4">
                             <p>Место финиша:</p>
-                            <h2>{{ $convoy->finish }}</h2>
+                            <h2>{{ $convoy->finish_city }}</h2>
+                            <h2>{{ $convoy->finish_company }}</h2>
                         </div>
-                        <div class="convoy-icon pl-5 pr-4 text-left">
+                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                     </li>
@@ -53,7 +56,7 @@
                             <p>Встречаемся на сервере:</p>
                             <h4>{{ $convoy->server }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pr-4 text-left">
+                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-server"></i>
                         </div>
                     </li>
@@ -62,7 +65,7 @@
                             <p>Начало конвоя:</p>
                             <h4>{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pr-4 text-left">
+                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-hourglass-half"></i>
                         </div>
                     </li>
@@ -71,7 +74,7 @@
                             <p>Выезд с места старта:</p>
                             <h4>{{ $convoy->start_time->format('H:i') }} по МСК</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pr-4 text-left">
+                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-clock"></i>
                         </div>
                     </li>
@@ -81,6 +84,12 @@
                 <a href="{{ $convoy->route }}" target="_blank"><img src="{{ $convoy->route }}" class="text-shadow-m"></a>
             </section>
         </div>
+
+        @if($convoy->dlc)
+            <section>
+                <h4 class="mt-5 text-center"><i class="fas fa-exclamation-triangle text-danger"></i> Для участия требуется DLC {{ implode(', ', $convoy->dlc) }}</h4>
+            </section>
+        @endif
 
         <section class="convoy-note pb-5 pt-5 m-auto">
             <hr class="m-auto">
@@ -97,7 +106,7 @@
                         <p>Связь ведём через {{ $convoy->communication }}:</p>
                         <a href="{{ $convoy->getCommunicationLink() }}" target="_blank"><h2>{{ $convoy->communication_link }}</h2></a>
                     </div>
-                    <div class="convoy-icon pl-5 pr-4 text-left">
+                    <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
                         @if($convoy->communication === 'TeamSpeak 3')
                             <i class="fab fa-teamspeak"></i>
                         @elseif($convoy->communication === 'Discord')
@@ -110,7 +119,7 @@
                         <p>Канал на сервере:</p>
                         <h4>{{ $convoy->communication_channel }}</h4>
                     </div>
-                    <div class="convoy-icon pl-5 pr-4 text-left">
+                    <div class="convoy-icon pl-5 pr-4 text-left d-flex align-items-center">
                         <i class="fas fa-list-alt"></i>
                     </div>
                 </li>
@@ -145,7 +154,7 @@
                                 <p>Полуприцеп:</p>
                                 <h2>{{ $convoy->trailer }}</h2>
                             </div>
-                            <div class="convoy-icon pl-5 pr-4 text-left">
+                            <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
                                 <i class="fas fa-trailer"></i>
                             </div>
                         </li>
@@ -155,7 +164,7 @@
                                     <p>Окрас:</p>
                                     <h4>{{ $convoy->trailer_tuning }}</h4>
                                 </div>
-                                <div class="convoy-icon pl-5 pr-4 text-left">
+                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
                                     <i class="fas fa-star"></i>
                                 </div>
                             </li>
@@ -166,7 +175,7 @@
                                     <p>Окрас:</p>
                                     <h4>{{ $convoy->trailer_paint }}</h4>
                                 </div>
-                                <div class="convoy-icon pl-5 pr-4 text-left">
+                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
                                     <i class="fas fa-fill"></i>
                                 </div>
                             </li>
@@ -177,7 +186,7 @@
                                     <p>Груз:</p>
                                     <h4>{{ $convoy->cargo }}</h4>
                                 </div>
-                                <div class="convoy-icon pl-5 pr-4 text-left">
+                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
                                     <i class="fas fa-truck-loading"></i>
                                 </div>
                             </li>

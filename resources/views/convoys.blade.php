@@ -48,7 +48,7 @@
                             <h2>{{ $convoy->finish_company }}</h2>
                         </div>
                         <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
-                            <i class="fas fa-map-marker-alt"></i>
+                            <i class="fas fa-sign-in-alt"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">

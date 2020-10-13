@@ -30,8 +30,7 @@ class MembersController extends Controller{
                 'nickname' => 'required|string',
                 'join_date' => 'required|date_format:d.m.Y',
                 'convoys' => 'required|numeric',
-                'vacations' => 'required|numeric',
-                'plate' => 'required|url',
+                'vacations' => 'required|numeric'
             ]);
             // TODO filter photo links
             $member = Member::findOrFail($id);

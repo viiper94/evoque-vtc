@@ -12,6 +12,11 @@
 @section('content')
 
     <div class="container pt-5 pb-5 private-convoys">
+        @can('manage_convoys')
+            <div class="row pt-3 justify-content-center">
+                <a href="{{ route('convoys', 'all') }}" class="btn btn-outline-warning">Смотреть все регламенты</a>
+            </div>
+        @endcan
         @foreach($grouped as $day => $convoys)
             <h1 class="mt-3 text-primary text-center">Регламент на {{ ucfirst($day) }}</h1>
             @foreach($convoys as $convoy)
@@ -20,6 +25,11 @@
                         <hr class="m-auto">
                         <blockquote class="blockquote text-center mb-4 mt-4">
                             <h2 class="mb-0">{{ $convoy->title }}</h2>
+                            @can('manage_convoys')
+                                <div class="row pt-3 justify-content-center">
+                                    <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit"></i> Редактировать</a>
+                                </div>
+                            @endcan
                         </blockquote>
                         <hr class="m-auto">
                     </section>
@@ -53,12 +63,12 @@
                         </div>
                     </div>
                     @if($convoy->dlc)
-                        <h4 class=" mt-5 text-center"><i class="fas fa-exclamation-triangle text-danger"></i> Для участия требуется DLC {{ implode(', ', $convoy->dlc) }}</h4>
+                        <h4 class=" mt-5 text-center"><i class="fas fa-exclamation-triangle text-warning"></i> Для участия требуется DLC {{ implode(', ', $convoy->dlc) }}</h4>
                     @endif
                     <div class="row convoy-info pt-5">
                         <div class="col-sm-6 pr-5 text-right">
                             <p>Тягач:</p>
-                            <h3>{{ $convoy->truck }}</h3>
+                            <h3>{{ $convoy->truck ?? 'Любой' }}</h3>
                             @if($convoy->truck_image)
                                 <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m"></a>
                             @endif
@@ -73,7 +83,7 @@
                         </div>
                         <div class="col-sm-6 pl-5">
                             <p>Прицеп:</p>
-                            <h3>{{ $convoy->trailer }}</h3>
+                            <h3>{{ $convoy->trailer ?? 'Любой' }}</h3>
                             @if($convoy->trailer_image)
                                 <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m"></a>
                             @endif

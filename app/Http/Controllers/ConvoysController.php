@@ -90,6 +90,16 @@ class ConvoysController extends Controller{
             return view('evoque.convoys.private', [
                 'grouped' => array_reverse($grouped)
             ]);
+        }else if(Gate::allows('manage_convoys') && $public === 'all'){
+            $convoys = Convoy::orderBy('start_time')->get();
+            $grouped = array();
+            foreach($convoys as $convoy){
+                $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
+                if(count($grouped) >= 5) break;
+            }
+            return view('evoque.convoys.private', [
+                'grouped' => array_reverse($grouped)
+            ]);
         }else{
             return view('convoys', [
                 'convoy' => Convoy::where(['visible' => '1', 'public' => '1'])->first()

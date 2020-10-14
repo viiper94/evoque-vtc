@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Convoy;
 use App\Member;
+use App\Tab;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -201,8 +202,99 @@ class ConvoysController extends Controller{
 
     private function saveImage(UploadedFile $file, $path = '/images/convoys/'){
         $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
-        $file->move(public_path('/images/convoys/'), $name);
+        $file->move(public_path($path), $name);
         return $name;
+    }
+
+    public function tab(){
+        return view('evoque.convoys.tab.index', [
+            'tabs' => Tab::with(['member', 'lead'])->orderBy('date', 'desc')->get()
+        ]);
+    }
+
+    public function addTab(Request $request){
+        if(Gate::denies('lead_convoys')) abort(403);
+        if($request->post()){
+            $this->validate($request, [
+                'convoy_title' => 'required|string',
+                'lead_id' => 'required|numeric',
+                'date' => 'required|date_format:d.m.Y',
+                'screenshot' => 'required|image',
+            ]);
+            $tab = new Tab();
+            $tab->fill($request->post());
+            $tab->member_id = Auth::user()->member->id;
+            $tab->date = Carbon::parse($request->input('date'))->format('Y-m-d');
+            if($request->file('screenshot')){
+                $tab->screenshot = $this->saveImage($request->file('screenshot'), '/images/convoys/tab/');
+            }
+            return $tab->save() ?
+                redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно подан!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
+        return view('evoque.convoys.tab.edit', [
+            'tab' => new Tab(),
+            'members' => Member::where('visible', '1')->get()
+        ]);
+    }
+
+    public function editTab(Request $request, $id){
+        if(Gate::denies('lead_convoys')) abort(403);
+        $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
+        if($request->post()){
+            $this->validate($request, [
+                'convoy_title' => 'required|string',
+                'lead_id' => 'required|numeric',
+                'date' => 'required|date_format:d.m.Y',
+                'screenshot' => 'nullable|image',
+            ]);
+            $tab->fill($request->post());
+            $tab->date = Carbon::parse($request->input('date'))->format('Y-m-d');
+            if($request->file('screenshot')){
+                if(is_file(public_path('/images/convoys/tab/').$tab->screenshot)){
+                    unlink(public_path('/images/convoys/tab/').$tab->screenshot);
+                }
+                $tab->screenshot = $this->saveImage($request->file('screenshot'), '/images/convoys/tab/');
+            }
+            return $tab->save() ?
+                redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
+        return view('evoque.convoys.tab.edit', [
+            'tab' => $tab,
+            'members' => Member::where('visible', '1')->get()
+        ]);
+    }
+
+    public function deleteTab(Request $request, $id){
+        if(Gate::denies('lead_convoys')) abort(403);
+        $tab = Tab::findOrFail($id);
+        if(is_file(public_path('/images/convoys/tab/').$tab->screenshot)){
+            unlink(public_path('/images/convoys/tab/').$tab->screenshot);
+        }
+        return $tab->delete() ?
+            redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно удалён!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
+    public function acceptTab(Request $request, $id){
+        if(Gate::denies('manage_table')) abort(403);
+        $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
+        if($request->post()){
+            $this->validate($request, [
+                'members_scores' => 'required|array',
+                'members_on_convoy' => 'required|array',
+                'scores' => 'required|numeric'
+            ]);
+            $tab->status = 1;
+            return $tab->save() ?
+                redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
+        return view('evoque.convoys.tab.edit', [
+            'tab' => $tab,
+            'members' => Member::where('visible', '1')->get()
+        ]);
     }
 
 }

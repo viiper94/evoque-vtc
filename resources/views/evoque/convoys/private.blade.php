@@ -34,7 +34,7 @@
                         <hr class="m-auto">
                     </section>
                     <div class="row convoy-info pt-5">
-                        <div class="col-sm-6 pr-5 text-right">
+                        <div class="col-sm-6 pr-md-5 pr-3 text-md-right text-center">
                             <p>Старт:</p>
                             <h3>{{ $convoy->start_city }}</h3>
                             <h5>{{ $convoy->start_company }}</h5>
@@ -49,7 +49,7 @@
                             <p>Выезд:</p>
                             <h3>{{ $convoy->start_time->format('H:i  ') }} по МСК</h3>
                         </div>
-                        <div class="col-sm-6 pl-5">
+                        <div class="col-sm-6 pl-md-5 pl-3 text-md-left text-center">
                             <p>Сервер:</p>
                             <h3>{{ $convoy->server }}</h3>
                             <p>Ведущий:</p>
@@ -66,7 +66,7 @@
                         <h4 class=" mt-5 text-center"><i class="fas fa-exclamation-triangle text-warning"></i> Для участия требуется DLC {{ implode(', ', $convoy->dlc) }}</h4>
                     @endif
                     <div class="row convoy-info pt-5">
-                        <div class="col-sm-6 pr-5 text-right">
+                        <div class="col-sm-6 pr-md-5 pr-3 text-md-right text-center">
                             <p>Тягач:</p>
                             <h3>{{ $convoy->truck ?? 'Любой' }}</h3>
                             @if($convoy->truck_image)
@@ -81,7 +81,7 @@
                                 <h3>{{ $convoy->truck_paint }}</h3>
                             @endif
                         </div>
-                        <div class="col-sm-6 pl-5">
+                        <div class="col-sm-6 pl-md-5 pl-3 text-md-left text-center">
                             <p>Прицеп:</p>
                             <h3>{{ $convoy->trailer ?? 'Любой' }}</h3>
                             @if($convoy->trailer_image)
@@ -123,7 +123,7 @@
                             <hr class="m-auto">
                             <blockquote class="blockquote text-center mb-4 mt-4">
                                 <h5 class="mb-0">Правила ВТК на конвое:</h5>
-                                <ol class="text-left">
+                                <ol class="text-left ml-5 mr-1">
                                     <li>Канал в рации <b>№7</b> (многочисленный флуд и музыка в рации полностью запрещены).</li>
                                     <li>Движение по команде и только колонной, соблюдая ПДД и правила мультиплеера.</li>
                                     <li>Рекомендуемая дистанция между машинами <b>70-150 метров</b>.</li>

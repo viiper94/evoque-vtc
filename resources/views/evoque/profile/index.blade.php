@@ -9,7 +9,7 @@
     @include('layout.alert')
     <div class="container pt-5 pb-5 profile">
         <div class="row mt-5">
-            <div class="col-sm-6 avatar text-right pr-sm-5 pt-3 pb-3">
+            <div class="col-sm-6 avatar text-md-right text-center pr-sm-5 pt-3 pb-3">
                 <img src="{{ $user->image }}" alt="{{ $user->name }}" class="text-shadow-m">
                 @if(\Illuminate\Support\Facades\Auth::user()->id === $user->id)
                     <div class="mt-3">
@@ -28,7 +28,7 @@
                     @endif
                 @endcan
             </div>
-            <div class="col-sm-6 info pl-sm-5 pt-3 pb-3">
+            <div class="col-sm-6 info pl-sm-5 pt-3 pb-3 text-center text-sm-left">
                 <h1 class="text-primary">{{ $user->name }}</h1>
                 @if($user->member)
                     <h3>[EVOQUE] {{ $user->member->nickname }}</h3>

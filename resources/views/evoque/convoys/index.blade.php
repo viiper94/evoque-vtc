@@ -26,8 +26,8 @@
                         </p>
                     </div>
                     <div class="card-actions">
-                        <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning"><i class="fas fa-edit"></i> Редактировать</a>
-                        <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger"
+                        <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning my-1"><i class="fas fa-edit"></i> Редактировать</a>
+                        <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger my-1"
                            onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
                     </div>
                 </div>

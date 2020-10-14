@@ -13,9 +13,9 @@
     <div class="container pt-5 pb-5">
         @include('layout.alert')
         @if($rules->paragraph)
-            <h1 class="text-primary">Редактирование параграфа {{ $rules->paragraph }} правил</h1>
+            <h3 class="text-primary mt-3">Редактирование параграфа {{ $rules->paragraph }} правил</h3>
         @else
-            <h1 class="text-primary">Новый параграф правил</h1>
+            <h3 class="text-primary mt-3">Новый параграф правил</h3>
         @endif
         <form method="post">
             @csrf

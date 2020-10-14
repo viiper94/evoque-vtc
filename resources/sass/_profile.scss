@@ -1,7 +1,9 @@
 // Profile
 .profile{
     .avatar{
-        border-right: 1px solid $primary;
+        @media (min-width: 576px){
+            border-right: 1px solid $primary;
+        }
         img{
             width: 190px;
         }

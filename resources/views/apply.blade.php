@@ -10,36 +10,36 @@
     @include('layout.alert')
     <section class="apply-requirements row pt-5 pb-5">
         <div class="col mr-5 with-img"></div>
-        <div class="col ml-5">
+        <div class="col ml-md-5">
             <h1>Требования</h1>
             <ul>
-                <li class="row mt-5">
+                <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
                         <i class="fas fa-address-book"></i>
                     </div>
                     <p>Ваш возраст должен быть не менее 17 лет</p>
                 </li>
-                <li class="row mt-5">
+                <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
                         <i class="fas fa-layer-group"></i>
                     </div>
                     <p>Вы не должны состоять в других ВТК</p>
                 </li>
-                <li class="row mt-5" style="flex-wrap: nowrap">
+                <li class="row mt-5 ml-1 ml-md-0" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
                         <i class="fab fa-steam-symbol"></i>
                     </div>
                     <p>Ваш профиль в Steam не должен быть скрытым<br>
                         <button data-toggle="modal" data-target="#steam-privacy-modal" class="btn btn-outline-warning btn-sm">Как открыть?</button></p>
                 </li>
-                <li class="row mt-5" style="flex-wrap: nowrap">
+                <li class="row mt-5 ml-1 ml-md-0" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
                         <i class="fas fa-ban"></i>
                     </div>
                     <p>Ваша история банов на сайте TruckersMP должна быть открыта<br>
                         <a data-toggle="modal" data-target="#ban-history-modal" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
                 </li>
-                <li class="row mt-5">
+                <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
                         <i class="fas fa-history"></i>
                     </div>

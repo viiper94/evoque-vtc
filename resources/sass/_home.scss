@@ -55,3 +55,10 @@ body{
         border-top: 1px solid;
     }
 }
+@media (max-width: 576px){
+    .apply-wrapper{
+        h1{
+            font-size: 30px;
+        }
+    }
+}

@@ -17219,6 +17219,13 @@ footer .contacts a i {
   font-size: 35px;
 }
 
+@media (max-width: 576px) {
+  footer h2 {
+    font-size: 30px;
+    margin-top: 1rem;
+  }
+}
+
 body::-webkit-scrollbar,
 .modal-body::-webkit-scrollbar,
 .table-responsive::-webkit-scrollbar,
@@ -17433,6 +17440,12 @@ body {
   border-top: 1px solid;
 }
 
+@media (max-width: 576px) {
+  .apply-wrapper h1 {
+    font-size: 30px;
+  }
+}
+
 .apply-requirements .with-img {
   background-image: url(/assets/img/actros-600.png);
   background-size: contain;
@@ -17445,9 +17458,22 @@ body {
   color: #e4c501;
 }
 
+@media (max-width: 576px) {
+  .apply-requirements h1 {
+    margin: 0;
+    text-align: center;
+  }
+}
+
 .apply-requirements ul li .icon-wrapper {
   border-right: 1px solid #bbbbbb;
   width: 60px;
+}
+
+@media (max-width: 576px) {
+  .apply-requirements ul li .icon-wrapper {
+    width: 54px;
+  }
 }
 
 .apply-requirements ul li .icon-wrapper i {
@@ -17475,6 +17501,12 @@ body {
 .apply-call-to-action i {
   color: #e4c501;
   font-size: 60px;
+}
+
+@media (max-width: 576px) {
+  .apply-call-to-action h1 {
+    font-size: 30px;
+  }
 }
 
 .application-form .btn-outline-warning.disabled,
@@ -17538,6 +17570,12 @@ ul.rules .blockquote p strong {
   color: #e4c501;
 }
 
+@media (max-width: 576px) {
+  .convoy-title {
+    font-size: 30px;
+  }
+}
+
 .convoy-info li {
   flex-wrap: nowrap;
 }
@@ -17556,6 +17594,16 @@ ul.rules .blockquote p strong {
   color: #e4c501;
 }
 
+@media (max-width: 576px) {
+  .convoy-info h2 {
+    font-size: 25px;
+  }
+
+  .convoy-info h4 {
+    font-size: 20px;
+  }
+}
+
 .convoy-icon {
   border-left: 1px solid #bbbbbb;
 }
@@ -17564,6 +17612,12 @@ ul.rules .blockquote p strong {
   font-size: 40px;
   color: #e4c501;
   width: 45px;
+}
+
+@media (max-width: 576px) {
+  .convoy-icon i {
+    font-size: 30px;
+  }
 }
 
 .route img {
@@ -17802,8 +17856,10 @@ table.users td.user-image img {
   color: #e4c501;
 }
 
-.profile .avatar {
-  border-right: 1px solid #e4c501;
+@media (min-width: 576px) {
+  .profile .avatar {
+    border-right: 1px solid #e4c501;
+  }
 }
 
 .profile .avatar img {

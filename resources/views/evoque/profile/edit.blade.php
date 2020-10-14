@@ -12,7 +12,7 @@
 @section('content')
 
     <div class="container pt-5 pb-5">
-        <h1 class="mt-3 text-primary">Редактирование профиля</h1>
+        <h2 class="mt-3 text-primary">Редактирование профиля</h2>
         <form method="post">
             @csrf
             <div class="form-group">

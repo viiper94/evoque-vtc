@@ -6,10 +6,11 @@
 
 @section('content')
 
-    <div class="container pt-5 pb-5 roles">
-        <h2 class="mt-3 mb-3 text-primary">Управление ролями</h2>
-        <table class="table table-dark table-hover roles-table">
-            <thead>
+    <div class="container-fliud pt-5 pb-5 roles">
+        <h2 class="mt-3 mb-3 text-primary text-center">Управление ролями</h2>
+        <div class="table-responsive mb-3">
+            <table class="table table-dark table-hover roles-table">
+                <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Название</th>
@@ -19,13 +20,13 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach($roles as $role)
                     <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td class="role-title">{{ $role->title }}</td>
-                        <td>{{ $role->group }}</td>
+                        <td class="">{{ $role->group }}</td>
                         <td>{{ count($role->members) }}</td>
                         <td>
                             <i class="icon-evoque @if($role->admin)active @endif"></i>
@@ -48,9 +49,12 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
-        <a href="{{ route('evoque.admin.roles.add') }}" class="btn btn-outline-warning"><i class="fas fa-plus-square"></i> Новая роль</a>
+                </tbody>
+            </table>
+        </div>
+        <div class="row justify-content-center">
+            <a href="{{ route('evoque.admin.roles.add') }}" class="btn btn-outline-warning btn-lg"><i class="fas fa-plus-square"></i> Новая роль</a>
+        </div>
     </div>
 
 @endsection

@@ -18,68 +18,68 @@
             <section class="convoy-info col-md-6 col-sm-12 text-right">
                 <ul>
                     <li class="row justify-content-end">
-                        <div class="mr-4 mb-4">
+                        <div class="mr-3 mr-md-4 mb-4">
                             <p>Дата:</p>
                             <h4>{{ $convoy->start_time->isoFormat('LL') }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
+                        <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-calendar-alt"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
-                        <div class="mr-4 mb-4">
+                        <div class="mr-3 mr-md-4 mb-4">
                             <p>Место старта:</p>
                             <h2>{{ $convoy->start_city }}</h2>
                             <h4>{{ $convoy->start_company }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
+                        <div class="convoy-icon pl-md-5 pl-4 pr-4 pb-4 text-left d-flex align-items-center">
                             <i class="fas fa-map-marker"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
-                        <div class="mr-4 mb-4">
+                        <div class="mr-3 mr-md-4 mb-4">
                             <p>Место отдыха:</p>
                             <h2>{{ $convoy->rest_city }}</h2>
                             <h4>{{ $convoy->rest_company }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
+                        <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-map-marked-alt"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
-                        <div class="mr-4 mb-4">
+                        <div class="mr-3 mr-md-4 mb-4">
                             <p>Место финиша:</p>
                             <h2>{{ $convoy->finish_city }}</h2>
                             <h2>{{ $convoy->finish_company }}</h2>
                         </div>
-                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
+                        <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-sign-in-alt"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
-                        <div class="mr-4 mb-4">
+                        <div class="mr-3 mr-md-4 mb-4">
                             <p>Встречаемся на сервере:</p>
                             <h4>{{ $convoy->server }}</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
+                        <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-server"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
-                        <div class="mr-4 mb-4">
+                        <div class="mr-3 mr-md-4 mb-4">
                             <p>Начало конвоя:</p>
                             <h4>{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
+                        <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-hourglass-half"></i>
                         </div>
                     </li>
                     <li class="row justify-content-end">
-                        <div class="mr-4 mb-4">
+                        <div class="mr-3 mr-md-4 mb-4">
                             <p>Выезд с места старта:</p>
                             <h4>{{ $convoy->start_time->format('H:i') }} по МСК</h4>
                         </div>
-                        <div class="convoy-icon pl-5 pb-4 pr-4 text-left d-flex align-items-center">
+                        <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                             <i class="fas fa-clock"></i>
                         </div>
                     </li>
@@ -116,9 +116,9 @@
                 <li class="row justify-content-end">
                     <div class="mr-4 mb-4">
                         <p>Связь ведём через {{ $convoy->communication }}:</p>
-                        <a href="{{ $convoy->getCommunicationLink() }}" target="_blank"><h2>{{ $convoy->communication_link }}</h2></a>
+                        <a href="{{ $convoy->getCommunicationLink() }}" target="_blank"><h4>{{ $convoy->communication_link }}</h4></a>
                     </div>
-                    <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
+                    <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                         @if($convoy->communication === 'TeamSpeak 3')
                             <i class="fab fa-teamspeak"></i>
                         @elseif($convoy->communication === 'Discord')
@@ -131,7 +131,7 @@
                         <p>Канал на сервере:</p>
                         <h4>{{ $convoy->communication_channel }}</h4>
                     </div>
-                    <div class="convoy-icon pl-5 pr-4 text-left d-flex align-items-center">
+                    <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
                         <i class="fas fa-list-alt"></i>
                     </div>
                 </li>

@@ -41,7 +41,9 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td><b>{{ $member->nickname }}</b></td>
-                                <td><b>{{ $member->user->birth_date ? $member->user->birth_date->age .' '. trans_choice('год|года|лет', $member->user->birth_date->age) : '–' }}</b></td>
+                                <td @if($member->user->birth_date && $member->user->birth_date->format('d-m') == \Carbon\Carbon::now()->format('d-m')) class="text-warning font-weight-bold" @endif>
+                                    <b>{{ $member->user->birth_date ? $member->user->birth_date->age .' '. trans_choice('год|года|лет', $member->user->birth_date->age) : '–' }}</b>
+                                </td>
                                 <td>
                                     @foreach($member->role as $item)
                                         {{ $item->title }}@if(!$loop->last),@endif
@@ -67,7 +69,9 @@
                                     @endcan
                                     <b class="number">{{ $member->money ?? '∞' }}</b>
                                 </td>
-                                <td>{{ $member->convoys }}</td>
+                                <td @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0) class="text-danger font-weight-bold" @endif>
+                                    {{ $member->convoys }}
+                                </td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td class="plate-img p-0"><img src="{{ $member->plate }}"></td>

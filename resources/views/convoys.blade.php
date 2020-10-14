@@ -99,7 +99,7 @@
 
         @if($convoy->dlc)
             <section>
-                <h4 class="mt-5 text-center"><i class="fas fa-exclamation-triangle text-danger"></i> Для участия требуется DLC {{ implode(', ', $convoy->dlc) }}</h4>
+                <h4 class="mt-5 text-center"><i class="fas fa-exclamation-triangle text-warning"></i> Для участия требуется DLC {{ implode(', ', $convoy->dlc) }}</h4>
             </section>
         @endif
 

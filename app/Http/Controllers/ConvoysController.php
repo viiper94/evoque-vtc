@@ -291,7 +291,7 @@ class ConvoysController extends Controller{
                 redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        return view('evoque.convoys.tab.edit', [
+        return view('evoque.convoys.tab.accept', [
             'tab' => $tab,
             'members' => Member::where('visible', '1')->get()
         ]);

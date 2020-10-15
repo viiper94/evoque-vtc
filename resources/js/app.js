@@ -70,7 +70,7 @@ $(document).ready(function(){
     });
 
     $('#add-convoy-img').click(function(){
-        if($('input[id^=route-]').length >= 4){
+        if($('input[id^=route-]').length >= 6){
             $(this).html('<i class="fas fa-times"></i> Угомонись уже, хватит!');
             return false;
         }

@@ -18,7 +18,11 @@
 
     <div class="container pt-5 pb-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary text-center">Подать скрин TAB</h2>
+        @if($tab->screenshot)
+            <h2 class="mt-3 text-primary text-center">Редактирование скрин TAB</h2>
+        @else
+            <h2 class="mt-3 text-primary text-center">Подать скрин TAB</h2>
+        @endif
         <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
@@ -57,7 +61,7 @@
                     <input type="file" class="custom-file-input uploader" id="screenshot" name="screenshot" accept="image/*">
                     <label class="custom-file-label" for="screenshot">Выберите скрин</label>
                 </div>
-                <img src="/images/convoys/tab/{{ $tab->screenshot ?? 'image-placeholder.jpg' }}" alt="Скрин TAB" class="w-100" id=" screenshot-preview">
+                <img src="/images/convoys/tab/{{ $tab->screenshot ?? 'image-placeholder.jpg' }}" alt="Скрин TAB" class="w-100" id="screenshot-preview">
             </div>
             <div class="row justify-content-center">
                 <button class="btn btn-outline-warning btn-lg" type="submit"><i class="fas fa-save"></i> Сохранить</button>

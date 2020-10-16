@@ -70,7 +70,7 @@ $(document).ready(function(){
     });
 
     $('#add-convoy-img').click(function(){
-        if($('input[id^=route-]').length >= 4){
+        if($('input[id^=route-]').length >= 6){
             $(this).html('<i class="fas fa-times"></i> Угомонись уже, хватит!');
             return false;
         }
@@ -83,13 +83,46 @@ $(document).ready(function(){
     });
 
     $('#delete-convoy-img').click(function(){
-        $('.route-images .form-group').remove();
-        let index = 0;
-        $('#add-convoy-img').data('index', index).html('<i class="fas fa-plus"></i> Еще картинку');
-        let template = $('#'+$(this).data('target')+'_template').html().replace(/%i%/g, index).replace('Еще одно ', '');
-        $('#add-convoy-img').before(template);
-        bsCustomFileInput.init();
-        return true;
+        if(confirm('Очистить все слоты для изображений?')){
+            $('.route-images .form-group').remove();
+            let index = 0;
+            $('#add-convoy-img').data('index', index).html('<i class="fas fa-plus"></i> Еще картинку');
+            let template = $('#' + $(this).data('target') + '_template').html().replace(/%i%/g, index).replace('Еще одно ', '');
+            $('#add-convoy-img').before(template);
+            bsCustomFileInput.init();
+            return true;
+        }
+        return false;
+    });
+
+    $('.delete-img').click(function(){
+        if(confirm('Удалить изображение?')){
+            let button = $(this);
+            $.ajax({
+                cache: false,
+                dataType : 'json',
+                type : 'POST',
+                data : {
+                    '_token' : $('form [name=_token]').val(),
+                    'target' : button.data('target'),
+                    'action' : 'remove_img'
+                },
+                beforeSend : function(){
+                    button.after(getPreloaderHtml());
+                },
+                success : function(response){
+                    if(response.status != 'OK') console.log(response);
+                    else{
+                        $(button.data('target')).val('');
+                        $('#'+button.data('target')+'-preview').attr('src', '/images/convoys/image-placeholder.jpg');
+                    }
+                },
+                complete : function(){
+                    $('.spinner-border').remove();
+                }
+            });
+        }
+        return false;
     });
 
 });

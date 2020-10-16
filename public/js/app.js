@@ -13905,7 +13905,7 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     readURL(this, '#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).attr('id') + '-preview');
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').click(function () {
-    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[id^=route-]').length >= 4) {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[id^=route-]').length >= 6) {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).html('<i class="fas fa-times"></i> Угомонись уже, хватит!');
       return false;
     }
@@ -13918,13 +13918,46 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     return true;
   });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#delete-convoy-img').click(function () {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.route-images .form-group').remove();
-    var index = 0;
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').data('index', index).html('<i class="fas fa-plus"></i> Еще картинку');
-    var template = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target') + '_template').html().replace(/%i%/g, index).replace('Еще одно ', '');
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').before(template);
-    bs_custom_file_input__WEBPACK_IMPORTED_MODULE_1___default.a.init();
-    return true;
+    if (confirm('Очистить все слоты для изображений?')) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.route-images .form-group').remove();
+      var index = 0;
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').data('index', index).html('<i class="fas fa-plus"></i> Еще картинку');
+      var template = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target') + '_template').html().replace(/%i%/g, index).replace('Еще одно ', '');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add-convoy-img').before(template);
+      bs_custom_file_input__WEBPACK_IMPORTED_MODULE_1___default.a.init();
+      return true;
+    }
+
+    return false;
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.delete-img').click(function () {
+    if (confirm('Удалить изображение?')) {
+      var button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+        cache: false,
+        dataType: 'json',
+        type: 'POST',
+        data: {
+          '_token': jquery__WEBPACK_IMPORTED_MODULE_0___default()('form [name=_token]').val(),
+          'target': button.data('target'),
+          'action': 'remove_img'
+        },
+        beforeSend: function beforeSend() {
+          button.after(getPreloaderHtml());
+        },
+        success: function success(response) {
+          if (response.status != 'OK') console.log(response);else {
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(button.data('target')).val('');
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + button.data('target') + '-preview').attr('src', '/images/convoys/image-placeholder.jpg');
+          }
+        },
+        complete: function complete() {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.spinner-border').remove();
+        }
+      });
+    }
+
+    return false;
   });
 });
 

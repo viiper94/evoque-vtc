@@ -68,14 +68,14 @@
                         @endif
                         <div class="form-group">
                             <div class="custom-file custom-file-dark mb-3">
-                                <input type="file" class="custom-file-input uploader" id="route-{{ $index }}" name="route[]" accept="image/*">
+                                <input type="file" class="custom-file-input uploader" id="route-{{ $index }}" name="route[{{ $index }}]" accept="image/*">
                                 <label class="custom-file-label" for="route-{{ $index }}">Изображение маршрута</label>
                             </div>
                             <img src="/images/convoys/{{ $image ?? "image-placeholder.jpg" }}" class="w-100" id="route-{{ $index }}-preview">
                         </div>
                     @endforeach
                     <button type="button" class="btn btn-sm btn-outline-warning" id="add-convoy-img" data-target="route_images" data-index="{{ $image_index ?? 0 }}"><i class="fas fa-plus"></i> Еще картинку</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" id="delete-convoy-img" data-target="route_images" onclick="return confirm('Удалить все картинки?')"><i class="fas fa-trash"></i> Удалить все картинки</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" id="delete-convoy-img" data-target="route_images"><i class="fas fa-trash"></i> Очистить все слоты</button>
                 </div>
                 <div class="col-md-7">
                     <div class="form-row">
@@ -177,7 +177,7 @@
             <h3 class="text-primary mt-5">Тягач</h3>
             <div class="row">
                 <div class="col-md-5">
-                    <div class="form-group">
+                    <div class="form-group truck_image">
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input uploader" id="truck_image" name="truck_image" accept="image/*">
                             <label class="custom-file-label" for="truck_image">Изображение тягача</label>
@@ -187,6 +187,7 @@
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif
                     </div>
+                    <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="truck_image"><i class="fas fa-trash"></i> Удалить картинку</button>
                 </div>
                 <div class="col-md-7">
                     <div class="custom-control custom-checkbox mb-2">
@@ -218,7 +219,7 @@
             <h3 class="text-primary mt-5">Прицеп (основной)</h3>
             <div class="row">
                 <div class="col-md-5">
-                    <div class="form-group">
+                    <div class="form-group trailer_image">
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input uploader" id="trailer_image" name="trailer_image" accept="image/*">
                             <label class="custom-file-label" for="trailer_image">Изображение прицепа</label>
@@ -228,6 +229,7 @@
                             <small class="form-text">{{ $errors->first('trailer_image') }}</small>
                         @endif
                     </div>
+                    <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>
                 <div class="col-md-7">
                     <div class="custom-control custom-checkbox mb-2">
@@ -266,7 +268,7 @@
             <h3 class="text-primary mt-5">Прицеп (без ДЛС)</h3>
             <div class="row">
                 <div class="col-md-5">
-                    <div class="form-group">
+                    <div class="form-group alt_trailer_image">
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input uploader" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
                             <label class="custom-file-label" for="alt_trailer_image">Изображение прицепа</label>
@@ -276,6 +278,7 @@
                             <small class="form-text">{{ $errors->first('alt_trailer_image') }}</small>
                         @endif
                     </div>
+                    <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="alt_trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>
                 <div class="col-md-7">
                     <div class="form-group">
@@ -344,7 +347,7 @@
     <script type="text/html" id="route_images_template">
         <div class="form-group">
             <div class="custom-file custom-file-dark mb-3">
-                <input type="file" class="custom-file-input uploader" id="route-%i%" name="route[]" accept="image/*">
+                <input type="file" class="custom-file-input uploader" id="route-%i%" name="route[%i%]" accept="image/*">
                 <label class="custom-file-label" for="route-%i%">Еще одно изображение маршрута</label>
             </div>
             <img src="/images/convoys/image-placeholder.jpg" class="w-100" id="route-%i%-preview">

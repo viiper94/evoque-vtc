@@ -152,11 +152,18 @@ class ConvoysController extends Controller{
 
     public function edit(Request $request, $id){
         if(Gate::denies('manage_convoys')) abort(403);
+        $convoy = Convoy::findOrFail($id);
+        if($request->ajax() && $request->input('action') == 'remove_img'){
+            $attr = $request->input('target');
+            $convoy->$attr = null;
+            return response()->json([
+                'status' => $convoy->save() ? 'OK' : 'Failed'
+            ]);
+        }
         if($request->post()){
             $this->validate($request, $this->attributes_validation);
             // TODO filter photo links
             // TODO Multiple route images
-            $convoy = Convoy::findOrFail($id);
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
             $convoy->public = $request->input('public') === 'on';
@@ -164,9 +171,10 @@ class ConvoysController extends Controller{
             $convoy->trailer_public = $request->input('trailer_public') === 'on';
             foreach($request->files as $key => $file){
                 if($key === 'route' && is_array($file)){
-                    $route_images = array();
-                    foreach($file as $i => $route){
-                        $route_images[] = $this->saveImage($route);
+                    $arr = array_values($file);
+                    $route_images = $convoy->route;
+                    foreach($file as $i => $image){
+                        $route_images[$i] = $this->saveImage($image);
                     }
                     $convoy->route = $route_images;
                 }else{
@@ -181,7 +189,7 @@ class ConvoysController extends Controller{
         $tmp = new Client();
         $servers = $tmp->servers()->get();
         return view('evoque.convoys.edit', [
-            'convoy' => Convoy::findOrFail($id),
+            'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::all(),
             'dlc' => $this->dlcList

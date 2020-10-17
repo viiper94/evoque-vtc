@@ -42,6 +42,10 @@ class Member extends Model implements Auditable{
         return $this->belongsToMany('App\Role', 'role_member');
     }
 
+    public function stats(){
+        return $this->hasMany('App\RpStats');
+    }
+
     public function stat(){
         return $this->hasOne('App\RpStats');
     }

@@ -69,7 +69,7 @@ class RpController extends Controller{
                 'weight' => 'required|numeric',
                 'level' => 'required|numeric',
             ]);
-            $stat = RpStats::where('member_id', $report->member_id)->first();
+            $stat = RpStats::where(['member_id' => $report->member_id, 'game' => $report->game])->first();
             if(is_null($stat)){
                 $stat = new RpStats();
                 $stat->member_id = $report->member_id;
@@ -78,14 +78,33 @@ class RpController extends Controller{
             $stat->weight += $request->input('weight');
             $stat->bonus += $request->input('bonus');
             $stat->level = $request->input('level');
+            $stat->game = $report->game;
             $stat->quantity += 1;
             $report->status = true;
-            if($stat->save() && $report->save()) return redirect()->route('evoque.rp')->with(['success' => 'Отчёт принят!']);
+            if($stat->save() && $report->save()) return redirect()->route('evoque.rp', $report->game)->with(['success' => 'Отчёт принят!']);
             return redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.rp.accept', [
             'report' => $report
         ]);
+    }
+
+    public function editStat(Request $request, $id){
+        $stat = RpStats::findOrFail($id);
+        $this->validate($request, [
+            'distance' => 'nullable|numeric',
+            'level' => 'nullable|numeric',
+            'bonus' => 'nullable|numeric',
+            'weight' => 'nullable|numeric',
+            'distance_total' => 'nullable|numeric',
+            'weight_total' => 'nullable|numeric',
+            'quantity' => 'nullable|numeric',
+            'quantity_total' => 'nullable|numeric',
+        ]);
+        $stat->fill($request->post());
+        return $stat->save() ?
+            redirect()->back()->with(['success' => 'Статистика успешно отредактирована!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

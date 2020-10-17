@@ -118,7 +118,97 @@
                 @endif
             </div>
         </form>
-        <div class="member-changelog">
+        <div class="member-rp-stat mt-5">
+            <h3 class="mt-3 text-primary">Редактирование статистики рейтинговых перевозок</h3>
+            <div class="row">
+                @foreach($member->stats as $stat)
+                    <div class="col-md-{{ count($member->stats) > 1 ? '6' : '12' }} ets2">
+                        <h5>{{ strtoupper($stat->game) }}</h5>
+                        <h5>Всего</h5>
+                        <form method="post" action="{{ route('evoque.rp.stat.edit', $stat->id) }}" class="row">
+                            @csrf
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="distance_total">Пройденное расстояние, км</label>
+                                    <input type="number" class="form-control" id="distance_total" name="distance_total" value="{{ $stat->distance_total }}" autocomplete="off">
+                                    @if($errors->has('distance_total'))
+                                        <small class="form-text">{{ $errors->first('distance_total') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="weight_total">Тоннаж, т</label>
+                                    <input type="number" class="form-control" id="weight_total" name="weight_total" value="{{ $stat->weight_total }}" autocomplete="off">
+                                    @if($errors->has('weight_total'))
+                                        <small class="form-text">{{ $errors->first('weight_total') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="quantity_total">Кол-во грузов</label>
+                                    <input type="number" class="form-control" id="quantity_total" name="quantity_total" value="{{ $stat->quantity_total }}" autocomplete="off">
+                                    @if($errors->has('quantity_total'))
+                                        <small class="form-text">{{ $errors->first('quantity_total') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="level">Уровень в игре</label>
+                                    <input type="number" class="form-control" id="level" name="level" value="{{ $stat->level }}" autocomplete="off">
+                                    @if($errors->has('level'))
+                                        <small class="form-text">{{ $errors->first('level') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <h5 class="col-12">За неделю</h5>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="distance">Пройденное расстояние, км</label>
+                                    <input type="number" class="form-control" id="distance" name="distance" value="{{ $stat->distance }}" autocomplete="off">
+                                    @if($errors->has('distance'))
+                                        <small class="form-text">{{ $errors->first('distance') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="weight">Тоннаж, т</label>
+                                    <input type="number" class="form-control" id="weight" name="weight" value="{{ $stat->weight }}" autocomplete="off">
+                                    @if($errors->has('weight'))
+                                        <small class="form-text">{{ $errors->first('weight') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="quantity">Кол-во грузов</label>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $stat->quantity }}" autocomplete="off">
+                                    @if($errors->has('quantity'))
+                                        <small class="form-text">{{ $errors->first('quantity') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bonus">Бонус</label>
+                                    <input type="number" class="form-control" id="bonus" name="bonus" value="{{ $stat->bonus }}" autocomplete="off">
+                                    @if($errors->has('bonus'))
+                                        <small class="form-text">{{ $errors->first('bonus') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-outline-warning"><i class="fas fa-save"></i> Сохранить статистику по {{ strtoupper($stat->game) }}</button>
+                            </div>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="member-changelog mt-5">
             @if(count($member->audits) > 0)
                 <h3 class="text-primary">История изменений</h3>
                 @foreach($member->audits as $item)

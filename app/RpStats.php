@@ -11,7 +11,11 @@ class RpStats extends Model{
         'distance',
         'level',
         'bonus',
-        'weight'
+        'weight',
+        'distance_total',
+        'weight_total',
+        'quantity',
+        'quantity_total',
     ];
 
     public function member(){

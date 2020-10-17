@@ -50,7 +50,7 @@ class MembersController extends Controller{
         return view('evoque.members.edit', [
             'member' => Member::with(['role', 'user', 'audits' => function($query){
                 $query->limit(10)->orderBy('created_at', 'desc');
-            }, 'audits.user.member'])->where('id', $id)->first(),
+            }, 'audits.user.member', 'stats'])->where('id', $id)->first(),
             'roles' => Role::all()
         ]);
     }

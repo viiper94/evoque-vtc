@@ -45,6 +45,7 @@ Route::any('/evoque/rp/reports/reset', 'RpController@reset')->name('evoque.rp.re
 Route::any('/evoque/rp/reports/accept/{id}', 'RpController@acceptReport')->name('evoque.rp.reports.accept');
 Route::get('/evoque/rp/reports/delete/{id}', 'RpController@deleteReport')->name('evoque.rp.reports.delete');
 Route::any('/evoque/rp/reports/edit/{id}', 'RpController@editReport')->name('evoque.rp.reports.edit');
+Route::any('/evoque/rp/reports/stat/{id}', 'RpController@editStat')->name('evoque.rp.stat.edit');
 Route::get('/evoque/rp/{game?}', 'RpController@index')->name('evoque.rp');
 
 Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');

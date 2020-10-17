@@ -24,7 +24,7 @@
                         <a class="nav-link" href="{{ route('members') }}">Команда</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Жалоба на водителя</a>
+                        <a class="nav-link" href="https://truckersmp.com/reports/create" target="_blank">Жалоба на водителя</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('convoys', 'public') }}">Открытый конвой</a>

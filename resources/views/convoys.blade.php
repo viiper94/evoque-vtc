@@ -4,10 +4,10 @@
     Открытый конвой @lang('general.vtc_evoque')
 @endsection
 
-{{--@section('assets')--}}
-{{--    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">--}}
-{{--    <script src="/js/fotorama-4.6.4/fotorama.js"></script>--}}
-{{--@endsection--}}
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
+    <script src="/js/fotorama-4.6.4/fotorama.js"></script>
+@endsection
 
 @section('content')
 
@@ -86,14 +86,14 @@
                 </ul>
             </section>
             <section class="route col-md-6 col-sm-12">
-{{--                <div class="fotorama w-100 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">--}}
-{{--                    @foreach($convoy->route as $item)--}}
-{{--                        <img src="/images/convoys/{{ $item }}">--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-                @foreach($convoy->route as $item)
-                    <a href="/images/convoys/{{ $item }}" target="_blank"><img src="/images/convoys/{{ $item }}" class="text-shadow-m"></a>
-                @endforeach
+                <div class="fotorama w-100 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
+                    @foreach($convoy->route as $item)
+                        <img src="/images/convoys/{{ $item }}">
+                    @endforeach
+                </div>
+{{--                @foreach($convoy->route as $item)--}}
+{{--                    <a href="/images/convoys/{{ $item }}" target="_blank"><img src="/images/convoys/{{ $item }}" class="text-shadow-m"></a>--}}
+{{--                @endforeach--}}
             </section>
         </div>
 

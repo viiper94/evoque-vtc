@@ -31,11 +31,11 @@
             @csrf
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="public" name="public" @if($convoy->public) checked @endif>
-                <label class="custom-control-label" for="public">Открытый конвой</label>
+                <label class="custom-control-label" for="public">Наш открытый конвой (виден всем)</label>
             </div>
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($convoy->visible) checked @endif>
-                <label class="custom-control-label" for="visible">Виден на сайте</label>
+                <label class="custom-control-label" for="visible">Опубликовать для сотрудников</label>
             </div>
             <div class="form-group">
                 <label for="nickname">Название</label>

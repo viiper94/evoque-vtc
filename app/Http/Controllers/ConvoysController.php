@@ -60,6 +60,8 @@ class ConvoysController extends Controller{
             'Beyond The Baltic Sea',
             'Road To The Black Sea',
             'Iberia',
+            'High Power Cargo Pack',
+            'Heavy Cargo Pack'
         ],
         'ats' => [
             'New Mexico',
@@ -68,6 +70,7 @@ class ConvoysController extends Controller{
             'Utah',
             'Idaho',
             'Colorado',
+            'Heavy Cargo Pack'
         ]
     ];
 
@@ -96,7 +99,6 @@ class ConvoysController extends Controller{
             $grouped = array();
             foreach($convoys as $convoy){
                 $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
-                if(count($grouped) >= 5) break;
             }
             return view('evoque.convoys.private', [
                 'grouped' => array_reverse($grouped)
@@ -175,10 +177,8 @@ class ConvoysController extends Controller{
             $convoy->trailer_public = $request->input('trailer_public') === 'on';
             foreach($request->files as $key => $file){
                 if($key === 'route' && is_array($file)){
-                    $arr = array_values($file);
-                    $route_images = $convoy->route;
-                    foreach($file as $i => $image){
-                        $route_images[$i] = $this->saveImage($image);
+                    foreach($file as $image){
+                        $route_images[] = $this->saveImage($image);
                     }
                     $convoy->route = $route_images;
                 }else{

@@ -213,17 +213,17 @@
 {{--                                </div>--}}
 {{--                            </li>--}}
 {{--                        @endif--}}
-{{--                        @if(isset($convoy->cargo))--}}
-{{--                            <li class="row justify-content-end">--}}
-{{--                                <div class="mr-4 mb-4">--}}
-{{--                                    <p>Груз:</p>--}}
-{{--                                    <h4>{{ $convoy->cargo }}</h4>--}}
-{{--                                </div>--}}
-{{--                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">--}}
-{{--                                    <i class="fas fa-truck-loading"></i>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                        @endif--}}
+                        @if(isset($convoy->cargo))
+                            <li class="row justify-content-end">
+                                <div class="mr-4 mb-4">
+                                    <p>Груз:</p>
+                                    <h4>{{ $convoy->cargo }}</h4>
+                                </div>
+                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">
+                                    <i class="fas fa-truck-loading"></i>
+                                </div>
+                            </li>
+                        @endif
                     </ul>
                 </section>
                 <section class="route col-md-6 col-sm-12">

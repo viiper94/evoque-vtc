@@ -17687,10 +17687,6 @@ ul.rules .blockquote p strong {
   color: #e4c501;
 }
 
-.private-convoys .convoy-info > div:first-child {
-  border-right: 1px solid #e4c501;
-}
-
 .private-convoys .convoy-info img {
   width: 100%;
 }

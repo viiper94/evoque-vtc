@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\Gate;
 
 class RpController extends Controller{
 
+    private $stages = [
+        'ets2' => [
+            20000,
+            40000,
+            75000,
+            120000,
+            200000,
+            200000,
+            320000,
+            450000,
+            700000,
+        ],
+        'ats' => [
+
+        ],
+    ];
+
     public function index($game = 'ets2'){
         if(Auth::guest()) abort(404);
         return view('evoque.rp.index', [

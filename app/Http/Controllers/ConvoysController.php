@@ -103,7 +103,11 @@ class ConvoysController extends Controller{
             ]);
         }else{
             return view('convoys', [
-                'convoy' => Convoy::where(['visible' => '1', 'public' => '1'])->first()
+                'convoy' => Convoy::where([
+                    ['visible', '=', '1'],
+                    ['public', '=', '1'],
+                    ['start_time', '>', Carbon::now()->subMinutes(45)->format('Y-m-d H:i')]
+                ])->orderBy('start_time')->first()
             ]);
         }
     }

@@ -12,6 +12,8 @@
 @section('assets')
     <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
     <script src="/js/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
+    <script src="/js/fotorama-4.6.4/fotorama.js"></script>
 @endsection
 
 @section('content')
@@ -62,19 +64,23 @@
             <h3 class="text-primary">Маршрут</h3>
             <div class="row">
                 <div class="col-md-5 route-images">
-                    @foreach($convoy->route as $index => $image)
-                        @if($loop->last)
-                            @php $image_index = $index @endphp
-                        @endif
-                        <div class="form-group">
-                            <div class="custom-file custom-file-dark mb-3">
-                                <input type="file" class="custom-file-input uploader" id="route-{{ $index }}" name="route[{{ $index }}]" accept="image/*">
-                                <label class="custom-file-label" for="route-{{ $index }}">Изображение маршрута</label>
-                            </div>
-                            <img src="/images/convoys/{{ $image ?? "image-placeholder.jpg" }}" class="w-100" id="route-{{ $index }}-preview">
+                    @if($convoy->route)
+                        <h6>{{ trans_choice('Текущее изображение|Текущие изображения', $convoy->route) }}</h6>
+                        <div class="fotorama mb-3 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
+                            @foreach($convoy->route as $item)
+                                <img src="/images/convoys/{{ $item }}" class="w-100">
+                            @endforeach
                         </div>
-                    @endforeach
-                    <button type="button" class="btn btn-sm btn-outline-warning" id="add-convoy-img" data-target="route_images" data-index="{{ $image_index ?? 0 }}"><i class="fas fa-plus"></i> Еще картинку</button>
+                    @endif
+                    <div class="form-group">
+                        <h6>Новые изображения</h6>
+                        <div class="custom-file custom-file-dark mb-3">
+                            <input type="file" class="custom-file-input uploader" id="route-0" name="route[]" accept="image/*">
+                            <label class="custom-file-label" for="route-0">{{ $convoy->route ? 'Загрузить новое изображение' : 'Изображение маршрута' }}</label>
+                        </div>
+                        <img src="/images/convoys/image-placeholder.jpg" class="w-100" id="route-0-preview">
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-warning" id="add-convoy-img" data-target="route_images" data-index="0"><i class="fas fa-plus"></i> Еще картинку</button>
                     <button type="button" class="btn btn-sm btn-outline-danger" id="delete-convoy-img" data-target="route_images"><i class="fas fa-trash"></i> Очистить все слоты</button>
                 </div>
                 <div class="col-md-7">
@@ -128,12 +134,13 @@
                     </div>
                     <div class="form-group">
                         <label for="dlc">Необходимые ДЛС (удерживать Ctrl для выбора нескольких)</label>
-                        <select class="form-control" size="10" name="dlc[]" id="dlc" multiple>
+                        <select class="form-control" size="20" name="dlc[]" id="dlc" multiple>
                             @foreach($dlc as $game => $list)
                                 <option disabled>{{ strtoupper($game) }}</option>
                                 @foreach($list as $item)
                                     <option value="{{ $item }}" @if(is_array($convoy->dlc) && in_array($item, $convoy->dlc)) selected @endif>{{ $item }}</option>
                                 @endforeach
+                                <option disabled></option>
                             @endforeach
                         </select>
                         @if($errors->has('dlc'))
@@ -202,14 +209,14 @@
                     </div>
                     <div class="form-group">
                         <label for="truck_tuning">Тюнинг</label>
-                        <input type="text" class="form-control" id="truck_tuning" name="truck_tuning" value="{{ $convoy->truck_tuning }}">
+                        <input type="text" class="form-control" id="truck_tuning" name="truck_tuning" value="{{ $convoy->truck_tuning }}" placeholder="Не обязательно">
                         @if($errors->has('truck_tuning'))
                             <small class="form-text">{{ $errors->first('truck_tuning') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="truck_paint">Окрас</label>
-                        <input type="text" class="form-control" id="truck_paint" name="truck_paint" value="{{ $convoy->truck_paint }}">
+                        <input type="text" class="form-control" id="truck_paint" name="truck_paint" value="{{ $convoy->truck_paint }}" placeholder="Не обязательно">
                         @if($errors->has('truck_paint'))
                             <small class="form-text">{{ $errors->first('truck_paint') }}</small>
                         @endif
@@ -244,21 +251,21 @@
                     </div>
                     <div class="form-group">
                         <label for="trailer_tuning">Тюнинг</label>
-                        <input type="text" class="form-control" id="trailer_tuning" name="trailer_tuning" value="{{ $convoy->trailer_tuning }}">
+                        <input type="text" class="form-control" id="trailer_tuning" name="trailer_tuning" value="{{ $convoy->trailer_tuning }}" placeholder="Не обязательно">
                         @if($errors->has('trailer_tuning'))
                             <small class="form-text">{{ $errors->first('trailer_tuning') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="trailer_paint">Окрас</label>
-                        <input type="text" class="form-control" id="trailer_paint" name="trailer_paint" value="{{ $convoy->trailer_paint }}">
+                        <input type="text" class="form-control" id="trailer_paint" name="trailer_paint" value="{{ $convoy->trailer_paint }}" placeholder="Не обязательно">
                         @if($errors->has('trailer_paint'))
                             <small class="form-text">{{ $errors->first('trailer_paint') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="cargo">Груз</label>
-                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{ $convoy->cargo }}">
+                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{ $convoy->cargo }}" placeholder="Не обязательно">
                         @if($errors->has('cargo'))
                             <small class="form-text">{{ $errors->first('cargo') }}</small>
                         @endif
@@ -282,28 +289,28 @@
                 </div>
                 <div class="col-md-7">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="alt_trailer" name="alt_trailer" value="{{ $convoy->alt_trailer }}" placeholder="Тип">
+                        <input type="text" class="form-control" id="alt_trailer" name="alt_trailer" value="{{ $convoy->alt_trailer }}" placeholder="Тип, не обязательно">
                         @if($errors->has('alt_trailer'))
                             <small class="form-text">{{ $errors->first('alt_trailer') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="alt_trailer_tuning">Тюнинг</label>
-                        <input type="text" class="form-control" id="alt_trailer_tuning" name="alt_trailer_tuning" value="{{ $convoy->alt_trailer_tuning }}">
+                        <input type="text" class="form-control" id="alt_trailer_tuning" name="alt_trailer_tuning" value="{{ $convoy->alt_trailer_tuning }}" placeholder="Не обязательно">
                         @if($errors->has('alt_trailer_tuning'))
                             <small class="form-text">{{ $errors->first('alt_trailer_tuning') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="alt_trailer_paint">Окрас</label>
-                        <input type="text" class="form-control" id="alt_trailer_paint" name="alt_trailer_paint" value="{{ $convoy->alt_trailer_paint }}">
+                        <input type="text" class="form-control" id="alt_trailer_paint" name="alt_trailer_paint" value="{{ $convoy->alt_trailer_paint }}" placeholder="Не обязательно">
                         @if($errors->has('alt_trailer_paint'))
                             <small class="form-text">{{ $errors->first('alt_trailer_paint') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="alt_cargo">Груз</label>
-                        <input type="text" class="form-control" id="alt_cargo" name="alt_cargo" value="{{ $convoy->alt_cargo }}">
+                        <input type="text" class="form-control" id="alt_cargo" name="alt_cargo" value="{{ $convoy->alt_cargo }}" placeholder="Не обязательно">
                         @if($errors->has('alt_cargo'))
                             <small class="form-text">{{ $errors->first('alt_cargo') }}</small>
                         @endif

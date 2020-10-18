@@ -113,11 +113,11 @@
             </div>
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="have_mic" name="have_mic" @if(old('have_mic')) checked @endif>
-                <label class="custom-control-label" for="have_mic">Микрофон</label>
+                <label class="custom-control-label" for="have_mic">Есть микрофон</label>
             </div>
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="have_ts3" name="have_ts3" @if(old('have_ts3')) checked @endif>
-                <label class="custom-control-label" for="have_ts3">TeamSpeak 3</label>
+                <label class="custom-control-label" for="have_ts3">Есть Discord</label>
             </div>
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="have_ats" name="have_ats" @if(old('have_ats')) checked @endif>

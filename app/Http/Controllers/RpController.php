@@ -42,8 +42,10 @@ class RpController extends Controller{
 
     public function reports(){
         if(Auth::guest()) abort(404);
+        $reports = RpReport::with('member');
+        if(Gate::denies('manage_rp')) $reports->where('member_id', Auth::user()->member->id);
         return view('evoque.rp.reports', [
-            'reports' => RpReport::with('member')->orderBy('created_at', 'desc')->paginate(10)
+            'reports' => $reports->orderBy('created_at', 'desc')->paginate(10)
         ]);
     }
 
@@ -72,9 +74,18 @@ class RpController extends Controller{
                 redirect()->route('evoque.rp.reports')->with(['success' => 'Отчёт успешно отправлен на модерацию!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        return view('evoque.rp.edit', [
+        return view('evoque.rp.add', [
             'report' => $report
         ]);
+    }
+
+    public function deleteReport(Request $request, $id){
+        $report = RpReport::findOrFail($id);
+        if(Gate::denies('admin') && (Gate::denies('do_rp') || $report->member_id != Auth::user()->member->id)) abort(403);
+        $report->deleteImages(public_path('/images/rp/'));
+        return $report->delete() ?
+            redirect()->route('evoque.rp.reports')->with(['success' => 'Отчёт успешно удалён!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
     public function acceptReport(Request $request, $id){
@@ -107,6 +118,7 @@ class RpController extends Controller{
     }
 
     public function editStat(Request $request, $id){
+        if(Gate::denies('manage_rp')) abort(403);
         $stat = RpStats::findOrFail($id);
         $this->validate($request, [
             'distance' => 'nullable|numeric',

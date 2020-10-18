@@ -168,14 +168,14 @@ class ConvoysController extends Controller{
         }
         if($request->post()){
             $this->validate($request, $this->attributes_validation);
-            // TODO filter photo links
-            // TODO Multiple route images
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
             $convoy->public = $request->input('public') === 'on';
             $convoy->truck_public = $request->input('truck_public') === 'on';
             $convoy->trailer_public = $request->input('trailer_public') === 'on';
+
             foreach($request->files as $key => $file){
+                $convoy->deleteImages(public_path('/images/convoys/'), [$key]);
                 if($key === 'route' && is_array($file)){
                     foreach($file as $image){
                         $route_images[] = $this->saveImage($image);
@@ -185,6 +185,7 @@ class ConvoysController extends Controller{
                     $convoy->$key = $this->saveImage($file);
                 }
             }
+
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             return $convoy->save() ?
                 redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
@@ -203,14 +204,11 @@ class ConvoysController extends Controller{
     public function delete(Request $request, $id){
         if(Gate::denies('manage_convoys')) abort(403);
         $convoy = Convoy::findOrFail($id);
-        // TODO deleting convoy images
+        $convoy->deleteImages(public_path('/images/convoys/'));
         return $convoy->delete() ?
             redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
-
-    // TODO Convoys screen TAB system
-    // TODO Convoy plans page
 
     private function saveImage(UploadedFile $file, $path = '/images/convoys/'){
         $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();

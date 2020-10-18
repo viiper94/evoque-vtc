@@ -309,4 +309,19 @@ class Convoy extends Model{
         ];
     }
 
+    public function deleteImages($folder, $attr = ['route', 'truck_image', 'trailer_image', 'alt_trailer_image']){
+        if(in_array('route', $attr)){
+            foreach($this->route as $route){
+                $this->removeFile($folder.$route);
+            }
+        }
+        if(in_array('truck_image', $attr) && $this->truck_image) $this->removeFile($folder.$this->truck_image);
+        if(in_array('trailer_image', $attr) && $this->trailer_image) $this->removeFile($folder.$this->trailer_image);
+        if(in_array('alt_trailer_image', $attr) && $this->alt_trailer_image) $this->removeFile($folder.$this->alt_trailer_image);
+    }
+
+    private function removeFile($path){
+        return is_file($path) ? unlink($path) : false;
+    }
+
 }

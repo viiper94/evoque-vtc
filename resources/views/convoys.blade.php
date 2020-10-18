@@ -173,7 +173,10 @@
                     </ul>
                 </section>
                 <section class="route col-md-6 col-sm-12">
-                    <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->truck_image }}" class="text-shadow-m"></a>
+                    <div class="fotorama w-100 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
+                        <img src="/images/convoys/{{ $convoy->truck_image }}">
+                    </div>
+{{--                    <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank"></a>--}}
                 </section>
             </div>
         @endif
@@ -227,7 +230,10 @@
                     </ul>
                 </section>
                 <section class="route col-md-6 col-sm-12">
-                    <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" class="text-shadow-m"></a>
+                    <div class="fotorama w-100 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
+                        <img src="/images/convoys/{{ $convoy->trailer_image }}">
+                    </div>
+{{--                    <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" class="text-shadow-m"></a>--}}
                 </section>
             </div>
         @endif

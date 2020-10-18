@@ -43,14 +43,13 @@
                     </div>
                     @if(!$report->status)
                         <div class="card-actions">
-                            @if(\Illuminate\Support\Facades\Auth::user()->member->id === $report->member_id)
-                                <a href="{{ route('evoque.rp.reports.edit', $report->id) }}" class="my-1 btn btn-outline-warning"><i class="fas fa-edit"></i> Редактировать</a>
-                            @endif
                             @can('manage_rp')
                                 <a href="{{ route('evoque.rp.reports.accept', $report->id) }}" class="my-1 btn btn-outline-success"><i class="fas fa-edit"></i> Принять</a>
-                                <a href="{{ route('evoque.rp.reports.delete', $report->id) }}" class="my-1 btn btn-outline-danger"
-                                    onclick="return confirm('Удалить этот отчёт?')"><i class="fas fa-trash"></i> Отклонить и удалить</a>
                             @endcan
+                                @if(\Illuminate\Support\Facades\Auth::user()->member->id == $report->member_id || \Illuminate\Support\Facades\Gate::allows('manage_rp'))
+                                    <a href="{{ route('evoque.rp.reports.delete', $report->id) }}" class="my-1 btn btn-outline-danger"
+                                       onclick="return confirm('Удалить этот отчёт?')"><i class="fas fa-trash"></i> Удалить</a>
+                                @endif
                         </div>
                     @endif
                 </div>

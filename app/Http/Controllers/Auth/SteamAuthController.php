@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Member;
+use App\RpStats;
 use Carbon\Carbon;
 use Invisnik\LaravelSteamAuth\SteamAuth;
 use App\User;
@@ -103,6 +104,10 @@ class SteamAuthController extends Controller
         ]);
         $member->role()->attach('14');
         $member->save();
+        $member->stats()->saveMany([
+            new RpStats(['game' => 'ets2']),
+            new RpStats(['game' => 'ats']),
+        ]);
         return $user;
     }
 }

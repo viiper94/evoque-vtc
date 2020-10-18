@@ -42,7 +42,7 @@ class Controller extends BaseController{
             $application->referral = htmlentities(trim($request->input('referral')));
             $application->status = 0;
             return $application->save() ?
-                redirect()->route('home')->with(['success' => 'Заявка успешно подана!']) :
+                redirect()->route('apply')->with(['success' => 'Заявка успешно подана!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('apply');

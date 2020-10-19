@@ -16,7 +16,7 @@ class MembersController extends Controller{
         if(Auth::guest()) return redirect()->route('auth.steam');
         return view('evoque.members.index', [
             'roles' => Role::with(['members' => function($query){
-                $query->orderBy('sort', 'desc')->orderBy('scores', 'desc')->orderBy('join_date', 'asc');
+                $query->where('visible', 1)->orderBy('sort', 'desc')->orderBy('scores', 'desc')->orderBy('join_date', 'asc');
             }, 'members.user', 'members.role' => function($query){
                 $query->where('visible', '1');
             }])->where('visible', 1)->get()->groupBy('group')

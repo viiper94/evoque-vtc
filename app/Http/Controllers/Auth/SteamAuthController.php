@@ -63,7 +63,7 @@ class SteamAuthController extends Controller
                 $tmp_info= $tmp->player($steam_info->steamID64)->get();
 
                 if($tmp_info->getCompanyId() !== 11682){
-                    return redirect(route('home'))
+                    return redirect(route('apply'))
                         ->withErrors([trans('general.not_member')]);
                 }
 
@@ -81,33 +81,34 @@ class SteamAuthController extends Controller
      *
      * @param $steam_info
      * @param $tmp_info
-     * @return User
      */
     protected function findOrNewUser($steam_info, $tmp_info)
     {
-        $user = User::where('steamid64', $steam_info->steamID64)->first();
+        $user = User::with('member')->where('steamid64', $steam_info->steamID64)->first();
 
-        if (!is_null($user)) {
+        if(!is_null($user) && !is_null($user->member)){
+            return $user;
+        }else{
+            if(is_null($user)){
+                $user = User::create([
+                    'name' => $steam_info->realname,
+                    'image' => $steam_info->avatarfull,
+                    'steamid64' => $steam_info->steamID64,
+                    'truckersmp_id' => $tmp_info->getId()
+                ]);
+            }
+            $member = Member::create([
+                'user_id' => $user->id,
+                'nickname' => str_replace('[EVOQUE] ', '', $tmp_info->getName()),
+                'join_date' => Carbon::now(),
+            ]);
+            $member->role()->attach('14');
+            $member->save();
+            $member->stats()->saveMany([
+                new RpStats(['game' => 'ets2']),
+                new RpStats(['game' => 'ats']),
+            ]);
             return $user;
         }
-
-        $user = User::create([
-            'name' => $steam_info->realname,
-            'image' => $steam_info->avatarfull,
-            'steamid64' => $steam_info->steamID64,
-            'truckersmp_id' => $tmp_info->getId()
-        ]);
-        $member = Member::create([
-            'user_id' => $user->id,
-            'nickname' => str_replace('[EVOQUE] ', '', $tmp_info->getName()),
-            'join_date' => Carbon::now(),
-        ]);
-        $member->role()->attach('14');
-        $member->save();
-        $member->stats()->saveMany([
-            new RpStats(['game' => 'ets2']),
-            new RpStats(['game' => 'ats']),
-        ]);
-        return $user;
     }
 }

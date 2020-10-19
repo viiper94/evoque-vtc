@@ -83,8 +83,14 @@ class MembersController extends Controller{
                     'scores' => $member->save() ? $member->money : $money,
                     'status' => 'OK'
                 ]);
+            }elseif($request->input('target') === 'посещение'){
+                $convoys = $member->convoys;
+                $member->convoys += 1;
+                return response()->json([
+                    'scores' => $member->save() ? $member->convoys : $convoys,
+                    'status' => 'OK'
+                ]);
             }
-
         }
         return false;
     }

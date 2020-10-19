@@ -17747,8 +17747,10 @@ ul.rules .blockquote p strong {
 
 .members-table table td.member-scores .add-btn,
 .members-table table td.member-money .add-btn,
+.members-table table td.member-convoys .add-btn,
 .members-table table th.member-scores .add-btn,
-.members-table table th.member-money .add-btn {
+.members-table table th.member-money .add-btn,
+.members-table table th.member-convoys .add-btn {
   display: none;
   position: absolute;
   left: 5px;
@@ -17757,16 +17759,20 @@ ul.rules .blockquote p strong {
 
 .members-table table td.member-scores:hover .add-btn,
 .members-table table td.member-money:hover .add-btn,
+.members-table table td.member-convoys:hover .add-btn,
 .members-table table th.member-scores:hover .add-btn,
-.members-table table th.member-money:hover .add-btn {
+.members-table table th.member-money:hover .add-btn,
+.members-table table th.member-convoys:hover .add-btn {
   display: block;
   cursor: pointer;
 }
 
 .members-table table td.member-scores:hover .add-btn.disabled,
 .members-table table td.member-money:hover .add-btn.disabled,
+.members-table table td.member-convoys:hover .add-btn.disabled,
 .members-table table th.member-scores:hover .add-btn.disabled,
-.members-table table th.member-money:hover .add-btn.disabled {
+.members-table table th.member-money:hover .add-btn.disabled,
+.members-table table th.member-convoys:hover .add-btn.disabled {
   opacity: 0.1;
   cursor: default;
 }

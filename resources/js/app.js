@@ -26,7 +26,7 @@ $(document).ready(function(){
 
     $(document).on('click', 'td .add-btn:not(.disabled)', function(){
         let button = $(this);
-        if(confirm('Добавить '+ (button.data('target') === 'бал' ? '1 ' : '0.5 ') + button.data('target') +' для '+ button.data('nickname') +'?')){
+        if(confirm('Добавить '+ button.data('amount') + ' ' + button.data('target') +' для '+ button.data('nickname') +'?')){
             $.ajax({
                 cache: false,
                 dataType : 'json',

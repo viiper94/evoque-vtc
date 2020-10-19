@@ -52,7 +52,7 @@
                                 <td class="member-scores">
                                     @can('manage_table')
                                         @if($member->scores !== null)
-                                            <a class="add-btn text-shadow" data-target="бал" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                            <a class="add-btn text-shadow" data-amount="1" data-target="бал" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         @endif
@@ -62,15 +62,20 @@
                                 <td class="member-money">
                                     @can('manage_table')
                                         @if($member->money !== null)
-                                            <a class="add-btn text-shadow" data-target="эвика" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                            <a class="add-btn text-shadow" data-amount="0.5" data-target="эвика" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         @endif
                                     @endcan
                                     <b class="number">{{ $member->money ?? '∞' }}</b>
                                 </td>
-                                <td @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0) class="text-danger font-weight-bold" @endif>
-                                    {{ $member->convoys }}
+                                <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0)text-danger font-weight-bold @endif">
+                                    @can('manage_table')
+                                        <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    @endcan
+                                    <span class="number">{{ $member->convoys }}</span>
                                 </td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>

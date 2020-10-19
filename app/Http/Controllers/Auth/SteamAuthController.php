@@ -68,6 +68,10 @@ class SteamAuthController extends Controller
                 }
 
                 $user = $this->findOrNewUser($steam_info, $tmp_info);
+                if($user->member && !$user->member->visible)
+                    return redirect(route('apply'))
+                    ->withErrors([trans('general.not_visible_member')]);
+
                 Auth::login($user, true);
 
                 return redirect($this->redirectURL); // redirect to site

@@ -39,6 +39,8 @@
                         <td>
                             @if(!$user->member)
                                 <i class="fas fa-times"></i>
+                            @elseif(!$user->member->visible)
+                                <i class="icon-evoque text-danger"></i>
                             @else
                                 <i class="icon-evoque text-primary"></i>
                             @endif

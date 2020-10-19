@@ -93,7 +93,7 @@
                                     @isset($member->user->truckersmp_id)
                                         <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
                                     @endisset
-                                    @can('manage_members')
+                                    @can('manage_table')
                                         <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
                                     @endcan
                                 </td>

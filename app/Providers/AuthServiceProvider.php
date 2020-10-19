@@ -55,7 +55,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('manage_table', function($user){
             foreach($user->member->role as $role){
-                if($role->manage_table || $role->admin) return true;
+                if($role->manage_members || $role->manage_table || $role->admin) return true;
             }
             return false;
         });

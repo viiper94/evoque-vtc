@@ -24,7 +24,7 @@ class MembersController extends Controller{
     }
 
     public function edit(Request $request, $id){
-        if(Gate::denies('manage_members')) abort(403);
+        if(Gate::denies('manage_table')) abort(403);
         if($request->post()){
             $this->validate($request, [
                 'nickname' => 'required|string',
@@ -67,7 +67,7 @@ class MembersController extends Controller{
     }
 
     public function add(Request $request){
-        if($request->ajax()){
+        if($request->ajax() && Gate::allows('manage_table')){
             $member = Member::find($request->input('member'));
             if($request->input('target') === 'бал'){
                 $scores = $member->scores;
@@ -88,7 +88,5 @@ class MembersController extends Controller{
         }
         return false;
     }
-
-    // TODO Members history
 
 }

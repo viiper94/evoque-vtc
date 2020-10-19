@@ -24,10 +24,12 @@
                             <small class="form-text">{{ $errors->first('nickname') }}</small>
                         @endif
                     </div>
-                    <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($member->visible) checked @endif>
-                        <label class="custom-control-label" for="visible">Виден на сайте</label>
-                    </div>
+                    @can('manage_members')
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($member->visible) checked @endif>
+                            <label class="custom-control-label" for="visible">Виден на сайте (снять галочку, чтобы уволить с восстановлением)</label>
+                        </div>
+                    @endcan
                     <div class="form-group">
                         <label for="join_date">Дата присоединения</label>
                         <input type="text" class="form-control" id="join_date" name="join_date" value="{{ $member->join_date->format('d.m.Y') }}" autocomplete="off">
@@ -112,14 +114,14 @@
             </div>
             <div class="row justify-content-center">
                 <button type="submit" class="btn btn-outline-warning btn-lg"><i class="fas fa-save"></i> Сохранить</button>
-                @if(\Illuminate\Support\Facades\Auth::user()->id !== $member->user->id && Gate::forUser($member->user)->denies('admin'))
+                @if(\Illuminate\Support\Facades\Auth::user()->id !== $member->user->id && Gate::allows('manage_members'))
                     <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-danger ml-5"
                        onclick="return confirm('Уволить этого сотрудника?')"><i class="fas fa-user-times"></i> Уволить</a>
                 @endif
             </div>
         </form>
         @if(count($member->stats) > 0)
-            <div class="member-rp-stat mt-5">
+            <div class="member-rp-stat mb-5">
                 <h3 class="mt-3 text-primary">Редактирование статистики рейтинговых перевозок</h3>
                 <div class="row">
                     @foreach($member->stats as $stat)
@@ -211,7 +213,7 @@
             </div>
         @endif
         @if(count($member->audits) > 0)
-            <div class="member-changelog mt-5">
+            <div class="member-changelog mb-5">
                 <h3 class="text-primary">История изменений</h3>
                 @foreach($member->audits as $item)
                     <div class="changelog-item mb-3 table-responsive">

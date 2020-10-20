@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-
+{{--@dd($roles)--}}
     <div class="container-fluid pt-5 members-table">
         @include('layout.alert')
         <h2 class="mt-3 text-center text-primary">Статистика рейтинговых перевозок по {{ strtoupper($game) }}</h2>
@@ -13,13 +13,14 @@
             <table class="table table-dark table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th colspan="3"></th>
+                    <th colspan="4"></th>
                     <th colspan="3">Всего</th>
                     <th colspan="4">За неделю</th>
                 </tr>
                 <tr>
                     <th>#</th>
                     <th>Ник в игре</th>
+                    <th>Ссылки</th>
                     <th>Уровень в игре</th>
                     <th>Пройденное расстояние</th>
                     <th>Тоннаж</th>
@@ -35,7 +36,7 @@
                 @foreach($roles as $role_group)
                     @if(count($role_group[0]->members) < 1) @continue @endif
                     <tr>
-                        <th colspan="10" class="text-center text-primary">{{ $role_group[0]->group }}</th>
+                        <th colspan="11" class="text-center text-primary">{{ $role_group[0]->group }}</th>
                     </tr>
                     @foreach($role_group as $role)
                         @foreach($role->members as $member)
@@ -43,6 +44,20 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td><b>{{ $member->nickname }}</b></td>
+                                    <td class="icon-link">
+                                        @isset($member->user->vk)
+                                            <a href="{{ $member->user->vk }}" target="_blank" class="mr-3"><i class="fab fa-vk"></i></a>
+                                        @endisset
+                                        @isset($member->user->steamid64)
+                                            <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank" class="mr-3"><i class="fab fa-steam-square"></i></a>
+                                        @endisset
+                                        @isset($member->user->truckersmp_id)
+                                            <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
+                                        @endisset
+                                        @can('manage_table')
+                                            <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
+                                        @endcan
+                                    </td>
                                     <td>{{ $member->stat->level }}</td>
                                     <td>{{ $member->stat->distance_total }} км</td>
                                     <td>{{ $member->stat->weight_total }} т</td>

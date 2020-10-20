@@ -40,9 +40,9 @@
                             @if(!$user->member)
                                 <i class="fas fa-times"></i>
                             @elseif(!$user->member->visible)
-                                <i class="icon-evoque text-danger"></i>
+                                <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-danger"></i></a>
                             @else
-                                <i class="icon-evoque text-primary"></i>
+                                <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-primary"></i></a>
                             @endif
                         </td>
                         <td>{{ $user->created_at->isoFormat('DD.MM.Y HH:mm') }}</td>

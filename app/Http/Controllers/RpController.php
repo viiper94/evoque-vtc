@@ -31,11 +31,26 @@ class RpController extends Controller{
     public function index($game = 'ets2'){
         if(Auth::guest()) abort(404);
         return view('evoque.rp.index', [
-            'roles' => Role::with(['members', 'members.role' => function($query){
-                $query->where('visible', '1');
-            }, 'members.stat' => function($query) use ($game){
-                $query->where('game', $game);
-            }])->where('visible', 1)->get()->groupBy('group'),
+            'roles' => Role::with([
+                'members' => function($query){
+                                $query->where('visible', '1');
+                            },
+                'members.role' => function($query){
+                                $query->where('visible', '1');
+                            },
+                'members.stat' => function($query) use ($game){
+                                $query->where('game', $game)->whereNotNull('level');
+                            }
+            ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
+                $has = false;
+                foreach($group as $role){
+                    foreach($role->members as $member){
+                        $has = $member->stat && $member->topRole() === $role->id;
+                        if($has) break;
+                    }
+                }
+                return $has;
+            }),
             'game' => $game
         ]);
     }

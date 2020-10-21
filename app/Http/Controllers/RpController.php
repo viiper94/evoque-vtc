@@ -11,23 +11,6 @@ use Illuminate\Support\Facades\Gate;
 
 class RpController extends Controller{
 
-    private $stages = [
-        'ets2' => [
-            20000,
-            40000,
-            75000,
-            120000,
-            200000,
-            200000,
-            320000,
-            450000,
-            700000,
-        ],
-        'ats' => [
-
-        ],
-    ];
-
     public function index($game = 'ets2'){
         if(Auth::guest()) abort(404);
         return view('evoque.rp.index', [
@@ -154,6 +137,22 @@ class RpController extends Controller{
         return view('evoque.rp.results', [
             'results' => []
         ]);
+    }
+
+    public function createResults($game){
+        if(Gate::denies('manage_rp')) abort(403);
+        $stats = RpStats::where([['game', '=', $game], ['quantity', '>', '0']])->get();
+        foreach($stats as $stat){
+            $stat->quantity_total += $stat->quantity;
+            $stat->distance_total = $stat->distance_total + $stat->distance + $stat->bonus;
+            $stat->weight_total += $stat->weight;
+            $stat->quantity = 0;
+            $stat->bonus = 0;
+            $stat->distance = 0;
+            $stat->weight = 0;
+            $stat->save();
+        }
+        return redirect()->back()->with(['success' => 'Готово!']);
     }
 
 }

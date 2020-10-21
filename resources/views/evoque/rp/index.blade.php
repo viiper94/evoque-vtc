@@ -5,12 +5,12 @@
 @endsection
 
 @section('content')
-{{--@dd($roles)--}}
+
     <div class="container-fluid pt-5 members-table">
         @include('layout.alert')
         <h2 class="mt-3 text-center text-primary">Статистика рейтинговых перевозок по {{ strtoupper($game) }}</h2>
         <div class="table-responsive">
-            <table class="table table-dark table-bordered table-hover">
+            <table class="table table-dark table-bordered">
                 <thead>
                 <tr>
                     <th colspan="4"></th>
@@ -40,7 +40,7 @@
                     @foreach($role_group as $role)
                         @foreach($role->members as $member)
                             @if($member->topRole() == $role->id && $member->stat)
-                                <tr>
+                                <tr class="stage-{{ $member->stat->getStage() }}">
                                     <td>{{ $i++ }}</td>
                                     <td><b>{{ $member->nickname }}</b></td>
                                     <td class="icon-link">
@@ -75,11 +75,35 @@
         </div>
         @can('manage_rp')
             <div class="row justify-content-center mb-5">
-                <a href="{{ route('evoque.rp.reset') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg">
-                    <i class="fas fa-sync-alt"></i> Подвести итоги недели
+                <a href="{{ route('evoque.rp.results.create', $game) }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"
+                    onclick="return confirm('Вы уверены?')">
+                    <i class="fas fa-sync-alt"></i> Обнулить результаты за неделю
                 </a>
             </div>
         @endcan
+    </div>
+    <div class="container mt-5 mb-5">
+        <h3 class="text-center text-primary">
+            Вознаграждения
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-dark table-bordered text-center rewards-table">
+                <thead>
+                <tr>
+                    <th>Километраж</th>
+                    <th>Вознаграждение (одно на каждую ступень)</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach(\App\RpStats::$stages[$game] as $km => $reward)
+                        <tr class="stage-{{ $loop->iteration }}">
+                            <th class="w-25">{{ $km }}</th>
+                            <td>{{ $reward }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
 @endsection

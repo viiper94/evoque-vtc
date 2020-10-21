@@ -58,9 +58,9 @@
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ets2') }}">Статистика ETS2</a>
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ats') }}">Статистика ATS</a>
                                 <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">Отчёты</a>
-                                @can('manage_rp')
-                                    <a class="dropdown-item" href="{{ route('evoque.rp.results') }}">Результаты</a>
-                                @endcan
+{{--                                @can('manage_rp')--}}
+{{--                                    <a class="dropdown-item" href="{{ route('evoque.rp.results') }}">Результаты</a>--}}
+{{--                                @endcan--}}
                             </div>
                         </li>
                         @can('admin')

@@ -150,4 +150,10 @@ class RpController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function results(){
+        return view('evoque.rp.results', [
+            'results' => []
+        ]);
+    }
+
 }

@@ -41,7 +41,8 @@ Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules
 
 Route::get('/evoque/rp/reports', 'RpController@reports')->name('evoque.rp.reports');
 Route::any('/evoque/rp/reports/add', 'RpController@addReport')->name('evoque.rp.reports.add');
-Route::any('/evoque/rp/reports/reset', 'RpController@reset')->name('evoque.rp.reset');
+Route::any('/evoque/rp/reports/results', 'RpController@results')->name('evoque.rp.results');
+Route::any('/evoque/rp/reports/results/create', 'RpController@createResults')->name('evoque.rp.results.create');
 Route::any('/evoque/rp/reports/accept/{id}', 'RpController@acceptReport')->name('evoque.rp.reports.accept');
 Route::get('/evoque/rp/reports/delete/{id}', 'RpController@deleteReport')->name('evoque.rp.reports.delete');
 Route::any('/evoque/rp/reports/stat/{id}', 'RpController@editStat')->name('evoque.rp.stat.edit');

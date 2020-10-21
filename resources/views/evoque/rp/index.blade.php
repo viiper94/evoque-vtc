@@ -13,19 +13,18 @@
             <table class="table table-dark table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th colspan="5"></th>
-                    <th colspan="3">Всего</th>
+                    <th colspan="4"></th>
+                    <th colspan="3" class="border-left-5 border-right-5">Всего</th>
                     <th colspan="4">За неделю</th>
                 </tr>
                 <tr>
                     <th>#</th>
                     <th>Ник в игре</th>
-                    <th>Ссылки</th>
                     <th>Уровень в игре</th>
                     <th>Ступень</th>
-                    <th>Пройденное расстояние</th>
+                    <th class="border-left-5">Пройденное расстояние</th>
                     <th>Тоннаж</th>
-                    <th>Кол-во грузов</th>
+                    <th class="border-right-5">Кол-во грузов</th>
                     <th>Пройденное расстояние</th>
                     <th>Бонус</th>
                     <th>Тоннаж</th>
@@ -43,26 +42,18 @@
                             @if($member->topRole() == $role->id && $member->stat)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td><b>{{ $member->nickname }}</b></td>
-                                    <td class="icon-link">
-                                        @isset($member->user->vk)
-                                            <a href="{{ $member->user->vk }}" target="_blank" class="mr-3"><i class="fab fa-vk"></i></a>
-                                        @endisset
-                                        @isset($member->user->steamid64)
-                                            <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank" class="mr-3"><i class="fab fa-steam-square"></i></a>
-                                        @endisset
-                                        @isset($member->user->truckersmp_id)
-                                            <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
-                                        @endisset
+                                    <td>
                                         @can('manage_table')
-                                            <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
+                                            <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><b>{{ $member->nickname }}</b></a>
+                                        @else
+                                            <b>{{ $member->nickname }}</b>
                                         @endcan
                                     </td>
                                     <td>{{ $member->stat->level }}</td>
                                     <td><b>{{ $member->stat->getStage() }}</b></td>
-                                    <td>{{ $member->stat->distance_total }} км</td>
+                                    <td class="border-left-5">{{ $member->stat->distance_total }} км</td>
                                     <td>{{ $member->stat->weight_total }} т</td>
-                                    <td>{{ $member->stat->quantity_total }}</td>
+                                    <td class="border-right-5">{{ $member->stat->quantity_total }}</td>
                                     <td>{{ $member->stat->distance }} км</td>
                                     <td>{{ $member->stat->bonus }} км</td>
                                     <td>{{ $member->stat->weight }} т</td>

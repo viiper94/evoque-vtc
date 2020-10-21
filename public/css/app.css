@@ -17880,43 +17880,13 @@ table.users td.user-image img {
   font-size: 30px;
 }
 
-.rewards-table .stage-1,
-.members-table .stage-1 {
-  color: pink;
+.rewards-table .border-right-5,
+.members-table .border-right-5 {
+  border-right: 5px solid #454d55;
 }
 
-.rewards-table .stage-2,
-.members-table .stage-2 {
-  color: orange;
-}
-
-.rewards-table .stage-3,
-.members-table .stage-3 {
-  color: yellow;
-}
-
-.rewards-table .stage-4,
-.members-table .stage-4 {
-  color: green;
-}
-
-.rewards-table .stage-5,
-.members-table .stage-5 {
-  color: magenta;
-}
-
-.rewards-table .stage-6,
-.members-table .stage-6 {
-  color: blue;
-}
-
-.rewards-table .stage-7,
-.members-table .stage-7 {
-  color: blueviolet;
-}
-
-.rewards-table .stage-8,
-.members-table .stage-8 {
-  color: red;
+.rewards-table .border-left-5,
+.members-table .border-left-5 {
+  border-left: 5px solid #454d55;
 }
 

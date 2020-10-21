@@ -34,7 +34,6 @@
                 <tbody>
                 @php $i = 1; @endphp
                 @foreach($roles as $role_group)
-                    @if(count($role_group[0]->members) < 1) @continue @endif
                     <tr>
                         <th colspan="11" class="text-center text-primary">{{ $role_group[0]->group }}</th>
                     </tr>

@@ -39,17 +39,16 @@ class RpController extends Controller{
                                 $query->where('visible', '1');
                             },
                 'members.stat' => function($query) use ($game){
-                                $query->where('game', $game)->whereNotNull('level');
+                                $query->where('game', $game);
                             }
             ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
-                $has = false;
                 foreach($group as $role){
                     foreach($role->members as $member){
-                        $has = $member->stat && $member->topRole() === $role->id;
-                        if($has) break;
+                        $has = $member->stat && $member->topRole() == $role->id;
+                        if($has) return true;
                     }
                 }
-                return $has;
+                return false;
             }),
             'game' => $game
         ]);

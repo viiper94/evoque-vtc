@@ -24,14 +24,13 @@ class MembersController extends Controller{
                                     $query->where('visible', '1');
                                 }
                 ])->where('visible', 1)->get()->groupBy('group')->filter(function($roles){
-                $has = false;
                 foreach($roles as $role){
                     foreach($role->members as $member){
                         $has = $member->topRole() === $role->id;
-                        if($has) break;
+                        if($has) return true;
                     }
                 }
-                return $has;
+                return false;
             })
         ]);
     }

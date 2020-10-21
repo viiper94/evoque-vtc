@@ -10,10 +10,10 @@
         @include('layout.alert')
         <h2 class="mt-3 text-center text-primary">Статистика рейтинговых перевозок по {{ strtoupper($game) }}</h2>
         <div class="table-responsive">
-            <table class="table table-dark table-bordered">
+            <table class="table table-dark table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th colspan="4"></th>
+                    <th colspan="5"></th>
                     <th colspan="3">Всего</th>
                     <th colspan="4">За неделю</th>
                 </tr>
@@ -22,6 +22,7 @@
                     <th>Ник в игре</th>
                     <th>Ссылки</th>
                     <th>Уровень в игре</th>
+                    <th>Ступень</th>
                     <th>Пройденное расстояние</th>
                     <th>Тоннаж</th>
                     <th>Кол-во грузов</th>
@@ -40,7 +41,7 @@
                     @foreach($role_group as $role)
                         @foreach($role->members as $member)
                             @if($member->topRole() == $role->id && $member->stat)
-                                <tr class="stage-{{ $member->stat->getStage() }}">
+                                <tr>
                                     <td>{{ $i++ }}</td>
                                     <td><b>{{ $member->nickname }}</b></td>
                                     <td class="icon-link">
@@ -58,6 +59,7 @@
                                         @endcan
                                     </td>
                                     <td>{{ $member->stat->level }}</td>
+                                    <td><b>{{ $member->stat->getStage() }}</b></td>
                                     <td>{{ $member->stat->distance_total }} км</td>
                                     <td>{{ $member->stat->weight_total }} т</td>
                                     <td>{{ $member->stat->quantity_total }}</td>
@@ -87,16 +89,18 @@
             Вознаграждения
         </h3>
         <div class="table-responsive">
-            <table class="table table-dark table-bordered text-center rewards-table">
+            <table class="table table-dark table-bordered text-center rewards-table table-hover">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>Километраж</th>
                     <th>Вознаграждение (одно на каждую ступень)</th>
                 </tr>
                 </thead>
                 <tbody>
                     @foreach(\App\RpStats::$stages[$game] as $km => $reward)
-                        <tr class="stage-{{ $loop->iteration }}">
+                        <tr>
+                            <th>{{ $loop->iteration }}</th>
                             <th class="w-25">{{ $km }}</th>
                             <td>{{ $reward }}</td>
                         </tr>

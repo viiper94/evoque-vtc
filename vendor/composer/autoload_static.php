@@ -629,6 +629,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'App\\RpStats' => __DIR__ . '/../..' . '/app/RpStats.php',
         'App\\Rules' => __DIR__ . '/../..' . '/app/Rules.php',
         'App\\Steam' => __DIR__ . '/../..' . '/app/Steam.php',
+        'App\\Tab' => __DIR__ . '/../..' . '/app/Tab.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',

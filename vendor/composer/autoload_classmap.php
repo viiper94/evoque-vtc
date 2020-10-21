@@ -47,6 +47,7 @@ return array(
     'App\\RpStats' => $baseDir . '/app/RpStats.php',
     'App\\Rules' => $baseDir . '/app/Rules.php',
     'App\\Steam' => $baseDir . '/app/Steam.php',
+    'App\\Tab' => $baseDir . '/app/Tab.php',
     'App\\User' => $baseDir . '/app/User.php',
     'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
     'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Cors.php',

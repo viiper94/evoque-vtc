@@ -39,7 +39,7 @@ class RpController extends Controller{
                                 $query->where('visible', '1');
                             },
                 'members.stat' => function($query) use ($game){
-                                $query->where('game', $game);
+                                $query->where('game', $game)->whereNotNull('level');
                             }
             ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
                 foreach($group as $role){
@@ -146,7 +146,7 @@ class RpController extends Controller{
         ]);
         $stat->fill($request->post());
         return $stat->save() ?
-            redirect()->back()->with(['success' => 'Статистика успешно отредактирована!']) :
+            redirect()->route('evoque.rp', $stat->game)->with(['success' => 'Статистика успешно отредактирована!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

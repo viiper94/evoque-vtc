@@ -50,7 +50,7 @@ class RpStats extends Model{
     public function getStage(){
         $stages = array_keys(self::$stages[$this->game]);
         foreach($stages as $index => $km){
-            if($this->distance_total >= $km && $this->distance_total < $stages[$index+1]) return $index+1;
+            if($this->distance_total >= $km && (!isset($stages[$index+1]) || $this->distance_total < $stages[$index+1])) return $index+1;
         }
         return 0;
     }

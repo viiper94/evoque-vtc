@@ -13853,6 +13853,16 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#submit_btn').prop('disabled', true).addClass('disabled');
     }
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#vk_link').keyup(function () {
+    var value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    var result = value.match(/((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/);
+
+    if (result && result[3]) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('is-valid').removeClass('is-invalid');
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('is-invalid').removeClass('is-valid');
+    }
+  });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tmp_link').keyup(function () {
     var value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
     var result = value.match(/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/);

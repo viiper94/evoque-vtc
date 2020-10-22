@@ -16,6 +16,16 @@ $(document).ready(function(){
         }
     });
 
+    $('#vk_link').keyup(function(){
+        let value = $(this).val();
+        let result = value.match(/((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/);
+        if(result && result[3]){
+            $(this).addClass('is-valid').removeClass('is-invalid');
+        }else{
+            $(this).addClass('is-invalid').removeClass('is-valid');
+        }
+    });
+
     $('#tmp_link').keyup(function(){
         let value = $(this).val();
         let result = value.match(/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/);

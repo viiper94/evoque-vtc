@@ -16,6 +16,53 @@ $(document).ready(function(){
         }
     });
 
+    $('#tmp_link').keyup(function(){
+        let value = $(this).val();
+        let result = value.match(/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/);
+        if(result && result[3]){
+            $('#check_tmp_link').prop('disabled', false).attr('data-id', result[3]);
+            $(this).addClass('is-valid').removeClass('is-invalid');
+        }else{
+            $('#check_tmp_link').prop('disabled', true).attr('data-id', null);
+            $(this).addClass('is-invalid').removeClass('is-valid');
+            $('.steam-row').hide();
+            $('#steam_link').val('');
+            $('#nickname').val('');
+            $('#hours_played').val('');
+            $('#have_ats').prop('checked', false);
+        }
+    });
+
+    $('#check_tmp_link').click(function(){
+        let button = $(this);
+        $.ajax({
+            cache: false,
+            dataType : 'json',
+            type : 'post',
+            data : {
+                '_token' : button.data('token'),
+                'id' : button.data('id')
+            },
+            beforeSend : function(){
+                button.find('i').removeClass('fa-check-circle').html(getPreloaderHtml());
+                button.prop('disabled', true);
+            },
+            success : function(response){
+                if(response.tmp_data && response.steam_data){
+                    $('#steam_link').val(response.steam_data.profileurl);
+                    $('#nickname').val(response.tmp_data.name);
+                    $('#hours_played').val(response.steam_games.ets2);
+                    $('.steam-row').show();
+                    if(response.steam_games.ats) $('#have_ats').prop('checked', true);
+                }
+            },
+            complete : function(){
+                button.find('.spinner-border').remove();
+                button.prop('disabled', false).find('i').addClass('fa-check-circle');
+            }
+        });
+    });
+
     $('input#scores').keyup(function(){
         if($('input#scores').val() === ''){
             $('input#sort').prop('checked', true);

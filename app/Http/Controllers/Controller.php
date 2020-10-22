@@ -6,11 +6,13 @@ use App\Convoy;
 use App\Member;
 use App\Recruitment;
 use App\Role;
+use App\Steam;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use TruckersMP\APIClient\Client;
 
 class Controller extends BaseController{
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -22,6 +24,22 @@ class Controller extends BaseController{
     }
 
     public function apply(Request $request){
+        if($request->ajax()){
+            $tmp = new Client();
+            $tmp_data = $tmp->player($request->input('id'))->get();
+            $steam = new Steam();
+            return response()->json([
+                'tmp_data' => [
+                    'id' => $tmp_data->getId(),
+                    'name' => $tmp_data->getName(),
+                    'steamid64' => $tmp_data->getSteamID64(),
+                    'vtc' => $tmp_data->getCompanyId(),
+                ],
+                'steam_data' => $steam->getPlayerData($tmp_data->getSteamID64()),
+                'steam_games' => $steam->getSCSGamesData($tmp_data->getSteamID64())
+            ]);
+        }
+
         if($request->post()){
             $this->validate($request, [
                 'name' => 'required|string',

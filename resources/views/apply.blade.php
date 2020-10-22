@@ -67,49 +67,54 @@
                     @endif
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="nickname">Игровой ник</label>
-                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ old('nickname') }}" required>
-                    @if($errors->has('nickname'))
-                        <small class="form-text">{{ $errors->first('nickname') }}</small>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6 col-sm-12">
                     <label for="age">Ваш возраст</label>
                     <input type="number" class="form-control" name="age" id="age" min="10" value="{{ old('age') }}" required>
                     @if($errors->has('age'))
                         <small class="form-text">{{ $errors->first('age') }}</small>
                     @endif
                 </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6 col-sm-12">
+                    <label for="vk_link">Ссылка на Ваш профиль ВКонтакте</label>
+                    <input type="url" class="form-control" id="vk_link" name="vk_link" value="{{ old('vk_link') }}" required>
+                    @if($errors->has('vk_link'))
+                        <small class="form-text">{{ $errors->first('vk_link') }}</small>
+                    @endif
+                </div>
+                <div class="form-group col-md-6 col-sm-12">
+                    <label for="tmp_link">Ссылка на Ваш аккаунт TruckersMP</label>
+                    <div class="form-row mx-0">
+                        <input type="url" class="form-control col" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
+                        <button class="btn btn-outline-warning ml-1" type="button" id="check_tmp_link" data-token="{{ csrf_token() }}" disabled><i class="fas fa-check-circle"></i> Проверить</button>
+                    </div>
+                    @if($errors->has('tmp_link'))
+                        <small class="form-text">{{ $errors->first('tmp_link') }}</small>
+                    @endif
+                </div>
+            </div>
+            <div class="row steam-row" style="display: none">
+                <div class="form-group col-md-6 col-sm-12">
+                    <label for="steam_link">Аккаунт Steam</label>
+                    <input type="url" class="form-control" id="steam_link" name="steam_link" value="{{ old('steam_link') }}" readonly>
+                    @if($errors->has('steam_link'))
+                        <small class="form-text">{{ $errors->first('steam_link') }}</small>
+                    @endif
+                </div>
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="hours_played">Сколько сыграно часов в ETS2 в Steam</label>
-                    <input type="number" class="form-control" id="hours_played" name="hours_played" value="{{ old('hours_played') }}" min="0" required>
+                    <input type="text" class="form-control" id="hours_played" name="hours_played" value="{{ old('hours_played') }}" readonly>
                     @if($errors->has('hours_played'))
                         <small class="form-text">{{ $errors->first('hours_played') }}</small>
                     @endif
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="vk_link">Ссылка на Ваш профиль ВКонтакте</label>
-                <input type="url" class="form-control" id="vk_link" name="vk_link" value="{{ old('vk_link') }}" required>
-                @if($errors->has('vk_link'))
-                    <small class="form-text">{{ $errors->first('vk_link') }}</small>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="steam_link">Аккаунт Steam</label>
-                <input type="url" class="form-control" id="steam_link" name="steam_link" value="{{ old('steam_link') }}" required>
-                @if($errors->has('steam_link'))
-                    <small class="form-text">{{ $errors->first('steam_link') }}</small>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="tmp_link">Аккаунт на TruckersMP</label>
-                <input type="url" class="form-control" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
-                @if($errors->has('tmp_link'))
-                    <small class="form-text">{{ $errors->first('tmp_link') }}</small>
-                @endif
+                <div class="form-group col-sm-12">
+                    <label for="nickname">Игровой ник</label>
+                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ old('nickname') }}" readonly>
+                    @if($errors->has('nickname'))
+                        <small class="form-text">{{ $errors->first('nickname') }}</small>
+                    @endif
+                </div>
             </div>
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="have_mic" name="have_mic" @if(old('have_mic')) checked @endif>

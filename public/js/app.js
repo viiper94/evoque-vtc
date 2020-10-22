@@ -13853,6 +13853,52 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#submit_btn').prop('disabled', true).addClass('disabled');
     }
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#tmp_link').keyup(function () {
+    var value = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).val();
+    var result = value.match(/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/);
+
+    if (result && result[3]) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#check_tmp_link').prop('disabled', false).attr('data-id', result[3]);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('is-valid').removeClass('is-invalid');
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#check_tmp_link').prop('disabled', true).attr('data-id', null);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).addClass('is-invalid').removeClass('is-valid');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.steam-row').hide();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#steam_link').val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#nickname').val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#hours_played').val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#have_ats').prop('checked', false);
+    }
+  });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#check_tmp_link').click(function () {
+    var button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      cache: false,
+      dataType: 'json',
+      type: 'post',
+      data: {
+        '_token': button.data('token'),
+        'id': button.data('id')
+      },
+      beforeSend: function beforeSend() {
+        button.find('i').removeClass('fa-check-circle').html(getPreloaderHtml());
+        button.prop('disabled', true);
+      },
+      success: function success(response) {
+        if (response.tmp_data && response.steam_data) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#steam_link').val(response.steam_data.profileurl);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#nickname').val(response.tmp_data.name);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#hours_played').val(response.steam_games.ets2);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.steam-row').show();
+          if (response.steam_games.ats) jquery__WEBPACK_IMPORTED_MODULE_0___default()('#have_ats').prop('checked', true);
+        }
+      },
+      complete: function complete() {
+        button.find('.spinner-border').remove();
+        button.prop('disabled', false).find('i').addClass('fa-check-circle');
+      }
+    });
+  });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#scores').keyup(function () {
     if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#scores').val() === '') {
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('input#sort').prop('checked', true);

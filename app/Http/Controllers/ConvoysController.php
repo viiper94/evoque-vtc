@@ -85,11 +85,10 @@ class ConvoysController extends Controller{
         if(Auth::check() && !$public){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
-            $convoys = Convoy::where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->get();
+            $convoys = Convoy::where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->limit(7)->get();
             $grouped = array();
             foreach($convoys as $convoy){
                 $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
-                if(count($grouped) >= 5) break;
             }
             return view('evoque.convoys.private', [
                 'grouped' => array_reverse($grouped)
@@ -118,8 +117,6 @@ class ConvoysController extends Controller{
         if(Gate::denies('manage_convoys')) abort(403);
         if($request->post()){
             $this->validate($request, $this->attributes_validation);
-            // TODO filter photo links
-            // TODO Multiple route images
             $convoy = new Convoy();
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';

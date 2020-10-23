@@ -19,9 +19,15 @@
             <h2 class="mt-3 text-primary text-center">Мои заявки</h2>
         @else
             <h2 class="mt-3 text-primary text-center">Все заявки сотрудников</h2>
+            <div class="row pt-3 justify-content-center">
+                <a href="{{ route('evoque.applications.recruitment') }}" class="btn btn-outline-warning btn-sm">
+                    Заявки на вступление
+                    @if($recruitments > 0)<span class="badge badge-danger">{{ $recruitments }}</span>@endif
+                </a>
+            </div>
         @endcan
         @if(count($apps) > 0)
-            <div class="applications pb-5 row">
+            <div class="applications pt-5 pb-5 row">
                 @foreach($apps as $app)
                     <div class="m-3 card card-dark text-shadow-m @if($app->status == 0) border-primary new @endif">
                         <h5 class="card-header @if($app->status == 0) @if($app->category === 1) text-warning @elseif($app->category === 5) text-danger @endif @endif">Заявка на {{ $app->getCategory() }}</h5>

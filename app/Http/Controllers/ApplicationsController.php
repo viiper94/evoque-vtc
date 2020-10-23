@@ -21,7 +21,8 @@ class ApplicationsController extends Controller{
             $apps = Application::with('member')->where('member_id', Auth::user()->member->id)->get();
         }
         return view('evoque.applications.index', [
-            'apps' => $apps->sortBy('created_at')->sortBy('status')
+            'apps' => $apps->sortBy('created_at')->sortBy('status'),
+            'recruitments' => Recruitment::where('status', 0)->count()
         ]);
     }
 
@@ -29,7 +30,8 @@ class ApplicationsController extends Controller{
         if(Gate::denies('manage_members')) abort(403);
         $recruitment = Recruitment::all();
         return view('evoque.applications.recruitment', [
-            'applications' => $recruitment->sortBy('created_at')->sortBy('status')
+            'applications' => $recruitment->sortBy('created_at')->sortBy('status'),
+            'apps' => Application::where('status', 0)->count()
         ]);
     }
 

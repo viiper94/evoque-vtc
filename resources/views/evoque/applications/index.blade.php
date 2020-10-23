@@ -43,8 +43,8 @@
                                     @break
                                 @case(2)
                                     <p class="mb-0">Желаемый номер: </p>
-                                    <h5 @if($app->status == 0) class="text-primary" @endif>{{ $app->new_plate_number }}
-                                        <a href="https://worldoftrucks.com/api/license_plate/eut2/germany/rear/{{ str_replace(' ', '%20', $app->new_plate_number) }}" target="_blank">
+                                    <h5 @if($app->status == 0) class="text-primary" @endif>EVOQUE {{ $app->new_plate_number }}
+                                        <a href="https://worldoftrucks.com/api/license_plate/eut2/germany/rear/evoque%20{{ $app->new_plate_number }}" target="_blank">
                                             <i class="fas fa-cogs"></i>
                                         </a>
                                     </h5>

@@ -53,24 +53,25 @@ class ConvoysController extends Controller{
 
     private $dlcList = [
         'ets2' => [
-            'Going East!',
-            'Scandinavia',
-            'Vive la France!',
-            'Italia',
-            'Beyond The Baltic Sea',
-            'Road To The Black Sea',
-            'Iberia',
-            'High Power Cargo Pack',
-            'Heavy Cargo Pack'
+            'ProMods',
+            'DLC Going East!',
+            'DLC Scandinavia',
+            'DLC Vive la France!',
+            'DLC Italia',
+            'DLC Beyond The Baltic Sea',
+            'DLC Road To The Black Sea',
+            'DLC Iberia',
+            'DLC High Power Cargo Pack',
+            'DLC Heavy Cargo Pack'
         ],
         'ats' => [
-            'New Mexico',
-            'Oregon',
-            'Washington',
-            'Utah',
-            'Idaho',
-            'Colorado',
-            'Heavy Cargo Pack'
+            'DLC New Mexico',
+            'DLC Oregon',
+            'DLC Washington',
+            'DLC Utah',
+            'DLC Idaho',
+            'DLC Colorado',
+            'DLC Heavy Cargo Pack'
         ]
     ];
 

@@ -46,9 +46,9 @@
                                 <a class="dropdown-item" href="{{ route('evoque.rules', 'public') }}">Публичные правила</a>
                             </div>
                         </li>
-{{--                        <li class="nav-item @if(Route::current()->getName() === 'evoque.applications')active @endif">--}}
-{{--                            <a class="nav-link" href="{{ route('evoque.applications') }}">Заявки</a>--}}
-{{--                        </li>--}}
+                        <li class="nav-item @if(Request::is('evoque/applications/*'))active @endif">
+                            <a class="nav-link" href="{{ route('evoque.applications') }}">Заявки</a>
+                        </li>
                         <li class="nav-item @if(Route::current() && Route::current()->getName() === 'evoque.members')active @endif">
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
@@ -67,7 +67,6 @@
                             <li class="nav-item dropdown @if(Request::is('evoque/admin/*'))active @endif">
                                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                                    <a class="dropdown-item" href="{{ route('evoque.admin.applications') }}">Заявки</a>
                                     <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>
                                     <a class="dropdown-item" href="{{ route('evoque.admin.users') }}">Пользователи</a>
                                 </div>

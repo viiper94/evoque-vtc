@@ -47,9 +47,17 @@ Route::get('/evoque/rp/reports/delete/{id}', 'RpController@deleteReport')->name(
 Route::any('/evoque/rp/reports/stat/{id}', 'RpController@editStat')->name('evoque.rp.stat.edit');
 Route::get('/evoque/rp/{game?}', 'RpController@index')->name('evoque.rp');
 
-Route::get('/evoque/admin/applications', 'ApplicationsController@index')->name('evoque.admin.applications');
-Route::get('/evoque/admin/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.admin.applications.accept.recruitment');
-Route::get('/evoque/admin/applications/deleteRecruitment/{id}', 'ApplicationsController@deleteRecruitment')->name('evoque.admin.applications.delete.recruitment');
+Route::get('/evoque/applications', 'ApplicationsController@index')->name('evoque.applications');
+Route::get('/evoque/applications/recruitment', 'ApplicationsController@recruitment')->name('evoque.applications.recruitment');
+Route::get('/evoque/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.applications.accept.recruitment');
+Route::get('/evoque/applications/deleteRecruitment/{id}', 'ApplicationsController@deleteRecruitment')->name('evoque.applications.delete.recruitment');
+Route::get('/evoque/applications/accept/{id}', 'ApplicationsController@accept')->name('evoque.applications.accept');
+Route::get('/evoque/applications/delete/{id}', 'ApplicationsController@delete')->name('evoque.applications.delete');
+Route::any('/evoque/applications/vacation', 'ApplicationsController@vacation')->name('evoque.applications.vacation');
+Route::any('/evoque/applications/plate', 'ApplicationsController@plate')->name('evoque.applications.plate');
+Route::any('/evoque/applications/rp', 'ApplicationsController@rp')->name('evoque.applications.rp');
+Route::any('/evoque/applications/nickname', 'ApplicationsController@nickname')->name('evoque.applications.nickname');
+Route::any('/evoque/applications/fire', 'ApplicationsController@fire')->name('evoque.applications.fire');
 
 Route::get('/evoque/admin/roles', 'RolesController@roles')->name('evoque.admin.roles');
 Route::any('/evoque/admin/roles/edit/{id}', 'RolesController@edit')->name('evoque.admin.roles.edit');

@@ -43,12 +43,16 @@
                                     @break
                                 @case(2)
                                     <p class="mb-0">Желаемый номер: </p>
-                                    <h5 class="text-primary">{{ $app->new_plate_number }}</h5>
-                                    @break
+                                    <h5 @if($app->status == 0) class="text-primary" @endif>{{ $app->new_plate_number }}
+                                        <a href="https://worldoftrucks.com/api/license_plate/eut2/germany/rear/{{ str_replace(' ', '%20', $app->new_plate_number) }}" target="_blank">
+                                            <i class="fas fa-cogs"></i>
+                                        </a>
+                                    </h5>
+                                @break
                                 @case(3) @break
                                 @case(4)
                                     <p class="mb-0">Новый никнейм: </p>
-                                    <h5 class="text-primary">{{ $app->new_nickname }}</h5>
+                                    <h5 @if($app->status == 0) class="text-primary" @endif>{{ $app->new_nickname }}</h5>
                                     @break
                                 @case(5) @break
                             @endswitch

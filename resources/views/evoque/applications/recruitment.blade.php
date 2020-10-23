@@ -8,14 +8,14 @@
 
     <div class="container pt-5">
         @include('layout.alert')
+        <h2 class="mt-3 text-primary text-center">Заявки на вступление</h2>
+        <div class="row pt-3 justify-content-center">
+            <a href="{{ route('evoque.applications') }}" class="btn btn-outline-warning btn-sm">
+                Заявки сотрудников
+                @if($apps > 0)<span class="badge badge-danger">{{ $apps }}</span>@endif
+            </a>
+        </div>
         @if(count($applications) > 0)
-            <h2 class="mt-3 text-primary text-center">Заявки на вступление</h2>
-            <div class="row pt-3 justify-content-center">
-                <a href="{{ route('evoque.applications') }}" class="btn btn-outline-warning btn-sm">
-                    Заявки сотрудников
-                    @if($apps > 0)<span class="badge badge-danger">{{ $apps }}</span>@endif
-                </a>
-            </div>
             <div class="applications pt-5 pb-5 row">
                 @foreach($applications as $application)
                     <div class="m-3 card card-dark text-shadow-m @if($application->status == 0) border-primary new @endif">
@@ -50,7 +50,7 @@
             </div>
         @else
             <div class="row justify-content-center pt-5 pb-5">
-                <h2 class="text-primary">Еще нет заявок</h2>
+                <h5>Еще нет заявок</h5>
             </div>
         @endif
     </div>

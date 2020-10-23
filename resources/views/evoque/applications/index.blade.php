@@ -11,7 +11,7 @@
         <div class="application-buttons mt-5 mb-5 row justify-content-center">
             <a href="{{ route('evoque.applications.vacation') }}" class="btn btn-lg btn-outline-warning m-1">Хочу в отпуск!</a>
             <a href="{{ route('evoque.applications.plate') }}" class="btn btn-lg btn-outline-info m-1">Сменить номер</a>
-            <a href="{{ route('evoque.applications.rp') }}" class="btn btn-lg btn-outline-success m-1">Сбросить статистику в рейтинговых</a>
+            <a href="{{ route('evoque.applications.rp') }}" class="btn btn-lg btn-outline-success m-1">Сменить уровень в рейтинговых</a>
             <a href="{{ route('evoque.applications.nickname') }}" class="btn btn-lg btn-outline-primary m-1">Сменить никнейм</a>
             <a href="{{ route('evoque.applications.fire') }}" class="btn btn-lg btn-outline-danger m-1">Увольняюсь!</a>
         </div>
@@ -49,7 +49,9 @@
                                         </a>
                                     </h5>
                                 @break
-                                @case(3) @break
+                                @case(3)
+                                    <p class="mb-0">Новый уровень в {{ strtoupper($app->new_rp_profile[0]) }}: {{ $app->new_rp_profile[1] }}</p>
+                                    @break
                                 @case(4)
                                     <p class="mb-0">Новый никнейм: </p>
                                     <h5 @if($app->status == 0) class="text-primary" @endif>{{ $app->new_nickname }}</h5>

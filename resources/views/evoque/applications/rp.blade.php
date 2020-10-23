@@ -8,12 +8,23 @@
 
     <div class="container pt-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary">Заявка на сброс статистики рейтинговых перевозок</h2>
+        <h2 class="mt-3 text-primary">Заявка на смену уровня в рейтинговых перевозках</h2>
         <form method="post" class="mb-5">
             @csrf
-            <div class="custom-control custom-checkbox mt-3 mb-3">
-                <input type="checkbox" class="custom-control-input" id="reset" name="reset" required>
-                <label class="custom-control-label" for="reset">Подтверждаю, что желаю сбросить свою статистику в рейтинговых перевозках в ETS2 и ATS</label>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" required>
+                <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>
+            </div>
+            <div class="custom-control custom-radio">
+                <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" required>
+                <label class="custom-control-label" for="game-ats">American Truck Simulator</label>
+            </div>
+            <div class="form-group">
+                <label for="new_rp_profile">Уровень в игре</label>
+                <input type="text" class="form-control" id="new_rp_profile" name="new_rp_profile" value="{{ old('new_rp_profile') }}" required>
+                @error('new_plate_number')
+                <small class="form-text">{{ $message }}</small>
+                @enderror
             </div>
             <div class="form-group">
                 <label for="reason">Причина</label>

@@ -53,15 +53,10 @@ class ApplicationsController extends Controller{
                 break;
             case 3:
                 foreach($application->member->stats as $stat){
-                    $stat->distance = 0;
-                    $stat->distance_total = 0;
-                    $stat->weight = 0;
-                    $stat->weight_total = 0;
-                    $stat->quantity = 0;
-                    $stat->quantity_total = 0;
-                    $stat->level = 0;
-                    $stat->bonus = 0;
-                    $result = $stat->save();
+                    if($stat->game == $application->new_rp_profile[0]){
+                        $stat->level = $application->new_rp_profile[1];
+                        $result = $stat->save();
+                    }
                 }
                 break;
             case 4:
@@ -135,12 +130,13 @@ class ApplicationsController extends Controller{
     public function rp(Request $request){
         if($request->post()){
             $this->validate($request, [
-                'reset' => 'accepted',
+                'new_rp_profile' => 'required|numeric',
                 'reason' => 'nullable|string'
             ]);
             $app = new Application();
             $app->member_id = Auth::user()->member->id;
             $app->old_nickname = Auth::user()->member->nickname;
+            $app->new_rp_profile = [$request->input('game'), $request->input('new_rp_profile')];
             $app->category = 3;
             $app->reason = htmlentities(trim($request->input('reason')));
             return $app->save() ?

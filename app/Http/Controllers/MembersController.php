@@ -44,7 +44,6 @@ class MembersController extends Controller{
                 'convoys' => 'required|numeric',
                 'vacations' => 'required|numeric'
             ]);
-            // TODO filter photo links
             $member = Member::findOrFail($id);
             $member->fill($request->post());
             $member->visible = $request->input('visible') === 'on';

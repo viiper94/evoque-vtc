@@ -34,7 +34,7 @@
                         <div class="card-body">
                             <h4 class="card-title mb-0">От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->old_nickname }}</span></h4>
                             @if($app->member)
-                                <p>Текущий ник: <b>{{ $app->member->nickname }}</b></p>
+                                <p class="text-muted">Текущий ник: <b>{{ $app->member->nickname }}</b></p>
                             @endif
                             @switch($app->category)
                                 @case(1)

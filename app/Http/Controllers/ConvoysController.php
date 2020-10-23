@@ -169,6 +169,7 @@ class ConvoysController extends Controller{
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
             $convoy->public = $request->input('public') === 'on';
+            $convoy->dlc = $request->input('dlc') ?? [];
             $convoy->truck_public = $request->input('truck_public') === 'on';
             $convoy->trailer_public = $request->input('trailer_public') === 'on';
 

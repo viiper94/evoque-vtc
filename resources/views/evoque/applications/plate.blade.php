@@ -13,7 +13,7 @@
             @csrf
             <div class="form-group">
                 <label for="new_plate_number">Новый номерной знак</label>
-                <input type="text" class="form-control" id="new_plate_number" name="new_plate_number" placeholder="Например: EVOQUE 123" value="{{ old('new_plate_number') }}" required>
+                <input type="text" class="form-control" id="new_plate_number" name="new_plate_number" placeholder="Три цифры" maxlength="3" minlength="3" value="{{ old('new_plate_number') }}" required>
                 @error('new_plate_number')
                     <small class="form-text">{{ $message }}</small>
                 @enderror

@@ -116,7 +116,7 @@ class ApplicationsController extends Controller{
     public function plate(Request $request){
         if($request->post()){
             $this->validate($request, [
-                'new_plate_number' => 'required|string',
+                'new_plate_number' => 'required|regex:/[0-9]{3}/',
                 'reason' => 'nullable|string'
             ]);
             $app = new Application();

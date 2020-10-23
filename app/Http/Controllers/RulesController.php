@@ -24,7 +24,6 @@ class RulesController extends Controller{
                 'title' => 'required|string',
                 'text' => 'required',
             ]);
-            // TODO Rules history
             $p = Rules::findOrFail($id);
             $p->fill($request->post());
             $p->public = $request->input('public') == 'true';

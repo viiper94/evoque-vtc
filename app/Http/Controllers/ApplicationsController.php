@@ -15,22 +15,20 @@ class ApplicationsController extends Controller{
 
     public function index(){
         if(Auth::guest()) abort(404);
-        if(Gate::allows('manage_members')){
-            $apps = Application::with('member')->get();
-        }else{
-            $apps = Application::with('member')->where('member_id', Auth::user()->member->id)->get();
+        $apps = Application::with('member');
+        if(Gate::denies('manage_members')){
+            $apps = $apps->where('member_id', Auth::user()->member->id);
         }
         return view('evoque.applications.index', [
-            'apps' => $apps->sortBy('created_at')->sortBy('status'),
+            'apps' => $apps->orderBy('status')->orderBy('created_at', 'desc')->get(),
             'recruitments' => Recruitment::where('status', 0)->count()
         ]);
     }
 
     public function recruitment(){
         if(Gate::denies('manage_members')) abort(403);
-        $recruitment = Recruitment::all();
         return view('evoque.applications.recruitment', [
-            'applications' => $recruitment->sortBy('created_at')->sortBy('status'),
+            'applications' => Recruitment::orderBy('status')->orderBy('created_at')->get(),
             'apps' => Application::where('status', 0)->count()
         ]);
     }

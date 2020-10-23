@@ -46,13 +46,13 @@
                                 <a class="dropdown-item" href="{{ route('evoque.rules', 'public') }}">Публичные правила</a>
                             </div>
                         </li>
-                        <li class="nav-item @if(Request::is('evoque/applications/*'))active @endif">
+                        <li class="nav-item @if(Request::is('evoque/applications*'))active @endif">
                             <a class="nav-link" href="{{ route('evoque.applications') }}">Заявки</a>
                         </li>
                         <li class="nav-item @if(Route::current() && Route::current()->getName() === 'evoque.members')active @endif">
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
-                        <li class="nav-item dropdown @if(Request::is('evoque/rp/*'))active @endif">
+                        <li class="nav-item dropdown @if(Request::is('evoque/rp*'))active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="rpDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Рейтинговые перевозки</a>
                             <div class="dropdown-menu" aria-labelledby="rpDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ets2') }}">Статистика ETS2</a>
@@ -64,7 +64,7 @@
                             </div>
                         </li>
                         @can('admin')
-                            <li class="nav-item dropdown @if(Request::is('evoque/admin/*'))active @endif">
+                            <li class="nav-item dropdown @if(Request::is('evoque/admin*'))active @endif">
                                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
                                     <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>

@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container-fliud pt-5 pb-5 roles">
+    <div class="container-fluid pt-5 pb-5 roles">
         <h2 class="mt-3 mb-3 text-primary text-center">Управление ролями</h2>
         <div class="table-responsive mb-3">
             <table class="table table-dark table-hover roles-table">

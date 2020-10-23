@@ -56,8 +56,10 @@
                                     @break
                                 @case(5) @break
                             @endswitch
-                            <p class="mb-0 pt-3">Причина: </p>
-                            <h5>{!! nl2br($app->reason) ?? '-' !!}</h5>
+                            @if($app->reason)
+                                <p class="mb-0 pt-3">Причина: </p>
+                                <h5>{!! nl2br($app->reason) !!}</h5>
+                            @endif
                             <span class="text-muted">{{ $app->created_at->isoFormat('LLL') }}</span>
                         </div>
                         <div class="card-actions">

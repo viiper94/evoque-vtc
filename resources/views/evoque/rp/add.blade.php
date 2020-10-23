@@ -35,7 +35,7 @@
                     <img src="/images/rp/image-placeholder.jpg" alt="Скрин с новым ID" class="w-100" id="new-id-screen-preview">
                 </div>
             </div>
-            <h4>2. Виберите игру</h4>
+            <h4>2. Выберите игру</h4>
             <div class="custom-control custom-radio">
                 <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" required>
                 <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>

@@ -13,14 +13,14 @@ class Application extends Model{
         'vacation_till'
     ];
 
-    protected $fillable = [
-
+    public $casts = [
+        'new_rp_profile' => 'array'
     ];
 
     public $categories = [
         '1' => 'отпуск',
         '2' => 'смену номера',
-        '3' => 'сброс статистики рейтинговых перевозок',
+        '3' => 'смену уровня в рейтинговых перевозках',
         '4' => 'смену никнейма',
         '5' => 'увольнение',
     ];

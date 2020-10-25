@@ -86,13 +86,13 @@ class ConvoysController extends Controller{
         if(Auth::check() && !$public){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
-            $convoys = Convoy::where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->limit(7)->get();
+            $convoys = Convoy::where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->get();
             $grouped = array();
             foreach($convoys as $convoy){
                 $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
             }
             return view('evoque.convoys.private', [
-                'grouped' => array_reverse($grouped)
+                'grouped' => collect(array_reverse($grouped))->slice(0, 7)
             ]);
         }else if(Gate::allows('manage_convoys') && $public === 'all'){
             $convoys = Convoy::orderBy('start_time')->get();

@@ -24,12 +24,15 @@
                             <small class="form-text">{{ $errors->first('nickname') }}</small>
                         @endif
                     </div>
-                    @can('manage_members')
-                        <div class="custom-control custom-checkbox mb-2">
+                    <div class="custom-control custom-checkbox mb-2">
+                        @can('manage_members')
                             <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($member->visible) checked @endif>
-                            <label class="custom-control-label" for="visible">Виден на сайте (снять галочку, чтобы уволить с восстановлением)</label>
-                        </div>
-                    @endcan
+                        @else
+                            <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($member->visible) checked @endif disabled>
+                            <input type="hidden" name="visible" value="{{ $member->visible ? 'on' : 'off' }}">
+                        @endcan
+                        <label class="custom-control-label" for="visible">Виден на сайте (снять галочку, чтобы уволить с восстановлением)</label>
+                    </div>
                     <div class="form-group">
                         <label for="join_date">Дата присоединения</label>
                         <input type="text" class="form-control" id="join_date" name="join_date" value="{{ $member->join_date->format('d.m.Y') }}" autocomplete="off">

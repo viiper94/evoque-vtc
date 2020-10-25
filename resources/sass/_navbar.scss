@@ -1,9 +1,11 @@
 .navbar-dark{
-    background: rgb(0,0,0);
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    background: rgba(0,0,0,0);
     .navbar-toggler{
         border: none;
         outline: none;
+    }
+    &.navbar-gradient{
+        background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
     }
     .navbar-nav{
         .nav-item{

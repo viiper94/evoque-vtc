@@ -14,7 +14,7 @@
                         <a class="nav-link" href="{{ route('rules') }}">Правила</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">О нас</a>
+                        <a class="nav-link" href="{{ route('kb') }}">База знаний</a>
                     </li>
                 </ul>
             </div>

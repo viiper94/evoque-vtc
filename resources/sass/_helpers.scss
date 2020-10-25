@@ -30,3 +30,9 @@
     background-color: $background-lighten-2;
     border-color: $background-lighten-2;
 }
+
+@media (min-width: 768px){
+    .position-md-fixed{
+        position: fixed !important;
+    }
+}

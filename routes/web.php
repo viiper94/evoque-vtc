@@ -21,7 +21,7 @@ Route::get('/', 'Controller@index')->name('home');
 Route::any('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
 Route::get('/members', 'Controller@members')->name('members');
-// TODO KB system
+Route::get('/kb', 'Controller@kb')->name('kb');
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
 Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');

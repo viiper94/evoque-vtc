@@ -17123,6 +17123,12 @@ i.icon-truckersmp:before {
   border-color: #424242;
 }
 
+@media (min-width: 768px) {
+  .position-md-fixed {
+    position: fixed !important;
+  }
+}
+
 p,
 h1,
 h2,
@@ -17151,13 +17157,16 @@ a:hover {
 }
 
 .navbar-dark {
-  background: black;
-  background: linear-gradient(180deg, black 0%, rgba(0, 0, 0, 0) 100%);
+  background: rgba(0, 0, 0, 0);
 }
 
 .navbar-dark .navbar-toggler {
   border: none;
   outline: none;
+}
+
+.navbar-dark.navbar-gradient {
+  background: linear-gradient(180deg, black 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .navbar-dark .navbar-nav .nav-item.active .nav-link {

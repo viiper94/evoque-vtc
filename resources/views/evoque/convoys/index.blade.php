@@ -33,5 +33,6 @@
                 </div>
             @endforeach
         </div>
+        {{ $convoys->links('layout.pagination') }}
     </div>
 @endsection

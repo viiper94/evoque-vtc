@@ -78,7 +78,7 @@ class ConvoysController extends Controller{
     public function index(){
         if(Gate::denies('manage_convoys')) abort(403);
         return view('evoque.convoys.index', [
-            'convoys' => Convoy::orderBy('start_time', 'desc')->get()
+            'convoys' => Convoy::orderBy('start_time', 'desc')->paginate(10)
         ]);
     }
 

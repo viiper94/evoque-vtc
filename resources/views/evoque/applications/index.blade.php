@@ -78,6 +78,7 @@
                         </div>
                     </div>
                 @endforeach
+                {{ $apps->links('layout.pagination') }}
             </div>
         @else
             <div class="row justify-content-center pt-5 pb-5">

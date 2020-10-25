@@ -14003,7 +14003,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
         },
         success: function success(response) {
           if (response.status != 'OK') console.log(response);else {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()(button.data('target')).val('');
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + button.data('target')).val('');
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()('label[for=' + button.data('target') + ']').html('Изображение');
             jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + button.data('target') + '-preview').attr('src', '/images/convoys/image-placeholder.jpg');
           }
         },

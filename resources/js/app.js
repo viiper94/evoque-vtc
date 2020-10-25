@@ -170,7 +170,8 @@ $(document).ready(function(){
                 success : function(response){
                     if(response.status != 'OK') console.log(response);
                     else{
-                        $(button.data('target')).val('');
+                        $('#'+button.data('target')).val('');
+                        $('label[for='+button.data('target')+']').html('Изображение');
                         $('#'+button.data('target')+'-preview').attr('src', '/images/convoys/image-placeholder.jpg');
                     }
                 },

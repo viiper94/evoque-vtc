@@ -116,6 +116,11 @@ class ConvoysController extends Controller{
 
     public function add(Request $request){
         if(Gate::denies('manage_convoys')) abort(403);
+        if($request->ajax() && $request->input('action') == 'remove_img'){
+            return response()->json([
+                'status' => 'OK'
+            ]);
+        }
         if($request->post()){
             $this->validate($request, $this->attributes_validation);
             $convoy = new Convoy();

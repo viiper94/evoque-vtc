@@ -183,6 +183,11 @@ $(document).ready(function(){
         return false;
     });
 
+    $('.member-set-scores [id^=lead-]').change(function(){
+        let id = $(this).data('member');
+        $('#scores-'+id+'-2:not([disabled])').prop('checked', true);
+    });
+
 });
 
 function getPreloaderHtml(){

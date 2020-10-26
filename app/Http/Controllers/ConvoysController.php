@@ -298,26 +298,17 @@ class ConvoysController extends Controller{
         if(Gate::denies('manage_table')) abort(403);
         $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
         if($request->post()){
-//            dd($request->input('lead'));
             $this->validate($request, [
                 'scores' => 'nullable|array',
-                'on' => 'nullable|array',
                 'lead' => 'nullable|string'
             ]);
+//            dd($request->input('scores'));
+            $lead = explode(',', $request->input('lead'));
             foreach($request->input('scores') as $member_id => $value){
                 $member = Member::find($member_id);
-                $member->scores += $value;
-                $member->save();
-            }
-            foreach($request->input('on') as $member_id){
-                $member = Member::find($member_id);
                 $member->convoys += 1;
-                $member->save();
-            }
-            if($request->input('lead')){
-                $lead = explode(',', $request->input('lead'));
-                $member = Member::find($lead[0]);
-                $member->money += $lead[1];
+                if($member->scores) $member->scores += $value;
+                if($member->money && $lead[0] === $member->id) $member->scores += $value;
                 $member->save();
             }
             $tab->status = 1;

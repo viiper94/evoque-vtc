@@ -27,7 +27,7 @@ class Member extends Model implements Auditable{
         'join_date',
         'convoys',
         'scores',
-        'money',
+//        'money',
         'vacations',
         'on_vacation_till',
         'plate',

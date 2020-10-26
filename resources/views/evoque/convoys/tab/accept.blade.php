@@ -48,34 +48,34 @@
                         @foreach($members as $member)
                             <tr class="member-row">
                                 <th class="border-right-5">{{ $member->nickname }}</th>
-                                <td>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-0" name="scores[{{ $member->id }}]" value="0" @if(!$member->scores) disabled @endif>
-                                        @if(!$member->scores)
-                                            <input type="hidden" name="scores[{{ $member->id }}]" value="0">
-                                        @endif
-                                        <label class="custom-control-label" for="scores-{{ $member->id }}-0">0 баллов</label>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-1" name="scores[{{ $member->id }}]" value="1" @if(!$member->scores) disabled @endif>
-                                        @if(!$member->scores)
-                                            <input type="hidden" name="scores[{{ $member->id }}]" value="0">
-                                        @endif
-                                        <label class="custom-control-label" for="scores-{{ $member->id }}-1">1 балл</label>
-                                    </div>
-                                </td>
-                                <td class="border-right-5">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="2" @if($tab->lead_id === $member->id) checked @endif @if(!$member->scores) disabled @endif>
-                                        @if(!$member->scores)
-                                            <input type="hidden" name="scores[{{ $member->id }}]" value="0">
-                                        @endif
-                                        <label class="custom-control-label" for="scores-{{ $member->id }}-2">2 балла</label>
-                                    </div>
-                                </td>
-                                @if($member->money)
+                                @if(isset($member->scores))
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-0" name="scores[{{ $member->id }}]" value="0">
+                                            <label class="custom-control-label" for="scores-{{ $member->id }}-0">0 баллов</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-1" name="scores[{{ $member->id }}]" value="1">
+                                            <label class="custom-control-label" for="scores-{{ $member->id }}-1">1 балл</label>
+                                        </div>
+                                    </td>
+                                    <td class="border-right-5">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="2" @if($tab->lead_id === $member->id) checked @endif>
+                                            <label class="custom-control-label" for="scores-{{ $member->id }}-2">2 балла</label>
+                                        </div>
+                                    </td>
+                                @else
+                                    <td class="border-right-5" colspan="3">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="0" @if($tab->lead_id === $member->id) checked @endif>
+                                            <label class="custom-control-label" for="scores-{{ $member->id }}-2">Посещение</label>
+                                        </div>
+                                    </td>
+                                @endif
+                                @if(isset($member->money))
                                     <td>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="lead-05-{{ $member->id }}" data-member="{{ $member->id }}" name="lead" value="{{ $member->id }},0.5">
@@ -91,7 +91,7 @@
                                 @else
                                     <td colspan="2">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="lead-{{ $member->id }}" name="lead" value="{{ $member->id }},0" @if($tab->lead_id === $member->id) checked @endif>
+                                            <input type="radio" class="custom-control-input" id="lead-{{ $member->id }}" data-member="{{ $member->id }}" name="lead" value="{{ $member->id }},0" @if($tab->lead_id === $member->id) checked @endif>
                                             <label class="custom-control-label" for="lead-{{ $member->id }}">Ведущий</label>
                                         </div>
                                     </td>

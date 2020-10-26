@@ -296,7 +296,7 @@ class ConvoysController extends Controller{
 
     public function acceptTab(Request $request, $id){
         if(Gate::denies('manage_table')) abort(403);
-        $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
+        $tab = Tab::with(['member', 'lead'])->where(['id' => $id, 'status' => 0])->firstOrFail();
         if($request->post()){
             $this->validate($request, [
                 'scores' => 'nullable|array',

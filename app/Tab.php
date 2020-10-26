@@ -20,7 +20,7 @@ class Tab extends Model{
     protected $fillable = [
         'convoy_title',
         'lead_id',
-        'description',
+//        'description',
     ];
 
     public function member(){

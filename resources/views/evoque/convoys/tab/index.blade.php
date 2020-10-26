@@ -21,7 +21,7 @@
         @endcan
         <div class="tabs mt-3 mb-5 row justify-content-around">
             @foreach($tabs as $tab)
-                <div class="card card-dark text-shadow-m col-md-5 m-3 px-0 @if($tab->status == 0)border-primary @endif">
+                <div class="card card-dark text-shadow-m col-md-5 m-3 px-0 @if(!$tab->status)border-primary @endif">
                     <h5 class="card-header">{{ $tab->convoy_title }}</h5>
                     <div class="card-body">
                         <h5>{{ $tab->date->isoFormat('LL') }}</h5>
@@ -36,14 +36,18 @@
                         </div>
                     </div>
                     <div class="card-actions">
-                        @if($tab->member_id === \Illuminate\Support\Facades\Auth::user()->member->id)
-                            <a href="{{ route('evoque.convoys.tab.edit', $tab->id) }}" class="btn btn-outline-warning my-1"><i class="fas fa-edit"></i> Редактировать</a>
+                        @if(!$tab->status)
+                            @if($tab->member_id === \Illuminate\Support\Facades\Auth::user()->member->id)
+                                <a href="{{ route('evoque.convoys.tab.edit', $tab->id) }}" class="btn btn-outline-warning my-1"><i class="fas fa-edit"></i> Редактировать</a>
+                            @endif
+                            @can('manage_table')
+                                <a href="{{ route('evoque.admin.convoys.tab.accept', $tab->id) }}" class="btn btn-outline-success my-1"><i class="fas fa-check"></i> Принять</a>
+                            @endcan
                         @endif
                         @can('manage_table')
-                            <a href="{{ route('evoque.admin.convoys.tab.accept', $tab->id) }}" class="btn btn-outline-success my-1"><i class="fas fa-check"></i> Принять</a>
+                            <a href="{{ route('evoque.admin.convoys.tab.delete', $tab->id) }}" class="btn btn-outline-danger my-1"
+                                onclick="return confirm('Удалить этот скрин TAB?')"><i class="fas fa-trash"></i> Удалить</a>
                         @endcan
-                        <a href="{{ route('evoque.admin.convoys.tab.delete', $tab->id) }}" class="btn btn-outline-danger my-1"
-                           onclick="return confirm('Удалить этот скрин TAB?')"><i class="fas fa-trash"></i> Удалить</a>
                     </div>
                 </div>
             @endforeach

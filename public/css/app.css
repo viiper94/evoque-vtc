@@ -17899,3 +17899,11 @@ table.users td.user-image img {
   border-left: 5px solid #454d55;
 }
 
+#navbar-scrollspy {
+  width: 300px;
+}
+
+.member-set-scores table td {
+  white-space: nowrap;
+}
+

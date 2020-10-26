@@ -76,5 +76,5 @@ Route::any('/evoque/admin/convoys/edit/{id}', 'ConvoysController@edit')->name('e
 Route::get('/evoque/convoys/tab', 'ConvoysController@tab')->name('evoque.convoys.tab');
 Route::any('/evoque/convoys/tab/add', 'ConvoysController@addTab')->name('evoque.convoys.tab.add');
 Route::any('/evoque/convoys/tab/edit/{id}', 'ConvoysController@editTab')->name('evoque.convoys.tab.edit');
-Route::get('/evoque/convoys/tab/accept/{id}', 'ConvoysController@acceptTab')->name('evoque.admin.convoys.tab.accept');
+Route::any('/evoque/convoys/tab/accept/{id}', 'ConvoysController@acceptTab')->name('evoque.admin.convoys.tab.accept');
 Route::get('/evoque/convoys/tab/delete/{id}', 'ConvoysController@deleteTab')->name('evoque.admin.convoys.tab.delete');

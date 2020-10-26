@@ -34,6 +34,7 @@
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
                                 <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
                                 <a class="dropdown-item" href="{{ route('convoys', 'public') }}">Открытый конвой</a>
+                                <a class="dropdown-item" href="{{ route('evoque.convoys.tab') }}">Скрины TAB</a>
                                 @can('manage_convoys')
                                     <a class="dropdown-item" href="{{ route('evoque.convoys') }}">Редактирование</a>
                                 @endcan

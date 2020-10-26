@@ -9,8 +9,7 @@
     <div class="container pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary text-center">Принять скрин TAB</h2>
-        <dt></dt>
-        <div class="row">
+        <div class="row mt-5">
             <div class="attribute col-md-4 col-xs-12 text-center text-md-left">
                 <p class="mb-0">Конвой</p>
                 <h3 class="text-primary">{{ $tab->convoy_title }}</h3>
@@ -30,9 +29,74 @@
                 <h3 class="text-primary">{!! nl2br($tab->description) !!}</h3>
             </div>
         @endif
-        <div class="member-set-scores mt-5">
-
+        <div class="tab-screenshot">
+            <a href="/images/convoys/tab/{{ $tab->screenshot }}" target="_blank"><img src="/images/convoys/tab/{{ $tab->screenshot }}" class="img-fluid"></a>
         </div>
+        <form method="post">
+        @csrf
+            <div class="member-set-scores mt-5">
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover text-center">
+                        <thead>
+                        <tr>
+                            <th>Никнейм</th>
+                            <th colspan="3">Баллы</th>
+                            <th>Посещение</th>
+                            <th colspan="2">Ведущий</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($members as $member)
+                            @if(isset($member->scores))
+                                <tr>
+                                    <th>{{ $member->nickname }}</th>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="member-{{ $member->id }}-05" name="scores[{{ $member->id }}]" value="0.5">
+                                            <label class="custom-control-label" for="member-{{ $member->id }}-05">0.5 балла</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="member-{{ $member->id }}-1" name="scores[{{ $member->id }}]" value="1">
+                                            <label class="custom-control-label" for="member-{{ $member->id }}-1">1 балл</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="member-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="2">
+                                            <label class="custom-control-label" for="member-{{ $member->id }}-2">2 балла</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" id="on-{{ $member->id }}" name="on[]" value="{{ $member->id }}">
+                                            <label class="custom-control-label" for="on-{{ $member->id }}">Посетил конвой</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="lead-05-{{ $member->id }}" name="lead" value="{{ $member->id }},0.5">
+                                            <label class="custom-control-label" for="lead-05-{{ $member->id }}">0.5 эвика</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input" id="lead-1-{{ $member->id }}" name="lead" value="{{ $member->id }},1" @if($tab->lead_id === $member->id) checked @endif">
+                                            <label class="custom-control-label" for="lead-1-{{ $member->id }}">1 эвик</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-outline-warning btn-lg">Принять скрин ТАБа</button>
+            </div>
+        </form>
     </div>
 
 @endsection

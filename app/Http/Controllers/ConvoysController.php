@@ -234,9 +234,11 @@ class ConvoysController extends Controller{
                 'lead_id' => 'required|numeric',
                 'date' => 'required|date_format:d.m.Y',
                 'screenshot' => 'required|image',
+                'description' => 'nullable|string',
             ]);
             $tab = new Tab();
             $tab->fill($request->post());
+            $tab->description = htmlentities(trim($request->input('description')));
             $tab->member_id = Auth::user()->member->id;
             $tab->date = Carbon::parse($request->input('date'))->format('Y-m-d');
             if($request->file('screenshot')){
@@ -263,6 +265,7 @@ class ConvoysController extends Controller{
                 'screenshot' => 'nullable|image',
             ]);
             $tab->fill($request->post());
+            $tab->description = htmlentities(trim($request->input('description')));
             $tab->date = Carbon::parse($request->input('date'))->format('Y-m-d');
             if($request->file('screenshot')){
                 if(is_file(public_path('/images/convoys/tab/').$tab->screenshot)){
@@ -295,11 +298,28 @@ class ConvoysController extends Controller{
         if(Gate::denies('manage_table')) abort(403);
         $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
         if($request->post()){
+//            dd($request->input('lead'));
             $this->validate($request, [
-                'members_scores' => 'required|array',
-                'members_on_convoy' => 'required|array',
-                'scores' => 'required|numeric'
+                'scores' => 'nullable|array',
+                'on' => 'nullable|array',
+                'lead' => 'nullable|string'
             ]);
+            foreach($request->input('scores') as $member_id => $value){
+                $member = Member::find($member_id);
+                $member->scores += $value;
+                $member->save();
+            }
+            foreach($request->input('on') as $member_id){
+                $member = Member::find($member_id);
+                $member->convoys += 1;
+                $member->save();
+            }
+            if($request->input('lead')){
+                $lead = explode(',', $request->input('lead'));
+                $member = Member::find($lead[0]);
+                $member->money += $lead[1];
+                $member->save();
+            }
             $tab->status = 1;
             return $tab->save() ?
                 redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :

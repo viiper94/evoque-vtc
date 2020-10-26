@@ -3,6 +3,9 @@
     table{
         td{
             white-space: nowrap;
+            .uncheck-scores{
+                cursor: pointer;
+            }
         }
     }
 }

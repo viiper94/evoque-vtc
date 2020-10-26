@@ -302,13 +302,12 @@ class ConvoysController extends Controller{
                 'scores' => 'nullable|array',
                 'lead' => 'nullable|string'
             ]);
-//            dd($request->input('scores'));
             $lead = explode(',', $request->input('lead'));
             foreach($request->input('scores') as $member_id => $value){
                 $member = Member::find($member_id);
                 $member->convoys += 1;
                 if(isset($member->scores)) $member->scores += $value;
-                if(isset($member->money) && $lead[0] === $member->id) $member->scores += $value;
+                if(isset($member->money) && $lead[0] == $member->id) $member->money += $lead[1];
                 $member->save();
             }
             $tab->status = 1;

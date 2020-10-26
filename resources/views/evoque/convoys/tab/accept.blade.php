@@ -40,8 +40,8 @@
                         <thead>
                         <tr>
                             <th class="border-right-5">Никнейм</th>
-                            <th colspan="3" class="border-right-5">Баллы</th>
-                            <th colspan="2">Ведущий</th>
+                            <th colspan="4" class="border-right-5">Баллы</th>
+                            <th colspan="3">Ведущий</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,20 +61,21 @@
                                             <label class="custom-control-label" for="scores-{{ $member->id }}-1">1 балл</label>
                                         </div>
                                     </td>
-                                    <td class="border-right-5">
+                                    <td>
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="2" @if($tab->lead_id === $member->id) checked @endif>
                                             <label class="custom-control-label" for="scores-{{ $member->id }}-2">2 балла</label>
                                         </div>
                                     </td>
                                 @else
-                                    <td class="border-right-5" colspan="3">
+                                    <td colspan="3">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="0" @if($tab->lead_id === $member->id) checked @endif>
                                             <label class="custom-control-label" for="scores-{{ $member->id }}-2">Посещение</label>
                                         </div>
                                     </td>
                                 @endif
+                                <td class="border-right-5"><a class="uncheck-scores" data-target="scores"><i class="fas fa-times"></i></a></td>
                                 @if(isset($member->money))
                                     <td>
                                         <div class="custom-control custom-radio">
@@ -96,6 +97,7 @@
                                         </div>
                                     </td>
                                 @endif
+                                <td><a class="uncheck-scores" data-target="lead"><i class="fas fa-times"></i></a></td>
                             </tr>
                         @endforeach
                         </tbody>

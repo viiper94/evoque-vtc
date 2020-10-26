@@ -42,7 +42,8 @@ class MembersController extends Controller{
                 'nickname' => 'required|string',
                 'join_date' => 'required|date_format:d.m.Y',
                 'convoys' => 'required|numeric',
-                'vacations' => 'required|numeric'
+                'vacations' => 'required|numeric',
+                'plate' => 'no_vk|nullable|url|'
             ]);
             $member = Member::findOrFail($id);
             $member->fill($request->post());

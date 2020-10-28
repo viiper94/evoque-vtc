@@ -50,6 +50,8 @@
                 }
             },
             format: 'd.m.Y',
+            minDate: 0,
+            maxDate: '{{ \Carbon\Carbon::now()->addDays(14)->format('Y/m/d') }}',
             lang: 'ru',
             step: 30,
             theme: 'dark',

@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <p class="card-text"><b>{{ $report->game === 'ets2' ? 'Euro Truck Simulator 2' : 'American Truck Simulator' }}</b></p>
                         <div class="row">
-                            <div class="fotorama" data-allowfullscreen="true" data-fit="cover" data-nav="thumbs" data-maxheight="500">
+                            <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="600">
                                 @foreach($report->images as $image)
                                     <img src="/images/rp/{{ $image }}">
                                 @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Convoy;
 use App\Member;
+use App\Role;
 use App\Tab;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -317,7 +318,23 @@ class ConvoysController extends Controller{
         }
         return view('evoque.convoys.tab.accept', [
             'tab' => $tab,
-            'members' => Member::where('visible', '1')->get()
+            'members' => Member::where('visible', '1')->orderBy('nickname')->get(),
+            'roles' => Role::with([
+                'members' => function($query){
+                    $query->where('visible', 1)->orderBy('sort', 'desc')->orderBy('scores', 'desc')->orderBy('join_date', 'asc');
+                },
+                'members.role' => function($query){
+                    $query->where('visible', '1');
+                }
+            ])->where('visible', 1)->get()->groupBy('group')->filter(function($roles){
+                foreach($roles as $role){
+                    foreach($role->members as $member){
+                        $has = $member->topRole() === $role->id;
+                        if($has) return true;
+                    }
+                }
+                return false;
+            })
         ]);
     }
 

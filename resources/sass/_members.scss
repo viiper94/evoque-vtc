@@ -56,5 +56,11 @@
         i{
             font-size: 25px;
         }
+        tbody th{
+            background-color: $primary;
+            color: $text-on-primary;
+            padding: 0;
+            font-size: 17px;
+        }
     }
 }

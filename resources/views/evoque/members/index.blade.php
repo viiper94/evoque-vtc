@@ -32,7 +32,7 @@
             @php $i = 1; @endphp
             @foreach($roles as $role_group)
                 <tr>
-                    <th colspan="14" class="text-center text-primary">{{ $role_group[0]->group }}</th>
+                    <th colspan="14" class="text-center">{{ $role_group[0]->group }}</th>
                 </tr>
                 @foreach($role_group as $role)
                     @foreach($role->members as $member)

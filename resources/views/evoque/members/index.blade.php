@@ -20,7 +20,7 @@
                 <th scope="col">Эвики</th>
                 <th scope="col" class="with-btn">
                     @can('manage_table')
-                        <a class="reset-btn text-shadow" onclick="return confirm('Обнулить посещаемость за неделю?')" data-token="{{ csrf_token() }}">
+                        <a class="reset-btn text-shadow" data-token="{{ csrf_token() }}">
                             <i class="fas fa-sync-alt"></i>
                         </a>
                     @endcan

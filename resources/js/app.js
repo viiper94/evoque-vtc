@@ -108,6 +108,28 @@ $(document).ready(function(){
         }
     });
 
+    $('.reset-btn').click(function(){
+        let button = $(this);
+        $.ajax({
+            cache: false,
+            dataType : 'json',
+            data : {
+                '_token' : button.data('token'),
+            },
+            url : 'evoque/reset',
+            beforeSend : function(){
+                $('.member-convoys .number').html(getPreloaderHtml());
+                button.addClass('disabled');
+            },
+            success : function(response){
+                $('.member-convoys .number').html('0');
+            },
+            complete : function(){
+                button.removeClass('disabled');
+            }
+        });
+    });
+
     $('.report-accept #distance, .report-accept #weight').keyup(function(){
         let distance = $('.report-accept #distance').val();
         let weight = $('.report-accept #weight').val();

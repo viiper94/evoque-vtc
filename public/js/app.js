@@ -13943,6 +13943,27 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
       });
     }
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('.reset-btn').click(function () {
+    var button = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax({
+      cache: false,
+      dataType: 'json',
+      data: {
+        '_token': button.data('token')
+      },
+      url: 'evoque/reset',
+      beforeSend: function beforeSend() {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('.member-convoys .number').html(getPreloaderHtml());
+        button.addClass('disabled');
+      },
+      success: function success(response) {
+        jquery__WEBPACK_IMPORTED_MODULE_0___default()('.member-convoys .number').html('0');
+      },
+      complete: function complete() {
+        button.removeClass('disabled');
+      }
+    });
+  });
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #distance, .report-accept #weight').keyup(function () {
     var distance = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #distance').val();
     var weight = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.report-accept #weight').val();

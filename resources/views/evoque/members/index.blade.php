@@ -18,7 +18,14 @@
                 <th scope="col">Должность</th>
                 <th scope="col">Баллы</th>
                 <th scope="col">Эвики</th>
-                <th scope="col">Конвоев<br>за неделю</th>
+                <th scope="col" class="with-btn">
+                    @can('manage_table')
+                        <a class="reset-btn text-shadow" onclick="return confirm('Обнулить посещаемость за неделю?')" data-token="{{ csrf_token() }}">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                    @endcan
+                    <span>Конвоев<br>за неделю</span>
+                </th>
                 <th scope="col">В отпуске до</th>
                 <th scope="col">Использовано<br>отпусков</th>
                 <th scope="col">Номер</th>
@@ -37,7 +44,7 @@
                 @foreach($role_group as $role)
                     @foreach($role->members as $member)
                         @if($member->topRole() == $role->id)
-                            <tr>
+                            <tr class="member-{{ $member->id }}">
                                 <td>{{ $i++ }}</td>
                                 <td><b>{{ $member->nickname }}</b></td>
                                 <td @if($member->user->birth_date && $member->user->birth_date->format('d-m') == \Carbon\Carbon::now()->format('d-m')) class="text-warning font-weight-bold" @endif>

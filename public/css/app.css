@@ -17746,6 +17746,40 @@ ul.rules .blockquote p strong {
   vertical-align: middle;
 }
 
+.members-table table td.with-btn,
+.members-table table th.with-btn {
+  position: relative;
+}
+
+.members-table table td.with-btn .reset-btn,
+.members-table table th.with-btn .reset-btn {
+  display: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  line-height: 68px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.members-table table td.with-btn span,
+.members-table table th.with-btn span {
+  color: #fff;
+}
+
+.members-table table td.with-btn:hover span,
+.members-table table th.with-btn:hover span {
+  opacity: 0.4;
+}
+
+.members-table table td.with-btn:hover .reset-btn,
+.members-table table th.with-btn:hover .reset-btn {
+  display: block;
+}
+
 .members-table table td.plate-img,
 .members-table table th.plate-img {
   width: 215px;

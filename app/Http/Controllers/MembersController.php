@@ -48,7 +48,8 @@ class MembersController extends Controller{
             $member = Member::findOrFail($id);
             $member->fill($request->post());
             $member->visible = $request->input('visible') === 'on';
-            $member->money = $request->input('money') ? str_replace(',', '.', $request->input('money')) : null;
+            $money = $request->input('money');
+            $member->money = isset($money) ? str_replace(',', '.', $request->input('money')) : null;
             $member->sort = $request->input('sort') === 'on';
             $member->join_date = Carbon::parse($request->input('join_date'))->format('Y-m-d');
             $member->on_vacation_till = $request->input('on_vacation_till') ? Carbon::parse($request->input('on_vacation_till'))->format('Y-m-d') : null;

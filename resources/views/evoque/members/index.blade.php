@@ -4,11 +4,16 @@
     Сотрудники | @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/css/jquery.floatingscroll.css">
+    <script src="/js/jquery.floatingscroll.min.js"></script>
+@endsection
+
 @section('content')
 <div class="container-fluid pt-5 members-table">
     @include('layout.alert')
     <h2 class="mt-3 text-center text-primary">Сотрудники ВТК EVOQUE</h2>
-    <div class="table-responsive mb-5">
+    <div class="table-responsive mb-5" data-fl-scrolls>
         <table class="table table-dark table-bordered table-hover">
             <thead>
             <tr>
@@ -28,11 +33,11 @@
                 </th>
                 <th scope="col">В отпуске до</th>
                 <th scope="col">Использовано<br>отпусков</th>
-                <th scope="col">Номер</th>
                 <th scope="col">Имя</th>
                 <th scope="col">Город/Страна</th>
                 <th scope="col">Ссылки</th>
                 <th scope="col">Дата<br>вступления</th>
+                <th scope="col">Номер</th>
             </tr>
             </thead>
             <tbody>
@@ -85,7 +90,6 @@
                                 </td>
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>
-                                <td class="plate-img p-0"><img src="{{ $member->plate }}"></td>
                                 <td>
                                     @can('manage_members')
                                         <a href="{{ route('evoque.profile', $member->user->id) }}" target="_blank">{{ $member->user->name }}</a>
@@ -109,6 +113,7 @@
                                     @endcan
                                 </td>
                                 <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>
+                                <td class="plate-img p-0"><img src="{{ $member->plate }}"></td>
                             </tr>
                         @endif
                     @endforeach
@@ -119,4 +124,5 @@
     </div>
 
 </div>
+
 @endsection

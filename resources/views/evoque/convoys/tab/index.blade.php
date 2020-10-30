@@ -21,8 +21,15 @@
         @endcan
         <div class="tabs mt-3 mb-5 row justify-content-around">
             @foreach($tabs as $tab)
-                <div class="card card-dark text-shadow-m col-md-5 m-3 px-0 @if(!$tab->status)border-primary @endif">
-                    <h5 class="card-header">{{ $tab->convoy_title }}</h5>
+                <div class="card card-dark text-shadow-m col-md-5 m-3 px-0 @if(!$tab->status)border-primary @else border-success @endif">
+                    <h5 class="card-header">
+                        {{ $tab->convoy_title }}
+                        @if($tab->status == 0)
+                            <span class="badge badge-warning">Рассматривается</span>
+                        @else
+                            <span class="badge badge-success">Принят</span>
+                        @endif
+                    </h5>
                     <div class="card-body">
                         <h5>{{ $tab->date->isoFormat('LL') }}</h5>
                         <div class="card-text">

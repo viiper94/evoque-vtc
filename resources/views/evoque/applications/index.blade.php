@@ -29,10 +29,17 @@
         @if(count($apps) > 0)
             <div class="applications pt-5 pb-5 row">
                 @foreach($apps as $app)
-                    <div class="m-3 card card-dark text-shadow-m @if($app->status == 0) border-primary new @endif">
+                    <div class="m-3 card card-dark text-shadow-m @if($app->status == 0) border-primary new @else border-success @endif">
                         <h5 class="card-header @if($app->status == 0) @if($app->category === 1) text-warning @elseif($app->category === 5) text-danger @endif @endif">Заявка на {{ $app->getCategory() }}</h5>
                         <div class="card-body">
-                            <h4 class="card-title mb-0">От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->old_nickname }}</span></h4>
+                            <h4 class="card-title mb-0">
+                                От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->old_nickname }}</span>
+                                @if($app->status == 0)
+                                    <span class="badge badge-warning">Рассматривается</span>
+                                @else
+                                    <span class="badge badge-success">Принята</span>
+                                @endif
+                            </h4>
                             @if($app->member)
                                 <p class="text-muted">Текущий ник: <b>{{ $app->member->nickname }}</b></p>
                             @endif

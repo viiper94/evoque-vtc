@@ -25,8 +25,15 @@
         @endcan
         <div class="rp-reports pt-3 pb-5">
             @foreach($reports as $report)
-                <div class="card card-dark text-shadow-m m-3 p-0 @if(!$report->status)border-primary @endif">
-                    <h5 class="card-header">От {{ $report->member->nickname }} ({{ $report->created_at->isoFormat('LLL') }})</h5>
+                <div class="card card-dark text-shadow-m m-3 p-0 @if(!$report->status)border-primary @else border-success @endif">
+                    <h5 class="card-header">
+                        От {{ $report->member->nickname }} ({{ $report->created_at->isoFormat('LLL') }})
+                        @if(!$report->status)
+                            <span class="badge badge-warning">Рассматривается</span>
+                        @else
+                            <span class="badge badge-success">Принят</span>
+                        @endif
+                    </h5>
                     <div class="card-body">
                         <p class="card-text"><b>{{ $report->game === 'ets2' ? 'Euro Truck Simulator 2' : 'American Truck Simulator' }}</b></p>
                         <div class="row">

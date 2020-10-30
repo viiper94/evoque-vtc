@@ -44,7 +44,7 @@ class ApplicationsController extends Controller{
     public function accept(Request $request, $id){
         if(Gate::denies('manage_members')) abort(403);
         $application = Application::with('member', 'member.stats')->where('id', $id)->first();
-        $result = false;
+        $result = true;
         switch($application->category){
             case 1:
                 $application->member->on_vacation_till = $application->vacation_till;

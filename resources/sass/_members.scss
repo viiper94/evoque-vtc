@@ -26,10 +26,36 @@
             white-space: nowrap;
             text-align: center;
             vertical-align: middle;
+            &.with-btn{
+                position: relative;
+                .reset-btn{
+                    display: none;
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    right: 0;
+                    left: 0;
+                    text-align: center;
+                    line-height: 68px;
+                    cursor: pointer;
+                    z-index: 999;
+                }
+                span{
+                    color: #fff;
+                }
+                &:hover{
+                    span{
+                        opacity: .4;
+                    }
+                    .reset-btn{
+                        display: block;
+                    }
+                }
+            }
             &.plate-img{
-                width: 215px;
+                width: 140px;
                 img{
-                    height: 46px;
+                    height: 30px;
                 }
             }
             &.icon-link{
@@ -55,6 +81,12 @@
         }
         i{
             font-size: 25px;
+        }
+        tbody th{
+            background-color: #5C5428;
+            color: $primary;
+            padding: 0;
+            font-size: 17px;
         }
     }
 }

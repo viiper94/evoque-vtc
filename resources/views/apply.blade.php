@@ -86,7 +86,7 @@
                     <label for="tmp_link">Ссылка на Ваш аккаунт TruckersMP</label>
                     <div class="form-row mx-0">
                         <input type="url" class="form-control col" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
-                        <button class="btn btn-outline-warning ml-1" type="button" id="check_tmp_link" data-token="{{ csrf_token() }}" disabled><i class="fas fa-check-circle"></i> Проверить</button>
+                        <button class="btn btn-outline-warning ml-1" data-checked="0" type="button" id="check_tmp_link" data-token="{{ csrf_token() }}" disabled><i class="fas fa-check-circle"></i> Проверить</button>
                     </div>
                     @if($errors->has('tmp_link'))
                         <small class="form-text">{{ $errors->first('tmp_link') }}</small>

@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     bsCustomFileInput.init();
     $('#rules_agreed, #requirements_agreed').change(function(){
-        if($('#rules_agreed').prop('checked') && $('#requirements_agreed').prop('checked')){
+        if($('#rules_agreed').prop('checked') && $('#requirements_agreed').prop('checked') && $('#check_tmp_link').data('checked') === '1'){
             $('#submit_btn').prop('disabled', false).removeClass('disabled');
         }else{
             $('#submit_btn').prop('disabled', true).addClass('disabled');
@@ -33,13 +33,14 @@ $(document).ready(function(){
             $('#check_tmp_link').prop('disabled', false).attr('data-id', result[3]);
             $(this).addClass('is-valid').removeClass('is-invalid');
         }else{
-            $('#check_tmp_link').prop('disabled', true).attr('data-id', null);
+            $('#check_tmp_link').prop('disabled', true).attr('data-id', null).data('checked', '0');
             $(this).addClass('is-invalid').removeClass('is-valid');
             $('.steam-row').hide();
             $('#steam_link').val('');
             $('#nickname').val('');
             $('#hours_played').val('');
             $('#have_ats').prop('checked', false);
+            $('#submit_btn').prop('disabled', true).addClass('disabled');
         }
     });
 
@@ -64,6 +65,7 @@ $(document).ready(function(){
                     $('#hours_played').val(response.steam_games.ets2);
                     $('.steam-row').show();
                     if(response.steam_games.ats) $('#have_ats').prop('checked', true);
+                    button.data('checked', '1');
                 }
             },
             complete : function(){
@@ -102,6 +104,30 @@ $(document).ready(function(){
                     button.parent().find('.number').html(response.scores);
                 },
                 complete : function(){
+                    button.removeClass('disabled');
+                }
+            });
+        }
+    });
+
+    $('.reset-btn').click(function(){
+        let button = $(this);
+        if(confirm('Обнулить посещаемость за неделю?')) {
+            $.ajax({
+                cache: false,
+                dataType: 'json',
+                data: {
+                    '_token': button.data('token'),
+                },
+                url: 'evoque/reset',
+                beforeSend: function () {
+                    $('.member-convoys .number').html(getPreloaderHtml());
+                    button.addClass('disabled');
+                },
+                success: function (response) {
+                    $('.member-convoys .number').html('0');
+                },
+                complete: function () {
                     button.removeClass('disabled');
                 }
             });

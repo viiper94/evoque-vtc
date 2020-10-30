@@ -29,6 +29,7 @@ Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.p
 
 Route::get('/evoque', 'MembersController@index')->name('evoque.members');
 Route::post('/evoque/add', 'MembersController@add');
+Route::get('/evoque/reset', 'MembersController@resetConvoys');
 Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
 Route::any('/evoque/admin/member/fire/{id}', 'MembersController@fire')->name('evoque.admin.members.fire');
 
@@ -78,3 +79,5 @@ Route::any('/evoque/convoys/tab/add', 'ConvoysController@addTab')->name('evoque.
 Route::any('/evoque/convoys/tab/edit/{id}', 'ConvoysController@editTab')->name('evoque.convoys.tab.edit');
 Route::any('/evoque/convoys/tab/accept/{id}', 'ConvoysController@acceptTab')->name('evoque.admin.convoys.tab.accept');
 Route::get('/evoque/convoys/tab/delete/{id}', 'ConvoysController@deleteTab')->name('evoque.admin.convoys.tab.delete');
+
+Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

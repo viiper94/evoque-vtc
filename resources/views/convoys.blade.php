@@ -236,15 +236,15 @@
 {{--                    <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" class="text-shadow-m"></a>--}}
                 </section>
             </div>
+            <section class="convoy-note pb-5 m-auto">
+                <hr class="m-auto">
+                <blockquote class="blockquote text-center mb-4 mt-4">
+                    <p class="mb-0">Один груз — одна большая команда!</p>
+                </blockquote>
+                <hr class="m-auto">
+            </section>
         @endif
 
-        <section class="convoy-note pb-5 m-auto">
-            <hr class="m-auto">
-            <blockquote class="blockquote text-center mb-4 mt-4">
-                <p class="mb-0">Один груз — одна большая команда!</p>
-            </blockquote>
-            <hr class="m-auto">
-        </section>
     @else
         <div class="row justify-content-center pt-5 pb-5">
             <h1 class="text-center text-primary m-5">Ближайших открытых конвоев еще нет!</h1>

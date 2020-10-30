@@ -77,6 +77,27 @@
     </div>
     <div class="container mt-5 mb-5">
         <h3 class="text-center text-primary">
+            Бонусные коефициенты
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-dark table-bordered text-center rewards-table table-hover">
+                <thead>
+                <tr>
+                    <th>Вес</th>
+                    <th>Коефициент</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach(\App\RpStats::$bonus as $weight => $k)
+                    <tr>
+                        <th>{{ $weight }}</th>
+                        <td>{{ $k }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        <h3 class="text-center text-primary mt-3">
             Вознаграждения
         </h3>
         <div class="table-responsive">

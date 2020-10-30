@@ -31,6 +31,14 @@ class RpStats extends Model{
         ],
     ];
 
+    public static $bonus = [
+        '< 14 т' => 'x0',
+        '15 - 19 т' => 'x0.1',
+        '20 - 25 т' => 'x0.3',
+        '26 - 32 т' => 'x0.5',
+        '> 33 т' => 'x0.7'
+    ];
+
     protected $fillable = [
         'game',
         'distance',

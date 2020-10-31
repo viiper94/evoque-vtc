@@ -121,11 +121,11 @@ $(document).ready(function(){
                 },
                 url: 'evoque/reset',
                 beforeSend: function () {
-                    $('.member-convoys .number').html(getPreloaderHtml());
+                    $('.member-convoys .number:not(.trainee)').html(getPreloaderHtml());
                     button.addClass('disabled');
                 },
                 success: function (response) {
-                    $('.member-convoys .number').html('0');
+                    $('.member-convoys .number:not(.trainee)').html('0');
                 },
                 complete: function () {
                     button.removeClass('disabled');

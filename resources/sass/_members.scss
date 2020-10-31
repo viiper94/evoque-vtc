@@ -77,6 +77,12 @@
                         cursor: default;
                     }
                 }
+                span.number{
+                    color: #fff;
+                }
+                &.text-danger span.number{
+                    color: #f00;
+                }
             }
         }
         i{

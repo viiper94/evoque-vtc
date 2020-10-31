@@ -60,34 +60,46 @@
                                         {{ $item->title }}@if(!$loop->last),@endif
                                     @endforeach
                                 </td>
-                                <td class="member-scores">
-                                    @can('manage_table')
-                                        @if($member->scores !== null)
-                                            <a class="add-btn text-shadow" data-amount="1" data-target="бал" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                @if($member->topRole() === 14)
+                                    <td colspan="2">Испытательный срок до {{ $member->join_date->addDays(10)->format('d.m') }}</td>
+                                    <td class="member-convoys @if($member->join_date->addDays(10)->isToday() && $member->convoys == 0) text-danger font-weight-bold @endif">
+                                        @can('manage_table')
+                                            <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>
-                                        @endif
-                                    @endcan
-                                    <b class="number">{{ $member->scores ?? '∞' }}</b>
-                                </td>
-                                <td class="member-money">
-                                    @can('manage_table')
-                                        @if($member->money !== null)
-                                            <a class="add-btn text-shadow" data-amount="0.5" data-target="эвика" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                        @endcan
+                                        <span class="number trainee">{{ $member->convoys }}</span><span>/4</span>
+                                    </td>
+                                @else
+                                    <td class="member-scores">
+                                        @can('manage_table')
+                                            @if($member->scores !== null)
+                                                <a class="add-btn text-shadow" data-amount="1" data-target="бал" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                            @endif
+                                        @endcan
+                                        <b class="number">{{ $member->scores ?? '∞' }}</b>
+                                    </td>
+                                    <td class="member-money">
+                                        @can('manage_table')
+                                            @if($member->money !== null)
+                                                <a class="add-btn text-shadow" data-amount="0.5" data-target="эвика" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                                    <i class="fas fa-plus"></i>
+                                                </a>
+                                            @endif
+                                        @endcan
+                                        <b class="number">{{ $member->money ?? '∞' }}</b>
+                                    </td>
+                                    <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0)text-danger font-weight-bold @endif">
+                                        @can('manage_table')
+                                            <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>
-                                        @endif
-                                    @endcan
-                                    <b class="number">{{ $member->money ?? '∞' }}</b>
-                                </td>
-                                <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0)text-danger font-weight-bold @endif">
-                                    @can('manage_table')
-                                        <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
-                                    @endcan
-                                    <span class="number">{{ $member->convoys }}</span>
-                                </td>
+                                        @endcan
+                                        <span class="number">{{ $member->convoys }}</span>
+                                    </td>
+                                @endif
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td>
@@ -113,13 +125,43 @@
                                     @endcan
                                 </td>
                                 <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>
-                                <td class="plate-img p-0"><img src="{{ $member->plate }}"></td>
+                                <td class="plate-img p-0">
+                                    <img src="{{ $member->topRole() === 14 ? '/assets/img/u.png' : $member->plate }}">
+                                </td>
                             </tr>
                         @endif
                     @endforeach
                 @endforeach
             @endforeach
+            <tr>
+                <th colspan="14">&nbsp;</th>
+            </tr>
             </tbody>
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Ник в игре</th>
+                <th scope="col">Возраст</th>
+                <th scope="col">Должность</th>
+                <th scope="col">Баллы</th>
+                <th scope="col">Эвики</th>
+                <th scope="col" class="with-btn">
+                    @can('manage_table')
+                        <a class="reset-btn text-shadow" data-token="{{ csrf_token() }}">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                    @endcan
+                    <span>Конвоев<br>за неделю</span>
+                </th>
+                <th scope="col">В отпуске до</th>
+                <th scope="col">Использовано<br>отпусков</th>
+                <th scope="col">Имя</th>
+                <th scope="col">Город/Страна</th>
+                <th scope="col">Ссылки</th>
+                <th scope="col">Дата<br>вступления</th>
+                <th scope="col">Номер</th>
+            </tr>
+            </thead>
         </table>
     </div>
 

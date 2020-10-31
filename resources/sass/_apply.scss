@@ -5,6 +5,9 @@
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right bottom;
+        @media (max-width: 991px){
+            display: none;
+        }
     }
     h1{
         margin-left: 73px;

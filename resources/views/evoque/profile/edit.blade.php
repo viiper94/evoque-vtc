@@ -47,7 +47,7 @@
             </div>
             <div class="form-group">
                 <label for="vk">Ссылка ВК</label>
-                <input type="url" class="form-control" name="vk" id="vk" value="{{ $user->vk }}">
+                <input type="url" class="form-control" name="vk" id="vk_link" value="{{ $user->vk }}">
                 @if($errors->has('vk'))
                     <small class="form-text">{{ $errors->first('vk') }}</small>
                 @endif

@@ -91,7 +91,7 @@
                                         @endcan
                                         <b class="number">{{ $member->money ?? '∞' }}</b>
                                     </td>
-                                    <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0)text-danger font-weight-bold @endif">
+                                    <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0 && !$member->onVacation())text-danger font-weight-bold @endif">
                                         @can('manage_table')
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>

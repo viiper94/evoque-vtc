@@ -66,7 +66,7 @@ class Member extends Model implements Auditable{
     }
 
     public function onVacation(){
-        return isset($this->on_vacation_till) && $this->on_vacation_till->isFuture();
+        return isset($this->on_vacation_till) && ($this->on_vacation_till->isFuture() || $this->on_vacation_till->isToday());
     }
 
 }

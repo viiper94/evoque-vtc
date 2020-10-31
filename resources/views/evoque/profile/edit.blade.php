@@ -40,7 +40,9 @@
             </div>
             <div class="form-group">
                 <label for="birth_date">Дата рождения</label>
-                <input type="text" class="form-control" name="birth_date" id="birth_date" value="{{ $user->birth_date ? $user->birth_date->format('d.m.Y') : '' }}" autocomplete="off" required>
+                <input type="text" class="form-control" name="birth_date" id="birth_date"
+                       value="{{ $user->birth_date ? $user->birth_date->format('d.m.Y') : '' }}" autocomplete="off"
+                       placeholder="Укажите в формате дд.мм.гггг или выберите в календаре" required>
                 @if($errors->has('birth_date'))
                     <small class="form-text">{{ $errors->first('birth_date') }}</small>
                 @endif
@@ -75,6 +77,7 @@
             },
             format: 'd.m.Y',
             theme: 'dark',
+            maxDate: 0,
             dayOfWeekStart: '1',
             timepicker: false,
             scrollInput: false

@@ -9,17 +9,17 @@
     <div class="kb container py-5">
         <h1 class="text-center text-primary mt-3">База знаний</h1>
             @auth
-                <h2 class="mt-5 ml-5 kb-section">ВТК EVOQOUE</h2>
-                <div class="accordion pb-5" id="vtc">
+                <h2 class="mt-3 mt-md-5 ml-md-5 kb-section">ВТК EVOQOUE</h2>
+                <div class="accordion pb-2 pb-md-5" id="vtc">
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="ets2-paint">
                             <h1 class="kb-icon pr-5 pl-sm-1"><i class="icon-evoque"></i></h1>
-                            <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#ets2-paint-content" aria-expanded="false" aria-controls="ets2-paint-content">
+                            <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#ets2-paint-content" aria-expanded="false" aria-controls="ets2-paint-content">
                                 Оффициальный окрас в ETS2
                             </h2>
                         </div>
                         <div id="ets2-paint-content" class="collapse" aria-labelledby="ets2-paint" data-parent="#vtc">
-                            <div class="card-body pl-5">
+                            <div class="card-body pl-md-5">
                                 <p>С 23.07.2020 в компании действует раскраска <b>Canopy</b></p>
                                 <p>Чтобы установить данную раскраску необходимо: <br>
                                     1. Перейти по ссылке - <a href="https://bit.ly/2O7v8x7" target="_blank">https://bit.ly/2O7v8x7</a> и нажать <b>Подписаться</b>. <br>
@@ -34,12 +34,12 @@
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="ats-paint">
                             <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-fill-drip"></i></h1>
-                            <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#ats-paint-content" aria-expanded="false" aria-controls="ats-paint-content">
+                            <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#ats-paint-content" aria-expanded="false" aria-controls="ats-paint-content">
                                 Оффициальный окрас в ATS
                             </h2>
                         </div>
                         <div id="ats-paint-content" class="collapse" aria-labelledby="ats-paint" data-parent="#vtc">
-                            <div class="card-body pl-5">
+                            <div class="card-body pl-md-5">
                                 <p>С 23.07.2020 в компании действует раскраска <b>Serenity</b> из DLC Classic Stripes Paint Jobs Pack</p>
                                 <p>Чтобы установить данную раскраску необходимо: <br>
                                     1. Перейти по ссылке - <a href="https://bit.ly/3oTNWBc" target="_blank">https://bit.ly/3oTNWBc</a> и нажать <b>Подписаться</b>. <br>
@@ -54,12 +54,12 @@
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="plate">
                             <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-ruler-horizontal"></i></h1>
-                            <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#plate-content" aria-expanded="false" aria-controls="plate-content">
+                            <h2 class="kb-title pl-md-5 pl-sm-1 text-center text-md-left col" type="button" data-toggle="collapse" data-target="#plate-content" aria-expanded="false" aria-controls="plate-content">
                                 Номерной знак ВТК
                             </h2>
                         </div>
                         <div id="plate-content" class="collapse" aria-labelledby="plate" data-parent="#vtc">
-                            <div class="card-body pl-5">
+                            <div class="card-body pl-md-5">
                                 <p>У всех сотрудников компании должен быть установлен номерной знак EVOQUE.</p>
                                 <p>Чтобы установить номер нужно:<br>
                                     1) Зайти на сайт <a href="https://www.worldoftrucks.com/en/" target="_blank">https://www.worldoftrucks.com/en/</a><br>
@@ -94,12 +94,12 @@
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="plates">
                             <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-table"></i></h1>
-                            <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#plates-content" aria-expanded="false" aria-controls="plates-content">
+                            <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#plates-content" aria-expanded="false" aria-controls="plates-content">
                                 Таблица номеров
                             </h2>
                         </div>
                         <div id="plates-content" class="collapse" aria-labelledby="plates" data-parent="#vtc">
-                            <div class="card-body pl-5">
+                            <div class="card-body pl-md-5">
                                 <p>Здесь - <a href="https://bit.ly/38zythV" target="_blank">https://bit.ly/38zythV</a> хранятся все занятые номера в компании.<br>
                                     Если вы хотите сменить номер или вам необходимо его придумать, то загляните сюда и подберите любой который не прописан в данной таблице.</p>
                             </div>
@@ -109,12 +109,12 @@
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="money">
                             <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-euro-sign"></i></h1>
-                            <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#money-content" aria-expanded="false" aria-controls="money-content">
+                            <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#money-content" aria-expanded="false" aria-controls="money-content">
                                 Эвики
                             </h2>
                         </div>
                         <div id="money-content" class="collapse" aria-labelledby="money" data-parent="#vtc">
-                            <div class="card-body pl-5">
+                            <div class="card-body pl-md-5">
                                 <p>Чтобы получить "Эвики" вам нужно начать или продолжать проводить конвои в нашей компании,
                                     обязательное условие наличие нарисованного маршрута или маршрута сделанного путем скриншота
                                     игровой карты с точками через саму игру. Либо вести нашу колонну на Открытом/совместном конвое другой ВТК.</p>
@@ -145,12 +145,12 @@
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="donate">
                             <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-hand-holding-usd"></i></h1>
-                            <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#donate-content" aria-expanded="false" aria-controls="donate-content">
+                            <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#donate-content" aria-expanded="false" aria-controls="donate-content">
                                 Помощь ВТК
                             </h2>
                         </div>
                         <div id="donate-content" class="collapse" aria-labelledby="donate" data-parent="#vtc">
-                            <div class="card-body pl-5">
+                            <div class="card-body pl-md-5">
                                 <p>Ежемесячно тратиться 100 рублей на оплату интерактивной шапки в Открытой группе + обмен Эвиков, рейтинговые грузоперевозки и соревнования.</p>
                                 <p>Сразу скажу, вас никто не обманет ибо в моей честности уже не усомнились многие из вас.<br>
                                     Ни на какие личные нужды эти финансы не уйдут, всё пойдет на нужды ВТК.</p>
@@ -166,12 +166,12 @@
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="links">
                             <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-external-link-alt"></i></h1>
-                            <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#links-content" aria-expanded="false" aria-controls="links-content">
+                            <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#links-content" aria-expanded="false" aria-controls="links-content">
                                 Полезные ссылки
                             </h2>
                         </div>
                         <div id="links-content" class="collapse" aria-labelledby="links" data-parent="#vtc">
-                            <div class="card-body pl-5">
+                            <div class="card-body pl-md-5">
                                 <h6>ВТК EVOQUE</h6>
                                 <ol class="pl-4">
                                     <li><a href="https://evoque.team" target="_blank">https://evoque.team</a> - Наш сайт</li>
@@ -196,17 +196,17 @@
                 </div>
             @endauth
 
-            <h2 class="mt-5 ml-5 kb-section">Связь</h2>
-            <div class="accordion pb-5" id="communication">
+            <h2 class="mt-3 mt-md-5 ml-md-5 kb-section">Связь</h2>
+            <div class="accordion pb-2 pb-md-5" id="communication">
 {{--                <div class="card card-dark mb-5">--}}
 {{--                    <div class="card-header row pb-0" id="discord">--}}
 {{--                        <h1 class="kb-icon pr-5 pl-sm-1"><i class="fab fa-discord"></i></h1>--}}
-{{--                        <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#discord-content" aria-expanded="false" aria-controls="discord-content">--}}
+{{--                        <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#discord-content" aria-expanded="false" aria-controls="discord-content">--}}
 {{--                            Как скачать Дискорд?--}}
 {{--                        </h2>--}}
 {{--                    </div>--}}
 {{--                    <div id="discord-content" class="collapse" aria-labelledby="discord" data-parent="#communication">--}}
-{{--                        <div class="card-body">--}}
+{{--                        <div class="card-body pl-md-5">--}}
 
 {{--                        </div>--}}
 {{--                    </div>--}}
@@ -215,12 +215,12 @@
 {{--                <div class="card card-dark mb-5">--}}
 {{--                    <div class="card-header row pb-0" id="ts3">--}}
 {{--                        <h1 class="kb-icon pr-5 pl-sm-1"><i class="fab fa-teamspeak"></i></h1>--}}
-{{--                        <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#ts3-content" aria-expanded="false" aria-controls="ts3-content">--}}
+{{--                        <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#ts3-content" aria-expanded="false" aria-controls="ts3-content">--}}
 {{--                            Как скачать Team Speak 3?--}}
 {{--                        </h2>--}}
 {{--                    </div>--}}
 {{--                    <div id="ts3-content" class="collapse" aria-labelledby="ts3" data-parent="#communication">--}}
-{{--                        <div class="card-body">--}}
+{{--                        <div class="card-body pl-md-5">--}}
 
 {{--                        </div>--}}
 {{--                    </div>--}}
@@ -229,7 +229,7 @@
                 <div class="card card-dark mb-5">
                     <div class="card-header pb-0 row" id="ts3-overlay">
                         <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-layer-group"></i></h1>
-                        <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#ts3-overlay-content" aria-expanded="false" aria-controls="ts3-overlay-content">
+                        <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#ts3-overlay-content" aria-expanded="false" aria-controls="ts3-overlay-content">
                             Оверлей для TS3
                         </h2>
                     </div>
@@ -271,17 +271,17 @@
                 </div>
             </div>
 
-            <h2 class="mt-5 ml-5 kb-section">ETS2 и ATS</h2>
-            <div class="accordion pb-5" id="games">
+            <h2 class="mt-3 mt-md-5 ml-md-5 kb-section">ETS2 и ATS</h2>
+            <div class="accordion pb-2 pb-md-5" id="games">
                 <div class="card card-dark mb-5">
                     <div class="card-header row pb-0" id="console">
                         <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-terminal"></i></h1>
-                        <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#console-content" aria-expanded="false" aria-controls="console-content">
+                        <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#console-content" aria-expanded="false" aria-controls="console-content">
                             Активация консоли
                         </h2>
                     </div>
                     <div id="console-content" class="collapse" aria-labelledby="console" data-parent="#games">
-                        <div class="card-body pl-5">
+                        <div class="card-body pl-md-5">
                             <p>Что бы активировать консоль в игре нужно:</p>
                             <ol class="pl-4">
                                 <li>Переходим в папку <b>Мои документы/Euro Truck Simulator 2</b></li>
@@ -304,29 +304,29 @@
 {{--                <div class="card card-dark mb-5">--}}
 {{--                    <div class="card-header row pb-0" id="cargo">--}}
 {{--                        <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-truck-loading"></i></h1>--}}
-{{--                        <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#cargo-content" aria-expanded="false" aria-controls="cargo-content">--}}
+{{--                        <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#cargo-content" aria-expanded="false" aria-controls="cargo-content">--}}
 {{--                            Как искать груз на конвой?--}}
 {{--                        </h2>--}}
 {{--                    </div>--}}
 {{--                    <div id="cargo-content" class="collapse" aria-labelledby="cargo" data-parent="#games">--}}
-{{--                        <div class="card-body">--}}
+{{--                        <div class="card-body pl-md-5">--}}
 
 {{--                        </div>--}}
 {{--                    </div>--}}
 {{--                </div>--}}
             </div>
 
-{{--            <h2 class="mt-5 ml-5 kb-section">TruckersMP</h2>--}}
-{{--            <div class="accordion" id="truckersmp">--}}
+{{--            <h2 class="mt-3 mt-md-5 ml-md-5 kb-section">TruckersMP</h2>--}}
+{{--            <div class="accordion pb-2 pb-md-5" id="truckersmp">--}}
 {{--                <div class="card card-dark mb-5">--}}
 {{--                    <div class="card-header row pb-0" id="tmp-download">--}}
 {{--                        <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-download"></i></h1>--}}
-{{--                        <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#tmp-download-content" aria-expanded="false" aria-controls="tmp-download-content">--}}
+{{--                        <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#tmp-download-content" aria-expanded="false" aria-controls="tmp-download-content">--}}
 {{--                            Как скачать клиент TruckersMP?--}}
 {{--                        </h2>--}}
 {{--                    </div>--}}
 {{--                    <div id="tmp-download-content" class="collapse" aria-labelledby="tmp-download" data-parent="#truckersmp">--}}
-{{--                        <div class="card-body">--}}
+{{--                        <div class="card-body pl-md-5">--}}
 
 {{--                        </div>--}}
 {{--                    </div>--}}
@@ -335,12 +335,12 @@
 {{--                <div class="card card-dark mb-5">--}}
 {{--                    <div class="card-header row pb-0" id="promods">--}}
 {{--                        <h1 class="kb-icon pr-5 pl-sm-1"><i class="fas fa-map"></i></h1>--}}
-{{--                        <h2 class="kb-title pl-md-5 pl-sm-1" type="button" data-toggle="collapse" data-target="#promods-content" aria-expanded="false" aria-controls="promods-content">--}}
+{{--                        <h2 class="kb-title pl-md-5 pl-sm-1 col text-center text-md-left" type="button" data-toggle="collapse" data-target="#promods-content" aria-expanded="false" aria-controls="promods-content">--}}
 {{--                            Как скачать карту ProMods?--}}
 {{--                        </h2>--}}
 {{--                    </div>--}}
 {{--                    <div id="promods-content" class="collapse" aria-labelledby="promods" data-parent="#truckersmp">--}}
-{{--                        <div class="card-body">--}}
+{{--                        <div class="card-body pl-md-5">--}}
 
 {{--                        </div>--}}
 {{--                    </div>--}}

@@ -5,6 +5,11 @@
 .kb {
     .kb-section {
         padding-left: 155px;
+        @media (max-width: 768px){
+            padding-left: 0;
+            text-align: center;
+            font-size: 18px;
+        }
     }
     .accordion{
         .card{
@@ -16,9 +21,17 @@
                     width: 150px;
                     text-align: right;
                     border-right: 1px solid $primary-text;
+                    @media (max-width: 768px){
+                         display: none;
+                    }
                 }
                 .kb-title{
                     line-height: 50px;
+                    @media (max-width: 768px){
+                        font-size: 20px;
+                        line-height: inherit;
+                    }
+
                 }
                 h1, h2, a{
                     color: $primary;
@@ -34,6 +47,11 @@
             .card-body{
                 border-left: 1px solid $primary-text;
                 margin-left: 154px;
+                @media (max-width: 768px){
+                    margin-left: 0;
+                    border-left: none;
+                }
+
                 ol, ul{
                     li{
                         color: $primary-text;

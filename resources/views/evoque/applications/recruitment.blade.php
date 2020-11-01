@@ -28,7 +28,7 @@
                             </p>
                             <p>
                                 <i class="mr-3 fas fa-microphone @if($application->have_mic)active @endif"></i>
-                                <i class="mr-3 fab fa-teamspeak @if($application->have_ts3)active @endif"></i>
+                                <i class="mr-3 fab fa-discord @if($application->have_ts3)active @endif"></i>
                                 <i class="mr-3 fas fa-truck-pickup @if($application->have_ats)active @endif"></i>
                             </p>
                             <p class="card-text">Ник в игре: <b>{{ $application->nickname }}</b><br>

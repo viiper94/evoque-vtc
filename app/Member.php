@@ -69,4 +69,8 @@ class Member extends Model implements Auditable{
         return isset($this->on_vacation_till) && ($this->on_vacation_till->isFuture() || $this->on_vacation_till->isToday());
     }
 
+    public function isTrainee(){
+        return $this->topRole() === 14;
+    }
+
 }

@@ -54,7 +54,7 @@
                                     @if($member->topRole() == $role->id)
                                         <tr class="member-row">
                                             <th class="border-right-5">{{ $member->nickname }}</th>
-                                            @if(isset($member->scores))
+                                            @if(isset($member->scores) && !$member->isTrainee())
                                                 <td>
                                                     <div class="custom-control custom-radio">
                                                         <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-0" name="scores[{{ $member->id }}]" value="0">
@@ -82,7 +82,7 @@
                                                 </td>
                                             @endif
                                             <td class="border-right-5"><a class="uncheck-scores" data-target="scores"><i class="fas fa-times"></i></a></td>
-                                            @if(isset($member->money))
+                                            @if(isset($member->money) && !$member->isTrainee())
                                                 <td>
                                                     <div class="custom-control custom-radio">
                                                         <input type="radio" class="custom-control-input" id="lead-05-{{ $member->id }}" data-member="{{ $member->id }}" name="lead" value="{{ $member->id }},0.5">
@@ -95,6 +95,9 @@
                                                         <label class="custom-control-label" for="lead-1-{{ $member->id }}">1 эвик</label>
                                                     </div>
                                                 </td>
+                                                <td><a class="uncheck-scores" data-target="lead"><i class="fas fa-times"></i></a></td>
+                                            @elseif($member->isTrainee())
+                                                <td colspan="3"></td>
                                             @else
                                                 <td colspan="2">
                                                     <div class="custom-control custom-radio">
@@ -102,8 +105,8 @@
                                                         <label class="custom-control-label" for="lead-{{ $member->id }}">Ведущий</label>
                                                     </div>
                                                 </td>
+                                                <td><a class="uncheck-scores" data-target="lead"><i class="fas fa-times"></i></a></td>
                                             @endif
-                                            <td><a class="uncheck-scores" data-target="lead"><i class="fas fa-times"></i></a></td>
                                         </tr>
                                     @endif
                                 @endforeach

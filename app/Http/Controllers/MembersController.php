@@ -111,10 +111,12 @@ class MembersController extends Controller{
 
     public function resetConvoys(Request $request){
         if(!$request->ajax() || Gate::denies('manage_table')) abort(403);
-        $members = Member::where('convoys', '>', 0)->get();
+        $members = Member::with('role')->where('convoys', '>', 0)->get();
         foreach($members as $member){
-            $member->convoys = 0;
-            $member->save();
+            if(!$member->isTrainee()){
+                $member->convoys = 0;
+                $member->save();
+            }
         }
         return response()->json([
             'status' => 'OK'

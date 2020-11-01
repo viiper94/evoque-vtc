@@ -4,11 +4,6 @@
         Скрин TAB | @lang('general.vtc_evoque')
 @endsection
 
-@section('assets')
-    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
-    <script src="/js/fotorama-4.6.4/fotorama.js"></script>
-@endsection
-
 @section('content')
 
     <div class="container pt-5">
@@ -37,9 +32,7 @@
                                 Ведущий: <b>{{ $tab->lead->nickname }}</b>
                             </p>
                             <p>{!! nl2br($tab->description) !!}</p>
-                            <div class="fotorama w-100" data-allowfullscreen="true" data-fit="cover" data-nav="none">
-                                <img src="/images/convoys/tab/{{ $tab->screenshot }}">
-                            </div>
+                            <a href="/images/convoys/tab/{{ $tab->screenshot }}" target="_blank"><img class="w-100 text-shadow-m" src="/images/convoys/tab/{{ $tab->screenshot }}"></a>
                         </div>
                     </div>
                     <div class="card-actions">

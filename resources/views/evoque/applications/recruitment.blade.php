@@ -33,7 +33,7 @@
                             </p>
                             <p class="card-text">Ник в игре: <b>{{ $application->nickname }}</b><br>
                                 Возраст: <b>{{ $application->age }} лет</b><br>
-                                Часов в ETS2: <b>{{ $application->hours_played }} часов</b><br>
+                                Часов в ETS2: <b>{{ $application->hours_played }} {{ trans_choice('час|часа|часов', $application->hours_played) }}</b><br>
                                 Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
                             <span class="text-muted">{{ $application->created_at->isoFormat('LLL') }}</span>
                         </div>

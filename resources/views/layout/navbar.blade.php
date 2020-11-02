@@ -37,8 +37,11 @@
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
                                 <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
                                 <a class="dropdown-item" href="{{ route('convoys', 'public') }}">Открытый конвой</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.tab') }}">Скрины TAB</a>
                                 @can('manage_convoys')
+                                    <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('evoque.convoys') }}">Редактирование</a>
                                 @endcan
                             </div>
@@ -61,6 +64,7 @@
                             <div class="dropdown-menu" aria-labelledby="rpDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ets2') }}">Статистика ETS2</a>
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ats') }}">Статистика ATS</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">Отчёты</a>
 {{--                                @can('manage_rp')--}}
 {{--                                    <a class="dropdown-item" href="{{ route('evoque.rp.results') }}">Результаты</a>--}}

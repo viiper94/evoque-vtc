@@ -338,4 +338,14 @@ class ConvoysController extends Controller{
         ]);
     }
 
+    public function plans(){
+        $days = [];
+        for($i = 0; $i <= 7; $i++){
+            $days[$i] = Carbon::now()->addDays($i);
+        }
+        return view('evoque.convoys.plans.index', [
+            'days' => $days
+        ]);
+    }
+
 }

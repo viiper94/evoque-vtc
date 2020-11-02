@@ -45,6 +45,12 @@
                     </div>
                     <p>Не более 2-х активных наказаний в истории банов на сайте TruckersMP</p>
                 </li>
+                <li class="row mt-5 ml-1 ml-md-0">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <p>Наличие DLC Going East!, Scandinavia, Vive la France! и Italia</p>
+                </li>
             </ul>
         </div>
     </section>

@@ -169,7 +169,31 @@
             </thead>
         </table>
     </div>
+</div>
 
+<div class="container mb-5">
+    <h3 class="text-primary text-center">Начисление баллов и эвиков</h3>
+    <table class="table table-dark table-hover table-bordered text-center">
+        <tbody>
+        <tr>
+            <td>Закрытый конвой</td>
+            <th>1 балл</th>
+        </tr>
+        <tr>
+            <td>Открытый или совместный конвой</td>
+            <th>2 балла</th>
+        </tr>
+        <tr>
+            <td>Проведённый конвой</td>
+            <th>2 балла + 1 эвик</th>
+        </tr>
+        <tr>
+            <td>Ведущий нашей ВТК на открытом или совместном конвое другой ВТК</td>
+            <th>2 балла + 0,5 эвика</th>
+        </tr>
+        </tbody>
+    </table>
+    <h6 class="text-center text-muted">Баллы зачисляются в том случае, если конвой пройден до конца, согласно установленного маршрута.</h6>
 </div>
 
 @endsection

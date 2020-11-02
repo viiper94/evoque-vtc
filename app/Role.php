@@ -9,6 +9,7 @@ class Role extends Model{
     public $fillable = [
         'group',
         'title',
+        'description',
         'admin',
         'manage_members',
         'manage_convoys',

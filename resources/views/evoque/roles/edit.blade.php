@@ -18,6 +18,10 @@
                 <label for="group">Группа роли</label>
                 <input type="text" class="form-control" id="group" name="group" value="{{ $role->group }}" required>
             </div>
+            <div class="form-group">
+                <label for="description">Описание</label>
+                <input type="text" class="form-control" id="description" name="description" value="{{ $role->description }}">
+            </div>
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="admin" name="admin" @if($role->admin)checked @endif>
                 <label class="custom-control-label" for="admin">Полные админские права</label>

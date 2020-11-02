@@ -7,7 +7,9 @@ import "bootstrap/dist/js/bootstrap.min";
 
 $(document).ready(function(){
 
+    $('[data-toggle="popover"]').popover()
     bsCustomFileInput.init();
+
     $('#rules_agreed, #requirements_agreed').change(function(){
         if($('#rules_agreed').prop('checked') && $('#requirements_agreed').prop('checked') && $('#check_tmp_link').data('checked') === '1'){
             $('#submit_btn').prop('disabled', false).removeClass('disabled');

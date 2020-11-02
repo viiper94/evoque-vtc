@@ -44,7 +44,10 @@
             @php $i = 1; @endphp
             @foreach($roles as $role_group)
                 <tr>
-                    <th colspan="14" class="text-center">{{ $role_group[0]->group }}</th>
+                    <th colspan="14" class="text-center">
+                        {{ $role_group[0]->group }}
+                        <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{ $role_group[0]->description }}"><i class="fas fa-info-circle"></i></a>
+                    </th>
                 </tr>
                 @foreach($role_group as $role)
                     @foreach($role->members as $member)

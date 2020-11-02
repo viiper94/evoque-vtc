@@ -16,6 +16,9 @@
                         <li class="nav-item @if(Route::current() && Route::current()->getName() === 'convoys')active @endif">
                             <a class="nav-link" href="{{ route('convoys') }}">Конвой</a>
                         </li>
+                        <li class="nav-item @if(Route::current() && Request::is('members'))active @endif">
+                            <a class="nav-link" href="{{ route('members') }}">Сотрудники</a>
+                        </li>
                         <li class="nav-item @if(Route::current() && Request::is('rules'))active @endif">
                             <a class="nav-link" href="{{ route('rules') }}">Правила</a>
                         </li>

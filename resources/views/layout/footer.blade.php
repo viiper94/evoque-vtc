@@ -8,7 +8,7 @@
                         <a href="https://vk.com/evoquevtc" target="_blank" class="pl-3 pr-2"><i class="fab fa-vk"></i></a>
                     </div>
                     <div class="discord">
-                        <a href="https://discord.com/invite/Gj53a8d" target="_blank" class="pl-3 pr-2"><i class="fab fa-discord"></i></a>
+                        <a href="https://discord.gg/Gj53a8d" target="_blank" class="pl-3 pr-2"><i class="fab fa-discord"></i></a>
                     </div>
                     <div class="teamspeak">
                         <a href="http://invite.teamspeak.com/evoque.ts3srv.ru" target="_blank" class="pl-3 pr-2"><i class="fab fa-teamspeak"></i></a>

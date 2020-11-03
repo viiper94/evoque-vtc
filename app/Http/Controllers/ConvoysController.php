@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Convoy;
+use App\ConvoyBookings;
 use App\Member;
 use App\Role;
 use App\Tab;
@@ -163,6 +164,7 @@ class ConvoysController extends Controller{
         $convoy->trailer_public = true;
         $convoy->route = ['1' => null];
         return view('evoque.convoys.edit', [
+            'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::all(),
@@ -348,12 +350,30 @@ class ConvoysController extends Controller{
         ]);
     }
 
-    public function plans(){
+    public function plans(Request $request){
+        if($request->post()){
+            $this->validate($request, [
+                'title' => 'required|string',
+                'date' => 'required|date_format:d.m.Y',
+                'time' => 'required|date_format:H:i',
+                'lead' => 'required|string',
+            ]);
+
+            $booking = new ConvoyBookings();
+            $booking->title = trim($request->input('title'));
+            $booking->lead = $request->input('lead');
+            $booking->start_time = Carbon::parse($request->input('date').' '. $request->input('time'))->format('Y-m-d H:i');
+            return $booking->save() ?
+                redirect()->back()->with(['success' => 'Конвой забронирован!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
         $days = [];
         $convoys = Convoy::whereDate('start_time', '>=', Carbon::today())->get();
+        $bookings = ConvoyBookings::whereDate('start_time', '>=', Carbon::today())->get();
+        $convoys_and_bookings = $convoys->merge($bookings);
         for($i = 0; $i <= 7; $i++){
             $convoy_that_day = array();
-            foreach($convoys as $convoy){
+            foreach($convoys_and_bookings as $convoy){
                 if($convoy->start_time->format('d.m.Y') === Carbon::now()->addDays($i)->format('d.m.Y')){
                     $convoy_that_day[] = $convoy;
                 }
@@ -364,9 +384,9 @@ class ConvoysController extends Controller{
                 'allowedToBook' => $this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] - count($convoy_that_day)
             ];
         }
-//        dd($days);
         return view('evoque.convoys.plans.index', [
-            'days' => $days
+            'days' => $days,
+            'members' => Member::where('visible', '1')->orderBy('nickname')->get(),
         ]);
     }
 

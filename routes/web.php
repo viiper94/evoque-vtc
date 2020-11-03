@@ -80,6 +80,6 @@ Route::any('/evoque/convoys/tab/edit/{id}', 'ConvoysController@editTab')->name('
 Route::any('/evoque/convoys/tab/accept/{id}', 'ConvoysController@acceptTab')->name('evoque.admin.convoys.tab.accept');
 Route::get('/evoque/convoys/tab/delete/{id}', 'ConvoysController@deleteTab')->name('evoque.admin.convoys.tab.delete');
 
-Route::get('/evoque/convoys/plans', 'ConvoysController@plans')->name('evoque.convoys.plans');
+Route::any('/evoque/convoys/plans', 'ConvoysController@plans')->name('evoque.convoys.plans');
 
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

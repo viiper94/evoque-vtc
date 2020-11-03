@@ -223,6 +223,11 @@ $(document).ready(function(){
         $(row).find('[id^='+target+'-]').prop('checked', false);
     });
 
+    $('.book-convoy').click(function(){
+        let date = $(this).data('date');
+        $('.modal #date').val(date)
+    });
+
 });
 
 function getPreloaderHtml(){

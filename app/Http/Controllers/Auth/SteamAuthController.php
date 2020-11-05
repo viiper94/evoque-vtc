@@ -105,6 +105,7 @@ class SteamAuthController extends Controller
                 'user_id' => $user->id,
                 'nickname' => str_replace('[EVOQUE] ', '', $tmp_info->getName()),
                 'join_date' => Carbon::now(),
+                'trainee_until' => Carbon::now()->addDays(10),
             ]);
             $member->role()->attach('14');
             $member->save();

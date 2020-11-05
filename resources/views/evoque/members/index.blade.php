@@ -66,7 +66,7 @@
                                     @endforeach
                                 </td>
                                 @if($member->topRole() === 14)
-                                    <td colspan="2">Испытательный срок до {{ $member->join_date->addDays(10)->format('d.m') }}</td>
+                                    <td colspan="2">Испытательный срок до {{ $member->trainee_until->format('d.m') }}</td>
                                     <td class="member-convoys @if($member->join_date->addDays(10)->isToday() && $member->convoys == 0) text-danger font-weight-bold @endif">
                                         @can('manage_table')
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">

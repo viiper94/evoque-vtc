@@ -16,6 +16,7 @@ class Member extends Model implements Auditable{
 
     protected $dates = [
         'on_vacation_till',
+        'trainee_until',
         'join_date',
         'created_at',
         'updated_at'
@@ -30,6 +31,7 @@ class Member extends Model implements Auditable{
 //        'money',
         'vacations',
         'on_vacation_till',
+        'trainee_until',
         'plate',
         'sort',
     ];

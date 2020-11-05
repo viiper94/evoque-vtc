@@ -50,6 +50,10 @@
                     </div>
                 </div>
                 <div class="col-md-6">
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="sort" name="sort" @if($member->sort) checked @endif>
+                        <label class="custom-control-label" for="sort">Показывать вверху списка</label>
+                    </div>
                     <div class="form-group">
                         <label for="roles">Должность (выбрать несколько с зажатым Ctrl)</label>
                         <select multiple class="form-control" id="roles" name="roles[]" size="14">
@@ -58,9 +62,12 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="sort" name="sort" @if($member->sort) checked @endif>
-                        <label class="custom-control-label" for="sort">Показывать вверху списка</label>
+                    <div class="form-group">
+                        <label for="trainee_until">Испытательный срок до</label>
+                        <input type="text" class="form-control" id="trainee_until" name="trainee_until" value="{{ $member->trainee_until ? $member->trainee_until->format('d.m.Y') : '' }}" autocomplete="off">
+                        @if($errors->has('trainee_until'))
+                            <small class="form-text">{{ $errors->first('trainee_until') }}</small>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -250,7 +257,7 @@
     </div>
 
     <script>
-        $('#join_date, #on_vacation_till').datetimepicker({
+        $('#join_date, #on_vacation_till, #trainee_until').datetimepicker({
             i18n:{
                 ru:{
                     months:[

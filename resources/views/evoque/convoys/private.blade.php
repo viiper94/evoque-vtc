@@ -53,7 +53,12 @@
                             <p>Сервер:</p>
                             <h3>{{ $convoy->server }}</h3>
                             <p>Ведущий:</p>
-                            <h3>{{ $convoy->lead }}</h3>
+                            <h3>
+                                {{ $convoy->lead }}&nbsp;
+                                @if($convoy->leadMember)
+                                    <a href="{{ $convoy->leadMember->user->vk }}" target="_blank"><i class="fab fa-vk"></i></a>
+                                @endif
+                            </h3>
                             <p>Связь {{ $convoy->communication }}:</p>
                             <h2><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication_link }}</a></h2>
                             @if($convoy->communication_channel)

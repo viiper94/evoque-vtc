@@ -98,7 +98,7 @@ class ConvoysController extends Controller{
         if(Auth::check() && !$public){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
-            $convoys = Convoy::where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->get();
+            $convoys = Convoy::with('leadMember', 'leadMember.user')->where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->get();
             $grouped = array();
             foreach($convoys as $convoy){
                 $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;

@@ -309,6 +309,10 @@ class Convoy extends Model{
         ];
     }
 
+    public function leadMember(){
+        return $this->hasOne('App\Member', 'nickname', 'lead');
+    }
+
     public function deleteImages($folder, $attr = ['route', 'truck_image', 'trailer_image', 'alt_trailer_image']){
         if(in_array('route', $attr)){
             foreach($this->route as $route){

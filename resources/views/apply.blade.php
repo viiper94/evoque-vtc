@@ -49,7 +49,15 @@
                     <div class="icon-wrapper">
                         <i class="fas fa-map"></i>
                     </div>
-                    <p>Наличие DLC Going East!, Scandinavia, Vive la France! и Italia</p>
+                    <p>Наличие DLC Going East!, Scandinavia, Vive la France! и Italia<br>
+                        <button class="btn btn-outline-warning btn-sm"
+                                data-toggle="popover"
+                                data-content="Отсутствие вышеупомянутых DLC не будет поводом в отказе при приеме,
+                                            но большая часть конвоев в ВТК проходит именно по этим расширениям!"
+                                data-trigger="focus">
+                            А что если нет?
+                        </button>
+                    </p>
                 </li>
             </ul>
         </div>

@@ -11,16 +11,16 @@
 
 @section('content')
 
-    <div class="container pt-5 pb-5 private-convoys">
+    <div class="container py-5 private-convoys">
         @can('manage_convoys')
-            <div class="row pt-3 justify-content-center">
+            <div class="row pt-5 justify-content-center">
                 <a href="{{ route('convoys', 'all') }}" class="btn btn-outline-warning">Смотреть все регламенты</a>
             </div>
         @endcan
         @foreach($grouped as $day => $convoys)
-            <h1 class="mt-3 text-primary text-center">Регламент на {{ ucfirst($day) }}</h1>
+            <h1 class="pt-5 text-primary text-center">Регламент на {{ ucfirst($day) }}</h1>
             @foreach($convoys as $convoy)
-                <div class="item pt-5 pb-5">
+                <div class="card card-dark item mt-2 pt-3 mb-">
                     <section class="convoy-note pb-3 pt-3 m-auto">
                         <hr class="m-auto">
                         <blockquote class="blockquote text-center mb-4 mt-4">
@@ -143,15 +143,15 @@
                             </blockquote>
                             <hr class="m-auto">
                         </section>
-                        <section class="w-100">
-                            <h1 class="text-center text-primary">Маршрут конвоя</h1>
-                            <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
-                                @foreach($convoy->route as $item)
-                                    <img src="/images/convoys/{{ $item }}">
-                                @endforeach
-                            </div>
-                        </section>
                     </div>
+                    <section class="w-100">
+                        <h1 class="text-center text-primary">Маршрут конвоя</h1>
+                        <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
+                            @foreach($convoy->route as $item)
+                                <img src="/images/convoys/{{ $item }}">
+                            @endforeach
+                        </div>
+                    </section>
                 </div>
             @endforeach
         @endforeach

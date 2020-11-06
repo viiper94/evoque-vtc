@@ -29,14 +29,16 @@
         </h2>
         <form method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="public" name="public" @if($convoy->public) checked @endif>
-                <label class="custom-control-label" for="public">Наш открытый конвой (виден всем)</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($convoy->visible) checked @endif>
-                <label class="custom-control-label" for="visible">Опубликовать для сотрудников</label>
-            </div>
+            @if(!$booking)
+                <div class="custom-control custom-checkbox mb-2">
+                    <input type="checkbox" class="custom-control-input" id="public" name="public" @if($convoy->public) checked @endif>
+                    <label class="custom-control-label" for="public">Наш открытый конвой (виден всем)</label>
+                </div>
+                <div class="custom-control custom-checkbox mb-2">
+                    <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($convoy->visible) checked @endif>
+                    <label class="custom-control-label" for="visible">Опубликовать для сотрудников</label>
+                </div>
+            @endif
             <div class="form-group">
                 <label for="nickname">Название</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ $convoy->title }}" required>
@@ -55,7 +57,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="datetimepicker">Время выезда</label>
+                <label for="datetimepicker">Время выезда по МСК</label>
                 <input type="text" class="form-control" id="datetimepicker" name="start_time" value="{{ $convoy->start_time->format('d.m.Y H:i') }}" autocomplete="off" required>
                 @if($errors->has('start_time'))
                     <small class="form-text">{{ $errors->first('start_time') }}</small>
@@ -151,23 +153,26 @@
             </div>
             <h3 class="mt-5 text-primary">Связь</h3>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3" @if($convoy->communication == 'TeamSpeak 3' || $convoy->communication == '') checked @endif>
+                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3" @if($convoy->communication == 'TeamSpeak 3' || $convoy->communication == '') checked @endif @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord" @if($convoy->communication == 'Discord') checked @endif>
+                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord" @if($convoy->communication == 'Discord') checked @endif @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-discord">Discord</label>
+                @if($booking)
+                    <input type="hidden" name="communication" value="{{ $convoy->communication }}">
+                @endif
             </div>
             <div class="form-group">
                 <label for="communication_program">Ссылка на сервер</label>
-                <input type="text" class="form-control" id="communication_link" name="communication_link" value="{{ $convoy->communication_link }}" required>
+                <input type="text" class="form-control" id="communication_link" name="communication_link" value="{{ $convoy->communication_link }}" required @if($booking) readonly @endif>
                 @if($errors->has('communication_link'))
                     <small class="form-text">{{ $errors->first('communication_link') }}</small>
                 @endif
             </div>
             <div class="form-group">
                 <label for="communication_channel">Канал на сервере</label>
-                <input type="text" class="form-control" id="communication_channel" name="communication_channel" value="{{ $convoy->communication_channel }}" required>
+                <input type="text" class="form-control" id="communication_channel" name="communication_channel" value="{{ $convoy->communication_channel }}" required @if($booking) readonly @endif>
                 @if($errors->has('communication_channel'))
                     <small class="form-text">{{ $errors->first('communication_channel') }}</small>
                 @endif
@@ -175,7 +180,9 @@
             <div class="form-group">
                 <label for="lead">Ведущий</label>
                 <select class="form-control" id="lead" name="lead">
-                    <option value="На месте разберёмся" @if($convoy->lead === 'На месте разберёмся') selected @endif >На месте разберёмся</option>
+                    @if(!$booking)
+                        <option value="На месте разберёмся" @if($convoy->lead === 'На месте разберёмся') selected @endif >На месте разберёмся</option>
+                    @endif
                     @foreach($members as $member)
                         <option value="{{ $member->nickname }}" @if($member->nickname === $convoy->lead) selected @endif >{{ $member->nickname }}</option>
                     @endforeach
@@ -197,10 +204,12 @@
                     <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="truck_image"><i class="fas fa-trash"></i> Удалить картинку</button>
                 </div>
                 <div class="col-md-7">
-                    <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public" @if($convoy->truck_public) checked @endif>
-                        <label class="custom-control-label" for="truck_public">Показывать для всех</label>
-                    </div>
+                    @if(!$booking)
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public" @if($convoy->truck_public) checked @endif>
+                            <label class="custom-control-label" for="truck_public">Показывать для всех</label>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}" placeholder="Марка">
                         @if($errors->has('truck'))
@@ -239,10 +248,12 @@
                     <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>
                 <div class="col-md-7">
-                    <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="trailer_public" name="trailer_public" @if($convoy->trailer_public) checked @endif>
-                        <label class="custom-control-label" for="trailer_public">Показывать для всех</label>
-                    </div>
+                    @if(!$booking)
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="trailer_public" name="trailer_public" @if($convoy->trailer_public) checked @endif>
+                            <label class="custom-control-label" for="trailer_public">Показывать для всех</label>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $convoy->trailer }}" placeholder="Тип">
                         @if($errors->has('trailer'))
@@ -346,7 +357,8 @@
             theme: 'dark',
             dayOfWeekStart: '1',
             defaultTime: '19:30',
-            scrollInput: false
+            scrollInput: false,
+            datepicker: {{ $booking ? 'false' : 'true' }}
         });
         $.datetimepicker.setLocale('ru');
     </script>

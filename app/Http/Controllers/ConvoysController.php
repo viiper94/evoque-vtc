@@ -351,6 +351,7 @@ class ConvoysController extends Controller{
     }
 
     public function plans(Request $request){
+        if(Auth::guest()) return redirect()->route('auth.steam');
         if($request->post()){
             $this->validate($request, [
                 'title' => 'required|string',
@@ -387,6 +388,50 @@ class ConvoysController extends Controller{
         return view('evoque.convoys.plans.index', [
             'days' => $days,
             'members' => Member::where('visible', '1')->orderBy('nickname')->get(),
+        ]);
+    }
+
+    public function book(Request $request, $offset){
+        if(Gate::denies('lead_convoys')) abort(403);
+        $convoy = new Convoy([
+            'trailer_public' => false,
+            'truck_public' => false,
+            'public' => false,
+            'visible' => false,
+            'route' => ['1' => null],
+            'communication' => 'Discord',
+            'communication_link' => 'https://discord.gg/Gj53a8d',
+            'communication_channel' => 'Комната для конвоев',
+            'lead' => Auth::user()->member->nickname,
+        ]);
+        if($request->post()){
+            $this->validate($request, $this->attributes_validation);
+            $convoy->fill($request->post());
+            foreach($request->files as $key => $file){
+                if($key === 'route' && is_array($file)){
+                    $route_images = array();
+                    foreach($file as $i => $route){
+                        $route_images[] = $this->saveImage($route);
+                    }
+                    $convoy->route = $route_images;
+                }else{
+                    $convoy->$key = $this->saveImage($file);
+                }
+            }
+            $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            return $convoy->save() ?
+                redirect()->route('evoque.convoys.plans')->with(['success' => 'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
+        $convoy->start_time = Carbon::now()->addDays($offset);
+        $tmp = new Client();
+        $servers = $tmp->servers()->get();
+        return view('evoque.convoys.edit', [
+            'booking' => true,
+            'convoy' => $convoy,
+            'servers' => $servers,
+            'members' => Member::where('id', Auth::user()->member->id)->get(),
+            'dlc' => $this->dlcList
         ]);
     }
 

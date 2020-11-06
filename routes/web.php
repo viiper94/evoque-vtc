@@ -81,5 +81,6 @@ Route::any('/evoque/convoys/tab/accept/{id}', 'ConvoysController@acceptTab')->na
 Route::get('/evoque/convoys/tab/delete/{id}', 'ConvoysController@deleteTab')->name('evoque.admin.convoys.tab.delete');
 
 Route::any('/evoque/convoys/plans', 'ConvoysController@plans')->name('evoque.convoys.plans');
+Route::any('/evoque/convoys/plans/book/{offset}', 'ConvoysController@book')->name('evoque.convoys.plans.book');
 
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

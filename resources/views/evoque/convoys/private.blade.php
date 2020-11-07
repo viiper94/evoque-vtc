@@ -22,7 +22,6 @@
             @foreach($convoys as $convoy)
                 <div class="card card-dark item mt-2 mb-5 py-3 text-shadow-m">
                     <section class="convoy-note pb-3 pt-3 m-auto">
-                        <hr class="m-auto">
                         <blockquote class="blockquote text-center mb-4 mt-4">
                             <h2 class="mb-0">{{ $convoy->title }}</h2>
                             @can('manage_convoys')
@@ -124,11 +123,11 @@
                                 @endif
                             @endif
                         </div>
-                        <section class="convoy-note pb-5 pt-5 m-auto">
+                        <section class="col-12 convoy-note pb-5 pt-5 m-auto">
                             <hr class="m-auto">
                             <blockquote class="blockquote text-center mb-4 mt-4">
                                 <h5 class="mb-0">Правила ВТК на конвое:</h5>
-                                <ol class="text-left ml-5 mr-1 px-5">
+                                <ol class="text-left ml-5 mr-1 px-md-5">
                                     <li>Канал в рации <b>№7</b> (многочисленный флуд и музыка в рации полностью запрещены).</li>
                                     <li>Движение по команде и только колонной, соблюдая ПДД и правила мультиплеера.</li>
                                     <li>Рекомендуемая дистанция между машинами <b>70-150 метров</b>.</li>
@@ -145,7 +144,7 @@
                         </section>
                     </div>
                     <section class="w-100">
-                        <h1 class="text-center text-primary">Маршрут конвоя</h1>
+                        <h1 class="text-center">Маршрут конвоя</h1>
                         <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
                             @foreach($convoy->route as $item)
                                 <img src="/images/convoys/{{ $item }}">

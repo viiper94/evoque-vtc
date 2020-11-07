@@ -20,7 +20,7 @@
         @foreach($grouped as $day => $convoys)
             <h1 class="pt-5 text-primary text-center">Регламент на {{ ucfirst($day) }}</h1>
             @foreach($convoys as $convoy)
-                <div class="card card-dark item mt-2 pt-3 mb-">
+                <div class="card card-dark item mt-2 mb-5 py-3 text-shadow-m">
                     <section class="convoy-note pb-3 pt-3 m-auto">
                         <hr class="m-auto">
                         <blockquote class="blockquote text-center mb-4 mt-4">
@@ -128,7 +128,7 @@
                             <hr class="m-auto">
                             <blockquote class="blockquote text-center mb-4 mt-4">
                                 <h5 class="mb-0">Правила ВТК на конвое:</h5>
-                                <ol class="text-left ml-5 mr-1">
+                                <ol class="text-left ml-5 mr-1 px-5">
                                     <li>Канал в рации <b>№7</b> (многочисленный флуд и музыка в рации полностью запрещены).</li>
                                     <li>Движение по команде и только колонной, соблюдая ПДД и правила мультиплеера.</li>
                                     <li>Рекомендуемая дистанция между машинами <b>70-150 метров</b>.</li>
@@ -154,6 +154,9 @@
                     </section>
                 </div>
             @endforeach
+                @if(!$loop->last)
+                    <hr class="border-primary w-100">
+                @endif
         @endforeach
     </div>
 

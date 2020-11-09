@@ -371,7 +371,7 @@ class ConvoysController extends Controller{
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $days = [];
-        $convoys = Convoy::whereDate('start_time', '>=', Carbon::today())->get();
+        $convoys = Convoy::whereDate('start_time', '>=', Carbon::today())->where('visible', '1')->get();
         for($i = 0; $i <= 7; $i++){
             $convoy_that_day = array();
             foreach($convoys as $convoy){

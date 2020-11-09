@@ -4,6 +4,11 @@
     Отчёт рейтинговой перевозки | @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container rp-report pt-5 pb-5">
@@ -91,5 +96,12 @@
             </section>
         </div>
     </div>
+
+    <script>
+        var simplemde = new SimpleMDE({
+            element: $('#note')[0],
+            promptURLs: true
+        });
+    </script>
 
 @endsection

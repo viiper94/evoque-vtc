@@ -7,6 +7,8 @@
 @section('assets')
     <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
     <script src="/js/fotorama-4.6.4/fotorama.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
 
 @section('content')
@@ -14,17 +16,17 @@
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary">Прием отчёта от {{ $report->member->nickname }}</h2>
-        <div class="row">
-            <div class="col-md-9">
-                <div class="fotorama w-100" data-allowfullscreen="true" data-fit="cover" data-nav="thumbs">
-                    @foreach($report->images as $image)
-                        <img src="/images/rp/{{ $image }}">
-                    @endforeach
+        <form method="post">
+            @csrf
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="fotorama w-100" data-allowfullscreen="true" data-fit="cover" data-nav="thumbs">
+                        @foreach($report->images as $image)
+                            <img src="/images/rp/{{ $image }}">
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <form method="post">
-                    @csrf
+                <div class="col-md-3">
                     <div class="form-group">
                         <label for="distance">Пройденая дистанция, км</label>
                         <input type="number" class="form-control" id="distance" name="distance">
@@ -50,13 +52,37 @@
                             <small class="form-text">{{ $errors->first('level') }}</small>
                         @endif
                     </div>
-                    <div class="row justify-content-center">
-                        <button type="submit" class="btn btn-outline-warning btn-lg">Принять отчёт</button>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
-
+            <div class="row">
+                <p class="mb-0 text-primary font-weight-bold col-12">Дополнительная информация</p>
+                <div class="col-12">
+                    @markdown($report->note)
+                </div>
+            </div>
+            <hr class="border-primary">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="comment">Комментарий</label>
+                    <textarea class="form-control simple-mde" id="comment" name="comment">{{ $report->comment }}</textarea>
+                    @if($errors->has('comment'))
+                        <small class="form-text">{{ $errors->first('comment') }}</small>
+                    @endif
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1">Принять</button>
+                <button type="submit" name="decline" value="1" class="btn btn-outline-danger btn-lg m-1"
+                    onclick="return confirm('Отклонить отчёт?')">Отклонить</button>
+            </div>
+        </form>
     </div>
+
+    <script>
+        var simplemde = new SimpleMDE({
+            element: $('#comment')[0],
+            promptURLs: true
+        });
+    </script>
 
 @endsection

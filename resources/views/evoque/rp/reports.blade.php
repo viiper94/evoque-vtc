@@ -25,17 +25,32 @@
         @endcan
         <div class="rp-reports pt-3 pb-5">
             @foreach($reports as $report)
-                <div class="card card-dark text-shadow-m m-3 p-0 @if(!$report->status)border-primary @else border-success @endif">
-                    <h5 class="card-header">
-                        От {{ $report->member->nickname }} ({{ $report->created_at->isoFormat('LLL') }})
-                        @if(!$report->status)
-                            <span class="badge badge-warning">Рассматривается</span>
-                        @else
-                            <span class="badge badge-success">Принят</span>
-                        @endif
-                    </h5>
+                <div class="card card-dark text-shadow-m m-3 p-0
+                        @if($report->status === 0) border-primary
+                        @elseif($report->status === 1) border-success
+                        @else border-danger @endif">
+                    <div class="card-header row">
+                        <h5 class="col-md-10 mb-0">
+                            От {{ $report->member->nickname }} ({{ $report->created_at->isoFormat('LLL') }})
+                            @if($report->status === 0)
+                                <span class="badge badge-warning">Рассматривается</span>
+                            @elseif($report->status === 1)
+                                <span class="badge badge-success">Принят</span>
+                            @else
+                                <span class="badge badge-danger">Отклонён</span>
+                            @endif
+                        </h5>
+                        <h5 class="col-md-2 text-md-right text-muted mb-0">{{ $report->game === 'ets2' ? 'ETS2' : 'ATS' }}</h5>
+                    </div>
                     <div class="card-body">
-                        <p class="card-text"><b>{{ $report->game === 'ets2' ? 'Euro Truck Simulator 2' : 'American Truck Simulator' }}</b></p>
+                        @if($report->note)
+                            <p class="font-weight-bold text-primary mt-2 mb-0">Дополнительная информация:</p>
+                            @markdown($report->note)
+                        @endif
+                        @if($report->comment)
+                            <p class="font-weight-bold text-primary mt-2 mb-0">Комментарий от {{ $report->comment_by }}:</p>
+                            @markdown($report->comment)
+                        @endif
                         <div class="row">
                             <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="600">
                                 @foreach($report->images as $image)
@@ -43,15 +58,11 @@
                                 @endforeach
                             </div>
                         </div>
-                        @if($report->note)
-                            <p>Дополнительная информация:<br>
-                            <b>{{ $report->note }}</b></p>
-                        @endif
                     </div>
                     @if(!$report->status)
                         <div class="card-actions">
                             @can('manage_rp')
-                                <a href="{{ route('evoque.rp.reports.accept', $report->id) }}" class="my-1 btn btn-outline-success"><i class="fas fa-edit"></i> Принять</a>
+                                <a href="{{ route('evoque.rp.reports.view', $report->id) }}" class="my-1 btn btn-outline-warning"><i class="fas fa-edit"></i> Смотреть</a>
                             @endcan
                                 @if(\Illuminate\Support\Facades\Auth::user()->member->id == $report->member_id || \Illuminate\Support\Facades\Gate::allows('manage_rp'))
                                     <a href="{{ route('evoque.rp.reports.delete', $report->id) }}" class="my-1 btn btn-outline-danger"

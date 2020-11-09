@@ -675,7 +675,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'App\\Application' => __DIR__ . '/../..' . '/app/Application.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Convoy' => __DIR__ . '/../..' . '/app/Convoy.php',
-        'App\\ConvoyBookings' => __DIR__ . '/../..' . '/app/ConvoyBookings.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\ApplicationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApplicationsController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

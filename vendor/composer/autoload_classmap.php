@@ -9,7 +9,6 @@ return array(
     'App\\Application' => $baseDir . '/app/Application.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Convoy' => $baseDir . '/app/Convoy.php',
-    'App\\ConvoyBookings' => $baseDir . '/app/ConvoyBookings.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\ApplicationsController' => $baseDir . '/app/Http/Controllers/ApplicationsController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

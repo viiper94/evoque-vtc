@@ -432,6 +432,7 @@ class ConvoysController extends Controller{
                 }
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->booking = true;
             $convoy->booked_by_id = Auth::user()->member->id;
             return $convoy->save() ?
                 redirect()->route('evoque.convoys.plans')->with(['success' => 'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :

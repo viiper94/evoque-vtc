@@ -19,6 +19,11 @@ ul.rules{
                 color: $primary;
             }
         }
+        ol{
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: $primary-text;
+        }
     }
 }
 @media (max-width: 768px){

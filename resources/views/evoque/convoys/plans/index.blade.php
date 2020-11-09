@@ -14,6 +14,14 @@
 <div class="container plans py-5">
     @include('layout.alert')
     <h1 class="mt-3 text-primary text-center">Планы по конвоям</h1>
+    <section class="pb-5 pt-3 m-auto text-center">
+        <hr class="m-auto w-25 border-primary">
+        <p class="mt-5">Тут находится вся информация о будущих мероприятиях в компании.<br>
+            Подробности этих мероприятий будут выкладываться примерно за сутки до начала мероприятия.</p>
+        <p class="mb-5">Если вы хотите провести конвой выберите подходящий (не занятый) день и забронируйте конвой - логист свяжется с вами обговорить детали.<br>
+            Проведенный конвой даёт вам 1 Эвик, Эвики можно обменять на различные DLC и игры (подробности в <a href="https://evoque.team/kb" target="_blank">Базе знаний</a>)</p>
+        <hr class="m-auto w-25 border-primary">
+    </section>
     <div class="table-responsive">
         <table class="table table-dark table-hover text-center">
             <thead>
@@ -62,6 +70,29 @@
             </tbody>
         </table>
     </div>
+    <section class="col-12 convoy-note pb-5 pt-5 m-auto">
+        <hr class="m-auto">
+        <blockquote class="blockquote text-center mb-4 mt-4">
+            <h5 class="mb-0">ETS2:</h5>
+            <ol class="text-left ml-5 mr-1 px-md-5 w-75 m-auto">
+                <li>Сервера Симуляции - протяженность конвоя не менее 2000 км/конвой.</li>
+                <li>Сервера аркады - протяженность конвоя не менее 2500 км/конвой.</li>
+                <li>Тяжелые грузы - не менее 1500 км.</li>
+                <li>Легковушки и головастики: Симуляция - не менее 2200 км, аркада - не менее 2700 км.</li>
+                <li>Максимальная скорость ведущего: симуляция - 100 км/ч, аркада - 150 км/ч.</li>
+            </ol>
+        </blockquote>
+        <blockquote class="blockquote text-center mb-4 mt-5">
+            <h5 class="mb-0">ATS:</h5>
+            <ol class="text-left ml-5 mr-1 px-md-5 w-75 m-auto">
+                <li>Планка конвоя - протяженность конвоя не менее 2100 км/конвой.</li>
+                <li>Тяжелые грузы - не менее 1500 км.</li>
+                <li>Легковушки и головастики: не менее 2300 км/конвой.</li>
+                <li>Максимальная скорость ведущего - 115 км/ч.</li>
+            </ol>
+        </blockquote>
+        <hr class="m-auto">
+    </section>
 </div>
 
 @can('manage_convoys')

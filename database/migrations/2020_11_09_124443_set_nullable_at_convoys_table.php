@@ -18,7 +18,7 @@ class SetNullableAtConvoysTable extends Migration
             $table->string('communication')->nullable()->change();
             $table->string('communication_link')->nullable()->change();
             $table->string('communication_channel')->nullable()->change();
-            $table->string('route')->nullable()->change();
+            $table->text('route')->nullable()->change();
             $table->string('start_city')->nullable()->change();
             $table->string('rest_city')->nullable()->change();
             $table->string('finish_city')->nullable()->change();

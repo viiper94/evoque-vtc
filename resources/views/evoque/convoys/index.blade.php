@@ -33,19 +33,17 @@
                             <h5>{{ $convoy->start_time->isoFormat('dddd') }}</h5>
                             <h4 class="convoy-date">{{ $convoy->start_time->isoFormat('LLL') }}</h4>
                             <p class="card-text">
-                                @if(!($convoy->booking && !$convoy->visible))
-                                    @if($convoy->start_city)
-                                        Старт: <b>{{ $convoy->start_city }} {{ $convoy->start_company }}</b><br>
-                                    @endif
-                                    @if($convoy->finish)
-                                        Финиш: <b>{{ $convoy->finish }} {{ $convoy->finish_company }}</b><br>
-                                    @endif
-                                    @if($convoy->server)
-                                        Сервер: <b>{{ $convoy->server }}</b><br>
-                                    @endif
-                                    @if($convoy->communication)
-                                        Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
-                                    @endif
+                                @if($convoy->start_city)
+                                    Старт: <b>{{ $convoy->start_city }} {{ $convoy->start_company }}</b><br>
+                                @endif
+                                @if($convoy->finish)
+                                    Финиш: <b>{{ $convoy->finish }} {{ $convoy->finish_company }}</b><br>
+                                @endif
+                                @if($convoy->server)
+                                    Сервер: <b>{{ $convoy->server }}</b><br>
+                                @endif
+                                @if($convoy->communication)
+                                    Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
                                 @endif
                                 Ведущий: <b>{{ $convoy->lead }}</b><br>
                             </p>

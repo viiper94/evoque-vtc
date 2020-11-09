@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Role;
 use App\RpReport;
 use App\RpStats;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -39,7 +40,7 @@ class RpController extends Controller{
 
     public function reports(){
         if(Auth::guest()) abort(404);
-        $reports = RpReport::with('member');
+        $reports = RpReport::with('member')->whereDate('created_at', '>=', Carbon::today()->subWeeks(1));
         if(Gate::denies('manage_rp')) $reports->where('member_id', Auth::user()->member->id);
         return view('evoque.rp.reports', [
             'reports' => $reports->orderBy('created_at', 'desc')->paginate(10)

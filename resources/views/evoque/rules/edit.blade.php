@@ -5,7 +5,8 @@
 @endsection
 
 @section('assets')
-    <script src="/js/ckeditor/ckeditor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
 
 @section('content')
@@ -60,7 +61,10 @@
     </div>
 
     <script>
-        CKEDITOR.replace('text');
+        var simplemde = new SimpleMDE({
+            element: $('#text')[0],
+            promptURLs: true
+        });
     </script>
 
 @endsection

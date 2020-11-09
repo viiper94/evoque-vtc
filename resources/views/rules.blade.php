@@ -14,12 +14,10 @@
                 <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§{{ $paragraph->paragraph }} </h1>
                 <h1 class="paragraph-title pl-md-5 pl-sm-1">{{ $paragraph->title }}
                 </h1>
-                <blockquote class="blockquote">
-                    <p class="ml-md-5">
-                        {!! $paragraph->text !!}
-                    </p>
+                <blockquote class="blockquote pl-md-5">
+                    @markdown($paragraph->text)
                     @can('admin')
-                        <p class="ml-md-5">
+                        <p class="">
                             <a href="{{ route('evoque.rules.edit', $paragraph->id) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Редактировать</a>
                             @if(count($paragraph->audits) > 0)
                                 <a href="{{ route('evoque.rules.changelog', $paragraph->id) }}" class="btn btn-outline-info"><i class="fas fa-history"></i></a>

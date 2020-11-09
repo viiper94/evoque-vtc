@@ -172,6 +172,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'GrahamCampbell\\Markdown\\' => 24,
         ),
         'F' => 
         array (
@@ -548,6 +549,10 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'GrahamCampbell\\Markdown\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/graham-campbell/markdown/src',
         ),
         'Fruitcake\\Cors\\' => 
         array (
@@ -2113,6 +2118,13 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Fideloper\\Proxy\\TrustedProxyServiceProvider' => __DIR__ . '/..' . '/fideloper/proxy/src/TrustedProxyServiceProvider.php',
         'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
         'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
+        'GrahamCampbell\\Markdown\\Facades\\Markdown' => __DIR__ . '/..' . '/graham-campbell/markdown/src/Facades/Markdown.php',
+        'GrahamCampbell\\Markdown\\MarkdownServiceProvider' => __DIR__ . '/..' . '/graham-campbell/markdown/src/MarkdownServiceProvider.php',
+        'GrahamCampbell\\Markdown\\View\\Compiler\\MarkdownCompiler' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Compiler/MarkdownCompiler.php',
+        'GrahamCampbell\\Markdown\\View\\Directive\\MarkdownDirective' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Directive/MarkdownDirective.php',
+        'GrahamCampbell\\Markdown\\View\\Engine\\BladeMarkdownEngine' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Engine/BladeMarkdownEngine.php',
+        'GrahamCampbell\\Markdown\\View\\Engine\\PathEvaluationTrait' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Engine/PathEvaluationTrait.php',
+        'GrahamCampbell\\Markdown\\View\\Engine\\PhpMarkdownEngine' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Engine/PhpMarkdownEngine.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',

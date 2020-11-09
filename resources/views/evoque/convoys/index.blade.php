@@ -32,18 +32,31 @@
                             @endif
                             <h5>{{ $convoy->start_time->isoFormat('dddd') }}</h5>
                             <h4 class="convoy-date">{{ $convoy->start_time->isoFormat('LLL') }}</h4>
-                            @if(!($convoy->booking && !$convoy->visible))
-                                <p class="card-text">
-                                    Старт: <b>{{ $convoy->start_city }} {{ $convoy->start_company }}</b><br>
-                                    Финиш: <b>{{ $convoy->finish }} {{ $convoy->finish_company }}</b><br>
-                                    Сервер: <b>{{ $convoy->server }}</b><br>
-                                    Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
-                                    Ведущий: <b>{{ $convoy->lead }}</b><br>
-                                </p>
-                            @endif
+                            <p class="card-text">
+                                @if(!($convoy->booking && !$convoy->visible))
+                                    @if($convoy->start_city)
+                                        Старт: <b>{{ $convoy->start_city }} {{ $convoy->start_company }}</b><br>
+                                    @endif
+                                    @if($convoy->finish)
+                                        Финиш: <b>{{ $convoy->finish }} {{ $convoy->finish_company }}</b><br>
+                                    @endif
+                                    @if($convoy->server)
+                                        Сервер: <b>{{ $convoy->server }}</b><br>
+                                    @endif
+                                    @if($convoy->communication)
+                                        Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
+                                    @endif
+                                @endif
+                                Ведущий: <b>{{ $convoy->lead }}</b><br>
+                            </p>
                         </div>
                         <div class="card-actions">
                             <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning my-1"><i class="fas fa-edit"></i> Редактировать</a>
+                            @if(!$convoy->visible)
+                                <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="btn btn-outline-success my-1"><i class="fas fa-eye"></i> Опубликовать</a>
+                            @else
+                                <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="btn btn-outline-info my-1"><i class="fas fa-eye-slash"></i> Спрятать</a>
+                            @endif
                             <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger my-1"
                                onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
                         </div>

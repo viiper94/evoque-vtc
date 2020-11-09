@@ -227,6 +227,15 @@ class ConvoysController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function toggle(Request $request, $id){
+        if(Gate::denies('manage_convoys')) abort(403);
+        $convoy = Convoy::findOrFail($id);
+        $convoy->visible = !$convoy->visible;
+        return $convoy->save() ?
+            redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
     private function saveImage(UploadedFile $file, $path = '/images/convoys/'){
         $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
         $file->move(public_path($path), $name);

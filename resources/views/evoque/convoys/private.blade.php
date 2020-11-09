@@ -34,34 +34,34 @@
                     </section>
                     <div class="row convoy-info pt-5 pb-5">
                         <div class="col-sm-6 pr-md-5 pr-3 text-md-right text-center">
-                            <p>Старт:</p>
+                            <p class="text-muted">Старт:</p>
                             <h3>{{ $convoy->start_city }}</h3>
                             <h5>{{ $convoy->start_company }}</h5>
-                            <p class="mt-4">Перерыв:</p>
+                            <p class="mt-4 text-muted">Перерыв:</p>
                             <h3>{{ $convoy->rest_city }}</h3>
                             <h5>{{ $convoy->rest_company }}</h5>
-                            <p class="mt-4">Финиш:</p>
+                            <p class="mt-4 text-muted">Финиш:</p>
                             <h3>{{ $convoy->finish_city }}</h3>
                             <h5>{{ $convoy->finish_company }}</h5>
-                            <p class="mt-4">Сбор:</p>
+                            <p class="mt-4 text-muted">Сбор:</p>
                             <h3 >{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h3>
-                            <p>Выезд:</p>
+                            <p class="text-muted">Выезд:</p>
                             <h3>{{ $convoy->start_time->format('H:i  ') }} по МСК</h3>
                         </div>
                         <div class="col-sm-6 pl-md-5 pl-3 text-md-left text-center">
-                            <p>Сервер:</p>
+                            <p class="text-muted">Сервер:</p>
                             <h3>{{ $convoy->server }}</h3>
-                            <p>Ведущий:</p>
+                            <p class="text-muted">Ведущий:</p>
                             <h3>
                                 {{ $convoy->lead }}&nbsp;
                                 @if($convoy->leadMember)
                                     <a href="{{ $convoy->leadMember->user->vk }}" target="_blank"><i class="fab fa-vk"></i></a>
                                 @endif
                             </h3>
-                            <p>Связь {{ $convoy->communication }}:</p>
+                            <p class="text-muted">Связь {{ $convoy->communication }}:</p>
                             <h2><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication_link }}</a></h2>
                             @if($convoy->communication_channel)
-                                <p>Канал на сервере:</p>
+                                <p class="text-muted">Канал на сервере:</p>
                                 <h3>{{ $convoy->communication_channel }}</h3>
                             @endif
                         </div>
@@ -71,54 +71,54 @@
                     @endif
                     <div class="row convoy-info pt-5">
                         <div class="col-sm-6 pr-md-5 pr-3 text-md-right text-center">
-                            <p>Тягач:</p>
+                            <p class="text-muted">Тягач:</p>
                             <h3>{{ $convoy->truck ?? 'Любой' }}</h3>
                             @if($convoy->truck_image)
                                 <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m"></a>
                             @endif
                             @if($convoy->truck_tuning)
-                                <p>Тюнинг:</p>
+                                <p class="text-muted">Тюнинг:</p>
                                 <h3>{{ $convoy->truck_tuning }}</h3>
                             @endif
                             @if($convoy->truck_paint)
-                                <p>Окрас:</p>
+                                <p class="text-muted">Окрас:</p>
                                 <h3>{{ $convoy->truck_paint }}</h3>
                             @endif
                         </div>
                         <div class="col-sm-6 pl-md-5 pl-3 text-md-left text-center">
-                            <p>Прицеп:</p>
+                            <p class="text-muted">Прицеп:</p>
                             <h3>{{ $convoy->trailer ?? 'Любой' }}</h3>
                             @if($convoy->trailer_image)
                                 <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m"></a>
                             @endif
                             @if($convoy->trailer_tuning)
-                                <p>Тюнинг:</p>
+                                <p class="text-muted">Тюнинг:</p>
                                 <h3>{{ $convoy->trailer_tuning }}</h3>
                             @endif
                             @if($convoy->trailer_paint)
-                                <p>Окрас:</p>
+                                <p class="text-muted">Окрас:</p>
                                 <h3>{{ $convoy->trailer_paint }}</h3>
                             @endif
                             @if($convoy->cargo)
-                                <p>Груз:</p>
+                                <p class="text-muted">Груз:</p>
                                 <h3>{{ $convoy->cargo }}</h3>
                             @endif
                             @if($convoy->alt_trailer)
-                                <p class="mt-5">Прицеп без ДЛС:</p>
+                                <p class="mt-5 text-muted">Прицеп без ДЛС:</p>
                                 <h3>{{ $convoy->alt_trailer }}</h3>
                                 @if($convoy->alt_trailer_image)
                                     <a href="/images/convoys/{{ $convoy->alt_trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m"></a>
                                 @endif
                                 @if($convoy->alt_trailer_tuning)
-                                    <p>Тюнинг:</p>
+                                    <p class="text-muted">Тюнинг:</p>
                                     <h3>{{ $convoy->alt_trailer_tuning }}</h3>
                                 @endif
                                 @if($convoy->alt_trailer_paint)
-                                    <p>Окрас:</p>
+                                    <p class="text-muted">Окрас:</p>
                                     <h3>{{ $convoy->alt_trailer_paint }}</h3>
                                 @endif
                                 @if($convoy->alt_cargo)
-                                    <p>Груз:</p>
+                                    <p class="text-muted">Груз:</p>
                                     <h3>{{ $convoy->alt_cargo }}</h3>
                                 @endif
                             @endif

@@ -43,7 +43,7 @@ Route::get('/evoque/rp/reports', 'RpController@reports')->name('evoque.rp.report
 Route::any('/evoque/rp/reports/add', 'RpController@addReport')->name('evoque.rp.reports.add');
 Route::any('/evoque/rp/reports/results', 'RpController@results')->name('evoque.rp.results');
 Route::any('/evoque/rp/reports/results/create/{game}', 'RpController@createResults')->name('evoque.rp.results.create');
-Route::any('/evoque/rp/reports/accept/{id}', 'RpController@acceptReport')->name('evoque.rp.reports.accept');
+Route::any('/evoque/rp/reports/{id}', 'RpController@viewReport')->name('evoque.rp.reports.view');
 Route::get('/evoque/rp/reports/delete/{id}', 'RpController@deleteReport')->name('evoque.rp.reports.delete');
 Route::any('/evoque/rp/reports/stat/{id}', 'RpController@editStat')->name('evoque.rp.stat.edit');
 Route::get('/evoque/rp/{game?}', 'RpController@index')->name('evoque.rp');

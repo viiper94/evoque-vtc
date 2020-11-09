@@ -86,31 +86,44 @@ class RpController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
-    public function acceptReport(Request $request, $id){
+    public function viewReport(Request $request, $id){
         if(Gate::denies('manage_rp')) abort(403);
         $report = RpReport::with('member')->where('id', $id)->first();
         if($request->post()){
             $this->validate($request, [
-                'distance' => 'required|numeric',
-                'weight' => 'required|numeric',
-                'level' => 'required|numeric',
+                'distance' => 'required_with:accept|nullable|numeric',
+                'weight' => 'required_with:accept|nullable|numeric',
+                'level' => 'required_with:accept|nullable|numeric',
+                'comment' => 'nullable|string',
             ]);
+            $accept = $request->input('accept') ?? false;
+            $decline = $request->input('decline') ?? false;
             $stat = RpStats::where(['member_id' => $report->member_id, 'game' => $report->game])->first();
-            if(is_null($stat)){
-                $stat = new RpStats();
-                $stat->member_id = $report->member_id;
+            $result = true;
+            if($accept && !$decline){
+                if(is_null($stat)){
+                    $stat = new RpStats();
+                    $stat->member_id = $report->member_id;
+                }
+                $stat->distance += $request->input('distance');
+                $stat->weight += $request->input('weight');
+                $stat->bonus += $request->input('bonus');
+                $stat->level = $request->input('level');
+                $stat->game = $report->game;
+                $stat->quantity += 1;
+                $report->status = 1;
+                $result = $stat->save();
+            }elseif($decline && ! $accept){
+                $report->status = 2;
             }
-            $stat->distance += $request->input('distance');
-            $stat->weight += $request->input('weight');
-            $stat->bonus += $request->input('bonus');
-            $stat->level = $request->input('level');
-            $stat->game = $report->game;
-            $stat->quantity += 1;
-            $report->status = true;
-            if($stat->save() && $report->save()) return redirect()->route('evoque.rp', $report->game)->with(['success' => 'Отчёт принят!']);
+            if($request->input('comment')){
+                $report->comment = $request->input('comment');
+                $report->comment_by = Auth::user()->member->nickname;
+            }
+            if($result && $report->save()) return redirect()->route('evoque.rp.reports', $report->game)->with(['success' => 'Отчёт '.($accept ? 'принят' : 'отклонён').'!']);
             return redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        return view('evoque.rp.accept', [
+        return view('evoque.rp.view', [
             'report' => $report
         ]);
     }

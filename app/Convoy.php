@@ -35,6 +35,7 @@ class Convoy extends Model{
     ];
 
     protected $casts = [
+        'public' => 'boolean',
         'visible' => 'boolean',
         'booking' => 'boolean',
         'dlc' => 'array',
@@ -319,7 +320,7 @@ class Convoy extends Model{
     }
 
     public function deleteImages($folder, $attr = ['route', 'truck_image', 'trailer_image', 'alt_trailer_image']){
-        if(in_array('route', $attr)){
+        if($this->route && in_array('route', $attr)){
             foreach($this->route as $route){
                 $this->removeFile($folder.$route);
             }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Convoy;
-use App\ConvoyBookings;
 use App\Member;
 use App\Role;
 use App\Tab;
@@ -90,7 +89,7 @@ class ConvoysController extends Controller{
     public function index(){
         if(Gate::denies('manage_convoys')) abort(403);
         return view('evoque.convoys.index', [
-            'convoys' => Convoy::orderBy('start_time', 'desc')->paginate(10)
+            'convoys' => Convoy::with('bookedBy')->orderBy('start_time', 'desc')->paginate(10)
         ]);
     }
 
@@ -172,7 +171,7 @@ class ConvoysController extends Controller{
         ]);
     }
 
-    public function edit(Request $request, $id){
+    public function edit(Request $request, $id, $booking = false){
         if(Gate::denies('manage_convoys')) abort(403);
         $convoy = Convoy::findOrFail($id);
         if($request->ajax() && $request->input('action') == 'remove_img'){
@@ -211,6 +210,7 @@ class ConvoysController extends Controller{
         $tmp = new Client();
         $servers = $tmp->servers()->get();
         return view('evoque.convoys.edit', [
+            'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::all(),
@@ -360,9 +360,11 @@ class ConvoysController extends Controller{
                 'lead' => 'required|string',
             ]);
 
-            $booking = new ConvoyBookings();
+            $booking = new Convoy();
             $booking->title = trim($request->input('title'));
             $booking->lead = $request->input('lead');
+            $booking->booking = true;
+            $booking->booked_by_id = Auth::user()->member->id;
             $booking->start_time = Carbon::parse($request->input('date').' '. $request->input('time'))->format('Y-m-d H:i');
             return $booking->save() ?
                 redirect()->back()->with(['success' => 'Конвой забронирован!']) :
@@ -370,11 +372,9 @@ class ConvoysController extends Controller{
         }
         $days = [];
         $convoys = Convoy::whereDate('start_time', '>=', Carbon::today())->get();
-        $bookings = ConvoyBookings::whereDate('start_time', '>=', Carbon::today())->get();
-        $convoys_and_bookings = $convoys->merge($bookings);
         for($i = 0; $i <= 7; $i++){
             $convoy_that_day = array();
-            foreach($convoys_and_bookings as $convoy){
+            foreach($convoys as $convoy){
                 if($convoy->start_time->format('d.m.Y') === Carbon::now()->addDays($i)->format('d.m.Y')){
                     $convoy_that_day[] = $convoy;
                 }
@@ -393,6 +393,10 @@ class ConvoysController extends Controller{
 
     public function book(Request $request, $offset){
         if(Gate::denies('lead_convoys')) abort(403);
+        $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->get();
+        if($offset === '0' || $this->allowedConvoysPerDay[Carbon::now()->addDays($offset)->isoFormat('dddd')] - count($convoy_that_day) === 0){
+            return redirect()->route('evoque.convoys.plans')->withErrors(['Нельзя больше бронировать на этот день!']);
+        }
         $convoy = new Convoy([
             'trailer_public' => false,
             'truck_public' => false,
@@ -402,7 +406,7 @@ class ConvoysController extends Controller{
             'communication' => 'Discord',
             'communication_link' => 'https://discord.gg/Gj53a8d',
             'communication_channel' => 'Комната для конвоев',
-            'lead' => Auth::user()->member->nickname,
+            'lead' => Auth::user()->member->nickname
         ]);
         if($request->post()){
             $this->validate($request, $this->attributes_validation);
@@ -419,6 +423,7 @@ class ConvoysController extends Controller{
                 }
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->booked_by_id = Auth::user()->member->id;
             return $convoy->save() ?
                 redirect()->route('evoque.convoys.plans')->with(['success' => 'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

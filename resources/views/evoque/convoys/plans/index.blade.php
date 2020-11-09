@@ -32,7 +32,7 @@
                     <td class="w-50 text-left">
                         @if(count($day['convoys']) > 0)
                             @foreach($day['convoys'] as $convoy)
-                                <p class="mb-0">{{ $convoy->start_time->format('H:i') }} - {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif</p>
+                                <p class="mb-0"><b>{{ $convoy->start_time->format('H:i') }}</b> - {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif</p>
                             @endforeach
                         @else
                             <p class="mb-0">Свободно</p>
@@ -48,7 +48,13 @@
                                 Забронировать конвой
                             </button>
                         @else
-                            <a href="{{ route('evoque.convoys.plans.book', $loop->index) }}" class="book-convoy btn btn-outline-warning btn-sm">Забронировать конвой</a>
+                            <a @if($day['allowedToBook'] > 0 && $loop->iteration !== 1)
+                               href="{{ route('evoque.convoys.plans.book', $loop->index) }}"
+                               @endif
+                               class="book-convoy btn btn-outline-warning btn-sm
+                                @if($day['allowedToBook'] === 0 || $loop->iteration === 1) disabled @endif">
+                                Забронировать конвой
+                            </a>
                         @endcan
                     </td>
                 </tr>

@@ -72,7 +72,7 @@ Route::get('/convoys/{public?}', 'ConvoysController@convoys')->name('convoys');
 Route::get('/evoque/convoys', 'ConvoysController@index')->name('evoque.convoys');
 Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
 Route::get('/evoque/admin/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');
-Route::any('/evoque/admin/convoys/edit/{id}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');
+Route::any('/evoque/admin/convoys/edit/{id}/{booking?}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');
 
 Route::get('/evoque/convoys/tab', 'ConvoysController@tab')->name('evoque.convoys.tab');
 Route::any('/evoque/convoys/tab/add', 'ConvoysController@addTab')->name('evoque.convoys.tab.add');

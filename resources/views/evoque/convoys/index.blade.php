@@ -11,24 +11,42 @@
         <div class="row justify-content-center">
             <a href="{{ route('evoque.admin.convoy.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Создать конвой</a>
         </div>
-        <div class="convoys mt-3 mb-5 row justify-content-around">
+        <div class="convoys mt-3 mb-5 row justify-content-center">
             @foreach($convoys as $convoy)
-                <div class="card card-dark text-shadow-m col-md-5 m-3 @if($convoy->public == 1 && $convoy->isUpcoming())border-primary @endif @if($convoy->isUpcoming())upcoming @endif">
-                    <h5 class="card-header">{{ $convoy->title }}</h5>
-                    <div class="card-body">
-                        <h5>{{ $convoy->start_time->isoFormat('dddd') }}</h5>
-                        <h4 class="convoy-date">{{ $convoy->start_time->isoFormat('LLL') }}</h4>
-                        <p class="card-text">
-                            Старт: <b>{{ $convoy->start }}</b><br>
-                            Финиш: <b>{{ $convoy->finish }}</b><br>
-                            Сервер: <b>{{ $convoy->server }}</b><br>
-                            Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
-                        </p>
-                    </div>
-                    <div class="card-actions">
-                        <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning my-1"><i class="fas fa-edit"></i> Редактировать</a>
-                        <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger my-1"
-                           onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
+                <div class="card-wrapper col-md-6">
+                    <div class="card card-dark text-shadow-m m-3
+                        @if($convoy->public && $convoy->isUpcoming()) border-primary
+                        @elseif($convoy->booking && !$convoy->visible) border-danger @endif
+                    @if($convoy->isUpcoming())upcoming @endif">
+                        <h5 class="card-header">
+                            {{ $convoy->title }}
+                            @if(!$convoy->visible)
+                                <span class="badge badge-warning">Неопубликован</span>
+                            @else
+                                <span class="badge badge-success">Опубликован</span>
+                            @endif
+                        </h5>
+                        <div class="card-body">
+                            @if($convoy->bookedBy)
+                                <h5 class="text-info">Бронь от {{ $convoy->bookedBy->nickname }}</h5>
+                            @endif
+                            <h5>{{ $convoy->start_time->isoFormat('dddd') }}</h5>
+                            <h4 class="convoy-date">{{ $convoy->start_time->isoFormat('LLL') }}</h4>
+                            @if(!($convoy->booking && !$convoy->visible))
+                                <p class="card-text">
+                                    Старт: <b>{{ $convoy->start_city }} {{ $convoy->start_company }}</b><br>
+                                    Финиш: <b>{{ $convoy->finish }} {{ $convoy->finish_company }}</b><br>
+                                    Сервер: <b>{{ $convoy->server }}</b><br>
+                                    Связь: <b><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication }}</a></b><br>
+                                    Ведущий: <b>{{ $convoy->lead }}</b><br>
+                                </p>
+                            @endif
+                        </div>
+                        <div class="card-actions">
+                            <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning my-1"><i class="fas fa-edit"></i> Редактировать</a>
+                            <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}" class="btn btn-outline-danger my-1"
+                               onclick="return confirm('Удалить этот конвой?')"><i class="fas fa-trash"></i> Удалить</a>
+                        </div>
                     </div>
                 </div>
             @endforeach

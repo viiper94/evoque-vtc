@@ -36,6 +36,7 @@ class Convoy extends Model{
 
     protected $casts = [
         'visible' => 'boolean',
+        'booking' => 'boolean',
         'dlc' => 'array',
         'route' => 'array',
     ];
@@ -307,6 +308,10 @@ class Convoy extends Model{
 
             ]
         ];
+    }
+
+    public function bookedBy(){
+        return $this->hasOne('App\Member', 'id', 'booked_by_id');
     }
 
     public function leadMember(){

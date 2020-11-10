@@ -373,6 +373,7 @@ class ConvoysController extends Controller{
             $booking->title = trim($request->input('title'));
             $booking->lead = $request->input('lead');
             $booking->booking = true;
+            $booking->visible = true;
             $booking->booked_by_id = Auth::user()->member->id;
             $booking->start_time = Carbon::parse($request->input('date').' '. $request->input('time'))->format('Y-m-d H:i');
             return $booking->save() ?

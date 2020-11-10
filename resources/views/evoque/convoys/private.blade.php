@@ -143,14 +143,16 @@
                             <hr class="m-auto">
                         </section>
                     </div>
-                    <section class="w-100">
-                        <h1 class="text-center">Маршрут конвоя</h1>
-                        <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
-                            @foreach($convoy->route as $item)
-                                <img src="/images/convoys/{{ $item }}">
-                            @endforeach
-                        </div>
-                    </section>
+                    @if($convoy->route)
+                        <section class="w-100">
+                            <h1 class="text-center">Маршрут конвоя</h1>
+                            <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs">
+                                @foreach($convoy->route as $item)
+                                    <img src="/images/convoys/{{ $item }}">
+                                @endforeach
+                            </div>
+                        </section>
+                    @endif
                 </div>
             @endforeach
                 @if(!$loop->last)

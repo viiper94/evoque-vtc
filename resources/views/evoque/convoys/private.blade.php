@@ -54,7 +54,7 @@
                             <p class="text-muted">Ведущий:</p>
                             <h3>
                                 {{ $convoy->lead }}&nbsp;
-                                @if($convoy->leadMember)
+                                @if($convoy->leadMember && $convoy->leadMember->user->vk)
                                     <a href="{{ $convoy->leadMember->user->vk }}" target="_blank"><i class="fab fa-vk"></i></a>
                                 @endif
                             </h3>

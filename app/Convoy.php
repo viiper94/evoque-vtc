@@ -334,4 +334,13 @@ class Convoy extends Model{
         return is_file($path) ? unlink($path) : false;
     }
 
+    public function getType(){
+        switch($this->type){
+            case '0' : return 'дневной';
+            case '2' : return 'ночной';
+            case '1' :
+            default : return 'вечерний';
+        }
+    }
+
 }

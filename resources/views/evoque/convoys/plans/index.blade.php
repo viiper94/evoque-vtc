@@ -33,10 +33,10 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($days as $day)
+            @foreach($days as $date => $day)
                 <tr @if($loop->iteration === 1) class="table-active" @endif>
                     <td class="text-right">{{ $day['date']->isoFormat('dddd') }}</td>
-                    <td>{{ $day['date']->format('d.m') }}</td>
+                    <td>{{ $date }}</td>
                     <td class="w-50 text-left">
                         @if(count($day['convoys']) > 0)
                             @foreach($day['convoys'] as $convoy)
@@ -126,9 +126,9 @@
                         <div class="form-group">
                             <label for="lead">Ведущий</label>
                             <select class="form-control" id="lead" name="lead">
-                                <option value="На месте разберёмся" @if($convoy->lead === 'На месте разберёмся') selected @endif >На месте разберёмся</option>
+                                <option value="На месте разберёмся">На месте разберёмся</option>
                                 @foreach($members as $member)
-                                    <option value="{{ $member->nickname }}" @if($member->nickname === $convoy->lead) selected @endif >{{ $member->nickname }}</option>
+                                    <option value="{{ $member->nickname }}">{{ $member->nickname }}</option>
                                 @endforeach
                             </select>
                         </div>

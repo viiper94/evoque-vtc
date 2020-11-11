@@ -77,13 +77,13 @@ class ConvoysController extends Controller{
     ];
 
     private $allowedConvoysPerDay = [
-        'понедельник' => 1,
-        'вторник' => 2,
-        'среда' => 1,
-        'четверг' => 2,
-        'пятница' => 3,
-        'суббота' => 3,
-        'воскресенье' => 2,
+        'понедельник' => [1],
+        'вторник' => [0, 1],
+        'среда' => [1],
+        'четверг' => [0, 1],
+        'пятница' => [0, 1, 2],
+        'суббота' => [0, 1, 2],
+        'воскресенье' => [0, 1],
     ];
 
     public function index(){
@@ -106,7 +106,7 @@ class ConvoysController extends Controller{
                 'grouped' => collect(array_reverse($grouped))->slice(0, 7)
             ]);
         }else if(Gate::allows('manage_convoys') && $public === 'all'){
-            $convoys = Convoy::orderBy('start_time')->get();
+            $convoys = Convoy::with('leadMember', 'leadMember.user')->orderBy('start_time')->get();
             $grouped = array();
             foreach($convoys as $convoy){
                 $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
@@ -386,13 +386,14 @@ class ConvoysController extends Controller{
             $convoy_that_day = array();
             foreach($convoys as $convoy){
                 if($convoy->start_time->format('d.m.Y') === Carbon::now()->addDays($i)->format('d.m.Y')){
-                    $convoy_that_day[] = $convoy;
+                    $convoy_that_day[$convoy->type] = $convoy;
                 }
             }
-            $days[$i] = [
+            $days[Carbon::now()->addDays($i)->format('d.m') ] = [
+
                 'date' => Carbon::now()->addDays($i),
                 'convoys' => $convoy_that_day,
-                'allowedToBook' => $this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] - count($convoy_that_day)
+                'allowedToBook' => count($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')]) - count($convoy_that_day)
             ];
         }
         return view('evoque.convoys.plans.index', [
@@ -404,7 +405,7 @@ class ConvoysController extends Controller{
     public function book(Request $request, $offset){
         if(Gate::denies('lead_convoys')) abort(403);
         $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->get();
-        if($offset === '0' || $this->allowedConvoysPerDay[Carbon::now()->addDays($offset)->isoFormat('dddd')] - count($convoy_that_day) === 0){
+        if($offset === '0' || count($this->allowedConvoysPerDay[Carbon::now()->addDays($offset)->isoFormat('dddd')]) - count($convoy_that_day) === 0){
             return redirect()->route('evoque.convoys.plans')->withErrors(['Нельзя больше бронировать на этот день!']);
         }
         $convoy = new Convoy([

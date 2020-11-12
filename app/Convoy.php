@@ -335,7 +335,11 @@ class Convoy extends Model{
     }
 
     public function getType(){
-        switch($this->type){
+        return self::getTypeByNum($this->type);
+    }
+
+    public static function getTypeByNum($num){
+        switch($num){
             case '0' : return 'дневной';
             case '2' : return 'ночной';
             case '1' :

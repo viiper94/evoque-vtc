@@ -38,13 +38,13 @@
                     <td class="text-right">{{ $day['date']->isoFormat('dddd') }}</td>
                     <td>{{ $date }}</td>
                     <td class="w-50 text-left">
-                        @if(count($day['convoys']) > 0)
-                            @foreach($day['convoys'] as $convoy)
-                                <p class="mb-0"><b>{{ $convoy->start_time->format('H:i') }}</b> - {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif</p>
-                            @endforeach
-                        @else
-                            <p class="mb-0">Свободно</p>
-                        @endif
+                        @foreach($day['convoys'] as $type => $convoy)
+                            @if($convoy)
+                                <p class="mb-0">{{ $convoy->getType() }} - <b class="text-primary">{{ $convoy->start_time->format('H:i') }}</b> - {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif</p>
+                            @else
+                                <p class="mb-0">{{ \App\Convoy::getTypeByNum($type) }} - Свободно</p>
+                            @endif
+                        @endforeach
                     </td>
                     <td>
                         @can('manage_convoys')

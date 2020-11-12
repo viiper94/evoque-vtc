@@ -384,9 +384,13 @@ class ConvoysController extends Controller{
         $convoys = Convoy::whereDate('start_time', '>=', Carbon::today())->where('visible', '1')->get();
         for($i = 0; $i <= 7; $i++){
             $convoy_that_day = array();
-            foreach($convoys as $convoy){
-                if($convoy->start_time->format('d.m.Y') === Carbon::now()->addDays($i)->format('d.m.Y')){
-                    $convoy_that_day[$convoy->type] = $convoy;
+            foreach($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] as $type){
+                foreach($convoys as $convoy){
+                    if($convoy->start_time->format('d.m.Y') === Carbon::now()->addDays($i)->format('d.m.Y') && $convoy->type === $type){
+                        $convoy_that_day[$type] = $convoy;
+                    }else{
+                        $convoy_that_day[$type] = [];
+                    }
                 }
             }
             $days[Carbon::now()->addDays($i)->format('d.m') ] = [

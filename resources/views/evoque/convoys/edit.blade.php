@@ -56,6 +56,18 @@
                     @endforeach
                 </select>
             </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="type-0" name="type" class="custom-control-input" value="0" @if($convoy->type == '0' || $convoy->communication == '') checked @endif @if($booking) disabled @endif>
+                <label class="custom-control-label" for="type-0">Дневной</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="type-1" name="type" class="custom-control-input" value="1" @if($convoy->type == '1') checked @endif @if($booking) disabled @endif>
+                <label class="custom-control-label" for="type-1">Вечерний</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="type-2" name="type" class="custom-control-input" value="2" @if($convoy->type == '2') checked @endif @if($booking) disabled @endif>
+                <label class="custom-control-label" for="type-2">Ночной</label>
+            </div>
             <div class="form-group">
                 <label for="datetimepicker">Время выезда по МСК</label>
                 <input type="text" class="form-control" id="datetimepicker" name="start_time" value="{{ $convoy->start_time->format('d.m.Y H:i') }}" autocomplete="off" required>

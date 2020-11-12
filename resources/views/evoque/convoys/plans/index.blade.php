@@ -38,31 +38,33 @@
                     <td class="text-right">{{ $day['date']->isoFormat('dddd') }}</td>
                     <td>{{ $date }}</td>
                     <td class="w-50 text-left">
+                        @php $allowedToBook = false; @endphp
                         @foreach($day['convoys'] as $type => $convoy)
                             @if($convoy)
                                 <p class="mb-0">{{ $convoy->getType() }} - <b class="text-primary">{{ $convoy->start_time->format('H:i') }}</b> - {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif</p>
                             @else
                                 <p class="mb-0">{{ \App\Convoy::getTypeByNum($type) }} - Свободно</p>
+                                @php $allowedToBook = true; @endphp
                             @endif
                         @endforeach
                     </td>
                     <td>
                         @can('manage_convoys')
-                            <button data-toggle="modal"
-                                    data-target="#book-modal"
-                                    class="book-convoy btn btn-outline-warning btn-sm"
-                                    data-date="{{ $day['date']->format('d.m.Y') }}"
-                                    @if($day['allowedToBook'] === 0 || $loop->iteration === 1) disabled @endif>
-                                Забронировать конвой
-                            </button>
+                            @if($allowedToBook && $loop->iteration !== 1)
+                                <button data-toggle="modal"
+                                        data-target="#book-modal"
+                                        class="book-convoy btn btn-outline-warning btn-sm"
+                                        data-date="{{ $day['date']->format('d.m.Y') }}">
+                                    Забронировать конвой
+                                </button>
+                            @endif
                         @else
-                            <a @if($day['allowedToBook'] > 0 && $loop->iteration !== 1)
-                               href="{{ route('evoque.convoys.plans.book', $loop->index) }}"
-                               @endif
-                               class="book-convoy btn btn-outline-warning btn-sm
-                                @if($day['allowedToBook'] === 0 || $loop->iteration === 1) disabled @endif">
-                                Забронировать конвой
-                            </a>
+                            @if($allowedToBook&& $loop->iteration !== 1)
+                                <a href="{{ route('evoque.convoys.plans.book', $loop->index) }}"
+                                   class="book-convoy btn btn-outline-warning btn-sm">
+                                    Забронировать конвой
+                                </a>
+                            @endif
                         @endcan
                     </td>
                 </tr>
@@ -147,6 +149,8 @@
             step: 30,
             theme: 'dark',
             datepicker: false,
+            minTime: '12:00',
+            maxTime: '22:01',
             defaultTime: '19:30',
             scrollInput: false
         });

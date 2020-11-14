@@ -152,7 +152,7 @@
         <section class="convoy-note pb-5 pt-5 m-auto">
             <hr class="m-auto">
             <blockquote class="blockquote text-center mb-4 mt-4">
-                <p class="mb-0">В колонне держим дистанцию не менее 70 метров по TAB и соблюдаем правила TruckersMP.<br>Помимо рации, флуд, мат, а так же фоновая музыка запрещены и в канале TeamSpeak.</p>
+                <p class="mb-0">В колонне держим дистанцию не менее 70 метров по TAB и соблюдаем правила TruckersMP.<br>Помимо рации, флуд, мат, а так же фоновая музыка запрещены и в голосовом канале Discord.</p>
             </blockquote>
             <hr class="m-auto">
         </section>

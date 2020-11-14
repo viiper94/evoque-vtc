@@ -147,7 +147,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="dlc">Необходимые ДЛС (удерживать Ctrl для выбора нескольких)</label>
+                        <label for="dlc">Необходимые ДЛС</label>
                         <select class="form-control" size="20" name="dlc[]" id="dlc" multiple>
                             @foreach($dlc as $game => $list)
                                 <option disabled>{{ strtoupper($game) }}</option>
@@ -157,6 +157,7 @@
                                 <option disabled></option>
                             @endforeach
                         </select>
+                        <label for="" class="text-muted">удерживать Ctrl для выбора нескольких или снятия выбора</label>
                         @if($errors->has('dlc'))
                             <small class="form-text">{{ $errors->first('dlc') }}</small>
                         @endif

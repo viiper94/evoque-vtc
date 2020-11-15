@@ -36,7 +36,9 @@
                             <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Конвои</a>
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
                                 <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
-                                <a class="dropdown-item" href="{{ route('convoys', 'public') }}">Открытый конвой</a>
+                                @can('manage_convoys')
+                                    <a class="dropdown-item" href="{{ route('convoys', 'public') }}">Открытый конвой</a>
+                                @endcan
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.tab') }}">Скрины TAB</a>

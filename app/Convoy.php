@@ -347,4 +347,23 @@ class Convoy extends Model{
         }
     }
 
+    public function setTypeByTime(){
+        $convoy_date = $this->start_time->format('Y-m-d');
+        $day_convoy_end = Carbon::parse($convoy_date . ' 17:00');
+        $evening_convoy_start = Carbon::parse($convoy_date . ' 17:30');
+        $evening_convoy_end = Carbon::parse($convoy_date . ' 20:30');
+        $night_convoy_start = Carbon::parse($convoy_date . ' 21:00');
+
+        if($this->start_time->lessThanOrEqualTo($day_convoy_end)){
+            $this->type = 0;
+        }elseif($this->start_time->lessThanOrEqualTo($evening_convoy_end) && $this->start_time->greaterThan($evening_convoy_start)){
+            $this->type = 1;
+        }elseif($this->start_time->greaterThan($night_convoy_start)){
+            $this->type = 2;
+        }else{
+            $this->type = 1;
+        }
+        return true;
+    }
+
 }

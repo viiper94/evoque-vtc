@@ -86,6 +86,12 @@ class ConvoysController extends Controller{
         'воскресенье' => [0, 1],
     ];
 
+    private $timesToType = [
+        0 => "['12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00']",
+        1 => "['17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30']",
+        2 => "['21:00', '21:30', '22:00', '22:30', '23:00', '23:30']"
+    ];
+
     public function index(){
         if(Gate::denies('manage_convoys')) abort(403);
         return view('evoque.convoys.index', [
@@ -152,6 +158,7 @@ class ConvoysController extends Controller{
                 }
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->setTypeByTime();
             return $convoy->save() ?
                 redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно создан!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -163,6 +170,7 @@ class ConvoysController extends Controller{
         $convoy->trailer_public = true;
         $convoy->route = ['1' => null];
         return view('evoque.convoys.edit', [
+            'allowTimes' => false,
             'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,
@@ -189,7 +197,6 @@ class ConvoysController extends Controller{
             $convoy->dlc = $request->input('dlc') ?? [];
             $convoy->truck_public = $request->input('truck_public') === 'on';
             $convoy->trailer_public = $request->input('trailer_public') === 'on';
-
             foreach($request->files as $key => $file){
                 $convoy->deleteImages(public_path('/images/convoys/'), [$key]);
                 if($key === 'route' && is_array($file)){
@@ -201,8 +208,9 @@ class ConvoysController extends Controller{
                     $convoy->$key = $this->saveImage($file);
                 }
             }
-
+            $convoy->booking = false;
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->setTypeByTime();
             return $convoy->save() ?
                 redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -210,6 +218,7 @@ class ConvoysController extends Controller{
         $tmp = new Client();
         $servers = $tmp->servers()->get();
         return view('evoque.convoys.edit', [
+            'allowTimes' => false,
             'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,
@@ -374,8 +383,8 @@ class ConvoysController extends Controller{
             $booking->lead = $request->input('lead');
             $booking->booking = true;
             $booking->visible = true;
-            $booking->booked_by_id = Auth::user()->member->id;
             $booking->start_time = Carbon::parse($request->input('date').' '. $request->input('time'))->format('Y-m-d H:i');
+            $booking->setTypeByTime();
             return $booking->save() ?
                 redirect()->back()->with(['success' => 'Конвой забронирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -386,15 +395,15 @@ class ConvoysController extends Controller{
             $convoy_that_day = array();
             foreach($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] as $type){
                 foreach($convoys as $convoy){
-                    if($convoy->start_time->format('d.m.Y') === Carbon::now()->addDays($i)->format('d.m.Y') && $convoy->type === $type){
+                    if($convoy->start_time->format('d.m.Y') === Carbon::today()->addDays($i)->format('d.m.Y') && $convoy->type === $type){
                         $convoy_that_day[$type] = $convoy;
+                        break;
                     }else{
                         $convoy_that_day[$type] = [];
                     }
                 }
             }
-            $days[Carbon::now()->addDays($i)->format('d.m') ] = [
-
+            $days[Carbon::now()->addDays($i)->format('d.m')] = [
                 'date' => Carbon::now()->addDays($i),
                 'convoys' => $convoy_that_day,
                 'allowedToBook' => count($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')]) - count($convoy_that_day)
@@ -406,13 +415,14 @@ class ConvoysController extends Controller{
         ]);
     }
 
-    public function book(Request $request, $offset){
+    public function book(Request $request, $offset, $type){
         if(Gate::denies('lead_convoys')) abort(403);
-        $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->get();
-        if($offset === '0' || count($this->allowedConvoysPerDay[Carbon::now()->addDays($offset)->isoFormat('dddd')]) - count($convoy_that_day) === 0){
-            return redirect()->route('evoque.convoys.plans')->withErrors(['Нельзя больше бронировать на этот день!']);
-        }
+        $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->where('type', $type)->get();
+        if($offset === '0') return redirect()->route('evoque.convoys.plans')->withErrors(['На сегодня уже нельзя бронировать конвои!']);
+        if(!in_array($type, [0, 1, 2])) return redirect()->route('evoque.convoys.plans')->withErrors(['Что то пошло не так =(']);
+        if(count($convoy_that_day) > 0) return redirect()->route('evoque.convoys.plans')->withErrors(['Уже забронирован конвой на этот период!']);
         $convoy = new Convoy([
+            'title' => 'Закрытый конвой',
             'trailer_public' => false,
             'truck_public' => false,
             'public' => false,
@@ -421,7 +431,7 @@ class ConvoysController extends Controller{
             'communication' => 'Discord',
             'communication_link' => 'https://discord.gg/Gj53a8d',
             'communication_channel' => 'Комната для конвоев',
-            'lead' => Auth::user()->member->nickname
+            'lead' => Auth::user()->member->nickname,
         ]);
         if($request->post()){
             $this->validate($request, $this->attributes_validation);
@@ -438,16 +448,18 @@ class ConvoysController extends Controller{
                 }
             }
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->setTypeByTime();
             $convoy->booking = true;
             $convoy->booked_by_id = Auth::user()->member->id;
             return $convoy->save() ?
                 redirect()->route('evoque.convoys.plans')->with(['success' => 'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        $convoy->start_time = Carbon::now()->addDays($offset);
+        $convoy->start_time = Carbon::today()->addDays($offset)->addHours($type == 0 ? 16 : ($type == 2 ? 22 : 19))->addMinutes($type == 1 ? 30 : 0);
         $tmp = new Client();
         $servers = $tmp->servers()->get();
         return view('evoque.convoys.edit', [
+            'allowTimes' => $this->timesToType[$type],
             'booking' => true,
             'convoy' => $convoy,
             'servers' => $servers,

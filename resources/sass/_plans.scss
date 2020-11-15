@@ -5,6 +5,20 @@
             line-height: 1;
             td{
                 vertical-align: middle;
+                font-size: 20px;
+                a.book-convoy{
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    .lead-rules{
+        .feature{
+            h1, h2{
+                min-height: 80px;
+            }
+            p{
+                font-size: 19px;
             }
         }
     }

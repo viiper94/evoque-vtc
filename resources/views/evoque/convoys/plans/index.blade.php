@@ -22,14 +22,13 @@
             Проведенный конвой даёт вам 1 Эвик, Эвики можно обменять на различные DLC и игры (подробности в <a href="https://evoque.team/kb" target="_blank">Базе знаний</a>)</p>
         <hr class="m-auto w-25 border-primary">
     </section>
-    <div class="table-responsive">
-        <table class="table table-dark table-hover text-center">
+    <div class="table-responsive pb-5">
+        <table class="table table-dark table-hover text-center mb-0">
             <thead>
             <tr>
                 <th class="text-right">День</th>
                 <th>Дата</th>
                 <th class="text-left">Конвои</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -37,63 +36,89 @@
                 <tr @if($loop->iteration === 1) class="table-active" @endif>
                     <td class="text-right">{{ $day['date']->isoFormat('dddd') }}</td>
                     <td>{{ $date }}</td>
-                    <td class="w-50 text-left">
-                        @php $allowedToBook = false; @endphp
+                    <td class="text-left">
                         @foreach($day['convoys'] as $type => $convoy)
                             @if($convoy)
-                                <p class="mb-0">{{ $convoy->getType() }} - <b class="text-primary">{{ $convoy->start_time->format('H:i') }}</b> - {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif</p>
+                                <p class="mb-1">
+                                    {{ $convoy->getType() }} -
+                                    <b class="text-primary">{{ $convoy->start_time->format('H:i') }}</b> -
+                                    {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif
+                                </p>
                             @else
-                                <p class="mb-0">{{ \App\Convoy::getTypeByNum($type) }} - Свободно</p>
-                                @php $allowedToBook = true; @endphp
+                                <p class="mb-1">
+                                    {{ \App\Convoy::getTypeByNum($type) }} -
+                                    @can('manage_convoys')
+                                        <a data-date="{{ $day['date']->format('d.m.Y') }}" data-toggle="modal" data-target="#book-modal" class="book-convoy text-primary">Забронировать конвой</a>
+                                    @elsecan('lead_convoys')
+                                        <a href="{{ route('evoque.convoys.plans.book', [$loop->parent->index, $type]) }}" class="book-convoy text-primary">Забронировать конвой</a>
+                                    @else
+                                        Свободно
+                                    @endcan
+                                </p>
                             @endif
                         @endforeach
-                    </td>
-                    <td>
-                        @can('manage_convoys')
-                            @if($allowedToBook && $loop->iteration !== 1)
-                                <button data-toggle="modal"
-                                        data-target="#book-modal"
-                                        class="book-convoy btn btn-outline-warning btn-sm"
-                                        data-date="{{ $day['date']->format('d.m.Y') }}">
-                                    Забронировать конвой
-                                </button>
-                            @endif
-                        @else
-                            @if($allowedToBook&& $loop->iteration !== 1)
-                                <a href="{{ route('evoque.convoys.plans.book', $loop->index) }}"
-                                   class="book-convoy btn btn-outline-warning btn-sm">
-                                    Забронировать конвой
-                                </a>
-                            @endif
-                        @endcan
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
     </div>
-    <section class="col-12 convoy-note pb-5 pt-5 m-auto">
-        <hr class="m-auto">
-        <blockquote class="blockquote text-center mb-4 mt-4">
-            <h5 class="mb-0">ETS2:</h5>
-            <ol class="text-left ml-5 mr-1 px-md-5 w-75 m-auto">
-                <li>Сервера Симуляции - протяженность конвоя не менее 2000 км/конвой.</li>
-                <li>Сервера аркады - протяженность конвоя не менее 2500 км/конвой.</li>
-                <li>Тяжелые грузы - не менее 1500 км.</li>
-                <li>Легковушки и головастики: Симуляция - не менее 2200 км, аркада - не менее 2700 км.</li>
-                <li>Максимальная скорость ведущего: симуляция - 100 км/ч, аркада - 150 км/ч.</li>
-            </ol>
-        </blockquote>
-        <blockquote class="blockquote text-center mb-4 mt-5">
-            <h5 class="mb-0">ATS:</h5>
-            <ol class="text-left ml-5 mr-1 px-md-5 w-75 m-auto">
-                <li>Планка конвоя - протяженность конвоя не менее 2100 км/конвой.</li>
-                <li>Тяжелые грузы - не менее 1500 км.</li>
-                <li>Легковушки и головастики: не менее 2300 км/конвой.</li>
-                <li>Максимальная скорость ведущего - 115 км/ч.</li>
-            </ol>
-        </blockquote>
-        <hr class="m-auto">
+    <hr class="m-auto w-25 border-primary">
+    <section class="features lead-rules text-center row pt-5 pb-5 justify-content-around">
+        <h2 class="col-12 mb-3">Правила для ETS2</h2>
+        <div class="feature col-lg-2 col-sm-4 col-sm-12">
+            <h1 class="display-4 font-weight-bold">SIM</h1>
+            <hr class="m-auto pb-3">
+            <p>2000+ км</p>
+        </div>
+        <div class="feature col-lg-2 col-sm-12">
+            <h1 class="display-4 font-weight-bold">ARC</h1>
+            <hr class="m-auto pb-3">
+            <p>2500+ км</p>
+        </div>
+        <div class="feature col-lg-2 col-sm-12">
+            <h2 class="text-primary font-weight-bold">Тяжёлые грузы</h2>
+            <hr class="m-auto pb-3">
+            <p>1500+ км</p>
+        </div>
+        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+            <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
+            <hr class="m-auto pb-3">
+            <p>SIM: 2500+ км<br>ARC: 2700+ км</p>
+        </div>
+        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+            <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
+            <hr class="m-auto pb-3">
+            <p>SIM: 100 км/ч<br>ARC: 150 км/ч</p>
+        </div>
+    </section>
+    <section class="features lead-rules text-center row justify-content-around">
+        <h2 class="col-12 mb-3">Правила для ATS</h2>
+        <div class="feature col-lg-2 col-sm-4 col-sm-12">
+            <h1 class="display-4 font-weight-bold">SIM</h1>
+            <hr class="m-auto pb-3">
+            <p>2100+ км</p>
+        </div>
+        <div class="feature col-lg-2 col-sm-12">
+            <h1 class="display-4 font-weight-bold">ARC</h1>
+            <hr class="m-auto pb-3">
+            <p>2100+ км</p>
+        </div>
+        <div class="feature col-lg-2 col-sm-12">
+            <h2 class="text-primary font-weight-bold">Тяжёлые грузы</h2>
+            <hr class="m-auto pb-3">
+            <p>1500+ км</p>
+        </div>
+        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+            <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
+            <hr class="m-auto pb-3">
+            <p>2300+ км</p>
+        </div>
+        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+            <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
+            <hr class="m-auto pb-3">
+            <p>SIM: 115 км/ч</p>
+        </div>
     </section>
 </div>
 
@@ -150,7 +175,7 @@
             theme: 'dark',
             datepicker: false,
             minTime: '12:00',
-            maxTime: '22:01',
+            maxTime: '23:31',
             defaultTime: '19:30',
             scrollInput: false
         });

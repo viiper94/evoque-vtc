@@ -94,8 +94,13 @@ class ConvoysController extends Controller{
 
     public function index(){
         if(Gate::denies('manage_convoys')) abort(403);
+        $list = array();
+        $convoys = Convoy::with('bookedBy')->orderBy('start_time', 'desc')->get();
+        foreach($convoys as $convoy){
+            $list[$convoy->start_time->isoFormat('dddd, DD.MM.YYYY')][] = $convoy;
+        }
         return view('evoque.convoys.index', [
-            'convoys' => Convoy::with('bookedBy')->orderBy('start_time', 'desc')->paginate(10)
+            'convoys' => $list
         ]);
     }
 

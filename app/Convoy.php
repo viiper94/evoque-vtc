@@ -32,6 +32,7 @@ class Convoy extends Model{
         'alt_trailer_paint',
         'alt_cargo',
         'dlc',
+        'comment',
     ];
 
     protected $casts = [

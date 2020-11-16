@@ -123,9 +123,9 @@
                                 @endif
                             @endif
                         </div>
-                        <section class="col-12 convoy-note pb-5 pt-5 m-auto">
+                        <section class="col-12 convoy-note py-5 m-auto">
                             <hr class="m-auto">
-                            <blockquote class="blockquote text-center mb-4 mt-4">
+                            <blockquote class="blockquote text-center my-5">
                                 <h5 class="mb-0">Правила ВТК на конвое:</h5>
                                 <ol class="text-left ml-5 mr-1 px-md-5">
                                     <li>Канал в рации <b>№7</b> (многочисленный флуд и музыка в рации полностью запрещены).</li>
@@ -142,6 +142,14 @@
                             </blockquote>
                             <hr class="m-auto">
                         </section>
+                        @if(isset($convoy->comment))
+                            <section class="col-12 convoy-note m-auto pb-5">
+                                <blockquote class="blockquote pb-5 text-center">
+                                    @markdown($convoy->comment)
+                                </blockquote>
+                                <hr class="m-auto">
+                            </section>
+                        @endif
                     </div>
                     @if($convoy->route)
                         <section class="w-100">

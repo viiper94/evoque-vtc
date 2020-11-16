@@ -14,21 +14,28 @@
     <script src="/js/jquery.datetimepicker.full.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
     <script src="/js/fotorama-4.6.4/fotorama.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
 
 @section('content')
 
     <div class="container pt-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary">
-            @if($convoy->title)
-                Редактирование конвоя
-            @else
-                Новый конвой
-            @endif
-        </h2>
         <form method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
+            <div class="mt-3 row justify-content-between">
+                <h2 class="text-primary col-md-6">
+                    @if($convoy->title)
+                        Редактирование конвоя
+                    @else
+                        Новый конвой
+                    @endif
+                </h2>
+                <div class="btn-wrapper col-md-6 text-md-right">
+                    <button class="btn btn-outline-warning mx-1" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
+                </div>
+            </div>
             @if(!$booking)
                 <div class="custom-control custom-checkbox mb-2">
                     <input type="checkbox" class="custom-control-input" id="public" name="public" @if($convoy->public) checked @endif>
@@ -329,10 +336,18 @@
                     </div>
                 </div>
             </div>
+            <div class="row pt-3">
+                <div class="form-group col-12">
+                    <label for="comment">Комментарий</label>
+                    <textarea class="form-control simple-mde" id="comment" name="comment">{{ $convoy->comment }}</textarea>
+                    @if($errors->has('comment'))
+                        <small class="form-text">{{ $errors->first('comment') }}</small>
+                    @endif
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <button class="btn btn-outline-warning mx-1" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
             </div>
-
         </form>
     </div>
 
@@ -363,6 +378,12 @@
             allowTimes: {!! $allowTimes ?? 'true' !!}
         });
         $.datetimepicker.setLocale('ru');
+
+        var simplemde = new SimpleMDE({
+            element: $('#comment')[0],
+            promptURLs: true,
+
+        });
     </script>
 
     <script type="text/html" id="route_images_template">

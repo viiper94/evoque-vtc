@@ -223,7 +223,7 @@ class ConvoysController extends Controller{
         $tmp = new Client();
         $servers = $tmp->servers()->get();
         return view('evoque.convoys.edit', [
-            'allowTimes' => false,
+            'allowTimes' => null,
             'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,

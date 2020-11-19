@@ -9,7 +9,7 @@
     <div class="kb container py-5">
         <h1 class="text-center text-primary mt-3">База знаний</h1>
             @auth
-                <h2 class="mt-3 mt-md-5 ml-md-5 kb-section">ВТК EVOQOUE</h2>
+                <h2 class="mt-3 mt-md-5 ml-md-5 kb-section">ВТК EVOQUE</h2>
                 <div class="accordion pb-2 pb-md-5" id="vtc">
                     <div class="card card-dark mb-5">
                         <div class="card-header row pb-0" id="ets2-paint">

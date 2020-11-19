@@ -29,19 +29,27 @@
         @if(count($apps) > 0)
             <div class="applications pt-5 pb-5 row">
                 @foreach($apps as $app)
-                    <div class="m-3 card card-dark text-shadow-m @if($app->status == 0) border-primary new @else border-success @endif">
-                        <h5 class="card-header @if($app->status == 0) @if($app->category === 1) text-warning @elseif($app->category === 5) text-danger @endif @endif">Заявка на {{ $app->getCategory() }}</h5>
+                    <div class="m-3 card card-dark text-shadow-m @if($app->status == 0) new border-primary @elseif($app->status == '1') border-success @else border-danger @endif">
+                        <h5 class="card-header @if($app->status == 0) @if($app->category === 1) text-warning @elseif($app->category === 5) text-danger @endif @endif">
+                            Заявка на {{ $app->getCategory() }}
+                            @if($app->status == '0')
+                                <span class="badge badge-warning">Рассматривается</span>
+                            @elseif($app->status == '1')
+                                <span class="badge badge-success">Принята</span>
+                            @elseif($app->status == '2')
+                                <span class="badge badge-danger">Отклонена</span>
+                            @endif
+                        </h5>
                         <div class="card-body">
                             <h4 class="card-title mb-0">
                                 От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->old_nickname }}</span>
-                                @if($app->status == 0)
-                                    <span class="badge badge-warning">Рассматривается</span>
-                                @else
-                                    <span class="badge badge-success">Принята</span>
-                                @endif
                             </h4>
-                            @if($app->member)
+                            @if($app->member && $app->category === 4)
                                 <p class="text-muted">Текущий ник: <b>{{ $app->member->nickname }}</b></p>
+                            @endif
+                            @if($app->comment)
+                                <p class="mb-0 pt-3">Комментарий от администратора: </p>
+                                @markdown($app->comment)
                             @endif
                             @switch($app->category)
                                 @case(1)
@@ -57,7 +65,7 @@
                                     </h5>
                                 @break
                                 @case(3)
-                                    <p class="mb-0">Новый уровень в {{ strtoupper($app->new_rp_profile[0]) }}: {{ $app->new_rp_profile[1] }}</p>
+                                    <p class="mb-0">Новый уровень в {{ strtoupper($app->new_rp_profile[0]) }}: <b>{{ $app->new_rp_profile[1] }}</b></p>
                                     @break
                                 @case(4)
                                     <p class="mb-0">Новый никнейм: </p>
@@ -74,8 +82,7 @@
                         <div class="card-actions">
                             @can('manage_members')
                                 @if($app->status == 0)
-                                    <a href="{{ route('evoque.applications.accept', $app->id) }}" class="btn btn-outline-primary"
-                                        onclick="return confirm('Принять эту заявку?')">Принять</a>
+                                    <a href="{{ route('evoque.applications', $app->id) }}" class="btn btn-outline-primary">Смотреть</a>
                                 @endif
                             @endcan
                             @if(($app->member_id === \Illuminate\Support\Facades\Auth::user()->member->id && $app->status == 0) || \Illuminate\Support\Facades\Gate::allows('manage_members'))

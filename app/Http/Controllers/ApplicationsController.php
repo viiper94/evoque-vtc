@@ -6,6 +6,7 @@ use App\Application;
 use App\Http\Controllers\Controller;
 use App\Member;
 use App\Recruitment;
+use App\RpStats;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,18 @@ use Illuminate\Support\Facades\Gate;
 
 class ApplicationsController extends Controller{
 
-    public function index(){
+    public function app(Request $request, $id = null){
         if(Auth::guest()) abort(404);
+        if(isset($id)){
+            if(Gate::denies('manage_members')) abort(403);
+            $app = Application::with('member')->where('id', $id)->firstOrFail();
+            $rp = null;
+            if($app->new_rp_profile) $rp = RpStats::where(['member_id' => $app->member_id, 'game' => $app->new_rp_profile[0]])->first();
+            return view('evoque.applications.show', [
+                'app' => $app,
+                'rp' => $rp
+            ]);
+        }
         $apps = Application::with('member');
         if(Gate::denies('manage_members')){
             $apps = $apps->where('member_id', Auth::user()->member->id);
@@ -25,7 +36,7 @@ class ApplicationsController extends Controller{
         ]);
     }
 
-    public function recruitment(){
+    public function recruitment(Request $request, $id = null){
         if(Gate::denies('manage_members')) abort(403);
         return view('evoque.applications.recruitment', [
             'applications' => Recruitment::orderBy('status')->orderBy('created_at')->get(),
@@ -45,7 +56,7 @@ class ApplicationsController extends Controller{
         if(Gate::denies('manage_members')) abort(403);
         $application = Application::with('member', 'member.stats')->where('id', $id)->first();
         $result = true;
-        switch($application->category){
+        switch($application->category && $request->input('accept') === '1'){
             case 1:
                 $application->member->on_vacation_till = $application->vacation_till;
                 $application->member->vacations += 1;
@@ -64,9 +75,10 @@ class ApplicationsController extends Controller{
                 $result = $application->member->save();
                 break;
         }
-        $application->status = 1;
+        $application->status = $request->input('accept');
+        $application->comment = $request->input('comment');
         return $result && $application->save() ?
-            redirect()->back()->with(['success' => 'Зявка принята!']) :
+            redirect()->back()->with(['success' => 'Зявка '. ($request->input('accept') === '1' ? 'принята' : 'отклонена') .'!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

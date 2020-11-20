@@ -26,15 +26,13 @@
                                 <a class="mr-3" href="{{ $application->steam_link }}" target="_blank"><i class="fab fa-steam"></i></a>
                                 <a class="mr-3" href="{{ $application->tmp_link }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
                             </p>
-                            <p>
-                                <i class="mr-3 fas fa-microphone @if($application->have_mic)active @endif"></i>
-                                <i class="mr-3 fab fa-discord @if($application->have_ts3)active @endif"></i>
-                                <i class="mr-3 fas fa-truck-pickup @if($application->have_ats)active @endif"></i>
-                            </p>
                             <p class="card-text">Ник в игре: <b>{{ $application->nickname }}</b><br>
                                 Возраст: <b>{{ $application->age }} лет</b><br>
-                                Часов в ETS2: <b>{{ $application->hours_played }} {{ trans_choice('час|часа|часов', $application->hours_played) }}</b><br>
-                                Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
+                                Часов в ETS2: <b>{{ $application->hours_played }} {{ trans_choice('час|часа|часов', $application->hours_played) }}</b></p>
+                            <p class="mb-0">Микрофон: @if($application->have_mic) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
+                            <p class="mb-0">Discord: @if($application->have_ts3) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
+                            <p>Наличие ATS: @if($application->have_ats) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
+                            <p>Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
                             <span class="text-muted">{{ $application->created_at->isoFormat('LLL') }}</span>
                         </div>
                         <div class="card-actions">

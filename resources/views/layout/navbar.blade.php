@@ -35,9 +35,9 @@
                         <li class="nav-item dropdown @if(Route::current() && in_array(Route::current()->getName(), ['evoque.convoys.tab', 'evoque.convoys', 'convoys']))active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Конвои
-                                @can('manage_convoys')
-                                    @if($bookings_c + $tabs_c > 0)
-                                        <span class="badge badge-danger">{{ $bookings_c + $tabs_c }}</span>
+                                @can('manage_table')
+                                    @if($tabs_c > 0)
+                                        <span class="badge badge-danger">{{ $tabs_c }}</span>
                                     @endif
                                 @endcan
                             </a>
@@ -50,7 +50,7 @@
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.tab') }}">
                                     Скрины TAB
-                                    @can('manage_convoys')
+                                    @can('manage_table')
                                         @if($tabs_c > 0)
                                             <span class="badge badge-danger">{{ $tabs_c }}</span>
                                         @endif
@@ -60,11 +60,11 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{ route('evoque.convoys') }}">
                                         Редактирование
-                                        @can('manage_convoys')
-                                            @if($bookings_c > 0)
-                                                <span class="badge badge-danger">{{ $bookings_c }}</span>
-                                            @endif
-                                        @endcan
+{{--                                        @can('manage_convoys')--}}
+{{--                                            @if($bookings_c > 0)--}}
+{{--                                                <span class="badge badge-danger">{{ $bookings_c }}</span>--}}
+{{--                                            @endif--}}
+{{--                                        @endcan--}}
                                     </a>
                                 @endcan
                             </div>

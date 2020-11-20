@@ -33,7 +33,14 @@
                             <a class="nav-link" href="{{ route('home') }}">Главная</a>
                         </li>
                         <li class="nav-item dropdown @if(Route::current() && in_array(Route::current()->getName(), ['evoque.convoys.tab', 'evoque.convoys', 'convoys']))active @endif">
-                            <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Конвои</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Конвои
+                                @can('manage_convoys')
+                                    @if($bookings_c + $tabs_c > 0)
+                                        <span class="badge badge-danger">{{ $bookings_c + $tabs_c }}</span>
+                                    @endif
+                                @endcan
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
                                 <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
                                 @can('manage_convoys')
@@ -41,10 +48,24 @@
                                 @endcan
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
-                                <a class="dropdown-item" href="{{ route('evoque.convoys.tab') }}">Скрины TAB</a>
+                                <a class="dropdown-item" href="{{ route('evoque.convoys.tab') }}">
+                                    Скрины TAB
+                                    @can('manage_convoys')
+                                        @if($tabs_c > 0)
+                                            <span class="badge badge-danger">{{ $tabs_c }}</span>
+                                        @endif
+                                    @endcan
+                                </a>
                                 @can('manage_convoys')
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('evoque.convoys') }}">Редактирование</a>
+                                    <a class="dropdown-item" href="{{ route('evoque.convoys') }}">
+                                        Редактирование
+                                        @can('manage_convoys')
+                                            @if($bookings_c > 0)
+                                                <span class="badge badge-danger">{{ $bookings_c }}</span>
+                                            @endif
+                                        @endcan
+                                    </a>
                                 @endcan
                             </div>
                         </li>
@@ -56,18 +77,39 @@
                             </div>
                         </li>
                         <li class="nav-item @if(Request::is('evoque/applications*'))active @endif">
-                            <a class="nav-link" href="{{ route('evoque.applications') }}">Заявки</a>
+                            <a class="nav-link" href="{{ route('evoque.applications') }}">
+                                Заявки
+                                @can('manage_members')
+                                    @if($applications_c + $recruitments_c > 0)
+                                        <span class="badge badge-danger">{{ $applications_c + $recruitments_c }}</span>
+                                    @endif
+                                @endcan
+                            </a>
                         </li>
                         <li class="nav-item @if(Route::current() && Route::current()->getName() === 'evoque.members')active @endif">
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
                         <li class="nav-item dropdown @if(Request::is('evoque/rp*'))active @endif">
-                            <a class="nav-link dropdown-toggle" href="#" id="rpDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Рейтинговые перевозки</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="rpDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Рейтинговые перевозки
+                                @can('manage_rp')
+                                    @if($reports_c > 0)
+                                        <span class="badge badge-danger">{{ $reports_c }}</span>
+                                    @endif
+                                @endcan
+                            </a>
                             <div class="dropdown-menu" aria-labelledby="rpDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ets2') }}">Статистика ETS2</a>
                                 <a class="dropdown-item" href="{{ route('evoque.rp', 'ats') }}">Статистика ATS</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">Отчёты</a>
+                                <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">
+                                    Отчёты
+                                    @can('manage_rp')
+                                        @if($reports_c > 0)
+                                            <span class="badge badge-danger">{{ $reports_c }}</span>
+                                        @endif
+                                    @endcan
+                                </a>
 {{--                                @can('manage_rp')--}}
 {{--                                    <a class="dropdown-item" href="{{ route('evoque.rp.results') }}">Результаты</a>--}}
 {{--                                @endcan--}}

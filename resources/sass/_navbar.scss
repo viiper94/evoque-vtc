@@ -15,6 +15,7 @@
                 }
             }
             .nav-link{
+                position: relative;
                 color: $primary-text;
                 &:hover{
                     color: rgba(255, 255, 255, 0.8);
@@ -26,6 +27,8 @@
                 }
                 &.avatar.dropdown-toggle::after{
                     display: none;
+                }
+                .badge{
                 }
             }
             .dropdown-menu{
@@ -47,7 +50,7 @@
     .navbar-brand{
         padding: 0;
         img{
-            height: 40px;
+            height: 30px;
         }
     }
 

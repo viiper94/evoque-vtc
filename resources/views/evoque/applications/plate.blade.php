@@ -4,6 +4,11 @@
     Заявка на смену номера | @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container pt-5">
@@ -28,5 +33,12 @@
             <button type="submit" class="btn btn-outline-warning"><i class="fas fa-check"></i> Отправить</button>
         </form>
     </div>
+
+    <script>
+        var simplemde = new SimpleMDE({
+            element: $('#reason')[0],
+            promptURLs: true
+        });
+    </script>
 
 @endsection

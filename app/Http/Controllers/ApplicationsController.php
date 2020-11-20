@@ -52,6 +52,7 @@ class ApplicationsController extends Controller{
             redirect()->back()->with(['success' => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
+
     public function accept(Request $request, $id){
         if(Gate::denies('manage_members')) abort(403);
         $application = Application::with('member', 'member.stats')->where('id', $id)->first();
@@ -112,7 +113,7 @@ class ApplicationsController extends Controller{
             $app->old_nickname = Auth::user()->member->nickname;
             $app->category = 1;
             $app->vacation_till = Carbon::parse($request->input('vacation_till'))->format('Y-m-d');
-            $app->reason = htmlentities(trim($request->input('reason')));
+            $app->reason = $request->input('reason');
             return $app->save() ?
                 redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -131,7 +132,7 @@ class ApplicationsController extends Controller{
             $app->old_nickname = Auth::user()->member->nickname;
             $app->category = 2;
             $app->new_plate_number = $request->input('new_plate_number');
-            $app->reason = htmlentities(trim($request->input('reason')));
+            $app->reason = $request->input('reason');
             return $app->save() ?
                 redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -150,7 +151,7 @@ class ApplicationsController extends Controller{
             $app->old_nickname = Auth::user()->member->nickname;
             $app->new_rp_profile = [$request->input('game'), $request->input('new_rp_profile')];
             $app->category = 3;
-            $app->reason = htmlentities(trim($request->input('reason')));
+            $app->reason = $request->input('reason');
             return $app->save() ?
                 redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -169,7 +170,7 @@ class ApplicationsController extends Controller{
             $app->old_nickname = Auth::user()->member->nickname;
             $app->new_nickname = $request->input('new_nickname');
             $app->category = 4;
-            $app->reason = htmlentities(trim($request->input('reason')));
+            $app->reason = $request->input('reason');
             return $app->save() ?
                 redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -187,7 +188,7 @@ class ApplicationsController extends Controller{
             $app->member_id = Auth::user()->member->id;
             $app->old_nickname = Auth::user()->member->nickname;
             $app->category = 5;
-            $app->reason = htmlentities(trim($request->input('reason')));
+            $app->reason = $request->input('reason');
             return $app->save() ?
                 redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

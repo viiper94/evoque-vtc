@@ -1,7 +1,12 @@
 @extends('layout.index')
 
 @section('title')
-    Заявка на сброс статистики рейтинговых перевозок | @lang('general.vtc_evoque')
+    Заявка на смену уровня в рейтинговых перевозок | @lang('general.vtc_evoque')
+@endsection
+
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
 
 @section('content')
@@ -36,5 +41,12 @@
             <button type="submit" class="btn btn-outline-warning"><i class="fas fa-check"></i> Отправить</button>
         </form>
     </div>
+
+    <script>
+        var simplemde = new SimpleMDE({
+            element: $('#reason')[0],
+            promptURLs: true
+        });
+    </script>
 
 @endsection

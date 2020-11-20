@@ -75,7 +75,7 @@
                             @endswitch
                             @if($app->reason)
                                 <p class="mb-0 pt-3">Причина: </p>
-                                <h5>{!! nl2br($app->reason) !!}</h5>
+                                @markdown($app->reason)
                             @endif
                             <span class="text-muted">{{ $app->created_at->isoFormat('LLL') }}</span>
                         </div>

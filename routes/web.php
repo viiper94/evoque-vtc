@@ -49,7 +49,7 @@ Route::any('/evoque/rp/reports/stat/{id}', 'RpController@editStat')->name('evoqu
 Route::get('/evoque/rp/{game?}', 'RpController@index')->name('evoque.rp');
 
 Route::get('/evoque/applications/recruitment/{id?}', 'ApplicationsController@recruitment')->name('evoque.applications.recruitment');
-Route::get('/evoque/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.applications.accept.recruitment');
+Route::any('/evoque/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.applications.accept.recruitment');
 Route::get('/evoque/applications/deleteRecruitment/{id}', 'ApplicationsController@deleteRecruitment')->name('evoque.applications.delete.recruitment');
 Route::any('/evoque/applications/accept/{id}', 'ApplicationsController@accept')->name('evoque.applications.accept');
 Route::get('/evoque/applications/delete/{id}', 'ApplicationsController@delete')->name('evoque.applications.delete');

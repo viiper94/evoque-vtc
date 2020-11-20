@@ -18,16 +18,20 @@
         @if(count($applications) > 0)
             <div class="applications pt-5 pb-5 row">
                 @foreach($applications as $application)
-                    <div class="m-3 card card-dark text-shadow-m @if($application->status == 0) border-primary new @endif">
+                    <div class="m-3 card card-dark text-shadow-m @if($application->status == 0) border-primary new @elseif($application->status == 1) border-success @elseif($application->status == 2) border-danger @endif">
                         <h4 class="card-header">{{ $application->name }}</h4>
                         <div class="card-body">
+                            @if($application->comment)
+                                <p class="mb-0 pt-3">Комментарий от администратора: </p>
+                                @markdown($application->comment)
+                            @endif
                             <p>
                                 <a class="mr-3" href="{{ $application->vk_link }}" target="_blank"><i class="fab fa-vk"></i></a>
                                 <a class="mr-3" href="{{ $application->steam_link }}" target="_blank"><i class="fab fa-steam"></i></a>
                                 <a class="mr-3" href="{{ $application->tmp_link }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
                             </p>
                             <p class="card-text">Ник в игре: <b>{{ $application->nickname }}</b><br>
-                                Возраст: <b>{{ $application->age }} лет</b><br>
+                                Возраст: <b>{{ $application->age }} {{ trans_choice('год|года|лет', $application->age) }}</b><br>
                                 Часов в ETS2: <b>{{ $application->hours_played }} {{ trans_choice('час|часа|часов', $application->hours_played) }}</b></p>
                             <p class="mb-0">Микрофон: @if($application->have_mic) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
                             <p class="mb-0">Discord: @if($application->have_ts3) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
@@ -37,8 +41,7 @@
                         </div>
                         <div class="card-actions">
                             @if($application->status == 0)
-                                <a href="{{ route('evoque.applications.accept.recruitment', $application->id) }}" class="btn btn-outline-primary"
-                                    onclick="return confirm('Принять эту заявку?')">Принять</a>
+                                <a href="{{ route('evoque.applications.recruitment', $application->id) }}" class="btn btn-outline-primary">Смотреть</a>
                             @endif
                             <a href="{{ route('evoque.applications.delete.recruitment', $application->id) }}" class="btn btn-outline-danger"
                                onclick="return confirm('Удалить эту заявку?')">Удалить</a>

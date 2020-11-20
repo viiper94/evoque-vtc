@@ -38,6 +38,12 @@ class ApplicationsController extends Controller{
 
     public function recruitment(Request $request, $id = null){
         if(Gate::denies('manage_members')) abort(403);
+        if(isset($id)){
+            $app = Recruitment::where('id', $id)->firstOrFail();
+            return view('evoque.applications.show_recruitment', [
+                'app' => $app
+            ]);
+        }
         return view('evoque.applications.recruitment', [
             'applications' => Recruitment::orderBy('status')->orderBy('created_at')->get(),
             'apps' => Application::where('status', 0)->count()
@@ -47,9 +53,14 @@ class ApplicationsController extends Controller{
     public function acceptRecruitment(Request $request, $id){
         if(Gate::denies('manage_members')) abort(403);
         $application = Recruitment::findOrFail($id);
-        $application->status = 1;
+        $application->status = $request->input('accept');
+        $application->comment = $request->input('comment');
+        $messages = [
+            '1' => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.',
+            '2' => 'Зявка отклонена!',
+        ];
         return $application->save() ?
-            redirect()->back()->with(['success' => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.']) :
+            redirect()->route('evoque.applications.recruitment')->with(['success' => $messages[$application->status]]) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

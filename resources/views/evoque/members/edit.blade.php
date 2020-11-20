@@ -62,13 +62,22 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="trainee_until">Испытательный срок до</label>
-                        <input type="text" class="form-control" id="trainee_until" name="trainee_until" value="{{ $member->trainee_until ? $member->trainee_until->format('d.m.Y') : '' }}" autocomplete="off">
-                        @if($errors->has('trainee_until'))
-                            <small class="form-text">{{ $errors->first('trainee_until') }}</small>
-                        @endif
-                    </div>
+                    @if($member->isTrainee())
+                        <div class="form-group">
+                            <label for="trainee_until">Испытательный срок до</label>
+                            <input type="text" class="form-control" id="trainee_until" name="trainee_until" value="{{ $member->trainee_until ? $member->trainee_until->format('d.m.Y') : '' }}" autocomplete="off">
+                            @if($errors->has('trainee_until'))
+                                <small class="form-text">{{ $errors->first('trainee_until') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="trainee_convoys">Конвоев на исп. сроке</label>
+                            <input type="text" class="form-control" id="trainee_convoys" name="trainee_convoys" value="{{ $member->trainee_convoys }}" autocomplete="off">
+                            @if($errors->has('trainee_convoys'))
+                                <small class="form-text">{{ $errors->first('trainee_convoys') }}</small>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="row">
@@ -93,7 +102,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="convoys">Посещение конвоев</label>
+                        <label for="convoys">Посещение конвоев за неделю</label>
                         <input type="number" class="form-control" id="convoys" name="convoys" value="{{ $member->convoys }}" required>
                         @if($errors->has('convoys'))
                             <small class="form-text">{{ $errors->first('convoys') }}</small>

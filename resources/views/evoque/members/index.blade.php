@@ -73,7 +73,7 @@
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         @endcan
-                                        <span class="number trainee">{{ $member->convoys }}</span><span>/4</span>
+                                        <span class="number trainee">{{ $member->trainee_convoys }}</span><span>/4</span>
                                     </td>
                                 @else
                                     <td class="member-scores">

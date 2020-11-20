@@ -342,6 +342,7 @@ class ConvoysController extends Controller{
             foreach($request->input('scores') as $member_id => $value){
                 $member = Member::find($member_id);
                 $member->convoys += 1;
+                if($member->isTrainee()) $member->trainee_convoys += 1;
                 if(isset($member->scores)) $member->scores += $value;
                 if(isset($member->money) && $lead[0] == $member->id) $member->money += $lead[1];
                 $member->save();

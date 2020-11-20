@@ -114,10 +114,8 @@ class MembersController extends Controller{
         if(!$request->ajax() || Gate::denies('manage_table')) abort(403);
         $members = Member::with('role')->where('convoys', '>', 0)->get();
         foreach($members as $member){
-            if(!$member->isTrainee()){
-                $member->convoys = 0;
-                $member->save();
-            }
+            $member->convoys = 0;
+            $member->save();
         }
         return response()->json([
             'status' => 'OK'

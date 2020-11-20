@@ -79,7 +79,7 @@ class ApplicationsController extends Controller{
         $application->status = $request->input('accept');
         $application->comment = $request->input('comment');
         return $result && $application->save() ?
-            redirect()->back()->with(['success' => 'Зявка '. ($request->input('accept') === '1' ? 'принята' : 'отклонена') .'!']) :
+            redirect()->route('evoque.applications')->with(['success' => 'Зявка '. ($request->input('accept') === '1' ? 'принята' : 'отклонена') .'!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

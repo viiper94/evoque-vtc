@@ -119,7 +119,7 @@
                             <li class="nav-item dropdown @if(Request::is('evoque/admin*'))active @endif">
                                 <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
-                                    <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Роли</a>
+                                    <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Должности</a>
                                     <a class="dropdown-item" href="{{ route('evoque.admin.users') }}">Пользователи</a>
                                 </div>
                             </li>

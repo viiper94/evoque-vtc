@@ -9,23 +9,7 @@ class Role extends Model{
     public $fillable = [
         'group',
         'title',
-        'description',
-        'admin',
-        'manage_members',
-        'manage_convoys',
-        'manage_table',
-        'manage_rp',
-        'do_rp',
-    ];
-
-    public $casts = [
-        'admin' => 'boolean',
-        'manage_members' => 'boolean',
-        'manage_convoys' => 'boolean',
-        'manage_table' => 'boolean',
-        'manage_rp' => 'boolean',
-        'do_rp' => 'boolean',
-        'visible' => 'boolean'
+        'description'
     ];
 
     public function members(){

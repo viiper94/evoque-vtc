@@ -25,13 +25,64 @@ class RolesController extends Controller{
                 'group' => 'required|string'
             ]);
             $role->fill($request->post());
-            $role->admin = $request->input('admin') == 'on';
-            $role->manage_members = $request->input('manage_members') == 'on';
-            $role->manage_convoys = $request->input('manage_convoys') == 'on';
-            $role->manage_table = $request->input('manage_table') == 'on';
-            $role->manage_rp = $request->input('manage_rp') == 'on';
-            $role->do_rp = $request->input('do_rp') == 'on';
+
             $role->visible = $request->input('visible') == 'on';
+            $role->admin = $request->input('admin') == 'on';
+
+            $role->manage_members = $request->input('manage_members') == 'on';
+            $role->edit_members = $request->input('edit_members') == 'on';
+            $role->edit_members_activity = $request->input('edit_members_activity') == 'on';
+            $role->edit_members_rp_stats = $request->input('edit_members_rp_stats') == 'on';
+            $role->fire_members = $request->input('fire_members') == 'on';
+            $role->set_members_activity = $request->input('set_members_activity') == 'on';
+            $role->reset_members_activity = $request->input('reset_members_activity') == 'on';
+
+            $role->manage_applications = $request->input('manage_applications') == 'on';
+            $role->view_recruitments = $request->input('view_recruitments') == 'on';
+            $role->claim_recruitments = $request->input('claim_recruitments') == 'on';
+            $role->delete_recruitments = $request->input('delete_recruitments') == 'on';
+            $role->make_applications = $request->input('make_applications') == 'on';
+            $role->view_applications = $request->input('view_applications') == 'on';
+            $role->claim_applications = $request->input('claim_applications') == 'on';
+            $role->delete_applications = $request->input('delete_applications') == 'on';
+
+            $role->manage_convoys = $request->input('manage_convoys') == 'on';
+            $role->view_all_convoys = $request->input('view_all_convoys') == 'on';
+            $role->book_convoys = $request->input('book_convoys') == 'on';
+            $role->add_convoys = $request->input('add_convoys') == 'on';
+            $role->edit_convoys = $request->input('edit_convoys') == 'on';
+            $role->delete_convoys = $request->input('delete_convoys') == 'on';
+
+            $role->manage_tab = $request->input('manage_tab') == 'on';
+            $role->add_tab = $request->input('add_tab') == 'on';
+            $role->edit_tab = $request->input('edit_tab') == 'on';
+            $role->accept_tab = $request->input('accept_tab') == 'on';
+            $role->delete_tab = $request->input('delete_tab') == 'on';
+
+            $role->manage_rp = $request->input('manage_rp') == 'on';
+            $role->add_reports = $request->input('add_reports') == 'on';
+            $role->view_all_reports = $request->input('view_all_reports') == 'on';
+            $role->delete_own_reports = $request->input('delete_own_reports') == 'on';
+            $role->delete_all_reports = $request->input('delete_all_reports') == 'on';
+            $role->accept_reports = $request->input('accept_reports') == 'on';
+
+            $role->manage_rules = $request->input('manage_rules') == 'on';
+            $role->add_rules = $request->input('add_rules') == 'on';
+            $role->edit_rules = $request->input('edit_rules') == 'on';
+            $role->delete_rules = $request->input('delete_rules') == 'on';
+            $role->view_rules_changelog = $request->input('view_rules_changelog') == 'on';
+
+            $role->manage_roles = $request->input('manage_roles') == 'on';
+            $role->view_roles = $request->input('view_roles') == 'on';
+            $role->add_roles = $request->input('add_roles') == 'on';
+            $role->edit_roles = $request->input('edit_roles') == 'on';
+            $role->edit_roles_permissions = $request->input('edit_roles_permissions') == 'on';
+            $role->delete_roles = $request->input('delete_roles') == 'on';
+
+            $role->manage_users = $request->input('manage_users') == 'on';
+            $role->view_users = $request->input('view_users') == 'on';
+            $role->set_user_as_member = $request->input('set_user_as_member') == 'on';
+
             return $role->save() ?
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно отредактирована!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -50,13 +101,64 @@ class RolesController extends Controller{
                 'group' => 'required|string'
             ]);
             $role->fill($request->post());
-            $role->admin = $request->input('admin') == 'on';
-            $role->manage_members = $request->input('manage_members') == 'on';
-            $role->manage_convoys = $request->input('manage_convoys') == 'on';
-            $role->manage_table = $request->input('manage_table') == 'on';
-            $role->manage_rp = $request->input('manage_rp') == 'on';
-            $role->do_rp = $request->input('do_rp') == 'on';
+
             $role->visible = $request->input('visible') == 'on';
+            $role->admin = $request->input('admin') == 'on';
+
+            $role->manage_members = $request->input('manage_members') == 'on';
+            $role->edit_members = $request->input('edit_members') == 'on';
+            $role->edit_members_activity = $request->input('edit_members_activity') == 'on';
+            $role->edit_members_rp_stats = $request->input('edit_members_rp_stats') == 'on';
+            $role->fire_members = $request->input('fire_members') == 'on';
+            $role->set_members_activity = $request->input('set_members_activity') == 'on';
+            $role->reset_members_activity = $request->input('reset_members_activity') == 'on';
+
+            $role->manage_applications = $request->input('manage_applications') == 'on';
+            $role->view_recruitments = $request->input('view_recruitments') == 'on';
+            $role->claim_recruitments = $request->input('claim_recruitments') == 'on';
+            $role->delete_recruitments = $request->input('delete_recruitments') == 'on';
+            $role->make_applications = $request->input('make_applications') == 'on';
+            $role->view_applications = $request->input('view_applications') == 'on';
+            $role->claim_applications = $request->input('claim_applications') == 'on';
+            $role->delete_applications = $request->input('delete_applications') == 'on';
+
+            $role->manage_convoys = $request->input('manage_convoys') == 'on';
+            $role->view_all_convoys = $request->input('view_all_convoys') == 'on';
+            $role->book_convoys = $request->input('book_convoys') == 'on';
+            $role->add_convoys = $request->input('add_convoys') == 'on';
+            $role->edit_convoys = $request->input('edit_convoys') == 'on';
+            $role->delete_convoys = $request->input('delete_convoys') == 'on';
+
+            $role->manage_tab = $request->input('manage_tab') == 'on';
+            $role->add_tab = $request->input('add_tab') == 'on';
+            $role->edit_tab = $request->input('edit_tab') == 'on';
+            $role->accept_tab = $request->input('accept_tab') == 'on';
+            $role->delete_tab = $request->input('delete_tab') == 'on';
+
+            $role->manage_rp = $request->input('manage_rp') == 'on';
+            $role->add_reports = $request->input('add_reports') == 'on';
+            $role->view_all_reports = $request->input('view_all_reports') == 'on';
+            $role->delete_own_reports = $request->input('delete_own_reports') == 'on';
+            $role->delete_all_reports = $request->input('delete_all_reports') == 'on';
+            $role->accept_reports = $request->input('accept_reports') == 'on';
+
+            $role->manage_rules = $request->input('manage_rules') == 'on';
+            $role->add_rules = $request->input('add_rules') == 'on';
+            $role->edit_rules = $request->input('edit_rules') == 'on';
+            $role->delete_rules = $request->input('delete_rules') == 'on';
+            $role->view_rules_changelog = $request->input('view_rules_changelog') == 'on';
+
+            $role->manage_roles = $request->input('manage_roles') == 'on';
+            $role->view_roles = $request->input('view_roles') == 'on';
+            $role->add_roles = $request->input('add_roles') == 'on';
+            $role->edit_roles = $request->input('edit_roles') == 'on';
+            $role->edit_roles_permissions = $request->input('edit_roles_permissions') == 'on';
+            $role->delete_roles = $request->input('delete_roles') == 'on';
+
+            $role->manage_users = $request->input('manage_users') == 'on';
+            $role->view_users = $request->input('view_users') == 'on';
+            $role->set_user_as_member = $request->input('set_user_as_member') == 'on';
+
             return $role->save() ?
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно добавлена!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

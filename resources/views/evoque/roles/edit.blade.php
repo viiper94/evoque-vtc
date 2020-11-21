@@ -7,48 +7,254 @@
 @section('content')
 
     <div class="container pt-5 pb-5">
-        <h3 class="mt-3 text-primary">Редактирование роли</h3>
+        <h3 class="mt-3 text-primary">Редактирование должности</h3>
         <form method="post">
             @csrf
             <div class="form-group">
-                <label for="title">Название роли</label>
+                <label for="title">Название должности</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ $role->title }}" required>
             </div>
             <div class="form-group">
-                <label for="group">Группа роли</label>
+                <label for="group">Группа должности</label>
                 <input type="text" class="form-control" id="group" name="group" value="{{ $role->group }}" required>
             </div>
             <div class="form-group">
                 <label for="description">Описание</label>
                 <input type="text" class="form-control" id="description" name="description" value="{{ $role->description }}">
             </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="admin" name="admin" @if($role->admin)checked @endif>
-                <label class="custom-control-label" for="admin">Полные админские права</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="manage_members" name="manage_members" @if($role->manage_members)checked @endif>
-                <label class="custom-control-label" for="manage_members">Может управлять участниками</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="manage_convoys" name="manage_convoys" @if($role->manage_convoys)checked @endif>
-                <label class="custom-control-label" for="manage_convoys">Может создавать и редактировать конвои</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="manage_table" name="manage_table" @if($role->manage_table)checked @endif>
-                <label class="custom-control-label" for="manage_table">Может редактировать таблицу</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="manage_rp" name="manage_rp" @if($role->manage_rp)checked @endif>
-                <label class="custom-control-label" for="manage_rp">Может модерировать рейтинговые перевозки</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="do_rp" name="do_rp" @if($role->do_rp)checked @endif>
-                <label class="custom-control-label" for="do_rp">Может делать рейтинговые перевозки</label>
-            </div>
             <div class="custom-control custom-checkbox mb-3">
                 <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($role->visible) checked @endif>
-                <label class="custom-control-label" for="visible">Показывать эту роль</label>
+                <label class="custom-control-label" for="visible">Показывать эту роль в таблице</label>
+            </div>
+            <div class="row my-5">
+                <h1 class="col-12 text-primary mb-3">Права должности на сайте</h1>
+                <div class="col-12">
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="admin" name="admin" @if($role->admin)checked @endif>
+                        <label class="custom-control-label text-danger" for="admin">Полные админские права</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Управление учасниками</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_members" name="manage_members" @if($role->manage_members)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_members">Полные права по управлению сотрудниками</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_members" name="edit_members" @if($role->edit_members)checked @endif>
+                        <label class="custom-control-label" for="edit_members">Редактировать сотрудников</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_members_activity" name="edit_members_activity" @if($role->edit_members_activity)checked @endif>
+                        <label class="custom-control-label" for="edit_activity_members">Редактировать статистику по посещениям сотрудников</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_members_rp_stats" name="edit_members_rp_stats" @if($role->edit_members_rp_stats)checked @endif>
+                        <label class="custom-control-label" for="edit_members_rp_stats">Редактировать статистику по рейтинговым перевозкам сотрудников</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="fire_members" name="fire_members" @if($role->fire_members)checked @endif>
+                        <label class="custom-control-label" for="fire_members">Увольнять сотрудников</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="set_members_activity" name="set_members_activity" @if($role->set_members_activity)checked @endif>
+                        <label class="custom-control-label" for="set_members_activity">Выставлять баллы, эвики и посещения через таблицу</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="reset_members_activity" name="reset_members_activity" @if($role->reset_members_activity)checked @endif>
+                        <label class="custom-control-label" for="reset_members_activity">Сбрасывать посещения через таблицу</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Заявки</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_applications" name="manage_applications" @if($role->manage_applications)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_applications">Полные права по всем заявкам</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_recruitments" name="view_recruitments" @if($role->view_recruitments)checked @endif>
+                        <label class="custom-control-label" for="view_recruitments">Смотреть заявки на вступление</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="claim_recruitments" name="claim_recruitments" @if($role->claim_recruitments)checked @endif>
+                        <label class="custom-control-label" for="claim_recruitments">Принимать или отклонять заявки на вступление</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="delete_recruitments" name="delete_recruitments" @if($role->delete_recruitments)checked @endif>
+                        <label class="custom-control-label" for="delete_recruitments">Удалять заявки на вступление</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="make_applications" name="make_applications" @if($role->make_applications)checked @endif>
+                        <label class="custom-control-label" for="make_applications">Подавать заявки</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_applications" name="edit_applications" @if($role->edit_applications)checked @endif>
+                        <label class="custom-control-label" for="edit_applications">Редактировать свои заявки</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_applications" name="view_applications" @if($role->view_applications)checked @endif>
+                        <label class="custom-control-label" for="view_applications">Смотреть все заявки сотрудников</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="claim_applications" name="claim_applications" @if($role->claim_applications)checked @endif>
+                        <label class="custom-control-label" for="claim_applications">Принимать или отклонять заявки сотрудников</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="delete_applications" name="delete_applications" @if($role->delete_applications)checked @endif>
+                        <label class="custom-control-label" for="delete_applications">Удалять заявки сотрудников</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Конвои</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_convoys" name="manage_convoys" @if($role->manage_convoys)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_convoys">Полные права по конвоям</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_all_convoys" name="view_all_convoys" @if($role->view_all_convoys)checked @endif>
+                        <label class="custom-control-label" for="view_all_convoys">Смотреть все регламенты будущих конвоев</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="book_convoys" name="book_convoys" @if($role->book_convoys)checked @endif>
+                        <label class="custom-control-label" for="book_convoys">Проводить конвои (бронировать)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="add_convoys" name="add_convoys" @if($role->add_convoys)checked @endif>
+                        <label class="custom-control-label" for="add_convoys">Создавать конвои</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_convoys" name="edit_convoys" @if($role->edit_convoys)checked @endif>
+                        <label class="custom-control-label" for="edit_convoys">Редактировать конвои (в т.ч. модерировать брони)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="delete_convoys" name="delete_convoys" @if($role->delete_convoys)checked @endif>
+                        <label class="custom-control-label" for="delete_convoys">Удалять конвои</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Скрин TAB</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_tab" name="manage_tab" @if($role->manage_tab)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_tab">Полные права по скрин TAB</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="add_tab" name="add_tab" @if($role->add_tab)checked @endif>
+                        <label class="custom-control-label" for="add_tab">Выкладывать скрин TAB</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_tab" name="edit_tab" @if($role->edit_tab)checked @endif>
+                        <label class="custom-control-label" for="edit_tab">Редактировать скрин TAB</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="accept_tab" name="accept_tab" @if($role->accept_tab)checked @endif>
+                        <label class="custom-control-label" for="accept_tab">Принимать скрин TAB</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="delete_tab" name="delete_tab" @if($role->delete_tab)checked @endif>
+                        <label class="custom-control-label" for="delete_tab">Удалять скрин TAB</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Рейтинговые перевозки</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_rp" name="manage_rp" @if($role->manage_rp)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_rp">Полные права по рейтинговым перевозкам</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="add_reports" name="add_reports" @if($role->add_reports)checked @endif>
+                        <label class="custom-control-label" for="add_reports">Выполнять рейтинговые перевозки (выкладывать отчёты)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_all_reports" name="view_all_reports" @if($role->view_all_reports)checked @endif>
+                        <label class="custom-control-label" for="view_all_reports">Смотреть все отчёты</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="delete_own_reports" name="delete_own_reports" @if($role->delete_own_reports)checked @endif>
+                        <label class="custom-control-label" for="delete_own_reports">Удалять свои отчёты</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="delete_all_reports" name="delete_all_reports" @if($role->delete_all_reports)checked @endif>
+                        <label class="custom-control-label" for="delete_all_reports">Удалять любые отчёты</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="accept_reports" name="accept_reports" @if($role->accept_reports)checked @endif>
+                        <label class="custom-control-label" for="accept_reports">Принимать или отклонять отчёты</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Правила</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_rules" name="manage_rules" @if($role->manage_rules)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_rules">Полные права по правилам</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="add_rules" name="add_rules" @if($role->add_rules)checked @endif>
+                        <label class="custom-control-label" for="add_rules">Создавать параграфы правил</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_rules" name="edit_rules" @if($role->edit_rules)checked @endif>
+                        <label class="custom-control-label" for="edit_rules">Редактировать параграфы правила</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="delete_rules" name="delete_rules" @if($role->delete_rules)checked @endif>
+                        <label class="custom-control-label" for="delete_rules">Удалять параграфы правил</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_rules_changelog" name="view_rules_changelog" @if($role->view_rules_changelog)checked @endif>
+                        <label class="custom-control-label" for="view_rules_changelog">Смотреть историю изменений правил</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Должности</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_roles" name="manage_roles" @if($role->manage_roles)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_roles">Полные права по должностям</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_roles" name="view_roles" @if($role->view_roles)checked @endif>
+                        <label class="custom-control-label" for="view_roles">Смотреть список должностей</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="add_roles" name="add_roles" @if($role->add_roles)checked @endif>
+                        <label class="custom-control-label" for="add_roles">Создавать должности</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_roles" name="edit_roles" @if($role->edit_roles)checked @endif>
+                        <label class="custom-control-label" for="edit_roles">Редактировать должности</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="edit_roles_permissions" name="edit_roles_permissions" @if($role->edit_roles_permissions)checked @endif>
+                        <label class="custom-control-label" for="edit_roles_permissions">Редактировать права должностей</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="delete_roles" name="delete_roles" @if($role->delete_roles)checked @endif>
+                        <label class="custom-control-label" for="delete_roles">Удалять должности</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <h3 class="text-primary">Пользователи сайта</h3>
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox" class="custom-control-input" id="manage_users" name="manage_users" @if($role->manage_users)checked @endif>
+                        <label class="custom-control-label text-danger" for="manage_users">Полные права по пользователям сайта</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_users" name="view_users" @if($role->view_users)checked @endif>
+                        <label class="custom-control-label" for="view_users">Просматривать список пользователей сайта</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="set_user_as_member" name="set_user_as_member" @if($role->set_user_as_member)checked @endif>
+                        <label class="custom-control-label" for="set_user_as_member">Назначать пользователя сотрудником</label>
+                    </div>
+                </div>
+
             </div>
             <button type="submit" class="btn btn-outline-warning">Сохранить</button>
         </form>

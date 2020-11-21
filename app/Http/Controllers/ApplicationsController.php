@@ -17,8 +17,8 @@ class ApplicationsController extends Controller{
     public function app(Request $request, $id = null){
         if(Auth::guest()) abort(404);
         if(isset($id)){
-            if(Gate::denies('manage_members')) abort(403);
             $app = Application::with('member')->where('id', $id)->firstOrFail();
+            $this->authorize('claim', $app);
             $rp = null;
             if($app->new_rp_profile) $rp = RpStats::where(['member_id' => $app->member_id, 'game' => $app->new_rp_profile[0]])->first();
             return view('evoque.applications.show', [
@@ -27,7 +27,7 @@ class ApplicationsController extends Controller{
             ]);
         }
         $apps = Application::with('member');
-        if(Gate::denies('manage_members')){
+        if(Auth::user()->cant('view', Application::class)){
             $apps = $apps->where('member_id', Auth::user()->member->id);
         }
         return view('evoque.applications.index', [

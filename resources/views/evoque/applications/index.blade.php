@@ -8,17 +8,21 @@
 
     <div class="container pt-5">
         @include('layout.alert')
-        <div class="application-buttons mt-5 mb-5 row justify-content-center">
-            <a href="{{ route('evoque.applications.vacation') }}" class="btn btn-lg btn-outline-warning m-1">Хочу в отпуск!</a>
-            <a href="{{ route('evoque.applications.plate') }}" class="btn btn-lg btn-outline-info m-1">Сменить номер</a>
-            <a href="{{ route('evoque.applications.rp') }}" class="btn btn-lg btn-outline-success m-1">Сменить уровень в рейтинговых</a>
-            <a href="{{ route('evoque.applications.nickname') }}" class="btn btn-lg btn-outline-primary m-1">Сменить никнейм</a>
-            <a href="{{ route('evoque.applications.fire') }}" class="btn btn-lg btn-outline-danger m-1">Увольняюсь!</a>
-        </div>
-        @cannot('manage_members')
+        @can('create', \App\Application::class)
+            <div class="application-buttons mt-5 mb-5 row justify-content-center">
+                <a href="{{ route('evoque.applications.vacation') }}" class="btn btn-lg btn-outline-warning m-1">Хочу в отпуск!</a>
+                <a href="{{ route('evoque.applications.plate') }}" class="btn btn-lg btn-outline-info m-1">Сменить номер</a>
+                <a href="{{ route('evoque.applications.rp') }}" class="btn btn-lg btn-outline-success m-1">Сменить уровень в рейтинговых</a>
+                <a href="{{ route('evoque.applications.nickname') }}" class="btn btn-lg btn-outline-primary m-1">Сменить никнейм</a>
+                <a href="{{ route('evoque.applications.fire') }}" class="btn btn-lg btn-outline-danger m-1">Увольняюсь!</a>
+            </div>
+        @endcan
+        @cannot('view', \App\Application::class)
             <h2 class="mt-3 text-primary text-center">Мои заявки</h2>
         @else
             <h2 class="mt-3 text-primary text-center">Все заявки сотрудников</h2>
+        @endcannot
+        @can('view', \App\Recruitment::class)
             <div class="row pt-3 justify-content-center">
                 <a href="{{ route('evoque.applications.recruitment') }}" class="btn btn-outline-warning btn-sm">
                     Заявки на вступление
@@ -42,7 +46,7 @@
                         </h5>
                         <div class="card-body">
                             <h4 class="card-title mb-0">
-                                От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->old_nickname }}</span>
+                                От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->category !== 4 ? $app->member->nickname : $app->old_nickname }}</span>
                             </h4>
                             @if($app->member && $app->category === 4)
                                 <p class="text-muted">Текущий ник: <b>{{ $app->member->nickname }}</b></p>
@@ -80,15 +84,16 @@
                             <span class="text-muted">{{ $app->created_at->isoFormat('LLL') }}</span>
                         </div>
                         <div class="card-actions">
-                            @can('manage_members')
-                                @if($app->status == 0)
-                                    <a href="{{ route('evoque.applications', $app->id) }}" class="btn btn-outline-primary">Смотреть</a>
-                                @endif
+                            @can('claim', $app)
+                                <a href="{{ route('evoque.applications', $app->id) }}" class="btn btn-outline-primary my-1">Смотреть</a>
                             @endcan
-                            @if(($app->member_id === \Illuminate\Support\Facades\Auth::user()->member->id && $app->status == 0) || \Illuminate\Support\Facades\Gate::allows('manage_members'))
-                                <a href="{{ route('evoque.applications.delete', $app->id) }}" class="btn btn-outline-danger"
+                            @can('update', $app)
+                                <a href="{{ route('evoque.applications.edit', $app->id) }}" class="btn btn-outline-primary my-1">Редактировать</a>
+                            @endcan
+                            @can('delete', $app)
+                                <a href="{{ route('evoque.applications.delete', $app->id) }}" class="btn btn-outline-danger my-1"
                                    onclick="return confirm('Удалить эту заявку?')">Удалить</a>
-                            @endif
+                            @endcan
                         </div>
                     </div>
                 @endforeach

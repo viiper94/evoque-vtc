@@ -33,6 +33,7 @@ class ModifyRolesTable extends Migration
 
             $table->boolean('view_all_convoys')->default(0)->after('manage_convoys');
             $table->boolean('book_convoys')->default(1)->after('manage_convoys');
+            $table->boolean('quick_book_convoys')->default(0)->after('manage_convoys');
             $table->boolean('add_convoys')->default(0)->after('manage_convoys');
             $table->boolean('edit_convoys')->default(0)->after('manage_convoys');
             $table->boolean('delete_convoys')->default(0)->after('manage_convoys');
@@ -93,10 +94,12 @@ class ModifyRolesTable extends Migration
             $table->dropColumn('make_applications');
             $table->dropColumn('view_applications');
             $table->dropColumn('claim_applications');
+            $table->dropColumn('edit_applications');
             $table->dropColumn('delete_applications');
 
             $table->dropColumn('view_all_convoys');
             $table->dropColumn('book_convoys');
+            $table->dropColumn('quick_book_convoys');
             $table->dropColumn('add_convoys');
             $table->dropColumn('edit_convoys');
             $table->dropColumn('delete_convoys');

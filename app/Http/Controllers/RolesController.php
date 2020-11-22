@@ -49,6 +49,7 @@ class RolesController extends Controller{
             $role->manage_convoys = $request->input('manage_convoys') == 'on';
             $role->view_all_convoys = $request->input('view_all_convoys') == 'on';
             $role->book_convoys = $request->input('book_convoys') == 'on';
+            $role->quick_book_convoys = $request->input('quick_book_convoys') == 'on';
             $role->add_convoys = $request->input('add_convoys') == 'on';
             $role->edit_convoys = $request->input('edit_convoys') == 'on';
             $role->delete_convoys = $request->input('delete_convoys') == 'on';
@@ -125,6 +126,7 @@ class RolesController extends Controller{
             $role->manage_convoys = $request->input('manage_convoys') == 'on';
             $role->view_all_convoys = $request->input('view_all_convoys') == 'on';
             $role->book_convoys = $request->input('book_convoys') == 'on';
+            $role->quick_book_convoys = $request->input('quick_book_convoys') == 'on';
             $role->add_convoys = $request->input('add_convoys') == 'on';
             $role->edit_convoys = $request->input('edit_convoys') == 'on';
             $role->delete_convoys = $request->input('delete_convoys') == 'on';

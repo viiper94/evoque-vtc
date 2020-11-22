@@ -122,6 +122,10 @@
                         <label class="custom-control-label" for="book_convoys">Проводить конвои (бронировать)</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="quick_book_convoys" name="quick_book_convoys" @if($role->quick_book_convoys)checked @endif>
+                        <label class="custom-control-label" for="quick_book_convoys">Делать быстрые брони (без регламента)</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
                         <input type="checkbox" class="custom-control-input" id="add_convoys" name="add_convoys" @if($role->add_convoys)checked @endif>
                         <label class="custom-control-label" for="add_convoys">Создавать конвои</label>
                     </div>

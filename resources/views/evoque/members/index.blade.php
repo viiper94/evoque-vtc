@@ -24,7 +24,7 @@
                 <th scope="col">Баллы</th>
                 <th scope="col">Эвики</th>
                 <th scope="col" class="with-btn">
-                    @can('manage_table')
+                    @can('resetActivity', \App\Member::class)
                         <a class="reset-btn text-shadow" data-token="{{ csrf_token() }}">
                             <i class="fas fa-sync-alt"></i>
                         </a>
@@ -77,7 +77,7 @@
                                     </td>
                                 @else
                                     <td class="member-scores">
-                                        @can('manage_table')
+                                        @can('setActivity', \App\Member::class)
                                             @if($member->scores !== null)
                                                 <a class="add-btn text-shadow" data-amount="1" data-target="бал" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                     <i class="fas fa-plus"></i>
@@ -87,7 +87,7 @@
                                         <b class="number">{{ $member->scores ?? '∞' }}</b>
                                     </td>
                                     <td class="member-money">
-                                        @can('manage_table')
+                                        @can('setActivity', \App\Member::class)
                                             @if($member->money !== null)
                                                 <a class="add-btn text-shadow" data-amount="0.5" data-target="эвика" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                     <i class="fas fa-plus"></i>
@@ -97,7 +97,7 @@
                                         <b class="number">{{ $member->money ?? '∞' }}</b>
                                     </td>
                                     <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0 && !$member->onVacation())text-danger font-weight-bold @endif">
-                                        @can('manage_table')
+                                        @can('setActivity', \App\Member::class)
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>
@@ -108,7 +108,7 @@
                                 <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td>
-                                    @can('manage_members')
+                                    @can('update', \App\Member::class)
                                         <a href="{{ route('evoque.profile', $member->user->id) }}" target="_blank">{{ $member->user->name }}</a>
                                     @else
                                         {{ $member->user->name }}
@@ -125,7 +125,8 @@
                                     @isset($member->user->truckersmp_id)
                                         <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
                                     @endisset
-                                    @can('manage_table')
+                                    @if(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Member::class) ||
+                                            \Illuminate\Support\Facades\Auth::user()->can('updateRpStats', \App\Member::class))
                                         <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
                                     @endcan
                                 </td>
@@ -151,7 +152,7 @@
                 <th scope="col">Баллы</th>
                 <th scope="col">Эвики</th>
                 <th scope="col" class="with-btn">
-                    @can('manage_table')
+                    @can('resetActivity', \App\Member::class)
                         <a class="reset-btn text-shadow" data-token="{{ csrf_token() }}">
                             <i class="fas fa-sync-alt"></i>
                         </a>

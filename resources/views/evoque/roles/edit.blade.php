@@ -45,10 +45,10 @@
                         <input type="checkbox" class="custom-control-input" id="edit_members" name="edit_members" @if($role->edit_members)checked @endif>
                         <label class="custom-control-label" for="edit_members">Редактировать сотрудников</label>
                     </div>
-                    <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="edit_members_activity" name="edit_members_activity" @if($role->edit_members_activity)checked @endif>
-                        <label class="custom-control-label" for="edit_activity_members">Редактировать статистику по посещениям сотрудников</label>
-                    </div>
+{{--                    <div class="custom-control custom-checkbox mb-2">--}}
+{{--                        <input type="checkbox" class="custom-control-input" id="edit_members_activity" name="edit_members_activity" @if($role->edit_members_activity)checked @endif>--}}
+{{--                        <label class="custom-control-label" for="edit_activity_members">Редактировать статистику по посещениям сотрудников</label>--}}
+{{--                    </div>--}}
                     <div class="custom-control custom-checkbox mb-2">
                         <input type="checkbox" class="custom-control-input" id="edit_members_rp_stats" name="edit_members_rp_stats" @if($role->edit_members_rp_stats)checked @endif>
                         <label class="custom-control-label" for="edit_members_rp_stats">Редактировать статистику по рейтинговым перевозкам сотрудников</label>

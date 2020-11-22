@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Gate;
 class MembersController extends Controller{
 
     public function index(){
-        if(Auth::guest()) return redirect()->route('auth.steam');
+        if(Auth::guest()) abort(404);
         return view('evoque.members.index', [
             'roles' => Role::with([
                 'members' => function($query){
@@ -36,7 +36,7 @@ class MembersController extends Controller{
     }
 
     public function edit(Request $request, $id){
-        if(Gate::denies('manage_table')) abort(403);
+        if(Auth::user()->cant('update', Member::class) && Auth::user()->cant('updateRpStats', Member::class)) abort(403);
         if($request->post()){
             $this->validate($request, [
                 'nickname' => 'required|string',
@@ -46,6 +46,7 @@ class MembersController extends Controller{
                 'plate' => 'no_vk|nullable|url|'
             ]);
             $member = Member::findOrFail($id);
+            $this->authorize('update', Member::class);
             $member->fill($request->post());
             $member->visible = $request->input('visible') === 'on';
             $money = $request->input('money');
@@ -55,8 +56,10 @@ class MembersController extends Controller{
             $member->trainee_until = $request->input('trainee_until') ? Carbon::parse($request->input('trainee_until'))->format('Y-m-d') : null;
             $member->on_vacation_till = $request->input('on_vacation_till') ? Carbon::parse($request->input('on_vacation_till'))->format('Y-m-d') : null;
             $member->role()->detach();
-            foreach($request->input('roles') as $role){
-                $member->role()->attach($role);
+            if(Auth::user()->can('updateRoles', $member)){
+                foreach($request->input('roles') as $role){
+                    $member->role()->attach($role);
+                }
             }
             return $member->save() ?
                 redirect()->route('evoque.members')->with(['success' => 'Сотрудник успешно отредактирован!']) :
@@ -71,8 +74,8 @@ class MembersController extends Controller{
     }
 
     public function fire(Request $request, $id){
-        if(Gate::denies('manage_members')) abort(403);
         $member = Member::with(['user', 'role'])->where('id', $id)->first();
+        $this->authorize('fire', $member);
         $member->role()->detach();
         $member->user->remember_token = null;
         $member->user->save();
@@ -82,7 +85,8 @@ class MembersController extends Controller{
     }
 
     public function add(Request $request){
-        if($request->ajax() && Gate::allows('manage_table')){
+        if($request->ajax()){
+            $this->authorize('setActivity', Member::class);
             $member = Member::find($request->input('member'));
             if($request->input('target') === 'бал'){
                 $scores = $member->scores;
@@ -111,7 +115,7 @@ class MembersController extends Controller{
     }
 
     public function resetConvoys(Request $request){
-        if(!$request->ajax() || Gate::denies('manage_table')) abort(403);
+        if(!$request->ajax() || Auth::user()->cant('resetActivity', Member::class)) abort(403);
         $members = Member::with('role')->where('convoys', '>', 0)->get();
         foreach($members as $member){
             $member->convoys = 0;

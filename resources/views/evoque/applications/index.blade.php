@@ -10,7 +10,9 @@
         @include('layout.alert')
         @can('create', \App\Application::class)
             <div class="application-buttons mt-5 mb-5 row justify-content-center">
-                <a href="{{ route('evoque.applications.vacation') }}" class="btn btn-lg btn-outline-warning m-1">Хочу в отпуск!</a>
+                @can('createVacation', \App\Application::class)
+                    <a href="{{ route('evoque.applications.vacation') }}" class="btn btn-lg btn-outline-warning m-1">Хочу в отпуск!</a>
+                @endcan
                 <a href="{{ route('evoque.applications.plate') }}" class="btn btn-lg btn-outline-info m-1">Сменить номер</a>
                 <a href="{{ route('evoque.applications.rp') }}" class="btn btn-lg btn-outline-success m-1">Сменить уровень в рейтинговых</a>
                 <a href="{{ route('evoque.applications.nickname') }}" class="btn btn-lg btn-outline-primary m-1">Сменить никнейм</a>

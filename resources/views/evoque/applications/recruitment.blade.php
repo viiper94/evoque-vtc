@@ -10,10 +10,12 @@
         @include('layout.alert')
         <h2 class="mt-3 text-primary text-center">Заявки на вступление</h2>
         <div class="row pt-3 justify-content-center">
-            <a href="{{ route('evoque.applications') }}" class="btn btn-outline-warning btn-sm">
-                Заявки сотрудников
-                @if($apps > 0)<span class="badge badge-danger">{{ $apps }}</span>@endif
-            </a>
+            @can('view', \App\Application::class)
+                <a href="{{ route('evoque.applications') }}" class="btn btn-outline-warning btn-sm">
+                    Заявки сотрудников
+                    @if($apps > 0)<span class="badge badge-danger">{{ $apps }}</span>@endif
+                </a>
+            @endcan
         </div>
         @if(count($applications) > 0)
             <div class="applications pt-5 pb-5 row">
@@ -40,11 +42,13 @@
                             <span class="text-muted">{{ $application->created_at->isoFormat('LLL') }}</span>
                         </div>
                         <div class="card-actions">
-                            @if($application->status == 0)
+                            @can('claim', $application)
                                 <a href="{{ route('evoque.applications.recruitment', $application->id) }}" class="btn btn-outline-primary">Смотреть</a>
-                            @endif
-                            <a href="{{ route('evoque.applications.delete.recruitment', $application->id) }}" class="btn btn-outline-danger"
-                               onclick="return confirm('Удалить эту заявку?')">Удалить</a>
+                            @endcan
+                            @can('delete', \App\Recruitment::class)
+                                <a href="{{ route('evoque.applications.delete.recruitment', $application->id) }}" class="btn btn-outline-danger"
+                                   onclick="return confirm('Удалить эту заявку?')">Удалить</a>
+                            @endcan
                         </div>
                     </div>
                 @endforeach

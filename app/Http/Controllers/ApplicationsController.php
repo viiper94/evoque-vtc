@@ -37,9 +37,10 @@ class ApplicationsController extends Controller{
     }
 
     public function recruitment(Request $request, $id = null){
-        if(Gate::denies('manage_members')) abort(403);
+        $this->authorize('view', Recruitment::class);
         if(isset($id)){
             $app = Recruitment::where('id', $id)->firstOrFail();
+            $this->authorize('claim', $app);
             return view('evoque.applications.show_recruitment', [
                 'app' => $app
             ]);
@@ -51,8 +52,8 @@ class ApplicationsController extends Controller{
     }
 
     public function acceptRecruitment(Request $request, $id){
-        if(Gate::denies('manage_members')) abort(403);
         $application = Recruitment::findOrFail($id);
+        $this->authorize('claim', $application);
         $application->status = $request->input('accept');
         $application->comment = $request->input('comment');
         $messages = [
@@ -64,9 +65,17 @@ class ApplicationsController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function deleteRecruitment(Request $request, $id){
+        $this->authorize('delete', Recruitment::class);
+        $application = Recruitment::findOrFail($id);
+        return $application->delete() ?
+            redirect()->back()->with(['success' => 'Зявка удалена!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
     public function accept(Request $request, $id){
-        if(Gate::denies('manage_members')) abort(403);
         $application = Application::with('member', 'member.stats')->where('id', $id)->first();
+        $this->authorize('claim', $application);
         $result = true;
         switch($application->category && $request->input('accept') === '1'){
             case 1:
@@ -94,16 +103,9 @@ class ApplicationsController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
-    public function deleteRecruitment(Request $request, $id){
-        if(Gate::denies('manage_members')) abort(403);
-        $application = Recruitment::findOrFail($id);
-        return $application->delete() ?
-            redirect()->back()->with(['success' => 'Зявка удалена!']) :
-            redirect()->back()->withErrors(['Возникла ошибка =(']);
-    }
-
     public function delete(Request $request, $id){
         $app = Application::findOrFail($id);
+        $this->authorize('delete', $app);
         if(($app->member_id === Auth::user()->member->id && $app->status === 0) || Gate::allows('manage_members')){
             return $app->delete() ?
                 redirect()->back()->with(['success' => 'Зявка удалена!']) :
@@ -114,6 +116,7 @@ class ApplicationsController extends Controller{
     }
 
     public function vacation(Request $request){
+        $this->authorize('createVacation', Application::class);
         if($request->post()){
             $this->validate($request, [
                 'vacation_till' => 'required|date_format:d.m.Y',
@@ -133,6 +136,7 @@ class ApplicationsController extends Controller{
     }
 
     public function plate(Request $request){
+        $this->authorize('create', Application::class);
         if($request->post()){
             $this->validate($request, [
                 'new_plate_number' => 'required|regex:/[0-9]{3}/',
@@ -152,6 +156,7 @@ class ApplicationsController extends Controller{
     }
 
     public function rp(Request $request){
+        $this->authorize('create', Application::class);
         if($request->post()){
             $this->validate($request, [
                 'new_rp_profile' => 'required|numeric',
@@ -171,6 +176,7 @@ class ApplicationsController extends Controller{
     }
 
     public function nickname(Request $request){
+        $this->authorize('create', Application::class);
         if($request->post()){
             $this->validate($request, [
                 'new_nickname' => 'required|string',
@@ -190,6 +196,7 @@ class ApplicationsController extends Controller{
     }
 
     public function fire(Request $request){
+        $this->authorize('create', Application::class);
         if($request->post()){
             $this->validate($request, [
                 'fire' => 'accepted',

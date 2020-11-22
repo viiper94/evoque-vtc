@@ -41,6 +41,21 @@ class ApplicationPolicy
     }
 
     /**
+     * Determine whether the user can create vacation application.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function createVacation(User $user){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_applications || ($role->make_applications && $user->member->vacations < 2)) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Determine whether the user can update his own applications.
      *
      * @param  \App\User  $user
@@ -82,7 +97,7 @@ class ApplicationPolicy
      * @return mixed
      */
     public function claim(User $user, Application $application){
-        if($user->member && $application->status === 0){
+        if($user->member && $application->status == 0){
             foreach($user->member->role as $role){
                 if($role->manage_applications || $role->claim_applications) return true;
             }

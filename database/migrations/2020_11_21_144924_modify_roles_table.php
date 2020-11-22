@@ -39,6 +39,7 @@ class ModifyRolesTable extends Migration
             $table->boolean('delete_convoys')->default(0)->after('manage_convoys');
 
             $table->boolean('manage_tab')->default(0);
+            $table->boolean('view_tab')->default(1);
             $table->boolean('add_tab')->default(1);
             $table->boolean('edit_tab')->default(1);
             $table->boolean('accept_tab')->default(0);
@@ -105,6 +106,7 @@ class ModifyRolesTable extends Migration
             $table->dropColumn('delete_convoys');
 
             $table->dropColumn('manage_tab');
+            $table->dropColumn('view_tab');
             $table->dropColumn('add_tab');
             $table->dropColumn('edit_tab');
             $table->dropColumn('accept_tab');

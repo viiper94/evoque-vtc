@@ -146,6 +146,10 @@
                         <label class="custom-control-label text-danger" for="manage_tab">Полные права по скрин TAB</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="view_tab" name="view_tab" @if($role->view_tab)checked @endif>
+                        <label class="custom-control-label" for="view_tab">Видеть все скрин TAB</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mb-2">
                         <input type="checkbox" class="custom-control-input" id="add_tab" name="add_tab" @if($role->add_tab)checked @endif>
                         <label class="custom-control-label" for="add_tab">Выкладывать скрин TAB</label>
                     </div>

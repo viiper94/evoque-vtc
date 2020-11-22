@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    @if($convoy->title)
+    @if($convoy->start_city)
         Редактирование конвоя
     @else
         Новый конвой
@@ -26,7 +26,7 @@
             @csrf
             <div class="mt-3 row justify-content-between">
                 <h2 class="text-primary col-md-6">
-                    @if($convoy->title)
+                    @if($convoy->start_city)
                         Редактирование конвоя
                     @else
                         Новый конвой

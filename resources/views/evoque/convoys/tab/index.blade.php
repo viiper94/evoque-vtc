@@ -8,21 +8,27 @@
 
     <div class="container pt-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary text-center">Все скрин TAB</h2>
-        @can('lead_convoys')
+        @can('viewAny', \App\Tab::class)
+            <h2 class="mt-3 text-primary text-center">Все скрин TAB</h2>
+        @else
+            <h2 class="mt-3 text-primary text-center">Мои скрин TAB</h2>
+        @endcan
+        @can('create', \App\Tab::class)
             <div class="row justify-content-center">
                 <a href="{{ route('evoque.convoys.tab.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Новый скрин TAB</a>
             </div>
         @endcan
         <div class="tabs mt-3 mb-5 row justify-content-around">
             @foreach($tabs as $tab)
-                <div class="card card-dark text-shadow-m col-md-5 m-3 px-0 @if(!$tab->status)border-primary @else border-success @endif">
+                <div class="card card-dark text-shadow-m col-md-5 m-3 px-0 @if($tab->status == 1)border-success @elseif($tab->status == 1) border-danger @else border-primary @endif">
                     <h5 class="card-header">
                         {{ $tab->convoy_title }}
                         @if($tab->status == 0)
                             <span class="badge badge-warning">Рассматривается</span>
-                        @else
+                        @elseif($tab->status == 1)
                             <span class="badge badge-success">Принят</span>
+                        @elseif($tab->status == 2)
+                            <span class="badge badge-danger">Отклонён</span>
                         @endif
                     </h5>
                     <div class="card-body">
@@ -36,17 +42,15 @@
                         </div>
                     </div>
                     <div class="card-actions">
-                        @if(!$tab->status)
-                            @if($tab->member_id === \Illuminate\Support\Facades\Auth::user()->member->id)
-                                <a href="{{ route('evoque.convoys.tab.edit', $tab->id) }}" class="btn btn-outline-warning my-1"><i class="fas fa-edit"></i> Редактировать</a>
-                            @endif
-                            @can('manage_table')
-                                <a href="{{ route('evoque.admin.convoys.tab.accept', $tab->id) }}" class="btn btn-outline-success my-1"><i class="fas fa-check"></i> Принять</a>
-                            @endcan
-                        @endif
-                        @can('manage_table')
+                        @can('update', $tab)
+                            <a href="{{ route('evoque.convoys.tab.edit', $tab->id) }}" class="btn btn-outline-warning my-1">Редактировать</a>
+                        @endcan
+                        @can('claim', $tab)
+                            <a href="{{ route('evoque.admin.convoys.tab.accept', $tab->id) }}" class="btn btn-outline-warning my-1">Смотреть</a>
+                        @endcan
+                        @can('delete', \App\Tab::class)
                             <a href="{{ route('evoque.admin.convoys.tab.delete', $tab->id) }}" class="btn btn-outline-danger my-1"
-                                onclick="return confirm('Удалить этот скрин TAB?')"><i class="fas fa-trash"></i> Удалить</a>
+                                onclick="return confirm('Удалить этот скрин TAB?')">Удалить</a>
                         @endcan
                     </div>
                 </div>

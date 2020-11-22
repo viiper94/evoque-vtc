@@ -93,7 +93,7 @@ class ConvoysController extends Controller{
     ];
 
     public function index(){
-        if(Gate::denies('manage_convoys')) abort(403);
+        $this->authorize('update', Convoy::class);
         $list = array();
         $convoys = Convoy::with('bookedBy')->orderBy('start_time', 'desc')->get();
         foreach($convoys as $convoy){
@@ -116,7 +116,7 @@ class ConvoysController extends Controller{
             return view('evoque.convoys.private', [
                 'grouped' => collect(array_reverse($grouped))->slice(0, 7)
             ]);
-        }else if(Gate::allows('manage_convoys') && $public === 'all'){
+        }else if(Auth::user()->can('viewAny', Convoy::class) && $public === 'all'){
             $convoys = Convoy::with('leadMember', 'leadMember.user')->orderBy('start_time')->get();
             $grouped = array();
             foreach($convoys as $convoy){
@@ -137,7 +137,7 @@ class ConvoysController extends Controller{
     }
 
     public function add(Request $request){
-        if(Gate::denies('manage_convoys')) abort(403);
+        $this->authorize('create', Convoy::class);
         if($request->ajax() && $request->input('action') == 'remove_img'){
             return response()->json([
                 'status' => 'OK'
@@ -185,7 +185,7 @@ class ConvoysController extends Controller{
     }
 
     public function edit(Request $request, $id, $booking = false){
-        if(Gate::denies('manage_convoys')) abort(403);
+        $this->authorize('update', Convoy::class);
         $convoy = Convoy::findOrFail($id);
         if($request->ajax() && $request->input('action') == 'remove_img'){
             $attr = $request->input('target');
@@ -233,7 +233,7 @@ class ConvoysController extends Controller{
     }
 
     public function delete(Request $request, $id){
-        if(Gate::denies('manage_convoys')) abort(403);
+        $this->authorize('delete', Convoy::class);
         $convoy = Convoy::findOrFail($id);
         $convoy->deleteImages(public_path('/images/convoys/'));
         return $convoy->delete() ?
@@ -242,7 +242,7 @@ class ConvoysController extends Controller{
     }
 
     public function toggle(Request $request, $id){
-        if(Gate::denies('manage_convoys')) abort(403);
+        $this->authorize('update', Convoy::class);
         $convoy = Convoy::findOrFail($id);
         $convoy->visible = !$convoy->visible;
         return $convoy->save() ?
@@ -263,7 +263,7 @@ class ConvoysController extends Controller{
     }
 
     public function addTab(Request $request){
-        if(Gate::denies('lead_convoys')) abort(403);
+        $this->authorize('create', Tab::class);
         if($request->post()){
             $this->validate($request, [
                 'convoy_title' => 'required|string',
@@ -291,7 +291,7 @@ class ConvoysController extends Controller{
     }
 
     public function editTab(Request $request, $id){
-        if(Gate::denies('lead_convoys')) abort(403);
+        $this->authorize('update', Tab::class);
         $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
         if($request->post()){
             $this->validate($request, [
@@ -320,7 +320,7 @@ class ConvoysController extends Controller{
     }
 
     public function deleteTab(Request $request, $id){
-        if(Gate::denies('lead_convoys')) abort(403);
+        $this->authorize('delete', Tab::class);
         $tab = Tab::findOrFail($id);
         if(is_file(public_path('/images/convoys/tab/').$tab->screenshot)){
             unlink(public_path('/images/convoys/tab/').$tab->screenshot);
@@ -331,8 +331,8 @@ class ConvoysController extends Controller{
     }
 
     public function acceptTab(Request $request, $id){
-        if(Gate::denies('manage_table')) abort(403);
         $tab = Tab::with(['member', 'lead'])->where(['id' => $id, 'status' => 0])->firstOrFail();
+        $this->authorize('claim', $tab);
         if($request->post()){
             $this->validate($request, [
                 'scores' => 'nullable|array',
@@ -354,7 +354,7 @@ class ConvoysController extends Controller{
                 if(isset($member->money) && $lead[0] == $member->id) $member->money += $lead[1];
                 $member->save();
             }
-            $tab->status = 1;
+            $tab->status = $request->input('accept');
             return $tab->save() ?
                 redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -382,8 +382,9 @@ class ConvoysController extends Controller{
     }
 
     public function plans(Request $request){
-        if(Auth::guest()) return redirect()->route('auth.steam');
+        if(Auth::guest()) return abort(404);
         if($request->post()){
+            $this->authorize('quickBook', Convoy::class);
             $this->validate($request, [
                 'title' => 'required|string',
                 'date' => 'required|date_format:d.m.Y',
@@ -429,7 +430,7 @@ class ConvoysController extends Controller{
     }
 
     public function book(Request $request, $offset, $type){
-        if(Gate::denies('lead_convoys')) abort(403);
+        $this->authorize('book', Convoy::class);
         $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->where('type', $type)->get();
         if($offset === '0') return redirect()->route('evoque.convoys.plans')->withErrors(['На сегодня уже нельзя бронировать конвои!']);
         if(!in_array($type, [0, 1, 2])) return redirect()->route('evoque.convoys.plans')->withErrors(['Что то пошло не так =(']);

@@ -12,7 +12,7 @@
 @section('content')
 
     <div class="container py-5 private-convoys">
-        @can('manage_convoys')
+        @can('viewAny', \App\Convoy::class)
             <div class="row pt-5 justify-content-center">
                 <a href="{{ route('convoys', 'all') }}" class="btn btn-outline-warning">Смотреть все регламенты</a>
             </div>
@@ -24,7 +24,7 @@
                     <section class="convoy-note pb-3 pt-3 m-auto">
                         <blockquote class="blockquote text-center mb-4 mt-4">
                             <h2 class="mb-0">{{ $convoy->title }}</h2>
-                            @can('manage_convoys')
+                            @can('update', \App\Convoy::class)
                                 <div class="row pt-3 justify-content-center">
                                     <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-outline-warning btn-sm"><i class="fas fa-edit"></i> Редактировать</a>
                                 </div>

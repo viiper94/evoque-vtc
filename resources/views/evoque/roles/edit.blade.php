@@ -149,17 +149,17 @@
                         <input type="checkbox" class="custom-control-input" id="view_tab" name="view_tab" @if($role->view_tab)checked @endif>
                         <label class="custom-control-label" for="view_tab">Видеть все скрин TAB</label>
                     </div>
-                    <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="add_tab" name="add_tab" @if($role->add_tab)checked @endif>
-                        <label class="custom-control-label" for="add_tab">Выкладывать скрин TAB</label>
-                    </div>
+{{--                    <div class="custom-control custom-checkbox mb-2">--}}
+{{--                        <input type="checkbox" class="custom-control-input" id="add_tab" name="add_tab" @if($role->add_tab)checked @endif>--}}
+{{--                        <label class="custom-control-label" for="add_tab">Выкладывать скрин TAB</label>--}}
+{{--                    </div>--}}
                     <div class="custom-control custom-checkbox mb-2">
                         <input type="checkbox" class="custom-control-input" id="edit_tab" name="edit_tab" @if($role->edit_tab)checked @endif>
                         <label class="custom-control-label" for="edit_tab">Редактировать скрин TAB</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-2">
                         <input type="checkbox" class="custom-control-input" id="accept_tab" name="accept_tab" @if($role->accept_tab)checked @endif>
-                        <label class="custom-control-label" for="accept_tab">Принимать скрин TAB</label>
+                        <label class="custom-control-label" for="accept_tab">Принимать или отклонять скрин TAB</label>
                     </div>
                     <div class="custom-control custom-checkbox mb-2">
                         <input type="checkbox" class="custom-control-input" id="delete_tab" name="delete_tab" @if($role->delete_tab)checked @endif>

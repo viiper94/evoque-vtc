@@ -25,8 +25,8 @@ class RpStats extends Model{
             60000 => 'Любая раскраска (на ваш выбор), Steering Creations Pack + 4 балла',
             110000 => 'Wheel Tuning Pack + 5 баллов',
             170000 => 'Heavy Cargo Pack, Special Transport, Forest Machinery + 6 баллов',
-            240000 => 'New Mexico, Oregon + 7 баллов',
-            450000 => 'Washington, Utah, Idaho + 8 баллов',
+            240000 => 'New Mexico, Oregon, Washington + 7 баллов',
+            450000 => 'Utah, Idaho, Colorado + 8 баллов',
             700000 => 'Любая игра или DLC в Steam стоимостью до 1000 рублей + 9 баллов',
         ],
     ];

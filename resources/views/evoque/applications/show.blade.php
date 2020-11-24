@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    Заявка от {{ $app->member->nickname }} | @lang('general.vtc_evoque')
+    Заявка от {{ !in_array($app->category, [4, 5]) ? $app->member->nickname : $app->old_nickname }} | @lang('general.vtc_evoque')
 @endsection
 
 @section('assets')
@@ -13,7 +13,7 @@
 
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary text-center">Заявка на {{ $app->getCategory() }} от {{ $app->member->nickname }}</h2>
+        <h2 class="mt-3 text-primary text-center">Заявка на {{ $app->getCategory() }} от {{ !in_array($app->category, [4, 5]) ? $app->member->nickname : $app->old_nickname }}</h2>
         <div class="row justify-content-between text-center mt-5">
             @switch($app->category)
                 @case(1)

@@ -13,12 +13,12 @@
 
     <div class="container pt-5">
         @include('layout.alert')
-        @can('manage_rp')
+        @can('viewAll', \App\RpReport::class)
             <h2 class="mt-3 text-primary ml-3 text-center">Все отчёты рейтинговых перевозок</h2>
         @else
             <h2 class="mt-3 text-primary ml-3 text-center">Мои отчёты рейтинговых перевозок</h2>
         @endcan
-        @can('do_rp')
+        @can('create', \App\RpReport::class)
             <div class="row justify-content-center">
                 <a href="{{ route('evoque.rp.reports.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Новый отчет</a>
             </div>
@@ -59,17 +59,15 @@
                             </div>
                         </div>
                     </div>
-                    @if(!$report->status)
-                        <div class="card-actions">
-                            @can('manage_rp')
-                                <a href="{{ route('evoque.rp.reports.view', $report->id) }}" class="my-1 btn btn-outline-warning"><i class="fas fa-edit"></i> Смотреть</a>
-                            @endcan
-                                @if(\Illuminate\Support\Facades\Auth::user()->member->id == $report->member_id || \Illuminate\Support\Facades\Gate::allows('manage_rp'))
-                                    <a href="{{ route('evoque.rp.reports.delete', $report->id) }}" class="my-1 btn btn-outline-danger"
-                                       onclick="return confirm('Удалить этот отчёт?')"><i class="fas fa-trash"></i> Удалить</a>
-                                @endif
-                        </div>
-                    @endif
+                    <div class="card-actions">
+                        @can('accepr', $report)
+                            <a href="{{ route('evoque.rp.reports.view', $report->id) }}" class="my-1 btn btn-outline-warning"><i class="fas fa-edit"></i> Смотреть</a>
+                        @endcan
+                        @can('delete', $report)
+                            <a href="{{ route('evoque.rp.reports.delete', $report->id) }}" class="my-1 btn btn-outline-danger"
+                               onclick="return confirm('Удалить этот отчёт?')"><i class="fas fa-trash"></i> Удалить</a>
+                        @endcan
+                    </div>
                 </div>
             @endforeach
         </div>

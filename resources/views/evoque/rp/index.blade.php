@@ -66,7 +66,7 @@
                 </tbody>
             </table>
         </div>
-        @can('manage_rp')
+        @can('resetStats', \App\RpReport::class)
             <div class="row justify-content-center mb-5">
                 <a href="{{ route('evoque.rp.results.create', $game) }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"
                     onclick="return confirm('Вы уверены?')">

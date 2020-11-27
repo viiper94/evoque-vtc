@@ -65,7 +65,7 @@ class RolePolicy
      * @return mixed
      */
     public function updatePermissions(User $user, Role $role){
-        if($user->member && $user->member->topRole() < $role->id){
+        if($user->member && $user->member->topRole() <= $role->id){
             foreach($user->member->role as $role){
                 if($role->manage_roles || $role->edit_roles_permissions) return true;
             }

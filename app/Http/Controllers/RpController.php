@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Member;
 use App\Role;
 use App\RpReport;
 use App\RpStats;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class RpController extends Controller{
 
@@ -41,15 +40,14 @@ class RpController extends Controller{
     public function reports(){
         if(Auth::guest()) abort(404);
         $reports = RpReport::with('member');
-        if(Gate::denies('manage_rp')) $reports->where('member_id', Auth::user()->member->id);
+        if(Auth::user()->cant('viewAll', RpReport::class)) $reports->where('member_id', Auth::user()->member->id);
         return view('evoque.rp.reports', [
             'reports' => $reports->orderBy('status')->orderBy('created_at', 'desc')->paginate(10)
         ]);
     }
 
     public function addReport(Request $request){
-        if(Auth::guest()) abort(404);
-        if(Gate::denies('do_rp')) abort(403);
+        $this->authorize('create', RpReport::class);
         $report = new RpReport();
         if($request->post()){
             $this->validate($request, [
@@ -79,7 +77,7 @@ class RpController extends Controller{
 
     public function deleteReport(Request $request, $id){
         $report = RpReport::findOrFail($id);
-        if(Gate::denies('admin') && (Gate::denies('do_rp') || $report->member_id != Auth::user()->member->id)) abort(403);
+        $this->authorize('delete', $report);
         $report->deleteImages(public_path('/images/rp/'));
         return $report->delete() ?
             redirect()->route('evoque.rp.reports')->with(['success' => 'Отчёт успешно удалён!']) :
@@ -87,8 +85,8 @@ class RpController extends Controller{
     }
 
     public function viewReport(Request $request, $id){
-        if(Gate::denies('manage_rp')) abort(403);
         $report = RpReport::with('member')->where('id', $id)->first();
+        $this->authorize('accept', $report);
         if($request->post()){
             $this->validate($request, [
                 'distance' => 'required_with:accept|nullable|numeric',
@@ -120,7 +118,8 @@ class RpController extends Controller{
                 $report->comment = $request->input('comment');
                 $report->comment_by = Auth::user()->member->nickname;
             }
-            if($result && $report->save()) return redirect()->route('evoque.rp.reports', $report->game)->with(['success' => 'Отчёт '.($accept ? 'принят' : 'отклонён').'!']);
+            if($result && $report->save()) return redirect()->route('evoque.rp.reports', $report->game)
+                ->with(['success' => 'Отчёт '.($accept ? 'принят' : 'отклонён').'!']);
             return redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.rp.view', [
@@ -129,7 +128,7 @@ class RpController extends Controller{
     }
 
     public function editStat(Request $request, $id){
-        if(Gate::denies('manage_rp')) abort(403);
+        $this->authorize('updateRpStats', Member::class);
         $stat = RpStats::findOrFail($id);
         $this->validate($request, [
             'distance' => 'nullable|numeric',
@@ -154,7 +153,7 @@ class RpController extends Controller{
     }
 
     public function createResults($game){
-        if(Gate::denies('manage_rp')) abort(403);
+        $this->authorize('resetStats', Member::class);
         $stats = RpStats::where([['game', '=', $game], ['quantity', '>', '0']])->get();
         foreach($stats as $stat){
             $stat->quantity_total += $stat->quantity;

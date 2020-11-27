@@ -63,6 +63,7 @@ Route::get('/evoque/applications/{id?}', 'ApplicationsController@app')->name('ev
 
 Route::get('/evoque/admin/roles', 'RolesController@roles')->name('evoque.admin.roles');
 Route::any('/evoque/admin/roles/edit/{id}', 'RolesController@edit')->name('evoque.admin.roles.edit');
+Route::any('/evoque/admin/roles/editPermissions/{id}', 'RolesController@editPermissions')->name('evoque.admin.roles.editPermissions');
 Route::get('/evoque/admin/roles/delete/{id}', 'RolesController@delete')->name('evoque.admin.roles.delete');
 Route::any('/evoque/admin/roles/add', 'RolesController@add')->name('evoque.admin.roles.add');
 

@@ -19,7 +19,7 @@ class RolesController extends Controller{
     public function editPermissions(Request $request, $id){
         $role = Role::findOrFail($id);
         $this->authorize('updatePermissions', $role);
-        if($request->post() && $id){
+        if($request->post() && $id !== false){
             $role->admin = $request->input('admin') == 'on';
 
             $role->manage_members = $request->input('manage_members') == 'on';
@@ -88,7 +88,7 @@ class RolesController extends Controller{
 
     public function edit(Request $request, $id){
         $role = Role::findOrFail($id);
-        if($request->post() && $id){
+        if($request->post() && $id !== false){
             $this->authorize('update', Role::class);
             $this->validate($request, [
                 'title' => 'required|string',

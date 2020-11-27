@@ -59,7 +59,11 @@
                             <label for="roles">Должность (выбрать несколько с зажатым Ctrl)</label>
                             <select multiple class="form-control" id="roles" name="roles[]" size="14">
                                 @foreach($roles as $role)
-                                    <option value="{{ $role->id }}" @if($member->role->contains($role->id)) selected @endif @cannot('updateRoles', $member) disabled @endcannot>{{ $role->title }}</option>
+                                    @if($role->id === 0)
+                                        <option value="0" disabled @if($member->role->contains($role->id)) selected @endif>{{ $role->title }}</option>
+                                    @else
+                                        <option value="{{ $role->id }}" @if($member->role->contains($role->id)) selected @endif @cannot('updateRoles', $member) disabled @endcannot>{{ $role->title }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @cannot('updateRoles', $member)

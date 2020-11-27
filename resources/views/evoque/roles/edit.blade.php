@@ -200,6 +200,10 @@
                             <input type="checkbox" class="custom-control-input" id="accept_reports" name="accept_reports" @if($role->accept_reports)checked @endif>
                             <label class="custom-control-label" for="accept_reports">Принимать или отклонять отчёты</label>
                         </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="reset_stats" name="reset_stats" @if($role->reset_stats)checked @endif>
+                            <label class="custom-control-label" for="reset_stats">Обнулять недельную статистику</label>
+                        </div>
                     </div>
 
                     <div class="col-md-6 mb-3">

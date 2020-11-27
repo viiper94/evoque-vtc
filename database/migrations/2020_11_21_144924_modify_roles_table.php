@@ -50,6 +50,7 @@ class ModifyRolesTable extends Migration
             $table->boolean('delete_own_reports')->default(1)->after('manage_rp');
             $table->boolean('delete_all_reports')->default(0)->after('manage_rp');
             $table->boolean('accept_reports')->default(0)->after('manage_rp');
+            $table->boolean('reset_stats')->default(0)->after('manage_rp');
 
             $table->boolean('manage_rules')->default(0);
             $table->boolean('add_rules')->default(0);
@@ -117,6 +118,7 @@ class ModifyRolesTable extends Migration
             $table->dropColumn('delete_own_reports');
             $table->dropColumn('delete_all_reports');
             $table->dropColumn('accept_reports');
+            $table->dropColumn('reset_stats');
 
             $table->dropColumn('manage_rules');
             $table->dropColumn('add_rules');

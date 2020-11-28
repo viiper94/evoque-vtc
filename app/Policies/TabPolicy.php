@@ -63,6 +63,22 @@ class TabPolicy
      * @param  \App\Tab  $tab
      * @return mixed
      */
+    public function accept(User $user){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_tab || $role->accept_tab) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Tab  $tab
+     * @return mixed
+     */
     public function claim(User $user, Tab $tab){
         if($user->member && $tab->status == 0){
             foreach($user->member->role as $role){

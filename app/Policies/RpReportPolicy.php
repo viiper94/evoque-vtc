@@ -74,7 +74,22 @@ class RpReportPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can accept any reports at all.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function claim(User $user){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_rp || $role->accept_reports) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can accept the model.
      *
      * @param  \App\User  $user
      * @param  \App\RpReport  $rpReport

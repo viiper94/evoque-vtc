@@ -105,4 +105,20 @@ class ApplicationPolicy
         return false;
     }
 
+    /**
+     * Determine whether the user can accept or decline applications.
+     *
+     * @param  \App\User  $user
+     * @param  \App\Application  $application
+     * @return mixed
+     */
+    public function accept(User $user){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_applications || $role->claim_applications) return true;
+            }
+        }
+        return false;
+    }
+
 }

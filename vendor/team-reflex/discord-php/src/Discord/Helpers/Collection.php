@@ -13,7 +13,7 @@ namespace Discord\Helpers;
 
 use ArrayAccess;
 use ArrayIterator;
-use Illuminate\Support\Arr;
+use Countable;
 use IteratorAggregate;
 use JsonSerializable;
 use Serializable;
@@ -22,7 +22,7 @@ use Traversable;
 /**
  * Collection of items. Inspired by Laravel Collections.
  */
-class Collection implements ArrayAccess, Serializable, JsonSerializable, IteratorAggregate
+class Collection implements ArrayAccess, Serializable, JsonSerializable, IteratorAggregate, Countable
 {
     /**
      * The collection discriminator.
@@ -110,7 +110,12 @@ class Collection implements ArrayAccess, Serializable, JsonSerializable, Iterato
      */
     public function pull($key, $default = null)
     {
-        return Arr::pull($this->items, $key, $default);
+        if (isset($this->items[$key])) {
+            $default = $this->items[$key];
+            unset($this->items[$key]);
+        }
+
+        return $default;
     }
 
     /**
@@ -193,7 +198,7 @@ class Collection implements ArrayAccess, Serializable, JsonSerializable, Iterato
         foreach ($this->items as $item) {
             return $item;
         }
-        
+
         return null;
     }
 
@@ -293,7 +298,7 @@ class Collection implements ArrayAccess, Serializable, JsonSerializable, Iterato
      */
     public function offsetGet($offset)
     {
-        return $this->items[$offset];
+        return $this->items[$offset] ?? null;
     }
 
     /**

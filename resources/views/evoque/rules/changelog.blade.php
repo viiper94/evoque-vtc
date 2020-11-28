@@ -10,7 +10,9 @@
         @foreach($changelog as $item)
             <div class="changelog-item mt-5 mb-5">
                 <h3 class="text-primary">{{ $item->created_at->format('d.m.Y H:i') }}</h3>
-                <h4>Отредактировал {{ $item->user->member->nickname }} </h4>
+                @can('update', \App\Rules::class)
+                    <h4>Отредактировал {{ $item->user->member->nickname }} </h4>
+                @endcan
                 <div class="table-responsive">
                     <table class="table table-dark table-bordered table-hover">
                         <thead>

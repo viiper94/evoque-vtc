@@ -17,7 +17,7 @@ class RulesController extends Controller{
     }
 
     public function edit(Request $request, $id){
-        if(Gate::denies('admin')) abort(403);
+        $this->authorize('update', Rules::class);
         if($request->post()){
             $this->validate($request, [
                 'paragraph' => 'required|numeric',
@@ -31,13 +31,15 @@ class RulesController extends Controller{
                 redirect()->route('rules', $p->public ? 'public' : 'private')->with(['success' => 'Параграф правил успешно изменён!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
+        $paragraph = Rules::find($id);
         return view('evoque.rules.edit', [
-            'rules' => Rules::findOrFail($id)
+            'rules' => $paragraph,
+            'changelog' => $paragraph->audits()->with(['user', 'user.member'])->orderBy('created_at', 'desc')->get()
         ]);
     }
 
     public function add(Request $request){
-        if(Gate::denies('admin')) abort(403);
+        $this->authorize('create', Rules::class);
         if($request->post()){
             $this->validate($request, [
                 'paragraph' => 'required|numeric',
@@ -57,7 +59,7 @@ class RulesController extends Controller{
     }
 
     public function delete(Request $request, $id){
-        if(Gate::denies('admin')) abort(403);
+        $this->authorize('delete', Rules::class);
         $p = Rules::findOrFail($id);
         $redirect = $p->public ? 'public' : 'private';
         return $p->delete() ?
@@ -66,6 +68,7 @@ class RulesController extends Controller{
     }
 
     public function changelog(Request $request, $id){
+        $this->authorize('viewChangelog', Rules::class);
         $paragraph = Rules::find($id);
         return view('evoque.rules.changelog', [
             'paragraph' => $paragraph,

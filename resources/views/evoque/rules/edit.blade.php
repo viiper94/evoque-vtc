@@ -52,12 +52,44 @@
                 @endif
             </div>
             <button type="submit" class="btn btn-outline-warning">Сохранить</button>
-            @if($rules->paragraph)
-                <a href="{{ route('evoque.rules.delete', $rules->id) }}" class="btn btn-outline-danger"
-                   onclick="return confirm('Удалить этот параграф правил?')"><i class="fas fa-trash"></i> Удалить</a>
-            @endif
+            @can('delete', \App\Rules::class)
+                @if($rules->paragraph)
+                    <a href="{{ route('evoque.rules.delete', $rules->id) }}" class="btn btn-outline-danger"
+                       onclick="return confirm('Удалить этот параграф правил?')"><i class="fas fa-trash"></i> Удалить</a>
+                @endif
+            @endcan
         </form>
-
+        @if($rules->paragraph)
+            @can('viewChangelog', \App\Rules::class)
+                <h2 class="mt-5 text-primary">История изменений</h2>
+                @foreach($changelog as $item)
+                    <div class="changelog-item mt-3 mb-5">
+                        <h3 class="text-primary">{{ $item->created_at->format('d.m.Y H:i') }}</h3>
+                        <h4>Отредактировал {{ $item->user->member->nickname }} </h4>
+                        <div class="table-responsive">
+                            <table class="table table-dark table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Параметр</th>
+                                    <th scope="col">Было</th>
+                                    <th scope="col">Стало</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($item->old_values as $key => $value)
+                                    <tr>
+                                        <td>{{ $key }}</td>
+                                        <td>{!! $value !!}</td>
+                                        <td>{!! $item->new_values[$key] !!}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                @endforeach
+            @endcan
+        @endif
     </div>
 
     <script>

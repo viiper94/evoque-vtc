@@ -16,14 +16,16 @@
                 </h1>
                 <blockquote class="blockquote pl-md-5">
                     @markdown($paragraph->text)
-                    @can('admin')
-                        <p class="">
+                    <p>
+                        @can('update', \App\Rules::class)
                             <a href="{{ route('evoque.rules.edit', $paragraph->id) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Редактировать</a>
+                        @endcan
+                        @can('viewChangelog', \App\Rules::class)
                             @if(count($paragraph->audits) > 0)
                                 <a href="{{ route('evoque.rules.changelog', $paragraph->id) }}" class="btn btn-outline-info"><i class="fas fa-history"></i></a>
                             @endif
-                        </p>
-                    @endcan
+                        @endcan
+                    </p>
                 </blockquote>
             </li>
         @endforeach

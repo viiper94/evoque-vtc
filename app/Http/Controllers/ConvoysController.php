@@ -116,7 +116,7 @@ class ConvoysController extends Controller{
             return view('evoque.convoys.private', [
                 'grouped' => collect(array_reverse($grouped))->slice(0, 7)
             ]);
-        }else if(Auth::user()->can('viewAny', Convoy::class) && $public === 'all'){
+        }else if(Auth::check() && Auth::user()->can('viewAny', Convoy::class) && $public === 'all'){
             $convoys = Convoy::with('leadMember', 'leadMember.user')->orderBy('start_time')->get();
             $grouped = array();
             foreach($convoys as $convoy){

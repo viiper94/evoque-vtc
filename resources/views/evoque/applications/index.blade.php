@@ -28,7 +28,9 @@
             <div class="row pt-3 justify-content-center">
                 <a href="{{ route('evoque.applications.recruitment') }}" class="btn btn-outline-warning btn-sm">
                     Заявки на вступление
-                    @if($recruitments > 0)<span class="badge badge-danger">{{ $recruitments }}</span>@endif
+                    @can('accept', \App\Recruitment::class)
+                        @if($recruitments > 0)<span class="badge badge-danger">{{ $recruitments }}</span>@endif
+                    @endcan
                 </a>
             </div>
         @endcan

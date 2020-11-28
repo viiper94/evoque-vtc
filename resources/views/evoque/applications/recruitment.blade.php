@@ -10,12 +10,12 @@
         @include('layout.alert')
         <h2 class="mt-3 text-primary text-center">Заявки на вступление</h2>
         <div class="row pt-3 justify-content-center">
-            @can('view', \App\Application::class)
-                <a href="{{ route('evoque.applications') }}" class="btn btn-outline-warning btn-sm">
-                    Заявки сотрудников
+            <a href="{{ route('evoque.applications') }}" class="btn btn-outline-warning btn-sm">
+                Заявки сотрудников
+                @can('accept', \App\Application::class)
                     @if($apps > 0)<span class="badge badge-danger">{{ $apps }}</span>@endif
-                </a>
-            @endcan
+                @endcan
+            </a>
         </div>
         @if(count($applications) > 0)
             <div class="applications pt-5 pb-5 row">

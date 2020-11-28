@@ -41,7 +41,7 @@ class RecruitmentPolicy
     }
 
     /**
-     * Determine whether the user can accept or decline recruitment.
+     * Determine whether the user can accept or decline specific model.
      *
      * @param  \App\User  $user
      * @param  \App\Recruitment  $recruitment
@@ -49,6 +49,21 @@ class RecruitmentPolicy
      */
     public function claim(User $user, Recruitment $recruitment){
         if($user->member && $recruitment->status == 0){
+            foreach($user->member->role as $role){
+                if($role->manage_applications || $role->claim_recruitments) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can accept or decline recruitment at all.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function accept(User $user){
+        if($user->member){
             foreach($user->member->role as $role){
                 if($role->manage_applications || $role->claim_recruitments) return true;
             }

@@ -12,15 +12,15 @@ use TruckersMP\APIClient\Client;
 class UsersController extends Controller{
 
     public function index(){
-        if(Gate::denies('manage_members')) abort(403);
+        $this->authorize('view', User::class);
         return view('evoque.users', [
             'users' => User::with('member')->orderBy('created_at', 'desc')->get()
         ]);
     }
 
     public function setAsMember(Request $request, $id){
-        if(Gate::denies('manage_members')) abort(403);
         $user = User::findOrFail($id);
+        $this->authorize('setAsMember', $user);
         $member = new Member();
         $member->user_id = $user->id;
         $member->join_date = Carbon::now();

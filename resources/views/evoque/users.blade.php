@@ -37,17 +37,27 @@
                         <td><a href="https://steamcommunity.com/profiles/{{ $user->steamid64 }}" target="_blank">{{ $user->steamid64 }}</a></td>
                         <td><a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank">{{ $user->truckersmp_id }}</a></td>
                         <td>
-                            @if(!$user->member)
-                                <i class="fas fa-times"></i>
-                            @elseif(!$user->member->visible)
-                                <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-danger"></i></a>
+                            @if($user->member)
+                                @if($user->member->visible)
+                                    @can('update', \App\Member::class)
+                                        <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-primary"></i></a>
+                                    @else
+                                        <i class="fas fa-check"></i>
+                                    @endcan
+                                @else
+                                    @can('update', \App\Member::class)
+                                        <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-danger"></i></a>
+                                    @else
+                                        <i class="fas fa-times text-danger"></i>
+                                    @endcan
+                                @endif
                             @else
-                                <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-primary"></i></a>
+                                <i class="fas fa-times text-danger"></i>
                             @endif
                         </td>
                         <td>{{ $user->created_at->isoFormat('DD.MM.Y HH:mm') }}</td>
                         <td>
-                            @if(!$user->member)
+                            @can('setAsMember', $user)
                                 <a href="{{ route('evoque.admin.users.setAsMember', $user->id) }}" onclick="return confirm('Назначить этого юзера сотрудником Эвок?')"><i class="fas fa-user-plus"></i></a>
                             @endif
                         </td>

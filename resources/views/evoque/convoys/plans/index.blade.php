@@ -122,7 +122,7 @@
     </section>
 </div>
 
-@can('manage_convoys')
+@can('quickBook', \App\Convoy::class)
     <!-- Book modal -->
     <div class="modal fade" id="book-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">

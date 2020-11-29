@@ -84,7 +84,7 @@
         <div class="feature col-lg-3 col-sm-4 col-sm-12">
             <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
             <hr class="m-auto pb-3">
-            <p>SIM: 2500+ км<br>ARC: 2700+ км</p>
+            <p>SIM: 2200+ км<br>ARC: 2700+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12">
             <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
@@ -102,7 +102,7 @@
         <div class="feature col-lg-2 col-sm-12">
             <h1 class="display-4 font-weight-bold">ARC</h1>
             <hr class="m-auto pb-3">
-            <p>2100+ км</p>
+            <p>2600+ км</p>
         </div>
         <div class="feature col-lg-2 col-sm-12">
             <h2 class="text-primary font-weight-bold">Тяжёлые грузы</h2>
@@ -112,12 +112,12 @@
         <div class="feature col-lg-3 col-sm-4 col-sm-12">
             <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
             <hr class="m-auto pb-3">
-            <p>2300+ км</p>
+            <p>SIM: 2500+ км<br>ARC: 2700+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12">
             <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
             <hr class="m-auto pb-3">
-            <p>SIM: 115 км/ч</p>
+            <p>SIM: 115 км/ч<br>ARC: 150 км/ч</p>
         </div>
     </section>
 </div>

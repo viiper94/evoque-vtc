@@ -77,24 +77,32 @@ class ApplicationsController extends Controller{
         $application = Application::with('member', 'member.stats')->where('id', $id)->first();
         $this->authorize('claim', $application);
         $result = true;
-        switch($application->category && $request->input('accept') === '1'){
-            case 1:
-                $application->member->on_vacation_till = $application->vacation_till;
-                $application->member->vacations += 1;
-                $result = $application->member->save();
-                break;
-            case 3:
-                foreach($application->member->stats as $stat){
-                    if($stat->game == $application->new_rp_profile[0]){
-                        $stat->level = $application->new_rp_profile[1];
-                        $result = $stat->save();
+        if($request->input('accept') === '1'){
+            switch($application->category){
+                case 1:
+                    $application->member->on_vacation_till = $application->vacation_till;
+                    $application->member->vacations += 1;
+                    $result = $application->member->save();
+                    break;
+                case 3:
+                    foreach($application->member->stats as $stat){
+                        if($stat->game == $application->new_rp_profile[0]){
+                            $stat->level = $application->new_rp_profile[1];
+                            $result = $stat->save();
+                        }
                     }
-                }
-                break;
-            case 4:
-                $application->member->nickname = $application->new_nickname;
-                $result = $application->member->save();
-                break;
+                    break;
+                case 4:
+                    $application->member->nickname = $application->new_nickname;
+                    $result = $application->member->save();
+                    break;
+                case 5:
+                    if($application->member){
+                        $application->member->stats->delete();
+                        $application->member->delete();
+                    }
+                    break;
+            }
         }
         $application->status = $request->input('accept');
         $application->comment = $request->input('comment');

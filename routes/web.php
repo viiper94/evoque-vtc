@@ -70,8 +70,9 @@ Route::any('/evoque/admin/roles/add', 'RolesController@add')->name('evoque.admin
 Route::get('/evoque/admin/users', 'UsersController@index')->name('evoque.admin.users');
 Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->name('evoque.admin.users.setAsMember');
 
-Route::get('/convoys/{public?}', 'ConvoysController@convoys')->name('convoys');
-Route::get('/evoque/convoys', 'ConvoysController@index')->name('evoque.convoys');
+Route::get('/convoy/public', 'ConvoysController@public')->name('convoy.public');
+Route::get('/evoque/convoys/private/{all?}', 'ConvoysController@private')->name('convoys.private');
+Route::get('/evoque/admin/convoys', 'ConvoysController@index')->name('evoque.admin.convoys');
 Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
 Route::any('/evoque/admin/convoys/toggle/{id}', 'ConvoysController@toggle')->name('evoque.admin.convoy.toggle');
 Route::get('/evoque/admin/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');

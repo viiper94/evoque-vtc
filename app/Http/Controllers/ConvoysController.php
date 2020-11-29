@@ -105,36 +105,31 @@ class ConvoysController extends Controller{
         ]);
     }
 
-    public function convoys(Request $request, $public = false){
-        if(Auth::check() && !$public){
+    public function private(Request $request, $all = false){
+        $convoys = Convoy::with('leadMember', 'leadMember.user');
+        if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
-            $convoys = Convoy::with('leadMember', 'leadMember.user')->where('visible', '1')->whereDate('start_time', $operator, Carbon::tomorrow())->orderBy('start_time')->get();
-            $grouped = array();
-            foreach($convoys as $convoy){
-                $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
-            }
-            return view('evoque.convoys.private', [
-                'grouped' => collect(array_reverse($grouped))->slice(0, 7)
-            ]);
-        }else if(Auth::check() && Auth::user()->can('viewAny', Convoy::class) && $public === 'all'){
-            $convoys = Convoy::with('leadMember', 'leadMember.user')->orderBy('start_time')->get();
-            $grouped = array();
-            foreach($convoys as $convoy){
-                $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
-            }
-            return view('evoque.convoys.private', [
-                'grouped' => array_reverse($grouped)
-            ]);
-        }else{
-            return view('convoys', [
-                'convoy' => Convoy::where([
-                    ['visible', '=', '1'],
-                    ['public', '=', '1'],
-                    ['start_time', '>', Carbon::now()->subMinutes(45)->format('Y-m-d H:i')]
-                ])->orderBy('start_time')->first()
-            ]);
+            $convoys = $convoys->whereDate('start_time', $operator, Carbon::tomorrow());
         }
+        $convoys = $convoys->where('visible', '1')->orderBy('start_time')->get();
+        $grouped = array();
+        foreach($convoys as $convoy){
+            $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
+        }
+        return view('evoque.convoys.private', [
+            'grouped' => collect(array_reverse($grouped))->slice(0, !$all ? 7 : 20)
+        ]);
+    }
+
+    public function public(){
+        return view('convoys', [
+            'convoy' => Convoy::where([
+                ['visible', '=', '1'],
+                ['public', '=', '1'],
+                ['start_time', '>', Carbon::now()->subMinutes(45)->format('Y-m-d H:i')]
+            ])->orderBy('start_time')->first()
+        ]);
     }
 
     public function add(Request $request){

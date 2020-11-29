@@ -72,7 +72,8 @@ class ConvoysController extends Controller{
             'DLC Utah',
             'DLC Idaho',
             'DLC Colorado',
-            'DLC Heavy Cargo Pack'
+            'DLC Heavy Cargo Pack',
+            'DLC Forest Machinery'
         ]
     ];
 

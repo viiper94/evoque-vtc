@@ -143,7 +143,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dlc">Необходимые ДЛС</label>
-                        <select class="form-control" size="20" name="dlc[]" id="dlc" multiple>
+                        <select class="form-control" size="22" name="dlc[]" id="dlc" multiple>
                             @foreach($dlc as $game => $list)
                                 <option disabled>{{ strtoupper($game) }}</option>
                                 @foreach($list as $item)

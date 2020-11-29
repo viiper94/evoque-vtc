@@ -50,7 +50,7 @@
                         </h5>
                         <div class="card-body">
                             <h4 class="card-title mb-0">
-                                От <span class="@if($app->status == 0)text-primary @endif ">{{ !in_array($app->category, [4, 5]) ? $app->member->nickname : $app->old_nickname }}</span>
+                                От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->category === 4 || !$app->member ? $app->old_nickname : $app->member->nickname }}</span>
                             </h4>
                             @if($app->member && $app->category === 4)
                                 <p class="text-muted">Текущий ник: <b>{{ $app->member->nickname }}</b></p>

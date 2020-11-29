@@ -14,7 +14,7 @@
                             <a class="nav-link" href="{{ route('home') }}">О нас</a>
                         </li>
                         <li class="nav-item @if(Route::current() && Route::current()->getName() === 'convoys')active @endif">
-                            <a class="nav-link" href="{{ route('convoys') }}">Конвой</a>
+                            <a class="nav-link" href="{{ route('convoy.public') }}">Конвой</a>
                         </li>
                         <li class="nav-item @if(Route::current() && Request::is('members'))active @endif">
                             <a class="nav-link" href="{{ route('members') }}">Сотрудники</a>
@@ -40,9 +40,9 @@
                                 @endif
                             </a>
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
-                                <a class="dropdown-item" href="{{ route('convoys') }}">Регламенты</a>
+                                <a class="dropdown-item" href="{{ route('convoys.private') }}">Регламенты</a>
                                 @can('update', \App\Convoy::class)
-                                    <a class="dropdown-item" href="{{ route('convoys', 'public') }}">Открытый конвой</a>
+                                    <a class="dropdown-item" href="{{ route('convoy.public') }}">Открытый конвой</a>
                                 @endcan
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
@@ -56,7 +56,7 @@
                                 </a>
                                 @can('update', \App\Convoy::class)
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('evoque.convoys') }}">
+                                    <a class="dropdown-item" href="{{ route('evoque.admin.convoys') }}">
                                         Редактирование
                                         @if($bookings_c > 0)
                                             <span class="badge badge-danger">{{ $bookings_c }}</span>

@@ -40,7 +40,7 @@
                         <a class="nav-link" href="https://truckersmp.com/reports/create" target="_blank">Жалоба на водителя</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('convoys', 'public') }}">Открытый конвой</a>
+                        <a class="nav-link" href="{{ route('convoy.public') }}">Открытый конвой</a>
                     </li>
                 </ul>
             </div>

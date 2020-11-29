@@ -88,6 +88,35 @@
     }
 }
 .private-convoys{
+    .accordion{
+        .card-header{
+            cursor: pointer;
+            align-items: center;
+            i.arrow{
+                font-size: 20px;
+                color: $primary-text;
+                transition: .3s ease transform;
+            }
+            h4{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                @media (min-width: 768px) {
+                    white-space: nowrap;
+                }
+                max-width: 86%;
+            }
+            &.active{
+                i.arrow{
+                    transform: rotate(180deg);
+                }
+            }
+            &:not(.upcoming){
+                h4, i.arrow{
+                    color: $primary-text-darker;
+                }
+            }
+        }
+    }
     p{
         font-style: normal;
         font-weight: bold;

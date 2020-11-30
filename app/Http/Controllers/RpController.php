@@ -153,7 +153,7 @@ class RpController extends Controller{
     }
 
     public function createResults($game){
-        $this->authorize('resetStats', Member::class);
+        $this->authorize('resetStats', RpReport::class);
         $stats = RpStats::where([['game', '=', $game], ['quantity', '>', '0']])->get();
         foreach($stats as $stat){
             $stat->quantity_total += $stat->quantity;

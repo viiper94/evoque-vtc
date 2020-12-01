@@ -21,7 +21,14 @@ Route::get('/', 'Controller@index')->name('home');
 Route::any('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
 Route::get('/members', 'Controller@members')->name('members');
-Route::get('/kb', 'Controller@kb')->name('kb');
+
+Route::any('/kb/add', 'KbController@add')->name('kb.add');
+Route::any('/kb/edit/{id}', 'KbController@edit')->name('kb.edit');
+Route::get('/kb/delete/{id}', 'KbController@delete')->name('kb.delete');
+Route::get('/kb/sort/{id}/{direction}', 'KbController@sort')->name('kb.sort');
+Route::get('/kb/changelog/{id}', 'KbController@changelog')->name('kb.changelog');
+Route::get('/kb/{id}', 'KbController@view')->name('kb.view');
+Route::get('/kb', 'KbController@index')->name('kb');
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
 Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');
@@ -34,7 +41,7 @@ Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.
 Route::any('/evoque/admin/member/fire/{id}', 'MembersController@fire')->name('evoque.admin.members.fire');
 
 Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');
-Route::get('/evoque/changelog/{id}', 'RulesController@changelog')->name('evoque.rules.changelog');
+Route::get('/evoque/rules/changelog/{id}', 'RulesController@changelog')->name('evoque.rules.changelog');
 Route::any('/evoque/admin/rules/edit/{id}', 'RulesController@edit')->name('evoque.rules.edit');
 Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
 Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');

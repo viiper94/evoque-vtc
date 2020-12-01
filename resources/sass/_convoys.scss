@@ -70,22 +70,31 @@
 
 // Admin convoys
 .convoys{
+    .convoys-day{
+        width: 125px;
+        @media (max-width: 768px){
+            width: 100%;
+        }
+    }
+    @media (min-width: 768px){
+        .convoys-list{
+            border-left: 1px solid $primary;
+        }
+    }
     .card{
         &.upcoming .convoy-date{
             color: $primary;
         }
         &:not(.upcoming){
-            span, p, label, h1, h2, h3, h4, h5, h6, a, small{
+            span, p, label, h1, h2, h3, h4, h5, h6, a, small, button{
                 color: $primary-text-darker;
             }
             a:hover, i.active{
                 color: $primary-text;
             }
         }
-        a:not(.btn){
-            text-decoration: underline;
-        }
     }
+
 }
 .private-convoys{
     .accordion{

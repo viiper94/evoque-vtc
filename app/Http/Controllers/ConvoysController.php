@@ -98,7 +98,7 @@ class ConvoysController extends Controller{
         $list = array();
         $convoys = Convoy::with('bookedBy')->orderBy('start_time', 'desc')->get();
         foreach($convoys as $convoy){
-            $list[$convoy->start_time->isoFormat('dddd, DD.MM.YYYY')][] = $convoy;
+            $list[$convoy->start_time->format('d.m').', '.$convoy->start_time->isoFormat('dd')][] = $convoy;
         }
         return view('evoque.convoys.index', [
             'convoys' => $list

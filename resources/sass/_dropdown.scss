@@ -1,0 +1,22 @@
+// Dropdowns
+.dropdown.dropdown-dark{
+    .dropdown-toggle{
+        color: $primary-text;
+        &:focus{
+            box-shadow: none;
+        }
+        &.no-arrow:after{
+            border: none;
+        }
+    }
+    .dropdown-menu{
+        background-color: $background-lighten-2;
+        a.dropdown-item{
+            color: $primary-text;
+            text-decoration: none;
+            &:hover{
+                background-color: $background-lighten-3;
+            }
+        }
+    }
+}

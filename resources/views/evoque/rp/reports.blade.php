@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="card-actions">
-                        @can('accepr', $report)
+                        @can('accept', $report)
                             <a href="{{ route('evoque.rp.reports.view', $report->id) }}" class="my-1 btn btn-outline-warning"><i class="fas fa-edit"></i> Смотреть</a>
                         @endcan
                         @can('delete', $report)

@@ -161,7 +161,7 @@ class ConvoysController extends Controller{
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
-                redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно создан!']) :
+                redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно создан!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $tmp = new Client();
@@ -213,7 +213,7 @@ class ConvoysController extends Controller{
             $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
-                redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
+                redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $tmp = new Client();
@@ -233,7 +233,7 @@ class ConvoysController extends Controller{
         $convoy = Convoy::findOrFail($id);
         $convoy->deleteImages(public_path('/images/convoys/'));
         return $convoy->delete() ?
-            redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно удалён!']) :
+            redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
@@ -242,7 +242,7 @@ class ConvoysController extends Controller{
         $convoy = Convoy::findOrFail($id);
         $convoy->visible = !$convoy->visible;
         return $convoy->save() ?
-            redirect()->route('evoque.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
+            redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

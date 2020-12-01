@@ -10,9 +10,17 @@
         <li data-target="#carousel" data-slide-to="3"></li>
         <li data-target="#carousel" data-slide-to="4"></li>
         <li data-target="#carousel" data-slide-to="5"></li>
+        <li data-target="#carousel" data-slide-to="6"></li>
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
+            <img src="/assets/img/carousel/0.jpg" class="d-block w-100">
+            <div class="carousel-caption d-none d-md-block text-shadow">
+                <h1 class="display-3">Мы - EVOQUE</h1>
+                <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
             <img src="/assets/img/carousel/1.jpg" class="d-block w-100">
             <div class="carousel-caption d-none d-md-block text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>

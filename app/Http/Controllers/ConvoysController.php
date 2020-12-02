@@ -287,8 +287,8 @@ class ConvoysController extends Controller{
     }
 
     public function editTab(Request $request, $id){
-        $this->authorize('update', Tab::class);
         $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
+        $this->authorize('update', $tab);
         if($request->post()){
             $this->validate($request, [
                 'convoy_title' => 'required|string',

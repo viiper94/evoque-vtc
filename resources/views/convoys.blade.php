@@ -10,9 +10,11 @@
 @endsection
 
 @section('meta')
-    <meta property="og:title" content="{{ $convoy->title }}">
+    <meta property="og:title" content="{{ $convoy ? $convoy->title : 'Открытый конвой' }}">
     <meta property="og:type" content="article">
-    <meta property="og:image" content="{{ \Illuminate\Support\Facades\URL::to('/') }}/images/convoys/{{ $convoy->route[0] }}">
+    @if($convoy)
+        <meta property="og:image" content="{{ \Illuminate\Support\Facades\URL::to('/') }}/images/convoys/{{ $convoy->route[0] }}">
+    @endif
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:site_name" content="ВТК EVOQUE">
 @endsection
@@ -261,7 +263,7 @@
 
 </div>
 
-@if($convoy->communication === 'TeamSpeak 3')
+@if($convoy && $convoy->communication === 'TeamSpeak 3')
     <!-- TS3 overlay modal -->
     <div class="modal fade" id="ts3-overlay-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">

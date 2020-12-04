@@ -24,7 +24,6 @@ class KbController extends Controller{
 
     public function article(Request $request, $id){
         $kb = Kb::with(['user', 'user.member'])->where('id', $id)->firstOrFail();
-        $this->authorize('update', $kb);
         return view('kb.article', [
             'article' => $kb
         ]);
@@ -32,6 +31,7 @@ class KbController extends Controller{
 
     public function add(Request $request){
         if($request->post()){
+            $this->authorize('create', Kb::class);
             $this->validate($request, [
                 'title' => 'required|string',
                 'category' => 'required|string',
@@ -42,13 +42,45 @@ class KbController extends Controller{
             $kb->visible = $request->input('visible') === 'on';
             $kb->public = $request->input('public') === 'on';
             $kb->author = Auth::id();
-            return $kb->save() ?
-                redirect()->route('kb')->with(['success' => 'Статья успешно создана!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
+            if($kb->save()){
+                $kb->sort = $kb->id;
+                return $kb->save() ?
+                    redirect()->route('kb')->with(['success' => 'Статья успешно создана!']) :
+                    redirect()->back()->withErrors(['Возникла ошибка =(']);
+            }
         }
         return view('kb.add', [
             'kb' => new Kb()
         ]);
+    }
+
+    public function edit(Request $request, $id){
+        $kb = Kb::findOrFail($id);
+        $this->authorize('update', $kb);
+        if($request->post()){
+            $this->validate($request, [
+                'title' => 'required|string',
+                'category' => 'required|string',
+                'article' => 'required|string',
+            ]);
+            $kb->fill($request->post());
+            $kb->visible = $request->input('visible') === 'on';
+            $kb->public = $request->input('public') === 'on';
+            return $kb->save() ?
+                redirect()->route('kb')->with(['success' => 'Статья успешно отредактирована!']) :
+                redirect()->back()->withErrors(['Возникла ошибка =(']);
+        }
+        return view('kb.add', [
+            'kb' => $kb
+        ]);
+    }
+
+    public function delete(Request $request, $id){
+        $kb = Kb::findOrFail($id);
+        $this->authorize('delete', $kb);
+        return $kb->delete() ?
+            redirect()->route('kb')->with(['success' => 'Статья успешно удалена!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

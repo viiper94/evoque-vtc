@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    Новая статья для базы знаний | @lang('general.vtc_evoque')
+    @if($kb->title) Редактирование @else Создание @endif статьи для базы знаний | @lang('general.vtc_evoque')
 @endsection
 
 @section('assets')
@@ -13,19 +13,19 @@
 
     <div class="container py-5">
         @include('layout.alert')
-        <h2 class="text-primary mt-3">Новая статья</h2>
+        <h2 class="text-primary mt-3">@if($kb->title) Редактирование @else Создание @endif статьи</h2>
         <form method="post">
             @csrf
             <div class="form-group">
                 <label for="title">Заголовок статьи</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
+                <input type="text" class="form-control" id="title" name="title" value="{{ $kb->title }}" required>
                 @if($errors->has('title'))
                     <small class="form-text">{{ $errors->first('title') }}</small>
                 @endif
             </div>
             <div class="form-group">
                 <label for="category">Категория</label>
-                <input type="text" class="form-control" id="category" name="category" value="{{ old('category') }}" required>
+                <input type="text" class="form-control" id="category" name="category" value="{{ $kb->category }}" required>
                 @if($errors->has('category'))
                     <small class="form-text">{{ $errors->first('category') }}</small>
                 @endif
@@ -38,7 +38,7 @@
                 <input type="checkbox" class="custom-control-input" id="public" name="public" @if($kb->public) checked @endif>
                 <label class="custom-control-label" for="public">Публичная статья</label>
             </div>
-            <textarea name="article" id="article">{{ old('category') }}</textarea>
+            <textarea name="article" id="article">{{ $kb->article }}</textarea>
             <button type="submit" class="btn btn-outline-warning">Сохранить</button>
         </form>
     </div>

@@ -75,6 +75,15 @@ class RolesController extends Controller{
             $role->edit_roles_permissions = $request->input('edit_roles_permissions') == 'on';
             $role->delete_roles = $request->input('delete_roles') == 'on';
 
+            $role->manage_kb = $request->input('manage_kb') == 'on';
+            $role->view_private = $request->input('view_private') == 'on';
+            $role->view_hidden = $request->input('view_hidden') == 'on';
+            $role->add_article = $request->input('add_article') == 'on';
+            $role->edit_own_article = $request->input('edit_own_article') == 'on';
+            $role->edit_all_articles = $request->input('edit_all_articles') == 'on';
+            $role->delete_own_article = $request->input('delete_own_article') == 'on';
+            $role->delete_all_articles = $request->input('delete_all_articles') == 'on';
+
             $role->manage_users = $request->input('manage_users') == 'on';
             $role->view_users = $request->input('view_users') == 'on';
             $role->set_user_as_member = $request->input('set_user_as_member') == 'on';

@@ -19,22 +19,25 @@ class KbPolicy
     public function viewAny(User $user){
         if($user->member){
             foreach($user->member->role as $role){
-                if($role->manage_kb || $role->view_invisible_articles) return true;
+                if($role->manage_kb || $role->view_hidden) return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\Kb  $kb
      * @return mixed
      */
-    public function view(User $user, Kb $kb)
-    {
-        //
+    public function viewPrivate(User $user){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_kb || $role->view_private) return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -46,10 +49,10 @@ class KbPolicy
     public function create(User $user){
         if($user->member){
             foreach($user->member->role as $role){
-                if($role->manage_kb || $role->add_kb) return true;
+                if($role->manage_kb || $role->add_article) return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
@@ -59,9 +62,14 @@ class KbPolicy
      * @param  \App\Kb  $kb
      * @return mixed
      */
-    public function update(User $user, Kb $kb)
-    {
-        //
+    public function update(User $user, Kb $kb){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_kb || $role->edit_all_articles ||
+                    ($kb->author == $user->id && $role->edit_own_article)) return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -71,32 +79,14 @@ class KbPolicy
      * @param  \App\Kb  $kb
      * @return mixed
      */
-    public function delete(User $user, Kb $kb)
-    {
-        //
+    public function delete(User $user, Kb $kb){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_kb || $role->delete_all_articles ||
+                    ($kb->author == $user->id && $role->delete_own_article)) return true;
+            }
+        }
+        return false;
     }
 
-    /**
-     * Determine whether the user can restore the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Kb  $kb
-     * @return mixed
-     */
-    public function restore(User $user, Kb $kb)
-    {
-        //
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Kb  $kb
-     * @return mixed
-     */
-    public function forceDelete(User $user, Kb $kb)
-    {
-        //
-    }
 }

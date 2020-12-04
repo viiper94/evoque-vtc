@@ -11,4 +11,12 @@
     img{
         max-width: 100%;
     }
+    a{
+        text-decoration: underline;
+        color: $primary;
+    }
+    hr{
+        border-top-color: $primary-text-darker;
+        margin: 1.5rem 0;
+    }
 }

@@ -16,7 +16,7 @@ class KbController extends Controller{
         if(Auth::user()->cant('viewAny', Kb::class)){
             $kb = $kb->where('visible', '1');
         }
-        $kb = $kb->orderBy('sort', 'desc')->get();
+        $kb = $kb->orderBy('sort')->get();
         return view('kb.index', [
             'categories' => $kb->groupBy('category')
         ]);

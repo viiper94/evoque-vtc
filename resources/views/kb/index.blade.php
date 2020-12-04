@@ -23,7 +23,14 @@
                         </h5>
                         <div class="card-body">
                             @foreach($category as $article)
-                                <p><a href="{{ route('kb.view', $article->id) }}">{{ $article->title }}</a></p>
+                                <p>
+                                    <a href="{{ route('kb.view', $article->id) }}">{{ $article->title }}</a>
+                                    @can('viewAny', \App\Kb::class)
+                                        @if(!$article->visible)
+                                            <i class="fas fa-eye-slash"></i>
+                                        @endif
+                                    @endcan
+                                </p>
                             @endforeach
                         </div>
                     </div>

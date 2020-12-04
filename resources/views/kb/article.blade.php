@@ -25,6 +25,11 @@
             </div>
             <hr class="border-primary w-50 mx-auto my-4">
         </section>
+        @can('viewAny', \App\Kb::class)
+            @if(!$article->visible)
+                <p class="text-muted">Статья не опубликована!</p>
+            @endif
+        @endcan
         <h1 class="text-primary my-3">{{ $article->title }}</h1>
         <section class="article-content">
             @markdown($article->article)

@@ -31,7 +31,7 @@ class ApplicationsController extends Controller{
             $apps = $apps->where('member_id', Auth::user()->member->id);
         }
         return view('evoque.applications.index', [
-            'apps' => $apps->orderBy('status')->orderBy('created_at', 'desc')->paginate(15),
+            'apps' => $apps->orderBy('created_at', 'desc')->paginate(15),
             'recruitments' => Recruitment::where('status', 0)->count()
         ]);
     }
@@ -46,7 +46,7 @@ class ApplicationsController extends Controller{
             ]);
         }
         return view('evoque.applications.recruitment', [
-            'applications' => Recruitment::orderBy('status')->orderBy('created_at')->get(),
+            'applications' => Recruitment::orderBy('created_at', 'desc')->get(),
             'apps' => Application::where('status', 0)->count()
         ]);
     }

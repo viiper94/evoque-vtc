@@ -27,7 +27,7 @@ Route::any('/kb/edit/{id}', 'KbController@edit')->name('kb.edit');
 Route::get('/kb/delete/{id}', 'KbController@delete')->name('kb.delete');
 Route::get('/kb/sort/{id}/{direction}', 'KbController@sort')->name('kb.sort');
 Route::get('/kb/changelog/{id}', 'KbController@changelog')->name('kb.changelog');
-Route::get('/kb/{id}', 'KbController@view')->name('kb.view');
+Route::get('/kb/{id}', 'KbController@article')->name('kb.view');
 Route::get('/kb', 'KbController@index')->name('kb');
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');

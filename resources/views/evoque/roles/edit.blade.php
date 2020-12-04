@@ -259,6 +259,42 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
+                        <h3 class="text-primary">База знаний</h3>
+                        <div class="custom-control custom-checkbox mb-4">
+                            <input type="checkbox" class="custom-control-input" id="manage_kb" name="manage_kb" @if($role->manage_kb)checked @endif>
+                            <label class="custom-control-label text-danger" for="manage_kb">Полные права базе знаний</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="view_private" name="view_private" @if($role->view_private)checked @endif>
+                            <label class="custom-control-label" for="view_private">Читать не публичные статьи</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="view_hidden" name="view_hidden" @if($role->view_hidden)checked @endif>
+                            <label class="custom-control-label" for="view_hidden">Читать не видимые статьи</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="add_article" name="add_article" @if($role->add_article)checked @endif>
+                            <label class="custom-control-label" for="add_article">Создавать статьи</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="edit_own_article" name="edit_own_article" @if($role->edit_own_article)checked @endif>
+                            <label class="custom-control-label" for="edit_own_article">Редактировать свои статьи</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="delete_own_article" name="delete_own_article" @if($role->delete_own_article)checked @endif>
+                            <label class="custom-control-label" for="delete_own_article">Удалять свои статьи</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="edit_all_articles" name="edit_all_articles" @if($role->edit_all_articles)checked @endif>
+                            <label class="custom-control-label" for="edit_all_articles">Редактировать все статьи</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="delete_all_articles" name="delete_all_articles" @if($role->delete_all_articles)checked @endif>
+                            <label class="custom-control-label" for="delete_all_articles">Удалять все статьи</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
                         <h3 class="text-primary">Пользователи сайта</h3>
                         <div class="custom-control custom-checkbox mb-4">
                             <input type="checkbox" class="custom-control-input" id="manage_users" name="manage_users" @if($role->manage_users)checked @endif>

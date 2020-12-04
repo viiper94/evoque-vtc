@@ -10,7 +10,7 @@ class KbController extends Controller{
 
     public function index($search = null){
         $kb = Kb::with('user');
-        if(Auth::guest()){
+        if(Auth::guest() || Auth::user()->cant('viewPrivate', Kb::class)){
             $kb = $kb->where('public', '1');
         }
         if(Auth::user()->cant('viewAny', Kb::class)){
@@ -19,6 +19,14 @@ class KbController extends Controller{
         $kb = $kb->orderBy('sort', 'desc')->get();
         return view('kb.index', [
             'categories' => $kb->groupBy('category')
+        ]);
+    }
+
+    public function article(Request $request, $id){
+        $kb = Kb::with(['user', 'user.member'])->where('id', $id)->firstOrFail();
+        $this->authorize('update', $kb);
+        return view('kb.article', [
+            'article' => $kb
         ]);
     }
 

@@ -31,7 +31,10 @@
                         @else border-danger @endif">
                     <div class="card-header row">
                         <h5 class="col-md-10 mb-0">
-                            От {{ $report->member->nickname }} ({{ $report->created_at->isoFormat('LLL') }})
+                            @if($report->member)
+                                От {{ $report->member->nickname }}
+                            @endif
+                            ({{ $report->created_at->isoFormat('LLL') }})
                             @if($report->status === 0)
                                 <span class="badge badge-warning">Рассматривается</span>
                             @elseif($report->status === 1)

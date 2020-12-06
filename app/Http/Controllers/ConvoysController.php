@@ -61,11 +61,12 @@ class ConvoysController extends Controller{
             'DLC Italia',
             'DLC Beyond The Baltic Sea',
             'DLC Road To The Black Sea',
-            'DLC Iberia',
+//            'DLC Iberia',
             'DLC High Power Cargo Pack',
             'DLC Heavy Cargo Pack'
         ],
         'ats' => [
+            'ProMods Canada',
             'DLC New Mexico',
             'DLC Oregon',
             'DLC Washington',

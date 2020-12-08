@@ -35,7 +35,7 @@ class KbController extends Controller{
             $this->validate($request, [
                 'title' => 'required|string',
                 'category' => 'required|string',
-                'article' => 'required|string',
+                'article' => 'required|string|no_vk',
             ]);
             $kb = new Kb();
             $kb->fill($request->post());
@@ -61,7 +61,7 @@ class KbController extends Controller{
             $this->validate($request, [
                 'title' => 'required|string',
                 'category' => 'required|string',
-                'article' => 'required|string',
+                'article' => 'required|string|no_vk',
             ]);
             $kb->fill($request->post());
             $kb->visible = $request->input('visible') === 'on';

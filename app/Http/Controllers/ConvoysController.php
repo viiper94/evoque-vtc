@@ -172,7 +172,7 @@ class ConvoysController extends Controller{
         $convoy->trailer_public = true;
         $convoy->route = ['1' => null];
         return view('evoque.convoys.edit', [
-            'allowTimes' => false,
+            'allowTimes' => null,
             'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,

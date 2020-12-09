@@ -1,5 +1,18 @@
 @extends('layout.index')
 
+@section('title')
+    EVOQUE - Виртуальная Транспортная Компания в TruckersMP
+@endsection
+
+@section('meta')
+    <meta property="description" content="ВТК EVOQUE - Опытная, динамично развивающаяся виртуальная транспортная компания,
+        которая занимается грузоперевозками в мире TruckersMP, проводит регулярные открытые конвои по мультиплееру ETS2 и ATS.">
+    <meta property="keywords" content="втк, конвой, открытые конвои, открытый конвой, совместные поездки, покатушки,
+        перевозки, грузоперевозки, виртуальная транспортная компания, truckersmp, truckers mp, ets2mp, atsmp, ets2 mp,
+        euro truck simulator 2, american truck simulator, ets2, ats, multiplayer, мультиплеер, симулятор дальнобойщика,
+        вступить в втк, втупить в компанию">
+@endsection
+
 @section('content')
 
 <div id="carousel" class="carousel slide text-shadow-m" data-ride="carousel">

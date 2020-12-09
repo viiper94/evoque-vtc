@@ -65,10 +65,10 @@
                                         {{ $item->title }}@if(!$loop->last),@endif
                                     @endforeach
                                 </td>
-                                @if($member->topRole() === 14)
+                                @if($member->isTrainee())
                                     <td colspan="2">Испытательный срок до {{ $member->trainee_until ? $member->trainee_until->format('d.m') : $member->join_date->addDays(10)->format('d.m') }}</td>
-                                    <td class="member-convoys @if($member->join_date->addDays(10)->isToday() && $member->convoys == 0) text-danger font-weight-bold @endif">
-                                        @can('manage_table')
+                                    <td class="member-convoys @if($member->isTraineeExpired() && $member->trainee_convoys < 4) text-danger font-weight-bold @endif">
+                                        @can('setActivity', \App\Member::class)
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>

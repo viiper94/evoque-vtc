@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
@@ -74,6 +75,11 @@ class Member extends Model implements Auditable{
 
     public function isTrainee(){
         return $this->topRole() === 14;
+    }
+
+    public function isTraineeExpired(){
+        $trainee_end = $this->trainee_until ?? $this->join_date->addDays(10);
+        return $trainee_end->lte(Carbon::today());
     }
 
 }

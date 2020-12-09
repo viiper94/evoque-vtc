@@ -84,12 +84,14 @@ class Member extends Model implements Auditable{
 
     public function checkRoles(){
         foreach($this->role as $role){
-            if(($role->max_scores && $this->scores > $role->max_scores) ||
-                ($role->min_scores && $this->scores < $role->min_scores)){
-                $new_role = Role::where('min_scores', '<=', $this->scores)->orWhere('min_scores', 'null')
-                    ->where('max_scores', '>=', $this->scores)->orWhere('max_scores', 'null')->first();
-                $this->role()->detach($role->id);
-                $this->role()->attach($new_role->id);
+            if($this->scores){
+                if(($role->max_scores && $this->scores > $role->max_scores) ||
+                    ($role->min_scores && $this->scores < $role->min_scores)){
+                    $new_role = Role::where('min_scores', '<=', $this->scores)->orWhere('min_scores', 'null')
+                        ->where('max_scores', '>=', $this->scores)->orWhere('max_scores', 'null')->first();
+                    $this->role()->detach($role->id);
+                    $this->role()->attach($new_role->id);
+                }
             }
         }
     }

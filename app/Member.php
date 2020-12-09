@@ -10,7 +10,7 @@ class Member extends Model implements Auditable{
 
     use \OwenIt\Auditing\Auditable;
 
-    public $casts = [
+    protected $casts = [
         'visible' => 'boolean',
         'sort' => 'boolean',
     ];
@@ -23,7 +23,7 @@ class Member extends Model implements Auditable{
         'updated_at'
     ];
 
-    public $fillable = [
+    protected $fillable = [
         'user_id',
         'nickname',
         'join_date',

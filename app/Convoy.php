@@ -367,4 +367,7 @@ class Convoy extends Model{
         return true;
     }
 
+    public function setCommentAttribute($value){
+        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
+    }
 }

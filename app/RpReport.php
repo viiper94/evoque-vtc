@@ -30,4 +30,8 @@ class RpReport extends Model{
         return is_file($path) ? unlink($path) : false;
     }
 
+    public function setCommentAttribute($value){
+        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
+    }
+
 }

@@ -13,7 +13,7 @@ class Application extends Model{
         'vacation_till'
     ];
 
-    public $casts = [
+    protected $casts = [
         'new_rp_profile' => 'array'
     ];
 
@@ -31,6 +31,10 @@ class Application extends Model{
 
     public function getCategory(){
         return $this->categories[$this->category];
+    }
+
+    public function setCommentAttribute($value){
+        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
     }
 
 }

@@ -27,4 +27,8 @@ class Recruitment extends Model{
         'have_ats'
     ];
 
+    public function setCommentAttribute($value){
+        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
+    }
+
 }

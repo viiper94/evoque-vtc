@@ -18,4 +18,8 @@ class Kb extends Model{
         return $this->hasOne('App\User', 'id', 'author');
     }
 
+    public function setCommentAttribute($value){
+        $this->attributes['article'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
+    }
+
 }

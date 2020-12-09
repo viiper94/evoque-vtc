@@ -96,12 +96,12 @@ class ApplicationsController extends Controller{
                     $application->member->nickname = $application->new_nickname;
                     $result = $application->member->save();
                     break;
-                case 5:
-                    if($application->member){
-                        $application->member->stats->delete();
-                        $application->member->delete();
-                    }
-                    break;
+//                case 5:
+//                    if($application->member){
+//                        $application->member->stats->delete();
+//                        $application->member->delete();
+//                    }
+//                    break;
             }
         }
         $application->status = $request->input('accept');

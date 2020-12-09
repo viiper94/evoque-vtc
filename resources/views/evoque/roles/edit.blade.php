@@ -34,30 +34,6 @@
                         <input type="number" class="form-control" id="max_scores" name="max_scores" value="{{ $role->max_scores }}">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="prev_role">Предыдущая роль по таблице</label>
-                        <select class="form-control" id="prev_role" name="prev_role">
-                            <option value="">Не указано</option>
-                            @foreach($roles_list as $r)
-                                <option value="{{ $r->id }}" @if($r->id == $role->prev_role) selected @endif>
-                                    {{ $r->title }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="next_role">Следующая роль по таблице</label>
-                        <select class="form-control" id="next_role" name="next_role">
-                            <option value="">Не указано</option>
-                            @foreach($roles_list as $r)
-                                <option value="{{ $r->id }}" @if($r->id == $role->next_role) selected @endif>
-                                    {{ $r->title }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($role->visible) checked @endif>
                     <label class="custom-control-label" for="visible">Показывать эту роль в таблице</label>

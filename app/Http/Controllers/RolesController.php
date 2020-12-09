@@ -102,8 +102,6 @@ class RolesController extends Controller{
             $this->validate($request, [
                 'title' => 'required|string',
                 'group' => 'required|string',
-                'next_role' => 'numeric|different:prev_role|nullable',
-                'prev_role' => 'numeric|different:next_role|nullable',
                 'min_scores' => 'nullable|numeric',
                 'max_scores' => 'nullable|numeric',
             ]);
@@ -126,8 +124,6 @@ class RolesController extends Controller{
             $this->validate($request, [
                 'title' => 'required|string',
                 'group' => 'required|string',
-                'next_role' => 'nullable|numeric|different:prev_role',
-                'prev_role' => 'nullable|numeric|different:next_role',
                 'min_scores' => 'nullable|numeric',
                 'max_scores' => 'nullable|numeric',
             ]);

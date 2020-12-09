@@ -16,8 +16,6 @@ class AddRolesInfoToRolesTable extends Migration
         Schema::table('roles', function (Blueprint $table) {
             $table->integer('min_scores')->nullable();
             $table->integer('max_scores')->nullable();
-            $table->integer('next_role')->nullable();
-            $table->integer('prev_role')->nullable();
         });
     }
 
@@ -31,8 +29,6 @@ class AddRolesInfoToRolesTable extends Migration
         Schema::table('roles', function (Blueprint $table) {
             $table->dropColumn('min_scores');
             $table->dropColumn('max_scores');
-            $table->dropColumn('next_role');
-            $table->dropColumn('prev_role');
         });
     }
 }

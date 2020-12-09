@@ -11,9 +11,7 @@ class Role extends Model{
         'title',
         'description',
         'min_scores',
-        'max_scores',
-        'next_role',
-        'prev_role',
+        'max_scores'
     ];
 
     public function members(){

@@ -7,6 +7,7 @@
 @section('content')
 
     <div class="container pt-5 pb-5">
+        @include('layout.alert')
         @can('update', \App\Role::class)
             <h3 class="mt-3 text-primary">Редактирование должности</h3>
             <form method="post">
@@ -22,6 +23,40 @@
                 <div class="form-group">
                     <label for="description">Описание</label>
                     <input type="text" class="form-control" id="description" name="description" value="{{ $role->description }}">
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="min_scores">Минимальное количество баллов (включительно)</label>
+                        <input type="number" class="form-control" id="min_scores" name="min_scores" value="{{ $role->min_scores }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="max_scores">Максимальное количество баллов (включительно)</label>
+                        <input type="number" class="form-control" id="max_scores" name="max_scores" value="{{ $role->max_scores }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="prev_role">Предыдущая роль по таблице</label>
+                        <select class="form-control" id="prev_role" name="prev_role">
+                            <option value="">Не указано</option>
+                            @foreach($roles_list as $r)
+                                <option value="{{ $r->id }}" @if($r->id == $role->prev_role) selected @endif>
+                                    {{ $r->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="next_role">Следующая роль по таблице</label>
+                        <select class="form-control" id="next_role" name="next_role">
+                            <option value="">Не указано</option>
+                            @foreach($roles_list as $r)
+                                <option value="{{ $r->id }}" @if($r->id == $role->next_role) selected @endif>
+                                    {{ $r->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="custom-control custom-checkbox mb-3">
                     <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($role->visible) checked @endif>

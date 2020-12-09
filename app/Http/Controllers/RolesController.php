@@ -101,7 +101,11 @@ class RolesController extends Controller{
             $this->authorize('update', Role::class);
             $this->validate($request, [
                 'title' => 'required|string',
-                'group' => 'required|string'
+                'group' => 'required|string',
+                'next_role' => 'numeric|different:prev_role|nullable',
+                'prev_role' => 'numeric|different:next_role|nullable',
+                'min_scores' => 'nullable|numeric',
+                'max_scores' => 'nullable|numeric',
             ]);
             $role->fill($request->post());
             $role->visible = $request->input('visible') == 'on';
@@ -110,7 +114,8 @@ class RolesController extends Controller{
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.roles.edit', [
-            'role' => $role
+            'role' => $role,
+            'roles_list' => Role::where('visible', '1')->get()
         ]);
     }
 
@@ -120,7 +125,11 @@ class RolesController extends Controller{
         if($request->post()){
             $this->validate($request, [
                 'title' => 'required|string',
-                'group' => 'required|string'
+                'group' => 'required|string',
+                'next_role' => 'nullable|numeric|different:prev_role',
+                'prev_role' => 'nullable|numeric|different:next_role',
+                'min_scores' => 'nullable|numeric',
+                'max_scores' => 'nullable|numeric',
             ]);
             $role->fill($request->post());
             $role->visible = $request->input('visible') == 'on';

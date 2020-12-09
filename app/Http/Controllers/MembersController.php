@@ -43,9 +43,9 @@ class MembersController extends Controller{
                 'join_date' => 'required|date_format:d.m.Y',
                 'convoys' => 'required|numeric',
                 'vacations' => 'required|numeric',
-                'plate' => 'no_vk|nullable|url|'
+                'plate' => 'no_vk|nullable|url'
             ]);
-            $member = Member::findOrFail($id);
+            $member = Member::with('role')->findOrFail($id);
             $this->authorize('update', Member::class);
             $member->fill($request->post());
             $member->visible = $request->input('visible') === 'on';
@@ -55,12 +55,13 @@ class MembersController extends Controller{
             $member->join_date = Carbon::parse($request->input('join_date'))->format('Y-m-d');
             $member->trainee_until = $request->input('trainee_until') ? Carbon::parse($request->input('trainee_until'))->format('Y-m-d') : null;
             $member->on_vacation_till = $request->input('on_vacation_till') ? Carbon::parse($request->input('on_vacation_till'))->format('Y-m-d') : null;
-            $member->role()->detach();
             if(Auth::user()->can('updateRoles', $member)){
+                $member->role()->detach();
                 foreach($request->input('roles') as $role){
                     $member->role()->attach($role);
                 }
             }
+            $member->checkRoles();
             return $member->save() ?
                 redirect()->route('evoque.members')->with(['success' => 'Сотрудник успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

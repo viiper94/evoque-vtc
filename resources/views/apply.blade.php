@@ -4,6 +4,20 @@
     Вступить в @lang('general.vtc_evoque')
 @endsection
 
+@section('meta')
+    <meta name="description" content="ВТК EVOQUE - Опытная, динамично развивающаяся виртуальная транспортная компания,
+        которая занимается грузоперевозками в мире TruckersMP, проводит регулярные открытые конвои по мультиплееру ETS2 и ATS.">
+    <meta name="keywords" content="втк, конвой, открытые конвои, открытый конвой, совместные поездки, покатушки,
+        перевозки, грузоперевозки, виртуальная транспортная компания, truckersmp, truckers mp, ets2mp, atsmp, ets2 mp,
+        euro truck simulator 2, american truck simulator, ets2, ats, multiplayer, мультиплеер, симулятор дальнобойщика,
+        вступить в втк, втупить в компанию">
+    <meta property="og:title" content="Вступить в ВТК EVOQUE">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="{{ \Illuminate\Support\Facades\URL::to('/') }}/assets/img/evoque.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:site_name" content="ВТК EVOQUE">
+@endsection
+
 @section('content')
 
 <div class="container mt-5">

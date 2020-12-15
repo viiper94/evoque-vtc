@@ -61,7 +61,7 @@
                                                 @endif
                                             </h3>
                                             <p class="text-muted">Связь {{ $convoy->communication }}:</p>
-                                            <h2><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication_link }}</a></h2>
+                                            <h3><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication_link }}</a></h3>
                                             @if($convoy->communication_channel)
                                                 <p class="text-muted">Канал на сервере:</p>
                                                 <h3>{{ $convoy->communication_channel }}</h3>

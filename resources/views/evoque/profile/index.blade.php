@@ -6,20 +6,17 @@
 
 @section('content')
 
-    @include('layout.alert')
     <div class="container pt-5 pb-5 profile">
+        @include('layout.alert')
         <div class="row mt-5">
             <div class="col-sm-6 avatar text-md-right text-center pr-sm-5 pt-3 pb-3">
                 <img src="{{ $user->image }}" alt="{{ $user->name }}" class="text-shadow-m">
                 @if(\Illuminate\Support\Facades\Auth::user()->id === $user->id)
-                    <div class="mt-3">
-                        <a href="{{ route('evoque.profile.updateAvatar') }}" class="btn btn-sm btn-outline-warning"><i class="fas fa-sync-alt"></i> Обновить Steam аватар</a>
-                    </div>
                     <div class="mt-2">
                         <a href="{{ route('evoque.profile.edit') }}" class="btn btn-sm btn-outline-info"><i class="fas fa-edit"></i> Редактировать профиль</a>
                     </div>
                 @endif
-                @can('manage_members')
+                @can('setAsMember')
                     @if(!$user->member)
                         <div class="mt-2">
                             <a href="{{ route('evoque.admin.users.setAsMember', $user->id) }}" class="btn btn-sm btn-outline-danger"

@@ -28,6 +28,49 @@ $(document).ready(function(){
         }
     });
 
+    $('#plate').keyup(function(){
+        let input = $(this);
+        if(input.val().length === 0) return false;
+        let oldVal = input.val().split('');
+        let newVal = [];
+        $.each(oldVal, function(index, char){
+            if(char.match(/[0-9]/)){
+                newVal.push(char);
+            }
+        });
+        input.val(newVal.join(''));
+
+        $.ajax({
+            cache: false,
+            dataType : 'json',
+            type : 'post',
+            data : {
+                '_token' : input.data('token'),
+                'value' : newVal.join('')
+            },
+            url : '/evoque/profile/checkPlate',
+            beforeSend : function(){
+                input.removeClass('is-invalid').removeClass('is-valid');
+                if($('#plate-img ~ .spinner-border').length === 0){
+                    $('#plate-img').after(getPreloaderHtml());
+                }
+            },
+            success : function(response){
+                if(response.data.isFree === true){
+                    input.addClass('is-valid').removeClass('is-invalid');
+                    $('#plate-img').attr('src', '/images/plates/'+response.data.value+'.png').show();
+                }else{
+                    input.addClass('is-invalid').removeClass('is-valid');
+                    $('#plate-img').attr('src', false).hide();
+                }
+                input.val(response.data.value);
+            },
+            complete : function(){
+                $('#plate-img ~ .spinner-border').remove();
+            }
+        });
+    });
+
     $('#tmp_link').keyup(function(){
         let value = $(this).val();
         let result = value.match(/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/);

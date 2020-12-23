@@ -5,7 +5,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <a class="navbar-brand" href="{{ route('home') }}">
-                <img src="/assets/img/EVOQUE_Gold_Sign_256.png" alt="@lang('general.vtc_evoque')">
+                <img src="/assets/img/EVOQUE_Gold_Sign_256_ny.png" alt="@lang('general.vtc_evoque')" style="height: 43px;">
             </a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-uppercase font-weight-bold text-shadow">

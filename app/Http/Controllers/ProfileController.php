@@ -35,10 +35,15 @@ class ProfileController extends Controller{
                 'city' => 'required|string',
                 'country' => 'required|string',
                 'birth_date' => 'required|date_format:d.m.Y',
+                'plate' => 'nullable|regex:/[0-9]{3}/',
             ]);
             $user = Auth::user();
             $user->fill($request->post());
             $user->birth_date = Carbon::parse($request->input('birth_date'))->format('Y-m-d');
+            if($user->member){
+                $user->member->plate = $request->input('plate');
+                $user->member->save();
+            }
             return $user->save() ?
                 redirect()->route('evoque.members')->with(['success' => 'Профиль успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
@@ -58,10 +63,28 @@ class ProfileController extends Controller{
             $user = User::findOrFail(Auth::user()->id);
             $user->image = $player['avatarfull'];
             return $user->save() ?
-                redirect()->route('evoque.profile')->with(['success' => 'Аватар успешно обновлён!']) :
+                redirect()->route('evoque.profile.edit')->with(['success' => 'Аватар успешно обновлён!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
+    public function checkPlate(Request $request){
+        if(!$request->ajax() && Auth::guest()) abort(404);
+
+        $value = $request->input('value');
+        if(strlen($value) === 1) $value = '00'.$value;
+        if(strlen($value) === 2) $value = '0'.$value;
+        $match = Member::where([
+            ['plate', '=', $value],
+            ['user_id', '!=', Auth::id()]
+        ])->first();
+        return response()->json([
+            'data' => [
+                'isFree' => $match ? false : true,
+                'value' => $value
+            ]
+        ]);
     }
 
 }

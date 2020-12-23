@@ -32,6 +32,7 @@ Route::get('/kb', 'KbController@index')->name('kb');
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
 Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');
+Route::post('/evoque/profile/checkPlate', 'ProfileController@checkPlate')->name('evoque.profile.checkPlate');
 Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.profile');
 
 Route::get('/evoque', 'MembersController@index')->name('evoque.members');

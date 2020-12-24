@@ -132,7 +132,7 @@
                                 </td>
                                 <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>
                                 <td class="plate-img p-0">
-                                    <img src="{{ $member->topRole() === 14 ? '/assets/img/u.png' : $member->plate }}">
+                                    <img src="{{ $member->topRole() === 14 ? '/assets/img/u.png' : '/images/plates/'.$member->plate.'.png' }}">
                                 </td>
                             </tr>
                         @endif

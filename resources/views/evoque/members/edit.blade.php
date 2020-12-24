@@ -47,7 +47,7 @@
                             @if($errors->has('plate'))
                                 <small class="form-text">{{ $errors->first('plate') }}</small>
                             @endif
-                            @isset($member->plate) <img class="mt-1" src="{{ $member->plate }}"> @endisset
+                            @isset($member->plate) <img class="mt-1" src="/images/plates/{{ $member->plate }}.png"> @endisset
                         </div>
                     </div>
                     <div class="col-md-6">

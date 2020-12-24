@@ -35,7 +35,7 @@ class ProfileController extends Controller{
                 'city' => 'required|string',
                 'country' => 'required|string',
                 'birth_date' => 'required|date_format:d.m.Y',
-                'plate' => 'nullable|regex:/[0-9]{3}/',
+                'plate' => 'uniquePlate|nullPlate|not_in:000,00,0',
             ]);
             $user = Auth::user();
             $user->fill($request->post());

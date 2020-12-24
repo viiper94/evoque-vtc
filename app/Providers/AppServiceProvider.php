@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Application;
 use App\Convoy;
+use App\Member;
 use App\Recruitment;
 use App\RpReport;
 use App\Tab;
@@ -35,6 +36,26 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Validator::extend('no_vk', function ($attribute, $value, $parameters, $validator) {
             return !stripos($value, 'userapi.com');
+        });
+
+        Validator::extend('nullPlate', function ($attribute, $value, $parameters, $validator) {
+            $member = Member::where('user_id', Auth::id())->first();
+            if($member->isTrainee()) return true;
+            else{
+                preg_match('%([0-9]{1,3})%', $value, $match);
+                return isset($value) && count($match) > 0;
+            }
+        });
+
+        Validator::extend('uniquePlate', function ($attribute, $value, $parameters, $validator) {
+            if (!isset($value)) return true;
+            if(strlen($value) === 1) $value = '00'.$value;
+            if(strlen($value) === 2) $value = '0'.$value;
+            $match = Member::where([
+                ['plate', '=', $value],
+                ['user_id', '!=', Auth::id()]
+            ])->first();
+            return $match ? false : true;
         });
 
         view()->composer('*', function($view){

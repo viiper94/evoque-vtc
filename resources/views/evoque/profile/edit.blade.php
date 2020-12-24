@@ -71,20 +71,23 @@
                     </div>
                 </div>
             </div>
-
             @if($user->member)
-                <div class="form-group">
-                    <label for="plate">Номерной знак</label>
-                    <div class="row m-0">
-                        <input type="text" class="form-control col" name="plate" id="plate" value="{{ $user->member->plate }}"
-                               maxlength="3" placeholder="Три цифры" data-token="{{ csrf_token() }}">
-                        @if($user->member->plate)
-                            <div class="col-auto pr-0">
-                                <img src="/images/plates/{{ $user->member->plate }}.png" id="plate-img" style="height: 38px;">
-                            </div>
-                        @endif
+                <div class="row">
+                    <div class="col-auto pr-0" style="width: 220px;">
+                        <label for="plate" class="d-block">Превью</label>
+                        <img src="/images/plates/{{ $user->member->plate ?? 'empty' }}.png" id="plate-img" style="height: 38px;">
                     </div>
-                    <small class="form-text">@if($errors->has('vk')){{ $errors->first('vk') }}@endif</small>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="plate">Номерной знак</label>
+                            <div class="row m-0">
+                                <input type="text" class="form-control col" name="plate" id="plate" value="{{ $user->member->plate }}"
+                                       maxlength="3" placeholder="Три цифры" data-token="{{ csrf_token() }}" @if(!$user->member->isTrainee()) required @endif>
+                                <button class="btn btn-outline-warning ml-1" type="button" id="check-plate-btn">Проверить</button>
+                            </div>
+                            <small class="form-text" id="plate-text">@if($errors->has('plate')){{ $errors->first('plate') }}@endif</small>
+                        </div>
+                    </div>
                 </div>
             @endif
             <div class="row text-center justify-content-center">

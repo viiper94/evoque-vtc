@@ -28,8 +28,9 @@ $(document).ready(function(){
         }
     });
 
-    $('#plate').keyup(function(){
-        let input = $(this);
+    $('#check-plate-btn').click(function(){
+        let input = $('#plate');
+        let btn = $(this);
         if(input.val().length === 0) return false;
         let oldVal = input.val().split('');
         let newVal = [];
@@ -59,9 +60,11 @@ $(document).ready(function(){
                 if(response.data.isFree === true){
                     input.addClass('is-valid').removeClass('is-invalid');
                     $('#plate-img').attr('src', '/images/plates/'+response.data.value+'.png').show();
+                    $('#plate-text').html('');
                 }else{
+                    $('#plate-text').html('Номер уже занят');
                     input.addClass('is-invalid').removeClass('is-valid');
-                    $('#plate-img').attr('src', false).hide();
+                    $('#plate-img').attr('src', '/images/plates/empty.png');
                 }
                 input.val(response.data.value);
             },

@@ -43,7 +43,7 @@ class MembersController extends Controller{
                 'join_date' => 'required|date_format:d.m.Y',
                 'convoys' => 'required|numeric',
                 'vacations' => 'required|numeric',
-                'plate' => 'no_vk|nullable|url'
+                'plate' => 'nullable|string'
             ]);
             $member = Member::with('role')->findOrFail($id);
             $this->authorize('update', Member::class);

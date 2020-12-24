@@ -42,8 +42,8 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="plate">Номерной знак (ссылка на изображение)</label>
-                            <input type="url" class="form-control" id="plate" name="plate" value="{{ $member->plate }}">
+                            <label for="plate">Номерной знак (три цифры)</label>
+                            <input type="text" class="form-control" id="plate" name="plate" value="{{ $member->plate }}">
                             @if($errors->has('plate'))
                                 <small class="form-text">{{ $errors->first('plate') }}</small>
                             @endif

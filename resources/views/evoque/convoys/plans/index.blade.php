@@ -26,7 +26,7 @@
         <table class="table table-dark table-hover text-center mb-0">
             <thead>
             <tr>
-                <th class="text-right">День</th>
+                <th class="text-right d-none d-md-block">День</th>
                 <th>Дата</th>
                 <th class="text-left">Конвои</th>
             </tr>
@@ -34,18 +34,23 @@
             <tbody>
             @foreach($days as $date => $day)
                 <tr @if($loop->iteration === 1) class="table-active" @endif>
-                    <td class="text-right">{{ $day['date']->isoFormat('dddd') }}</td>
-                    <td>{{ $date }}</td>
-                    <td class="text-left">
+                    <td class="text-right d-md-table-cell d-none">
+                        <span>{{ $day['date']->isoFormat('dddd') }}</span>
+                    </td>
+                    <td>
+                        <p class="d-block d-md-none">{{ $day['date']->isoFormat('dd') }}</p>
+                        {{ $date }}
+                    </td>
+                    <td class="text-left convoys">
                         @foreach($day['convoys'] as $type => $convoy)
                             @if($convoy)
-                                <p class="mb-1">
+                                <p class="my-2">
                                     {{ $convoy->getType() }} -
                                     <b class="text-primary">{{ $convoy->start_time->format('H:i') }}</b> -
                                     {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif
                                 </p>
                             @else
-                                <p class="mb-1">
+                                <p class="my-2">
                                     {{ \App\Convoy::getTypeByNum($type) }} -
                                     @can('quickBook', \App\Convoy::class)
                                         <a data-date="{{ $day['date']->format('d.m.Y') }}" data-toggle="modal" data-target="#book-modal" class="book-convoy text-primary">Забронировать конвой</a>
@@ -66,27 +71,27 @@
     <hr class="m-auto w-25 border-primary">
     <section class="features lead-rules text-center row pt-5 pb-5 justify-content-around">
         <h2 class="col-12 mb-3">Правила для ETS2</h2>
-        <div class="feature col-lg-2 col-sm-4 col-sm-12">
+        <div class="feature col-lg-2 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">SIM</h1>
             <hr class="m-auto pb-3">
             <p>2000+ км</p>
         </div>
-        <div class="feature col-lg-2 col-sm-12">
+        <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">ARC</h1>
             <hr class="m-auto pb-3">
             <p>2500+ км</p>
         </div>
-        <div class="feature col-lg-2 col-sm-12">
+        <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Тяжёлые грузы</h2>
             <hr class="m-auto pb-3">
             <p>1500+ км</p>
         </div>
-        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+        <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
             <hr class="m-auto pb-3">
             <p>SIM: 2200+ км<br>ARC: 2700+ км</p>
         </div>
-        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+        <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
             <hr class="m-auto pb-3">
             <p>SIM: 100 км/ч<br>ARC: 150 км/ч</p>
@@ -94,27 +99,27 @@
     </section>
     <section class="features lead-rules text-center row justify-content-around">
         <h2 class="col-12 mb-3">Правила для ATS</h2>
-        <div class="feature col-lg-2 col-sm-4 col-sm-12">
+        <div class="feature col-lg-2 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">SIM</h1>
             <hr class="m-auto pb-3">
             <p>2100+ км</p>
         </div>
-        <div class="feature col-lg-2 col-sm-12">
+        <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">ARC</h1>
             <hr class="m-auto pb-3">
             <p>2600+ км</p>
         </div>
-        <div class="feature col-lg-2 col-sm-12">
+        <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Тяжёлые грузы</h2>
             <hr class="m-auto pb-3">
             <p>1500+ км</p>
         </div>
-        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+        <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
             <hr class="m-auto pb-3">
             <p>SIM: 2500+ км<br>ARC: 2700+ км</p>
         </div>
-        <div class="feature col-lg-3 col-sm-4 col-sm-12">
+        <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
             <hr class="m-auto pb-3">
             <p>SIM: 115 км/ч<br>ARC: 150 км/ч</p>

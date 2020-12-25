@@ -19,4 +19,9 @@
             }
         }
     }
+    &.dropleft{
+        .dropdown-toggle:before{
+            display: none;
+        }
+    }
 }

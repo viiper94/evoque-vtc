@@ -16,8 +16,8 @@
         <div class="convoys mt-3 mb-5">
             @foreach($convoys as $day => $convoys_per_day)
                 <div class="row flex-column flex-md-row">
-                    <h1 class="text-primary text-md-right text-center col-auto mt-5 p-0 convoys-day">{{ $day }}</h1>
-                    <div class="row col convoys-list m-0 p-0 my-0 my-md-3 mx-md-5 px-md-0">
+                    <h1 class="text-primary text-md-right text-center col-md-auto mt-md-5 mt-3 p-0 convoys-day">{{ $day }}</h1>
+                    <div class="row col-md convoys-list m-0 p-0 my-0 my-md-3 mx-md-5 px-md-0">
                         @foreach($convoys_per_day as $convoy)
                             <div class="card card-dark text-shadow-m my-md-2 ml-md-5 col-12 px-md-0
                                 @if($convoy->public && $convoy->isUpcoming()) border-primary
@@ -34,12 +34,12 @@
                                         <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}">{{ $convoy->title }}</a>
                                     </div>
                                     @can('update', \App\Convoy::class)
-                                        <div class="dropdown dropdown-dark col-auto px-0">
+                                        <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                             <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
                                                 <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Редактировать</a>
                                                 @if(!$convoy->visible)
                                                     <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Опубликовать</a>
@@ -67,6 +67,7 @@
                         @endforeach
                     </div>
                 </div>
+                <div class="clearfix"></div>
             @endforeach
         </div>
     </div>

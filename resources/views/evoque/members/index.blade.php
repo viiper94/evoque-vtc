@@ -123,7 +123,11 @@
                                         <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank" class="mr-3"><i class="fab fa-steam-square"></i></a>
                                     @endisset
                                     @isset($member->user->truckersmp_id)
-                                        <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
+                                        <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}"
+                                           target="_blank" @if($member->isBanned()) class="text-danger" data-toggle="popover"
+                                           data-trigger="hover" data-content=" Забанен до {{ $member->tmp_banned_until->isoFormat('DD.MM.YYYY, HH:MM') }}" @endif>
+                                            <i class="fas fa-truck-pickup"></i>
+                                        </a>
                                     @endisset
                                     @if(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Member::class) ||
                                             \Illuminate\Support\Facades\Auth::user()->can('updateRpStats', \App\Member::class))

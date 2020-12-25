@@ -16,6 +16,7 @@ class Member extends Model implements Auditable{
     ];
 
     protected $dates = [
+        'tmp_banned_until',
         'on_vacation_till',
         'trainee_until',
         'join_date',
@@ -94,6 +95,10 @@ class Member extends Model implements Auditable{
                 }
             }
         }
+    }
+
+    public function isBanned(){
+        return isset($this->tmp_banned_until) && $this->tmp_banned_until->isFuture();
     }
 
 }

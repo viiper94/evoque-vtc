@@ -132,7 +132,13 @@
                                 </td>
                                 <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>
                                 <td class="plate-img p-0">
-                                    <img src="{{ $member->topRole() === 14 ? '/assets/img/u.png' : '/images/plates/'.$member->plate.'.png' }}">
+                                    @if($member->isTrainee())
+                                        <img src="/assets/img/u.png">
+                                    @elseif($member->plate)
+                                        <img src="/images/plates/{{ $member->plate }}.png">
+                                    @else
+                                        <img src="/images/plates/empty.png">
+                                    @endif
                                 </td>
                             </tr>
                         @endif

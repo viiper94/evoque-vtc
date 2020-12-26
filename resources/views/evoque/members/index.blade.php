@@ -141,6 +141,10 @@
                                                     <i class="fas fa-truck-pickup"></i>
                                                 </a>
                                             @endif
+                                        @else
+                                            <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}">
+                                                <i class="fas fa-truck-pickup"></i>
+                                            </a>
                                         @endcan
                                     @endisset
                                     @if(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Member::class) ||

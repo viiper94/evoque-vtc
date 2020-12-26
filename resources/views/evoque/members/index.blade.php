@@ -123,11 +123,25 @@
                                         <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank" class="mr-3"><i class="fab fa-steam-square"></i></a>
                                     @endisset
                                     @isset($member->user->truckersmp_id)
-                                        <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}"
-                                           target="_blank" @if($member->isBanned()) class="text-danger" data-toggle="popover"
-                                           data-trigger="hover" data-content=" Забанен до {{ $member->tmp_banned_until->isoFormat('DD.MM.YYYY, HH:MM') }}" @endif>
-                                            <i class="fas fa-truck-pickup"></i>
-                                        </a>
+                                        @can('seeBans', \App\Member::class)
+                                            @if($member->tmp_bans_hidden)
+                                                <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}"
+                                                   target="_blank" class="text-warning" data-toggle="popover" data-trigger="hover"
+                                                   data-content="История банов скрыта">
+                                                    <i class="fas fa-truck-pickup"></i>
+                                                </a>
+                                            @elseif($member->isBanned())
+                                                <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}"
+                                                   target="_blank" class="text-danger" data-toggle="popover" data-trigger="hover"
+                                                   data-content="Забанен до {{ $member->tmp_banned_until->isoFormat('DD.MM.YYYY, HH:MM') }}">
+                                                    <i class="fas fa-truck-pickup"></i>
+                                                </a>
+                                            @else
+                                                <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}">
+                                                    <i class="fas fa-truck-pickup"></i>
+                                                </a>
+                                            @endif
+                                        @endcan
                                     @endisset
                                     @if(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Member::class) ||
                                             \Illuminate\Support\Facades\Auth::user()->can('updateRpStats', \App\Member::class))

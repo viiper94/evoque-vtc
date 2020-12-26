@@ -101,4 +101,14 @@ class MemberPolicy
         }
         return false;
     }
+
+    public function seeBans(User $user){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_members || $role->fire_members) return true;
+            }
+        }
+        return true;
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use TruckersMP\APIClient\Client;
 
 class Member extends Model implements Auditable{
 
@@ -13,6 +14,8 @@ class Member extends Model implements Auditable{
     protected $casts = [
         'visible' => 'boolean',
         'sort' => 'boolean',
+        'tmp_banned' => 'boolean',
+        'tmp_bans_hidden' => 'boolean',
     ];
 
     protected $dates = [
@@ -98,7 +101,28 @@ class Member extends Model implements Auditable{
     }
 
     public function isBanned(){
-        return isset($this->tmp_banned_until) && $this->tmp_banned_until->isFuture();
+        return $this->tmp_banned;
+    }
+
+    public static function checkBans(){
+        $members = Member::with(['user' => function($query){
+            $query->whereNotNull('truckersmp_id');
+        }])->get();
+        $tmp = new Client();
+        foreach($members as $member){
+            $player = $tmp->player($member->user->truckersmp_id)->get();
+            if($player->hasBansHidden()){
+                $member->tmp_bans_hidden = true;
+            }else{
+                $member->tmp_bans_hidden = false;
+            }
+            if($player->isBanned()){
+                $member->tmp_banned_until = $player->getBannedUntilDate()->format('Y-m-d H:i');
+                $member->tmp_banned = true;
+                $member->save();
+            }
+            $member->save();
+        }
     }
 
 }

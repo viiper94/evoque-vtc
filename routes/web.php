@@ -36,6 +36,7 @@ Route::post('/evoque/profile/checkPlate', 'ProfileController@checkPlate')->name(
 Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.profile');
 
 Route::get('/evoque', 'MembersController@index')->name('evoque.members');
+Route::get('/evoque/check', 'MembersController@check')->name('evoque.check');
 Route::post('/evoque/add', 'MembersController@add');
 Route::get('/evoque/reset', 'MembersController@resetConvoys');
 Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');

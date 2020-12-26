@@ -351,8 +351,8 @@ class Convoy extends Model{
 
     public function setTypeByTime(){
         $convoy_date = $this->start_time->format('Y-m-d');
-        $morning_convoy_end = Carbon::parse($convoy_date . ' 12:30');
-        $day_convoy_start = Carbon::parse($convoy_date . ' 13:00');
+        $morning_convoy_end = Carbon::parse($convoy_date . ' 11:00');
+        $day_convoy_start = Carbon::parse($convoy_date . ' 11:30');
         $day_convoy_end = Carbon::parse($convoy_date . ' 17:00');
         $evening_convoy_start = Carbon::parse($convoy_date . ' 17:30');
         $evening_convoy_end = Carbon::parse($convoy_date . ' 20:30');

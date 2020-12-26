@@ -105,10 +105,10 @@ class MemberPolicy
     public function seeBans(User $user){
         if($user->member){
             foreach($user->member->role as $role){
-                if($role->manage_members || $role->fire_members) return true;
+                if($role->manage_members || $role->see_bans) return true;
             }
         }
-        return true;
+        return false;
     }
 
 }

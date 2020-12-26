@@ -29,6 +29,7 @@ class RolesController extends Controller{
             $role->fire_members = $request->input('fire_members') == 'on';
             $role->set_members_activity = $request->input('set_members_activity') == 'on';
             $role->reset_members_activity = $request->input('reset_members_activity') == 'on';
+            $role->see_bans = $request->input('see_bans') == 'on';
 
             $role->manage_applications = $request->input('manage_applications') == 'on';
             $role->view_recruitments = $request->input('view_recruitments') == 'on';

@@ -83,6 +83,10 @@
                             <input type="checkbox" class="custom-control-input" id="reset_members_activity" name="reset_members_activity" @if($role->reset_members_activity)checked @endif>
                             <label class="custom-control-label" for="reset_members_activity">Сбрасывать посещения через таблицу</label>
                         </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="see_bans" name="see_bans" @if($role->see_bans)checked @endif>
+                            <label class="custom-control-label" for="see_bans">Видеть баны сотрудников в таблице</label>
+                        </div>
                     </div>
 
                     <div class="col-md-6 mb-3">

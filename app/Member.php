@@ -119,7 +119,9 @@ class Member extends Model implements Auditable{
             if($player->isBanned()){
                 $member->tmp_banned_until = $player->getBannedUntilDate()->format('Y-m-d H:i');
                 $member->tmp_banned = true;
-                $member->save();
+            }else{
+                $member->tmp_banned_until = null;
+                $member->tmp_banned = false;
             }
             $member->save();
         }

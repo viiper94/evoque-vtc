@@ -114,6 +114,9 @@ $(document).ready(function(){
                     $('.steam-row').show();
                     if(response.steam_games.ats) $('#have_ats').prop('checked', true);
                     button.data('checked', '1');
+                    if($('#rules_agreed').prop('checked') && $('#requirements_agreed').prop('checked')){
+                        $('#submit_btn').prop('disabled', false).removeClass('disabled');
+                    }
                 }
             },
             complete : function(){

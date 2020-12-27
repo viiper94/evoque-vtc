@@ -24,7 +24,7 @@ class Steam extends Model{
 
     private function getUsersGames($steamid64){
         $json = json_decode(file_get_contents('http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key='.$this->key.'&steamid='.$steamid64.'&format=json'));
-        if(count($json->response->games) > 0){
+        if(property_exists($json->response, 'games') && count($json->response->games) > 0){
             return collect($json->response->games);
         }else{
             return false;
@@ -35,6 +35,7 @@ class Steam extends Model{
         $games = $this->getUsersGames($steamid64);
         $ets2 = null;
         $ats = null;
+        if(!$games) return ['ets2' => null, 'ats' => null];
         foreach($games as $game){
             if($game->appid == '227300'){
                 $ets2 = floor(intval($game->playtime_forever)/60);

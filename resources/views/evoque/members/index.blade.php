@@ -124,16 +124,10 @@
                                     @endisset
                                     @isset($member->user->truckersmp_id)
                                         @can('seeBans', \App\Member::class)
-                                            @if($member->tmp_bans_hidden)
-                                                <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}"
-                                                   target="_blank" class="text-warning" data-toggle="popover" data-trigger="hover"
-                                                   data-content="История банов скрыта">
-                                                    <i class="fas fa-truck-pickup"></i>
-                                                </a>
-                                            @elseif($member->isBanned())
+                                            @if($member->isBanned())
                                                 <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}"
                                                    target="_blank" class="text-danger" data-toggle="popover" data-trigger="hover"
-                                                   data-content="Забанен до {{ $member->tmp_banned_until->isoFormat('DD.MM.YYYY, HH:MM') }}">
+                                                   data-content="Забанен {{ isset($member->tmp_banned_until) ? 'до '.$member->tmp_banned_until->isoFormat('DD.MM.YYYY, HH:MM') : 'перманентно!' }}">
                                                     <i class="fas fa-truck-pickup"></i>
                                                 </a>
                                             @else

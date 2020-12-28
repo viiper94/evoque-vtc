@@ -104,10 +104,16 @@ class MembersController extends Controller{
                     'status' => 'OK'
                 ]);
             }elseif($request->input('target') === 'посещение'){
-                $convoys = $member->convoys;
-                $member->convoys += 1;
+                if($member->isTrainee()){
+                    $convoys = $member->trainee_convoys;
+                    $member->trainee_convoys += 1;
+                    $member->convoys += 1;
+                }else{
+                    $convoys = $member->convoys;
+                    $member->convoys += 1;
+                }
                 return response()->json([
-                    'scores' => $member->save() ? $member->convoys : $convoys,
+                    'scores' => $member->save() ? ($member->isTrainee() ? $member->trainee_convoys : $member->convoys ) : $convoys,
                     'status' => 'OK'
                 ]);
             }

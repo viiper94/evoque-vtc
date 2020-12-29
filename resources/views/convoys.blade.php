@@ -28,9 +28,16 @@
 @section('content')
 
 <div class="container pt-5">
+    @include('layout.alert')
     @if($convoy)
-        <h1 class="convoy-title text-center pt-5 pb-5">{{ $convoy->title }} {{ $convoy->start_time->isoFormat('L') }}</h1>
-        <div class="row mb-5">
+        <h1 class="convoy-title text-center pt-5">{{ $convoy->title }} {{ $convoy->start_time->isoFormat('L') }}</h1>
+        @can('update', \App\Convoy::class)
+            <div class="row justify-content-center">
+                <a href="{{ route('convoy.discord', $convoy->id) }}" class="btn btn-sm btn-outline-warning"
+                    onclick="return confirm('Запостить регламент?')">Запостить регламент в Дискорд</a>
+            </div>
+        @endcan
+        <div class="row mb-5 pt-5">
             <section class="convoy-info col-md-6 col-sm-12 text-right">
                 <ul>
                     <li class="row justify-content-end">

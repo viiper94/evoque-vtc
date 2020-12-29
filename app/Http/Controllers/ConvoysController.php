@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use TruckersMP\APIClient\Client;
 
@@ -479,6 +480,119 @@ class ConvoysController extends Controller{
             'members' => Member::where('id', Auth::user()->member->id)->get(),
             'dlc' => $this->dlcList
         ]);
+    }
+
+    public function toDiscord($convoy_id){
+        $this->authorize('update', Convoy::class);
+
+        $convoy = Convoy::find($convoy_id);
+
+        $fields = [
+            [
+                'name' => 'Место старта',
+                'value' => $convoy->start_city.' - '. $convoy->start_company,
+                'inline' => true
+            ],
+            [
+                'name' => 'Место отдыха',
+                'value' => $convoy->rest_city.' - '. $convoy->rest_company,
+                'inline' => true
+            ],
+            [
+                'name' => 'Место финиша',
+                'value' => $convoy->finish_city.' - '. $convoy->finish_company,
+                'inline' => true
+            ],
+            [
+                'name' => 'Встречаемся на сервере',
+                'value' => $convoy->server
+            ],
+            [
+                'name' => 'Начало конвоя',
+                'value' => $convoy->start_time->subMinutes(30)->format('H:i') . ' по МСК',
+                'inline' => true
+            ],
+            [
+                'name' => 'Выезд с места старта',
+                'value' => $convoy->start_time->format('H:i') . ' по МСК',
+                'inline' => true
+            ]
+        ];
+        if($convoy->dlc){
+            array_push($fields, [
+                'name' => ':warning: Для участия требуется '. implode(', ', $convoy->dlc),
+                'value' => "> *Выставив маршрут, ваша поездка будет комфортной и спокойной!*",
+            ]);
+        }
+        array_push($fields, [
+            'name' => 'Связь ведём через '. $convoy->communication,
+            'value' => $convoy->getCommunicationLink(),
+            'inline' => true
+        ]);
+        array_push($fields, [
+            'name' => 'Канал на сервере',
+            'value' => 'Открытый конвой',
+            'inline' => true
+        ]);
+        array_push($fields, [
+            'name' => '> *В колонне держим дистанцию не менее 70 метров по TAB и соблюдаем правила TruckersMP. Помимо рации, флуд, мат, а так же фоновая музыка запрещены и в голосовом канале Discord.*',
+            'value' => '___',
+        ]);
+        if(isset($convoy->truck) && $convoy->truck_public){
+            array_push($fields, [
+                'name' => 'Тягач',
+                'value' => $convoy->truck,
+            ]);
+        }
+        if(isset($convoy->trailer) && $convoy->trailer_public){
+            array_push($fields, [
+                'name' => 'Прицеп',
+                'value' => $convoy->trailer,
+                'inline' => true
+            ]);
+            if(isset($convoy->cargo)){
+                array_push($fields, [
+                    'name' => 'Груз',
+                    'value' => $convoy->cargo,
+                    'inline' => true
+                ]);
+            }
+            array_push($fields, [
+                'name' => '> *Один груз — одна большая команда!*',
+                'value' => '___',
+            ]);
+        }
+        array_push($fields, [
+            'name' => 'Маршрут',
+            'value' => Url::to('/').'/images/convoys/'.$convoy->route[0]
+        ]);
+
+        $curl = curl_init('https://discord.com/api/webhooks/727068749601046530/2CJ_k6ML8Iflt2i_YRv_RbYNFKdgwcY1IjRZcvc-kC5KWJiQiVjkwm3iHtdFD7AYC5Bb');
+        curl_setopt_array($curl, [
+            CURLOPT_HTTPHEADER => [
+                "Content-Type: application/json"
+            ],
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode([
+                'embeds' => [
+                    [
+                        'title' => $convoy->title,
+                        'type' => 'rich',
+                        'url' => route('convoy.public'),
+                        'color' => 14992641,
+                        'footer' => [
+                            'text' => 'ВТК EVOQUE'
+                        ],
+                        'image' => [
+                            'url' => Url::to('/').'/images/convoys/'.$convoy->route[0]
+                        ],
+                        'fields' => $fields
+                    ]
+                ]
+            ])
+        ]);
+        return curl_exec($curl) ? redirect()->back()->with(['success' => 'Конвой успешно запощен в Дискорде!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

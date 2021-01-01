@@ -6,7 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'TrafficCophp' => array($vendorDir . '/trafficcophp/bytebuffer/src'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
-    'Evenement' => array($vendorDir . '/evenement/evenement/src'),
 );

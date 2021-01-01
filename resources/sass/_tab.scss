@@ -9,3 +9,12 @@
         }
     }
 }
+.tabs{
+    .card{
+        width: 400px;
+        max-height: 550px;
+        .card-body{
+            overflow: hidden;
+        }
+    }
+}

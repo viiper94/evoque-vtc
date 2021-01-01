@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="container pt-5">
+    <div class="container-fluid pt-5">
         @include('layout.alert')
         @can('viewAny', \App\Tab::class)
             <h2 class="mt-3 text-primary text-center">Все скрин TAB</h2>
@@ -20,7 +20,7 @@
         @endcan
         <div class="tabs mt-3 mb-5 row justify-content-around">
             @foreach($tabs as $tab)
-                <div class="card card-dark text-shadow-m col-md-5 m-3 px-0 @if($tab->status == 1)border-success @elseif($tab->status == 1) border-danger @else border-primary @endif">
+                <div class="card card-dark text-shadow-m col-auto m-3 px-0 @if($tab->status == 1)border-success @elseif($tab->status == 1) border-danger @else border-primary @endif">
                     <h5 class="card-header">
                         {{ $tab->convoy_title }}
                         @if($tab->status == 0)

@@ -17,6 +17,8 @@
                 @endcan
             </a>
         </div>
+    </div>
+    <div class="container-fluid">
         @if(count($applications) > 0)
             <div class="applications pt-5 pb-5 row">
                 @foreach($applications as $application)
@@ -38,7 +40,9 @@
                             <p class="mb-0">Микрофон: @if($application->have_mic) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
                             <p class="mb-0">Discord: @if($application->have_ts3) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
                             <p>Наличие ATS: @if($application->have_ats) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
-                            <p>Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
+                            @if(isset($application->referral))
+                                <p class="referral">Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
+                            @endif
                             <span class="text-muted">{{ $application->created_at->isoFormat('LLL') }}</span>
                         </div>
                         <div class="card-actions">

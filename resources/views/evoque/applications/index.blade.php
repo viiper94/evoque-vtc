@@ -34,6 +34,8 @@
                 </a>
             </div>
         @endcan
+    </div>
+    <div class="container-fluid">
         @if(count($apps) > 0)
             <div class="applications pt-5 pb-5 row">
                 @foreach($apps as $app)
@@ -91,9 +93,6 @@
                             @can('claim', $app)
                                 <a href="{{ route('evoque.applications', $app->id) }}" class="btn btn-outline-primary my-1">Смотреть</a>
                             @endcan
-{{--                            @can('update', $app)--}}
-{{--                                <a href="{{ route('evoque.applications.edit', $app->id) }}" class="btn btn-outline-primary my-1">Редактировать</a>--}}
-{{--                            @endcan--}}
                             @can('delete', $app)
                                 <a href="{{ route('evoque.applications.delete', $app->id) }}" class="btn btn-outline-danger my-1"
                                    onclick="return confirm('Удалить эту заявку?')">Удалить</a>
@@ -101,8 +100,8 @@
                         </div>
                     </div>
                 @endforeach
-                {{ $apps->links('layout.pagination') }}
             </div>
+            {{ $apps->links('layout.pagination') }}
         @else
             <div class="row justify-content-center pt-5 pb-5">
                 <h5>Еще нет заявок</h5>

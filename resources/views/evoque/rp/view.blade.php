@@ -18,6 +18,14 @@
         <h2 class="mt-3 text-primary">Прием отчёта от {{ $report->member->nickname }}</h2>
         <form method="post">
             @csrf
+            @if($report->note)
+                <div class="row">
+                    <p class="mb-0 text-primary font-weight-bold col-12">Дополнительная информация</p>
+                    <div class="col-12">
+                        @markdown($report->note)
+                    </div>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-9">
                     <div class="fotorama w-100" data-allowfullscreen="true" data-fit="cover" data-nav="thumbs">
@@ -52,12 +60,6 @@
                             <small class="form-text">{{ $errors->first('level') }}</small>
                         @endif
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <p class="mb-0 text-primary font-weight-bold col-12">Дополнительная информация</p>
-                <div class="col-12">
-                    @markdown($report->note)
                 </div>
             </div>
             <hr class="border-primary">

@@ -1,6 +1,7 @@
 // RP reports
 .rp-reports{
     .card{
+        max-width: 550px;
         ol, ul{
             color: $primary-text;
             margin-left: 1.5rem;

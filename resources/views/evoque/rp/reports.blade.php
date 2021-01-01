@@ -23,9 +23,11 @@
                 <a href="{{ route('evoque.rp.reports.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Новый отчет</a>
             </div>
         @endcan
-        <div class="rp-reports pt-3 pb-5">
+    </div>
+    <div class="container-fluid">
+        <div class="rp-reports pt-3 pb-5 row justify-content-around">
             @foreach($reports as $report)
-                <div class="card card-dark text-shadow-m m-3 p-0
+                <div class="card card-dark col-auto text-shadow-m m-3 p-0
                         @if($report->status === 0) border-primary
                         @elseif($report->status === 1) border-success
                         @else border-danger @endif">
@@ -57,7 +59,7 @@
                         <div class="row">
                             <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="600">
                                 @foreach($report->images as $image)
-                                    <img src="/images/rp/{{ $image }}">
+                                    <img src="/images/rp/{{ $image }}" style="max-width: 100%">
                                 @endforeach
                             </div>
                         </div>

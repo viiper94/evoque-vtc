@@ -12,12 +12,21 @@
                 color: $primary-text;
             }
         }
-        &.new .card-text {
+        & .referral{
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+        }
+        & .card-text {
             overflow: hidden;
             text-overflow: ellipsis;
             b{
-                color: $primary;
+                white-space: nowrap;
             }
+        }
+        &.new .card-text b{
+            color: $primary;
         }
         i{
             font-size: 25px;

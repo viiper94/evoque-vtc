@@ -17,9 +17,9 @@
         <form method="post">
             @csrf
             <div class="row">
-                <div class="col-auto">
+                <div class="col-12 col-sm-auto text-center text-sm-left">
                     <label>Аватар</label>
-                    <img src="{{ $user->image }}" alt="{{ $user->name }}" class="text-shadow-m d-block">
+                    <img src="{{ $user->image }}" alt="{{ $user->name }}" class="text-shadow-m d-block m-auto">
                     <a href="{{ route('evoque.profile.updateAvatar') }}" class="btn btn-sm btn-outline-warning my-1"><i class="fab fa-steam"></i> Загрузить Steam аватар</a>
                 </div>
                 <div class="col">
@@ -77,7 +77,7 @@
                         <label for="plate" class="d-block">Превью</label>
                         <img src="/images/plates/{{ $user->member->plate ?? 'empty' }}.png" id="plate-img" style="height: 38px;">
                     </div>
-                    <div class="col">
+                    <div class="col" style="min-width: 200px;">
                         <div class="form-group">
                             <label for="plate">Номерной знак</label>
                             <div class="row m-0">

@@ -134,8 +134,10 @@
         color: $primary;
     }
     .convoy-info {
-        & > div:first-child{
-            border-right: 1px solid $primary;
+        @media (min-width: 576px) {
+            & > div:first-child{
+                border-right: 1px solid $primary;
+            }
         }
         img{
             width: 100%;

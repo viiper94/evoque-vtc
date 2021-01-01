@@ -339,7 +339,7 @@ class Convoy extends Model{
         return self::getTypeByNum($this->type);
     }
 
-    public static function getTypeByNum($num){
+    public static function getTypeByNum($num): string{
         switch($num){
             case '0' : return 'дневной';
             case '2' : return 'ночной';
@@ -349,7 +349,7 @@ class Convoy extends Model{
         }
     }
 
-    public function setTypeByTime(){
+    public function setTypeByTime(): bool{
         $convoy_date = $this->start_time->format('Y-m-d');
         $morning_convoy_end = Carbon::parse($convoy_date . ' 11:00');
         $day_convoy_start = Carbon::parse($convoy_date . ' 11:30');
@@ -375,4 +375,9 @@ class Convoy extends Model{
     public function setCommentAttribute($value){
         $this->attributes['comment'] = isset($value) ? str_replace(PHP_EOL, '  '.PHP_EOL, $value) : null;
     }
+
+    public function isFulfilled(): bool{
+        return $this->start_city ? true : false;
+    }
+
 }

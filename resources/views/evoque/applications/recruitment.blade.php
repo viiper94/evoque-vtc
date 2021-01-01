@@ -57,6 +57,7 @@
                     </div>
                 @endforeach
             </div>
+            {{ $applications->links('layout.pagination') }}
         @else
             <div class="row justify-content-center pt-5 pb-5">
                 <h5>Еще нет заявок</h5>

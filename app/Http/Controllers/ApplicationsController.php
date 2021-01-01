@@ -46,7 +46,7 @@ class ApplicationsController extends Controller{
             ]);
         }
         return view('evoque.applications.recruitment', [
-            'applications' => Recruitment::orderBy('created_at', 'desc')->get(),
+            'applications' => Recruitment::orderBy('created_at', 'desc')->paginate(15),
             'apps' => Application::where('status', 0)->count()
         ]);
     }

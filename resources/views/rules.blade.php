@@ -14,7 +14,7 @@
                 <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§{{ $paragraph->paragraph }} </h1>
                 <h1 class="paragraph-title pl-md-5 pl-sm-1">{{ $paragraph->title }}
                 </h1>
-                <blockquote class="blockquote pl-md-5">
+                <blockquote class="blockquote pl-md-5 markdown-content">
                     @markdown($paragraph->text)
                     <p>
                         @can('update', \App\Rules::class)

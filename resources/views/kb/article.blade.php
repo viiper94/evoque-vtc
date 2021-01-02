@@ -31,7 +31,7 @@
             @endif
         @endcan
         <h1 class="text-primary my-3">{{ $article->title }}</h1>
-        <section class="article-content">
+        <section class="article-content markdown-content">
             @markdown($article->article)
         </section>
         @can('update', $article)

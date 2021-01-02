@@ -27,7 +27,9 @@
                         <div class="card-body">
                             @if($application->comment)
                                 <p class="mb-0 pt-3">Комментарий от администратора: </p>
-                                @markdown($application->comment)
+                                <div class="markdown-content">
+                                    @markdown($application->comment)
+                                </div>
                             @endif
                             <p>
                                 <a class="mr-3" href="{{ $application->vk_link }}" target="_blank"><i class="fab fa-vk"></i></a>

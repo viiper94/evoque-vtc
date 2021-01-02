@@ -59,7 +59,9 @@
                             @endif
                             @if($app->comment)
                                 <p class="mb-0 pt-3">Комментарий от администратора: </p>
-                                @markdown($app->comment)
+                                <div class="markdown-content">
+                                    @markdown($app->comment)
+                                </div>
                             @endif
                             @switch($app->category)
                                 @case(1)

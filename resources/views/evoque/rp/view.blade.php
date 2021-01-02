@@ -21,7 +21,7 @@
             @if($report->note)
                 <div class="row">
                     <p class="mb-0 text-primary font-weight-bold col-12">Дополнительная информация</p>
-                    <div class="col-12">
+                    <div class="col-12 markdown-content">
                         @markdown($report->note)
                     </div>
                 </div>

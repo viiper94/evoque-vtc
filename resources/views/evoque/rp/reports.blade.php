@@ -50,11 +50,15 @@
                     <div class="card-body">
                         @if($report->note)
                             <p class="font-weight-bold text-primary mt-2 mb-0">Дополнительная информация:</p>
-                            @markdown($report->note)
+                            <div class="markdown-content">
+                                @markdown($report->note)
+                            </div>
                         @endif
                         @if($report->comment)
                             <p class="font-weight-bold text-primary mt-2 mb-0">Комментарий от {{ $report->comment_by }}:</p>
-                            @markdown($report->comment)
+                            <div class="markdown-content">
+                                @markdown($report->comment)
+                            </div>
                         @endif
                         <div class="row">
                             <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="600">

@@ -147,7 +147,7 @@
                                             </section>
                                             @if(isset($convoy->comment))
                                                 <section class="col-12 convoy-note m-auto pb-5">
-                                                    <blockquote class="blockquote pb-5 text-center">
+                                                    <blockquote class="blockquote pb-5 text-center markdown-content">
                                                         @markdown($convoy->comment)
                                                     </blockquote>
                                                     <hr class="m-auto">

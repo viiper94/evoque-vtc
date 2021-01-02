@@ -37,7 +37,7 @@
                             <p>
                                 Ведущий: <b>{{ $tab->lead->nickname }}</b>
                             </p>
-                            <p class="text-primary">{!! nl2br($tab->description) !!}</p>
+                            <p class="text-primary markdown-content">{!! nl2br($tab->description) !!}</p>
                             <a href="/images/convoys/tab/{{ $tab->screenshot }}" target="_blank"><img class="w-100 text-shadow-m" src="/images/convoys/tab/{{ $tab->screenshot }}"></a>
                         </div>
                     </div>

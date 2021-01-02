@@ -27,7 +27,7 @@
     <div class="container-fluid">
         <div class="rp-reports pt-3 pb-5 row justify-content-around">
             @foreach($reports as $report)
-                <div class="card card-dark col-auto text-shadow-m m-3 p-0
+                <div class="card card-dark col-12 col-md-auto text-shadow-m m-3 p-0
                         @if($report->status === 0) border-primary
                         @elseif($report->status === 1) border-success
                         @else border-danger @endif">

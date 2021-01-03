@@ -34,6 +34,7 @@ class Controller extends BaseController{
                     'name' => $tmp_data->getName(),
                     'steamid64' => $tmp_data->getSteamID64(),
                     'vtc' => $tmp_data->getCompanyId(),
+                    'tmp_join_date' => $tmp_data->getJoinDate()->format('Y-m-d'),
                 ],
                 'steam_data' => $steam->getPlayerData($tmp_data->getSteamID64()),
                 'steam_games' => $steam->getSCSGamesData($tmp_data->getSteamID64())

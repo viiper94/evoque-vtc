@@ -14,6 +14,13 @@ class Recruitment extends Model{
         'have_ats' => 'boolean',
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'tmp_join_date'
+    ];
+
     protected $fillable = [
         'name',
         'nickname',
@@ -24,7 +31,8 @@ class Recruitment extends Model{
         'tmp_link',
         'have_mic',
         'have_ts3',
-        'have_ats'
+        'have_ats',
+        'tmp_join_date'
     ];
 
     public function setCommentAttribute($value){

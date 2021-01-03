@@ -96,6 +96,22 @@ class RpReportPolicy
      * @return mixed
      */
     public function accept(User $user, RpReport $rpReport){
+        if($user->member && $rpReport->status == 0 && $rpReport->member){
+            foreach($user->member->role as $role){
+                if($role->manage_rp || $role->accept_reports) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can accept the model.
+     *
+     * @param  \App\User  $user
+     * @param  \App\RpReport  $rpReport
+     * @return mixed
+     */
+    public function decline(User $user, RpReport $rpReport){
         if($user->member && $rpReport->status == 0){
             foreach($user->member->role as $role){
                 if($role->manage_rp || $role->accept_reports) return true;

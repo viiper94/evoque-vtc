@@ -111,6 +111,7 @@ $(document).ready(function(){
                     $('#steam_link').val(response.steam_data.profileurl);
                     $('#nickname').val(response.tmp_data.name);
                     $('#hours_played').val(response.steam_games.ets2);
+                    $('#tmp_join_date').val(response.tmp_data.tmp_join_date);
                     $('.steam-row').show();
                     if(response.steam_games.ats) $('#have_ats').prop('checked', true);
                     button.data('checked', '1');

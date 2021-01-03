@@ -2,6 +2,21 @@
 .rp-reports{
     .card{
         max-width: 550px;
+        .card-header{
+            flex-wrap: nowrap;
+            .col.rp-title{
+                max-width: 90%;
+                h5{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+            .no-member{
+                font-style: italic;
+                font-size: 14px
+            }
+        }
         ol, ul{
             color: $primary-text;
             margin-left: 1.5rem;

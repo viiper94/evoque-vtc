@@ -12,6 +12,17 @@
                 color: $primary-text;
             }
         }
+        .card-header{
+            flex-wrap: nowrap;
+            .col.app-title{
+                max-width: 90%;
+                h5{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
         & .referral{
             overflow: hidden;
             display: -webkit-box;
@@ -28,7 +39,7 @@
         &.new .card-text b{
             color: $primary;
         }
-        i{
+        .card-body i{
             font-size: 25px;
             width: 29px;
             text-align: center;

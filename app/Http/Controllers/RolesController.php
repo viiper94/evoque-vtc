@@ -49,7 +49,7 @@ class RolesController extends Controller{
             $role->delete_convoys = $request->input('delete_convoys') == 'on';
 
             $role->manage_tab = $request->input('manage_tab') == 'on';
-            $role->add_tab = $request->input('view_tab') == 'on';
+            $role->view_tab = $request->input('view_tab') == 'on';
             $role->add_tab = $request->input('add_tab') == 'on';
             $role->edit_tab = $request->input('edit_tab') == 'on';
             $role->accept_tab = $request->input('accept_tab') == 'on';

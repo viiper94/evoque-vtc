@@ -161,11 +161,11 @@
             </div>
             <h3 class="mt-5 text-primary">Связь</h3>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3" @if($convoy->communication == 'TeamSpeak 3' || $convoy->communication == '') checked @endif @if($booking) disabled @endif>
+                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3" @if($convoy->communication == 'TeamSpeak 3') checked @endif @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord" @if($convoy->communication == 'Discord') checked @endif @if($booking) disabled @endif>
+                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord" @if($convoy->communication == 'Discord' || $convoy->communication == '') checked @endif @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-discord">Discord</label>
                 @if($booking)
                     <input type="hidden" name="communication" value="{{ $convoy->communication }}">

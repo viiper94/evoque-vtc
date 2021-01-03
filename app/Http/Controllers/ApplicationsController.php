@@ -143,26 +143,6 @@ class ApplicationsController extends Controller{
         return view('evoque.applications.vacation');
     }
 
-    public function plate(Request $request){
-        $this->authorize('create', Application::class);
-        if($request->post()){
-            $this->validate($request, [
-                'new_plate_number' => 'required|regex:/[0-9]{3}/',
-                'reason' => 'nullable|string'
-            ]);
-            $app = new Application();
-            $app->member_id = Auth::user()->member->id;
-            $app->old_nickname = Auth::user()->member->nickname;
-            $app->category = 2;
-            $app->new_plate_number = $request->input('new_plate_number');
-            $app->reason = $request->input('reason');
-            return $app->save() ?
-                redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        return view('evoque.applications.plate');
-    }
-
     public function rp(Request $request){
         $this->authorize('create', Application::class);
         if($request->post()){

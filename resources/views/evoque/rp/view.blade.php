@@ -15,7 +15,7 @@
 
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary">Прием отчёта от {{ $report->member->nickname }}</h2>
+        <h2 class="mt-3 text-primary">Прием отчёта от {{ $report->member->nickname ?? 'уволенного сотрудника' }}</h2>
         <form method="post">
             @csrf
             @if($report->note)
@@ -73,9 +73,13 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1">Принять</button>
-                <button type="submit" name="decline" value="1" class="btn btn-outline-danger btn-lg m-1"
-                    onclick="return confirm('Отклонить отчёт?')">Отклонить</button>
+                @can('accept', $report)
+                    <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1">Принять</button>
+                @endcan
+                @can('decline', $report)
+                        <button type="submit" name="decline" value="1" class="btn btn-outline-danger btn-lg m-1"
+                                onclick="return confirm('Отклонить отчёт?')">Отклонить</button>
+                @endcan
             </div>
         </form>
     </div>

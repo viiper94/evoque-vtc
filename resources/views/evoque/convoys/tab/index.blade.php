@@ -32,6 +32,12 @@
                         @endif
                     </h5>
                     <div class="card-body">
+                        @if($tab->comment)
+                            <p class="mb-0 text-danger">Комментарий от администратора: </p>
+                            <div class="markdown-content">
+                                @markdown($tab->comment)
+                            </div>
+                        @endif
                         <h5>{{ $tab->date->isoFormat('LL') }}</h5>
                         <div class="card-text">
                             <p>

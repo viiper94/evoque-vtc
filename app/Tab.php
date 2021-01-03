@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tab extends Model{
 
-    protected $casts = [
-        'status' => 'boolean',
-    ];
-
     protected $dates = [
         'created_at',
         'updated_at',
@@ -20,6 +16,7 @@ class Tab extends Model{
     protected $fillable = [
         'convoy_title',
         'lead_id',
+        'comment',
 //        'description',
     ];
 
@@ -29,6 +26,10 @@ class Tab extends Model{
 
     public function lead(){
         return $this->belongsTo('App\Member');
+    }
+
+    public function setCommentAttribute($value){
+        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
     }
 
 }

@@ -339,7 +339,8 @@ class ConvoysController extends Controller{
         if($request->post()){
             $this->validate($request, [
                 'scores' => 'nullable|array',
-                'lead' => 'nullable|string'
+                'lead' => 'nullable|string',
+                'comment' => 'nullable|string'
             ]);
             $lead = explode(',', $request->input('lead'));
             foreach($request->input('scores') as $member_id => $value){
@@ -359,6 +360,7 @@ class ConvoysController extends Controller{
                 $member->save();
             }
             $tab->status = $request->input('accept');
+            $tab->comment = $request->input('comment');
             return $tab->save() ?
                 redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

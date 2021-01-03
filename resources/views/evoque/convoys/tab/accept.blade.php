@@ -4,6 +4,11 @@
     Принять скрин TAB| @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container pt-5 pb-5">
@@ -117,12 +122,28 @@
                         </table>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="comment">Комментарий</label>
+                        <textarea class="form-control simple-mde" id="comment" name="comment">{{ $tab->comment }}</textarea>
+                        @if($errors->has('comment'))
+                            <small class="form-text">{{ $errors->first('comment') }}</small>
+                        @endif
+                    </div>
+                </div>
                 <div class="row justify-content-center">
                     <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1">Принять</button>
-                    <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1">Отклонить</button>
+                    <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1" onclick="return confirm('Отклонить этот скрин таба?')">Отклонить</button>
                 </div>
             </form>
         @endcan
     </div>
+
+    <script>
+        var simplemde = new SimpleMDE({
+            element: $('#comment')[0],
+            promptURLs: true
+        });
+    </script>
 
 @endsection

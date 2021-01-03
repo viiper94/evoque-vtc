@@ -20,13 +20,41 @@
     </div>
     <div class="container-fluid">
         @if(count($applications) > 0)
-            <div class="applications pt-5 pb-5 row">
+            <div class="applications pt-3 pb-5 row">
                 @foreach($applications as $application)
                     <div class="m-3 card card-dark text-shadow-m @if($application->status == 0) border-primary new @elseif($application->status == 1) border-success @elseif($application->status == 2) border-danger @endif">
-                        <h4 class="card-header">{{ $application->name }}</h4>
+                        <div class="card-header row mx-0 pr-2">
+                            <div class="col px-0 app-title">
+                                <h5 class="mb-0">
+                                    @can('claim', $application)
+                                        <a href="{{ route('evoque.applications.recruitment', $application->id) }}">{{ $application->name }}</a>
+                                    @else
+                                        {{ $application->name }}
+                                    @endcan
+                                </h5>
+                            </div>
+                            @if(\Illuminate\Support\Facades\Auth::user()->can('claim', $application) ||
+                                    \Illuminate\Support\Facades\Auth::user()->can('delete', \App\Recruitment::class))
+                                <div class="dropdown dropdown-dark col-auto px-0 dropleft">
+                                    <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
+                                        @can('claim', $application)
+                                            <a href="{{ route('evoque.applications.recruitment', $application->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Смотреть</a>
+                                        @endcan
+                                        @can('delete', \App\Recruitment::class)
+                                            <a href="{{ route('evoque.applications.delete.recruitment', $application->id) }}"
+                                               class="dropdown-item" onclick="return confirm('Удалить эту заявку?')"><i class="fas fa-trash"></i> Удалить</a>
+                                        @endcan
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                         <div class="card-body">
                             @if($application->comment)
-                                <p class="mb-0 pt-3">Комментарий от администратора: </p>
+                                <p class="mb-0 text-danger">Комментарий от администратора: </p>
                                 <div class="markdown-content">
                                     @markdown($application->comment)
                                 </div>
@@ -36,7 +64,8 @@
                                 <a class="mr-3" href="{{ $application->steam_link }}" target="_blank"><i class="fab fa-steam"></i></a>
                                 <a class="mr-3" href="{{ $application->tmp_link }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
                             </p>
-                            <p class="card-text">Ник в игре: <b>{{ $application->nickname }}</b><br>
+                            <p class="card-text">
+                                Ник в игре: <b>{{ $application->nickname }}</b><br>
                                 Возраст: <b>{{ $application->age }} {{ trans_choice('год|года|лет', $application->age) }}</b><br>
                                 Часов в ETS2: <b>{{ $application->hours_played }} {{ trans_choice('час|часа|часов', $application->hours_played) }}</b><br>
                                 @if($application->tmp_join_date)
@@ -47,18 +76,11 @@
                             <p class="mb-0">Discord: @if($application->have_ts3) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
                             <p>Наличие ATS: @if($application->have_ats) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
                             @if(isset($application->referral))
-                                <p class="referral">Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
+                                <p class="referral mb-0">Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
                             @endif
-                            <span class="text-muted">{{ $application->created_at->isoFormat('LLL') }}</span>
                         </div>
-                        <div class="card-actions">
-                            @can('claim', $application)
-                                <a href="{{ route('evoque.applications.recruitment', $application->id) }}" class="btn btn-outline-primary">Смотреть</a>
-                            @endcan
-                            @can('delete', \App\Recruitment::class)
-                                <a href="{{ route('evoque.applications.delete.recruitment', $application->id) }}" class="btn btn-outline-danger"
-                                   onclick="return confirm('Удалить эту заявку?')">Удалить</a>
-                            @endcan
+                        <div class="card-footer text-muted">
+                            {{ $application->created_at->isoFormat('LLL') }}
                         </div>
                     </div>
                 @endforeach

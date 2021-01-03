@@ -23,14 +23,16 @@
                                 @if($convoy->public && $convoy->isUpcoming()) border-primary
                                 @elseif(($convoy->booking && !$convoy->visible) || !$convoy->start_city) border-danger @endif
                                 @if($convoy->isUpcoming())upcoming @endif">
-                                <h6 class="card-header row mb-0">
-                                    <div class="col">
-                                        <span class="text-muted">{{ $convoy->getType() }}
+                                <h6 class="card-header row mb-0 mx-0">
+                                    <div class="col px-0 app-title">
+                                        <span class="text-muted">
                                             @if(!$convoy->visible)
-                                                <span class="badge badge-warning">Неопубликован</span>
+                                                <i class="fas fa-eye-slash text-warning"></i>
                                             @else
-                                                <span class="badge badge-success">Опубликован</span>
-                                            @endif</span>
+                                                <i class="fas fa-eye text-success"></i>
+                                            @endif
+                                            {{ $convoy->getType() }}
+                                        </span>
                                         <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}">{{ $convoy->title }}</a>
                                     </div>
                                     @can('update', \App\Convoy::class)

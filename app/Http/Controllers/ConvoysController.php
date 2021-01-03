@@ -256,8 +256,12 @@ class ConvoysController extends Controller{
     }
 
     public function tab(){
+        $tabs = Tab::with(['member', 'lead']);
+        if(Auth::user()->cant('viewAny', Tab::class)){
+            $tabs = $tabs->where('member_id', Auth::user()->member->id);
+        }
         return view('evoque.convoys.tab.index', [
-            'tabs' => Tab::with(['member', 'lead'])->orderBy('date', 'desc')->get()
+            'tabs' => $tabs->orderBy('date', 'desc')->get()
         ]);
     }
 

@@ -86,7 +86,7 @@ class RpController extends Controller{
 
     public function viewReport(Request $request, $id){
         $report = RpReport::with('member')->where('id', $id)->first();
-        $this->authorize('accept', $report);
+        $this->authorize('claim', $report);
         if($request->post()){
             $this->validate($request, [
                 'distance' => 'required_with:accept|nullable|numeric',

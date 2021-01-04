@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Convoy extends Model{
 
@@ -48,6 +49,69 @@ class Convoy extends Model{
         'updated_at',
         'deleted_at',
         'start_time'
+    ];
+
+    public $attributes_validation = [
+        'title' => 'required|string',
+        'start_time' => 'required|date',
+        'server' => 'required|string',
+
+        'route' => 'nullable|array',
+        'start_city' => 'required|string',
+        'start_company' => 'nullable|string',
+        'rest_city' => 'required|string',
+        'rest_company' => 'nullable|string',
+        'finish_city' => 'required|string',
+        'finish_company' => 'nullable|string',
+        'dlc' => 'nullable|array',
+
+        'communication' => 'required|string',
+        'communication_link' => 'required|string',
+        'communication_channel' => 'required|string',
+        'lead' => 'nullable|string',
+
+        'truck_image' => 'nullable|image',
+        'truck' => 'nullable|string',
+        'truck_tuning' => 'nullable|string',
+        'truck_paint' => 'nullable|string',
+
+        'trailer_image' => 'nullable|image',
+        'trailer' => 'nullable|string',
+        'trailer_tuning' => 'nullable|string',
+        'trailer_paint' => 'nullable|string',
+        'cargo' => 'nullable|string',
+
+        'alt_trailer_image' => 'nullable|image',
+        'alt_trailer' => 'nullable|string',
+        'alt_trailer_tuning' => 'nullable|string',
+        'alt_trailer_paint' => 'nullable|string',
+        'alt_cargo' => 'nullable|string',
+    ];
+
+    public $dlcList = [
+        'ets2' => [
+            'ProMods',
+            'DLC Going East!',
+            'DLC Scandinavia',
+            'DLC Vive la France!',
+            'DLC Italia',
+            'DLC Beyond The Baltic Sea',
+            'DLC Road To The Black Sea',
+//            'DLC Iberia',
+            'DLC High Power Cargo Pack',
+            'DLC Heavy Cargo Pack'
+        ],
+        'ats' => [
+            'ProMods Canada',
+            'DLC New Mexico',
+            'DLC Oregon',
+            'DLC Washington',
+            'DLC Utah',
+            'DLC Idaho',
+            'DLC Colorado',
+            'DLC Heavy Cargo Pack',
+            'DLC Forest Machinery'
+        ]
     ];
 
     public function isUpcoming(){
@@ -318,6 +382,12 @@ class Convoy extends Model{
 
     public function leadMember(){
         return $this->hasOne('App\Member', 'nickname', 'lead');
+    }
+
+    public function saveImage(UploadedFile $file, $path = '/images/convoys/'){
+        $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
+        $file->move(public_path($path), $name);
+        return $name;
     }
 
     public function deleteImages($folder, $attr = ['route', 'truck_image', 'trailer_image', 'alt_trailer_image']){

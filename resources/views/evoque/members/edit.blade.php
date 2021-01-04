@@ -248,33 +248,34 @@
             @if(count($member->audits) > 0)
                 <div class="member-changelog mb-5">
                     <h3 class="text-primary">История изменений</h3>
-                    @foreach($member->audits as $item)
-                        @if($item->old_values)
-                            <div class="changelog-item mb-3 table-responsive">
-                                <table class="table table-dark table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th colspan="3" class="text-primary">Отредактировал {{ $item->user->member->nickname }}, {{ $item->created_at->format('d.m.Y в H:i') }}</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">Параметр</th>
-                                        <th scope="col">Было</th>
-                                        <th scope="col">Стало</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                    <div class="changelog-item mb-3 table-responsive">
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Кто</th>
+                                <th scope="col">Когда</th>
+                                <th scope="col">Что</th>
+                                <th scope="col">Было</th>
+                                <th scope="col">Стало</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($member->audits as $item)
+                                @if($item->old_values)
                                     @foreach($item->old_values as $key => $value)
                                         <tr>
+                                            <td class="text-primary">{{ $item->user->member->nickname }}</td>
+                                            <td>{{ $item->created_at->format('d.m.Y в H:i') }}</td>
                                             <td>{{ $key }}</td>
-                                            <td>{!! $value !!}</td>
-                                            <td>{!! $item->new_values[$key] !!}</td>
+                                            <td class="text-danger font-weight-bold">{!! $value !!}</td>
+                                            <td class="text-success font-weight-bold">{!! $item->new_values[$key] !!}</td>
                                         </tr>
                                     @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        @endif
-                    @endforeach
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             @endif
         @endcan

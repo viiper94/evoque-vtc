@@ -112,7 +112,9 @@
                             @endswitch
                             @if($app->reason)
                                 <p class="mb-0 pt-3">Причина: </p>
-                                @markdown($app->reason)
+                                <div class="markdown-content">
+                                    @markdown($app->reason)
+                                </div>
                             @endif
                         </div>
                         <div class="card-footer text-muted">

@@ -63,7 +63,9 @@
         @if($app->reason)
             <div class="row flex-column text-center">
                 <h4 class="mb-0 pt-3">Причина: </h4>
-                @markdown($app->reason)
+                <div class="markdown-content">
+                    @markdown($app->reason)
+                </div>
             </div>
         @endif
         <form method="post" action="{{ route('evoque.applications.accept', $app->id) }}">

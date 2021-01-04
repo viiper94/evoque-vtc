@@ -77,8 +77,10 @@
                             </p>
                             <p class="text-primary markdown-content">{!! nl2br($tab->description) !!}</p>
                         </div>
+                        <a href="/images/convoys/tab/{{ $tab->screenshot }}" target="_blank">
+                            <img class="w-100 text-shadow-m" src="/images/convoys/tab/{{ $tab->screenshot }}">
+                        </a>
                     </div>
-                    <a href="/images/convoys/tab/{{ $tab->screenshot }}" target="_blank"><img class="w-100 text-shadow-m" src="/images/convoys/tab/{{ $tab->screenshot }}"></a>
                 </div>
             @endforeach
         </div>

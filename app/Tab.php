@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Tab extends Model{
 
@@ -28,8 +29,10 @@ class Tab extends Model{
         return $this->belongsTo('App\Member');
     }
 
-    public function setCommentAttribute($value){
-        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
+    public function saveImage(UploadedFile $file, $path = '/images/convoys/tab/'){
+        $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
+        $file->move(public_path($path), $name);
+        return $name;
     }
 
 }

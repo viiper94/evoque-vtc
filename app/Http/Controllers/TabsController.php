@@ -37,7 +37,7 @@ class TabsController extends Controller{
             $tab->member_id = Auth::user()->member->id;
             $tab->date = Carbon::parse($request->input('date'))->format('Y-m-d');
             if($request->file('screenshot')){
-                $tab->screenshot = $this->saveImage($request->file('screenshot'), '/images/convoys/tab/');
+                $tab->screenshot = $tab->saveImage($request->file('screenshot'), '/images/convoys/tab/');
             }
             return $tab->save() ?
                 redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно подан!']) :
@@ -66,7 +66,7 @@ class TabsController extends Controller{
                 if(is_file(public_path('/images/convoys/tab/').$tab->screenshot)){
                     unlink(public_path('/images/convoys/tab/').$tab->screenshot);
                 }
-                $tab->screenshot = $this->saveImage($request->file('screenshot'), '/images/convoys/tab/');
+                $tab->screenshot = $tab->saveImage($request->file('screenshot'), '/images/convoys/tab/');
             }
             return $tab->save() ?
                 redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :

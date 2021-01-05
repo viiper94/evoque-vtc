@@ -150,7 +150,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
-            'GrahamCampbell\\Markdown\\' => 24,
         ),
         'F' => 
         array (
@@ -467,10 +466,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'GrahamCampbell\\Markdown\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/graham-campbell/markdown/src',
-        ),
         'Fruitcake\\Cors\\' => 
         array (
             0 => __DIR__ . '/..' . '/fruitcake/laravel-cors/src',
@@ -566,6 +561,13 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
     );
 
     public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'Parsedown' => 
+            array (
+                0 => __DIR__ . '/..' . '/erusev/parsedown',
+            ),
+        ),
         'M' => 
         array (
             'Mockery' => 
@@ -580,6 +582,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Convoy' => __DIR__ . '/../..' . '/app/Convoy.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Gallery' => __DIR__ . '/../..' . '/app/Gallery.php',
         'App\\Http\\Controllers\\ApplicationsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApplicationsController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
@@ -591,12 +594,15 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ConvoysController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConvoysController.php',
         'App\\Http\\Controllers\\DiscordController' => __DIR__ . '/../..' . '/app/Http/Controllers/DiscordController.php',
+        'App\\Http\\Controllers\\GalleryController' => __DIR__ . '/../..' . '/app/Http/Controllers/GalleryController.php',
         'App\\Http\\Controllers\\KbController' => __DIR__ . '/../..' . '/app/Http/Controllers/KbController.php',
         'App\\Http\\Controllers\\MembersController' => __DIR__ . '/../..' . '/app/Http/Controllers/MembersController.php',
+        'App\\Http\\Controllers\\PlansController' => __DIR__ . '/../..' . '/app/Http/Controllers/PlansController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\RolesController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolesController.php',
         'App\\Http\\Controllers\\RpController' => __DIR__ . '/../..' . '/app/Http/Controllers/RpController.php',
         'App\\Http\\Controllers\\RulesController' => __DIR__ . '/../..' . '/app/Http/Controllers/RulesController.php',
+        'App\\Http\\Controllers\\TabsController' => __DIR__ . '/../..' . '/app/Http/Controllers/TabsController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -611,6 +617,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'App\\Member' => __DIR__ . '/../..' . '/app/Member.php',
         'App\\Policies\\ApplicationPolicy' => __DIR__ . '/../..' . '/app/Policies/ApplicationPolicy.php',
         'App\\Policies\\ConvoyPolicy' => __DIR__ . '/../..' . '/app/Policies/ConvoyPolicy.php',
+        'App\\Policies\\GalleryPolicy' => __DIR__ . '/../..' . '/app/Policies/GalleryPolicy.php',
         'App\\Policies\\KbPolicy' => __DIR__ . '/../..' . '/app/Policies/KbPolicy.php',
         'App\\Policies\\MemberPolicy' => __DIR__ . '/../..' . '/app/Policies/MemberPolicy.php',
         'App\\Policies\\RecruitmentPolicy' => __DIR__ . '/../..' . '/app/Policies/RecruitmentPolicy.php',
@@ -1917,13 +1924,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Fideloper\\Proxy\\TrustedProxyServiceProvider' => __DIR__ . '/..' . '/fideloper/proxy/src/TrustedProxyServiceProvider.php',
         'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
         'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
-        'GrahamCampbell\\Markdown\\Facades\\Markdown' => __DIR__ . '/..' . '/graham-campbell/markdown/src/Facades/Markdown.php',
-        'GrahamCampbell\\Markdown\\MarkdownServiceProvider' => __DIR__ . '/..' . '/graham-campbell/markdown/src/MarkdownServiceProvider.php',
-        'GrahamCampbell\\Markdown\\View\\Compiler\\MarkdownCompiler' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Compiler/MarkdownCompiler.php',
-        'GrahamCampbell\\Markdown\\View\\Directive\\MarkdownDirective' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Directive/MarkdownDirective.php',
-        'GrahamCampbell\\Markdown\\View\\Engine\\BladeMarkdownEngine' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Engine/BladeMarkdownEngine.php',
-        'GrahamCampbell\\Markdown\\View\\Engine\\PathEvaluationTrait' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Engine/PathEvaluationTrait.php',
-        'GrahamCampbell\\Markdown\\View\\Engine\\PhpMarkdownEngine' => __DIR__ . '/..' . '/graham-campbell/markdown/src/View/Engine/PhpMarkdownEngine.php',
         'GuzzleHttp\\Client' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Client.php',
         'GuzzleHttp\\ClientInterface' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/ClientInterface.php',
         'GuzzleHttp\\Cookie\\CookieJar' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/Cookie/CookieJar.php',
@@ -3967,6 +3967,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'PHP_Token_XOR_EQUAL' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/XorEqual.php',
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Yield.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/YieldFrom.php',
+        'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',

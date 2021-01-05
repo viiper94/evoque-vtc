@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '31a7ead10bb39b00ffad5aabfc7a70989ae4d700',
+    'reference' => '3d642c2385e12afa28dcb050fe719f07c18193bf',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -165,6 +165,15 @@ private static $installed = array (
       ),
       'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
     ),
+    'erusev/parsedown' => 
+    array (
+      'pretty_version' => '1.7.4',
+      'version' => '1.7.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cb17b6477dfff935958ba01325f2e8a2bfa6dab3',
+    ),
     'facade/flare-client-php' => 
     array (
       'pretty_version' => '1.3.7',
@@ -227,15 +236,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '848d8125239d7dbf8ab25cb7f054f1a630e68c2e',
-    ),
-    'graham-campbell/markdown' => 
-    array (
-      'pretty_version' => 'v13.1.0',
-      'version' => '13.1.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'bd95ce6bb31b9d9732e42907c983b9f8e31c8854',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -508,7 +508,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '31a7ead10bb39b00ffad5aabfc7a70989ae4d700',
+      'reference' => '3d642c2385e12afa28dcb050fe719f07c18193bf',
     ),
     'laravel/tinker' => 
     array (
@@ -909,8 +909,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache' => 

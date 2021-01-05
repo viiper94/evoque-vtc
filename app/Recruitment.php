@@ -35,8 +35,4 @@ class Recruitment extends Model{
         'tmp_join_date'
     ];
 
-    public function setCommentAttribute($value){
-        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
-    }
-
 }

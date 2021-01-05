@@ -442,10 +442,6 @@ class Convoy extends Model{
         return true;
     }
 
-    public function setCommentAttribute($value){
-        $this->attributes['comment'] = isset($value) ? str_replace(PHP_EOL, '  '.PHP_EOL, $value) : null;
-    }
-
     public function isFulfilled(): bool{
         return $this->start_city ? true : false;
     }

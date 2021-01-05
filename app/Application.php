@@ -33,8 +33,4 @@ class Application extends Model{
         return $this->categories[$this->category];
     }
 
-    public function setCommentAttribute($value){
-        $this->attributes['comment'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
-    }
-
 }

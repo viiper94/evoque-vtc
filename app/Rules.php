@@ -22,8 +22,4 @@ class Rules extends Model implements Auditable{
 //        'history' => 'array'
     ];
 
-    public function setTextAttribute($value){
-        $this->attributes['text'] = str_replace(PHP_EOL, '  '.PHP_EOL, $value);
-    }
-
 }

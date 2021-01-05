@@ -1,7 +1,10 @@
 // Markdown
 .markdown-content{
+    color: $primary-text;
     ol, ul{
-        color: $primary-text;
         margin-left: 2.5rem;
+    }
+    p{
+        margin-bottom: 1rem;
     }
 }

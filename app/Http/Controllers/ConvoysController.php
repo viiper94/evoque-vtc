@@ -111,6 +111,7 @@ class ConvoysController extends Controller{
             ]);
         }
         if($request->post()){
+//            dd($request->files);
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on';
@@ -172,6 +173,10 @@ class ConvoysController extends Controller{
         $convoy = Convoy::find($convoy_id);
 
         $fields = [
+            [
+                'name' => 'Дата',
+                'value' => $convoy->start_time->isoFormat('LL'),
+            ],
             [
                 'name' => 'Место старта',
                 'value' => $convoy->start_city.' - '. $convoy->start_company,
@@ -241,10 +246,12 @@ class ConvoysController extends Controller{
                     'inline' => true
                 ]);
             }
-            array_push($fields, [
-                'name' => '> *Один груз — одна большая команда!*',
-                'value' => '___',
-            ]);
+            if($convoy->trailer_image){
+                array_push($fields, [
+                    'name' => '> *Один груз — одна большая команда!*',
+                    'value' => '___',
+                ]);
+            }
         }
         array_push($fields, [
             'name' => 'Маршрут',
@@ -275,8 +282,11 @@ class ConvoysController extends Controller{
                 ]
             ])
         ]);
-        return curl_exec($curl) ? redirect()->back()->with(['success' => 'Конвой успешно запощен в Дискорде!']) :
-            redirect()->back()->withErrors(['Возникла ошибка =(']);
+        if(curl_exec($curl)){
+            curl_close($curl);
+            return redirect()->back()->with(['success' => 'Конвой успешно запощен в Дискорде!']);
+        }
+        return redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

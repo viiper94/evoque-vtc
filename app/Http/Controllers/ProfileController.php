@@ -16,7 +16,7 @@ use Relisoft\Steam\Src\Api\Player;
 class ProfileController extends Controller{
 
     public function profile(Request $request, $id = null){
-        if(Auth::guest()) abort(404);
+        if(!Auth::user()->member) abort(404);
         if($id && Gate::check('manage_members')){
             $user = User::findOrFail($id);
         }else{
@@ -28,7 +28,7 @@ class ProfileController extends Controller{
     }
 
     public function edit(Request $request){
-        if(Auth::guest()) abort(404);
+        if(!Auth::user()->member) abort(404);
         if($request->post()){
             $this->validate($request, [
                 'name' => 'required|string',
@@ -54,7 +54,7 @@ class ProfileController extends Controller{
     }
 
     public function updateAvatar(){
-        if(Auth::guest()) abort(404);
+        if(!Auth::user()->member) abort(404);
 
         $client = new Steam();
         $player = $client->getPlayerData(Auth::user()->steamid64);
@@ -70,7 +70,7 @@ class ProfileController extends Controller{
     }
 
     public function checkPlate(Request $request){
-        if(!$request->ajax() && Auth::guest()) abort(404);
+        if(!$request->ajax() && !Auth::user()->member) abort(404);
 
         $value = $request->input('value');
         if(strlen($value) === 1) $value = '00'.$value;

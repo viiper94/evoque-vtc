@@ -39,7 +39,7 @@ class PlansController extends Controller{
     ];
 
     public function plans(Request $request){
-        if(Auth::guest()) return abort(404);
+        if(!Auth::user()->member) return abort(404);
         $days = [];
         $convoys = Convoy::whereDate('start_time', '>=', Carbon::today())->where('visible', '1')->get();
         for($i = 0; $i <= 7; $i++){

@@ -10,7 +10,7 @@ class KbController extends Controller{
 
     public function index($search = null){
         $kb = Kb::with('user');
-        if(Auth::guest() || Auth::user()->cant('viewPrivate', Kb::class)){
+        if(!Auth::user()->member || Auth::user()->cant('viewPrivate', Kb::class)){
             $kb = $kb->where('public', '1');
         }elseif(Auth::user()->cant('viewAny', Kb::class)){
             $kb = $kb->where('visible', '1');

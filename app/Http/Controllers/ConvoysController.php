@@ -25,7 +25,7 @@ class ConvoysController extends Controller{
     }
 
     public function private(Request $request, $all = false){
-        if(!Auth::user()->member) abort(404);
+        if(Auth::guest() || !Auth::user()->member) abort(404);
         $convoys = Convoy::with('leadMember', 'leadMember.user');
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
             $operator = '<';

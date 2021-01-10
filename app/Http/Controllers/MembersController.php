@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Gate;
 class MembersController extends Controller{
 
     public function index(){
-        if(!Auth::user()->member) abort(404);
+        if(Auth::guest() || !Auth::user()->member) abort(404);
         return view('evoque.members.index', [
             'roles' => Role::with([
                 'members' => function($query){

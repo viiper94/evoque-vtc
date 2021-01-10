@@ -12,8 +12,7 @@ class KbController extends Controller{
         $kb = Kb::with('user');
         if(Auth::guest() || Auth::user()->cant('viewPrivate', Kb::class)){
             $kb = $kb->where('public', '1');
-        }
-        if(Auth::user()->cant('viewAny', Kb::class)){
+        }elseif(Auth::user()->cant('viewAny', Kb::class)){
             $kb = $kb->where('visible', '1');
         }
         $kb = $kb->orderBy('sort')->get();

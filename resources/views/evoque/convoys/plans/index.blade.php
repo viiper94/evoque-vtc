@@ -143,7 +143,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nickname">Название</label>
-                            <input type="text" class="form-control" id="title" name="title" value="Закрытый конвой" @cannot('manage_convoys')readonly @endcan required>
+                            <input type="text" class="form-control" id="title" name="title" value="Закрытый конвой" required>
                         </div>
                         <div class="row">
                             <div class="form-group col">

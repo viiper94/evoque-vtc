@@ -77,8 +77,4 @@ class Controller extends BaseController{
         ]);
     }
 
-    public function kb(){
-        return view('kb');
-    }
-
 }

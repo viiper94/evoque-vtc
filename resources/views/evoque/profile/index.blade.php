@@ -19,7 +19,7 @@
                         <a href="{{ route('evoque.profile.dump') }}" class="btn btn-sm btn-outline-info"><i class="fas fa-download"></i> Запросить свои данные</a>
                     </div>
                 @endif
-                @can('setAsMember')
+                @can('setAsMember', $user)
                     @if(!$user->member)
                         <div class="mt-2">
                             <a href="{{ route('evoque.admin.users.setAsMember', $user->id) }}" class="btn btn-sm btn-outline-danger"

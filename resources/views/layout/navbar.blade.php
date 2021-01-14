@@ -9,7 +9,7 @@
             </a>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-uppercase font-weight-bold text-shadow">
-                    @if(!\Illuminate\Support\Facades\Auth::user()->member)
+                    @if(\Illuminate\Support\Facades\Auth::guest() || !\Illuminate\Support\Facades\Auth::user()->member)
                         <li class="nav-item @if(Route::current() && Route::current()->getName() === 'home')active @endif">
                             <a class="nav-link" href="{{ route('home') }}">О нас</a>
                         </li>

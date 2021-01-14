@@ -40,6 +40,7 @@ Route::get('/gallery/delete/{id}', 'GalleryController@delete')->name('gallery.de
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
 Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');
 Route::post('/evoque/profile/checkPlate', 'ProfileController@checkPlate')->name('evoque.profile.checkPlate');
+Route::post('/evoque/profile/dump', 'ProfileController@dump')->name('evoque.profile.dump');
 Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.profile');
 
 Route::get('/evoque', 'MembersController@index')->name('evoque.members');

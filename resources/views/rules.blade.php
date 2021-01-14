@@ -41,7 +41,7 @@
             </li>
         @endif
     </ul>
-    @can('admin')
+    @can('create', \App\Rules::class)
         <div class="row text-center justify-content-center">
             <a href="{{ route('evoque.rules.add') }}" class="mb-3 btn btn-lg btn-outline-warning"><i class="fas fa-plus"></i> Добавить параграф правил</a>
         </div>

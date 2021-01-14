@@ -23,6 +23,14 @@ class Controller extends BaseController{
         ]);
     }
 
+    public function privacy(){
+        return view('privacy');
+    }
+
+    public function terms(){
+        return view('terms');
+    }
+
     public function apply(Request $request){
         if($request->ajax()){
             $tmp = new Client();
@@ -52,6 +60,7 @@ class Controller extends BaseController{
                 'tmp_link' => 'required|url',
                 'rules_agreed' => 'required',
                 'requirements_agreed' => 'required',
+                'terms_agreed' => 'required',
             ]);
             $application = new Recruitment();
             $application->fill($request->post());

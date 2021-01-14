@@ -4,6 +4,7 @@ import bsCustomFileInput from 'bs-custom-file-input'
 window.$ = window.jQuery = require('jquery');
 
 import "bootstrap/dist/js/bootstrap.min";
+import "./cookie.notice";
 
 $(document).ready(function(){
 

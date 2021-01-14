@@ -179,6 +179,14 @@
                     <small class="form-text">{{ $errors->first('requirements_agreed') }}</small>
                 @endif
             </div>
+            <div class="custom-control custom-checkbox mb-2">
+                <input type="checkbox" class="custom-control-input" id="terms_agreed" name="terms_agreed">
+                <label class="custom-control-label" for="terms_agreed">С <a href="{{ route('terms') }}" target="_blank" class="text-primary">Правилами использования</a> и
+                    <a href="{{ route('privacy') }}" target="_blank" class="text-primary">Политикой конфиденциальности</a> ознакомился и принимаю их!
+                    @if($errors->has('terms_agreed'))
+                        <small class="form-text">{{ $errors->first('terms_agreed') }}</small>
+                @endif
+            </div>
             <div class="row justify-content-center">
                 <button type="submit" id="submit_btn" class="btn btn-outline-warning btn-lg disabled" disabled>Отправить</button>
             </div>

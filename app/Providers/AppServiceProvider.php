@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Application;
 use App\Convoy;
+use App\Gallery;
 use App\Member;
 use App\Recruitment;
 use App\RpReport;
@@ -72,11 +73,13 @@ class AppServiceProvider extends ServiceProvider
 
             $applications_c = Application::where('status', 0)->count();
             $recruitments_c = Recruitment::where('status', 0)->count();
+            $gallery_c = Gallery::where('visible', 0)->count();
             if(Auth::check() && Auth::user()->can('accept', Application::class)) $applications_badge += $applications_c;
             if(Auth::check() && Auth::user()->can('accept', Recruitment::class)) $applications_badge += $recruitments_c;
             View::share('applications_badge', $applications_badge);
             View::share('applications_c', $applications_c);
             View::share('recruitments_c', $recruitments_c);
+            View::share('gallery_c', $gallery_c);
 
             View::share('reports_c', RpReport::where('status', '0')->count());
         });

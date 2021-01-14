@@ -24,7 +24,11 @@
                         <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('rules') }}">Правила</a>
+                        <a class="nav-link" href="{{ route('gallery') }}">Галлерея
+                            @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->can('toggle', \App\Gallery::class))
+                                <span class="badge badge-danger">{{ $gallery_c }}</span>
+                            @endif
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('kb') }}">База знаний</a>

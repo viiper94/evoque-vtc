@@ -33,6 +33,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('kb') }}">База знаний</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('privacy') }}">Политика конфиденциальности</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-12">
@@ -45,6 +48,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('convoy.public') }}">Открытый конвой</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('terms') }}">Правила пользования</a>
                     </li>
                 </ul>
             </div>

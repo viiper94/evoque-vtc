@@ -325,6 +325,30 @@
                         </div>
                     </div>
 
+                    <div class="col-md-6 mb-3">
+                        <h3 class="text-primary">Галлерея</h3>
+                        <div class="custom-control custom-checkbox mb-4">
+                            <input type="checkbox" class="custom-control-input" id="manage_gallery" name="manage_gallery" @if($role->manage_gallery)checked @endif>
+                            <label class="custom-control-label text-danger" for="manage_gallery">Полные права по галлерее</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="upload_screenshots" name="upload_screenshots" @if($role->upload_screenshots)checked @endif>
+                            <label class="custom-control-label " for="upload_screenshots">Загружать скриншоты в галлерею</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="upload_without_moderation" name="upload_without_moderation" @if($role->upload_without_moderation)checked @endif>
+                            <label class="custom-control-label" for="upload_without_moderation">Загружать скриншоты без премодерации</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="toggle_visibility" name="toggle_visibility" @if($role->toggle_visibility)checked @endif>
+                            <label class="custom-control-label" for="toggle_visibility">Скроывать или показывать скриншоты</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="delete_screenshots" name="delete_screenshots" @if($role->delete_screenshots)checked @endif>
+                            <label class="custom-control-label" for="delete_screenshots">Удалять скриншоты</label>
+                        </div>
+                    </div>
+
                 </div>
                 <button type="submit" class="btn btn-outline-warning">Сохранить права</button>
             </form>

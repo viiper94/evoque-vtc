@@ -89,6 +89,12 @@ class RolesController extends Controller{
             $role->view_users = $request->input('view_users') == 'on';
             $role->set_user_as_member = $request->input('set_user_as_member') == 'on';
 
+            $role->manage_gallery = $request->input('manage_gallery') == 'on';
+            $role->upload_screenshots = $request->input('upload_screenshots') == 'on';
+            $role->upload_without_moderation = $request->input('upload_without_moderation') == 'on';
+            $role->toggle_visibility = $request->input('toggle_visibility') == 'on';
+            $role->delete_screenshots = $request->input('delete_screenshots') == 'on';
+
             return $role->save() ?
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Права роли успешно отредактирована!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

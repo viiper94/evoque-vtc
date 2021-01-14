@@ -17,7 +17,7 @@ class ProfileController extends Controller{
 
     public function profile(Request $request, $id = null){
         if(Auth::guest() || !Auth::user()->member) abort(404);
-        if($id && Gate::check('manage_members')){
+        if($id && Auth::user()->can('view', User::class)){
             $user = User::findOrFail($id);
         }else{
             $user = Auth::user();

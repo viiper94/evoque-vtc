@@ -10,7 +10,7 @@
         @include('layout.alert')
         <div class="row mt-5">
             <div class="col-sm-6 avatar text-md-right text-center pr-sm-5 pt-3 pb-3">
-                <img src="{{ $user->image }}" alt="{{ $user->name }}" class="text-shadow-m">
+                <img src="{{ $user->image }}" alt="{{ $user->name }}" class="text-shadow-m rounded">
                 @if(\Illuminate\Support\Facades\Auth::user()->id === $user->id)
                     <div class="mt-2">
                         <a href="{{ route('evoque.profile.edit') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Редактировать профиль</a>

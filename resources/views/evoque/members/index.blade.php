@@ -31,7 +31,7 @@
                     @endcan
                     <span>Конвоев<br>за неделю</span>
                 </th>
-                <th scope="col">В отпуске до</th>
+                <th scope="col">В отпуске<br>до</th>
                 <th scope="col">Использовано<br>отпусков</th>
                 <th scope="col">Имя</th>
                 <th scope="col">Город/Страна</th>
@@ -181,7 +181,7 @@
                     @endcan
                     <span>Конвоев<br>за неделю</span>
                 </th>
-                <th scope="col">В отпуске до</th>
+                <th scope="col">В отпуске<br>до</th>
                 <th scope="col">Использовано<br>отпусков</th>
                 <th scope="col">Имя</th>
                 <th scope="col">Город/Страна</th>

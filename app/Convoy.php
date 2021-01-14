@@ -70,18 +70,18 @@ class Convoy extends Model{
         'communication_channel' => 'required|string',
         'lead' => 'nullable|string',
 
-        'truck_image' => 'nullable|image',
+        'truck_image' => 'nullable|image|max:1000',
         'truck' => 'nullable|string',
         'truck_tuning' => 'nullable|string',
         'truck_paint' => 'nullable|string',
 
-        'trailer_image' => 'nullable|image',
+        'trailer_image' => 'nullable|image|max:1000',
         'trailer' => 'nullable|string',
         'trailer_tuning' => 'nullable|string',
         'trailer_paint' => 'nullable|string',
         'cargo' => 'nullable|string',
 
-        'alt_trailer_image' => 'nullable|image',
+        'alt_trailer_image' => 'nullable|image|max:1000',
         'alt_trailer' => 'nullable|string',
         'alt_trailer_tuning' => 'nullable|string',
         'alt_trailer_paint' => 'nullable|string',

@@ -86,6 +86,7 @@
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input uploader" id="route-0" name="route[]" accept="image/*">
                             <label class="custom-file-label" for="route-0">{{ $convoy->route ? 'Загрузить новое изображение' : 'Изображение маршрута' }}</label>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 1 Мб</small>
                         </div>
                         <img src="/images/convoys/image-placeholder.jpg" class="w-100" id="route-0-preview">
                     </div>
@@ -391,6 +392,7 @@
             <div class="custom-file custom-file-dark mb-3">
                 <input type="file" class="custom-file-input uploader" id="route-%i%" name="route[%i%]" accept="image/*">
                 <label class="custom-file-label" for="route-%i%">Еще одно изображение маршрута</label>
+                <small class="text-primary"><b>Макс. размер файла:</b> 1 Мб</small>
             </div>
             <img src="/images/convoys/image-placeholder.jpg" class="w-100" id="route-%i%-preview">
         </div>

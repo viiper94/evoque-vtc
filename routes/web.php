@@ -32,6 +32,11 @@ Route::get('/kb/changelog/{id}', 'KbController@changelog')->name('kb.changelog')
 Route::get('/kb/{id}', 'KbController@article')->name('kb.view');
 Route::get('/kb', 'KbController@index')->name('kb');
 
+Route::get('/gallery', 'GalleryController@index')->name('gallery');
+Route::any('/gallery/add', 'GalleryController@add')->name('gallery.add');
+Route::any('/gallery/toggle/{id}', 'GalleryController@toggle')->name('gallery.toggle');
+Route::get('/gallery/delete/{id}', 'GalleryController@delete')->name('gallery.delete');
+
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
 Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');
 Route::post('/evoque/profile/checkPlate', 'ProfileController@checkPlate')->name('evoque.profile.checkPlate');

@@ -17,3 +17,8 @@
         border-top-color: $background-lighten-2;
     }
 }
+@media (min-width: 1140px) {
+    .modal-xl{
+        min-width: 70%;
+    }
+}

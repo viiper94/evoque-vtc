@@ -40,13 +40,13 @@
                             @if($user->member)
                                 @if($user->member->visible)
                                     @can('update', \App\Member::class)
-                                        <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-primary"></i></a>
+                                        <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="fontello icon-evoque text-primary"></i></a>
                                     @else
                                         <i class="fas fa-check"></i>
                                     @endcan
                                 @else
                                     @can('update', \App\Member::class)
-                                        <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="icon-evoque text-danger"></i></a>
+                                        <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="fontello icon-evoque text-danger"></i></a>
                                     @else
                                         <i class="fas fa-times text-danger"></i>
                                     @endcan

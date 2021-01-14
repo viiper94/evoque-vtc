@@ -20,6 +20,8 @@ Route::get('auth/steam/handle', 'Auth\SteamAuthController@handle')->name('auth.s
 Route::get('/', 'Controller@index')->name('home');
 Route::any('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
+Route::get('/privacy-policy', 'Controller@privacy')->name('privacy');
+Route::get('/terms-of-use', 'Controller@terms')->name('terms');
 Route::get('/members', 'Controller@members')->name('members');
 
 Route::any('/kb/add', 'KbController@add')->name('kb.add');

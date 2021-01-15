@@ -3,22 +3,64 @@ footer{
     .container{
         border-top: 1px solid $primary;
     }
-    .copyright{
-        font-size: 12px;
-    }
     .contacts{
-        a{
-            i{
-                font-size: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+        margin-bottom: 1.5rem;
+        @media (min-width: map-get($grid-breakpoints, 'md')){
+            order: 1;
+            align-items: flex-end;
+            h2{
+                padding-right: 1rem;
+            }
+        }
+        @media (min-width: map-get($grid-breakpoints, 'xl')){
+            order: 0;
+        }
+        .contacts-links{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: nowrap;
+            width: 270px;
+            @media (min-width: map-get($grid-breakpoints, 'md')){
+                padding-right: 1rem;
+                justify-content: space-between;
+            }
+            a{
+                i{
+                    font-size: 30px;
+                }
             }
         }
     }
-}
-@media (max-width: 576px){
-    footer{
+    .copyright{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+        margin-top: 1.5rem;
+        @media (min-width: map-get($grid-breakpoints, 'md')){
+            order: 1;
+            align-items: flex-start;
+            margin-top: 0;
+            h2, span{
+                padding-left: 1rem;
+            }
+        }
+        @media (min-width: map-get($grid-breakpoints, 'xl')){
+            order: 0;
+        }
+        span{
+            font-size: 12px;
+        }
+    }
+    @media (max-width: map-get($grid-breakpoints, 'sm')){
         h2{
             font-size: 30px;
-            margin-top: 1rem;
         }
     }
 }

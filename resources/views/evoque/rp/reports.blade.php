@@ -41,11 +41,17 @@
                                 @elseif($report->status == '2')
                                     <i class="fas fa-times-circle text-danger"></i>
                                 @endif
+                                @can('decline', $report)
+                                    <a href="{{ route('evoque.rp.reports.view', $report->id) }}">
+                                @endcan
                                 @if($report->member)
                                     От {{ $report->member->nickname }}
                                 @else
                                     <span class="no-member">Отчёт уволенного сотрудника</span>
                                 @endif
+                                @can('decline', $report)
+                                    </a>
+                                @endcan
                             </h5>
                         </div>
                         <h5 class="col-auto text-md-right text-muted mb-0">{{ $report->game === 'ets2' ? 'ETS2' : 'ATS' }}</h5>

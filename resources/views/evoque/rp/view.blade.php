@@ -28,7 +28,7 @@
             @endif
             <div class="row">
                 <div class="col-md-9">
-                    <div class="fotorama w-100" data-allowfullscreen="true" data-fit="cover" data-nav="thumbs">
+                    <div class="fotorama w-100" data-allowfullscreen="true" data-nav="thumbs">
                         @foreach($report->images as $image)
                             <img src="/images/rp/{{ $image }}">
                         @endforeach

@@ -25,7 +25,7 @@
         @endcan
     </div>
     <div class="container-fluid">
-        <div class="rp-reports pt-3 pb-5 row justify-content-around">
+        <div class="rp-reports pt-3 pb-5 row justify-content-around align-items-baseline">
             @foreach($reports as $report)
                 <div class="card card-dark col-12 col-md-auto text-shadow-m m-3 p-0
                         @if($report->status === 2) border-danger

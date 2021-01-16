@@ -42,7 +42,7 @@ class RpController extends Controller{
         $reports = RpReport::with('member');
         if(Auth::user()->cant('viewAll', RpReport::class)) $reports->where('member_id', Auth::user()->member->id);
         return view('evoque.rp.reports', [
-            'reports' => $reports->orderBy('created_at', 'desc')->paginate(10)
+            'reports' => $reports->orderBy('created_at', 'desc')->paginate(24)
         ]);
     }
 

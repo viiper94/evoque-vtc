@@ -66,7 +66,7 @@
     <div class="modal fade" id="gallery-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" >
             <div class="modal-content modal-content-dark">
-                <div class="modal-body">
+                <div class="modal-body p-0">
                     <div class="gallery-fotorama w-100" data-nav="thumbs" data-allowfullscreen="true" data-auto="false" data-fit="contain" data-ratio="16/9" data-width="100%">
                         @foreach($photos as $photo)
                             <a href="/images/gallery/{{ $photo->image_full }}" class="w-100" data-caption="Автор:

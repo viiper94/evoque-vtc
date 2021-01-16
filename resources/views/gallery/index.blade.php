@@ -69,7 +69,7 @@
                 <div class="modal-body">
                     <div class="gallery-fotorama w-100" data-nav="thumbs" data-allowfullscreen="true" data-auto="false" data-fit="contain" data-ratio="16/9" data-width="100%">
                         @foreach($photos as $photo)
-                            <img src="/images/gallery/{{ $photo->image_full }}" class="w-100" data-caption="Автор:
+                            <a href="/images/gallery/{{ $photo->image_full }}" class="w-100" data-caption="Автор:
                                  @if($photo->user && !$photo->author)
                                     @if($photo->user->member)
                                         [EVOQUE] {{ $photo->user->member->nickname }}
@@ -78,7 +78,7 @@
                                     @endif
                                  @else
                                      {{ $photo->author ?? 'Не указан' }}
-                                 @endif">
+                                @endif" data-thumb="/images/gallery/{{ $photo->image_thumb }}"></a>
                         @endforeach
                     </div>
                 </div>

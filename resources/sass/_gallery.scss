@@ -3,7 +3,7 @@ section.head-section{
     height: 200px;
     box-shadow: 0 -20px 15px -10px rgba(0, 0, 0, 0.8) inset,
                 0 20px 15px -10px rgba(0, 0, 0, 0.8) inset;
-    background-image: url("/assets/img/an_image.png");
+    background-image: url("/assets/img/an_image.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -30,7 +30,10 @@ section.head-section{
     .gallery-image{
         position: relative;
         width: 20%;
-        min-height: calc(100vw/6/16*9);
+        min-height: calc(100vw/1.8/16*9);
+        @media (min-height: $md) {
+            min-height: calc(100vw/6/16*9);
+        }
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

@@ -28,7 +28,7 @@ class Application extends Model{
     public $statuses = [
         '0' => 'Новая',
         '1' => 'Принята',
-        '3' => 'Отклонена'
+        '2' => 'Отклонена'
     ];
 
     public function member(){

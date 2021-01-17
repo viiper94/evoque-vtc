@@ -19,7 +19,7 @@ class RpReport extends Model{
     public $statuses = [
         '0' => 'Новый',
         '1' => 'Принят',
-        '3' => 'Отклонён'
+        '2' => 'Отклонён'
     ];
 
     public function member(){

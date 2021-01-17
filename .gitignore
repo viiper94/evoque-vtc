@@ -12,3 +12,4 @@ yarn-error.log
 /.idea
 /public/images/*
 !/public/images/plates
+/public/dumps/*

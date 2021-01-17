@@ -280,6 +280,23 @@ $(document).ready(function(){
         $('.modal #date').val(date)
     });
 
+    $('#generate-data-dump').click(function(){
+        let button = $(this);
+        if(!button.attr('href')){
+            $.ajax('/evoque/profile/dump',{
+                data: {
+                    '_token' : button.data('token'),
+                },
+                beforeSend : function(){
+                    button.html(getPreloaderHtml());
+                },
+                success : function(response){
+                    button.addClass('btn-success').removeClass('btn-outline-info').html('<i class="fas fa-download"></i> Скачать свои данные').attr('href', '/dumps/'+response).prop('download', response);
+                },
+            });
+        }
+    });
+
 });
 
 function getPreloaderHtml(){

@@ -16,7 +16,9 @@
                         <a href="{{ route('evoque.profile.edit') }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-edit"></i> Редактировать профиль</a>
                     </div>
                     <div class="mt-2">
-                        <a href="{{ route('evoque.profile.dump') }}" class="btn btn-sm btn-outline-info"><i class="fas fa-download"></i> Запросить свои данные</a>
+                        <a id="generate-data-dump" data-token="{{ csrf_token() }}" class="btn btn-sm btn-outline-info" target="_blank">
+                            <i class="fas fa-download"></i> Запросить свои данные
+                        </a>
                     </div>
                 @endif
                 @can('setAsMember', $user)

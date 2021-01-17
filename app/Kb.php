@@ -14,6 +14,11 @@ class Kb extends Model{
 
     protected $table = 'kb';
 
+    protected $casts = [
+        'visible' => 'boolean',
+        'public' => 'boolean',
+    ];
+
     public function user(){
         return $this->hasOne('App\User', 'id', 'author');
     }

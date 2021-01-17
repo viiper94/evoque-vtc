@@ -16,6 +16,12 @@ class RpReport extends Model{
         'comment'
     ];
 
+    public $statuses = [
+        '0' => 'Новый',
+        '1' => 'Принят',
+        '3' => 'Отклонён'
+    ];
+
     public function member(){
         return $this->belongsTo('App\Member');
     }
@@ -28,6 +34,10 @@ class RpReport extends Model{
 
     private function removeFile($path){
         return is_file($path) ? unlink($path) : false;
+    }
+
+    public function getStatus(){
+        return $this->statuses[$this->status];
     }
 
 }

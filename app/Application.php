@@ -25,12 +25,22 @@ class Application extends Model{
         '5' => 'увольнение',
     ];
 
+    public $statuses = [
+        '0' => 'Новая',
+        '1' => 'Принята',
+        '3' => 'Отклонена'
+    ];
+
     public function member(){
         return $this->belongsTo('App\Member');
     }
 
     public function getCategory(){
         return $this->categories[$this->category];
+    }
+
+    public function getStatus(){
+        return $this->statuses[$this->status];
     }
 
 }

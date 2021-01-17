@@ -21,6 +21,12 @@ class Tab extends Model{
 //        'description',
     ];
 
+    public $statuses = [
+        '0' => 'Новый',
+        '1' => 'Принят',
+        '3' => 'Отклонён'
+    ];
+
     public function member(){
         return $this->belongsTo('App\Member');
     }
@@ -33,6 +39,10 @@ class Tab extends Model{
         $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
         $file->move(public_path($path), $name);
         return $name;
+    }
+
+    public function getStatus(){
+        return $this->statuses[$this->status];
     }
 
 }

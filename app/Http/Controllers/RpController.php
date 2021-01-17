@@ -123,7 +123,8 @@ class RpController extends Controller{
             return redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.rp.view', [
-            'report' => $report
+            'report' => $report,
+            'stat' => RpStats::with('member')->where(['member_id' => $report->member->id, 'game' => $report->game])->first()
         ]);
     }
 

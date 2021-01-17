@@ -70,16 +70,20 @@
                                 @markdown($tab->comment)
                             </div>
                         @endif
-                        <h5>{{ $tab->date->isoFormat('LL') }}</h5>
                         <div class="card-text">
                             <p>
                                 Ведущий: <b>{{ $tab->lead->nickname }}</b>
                             </p>
                             <p class="text-primary markdown-content">{!! nl2br($tab->description) !!}</p>
                         </div>
+                    </div>
+                    <div class="row mx-0">
                         <a href="/images/convoys/tab/{{ $tab->screenshot }}" target="_blank">
-                            <img class="w-100 text-shadow-m" src="/images/convoys/tab/{{ $tab->screenshot }}">
+                            <img class="w-100" src="/images/convoys/tab/{{ $tab->screenshot }}">
                         </a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{ $tab->date->isoFormat('LL') }}
                     </div>
                 </div>
             @endforeach

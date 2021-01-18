@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 col-xl-auto mb-md-3">
-                <ul class="nav flex-column text-center text-md-right">
+                <ul class="nav flex-column text-center text-md-right text-xl-center">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                     </li>
@@ -32,7 +32,7 @@
                 </ul>
             </div>
             <div class="col-md-6 col-sm-12 col-xl-auto mb-md-3">
-                <ul class="nav flex-column text-center text-md-left">
+                <ul class="nav flex-column text-center text-md-left text-xl-center">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('members') }}">Команда</a>
                     </li>

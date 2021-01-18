@@ -19,6 +19,7 @@ footer{
         }
         @media (min-width: map-get($grid-breakpoints, 'xl')){
             order: 0;
+            align-items: center;
         }
         .contacts-links{
             display: flex;
@@ -53,6 +54,7 @@ footer{
         }
         @media (min-width: map-get($grid-breakpoints, 'xl')){
             order: 0;
+            align-items: center;
         }
         span{
             font-size: 12px;

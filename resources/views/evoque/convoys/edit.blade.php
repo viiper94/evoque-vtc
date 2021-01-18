@@ -20,7 +20,7 @@
 
 @section('content')
 
-    <div class="container pt-5">
+    <div class="container new-convoy pt-5">
         @include('layout.alert')
         <form method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
@@ -73,7 +73,7 @@
             <h3 class="text-primary">Маршрут</h3>
             <div class="row">
                 <div class="col-md-5 route-images">
-                    @if($convoy->route)
+                    @if($convoy->start_city)
                         <h6>{{ trans_choice('Текущее изображение|Текущие изображения', $convoy->route) }}</h6>
                         <div class="fotorama mb-3 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
                             @foreach($convoy->route as $item)
@@ -84,11 +84,11 @@
                     <div class="form-group">
                         <h6>Новые изображения</h6>
                         <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input uploader" id="route-0" name="route[]" accept="image/*">
-                            <label class="custom-file-label" for="route-0">{{ $convoy->route ? 'Загрузить новое изображение' : 'Изображение маршрута' }}</label>
-                            <small class="text-primary"><b>Макс. размер файла:</b> 1 Мб</small>
+                            <input type="file" class="custom-file-input" id="route-0" name="route[]" accept="image/*">
+                            <label class="custom-file-label" for="route-0">{{ $convoy->route ? 'Загрузить новое изображение' : 'Виберите изображение' }}</label>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 2 Мб, 3000x3000px</small>
                         </div>
-                        <img src="/images/convoys/image-placeholder.jpg" class="w-100" id="route-0-preview">
+                        <img class="w-100" id="route-0-preview">
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-warning" id="add-convoy-img" data-target="route_images" data-index="0"><i class="fas fa-plus"></i> Еще картинку</button>
                     <button type="button" class="btn btn-sm btn-outline-danger" id="delete-convoy-img" data-target="route_images"><i class="fas fa-trash"></i> Очистить все слоты</button>
@@ -202,8 +202,9 @@
                 <div class="col-md-5">
                     <div class="form-group truck_image">
                         <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input uploader" id="truck_image" name="truck_image" accept="image/*">
-                            <label class="custom-file-label" for="truck_image">Изображение тягача</label>
+                            <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*">
+                            <label class="custom-file-label" for="truck_image">Виберите изображение</label>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 2 Мб, 3000x3000px</small>
                         </div>
                         <img src="/images/convoys/{{ $convoy->truck_image ? $convoy->truck_image : "image-placeholder.jpg" }}" class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
@@ -246,8 +247,9 @@
                 <div class="col-md-5">
                     <div class="form-group trailer_image">
                         <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input uploader" id="trailer_image" name="trailer_image" accept="image/*">
-                            <label class="custom-file-label" for="trailer_image">Изображение прицепа</label>
+                            <input type="file" class="custom-file-input" id="trailer_image" name="trailer_image" accept="image/*">
+                            <label class="custom-file-label" for="trailer_image">Виберите изображение</label>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 2 Мб, 3000x3000px</small>
                         </div>
                         <img src="/images/convoys/{{ $convoy->trailer_image ? $convoy->trailer_image : "image-placeholder.jpg" }}" class="w-100" id="trailer_image-preview">
                         @if($errors->has('trailer_image'))
@@ -297,8 +299,9 @@
                 <div class="col-md-5">
                     <div class="form-group alt_trailer_image">
                         <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input uploader" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
-                            <label class="custom-file-label" for="alt_trailer_image">Изображение прицепа</label>
+                            <input type="file" class="custom-file-input" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
+                            <label class="custom-file-label" for="alt_trailer_image">Виберите изображение</label>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 2 Мб, 3000x3000px</small>
                         </div>
                         <img src="/images/convoys/{{ $convoy->alt_trailer_image ? $convoy->alt_trailer_image : "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
                         @if($errors->has('alt_trailer_image'))
@@ -390,11 +393,11 @@
     <script type="text/html" id="route_images_template">
         <div class="form-group">
             <div class="custom-file custom-file-dark mb-3">
-                <input type="file" class="custom-file-input uploader" id="route-%i%" name="route[%i%]" accept="image/*">
-                <label class="custom-file-label" for="route-%i%">Еще одно изображение маршрута</label>
-                <small class="text-primary"><b>Макс. размер файла:</b> 1 Мб</small>
+                <input type="file" class="custom-file-input" id="route-%i%" name="route[%i%]" accept="image/*">
+                <label class="custom-file-label" for="route-%i%">Виберите изображение</label>
+                <small class="text-primary"><b>Макс. размер файла:</b> 1 Мб, 3000x3000px</small>
             </div>
-            <img src="/images/convoys/image-placeholder.jpg" class="w-100" id="route-%i%-preview">
+            <img class="w-100" id="route-%i%-preview">
         </div>
     </script>
 

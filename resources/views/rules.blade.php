@@ -8,7 +8,7 @@
 
 <div class="container pt-5">
     @include('layout.alert')
-    <ul class="rules pt-5">
+    <ul class="rules pt-md-5">
         @foreach($rules as $paragraph)
             <li class="p-1 row">
                 <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§{{ $paragraph->paragraph }} </h1>

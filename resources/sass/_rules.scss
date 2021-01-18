@@ -10,6 +10,11 @@ ul.rules{
             line-height: 105px;
         }
         color: $primary;
+        @media (max-width: $sm) {
+            &.paragraph-title{
+                font-size: 1.8rem;
+            }
+        }
     }
     .blockquote{
         margin-left: 150px;

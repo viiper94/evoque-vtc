@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container pt-5">
-        <ul class="rules pt-5">
+        <ul class="rules pt-md-5">
             <li class="mb-5 p-1 row">
                 <h1 class="paragraph-number display-2 pr-5 pl-sm-1">§1</h1>
                 <h1 class="paragraph-title pl-md-5 pl-sm-1">Термины и Определения</h1>

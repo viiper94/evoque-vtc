@@ -141,7 +141,7 @@
                         <p>Связь ведём через {{ $convoy->communication }}:</p>
                         <a href="{{ $convoy->getCommunicationLink() }}" target="_blank"><h4>{{ $convoy->communication_link }}</h4></a>
                     </div>
-                    <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
+                    <div class="convoy-icon pl-md-5 px-3 pb-4 px-sm-4 text-left d-flex align-items-center">
                         @if($convoy->communication === 'TeamSpeak 3')
                             <i class="fab fa-teamspeak"></i>
                         @elseif($convoy->communication === 'Discord')
@@ -154,7 +154,7 @@
                         <p>Канал на сервере:</p>
                         <h4>{{ $convoy->communication_channel }}</h4>
                     </div>
-                    <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
+                    <div class="convoy-icon pl-md-5 px-3 pb-4 px-sm-4 text-left d-flex align-items-center">
                         <i class="fas fa-list-alt"></i>
                     </div>
                 </li>

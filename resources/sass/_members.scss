@@ -13,9 +13,12 @@
             }
         }
     }
-    h2, .member-nickname{
-        color: $primary;
+    @media (max-width: $sm) {
+        h2{
+            font-size: 1.8rem;
+        }
     }
+
 }
 
 .members-table{

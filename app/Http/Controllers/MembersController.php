@@ -79,6 +79,7 @@ class MembersController extends Controller{
         $this->authorize('fire', $member);
         $member->role()->detach();
         $member->user->remember_token = null;
+        $member->user->fired_at = Carbon::now();
         $member->user->save();
         return $member->delete() ?
             redirect()->route('evoque.members')->with(['success' => 'Сотрудник уволен!']) :

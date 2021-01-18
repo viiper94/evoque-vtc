@@ -385,7 +385,7 @@ class Convoy extends Model{
     }
 
     public function saveImage(UploadedFile $file, $path = '/images/convoys/'){
-        $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
+        $name = substr(md5(time().$file->getClientOriginalName()), 0, 5).'.'. $file->getClientOriginalExtension();
         $file->move(public_path($path), $name);
         return $name;
     }

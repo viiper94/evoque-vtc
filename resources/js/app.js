@@ -205,7 +205,7 @@ $(document).ready(function(){
     $(document).on('change', '.new-convoy .custom-file-input', function(){
         let _URL = window.URL || window.webkitURL;
         console.log(this.files[0].size);
-        if(this.files[0].size > 2200000){
+        if(this.files[0].size > 3200000){
             alert('Превышен лимит размера файла. Максимум 2 МБ!');
             $(this).val('');
             $(this).parent().find('label').html('Виберите изображение');

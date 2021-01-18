@@ -22,6 +22,7 @@
                     <th scope="col">TruckersMP ID</th>
                     <th scope="col">В компании</th>
                     <th scope="col">На сайте с</th>
+                    <th scope="col">Уволен</th>
                     <th scope="col">#</th>
                 </tr>
                 </thead>
@@ -56,6 +57,7 @@
                             @endif
                         </td>
                         <td>{{ $user->created_at->isoFormat('DD.MM.Y HH:mm') }}</td>
+                        <td>{{ !$user->fired_at ? '-' : $user->fired_at->isoFormat('DD.MM.Y HH:mm') }}</td>
                         <td>
                             @can('setAsMember', $user)
                                 <a href="{{ route('evoque.admin.users.setAsMember', $user->id) }}" onclick="return confirm('Назначить этого юзера сотрудником Эвок?')"><i class="fas fa-user-plus"></i></a>

@@ -14,6 +14,9 @@
     <div class="container pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary text-center">Принять скрин TAB</h2>
+        @if($tab->member)
+            <h6 class="text-muted text-center">Автор: {{ $tab->member->nickname }}</h6>
+        @endif
         <div class="row mt-5">
             <div class="attribute col-md-4 col-xs-12 text-center text-md-left">
                 <p class="mb-0">Конвой</p>

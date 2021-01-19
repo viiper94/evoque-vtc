@@ -38,17 +38,17 @@
             </div>
             @if(!$booking)
                 <div class="custom-control custom-checkbox mb-2">
-                    <input type="checkbox" class="custom-control-input" id="public" name="public" @if($convoy->public) checked @endif>
+                    <input type="checkbox" class="custom-control-input" id="public" name="public" @if($convoy->public || old('public') === 'on') checked @endif>
                     <label class="custom-control-label" for="public">Наш открытый конвой (виден всем)</label>
                 </div>
                 <div class="custom-control custom-checkbox mb-2">
-                    <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($convoy->visible) checked @endif>
+                    <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($convoy->visible || old('visible') === 'on') checked @endif>
                     <label class="custom-control-label" for="visible">Опубликовать для сотрудников</label>
                 </div>
             @endif
             <div class="form-group">
                 <label for="nickname">Название</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ $convoy->title }}" required>
+                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $convoy->title }}" required>
                 @if($errors->has('title'))
                     <small class="form-text">{{ $errors->first('title') }}</small>
                 @endif
@@ -57,15 +57,17 @@
                 <label for="server">Сервер</label>
                 <select class="form-control" id="server" name="server" required>
                     @foreach($servers as $server)
-                        <option value="{{ $server->getName() }}" @if($server->getName() === $convoy->server) selected @endif >
+                        <option value="{{ $server->getName() }}" @if($server->getName() === (old('server') ?? $convoy->server)) selected @endif >
                             [{{ $server->getGame() }}] {{ $server->getName() }} ({{ $server->getPlayers() }}/{{ $server->getMaxPlayers() }})
                         </option>
                     @endforeach
+                    <option value="Выделенный ивент сервер" @if((old('server') ?? $convoy->server) === 'Выделенный ивент сервер') selected @endif >Выделенный ивент сервер</option>
+                    <option value="Определимся позже" @if((old('server') ?? $convoy->server) === 'Определимся позже') selected @endif >Определимся позже</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="datetimepicker">Время выезда по МСК</label>
-                <input type="text" class="form-control" id="datetimepicker" name="start_time" value="{{ $convoy->start_time->format('d.m.Y H:i') }}" autocomplete="off" required>
+                <input type="text" class="form-control" id="datetimepicker" name="start_time" value="{{ old('start_time') ?? $convoy->start_time->format('d.m.Y H:i') }}" autocomplete="off" required>
                 @if($errors->has('start_time'))
                     <small class="form-text">{{ $errors->first('start_time') }}</small>
                 @endif
@@ -97,14 +99,14 @@
                     <div class="form-row">
                         <div class="form-group col-7">
                             <label for="start_city">Старт из</label>
-                            <input type="text" class="form-control" id="start_city" name="start_city" value="{{ $convoy->start_city }}" required placeholder="Город">
+                            <input type="text" class="form-control" id="start_city" name="start_city" value="{{ old('start_city') ?? $convoy->start_city }}" required placeholder="Город">
                             @if($errors->has('start_city'))
                                 <small class="form-text">{{ $errors->first('start_city') }}</small>
                             @endif
                         </div>
                         <div class="form-group col-5">
                             <label for="start_company">Место</label>
-                            <input type="text" class="form-control" id="start_company" name="start_company" value="{{ $convoy->start_company }}" required placeholder="Место">
+                            <input type="text" class="form-control" id="start_company" name="start_company" value="{{ old('start_company') ?? $convoy->start_company }}" required placeholder="Место">
                             @if($errors->has('start_company'))
                                 <small class="form-text">{{ $errors->first('start_company') }}</small>
                             @endif
@@ -113,14 +115,14 @@
                     <div class="form-row">
                         <div class="form-group col-7">
                             <label for="rest_city">Перерыв</label>
-                            <input type="text" class="form-control" id="rest_city" name="rest_city" value="{{ $convoy->rest_city }}" required placeholder="Город">
+                            <input type="text" class="form-control" id="rest_city" name="rest_city" value="{{ old('rest_city') ?? $convoy->rest_city }}" required placeholder="Город">
                             @if($errors->has('rest_city'))
                                 <small class="form-text">{{ $errors->first('rest_city') }}</small>
                             @endif
                         </div>
                         <div class="form-group col-5">
                             <label for="rest_company">Место</label>
-                            <input type="text" class="form-control" id="rest_company" name="rest_company" value="{{ $convoy->rest_company }}" placeholder="Место">
+                            <input type="text" class="form-control" id="rest_company" name="rest_company" value="{{ old('rest_company') ?? $convoy->rest_company }}" placeholder="Место">
                             @if($errors->has('rest_company'))
                                 <small class="form-text">{{ $errors->first('rest_company') }}</small>
                             @endif
@@ -129,14 +131,14 @@
                     <div class="form-row">
                         <div class="form-group col-7">
                             <label for="finish_city">Финиш в:</label>
-                            <input type="text" class="form-control" id="finish_city" name="finish_city" value="{{ $convoy->finish_city }}" required placeholder="Город">
+                            <input type="text" class="form-control" id="finish_city" name="finish_city" value="{{ old('finish_city') ?? $convoy->finish_city }}" required placeholder="Город">
                             @if($errors->has('finish_city'))
                                 <small class="form-text">{{ $errors->first('finish_city') }}</small>
                             @endif
                         </div>
                         <div class="form-group col-5">
                             <label for="finish_company">Финиш</label>
-                            <input type="text" class="form-control" id="finish_company" name="finish_company" value="{{ $convoy->finish_company }}" required placeholder="Место">
+                            <input type="text" class="form-control" id="finish_company" name="finish_company" value="{{ old('finish_company') ?? $convoy->finish_company }}" required placeholder="Место">
                             @if($errors->has('finish_company'))
                                 <small class="form-text">{{ $errors->first('finish_company') }}</small>
                             @endif
@@ -147,8 +149,9 @@
                         <select class="form-control" size="22" name="dlc[]" id="dlc" multiple>
                             @foreach($dlc as $game => $list)
                                 <option disabled>{{ strtoupper($game) }}</option>
+                                @php $dlc_list = old('dlc') ?? $convoy->dlc @endphp
                                 @foreach($list as $item)
-                                    <option value="{{ $item }}" @if(is_array($convoy->dlc) && in_array($item, $convoy->dlc)) selected @endif>{{ $item }}</option>
+                                    <option value="{{ $item }}" @if(is_array($dlc_list) && in_array($item, $dlc_list)) selected @endif>{{ $item }}</option>
                                 @endforeach
                                 <option disabled></option>
                             @endforeach
@@ -162,11 +165,13 @@
             </div>
             <h3 class="mt-5 text-primary">Связь</h3>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3" @if($convoy->communication == 'TeamSpeak 3') checked @endif @if($booking) disabled @endif>
+                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3"
+                       @if((old('communication') ?? $convoy->communication) === 'TeamSpeak 3') checked @endif @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord" @if($convoy->communication == 'Discord' || $convoy->communication == '') checked @endif @if($booking) disabled @endif>
+                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord"
+                       @if((old('communication') ?? $convoy->communication) === 'Discord' || (old('communication') ?? $convoy->communication) == '') checked @endif @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-discord">Discord</label>
                 @if($booking)
                     <input type="hidden" name="communication" value="{{ $convoy->communication }}">
@@ -174,14 +179,14 @@
             </div>
             <div class="form-group">
                 <label for="communication_program">Ссылка на сервер</label>
-                <input type="text" class="form-control" id="communication_link" name="communication_link" value="{{ $convoy->communication_link }}" required @if($booking) readonly @endif>
+                <input type="text" class="form-control" id="communication_link" name="communication_link" value="{{ old('communication_link') ?? $convoy->communication_link }}" required @if($booking) readonly @endif>
                 @if($errors->has('communication_link'))
                     <small class="form-text">{{ $errors->first('communication_link') }}</small>
                 @endif
             </div>
             <div class="form-group">
                 <label for="communication_channel">Канал на сервере</label>
-                <input type="text" class="form-control" id="communication_channel" name="communication_channel" value="{{ $convoy->communication_channel }}" required @if($booking) readonly @endif>
+                <input type="text" class="form-control" id="communication_channel" name="communication_channel" value="{{ old('communication_channel') ?? $convoy->communication_channel }}" @if($booking) readonly @endif>
                 @if($errors->has('communication_channel'))
                     <small class="form-text">{{ $errors->first('communication_channel') }}</small>
                 @endif
@@ -190,10 +195,10 @@
                 <label for="lead">Ведущий</label>
                 <select class="form-control" id="lead" name="lead">
                     @if(!$booking)
-                        <option value="На месте разберёмся" @if($convoy->lead === 'На месте разберёмся') selected @endif >На месте разберёмся</option>
+                        <option value="На месте разберёмся" @if((old('lead') ?? $convoy->lead) === 'На месте разберёмся') selected @endif >На месте разберёмся</option>
                     @endif
                     @foreach($members as $member)
-                        <option value="{{ $member->nickname }}" @if($member->nickname === $convoy->lead) selected @endif >{{ $member->nickname }}</option>
+                        <option value="{{ $member->nickname }}" @if($member->nickname === (old('lead') ?? $convoy->lead)) selected @endif >{{ $member->nickname }}</option>
                     @endforeach
                 </select>
             </div>
@@ -216,26 +221,26 @@
                 <div class="col-md-7">
                     @if(!$booking)
                         <div class="custom-control custom-checkbox mb-2">
-                            <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public" @if($convoy->truck_public) checked @endif>
+                            <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public" @if($convoy->truck_public || old('truck_public') === 'on') checked @endif>
                             <label class="custom-control-label" for="truck_public">Показывать для всех</label>
                         </div>
                     @endif
                     <div class="form-group">
-                        <input type="text" class="form-control" id="truck" name="truck" value="{{ $convoy->truck }}" placeholder="Марка">
+                        <input type="text" class="form-control" id="truck" name="truck" value="{{ old('truck') ?? $convoy->truck }}" placeholder="Марка">
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="truck_tuning">Тюнинг</label>
-                        <input type="text" class="form-control" id="truck_tuning" name="truck_tuning" value="{{ $convoy->truck_tuning }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="truck_tuning" name="truck_tuning" value="{{ old('truck_tuning') ?? $convoy->truck_tuning }}" placeholder="Не обязательно">
                         @if($errors->has('truck_tuning'))
                             <small class="form-text">{{ $errors->first('truck_tuning') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="truck_paint">Окрас</label>
-                        <input type="text" class="form-control" id="truck_paint" name="truck_paint" value="{{ $convoy->truck_paint }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="truck_paint" name="truck_paint" value="{{ old('truck_paint') ?? $convoy->truck_paint }}" placeholder="Не обязательно">
                         @if($errors->has('truck_paint'))
                             <small class="form-text">{{ $errors->first('truck_paint') }}</small>
                         @endif
@@ -261,33 +266,33 @@
                 <div class="col-md-7">
                     @if(!$booking)
                         <div class="custom-control custom-checkbox mb-2">
-                            <input type="checkbox" class="custom-control-input" id="trailer_public" name="trailer_public" @if($convoy->trailer_public) checked @endif>
+                            <input type="checkbox" class="custom-control-input" id="trailer_public" name="trailer_public" @if($convoy->trailer_public || old('trailer_public') === 'on') checked @endif>
                             <label class="custom-control-label" for="trailer_public">Показывать для всех</label>
                         </div>
                     @endif
                     <div class="form-group">
-                        <input type="text" class="form-control" id="trailer" name="trailer" value="{{ $convoy->trailer }}" placeholder="Тип">
+                        <input type="text" class="form-control" id="trailer" name="trailer" value="{{ old('trailer') ?? $convoy->trailer }}" placeholder="Тип">
                         @if($errors->has('trailer'))
                             <small class="form-text">{{ $errors->first('trailer') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="trailer_tuning">Тюнинг</label>
-                        <input type="text" class="form-control" id="trailer_tuning" name="trailer_tuning" value="{{ $convoy->trailer_tuning }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="trailer_tuning" name="trailer_tuning" value="{{ old('trailer_tuning') ?? $convoy->trailer_tuning }}" placeholder="Не обязательно">
                         @if($errors->has('trailer_tuning'))
                             <small class="form-text">{{ $errors->first('trailer_tuning') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="trailer_paint">Окрас</label>
-                        <input type="text" class="form-control" id="trailer_paint" name="trailer_paint" value="{{ $convoy->trailer_paint }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="trailer_paint" name="trailer_paint" value="{{ old('trailer_paint') ?? $convoy->trailer_paint }}" placeholder="Не обязательно">
                         @if($errors->has('trailer_paint'))
                             <small class="form-text">{{ $errors->first('trailer_paint') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="cargo">Груз</label>
-                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{ $convoy->cargo }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="cargo" name="cargo" value="{{ old('cargo') ?? $convoy->cargo }}" placeholder="Не обязательно">
                         @if($errors->has('cargo'))
                             <small class="form-text">{{ $errors->first('cargo') }}</small>
                         @endif
@@ -312,28 +317,28 @@
                 </div>
                 <div class="col-md-7">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="alt_trailer" name="alt_trailer" value="{{ $convoy->alt_trailer }}" placeholder="Тип, не обязательно">
+                        <input type="text" class="form-control" id="alt_trailer" name="alt_trailer" value="{{ old('alt_trailer') ?? $convoy->alt_trailer }}" placeholder="Тип, не обязательно">
                         @if($errors->has('alt_trailer'))
                             <small class="form-text">{{ $errors->first('alt_trailer') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="alt_trailer_tuning">Тюнинг</label>
-                        <input type="text" class="form-control" id="alt_trailer_tuning" name="alt_trailer_tuning" value="{{ $convoy->alt_trailer_tuning }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="alt_trailer_tuning" name="alt_trailer_tuning" value="{{ old('alt_trailer_tuning') ?? $convoy->alt_trailer_tuning }}" placeholder="Не обязательно">
                         @if($errors->has('alt_trailer_tuning'))
                             <small class="form-text">{{ $errors->first('alt_trailer_tuning') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="alt_trailer_paint">Окрас</label>
-                        <input type="text" class="form-control" id="alt_trailer_paint" name="alt_trailer_paint" value="{{ $convoy->alt_trailer_paint }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="alt_trailer_paint" name="alt_trailer_paint" value="{{ old('alt_trailer_paint') ?? $convoy->alt_trailer_paint }}" placeholder="Не обязательно">
                         @if($errors->has('alt_trailer_paint'))
                             <small class="form-text">{{ $errors->first('alt_trailer_paint') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="alt_cargo">Груз</label>
-                        <input type="text" class="form-control" id="alt_cargo" name="alt_cargo" value="{{ $convoy->alt_cargo }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="alt_cargo" name="alt_cargo" value="{{ old('alt_cargo') ?? $convoy->alt_cargo }}" placeholder="Не обязательно">
                         @if($errors->has('alt_cargo'))
                             <small class="form-text">{{ $errors->first('alt_cargo') }}</small>
                         @endif
@@ -343,7 +348,7 @@
             <div class="row pt-3">
                 <div class="form-group col-12">
                     <label for="comment">Комментарий</label>
-                    <textarea class="form-control simple-mde" id="comment" name="comment">{{ $convoy->comment }}</textarea>
+                    <textarea class="form-control simple-mde" id="comment" name="comment">{{ old('comment') ?? $convoy->comment }}</textarea>
                     @if($errors->has('comment'))
                         <small class="form-text">{{ $errors->first('comment') }}</small>
                     @endif

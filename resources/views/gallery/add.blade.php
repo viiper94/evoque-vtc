@@ -11,30 +11,26 @@
         <h2 class="mt-3 text-primary text-center">Добавление скриншота в Галлерею</h2>
         <form method="post" enctype="multipart/form-data">
             @csrf
-            <div class="row pt-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input uploader" id="image" name="image" accept="image/*">
-                            <label class="custom-file-label" for="image">Выберите скриншот</label>
-                        </div>
-                        <img src="/images/gallery/image-placeholder.jpg" alt="Пока пусто" class="w-100" id="image-preview">
+            <div class="pt-3">
+                @can('forceCreate', \App\Gallery::class)
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="public" name="public" checked>
+                        <label class="custom-control-label" for="public">Опубликовать сразу</label>
                     </div>
+                @endcan
+                <div class="form-group">
+                    <label for="author">Автор</label>
+                    <input type="text" class="form-control" id="author" name="author" value="{{ old('author') }}" placeholder="Укажите, если автор не вы">
+                    @if($errors->has('author'))
+                        <small class="form-text">{{ $errors->first('author') }}</small>
+                    @endif
                 </div>
-                <div class="col-md-6">
-                    @can('forceCreate', \App\Gallery::class)
-                        <div class="custom-control custom-checkbox mb-2">
-                            <input type="checkbox" class="custom-control-input" id="public" name="public" checked>
-                            <label class="custom-control-label" for="public">Опубликовать сразу</label>
-                        </div>
-                    @endcan
-                    <div class="form-group">
-                        <label for="author">Автор</label>
-                        <input type="text" class="form-control" id="author" name="author" placeholder="Укажите, если автор не вы">
-                        @if($errors->has('author'))
-                            <small class="form-text">{{ $errors->first('author') }}</small>
-                        @endif
+                <div class="form-group">
+                    <div class="custom-file custom-file-dark mb-3">
+                        <input type="file" class="custom-file-input uploader" id="image" name="image" accept="image/*">
+                        <label class="custom-file-label" for="image">Выберите скриншот</label>
                     </div>
+                    <img class="w-100" id="image-preview">
                 </div>
             </div>
             <div class="row justify-content-center">

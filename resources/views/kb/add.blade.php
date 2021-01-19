@@ -18,14 +18,14 @@
             @csrf
             <div class="form-group">
                 <label for="title">Заголовок статьи</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ $kb->title }}" required>
+                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $kb->title }}" required>
                 @if($errors->has('title'))
                     <small class="form-text">{{ $errors->first('title') }}</small>
                 @endif
             </div>
             <div class="form-group">
                 <label for="category">Категория</label>
-                <input type="text" class="form-control" id="category" name="category" value="{{ $kb->category }}" required>
+                <input type="text" class="form-control" id="category" name="category" value="{{ old('category') ?? $kb->category }}" required>
                 @if($errors->has('category'))
                     <small class="form-text">{{ $errors->first('category') }}</small>
                 @endif
@@ -38,7 +38,7 @@
                 <input type="checkbox" class="custom-control-input" id="public" name="public" @if($kb->public) checked @endif>
                 <label class="custom-control-label" for="public">Публичная статья</label>
             </div>
-            <textarea name="article" id="article">{{ $kb->article }}</textarea>
+            <textarea name="article" id="article">{{ old('article') ?? $kb->article }}</textarea>
             <button type="submit" class="btn btn-outline-warning">Сохранить</button>
         </form>
     </div>

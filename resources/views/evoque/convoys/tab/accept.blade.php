@@ -125,7 +125,7 @@
                 <div class="row">
                     <div class="form-group col-12">
                         <label for="comment">Комментарий</label>
-                        <textarea class="form-control simple-mde" id="comment" name="comment">{{ $tab->comment }}</textarea>
+                        <textarea class="form-control simple-mde" id="comment" name="comment">{{ old('comment') ?? $tab->comment }}</textarea>
                         @if($errors->has('comment'))
                             <small class="form-text">{{ $errors->first('comment') }}</small>
                         @endif

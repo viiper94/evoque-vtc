@@ -67,21 +67,21 @@ class Convoy extends Model{
 
         'communication' => 'required|string',
         'communication_link' => 'required|string',
-        'communication_channel' => 'required|string',
+        'communication_channel' => 'nullable|string',
         'lead' => 'nullable|string',
 
-        'truck_image' => 'nullable|image|max:1000',
+        'truck_image' => 'nullable|image|max:3000',
         'truck' => 'nullable|string',
         'truck_tuning' => 'nullable|string',
         'truck_paint' => 'nullable|string',
 
-        'trailer_image' => 'nullable|image|max:1000',
+        'trailer_image' => 'nullable|image|max:3000',
         'trailer' => 'nullable|string',
         'trailer_tuning' => 'nullable|string',
         'trailer_paint' => 'nullable|string',
         'cargo' => 'nullable|string',
 
-        'alt_trailer_image' => 'nullable|image|max:1000',
+        'alt_trailer_image' => 'nullable|image|max:3000',
         'alt_trailer' => 'nullable|string',
         'alt_trailer_tuning' => 'nullable|string',
         'alt_trailer_paint' => 'nullable|string',
@@ -109,7 +109,7 @@ class Convoy extends Model{
             'DLC Utah',
             'DLC Idaho',
             'DLC Colorado',
-            'DLC Heavy Cargo Pack',
+            'DLC Heavy Cargo Paсk',
             'DLC Forest Machinery'
         ]
     ];

@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'd29604bfe8f0cceed9cbc14d3b1928e4929ea9d4',
+    'reference' => 'daeab53a8a0fd454af4c46626a6219ac3c481833',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -508,7 +508,16 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'd29604bfe8f0cceed9cbc14d3b1928e4929ea9d4',
+      'reference' => 'daeab53a8a0fd454af4c46626a6219ac3c481833',
+    ),
+    'laravel/socialite' => 
+    array (
+      'pretty_version' => 'v5.1.3',
+      'version' => '5.1.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2e6beafe911a09f2300353c102d882e9d63f1f72',
     ),
     'laravel/tinker' => 
     array (
@@ -563,6 +572,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '353f66d7555d8a90781f6f5e7091932f9a4250aa',
+    ),
+    'league/oauth1-client' => 
+    array (
+      'pretty_version' => 'v1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1e7e6be2dc543bf466236fb171e5b20e1b06aee6',
     ),
     'maximebf/debugbar' => 
     array (
@@ -1072,6 +1090,24 @@ private static $installed = array (
       array (
       ),
       'reference' => '99732be0ddb3361e16ad77b68ba41efc8e979019',
+    ),
+    'socialiteproviders/discord' => 
+    array (
+      'pretty_version' => '4.1.1',
+      'version' => '4.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c6eddeb07ace7473e82d02d4db852dfacf5ef574',
+    ),
+    'socialiteproviders/manager' => 
+    array (
+      'pretty_version' => '4.0.1',
+      'version' => '4.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '0f5e82af0404df0080bdc5c105cef936c1711524',
     ),
     'swiftmailer/swiftmailer' => 
     array (

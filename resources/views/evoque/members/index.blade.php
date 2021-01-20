@@ -32,7 +32,7 @@
                     <span>Конвоев<br>за неделю</span>
                 </th>
                 <th scope="col">В отпуске<br>до</th>
-                <th scope="col">Использовано<br>отпусков</th>
+                <th scope="col">Исп.<br>отпусков</th>
                 <th scope="col">Имя</th>
                 <th scope="col">Город/Страна</th>
                 <th scope="col">Ссылки</th>
@@ -119,6 +119,9 @@
                                     @isset($member->user->vk)
                                         <a href="{{ $member->user->vk }}" target="_blank" class="mr-3"><i class="fab fa-vk"></i></a>
                                     @endisset
+                                    @isset($member->user->discord_id)
+                                        <a href="https://discord.com/channels/@me/{{ $member->user->discord_id }}" target="_blank" class="mr-3"><i class="fab fa-discord"></i></a>
+                                    @endisset
                                     @isset($member->user->steamid64)
                                         <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank" class="mr-3"><i class="fab fa-steam-square"></i></a>
                                     @endisset
@@ -182,7 +185,7 @@
                     <span>Конвоев<br>за неделю</span>
                 </th>
                 <th scope="col">В отпуске<br>до</th>
-                <th scope="col">Использовано<br>отпусков</th>
+                <th scope="col">Исп.<br>отпусков</th>
                 <th scope="col">Имя</th>
                 <th scope="col">Город/Страна</th>
                 <th scope="col">Ссылки</th>

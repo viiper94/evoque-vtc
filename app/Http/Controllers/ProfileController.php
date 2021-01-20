@@ -34,6 +34,7 @@ class ProfileController extends Controller{
                 'name' => 'required|string',
                 'city' => 'required|string',
                 'country' => 'required|string',
+                'email' => 'nullable|email',
                 'birth_date' => 'required|date_format:d.m.Y',
                 'plate' => 'uniquePlate|nullPlate|not_in:000,00,0',
             ]);
@@ -45,7 +46,7 @@ class ProfileController extends Controller{
                 $user->member->save();
             }
             return $user->save() ?
-                redirect()->route('evoque.members')->with(['success' => 'Профиль успешно отредактирован!']) :
+                redirect()->route('evoque.profile')->with(['success' => 'Профиль успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.profile.edit', [

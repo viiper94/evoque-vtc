@@ -15,10 +15,12 @@
         "fruitcake/laravel-cors": "^2.0",
         "invisnik/laravel-steam-auth": "^4.2",
         "laravel/framework": "^7.24",
+        "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.2",
         "laravelista/lumen-vendor-publish": "^7.0",
         "owen-it/laravel-auditing": "^12.0",
+        "socialiteproviders/discord": "^4.1",
         "truckersmp/api-client": "^1.2"
     },
     "require-dev": {

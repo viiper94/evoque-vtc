@@ -122,8 +122,8 @@ class ConvoysController extends Controller{
             foreach($request->files as $key => $file){
                 $convoy->deleteImages(public_path('/images/convoys/'), [$key]);
                 if($key === 'route' && is_array($file)){
-                    foreach($file as $image){
-                        $route_images[] = $convoy->saveImage($image);
+                    foreach($file as $i => $image){
+                        $route_images[] = $convoy->saveImage($image, '/images/convoys/', $i);
                     }
                     $convoy->route = $route_images;
                 }else{

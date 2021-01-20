@@ -120,7 +120,7 @@
                                         <a href="{{ $member->user->vk }}" target="_blank" class="mr-3"><i class="fab fa-vk"></i></a>
                                     @endisset
                                     @isset($member->user->discord_id)
-                                        <a href="https://discord.com/channels/@me/{{ $member->user->discord_id }}" target="_blank" class="mr-3"><i class="fab fa-discord"></i></a>
+                                        <a href="https://discordapp.com/users/{{ $member->user->discord_id }}" target="_blank" class="mr-3"><i class="fab fa-discord"></i></a>
                                     @endisset
                                     @isset($member->user->steamid64)
                                         <a href="https://steamcommunity.com/profiles/{{ $member->user->steamid64 }}" target="_blank" class="mr-3"><i class="fab fa-steam-square"></i></a>

@@ -72,7 +72,13 @@
                         @endif
                         <div class="card-text">
                             <p>
-                                Ведущий: <b>{{ $tab->lead->nickname }}</b>
+                                Ведущий:
+                                @if($tab->lead)
+                                    <b>{{ $tab->lead->nickname }}</b>
+                                @else
+                                    <i>Уволенный сотрудник</i>
+                                @endif
+
                             </p>
                             <p class="text-primary markdown-content">{!! nl2br($tab->description) !!}</p>
                         </div>

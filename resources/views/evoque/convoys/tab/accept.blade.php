@@ -28,7 +28,7 @@
             </div>
             <div class="attribute col-md-4 col-xs-12 text-md-right text-center">
                 <p class="mb-0">Ведущий</p>
-                <h3 class="text-primary">{{ $tab->lead->nickname }}</h3>
+                <h3 class="text-primary">{{ $tab->lead ? $tab->lead->nickname : 'Уволенный сотрудник' }}</h3>
             </div>
         </div>
         @if($tab->description)

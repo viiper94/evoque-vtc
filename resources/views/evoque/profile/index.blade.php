@@ -49,9 +49,18 @@
                     <h5><b>{{ $user->birth_date->age }} {{ trans_choice('год|года|лет', $user->birth_date->age) }}</b></h5>
                 @endif
                 <div class="user-links pt-4">
-                    <a href="{{ $user->vk }}" target="_blank"><i class="fab fa-vk"></i></a>
-                    <a href="https://steamcommunity.com/profiles/{{ $user->steamid64 }}" target="_blank" class="ml-2"><i class="fab fa-steam-square"></i></a>
-                    <a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank" class="ml-2"><i class="fas fa-truck-pickup"></i></a>
+                    @if($user->vk)
+                        <a href="{{ $user->vk }}" target="_blank"><i class="fab fa-vk"></i></a>
+                    @endif
+                    @if($user->discord_id)
+                        <a href="https://discordapp.com/users/{{ $user->discord_id }}" target="_blank" class="ml-2"><i class="fab fa-discord"></i></a>
+                    @endif
+                    @if($user->steamid64)
+                        <a href="https://steamcommunity.com/profiles/{{ $user->steamid64 }}" target="_blank" class="ml-2"><i class="fab fa-steam-square"></i></a>
+                    @endif
+                    @if($user->truckersmp_id)
+                        <a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank" class="ml-2"><i class="fas fa-truck-pickup"></i></a>
+                    @endif
                 </div>
             </div>
         </div>

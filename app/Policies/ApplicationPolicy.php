@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Application;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ApplicationPolicy
@@ -79,11 +80,11 @@ class ApplicationPolicy
      * @return mixed
      */
     public function delete(User $user, Application $application){
-        if($user->member){
+        if($user->member && $application->status === 0){
             foreach($user->member->role as $role){
                 if($role->manage_applications ||
-                    ($role->edit_applications && $user->member->id === $application->member_id && $application->status === 0) ||
-                    $role->delete_applications) return true;
+                    ($role->edit_applications && $user->member->id === $application->member_id && Carbon::now()->lt($application->created_at->addMinutes(15)))
+                    || $role->delete_applications) return true;
             }
         }
         return false;

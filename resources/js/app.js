@@ -324,6 +324,10 @@ $(document).ready(function(){
         }
     });
 
+    $('#remove-discord').click(function(){
+        $('#discord').prop('disabled', false).prop('readonly', true).attr('name', 'discord_id').attr('value', '');
+    });
+
 });
 
 function getPreloaderHtml(){

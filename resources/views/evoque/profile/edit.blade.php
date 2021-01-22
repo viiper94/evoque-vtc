@@ -69,15 +69,19 @@
                             <small class="form-text">{{ $errors->first('vk') }}</small>
                         @endif
                     </div>
-                    <div class="form-group">
+                    <div class="form-group row">
                         @if($user->discord_id)
-                            <label for="discord">Discord</label>
-                            <input type="text" class="form-control" id="discord" value="{{ $user->discord_name }}" disabled>
+                            <label for="discord" class="col-12">Discord</label>
+                            <div class="col">
+                                <input type="text" class="form-control" id="discord" value="{{ $user->discord_name }}" disabled>
+                            </div>
+                            <div class="col-auto">
+                                <a id="remove-discord" class="btn btn-outline-warning"><i class="fas fa-times"></i></a>
+                            </div>
                         @else
-                            <a href="{{ route('auth.discord') }}" class="btn btn-outline-info"><i class="fab fa-discord"></i> Прикрепить аккаунт Discord</a>
-                        @endif
-                        @if($errors->has('vk'))
-                            <small class="form-text">{{ $errors->first('vk') }}</small>
+                            <div class="col-auto">
+                                <a href="{{ route('auth.discord') }}" class="btn btn-outline-info"><i class="fab fa-discord"></i> Прикрепить аккаунт Discord</a>
+                            </div>
                         @endif
                     </div>
                 </div>

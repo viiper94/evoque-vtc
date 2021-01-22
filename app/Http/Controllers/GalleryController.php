@@ -44,7 +44,7 @@ class GalleryController extends Controller{
                 }
             }
             return $image->save() ?
-                redirect()->route('gallery')->with(['success' => 'Скриншот успешно загружен'. ($image->visible ? '!' : ' и будет отображен в галлерее после модерации!')]) :
+                redirect()->route('gallery')->with(['success' => 'Скриншот успешно загружен'. ($image->visible ? '!' : ' и будет отображен в галерее после модерации!')]) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('gallery.add');

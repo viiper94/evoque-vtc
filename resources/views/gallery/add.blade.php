@@ -1,14 +1,14 @@
 @extends('layout.index')
 
 @section('title')
-    Добавление скриншота в Галлерею | @lang('general.vtc_evoque')
+    Добавление скриншота в Галерею | @lang('general.vtc_evoque')
 @endsection
 
 @section('content')
 
     <div class="container pt-5 pb-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary text-center">Добавление скриншота в Галлерею</h2>
+        <h2 class="mt-3 text-primary text-center">Добавление скриншота в Галерею</h2>
         <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="pt-3">

@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    Галлерея | @lang('general.vtc_evoque')
+    Галерея | @lang('general.vtc_evoque')
 @endsection
 
 @section('assets')
@@ -21,7 +21,7 @@
 @section('content')
     <section class="head-section">
         <div class="row h-100 justify-content-center align-items-center flex-column mx-0">
-            <h1 class="text-primary display-4 text-shadow">Галлерея</h1>
+            <h1 class="text-primary display-4 text-shadow">Галерея</h1>
             @can('create', \App\Gallery::class)
                 <a href="{{ route('gallery.add') }}" class="btn btn-outline-warning"><i class="fas fa-plus"></i> Загрузить фото</a>
             @endcan

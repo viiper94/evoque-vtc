@@ -17,7 +17,7 @@
                         <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('gallery') }}">Галлерея
+                        <a class="nav-link" href="{{ route('gallery') }}">Галерея
                             @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->can('toggle', \App\Gallery::class) && $gallery_c > 0)
                                 <span class="badge badge-danger">{{ $gallery_c }}</span>
                             @endif

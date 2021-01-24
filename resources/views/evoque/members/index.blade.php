@@ -134,12 +134,12 @@
                                                     <i class="fas fa-truck-pickup"></i>
                                                 </a>
                                             @else
-                                                <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}">
+                                                <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank">
                                                     <i class="fas fa-truck-pickup"></i>
                                                 </a>
                                             @endif
                                         @else
-                                            <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}">
+                                            <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}" target="_blank">
                                                 <i class="fas fa-truck-pickup"></i>
                                             </a>
                                         @endcan

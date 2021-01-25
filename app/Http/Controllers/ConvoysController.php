@@ -102,7 +102,9 @@ class ConvoysController extends Controller{
 
     public function edit(Request $request, $id, $booking = false){
         $this->authorize('update', Convoy::class);
-        $convoy = Convoy::findOrFail($id);
+        $convoy = Convoy::with(['audits' => function($query){
+            $query->limit(10)->orderBy('created_at', 'desc');
+        }])->where('id', $id)->first();
         if($request->ajax() && $request->input('action') == 'remove_img'){
             $attr = $request->input('target');
             $convoy->$attr = null;

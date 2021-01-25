@@ -4,9 +4,12 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use OwenIt\Auditing\Contracts\Auditable;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class Convoy extends Model{
+class Convoy extends Model implements Auditable{
+
+    use \OwenIt\Auditing\Auditable;
 
     protected $fillable = [
         'title',
@@ -37,6 +40,8 @@ class Convoy extends Model{
     ];
 
     protected $casts = [
+        'truck_public' => 'boolean',
+        'trailer_public' => 'boolean',
         'public' => 'boolean',
         'visible' => 'boolean',
         'booking' => 'boolean',

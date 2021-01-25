@@ -358,6 +358,43 @@
                 <button class="btn btn-outline-warning mx-1" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
             </div>
         </form>
+
+        @can('update', \App\Convoy::class)
+            @if(count($convoy->audits) > 0)
+                <div class="member-changelog mb-5">
+                    <h3 class="text-primary">История изменений</h3>
+                    <div class="changelog-item mb-3 table-responsive">
+                        <table class="table table-dark table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col">Кто</th>
+                                <th scope="col">Когда</th>
+                                <th scope="col">Что</th>
+                                <th scope="col">Было</th>
+                                <th scope="col">Стало</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($convoy->audits as $item)
+                                @if($item->old_values)
+                                    @foreach($item->old_values as $key => $value)
+                                        <tr>
+                                            <td class="text-primary">{{ $item->user->member->nickname }}</td>
+                                            <td>{{ $item->created_at->format('d.m.Y в H:i') }}</td>
+                                            <td>{{ $key }}</td>
+                                            <td class="text-danger font-weight-bold">{!! $value !!}</td>
+                                            <td class="text-success font-weight-bold">{!! $item->new_values[$key] !!}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            @endif
+        @endcan
+
     </div>
 
     <script>

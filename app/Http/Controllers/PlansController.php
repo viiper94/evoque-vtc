@@ -28,26 +28,29 @@ class PlansController extends Controller{
 //        3 => "['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30']",
     ];
 
-    public function plans(Request $request){
+    public function plans(){
         if(Auth::guest() || !Auth::user()->member) return abort(404);
         $days = [];
         $convoys = Convoy::whereDate('start_time', '>=', Carbon::today())->where('visible', '1')->get();
+
         for($i = 0; $i <= 7; $i++){
             $convoy_that_day = array();
-            foreach($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] as $type){
-                foreach($convoys as $convoy){
-                    if($convoy->start_time->format('d.m.Y') === Carbon::today()->addDays($i)->format('d.m.Y') && $convoy->type === $type){
-                        $convoy_that_day[$type] = $convoy;
-                        break;
-                    }else{
-                        $convoy_that_day[$type] = [];
-                    }
+            foreach($convoys as $convoy){
+                if($convoy->start_time->format('d.m.Y') === Carbon::today()->addDays($i)->format('d.m.Y')){
+                    $convoy_that_day[$convoy->type] = $convoy;
                 }
             }
+            foreach($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] as $type){
+                if(key_exists($type, $convoy_that_day)){
+                    continue;
+                }elseif($i !== 0){
+                    $convoy_that_day[$type] = [];
+                }
+            }
+            ksort($convoy_that_day);
             $days[Carbon::now()->addDays($i)->format('d.m')] = [
                 'date' => Carbon::now()->addDays($i),
-                'convoys' => $convoy_that_day,
-                'allowedToBook' => count($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')]) - count($convoy_that_day)
+                'convoys' => $convoy_that_day
             ];
         }
         return view('evoque.convoys.plans.index', [
@@ -81,7 +84,7 @@ class PlansController extends Controller{
         $this->authorize('book', Convoy::class);
         $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->where('type', $type)->get();
         if($offset === '0') return redirect()->route('evoque.convoys.plans')->withErrors(['На сегодня уже нельзя бронировать конвои!']);
-        if(!in_array($type, [0, 1, 2])) return redirect()->route('evoque.convoys.plans')->withErrors(['Что то пошло не так =(']);
+        if(!in_array($type, [0, 1, 2, 3])) return redirect()->route('evoque.convoys.plans')->withErrors(['Что то пошло не так =(']);
         if(count($convoy_that_day) > 0) return redirect()->route('evoque.convoys.plans')->withErrors(['Уже забронирован конвой на этот период!']);
         $convoy = new Convoy([
             'title' => 'Закрытый конвой',

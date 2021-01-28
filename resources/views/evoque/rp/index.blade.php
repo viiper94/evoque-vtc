@@ -113,7 +113,7 @@
                     @foreach(\App\RpStats::$stages[$game] as $km => $reward)
                         <tr>
                             <th>{{ $loop->iteration }}</th>
-                            <th class="w-25">{{ $km }}</th>
+                            <th class="w-25 stage-{{ $loop->iteration }}">{{ $km }}</th>
                             <td>{{ $reward }}</td>
                         </tr>
                     @endforeach

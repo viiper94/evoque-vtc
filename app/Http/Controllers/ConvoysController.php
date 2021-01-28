@@ -260,7 +260,7 @@ class ConvoysController extends Controller{
             'value' => Url::to('/').'/images/convoys/'.$convoy->route[0]
         ]);
 
-        $curl = curl_init('https://discord.com/api/webhooks/727068749601046530/2CJ_k6ML8Iflt2i_YRv_RbYNFKdgwcY1IjRZcvc-kC5KWJiQiVjkwm3iHtdFD7AYC5Bb');
+        $curl = curl_init(env('DISCORD_WEBHOOK_URL'));
         curl_setopt_array($curl, [
             CURLOPT_HTTPHEADER => [
                 "Content-Type: application/json"

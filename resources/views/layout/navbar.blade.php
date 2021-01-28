@@ -25,12 +25,20 @@
                         <li class="nav-item @if(Route::current() && Request::is('apply'))active @endif">
                             <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                         </li>
+                        <li class="nav-item @if(Route::current() && Request::is('gallery'))active @endif">
+                            <a class="nav-link" href="{{ route('gallery') }}">Галерея</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('auth.steam') }}">Войти <i class="fab fa-steam"></i></a>
                         </li>
                     @else
-                        <li class="nav-item @if(Route::current()->getName() === 'home')active @endif">
-                            <a class="nav-link" href="{{ route('home') }}">Главная</a>
+                        <li class="nav-item @if(Route::current()->getName() === 'gallery')active @endif">
+                            <a class="nav-link" href="{{ route('gallery') }}">
+                                Галерея
+                                @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->can('toggle', \App\Gallery::class) && $gallery_c > 0)
+                                    <span class="badge badge-danger">{{ $gallery_c }}</span>
+                                @endif
+                            </a>
                         </li>
                         <li class="nav-item dropdown @if(Route::current() && in_array(Route::current()->getName(), ['evoque.convoys.tab', 'evoque.convoys', 'convoys']))active @endif">
                             <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

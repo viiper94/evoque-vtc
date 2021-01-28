@@ -42,8 +42,8 @@
                             @if($member->topRole() == $role->id && $member->stat)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>
-                                        @can('manage_table')
+                                    <td class="stage-{{ $member->stat->getStage() }}">
+                                        @can('updateRpStats')
                                             <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><b>{{ $member->nickname }}</b></a>
                                         @else
                                             <b>{{ $member->nickname }}</b>

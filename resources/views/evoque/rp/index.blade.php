@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td class="stage-{{ $member->stat->getStage() }}">
-                                        @can('updateRpStats')
+                                        @can('updateRpStats', \App\Member::class)
                                             <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><b>{{ $member->nickname }}</b></a>
                                         @else
                                             <b>{{ $member->nickname }}</b>

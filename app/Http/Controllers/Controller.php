@@ -32,45 +32,38 @@ class Controller extends BaseController{
     }
 
     public function apply(Request $request){
-        if($request->ajax()){
-            $tmp = new Client();
-            $tmp_data = $tmp->player($request->input('id'))->get();
-            $steam = new Steam();
-            return response()->json([
-                'tmp_data' => [
-                    'id' => $tmp_data->getId(),
-                    'name' => $tmp_data->getName(),
-                    'steamid64' => $tmp_data->getSteamID64(),
-                    'vtc' => $tmp_data->getCompanyId(),
-                    'tmp_join_date' => $tmp_data->getJoinDate()->format('Y-m-d'),
-                ],
-                'steam_data' => $steam->getPlayerData($tmp_data->getSteamID64()),
-                'steam_games' => $steam->getSCSGamesData($tmp_data->getSteamID64())
-            ]);
-        }
-
         if($request->post()){
             $this->validate($request, [
                 'name' => 'required|string',
                 'nickname' => 'required|string',
                 'age' => 'required|numeric',
-                'hours_played' => 'required|numeric',
                 'vk_link' => 'required|url',
-                'steam_link' => 'required|url',
+                'discord_name' => 'required|url',
                 'tmp_link' => 'required|url',
                 'rules_agreed' => 'required',
                 'requirements_agreed' => 'required',
                 'terms_agreed' => 'required',
             ]);
+
+            $tmp = new Client();
+            $steam = new Steam();
+            $tmp_data = $tmp->player($request->input('id'))->get();
+            $steam_data = $steam->getPlayerData($tmp_data->getSteamID64());
+            $steam_games = $steam->getSCSGamesData($tmp_data->getSteamID64());
+
             $application = new Recruitment();
             $application->fill($request->post());
+            $application->steam_link = $steam_data['profileurl'];
+            $application->nickname = $tmp_data->getName();
+            $application->hours_played = $steam_games['ets2'];
+            $application->tmp_join_date = $tmp_data->getJoinDate()->format('Y-m-d');
             $application->have_mic = $request->input('have_mic') == 'on';
             $application->have_ts3 = $request->input('have_ts3') == 'on';
-            $application->have_ats = $request->input('have_ats') == 'on';
+            $application->have_ats = $steam_games['ets2'] ? true : false;
             $application->referral = htmlentities(trim($request->input('referral')));
             $application->status = 0;
             return $application->save() ?
-                redirect()->route('apply')->with(['success' => 'Заявка успешно подана! Наш Отдел кадров скоро свяжется с вами через ВК.']) :
+                redirect()->route('apply')->with(['success' => 'Заявка успешно подана! Наш Отдел кадров скоро свяжется с вами.']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('apply');

@@ -112,50 +112,29 @@
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="tmp_link">Ссылка на Ваш аккаунт TruckersMP</label>
-                    <div class="form-row mx-0">
-                        <input type="url" class="form-control col" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
-                        <input type="hidden" id="tmp_join_date" name="tmp_join_date">
-                        <button class="btn btn-outline-warning ml-1" data-checked="0" type="button" id="check_tmp_link" data-token="{{ csrf_token() }}" disabled><i class="fas fa-check-circle"></i> Проверить</button>
-                    </div>
+                    <input type="url" class="form-control" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
                     @if($errors->has('tmp_link'))
                         <small class="form-text">{{ $errors->first('tmp_link') }}</small>
                     @endif
                 </div>
-            </div>
-            <div class="row steam-row" style="display: none">
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="steam_link">Аккаунт Steam</label>
-                    <input type="url" class="form-control" id="steam_link" name="steam_link" value="{{ old('steam_link') }}" readonly>
-                    @if($errors->has('steam_link'))
-                        <small class="form-text">{{ $errors->first('steam_link') }}</small>
-                    @endif
-                </div>
-                <div class="form-group col-md-6 col-sm-12">
-                    <label for="hours_played">Сколько сыграно часов в ETS2 в Steam</label>
-                    <input type="text" class="form-control" id="hours_played" name="hours_played" value="{{ old('hours_played') }}" readonly>
-                    @if($errors->has('hours_played'))
-                        <small class="form-text">{{ $errors->first('hours_played') }}</small>
-                    @endif
-                </div>
-                <div class="form-group col-sm-12">
-                    <label for="nickname">Игровой ник</label>
-                    <input type="text" class="form-control" id="nickname" name="nickname" value="{{ old('nickname') }}" readonly>
-                    @if($errors->has('nickname'))
-                        <small class="form-text">{{ $errors->first('nickname') }}</small>
+                    <label for="discord_name">
+                        Ваше имя в Дискорд
+                    </label>
+                    <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="Найти своё имя можно в
+                        клиенте или веб-версии Дискорда в самом низу слева. Возле вашего аватара будет ваш ник и дискриминатор (4 цифры).
+                        Чтобы их скопировать, достаточно нажать на них один раз." class="text-light">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                    <input type="url" class="form-control" id="discord_name" name="discord_name" value="{{ old('discord_name') }}" placeholder="Имя#0001" required>
+                    @if($errors->has('discord_name'))
+                        <small class="form-text">{{ $errors->first('discord_name') }}</small>
                     @endif
                 </div>
             </div>
-            <div class="custom-control custom-checkbox mb-2">
+            <div class="custom-control custom-checkbox mb-4">
                 <input type="checkbox" class="custom-control-input" id="have_mic" name="have_mic" @if(old('have_mic')) checked @endif>
                 <label class="custom-control-label" for="have_mic">Есть микрофон</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="have_ts3" name="have_ts3" @if(old('have_ts3')) checked @endif>
-                <label class="custom-control-label" for="have_ts3">Есть Discord</label>
-            </div>
-            <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="have_ats" name="have_ats" @if(old('have_ats')) checked @endif>
-                <label class="custom-control-label" for="have_ats">Наличие American Truck Simulator</label>
             </div>
             <div class="form-group">
                 <label for="referral">Откуда Вы узнали о нас?</label>

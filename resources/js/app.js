@@ -13,16 +13,22 @@ $(document).ready(function(){
 
     $('#rules_agreed, #requirements_agreed, #terms_agreed').change(function(){
         if($('#rules_agreed').prop('checked') && $('#terms_agreed').prop('checked') &&
-            $('#requirements_agreed').prop('checked') && $('#check_tmp_link').data('checked') === '1'){
+            $('#requirements_agreed').prop('checked')){
             $('#submit_btn').prop('disabled', false).removeClass('disabled');
         }else{
             $('#submit_btn').prop('disabled', true).addClass('disabled');
         }
     });
 
-    $('#vk_link').keyup(function(){
+    $('#vk_link, #tmp_link, #discord_name').keyup(function(){
         let value = $(this).val();
-        let result = value.match(/((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/);
+        let regex = {
+            'vk_link': /((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/,
+            'tmp_link': /((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/,
+            'discord_name': /^.+#[0-9]{4}$/,
+        }
+        console.log($(this));
+        let result = value.match(regex[$(this).id]);
         if(result && result[3]){
             $(this).addClass('is-valid').removeClass('is-invalid');
         }else{
@@ -72,59 +78,6 @@ $(document).ready(function(){
             },
             complete : function(){
                 $('#plate-img ~ .spinner-border').remove();
-            }
-        });
-    });
-
-    $('#tmp_link').keyup(function(){
-        let value = $(this).val();
-        let result = value.match(/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/);
-        if(result && result[3]){
-            $('#check_tmp_link').prop('disabled', false).attr('data-id', result[3]);
-            $(this).addClass('is-valid').removeClass('is-invalid');
-        }else{
-            $('#check_tmp_link').prop('disabled', true).attr('data-id', null).data('checked', '0');
-            $(this).addClass('is-invalid').removeClass('is-valid');
-            $('.steam-row').hide();
-            $('#steam_link').val('');
-            $('#nickname').val('');
-            $('#hours_played').val('');
-            $('#have_ats').prop('checked', false);
-            $('#submit_btn').prop('disabled', true).addClass('disabled');
-        }
-    });
-
-    $('#check_tmp_link').click(function(){
-        let button = $(this);
-        $.ajax({
-            cache: false,
-            dataType : 'json',
-            type : 'post',
-            data : {
-                '_token' : button.data('token'),
-                'id' : button.data('id')
-            },
-            beforeSend : function(){
-                button.find('i').removeClass('fa-check-circle').html(getPreloaderHtml());
-                button.prop('disabled', true);
-            },
-            success : function(response){
-                if(response.tmp_data && response.steam_data){
-                    $('#steam_link').val(response.steam_data.profileurl);
-                    $('#nickname').val(response.tmp_data.name);
-                    $('#hours_played').val(response.steam_games.ets2);
-                    $('#tmp_join_date').val(response.tmp_data.tmp_join_date);
-                    $('.steam-row').show();
-                    if(response.steam_games.ats) $('#have_ats').prop('checked', true);
-                    button.data('checked', '1');
-                    if($('#rules_agreed').prop('checked') && $('#requirements_agreed').prop('checked')){
-                        $('#submit_btn').prop('disabled', false).removeClass('disabled');
-                    }
-                }
-            },
-            complete : function(){
-                button.find('.spinner-border').remove();
-                button.prop('disabled', false).find('i').addClass('fa-check-circle');
             }
         });
     });

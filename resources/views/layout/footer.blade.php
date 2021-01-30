@@ -49,7 +49,7 @@
             </div>
             <div class="col-xl-auto col-md-6 col-sm-12 copyright">
                 <h2>@lang('general.vtc_evoque')</h2>
-                <span class="text-muted">Все права защищены &copy; {{ date('Y') }}</span>
+                <span class="text-muted">Все права защищены &copy; 2016 - {{ date('Y') }}</span>
             </div>
         </div>
     </div>

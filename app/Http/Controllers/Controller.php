@@ -35,10 +35,9 @@ class Controller extends BaseController{
         if($request->post()){
             $this->validate($request, [
                 'name' => 'required|string',
-                'nickname' => 'required|string',
                 'age' => 'required|numeric',
                 'vk_link' => 'required|url',
-                'discord_name' => 'required|url',
+                'discord_name' => 'nullable|string',
                 'tmp_link' => 'required|url',
                 'rules_agreed' => 'required',
                 'requirements_agreed' => 'required',
@@ -47,7 +46,7 @@ class Controller extends BaseController{
 
             $tmp = new Client();
             $steam = new Steam();
-            $tmp_data = $tmp->player($request->input('id'))->get();
+            $tmp_data = $tmp->player(explode('user/', $request->input('tmp_link'))[1])->get();
             $steam_data = $steam->getPlayerData($tmp_data->getSteamID64());
             $steam_games = $steam->getSCSGamesData($tmp_data->getSteamID64());
 
@@ -58,7 +57,6 @@ class Controller extends BaseController{
             $application->hours_played = $steam_games['ets2'];
             $application->tmp_join_date = $tmp_data->getJoinDate()->format('Y-m-d');
             $application->have_mic = $request->input('have_mic') == 'on';
-            $application->have_ts3 = $request->input('have_ts3') == 'on';
             $application->have_ats = $steam_games['ets2'] ? true : false;
             $application->referral = htmlentities(trim($request->input('referral')));
             $application->status = 0;

@@ -72,9 +72,17 @@
                                     В TruckersMP с: <b>{{ $application->tmp_join_date->isoFormat('LL') }}</b>
                                 @endif
                             </p>
-                            <p class="mb-0">Микрофон: @if($application->have_mic) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
-                            <p class="mb-0">Discord: @if($application->have_ts3) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
-                            <p>Наличие ATS: @if($application->have_ats) <span class="text-success">Есть</span> @else <span class="text-danger">Нету</span> @endif</p>
+                                <p class="mb-0">Discord:
+                                    @if($application->discord_name)
+                                        <span class="text-success">{{ $application->discord_name }}</span>
+                                    @elseif($application->have_ts3)
+                                        <span class="text-success">Есть</span>
+                                    @else
+                                        <span class="text-danger">Нет</span>
+                                    @endif
+                                </p>
+                                <p class="mb-0">Микрофон: @if($application->have_mic) <span class="text-success">Есть</span> @else <span class="text-danger">Нет</span> @endif</p>
+                            <p>Наличие ATS: @if($application->have_ats) <span class="text-success">Есть</span> @else <span class="text-danger">Нет</span> @endif</p>
                             @if(isset($application->referral))
                                 <p class="referral mb-0">Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
                             @endif

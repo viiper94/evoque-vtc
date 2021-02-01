@@ -33,12 +33,6 @@
                     </div>
                     <p>Ваш возраст должен быть не менее 17 лет</p>
                 </li>
-                <li class="row mt-5 ml-1 ml-md-0">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <p>Вы не должны состоять в других ВТК</p>
-                </li>
                 <li class="row mt-5 ml-1 ml-md-0" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
                         <i class="fab fa-steam-symbol"></i>
@@ -55,9 +49,9 @@
                 </li>
                 <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
-                        <i class="fas fa-history"></i>
+                        <i class="fab fa-vk"></i>
                     </div>
-                    <p>Не более 2-х активных наказаний в истории банов на сайте TruckersMP</p>
+                    <p>Ваши личные сообщения ВК должны быть открытыми</p>
                 </li>
                 <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
@@ -88,14 +82,14 @@
             @csrf
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="name">Имя и фамилия</label>
+                    <label for="name">Имя и фамилия*</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
                     @if($errors->has('name'))
                         <small class="form-text">{{ $errors->first('name') }}</small>
                     @endif
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="age">Ваш возраст</label>
+                    <label for="age">Ваш возраст*</label>
                     <input type="number" class="form-control" name="age" id="age" min="10" value="{{ old('age') }}" required>
                     @if($errors->has('age'))
                         <small class="form-text">{{ $errors->first('age') }}</small>
@@ -104,14 +98,14 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="vk_link">Ссылка на Ваш профиль ВКонтакте</label>
+                    <label for="vk_link">Ссылка на Ваш профиль ВКонтакте*</label>
                     <input type="url" class="form-control" id="vk_link" name="vk_link" value="{{ old('vk_link') }}" required>
                     @if($errors->has('vk_link'))
                         <small class="form-text">{{ $errors->first('vk_link') }}</small>
                     @endif
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
-                    <label for="tmp_link">Ссылка на Ваш аккаунт TruckersMP</label>
+                    <label for="tmp_link">Ссылка на Ваш аккаунт TruckersMP*</label>
                     <input type="url" class="form-control" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
                     @if($errors->has('tmp_link'))
                         <small class="form-text">{{ $errors->first('tmp_link') }}</small>
@@ -126,7 +120,7 @@
                         Чтобы их скопировать, достаточно нажать на них один раз." class="text-light">
                         <i class="fas fa-question-circle"></i>
                     </a>
-                    <input type="url" class="form-control" id="discord_name" name="discord_name" value="{{ old('discord_name') }}" placeholder="Имя#0001" required>
+                    <input type="text" class="form-control" id="discord_name" name="discord_name" value="{{ old('discord_name') }}" placeholder="Имя#0001">
                     @if($errors->has('discord_name'))
                         <small class="form-text">{{ $errors->first('discord_name') }}</small>
                     @endif

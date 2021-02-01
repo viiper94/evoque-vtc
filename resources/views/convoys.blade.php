@@ -114,9 +114,6 @@
                         <img src="/images/convoys/{{ $item }}">
                     @endforeach
                 </div>
-{{--                @foreach($convoy->route as $item)--}}
-{{--                    <a href="/images/convoys/{{ $item }}" target="_blank"><img src="/images/convoys/{{ $item }}" class="text-shadow-m"></a>--}}
-{{--                @endforeach--}}
             </section>
         </div>
 
@@ -217,28 +214,6 @@
                                 <i class="fas fa-trailer"></i>
                             </div>
                         </li>
-{{--                        @if(isset($convoy->trailer_tuning))--}}
-{{--                            <li class="row justify-content-end">--}}
-{{--                                <div class="mr-4 mb-4">--}}
-{{--                                    <p>Окрас:</p>--}}
-{{--                                    <h4>{{ $convoy->trailer_tuning }}</h4>--}}
-{{--                                </div>--}}
-{{--                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">--}}
-{{--                                    <i class="fas fa-star"></i>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                        @endif--}}
-{{--                        @if(isset($convoy->trailer_paint))--}}
-{{--                            <li class="row justify-content-end">--}}
-{{--                                <div class="mr-4 mb-4">--}}
-{{--                                    <p>Окрас:</p>--}}
-{{--                                    <h4>{{ $convoy->trailer_paint }}</h4>--}}
-{{--                                </div>--}}
-{{--                                <div class="convoy-icon pl-5 pr-4 pb-4 text-left d-flex align-items-center">--}}
-{{--                                    <i class="fas fa-fill"></i>--}}
-{{--                                </div>--}}
-{{--                            </li>--}}
-{{--                        @endif--}}
                         @if(isset($convoy->cargo))
                             <li class="row justify-content-end">
                                 <div class="mr-4 mb-4">
@@ -256,7 +231,6 @@
                     <div class="fotorama w-100 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
                         <img src="/images/convoys/{{ $convoy->trailer_image }}">
                     </div>
-{{--                    <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank"><img src="/images/convoys/{{ $convoy->trailer_image }}" class="text-shadow-m"></a>--}}
                 </section>
             </div>
             <section class="convoy-note pb-5 m-auto">
@@ -270,7 +244,7 @@
 
     @else
         <div class="row justify-content-center pt-5 pb-5">
-            <h1 class="text-center text-primary m-5">Ближайших открытых конвоев еще нет!</h1>
+            <h1 class="text-center text-primary m-5">Мы проводим открытые мероприятия по вторникам. Ближайший конвой уже готовится!</h1>
         </div>
     @endif
 

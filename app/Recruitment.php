@@ -25,14 +25,10 @@ class Recruitment extends Model{
         'name',
         'nickname',
         'age',
-        'hours_played',
         'vk_link',
-        'steam_link',
         'tmp_link',
         'have_mic',
-        'have_ts3',
-        'have_ats',
-        'tmp_join_date'
+        'discord_name',
     ];
 
     public $statuses = [

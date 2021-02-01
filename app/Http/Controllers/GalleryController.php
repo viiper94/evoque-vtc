@@ -76,7 +76,7 @@ class GalleryController extends Controller{
         $image = Gallery::findOrFail($id);
         $image->visible = !$image->visible;
         return $image->save() ?
-            redirect()->route('gallery')->with(['success' => 'Скриншот успешно скрыт!']) :
+            redirect()->route('gallery')->with(['success' => 'Скриншот успешно '. ($image->visible ? 'опубликован!' : 'скрыт!')]) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

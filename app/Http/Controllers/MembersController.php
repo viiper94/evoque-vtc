@@ -48,10 +48,10 @@ class MembersController extends Controller{
             $member = Member::with('role')->findOrFail($id);
             $this->authorize('update', Member::class);
             $member->fill($request->post());
-            $member->visible = $request->input('visible') === 'on';
+            $member->visible = $request->input('visible') === 'on' ? 1 : 0;
             $money = $request->input('money');
             $member->money = isset($money) ? str_replace(',', '.', $request->input('money')) : null;
-            $member->sort = $request->input('sort') === 'on';
+            $member->sort = $request->input('sort') === 'on' ? 1 : 0;
             $member->join_date = Carbon::parse($request->input('join_date'))->format('Y-m-d');
             $member->trainee_until = $request->input('trainee_until') ? Carbon::parse($request->input('trainee_until'))->format('Y-m-d') : null;
             $member->on_vacation_till = $request->input('on_vacation_till') ? Carbon::parse($request->input('on_vacation_till'))->format('Y-m-d') : null;

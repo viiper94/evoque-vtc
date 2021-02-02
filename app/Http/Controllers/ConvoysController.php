@@ -63,10 +63,10 @@ class ConvoysController extends Controller{
             $convoy = new Convoy();
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
-            $convoy->visible = $request->input('visible') === 'on';
-            $convoy->public = $request->input('public') === 'on';
-            $convoy->truck_public = $request->input('truck_public') === 'on';
-            $convoy->trailer_public = $request->input('trailer_public') === 'on';
+            $convoy->visible = $request->input('visible') === 'on' ? 1 : 0;
+            $convoy->public = $request->input('public') === 'on' ? 1 : 0;
+            $convoy->truck_public = $request->input('truck_public') === 'on' ? 1 : 0;
+            $convoy->trailer_public = $request->input('trailer_public') === 'on' ? 1 : 0;
             foreach($request->files as $key => $file){
                 if($key === 'route' && is_array($file)){
                     $route_images = array();
@@ -116,11 +116,11 @@ class ConvoysController extends Controller{
 //            dd($request->files);
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
-            $convoy->visible = $request->input('visible') === 'on';
-            $convoy->public = $request->input('public') === 'on';
+            $convoy->visible = $request->input('visible') === 'on' ? 1 : 0;
+            $convoy->public = $request->input('public') === 'on' ? 1 : 0;
             $convoy->dlc = $request->input('dlc') ?? [];
-            $convoy->truck_public = $request->input('truck_public') === 'on';
-            $convoy->trailer_public = $request->input('trailer_public') === 'on';
+            $convoy->truck_public = $request->input('truck_public') === 'on' ? 1 : 0;
+            $convoy->trailer_public = $request->input('trailer_public') === 'on' ? 1 : 0;
             foreach($request->files as $key => $file){
                 $convoy->deleteImages(public_path('/images/convoys/'), [$key]);
                 if($key === 'route' && is_array($file)){

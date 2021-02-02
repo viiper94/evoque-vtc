@@ -249,7 +249,7 @@
                 <div class="member-changelog mb-5">
                     <h3 class="text-primary">История изменений</h3>
                     <div class="changelog-item mb-3 table-responsive">
-                        <table class="table table-dark table-bordered table-hover">
+                        <table class="table table-sm table-dark table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th scope="col">Кто</th>

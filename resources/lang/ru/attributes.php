@@ -1,0 +1,49 @@
+<?php
+
+return [
+
+    // shared
+    'public' => 'Опубликован(-а)',
+    'visible' => 'Видимый(-а)',
+    'title' => 'Название',
+    'comment' => 'Комментарий',
+    'created_at' => 'Создан(-а)',
+    'updated_at' => 'Обновлен(-а)',
+
+    // convoy
+    'start_time' => 'Время выезда по МСК',
+    'server' => 'Сервер',
+    'communication' => 'Связь',
+    'lead' => 'Ведущий',
+    'booked_by_id' => 'Забронировал',
+    'truck' => 'Тягач',
+    'truck_tuning' => 'Тюнинг тягача',
+    'truck_paint' => 'Окрас тягача',
+    'truck_image' => 'Изображение тягача',
+    'trailer' => 'Прицеп (основной)',
+    'trailer_tuning' => 'Тюнинг прицепа',
+    'trailer_paint' => 'Окрас прицепа',
+    'trailer_image' => 'Изображение прицепа',
+    'cargo' => 'Груз',
+    'route' => 'Маршрут',
+    'communication_link' => 'Ссылка на сервер',
+    'communication_channel' => 'Канал на сервере',
+    'start_city' => 'Старт из',
+    'start_company' => 'Место старта',
+    'rest_city' => 'Перерыв в',
+    'rest_company' => 'Место отдыха',
+    'finish_city' => 'Финиш в',
+    'finish_company' => 'Место финиша',
+    'alt_trailer_image' => 'Изображение прицепа без ДЛС',
+    'alt_trailer' => 'Прицеп (без ДЛС)',
+    'alt_trailer_tuning' => 'Тюнинг прицепа без ДЛС',
+    'alt_trailer_paint' => 'Окрас прицепа без ДЛС',
+    'alt_cargo' => 'Груз без ДЛС',
+    'dlc' => 'Необходимые ДЛС',
+    'trailer_public' => 'Показывать прицеп для всех',
+    'truck_public' => 'Показывать тягач для всех',
+    'booking' => 'Бронь',
+    'type' => 'Тип',
+
+
+];

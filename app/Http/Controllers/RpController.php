@@ -71,7 +71,8 @@ class RpController extends Controller{
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.rp.add', [
-            'report' => $report
+            'report' => $report,
+            'stats' => RpStats::where('member_id', Auth::user()->member->id)->get()
         ]);
     }
 

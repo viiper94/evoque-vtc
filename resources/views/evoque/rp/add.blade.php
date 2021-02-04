@@ -17,6 +17,9 @@
         <form method="post" enctype="multipart/form-data">
             @csrf
             <h4>1. Загрузите скриншоты</h4>
+            @foreach($stats as $stat)
+                <p class="mb-0  text-muted">Ваш текущий уровень в {{ strtoupper($stat->game) }} - <b>{{ $stat->level }}</b></p>
+            @endforeach
             <div class="row">
                 <div class="form-group col-md-4 col-xs-12">
                     <div class="custom-file custom-file-dark mb-3">

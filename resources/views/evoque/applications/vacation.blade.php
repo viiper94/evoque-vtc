@@ -5,8 +5,9 @@
 @endsection
 
 @section('assets')
-    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
-    <script src="/js/jquery.datetimepicker.full.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/daterangepicker/daterangepicker.css">
+    <script src="/js/daterangepicker/moment.min.js"></script>
+    <script src="/js/daterangepicker/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
     <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
@@ -38,32 +39,40 @@
     </div>
 
     <script>
-        $('#vacation_till').datetimepicker({
-            i18n:{
-                ru:{
-                    months:[
-                        'Январь','Февраль','Март','Апрель',
-                        'Май','Июнь','Июль','Август',
-                        'Сентябрь','Октябрь','Ноябрь','Декабрь',
-                    ],
-                    dayOfWeek:[
-                        "Вс", "Пн", "Вт", "Ср",
-                        "Чт", "Пт", "Сб",
-                    ]
-                }
+        $('#vacation_till').daterangepicker({
+            locale:  {
+                "format": "DD.MM.YYYY",
+                "daysOfWeek": [
+                    "Вс",
+                    "Пн",
+                    "Вт",
+                    "Ср",
+                    "Чт",
+                    "Пт",
+                    "Сб"
+                ],
+                "monthNames": [
+                    "Январь",
+                    "Февраль",
+                    "Март",
+                    "Апрель",
+                    "Май",
+                    "Июнь",
+                    "Июль",
+                    "Август",
+                    "Сентябрь",
+                    "Октябрь",
+                    "Ноябрь",
+                    "Декабрь"
+                ],
+                "firstDay": 1
             },
-            format: 'd.m.Y',
+            autoApply: true,
             minDate: 0,
-            maxDate: '{{ \Carbon\Carbon::now()->addDays(14)->format('Y/m/d') }}',
-            lang: 'ru',
-            step: 30,
-            theme: 'dark',
-            dayOfWeekStart: '1',
-            defaultTime: '19:30',
-            timepicker: false,
-            scrollInput: false
+            maxSpan: {
+                "days": 14
+            }
         });
-        $.datetimepicker.setLocale('ru');
     </script>
 
     <script>

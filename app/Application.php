@@ -10,11 +10,11 @@ class Application extends Model{
         'created_at',
         'updated_at',
         'deleted_at',
-        'vacation_till'
     ];
 
     protected $casts = [
-        'new_rp_profile' => 'array'
+        'new_rp_profile' => 'array',
+        'vacation_till' => 'array',
     ];
 
     public $categories = [

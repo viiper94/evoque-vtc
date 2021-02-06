@@ -127,14 +127,17 @@ class ApplicationsController extends Controller{
         $this->authorize('createVacation', Application::class);
         if($request->post()){
             $this->validate($request, [
-                'vacation_till' => 'required|date_format:d.m.Y',
+                'vacation_till' => 'required|string',
                 'reason' => 'nullable|string'
             ]);
             $app = new Application();
             $app->member_id = Auth::user()->member->id;
             $app->old_nickname = Auth::user()->member->nickname;
             $app->category = 1;
-            $app->vacation_till = Carbon::parse($request->input('vacation_till'))->format('Y-m-d');
+            $app->vacation_till = [
+                'from' => Carbon::parse(explode(' - ', $request->input('vacation_till'))[0])->format('Y-m-d'),
+                'to' => Carbon::parse(explode(' - ', $request->input('vacation_till'))[1])->format('Y-m-d'),
+            ];
             $app->reason = $request->input('reason');
             return $app->save() ?
                 redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :

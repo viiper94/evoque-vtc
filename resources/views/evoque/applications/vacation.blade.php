@@ -5,9 +5,6 @@
 @endsection
 
 @section('assets')
-    <link rel="stylesheet" type="text/css" href="/js/daterangepicker/daterangepicker.css">
-    <script src="/js/daterangepicker/moment.min.js"></script>
-    <script src="/js/daterangepicker/daterangepicker.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
     <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
@@ -39,39 +36,17 @@
     </div>
 
     <script>
-        $('#vacation_till').daterangepicker({
-            locale:  {
-                "format": "DD.MM.YYYY",
-                "daysOfWeek": [
-                    "Вс",
-                    "Пн",
-                    "Вт",
-                    "Ср",
-                    "Чт",
-                    "Пт",
-                    "Сб"
-                ],
-                "monthNames": [
-                    "Январь",
-                    "Февраль",
-                    "Март",
-                    "Апрель",
-                    "Май",
-                    "Июнь",
-                    "Июль",
-                    "Август",
-                    "Сентябрь",
-                    "Октябрь",
-                    "Ноябрь",
-                    "Декабрь"
-                ],
-                "firstDay": 1
-            },
-            autoApply: true,
-            minDate: 0,
-            maxSpan: {
-                "days": 14
-            }
+        const picker = new Litepicker({
+            element: document.getElementById('vacation_till'),
+            inlineMode: true,
+            lang: 'ru-RU',
+            fprmat: 'MM-DD-YYYY',
+            maxDays: 14,
+            minDate: Date.now(),
+            singleMode: false,
+            showTooltip: false,
+            numberOfMonths: 2,
+            numberOfColumns: 2
         });
     </script>
 

@@ -54,7 +54,10 @@ class MembersController extends Controller{
             $member->sort = $request->input('sort') === 'on' ? 1 : 0;
             $member->join_date = Carbon::parse($request->input('join_date'))->format('Y-m-d');
             $member->trainee_until = $request->input('trainee_until') ? Carbon::parse($request->input('trainee_until'))->format('Y-m-d') : null;
-            $member->on_vacation_till = $request->input('on_vacation_till') ? Carbon::parse($request->input('on_vacation_till'))->format('Y-m-d') : null;
+            $member->on_vacation_till = $request->input('on_vacation_till') ? [
+                'from' => explode(' - ', $request->input('on_vacation_till'))[0],
+                'to' => explode(' - ', $request->input('on_vacation_till'))[1],
+            ] : null;
             if(Auth::user()->can('updateRoles', $member)){
                 $member->role()->detach();
                 foreach($request->input('roles') as $role){

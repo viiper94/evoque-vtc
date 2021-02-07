@@ -18,8 +18,8 @@
         <form method="post" class="mb-5">
             @csrf
             <div class="form-group">
-                <label for="vacation_till">Отпуск до</label>
-                <input type="text" class="form-control" id="vacation_till" name="vacation_till" value="{{ old('vacation_till') }}" readonly required>
+                <label for="vacation_till">Выберите период отпуска (от и до)</label><br>
+                <input type="hidden" class="form-control" id="vacation_till" name="vacation_till" value="{{ old('vacation_till') }}" readonly required>
                 @error('vacation_till')
                     <small class="form-text">{{ $message }}</small>
                 @enderror
@@ -40,7 +40,6 @@
             element: document.getElementById('vacation_till'),
             inlineMode: true,
             lang: 'ru-RU',
-            fprmat: 'MM-DD-YYYY',
             maxDays: 14,
             minDate: Date.now(),
             singleMode: false,

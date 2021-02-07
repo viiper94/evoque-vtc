@@ -90,9 +90,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="row">
-                    <h5 class="col-12">Игровая статистика</h5>
-                    <div class="col-md-4">
+                <div class="row my-3">
+                    <div class="col">
+                        <h5>Игровая статистика</h5>
                         <div class="form-group">
                             <label for="scores">Баллы</label>
                             <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}" placeholder="∞">
@@ -100,8 +100,6 @@
                                 <small class="form-text">{{ $errors->first('scores') }}</small>
                             @endif
                         </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="money">Эвики</label>
                             <input type="text" class="form-control" id="money" name="money" value="{{ $member->money }}" placeholder="∞">
@@ -109,8 +107,6 @@
                                 <small class="form-text">{{ $errors->first('money') }}</small>
                             @endif
                         </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="convoys">Посещение конвоев за неделю</label>
                             <input type="number" class="form-control" id="convoys" name="convoys" value="{{ $member->convoys }}" required>
@@ -119,10 +115,15 @@
                             @endif
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <h5 class="col-12">Отпуски</h5>
-                    <div class="col-md-6">
+                    <div class="col-auto">
+                        <h5>Отпуски</h5>
+                        <div class="form-group">
+                            <label for="on_vacation_till">Последний отпуск</label> <br>
+                            <input type="hidden" id="on_vacation_till" name="on_vacation_till" value="{{ $member->on_vacation_till ? $member->on_vacation_till['from'].' - '.$member->on_vacation_till['to'] : '' }}">
+                            @if($errors->has('on_vacation_till'))
+                                <small class="form-text">{{ $errors->first('on_vacation_till') }}</small>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <label for="vacations">Использовано отпусков</label>
                             <input type="number" class="form-control" id="vacations" name="vacations" value="{{ $member->vacations }}">
@@ -131,21 +132,12 @@
                             @endif
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="on_vacation_till">В отпуске до</label>
-                            <input type="text" class="form-control" id="on_vacation_till" name="on_vacation_till" value="{{ $member->on_vacation_till ? $member->on_vacation_till->format('d.m.Y') : '' }}" autocomplete="off">
-                            @if($errors->has('on_vacation_till'))
-                                <small class="form-text">{{ $errors->first('on_vacation_till') }}</small>
-                            @endif
-                        </div>
-                    </div>
                 </div>
                 <div class="row justify-content-center">
                     <button type="submit" class="btn btn-outline-warning btn-lg"><i class="fas fa-save"></i> Сохранить</button>
                     @can('fire', $member)
                         <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-danger ml-5"
-                           onclick="return confirm('Уволить этого сотрудника?')"><i class="fas fa-user-times"></i> Уволить</a>
+                           onclick="return confirm('Уволить этого сотрудника без восстановления?')"><i class="fas fa-user-times"></i> Уволить</a>
                     @endcan
                 </div>
             </form>
@@ -282,30 +274,26 @@
     </div>
 
     <script>
-        $('#join_date, #on_vacation_till, #trainee_until').datetimepicker({
-            i18n:{
-                ru:{
-                    months:[
-                        'Январь','Февраль','Март','Апрель',
-                        'Май','Июнь','Июль','Август',
-                        'Сентябрь','Октябрь','Ноябрь','Декабрь',
-                    ],
-                    dayOfWeek:[
-                        "Вс", "Пн", "Вт", "Ср",
-                        "Чт", "Пт", "Сб",
-                    ]
-                }
-            },
-            format: 'd.m.Y',
-            lang: 'ru',
-            step: 30,
-            theme: 'dark',
-            dayOfWeekStart: '1',
-            defaultTime: '19:30',
-            timepicker: false,
-            scrollInput: false
+        const pickerVacation = new Litepicker({
+            element: document.getElementById('on_vacation_till'),
+            inlineMode: true,
+            lang: 'ru-RU',
+            singleMode: false,
+            showTooltip: false,
+            numberOfMonths: 2,
+            numberOfColumns: 2,
+            resetButton: true
         });
-        $.datetimepicker.setLocale('ru');
+        const pickerJoin = new Litepicker({
+            element: document.getElementById('join_date'),
+            lang: 'ru-RU',
+            format: 'DD.MM.YYYY'
+        });
+        const pickerTrainee = new Litepicker({
+            element: document.getElementById('trainee_until'),
+            lang: 'ru-RU',
+            format: 'DD.MM.YYYY'
+        });
     </script>
 
 @endsection

@@ -16,11 +16,11 @@ class Member extends Model implements Auditable{
         'sort' => 'boolean',
         'tmp_banned' => 'boolean',
         'tmp_bans_hidden' => 'boolean',
+        'on_vacation_till' => 'array',
     ];
 
     protected $dates = [
         'tmp_banned_until',
-        'on_vacation_till',
         'trainee_until',
         'join_date',
         'created_at',
@@ -73,8 +73,14 @@ class Member extends Model implements Auditable{
         return $index;
     }
 
-    public function onVacation(){
-        return isset($this->on_vacation_till) && ($this->on_vacation_till->isFuture() || $this->on_vacation_till->isToday());
+    public function onVacation($offset = false){
+        if($this->on_vacation_till){
+            $start = Carbon::parse($this->on_vacation_till['from']);
+            $end = Carbon::parse($this->on_vacation_till['to']);
+            if($offset && $start->isPast() && $end->endOfWeek()->isFuture()) return true;
+            if(!$offset && $start->isPast() && $end->isFuture()) return true;
+        }
+        return false;
     }
 
     public function isTrainee(){

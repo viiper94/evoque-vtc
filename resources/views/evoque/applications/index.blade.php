@@ -90,8 +90,9 @@
                             @endif
                             @switch($app->category)
                                 @case(1)
-                                    <p class="mb-0">Отпуск до: </p>
-                                    <h5 @if($app->status == 0) class="text-primary" @endif>{{ $app->vacation_till->isoFormat('LL') }}</h5>
+                                    <p class="mb-0 mt-3">Отпуск: </p>
+                                    <h5 @if($app->status == 0) class="text-primary" @endif>с {{ \Carbon\Carbon::parse($app->vacation_till['from'])->isoFormat('LL') }}</h5>
+                                    <h5 @if($app->status == 0) class="text-primary" @endif>по {{ \Carbon\Carbon::parse($app->vacation_till['to'])->isoFormat('LL') }}</h5>
                                     @break
                                 @case(2)
                                     <p class="mb-0">Желаемый номер: </p>
@@ -107,7 +108,7 @@
                                 @case(4)
                                     <p class="mb-0">Новый никнейм: </p>
                                     <h5 @if($app->status == 0) class="text-primary" @endif>{{ $app->new_nickname }}</h5>
-                                    @brea
+                                    @break
                                 @case(5) @break
                             @endswitch
                             @if($app->reason)

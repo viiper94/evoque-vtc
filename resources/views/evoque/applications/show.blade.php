@@ -18,8 +18,9 @@
             @switch($app->category)
                 @case(1)
                     <div class="col-12">
-                        <h4 class="mb-0">Отпуск до</h4>
-                        <h1 class="text-primary">{{ $app->vacation_till->isoFormat('LL') }}</h1>
+                        <h4 class="mb-0">Отпуск</h4>
+                        <h1 class="text-primary">с {{ \Carbon\Carbon::parse($app->vacation_till['from'])->isoFormat('LL') }}</h1>
+                        <h1 class="text-primary">по {{ \Carbon\Carbon::parse($app->vacation_till['to'])->isoFormat('LL') }}</h1>
                     </div>
                     @break
                 @case(2)

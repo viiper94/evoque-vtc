@@ -135,8 +135,8 @@ class ApplicationsController extends Controller{
             $app->old_nickname = Auth::user()->member->nickname;
             $app->category = 1;
             $app->vacation_till = [
-                'from' => Carbon::parse(explode(' - ', $request->input('vacation_till'))[0])->format('Y-m-d'),
-                'to' => Carbon::parse(explode(' - ', $request->input('vacation_till'))[1])->format('Y-m-d'),
+                'from' => explode(' - ', $request->input('vacation_till'))[0],
+                'to' => explode(' - ', $request->input('vacation_till'))[1],
             ];
             $app->reason = $request->input('reason');
             return $app->save() ?

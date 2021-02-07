@@ -96,7 +96,7 @@
                                         @endcan
                                         <b class="number">{{ $member->money ?? '∞' }}</b>
                                     </td>
-                                    <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0 && !$member->onVacation())text-danger font-weight-bold @endif">
+                                    <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0 && !$member->onVacation(true))text-danger font-weight-bold @endif">
                                         @can('setActivity', \App\Member::class)
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
@@ -105,7 +105,7 @@
                                         <span class="number">{{ $member->convoys }}</span>
                                     </td>
                                 @endif
-                                <td>{{ !isset($member->on_vacation_till) ? '–' : $member->on_vacation_till->isoFormat('DD.MM.Y') }}</td>
+                                <td>{{ $member->on_vacation_till ? \Carbon\Carbon::parse($member->on_vacation_till['to'])->isoFormat('DD.MM.Y') : '–' }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td>
                                     @can('update', \App\Member::class)

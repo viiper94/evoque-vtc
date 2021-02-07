@@ -105,7 +105,7 @@
                                         <span class="number">{{ $member->convoys }}</span>
                                     </td>
                                 @endif
-                                <td>{{ $member->on_vacation_till ? \Carbon\Carbon::parse($member->on_vacation_till['to'])->isoFormat('DD.MM.Y') : '–' }}</td>
+                                <td>{{ $member->on_vacation_till && !\Carbon\Carbon::parse($member->on_vacation_till['from'])->isFuture() ? \Carbon\Carbon::parse($member->on_vacation_till['to'])->isoFormat('DD.MM.Y') : '–' }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td>
                                     @can('update', \App\Member::class)

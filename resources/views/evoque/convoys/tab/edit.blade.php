@@ -81,8 +81,7 @@
             element: document.getElementById('date'),
             lang: 'ru-RU',
             inlineMode: true,
-            startDate: Date.now(),
-            format: 'DD.MM.YYYY'
+            startDate: Date.now()
         });
     </script>
 

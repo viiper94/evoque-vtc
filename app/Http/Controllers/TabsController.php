@@ -28,7 +28,7 @@ class TabsController extends Controller{
             $this->validate($request, [
                 'convoy_title' => 'required|string',
                 'lead_id' => 'required|numeric',
-                'date' => 'required|date_format:d.m.Y',
+                'date' => 'required|date',
                 'screenshot' => 'required|image',
                 'description' => 'nullable|string',
             ]);
@@ -36,7 +36,7 @@ class TabsController extends Controller{
             $tab->fill($request->post());
             $tab->description = htmlentities(trim($request->input('description')));
             $tab->member_id = Auth::user()->member->id;
-            $tab->date = Carbon::parse($request->input('date'))->format('Y-m-d');
+            $tab->date = $request->input('date');
             if($request->file('screenshot')){
                 $tab->screenshot = $tab->saveImage($request->file('screenshot'), '/images/convoys/tab/');
             }

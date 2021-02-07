@@ -5,6 +5,18 @@
   */
 
 /*!
+ * 
+ * litepicker.umd.js
+ * Litepicker v2.0.3 (https://github.com/wakirin/Litepicker)
+ * Package: litepicker (https://www.npmjs.com/package/litepicker)
+ * License: MIT (https://github.com/wakirin/Litepicker/blob/master/LICENCE.md)
+ * Copyright 2019-2021 Rinat G.
+ *     
+ * Hash: 87300fcc3d546fcab844
+ * 
+ */
+
+/*!
  * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *

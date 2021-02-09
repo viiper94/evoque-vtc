@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: viiper94.mysql.ukraine.com.ua
--- Час створення: Лют 07 2021 р., 14:34
+-- Час створення: Лют 09 2021 р., 13:32
 -- Версія сервера: 5.7.16-10-log
 -- Версія PHP: 7.4.15
 
@@ -31,7 +31,7 @@ CREATE TABLE `applications` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category` int(11) NOT NULL,
   `member_id` int(11) NOT NULL,
-  `vacation_till` date DEFAULT NULL,
+  `vacation_till` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `new_plate_number` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `new_nickname` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `old_nickname` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `applications` (
 --
 
 INSERT INTO `applications` (`id`, `category`, `member_id`, `vacation_till`, `new_plate_number`, `new_nickname`, `old_nickname`, `new_rp_profile`, `reason`, `created_at`, `updated_at`, `status`, `comment`) VALUES
-(10, 1, 21, '2020-11-30', NULL, NULL, 'Dnepryanin[UA]', NULL, 'Очень нужно, спасибо.', '2020-10-29 10:05:43', '2020-10-29 19:31:32', 1, NULL),
+(10, 1, 21, '{\"from\":\"2020-10-29\",\"to\":\"2020-11-30\"}', NULL, NULL, 'Dnepryanin[UA]', NULL, 'Очень нужно, спасибо.', '2020-10-29 10:05:43', '2021-02-07 13:41:48', 1, NULL),
 (11, 2, 31, NULL, '161', NULL, 'Влад_161RUS', NULL, '', '2020-10-29 18:49:03', '2020-10-30 09:20:43', 1, NULL),
 (12, 2, 35, NULL, '111', NULL, 'staff4rd.', NULL, '', '2020-10-30 18:53:51', '2020-11-01 09:50:55', 1, NULL),
 (13, 3, 5, NULL, NULL, NULL, 'Mayday', '[\"ets2\",\"30\"]', '', '2020-11-04 16:41:48', '2020-11-06 02:26:04', 1, NULL),
@@ -57,64 +57,66 @@ INSERT INTO `applications` (`id`, `category`, `member_id`, `vacation_till`, `new
 (16, 3, 16, NULL, NULL, NULL, 'Виктор_102RUS', '[\"ets2\",\"42\"]', '', '2020-11-06 10:39:31', '2020-11-08 06:14:08', 1, NULL),
 (17, 2, 13, NULL, '199', NULL, 'М5-Урал', NULL, '', '2020-11-06 21:27:00', '2020-11-08 08:24:28', 1, NULL),
 (18, 2, 35, NULL, '911', NULL, 'staff4rd.', NULL, 'это надо!', '2020-11-08 07:12:18', '2020-11-08 08:25:32', 1, NULL),
-(20, 1, 34, '2020-11-16', NULL, NULL, 'BoomRed', NULL, '', '2020-11-08 14:22:14', '2020-11-08 16:19:22', 1, NULL),
-(21, 1, 18, '2020-11-22', NULL, NULL, 'Цaрь [23IUA]', NULL, 'Нет времени', '2020-11-08 15:07:52', '2020-11-08 16:19:48', 1, NULL),
-(22, 1, 10, '2020-11-22', NULL, NULL, 'R a r e', NULL, 'Y', '2020-11-08 17:03:12', '2020-11-08 17:41:09', 1, NULL),
-(23, 1, 26, '2020-11-15', NULL, NULL, 'Koperka', NULL, '', '2020-11-08 20:14:06', '2020-11-09 07:58:00', 1, NULL),
-(24, 1, 32, '2020-11-15', NULL, NULL, 'Limbo  [RUS]', NULL, '', '2020-11-08 20:42:22', '2020-11-09 07:58:02', 1, NULL),
+(20, 1, 34, '{\"from\":\"2020-11-08\",\"to\":\"2020-11-16\"}', NULL, NULL, 'BoomRed', NULL, '', '2020-11-08 14:22:14', '2021-02-07 13:41:48', 1, NULL),
+(21, 1, 18, '{\"from\":\"2020-11-08\",\"to\":\"2020-11-22\"}', NULL, NULL, 'Цaрь [23IUA]', NULL, 'Нет времени', '2020-11-08 15:07:52', '2021-02-07 13:41:48', 1, NULL),
+(22, 1, 10, '{\"from\":\"2020-11-08\",\"to\":\"2020-11-22\"}', NULL, NULL, 'R a r e', NULL, 'Y', '2020-11-08 17:03:12', '2021-02-07 13:41:48', 1, NULL),
+(23, 1, 26, '{\"from\":\"2020-11-08\",\"to\":\"2020-11-15\"}', NULL, NULL, 'Koperka', NULL, '', '2020-11-08 20:14:06', '2021-02-07 13:41:48', 1, NULL),
+(24, 1, 32, '{\"from\":\"2020-11-08\",\"to\":\"2020-11-15\"}', NULL, NULL, 'Limbo  [RUS]', NULL, '', '2020-11-08 20:42:22', '2021-02-07 13:41:48', 1, NULL),
 (26, 5, 40, NULL, NULL, NULL, 'VitaminL', NULL, 'Нет времени на игру', '2020-11-15 12:39:43', '2020-11-15 22:34:40', 1, NULL),
-(28, 1, 35, '2020-11-26', NULL, NULL, 'staff4rd.', NULL, '', '2020-11-20 11:15:13', '2020-11-20 20:25:34', 1, NULL),
-(29, 1, 13, '2020-11-30', NULL, NULL, 'М5-Урал', NULL, NULL, '2020-11-21 20:00:57', '2020-11-21 20:46:45', 1, NULL),
-(30, 1, 5, '2020-11-27', NULL, NULL, 'Mayday', NULL, '¯\\\\\\_(ツ)\\_/¯', '2020-11-22 12:05:21', '2020-11-22 21:12:21', 1, NULL),
-(36, 1, 25, '2020-12-07', NULL, NULL, 'MolfaR_Ru', NULL, 'Подготовка к сессии (', '2020-11-25 18:44:11', '2020-11-25 21:26:30', 1, NULL),
+(28, 1, 35, '{\"from\":\"2020-11-20\",\"to\":\"2020-11-26\"}', NULL, NULL, 'staff4rd.', NULL, '', '2020-11-20 11:15:13', '2021-02-07 13:41:48', 1, NULL),
+(29, 1, 13, '{\"from\":\"2020-11-21\",\"to\":\"2020-11-30\"}', NULL, NULL, 'М5-Урал', NULL, NULL, '2020-11-21 20:00:57', '2021-02-07 13:41:48', 1, NULL),
+(30, 1, 5, '{\"from\":\"2020-11-22\",\"to\":\"2020-11-27\"}', NULL, NULL, 'Mayday', NULL, '¯\\\\\\_(ツ)\\_/¯', '2020-11-22 12:05:21', '2021-02-07 13:41:48', 1, NULL),
+(36, 1, 25, '{\"from\":\"2020-11-25\",\"to\":\"2020-12-07\"}', NULL, NULL, 'MolfaR_Ru', NULL, 'Подготовка к сессии (', '2020-11-25 18:44:11', '2021-02-07 13:41:48', 1, NULL),
 (38, 4, 30, NULL, NULL, 'Sanek', 'Sanek_70', NULL, NULL, '2020-11-28 09:23:14', '2020-11-28 18:15:17', 1, NULL),
 (39, 4, 13, NULL, NULL, 'Урал', 'М5-Урал', NULL, NULL, '2020-11-28 13:05:07', '2020-11-28 18:12:09', 1, NULL),
 (40, 2, 47, NULL, '054', NULL, 'VerVoer', NULL, NULL, '2020-11-29 01:45:03', '2020-11-29 17:04:50', 1, NULL),
-(41, 1, 46, '2020-12-13', NULL, NULL, 'lllAnkylll', NULL, NULL, '2020-11-29 13:22:19', '2020-11-29 16:55:40', 1, NULL),
-(42, 1, 23, '2020-12-06', NULL, NULL, 'Conar', NULL, 'У меня появились дела и я не успеваю конвои. Поэтому прошу отпуск.', '2020-11-29 17:48:56', '2020-11-29 20:03:40', 1, NULL),
+(41, 1, 46, '{\"from\":\"2020-11-29\",\"to\":\"2020-12-13\"}', NULL, NULL, 'lllAnkylll', NULL, NULL, '2020-11-29 13:22:19', '2021-02-07 13:41:48', 1, NULL),
+(42, 1, 23, '{\"from\":\"2020-11-29\",\"to\":\"2020-12-06\"}', NULL, NULL, 'Conar', NULL, 'У меня появились дела и я не успеваю конвои. Поэтому прошу отпуск.', '2020-11-29 17:48:56', '2021-02-07 13:41:48', 1, NULL),
 (43, 5, 32, NULL, NULL, NULL, 'Limbo  [RUS]', NULL, 'Нет желание играть, Всех лбоюлюблюлюблюВсех люблю ❤️ \r\nEVOQUE в сердце', '2020-11-29 20:04:11', '2020-11-29 20:04:11', 1, NULL),
-(45, 1, 16, '2020-12-14', NULL, NULL, 'Виктор_102RUS', NULL, 'сложная ситуация', '2020-12-03 16:48:36', '2020-12-03 17:34:43', 1, NULL),
-(46, 1, 18, '2020-12-13', NULL, NULL, 'Цaрь [23IUA]', NULL, 'Работа, дом, работа, проблеммы..', '2020-12-05 10:01:21', '2020-12-05 10:15:41', 1, NULL),
+(45, 1, 16, '{\"from\":\"2020-12-03\",\"to\":\"2020-12-14\"}', NULL, NULL, 'Виктор_102RUS', NULL, 'сложная ситуация', '2020-12-03 16:48:36', '2021-02-07 13:41:48', 1, NULL),
+(46, 1, 18, '{\"from\":\"2020-12-05\",\"to\":\"2020-12-13\"}', NULL, NULL, 'Цaрь [23IUA]', NULL, 'Работа, дом, работа, проблеммы..', '2020-12-05 10:01:21', '2021-02-07 13:41:48', 1, NULL),
 (47, 5, 39, NULL, NULL, NULL, 'FrankIN13', NULL, NULL, '2020-12-05 21:18:15', '2020-12-05 21:24:57', 1, NULL),
-(48, 1, 34, '2020-12-20', NULL, NULL, 'BoomRed', NULL, NULL, '2020-12-06 14:57:55', '2020-12-06 16:04:39', 1, NULL),
-(50, 1, 26, '2020-12-13', NULL, NULL, 'Koperka', NULL, NULL, '2020-12-06 20:08:32', '2020-12-07 08:00:42', 1, NULL),
-(51, 1, 43, '2020-12-16', NULL, NULL, 'Тwin', NULL, 'Личные обстоятельства', '2020-12-07 08:03:54', '2020-12-07 08:06:44', 1, NULL),
+(48, 1, 34, '{\"from\":\"2020-12-06\",\"to\":\"2020-12-20\"}', NULL, NULL, 'BoomRed', NULL, NULL, '2020-12-06 14:57:55', '2021-02-07 13:41:48', 1, NULL),
+(50, 1, 26, '{\"from\":\"2020-12-06\",\"to\":\"2020-12-13\"}', NULL, NULL, 'Koperka', NULL, NULL, '2020-12-06 20:08:32', '2021-02-07 13:41:48', 1, NULL),
+(51, 1, 43, '{\"from\":\"2020-12-07\",\"to\":\"2020-12-16\"}', NULL, NULL, 'Тwin', NULL, 'Личные обстоятельства', '2020-12-07 08:03:54', '2021-02-07 13:41:48', 1, NULL),
 (52, 4, 38, NULL, NULL, 'Женек 43 rus', '43 ЕВГЕН 43', NULL, NULL, '2020-12-11 14:13:37', '2020-12-11 20:34:07', 1, ''),
-(53, 1, 15, '2020-12-27', NULL, NULL, 'Antoxa 73 Rus', NULL, NULL, '2020-12-13 15:02:24', '2020-12-13 15:17:44', 1, ''),
-(54, 1, 35, '2020-12-28', NULL, NULL, 'staff4rd.', NULL, NULL, '2020-12-14 11:16:57', '2020-12-14 11:27:16', 1, ''),
-(55, 1, 18, '2020-12-31', NULL, NULL, 'Цaрь [23IUA]', NULL, 'Бан)', '2020-12-18 10:41:33', '2020-12-18 20:04:00', 1, ''),
-(56, 1, 25, '2020-12-25', NULL, NULL, 'MolfaR_Ru', NULL, 'График напряжённый, тупо не успеваю приходить. После 25-го должно быть посвободнее.', '2020-12-19 15:54:48', '2020-12-19 17:09:40', 1, ''),
-(57, 1, 50, '2020-12-27', NULL, NULL, 'Dimone22RUS', NULL, 'Экзамены :(', '2020-12-20 15:22:51', '2020-12-20 15:51:01', 1, ''),
-(58, 1, 31, '2020-12-27', NULL, NULL, 'Влад_161RUS', NULL, NULL, '2020-12-20 15:24:47', '2020-12-20 15:50:49', 1, ''),
+(53, 1, 15, '{\"from\":\"2020-12-13\",\"to\":\"2020-12-27\"}', NULL, NULL, 'Antoxa 73 Rus', NULL, NULL, '2020-12-13 15:02:24', '2021-02-07 13:41:48', 1, ''),
+(54, 1, 35, '{\"from\":\"2020-12-14\",\"to\":\"2020-12-28\"}', NULL, NULL, 'staff4rd.', NULL, NULL, '2020-12-14 11:16:57', '2021-02-07 13:41:48', 1, ''),
+(55, 1, 18, '{\"from\":\"2020-12-18\",\"to\":\"2020-12-31\"}', NULL, NULL, 'Цaрь [23IUA]', NULL, 'Бан)', '2020-12-18 10:41:33', '2021-02-07 13:41:48', 1, ''),
+(56, 1, 25, '{\"from\":\"2020-12-19\",\"to\":\"2020-12-25\"}', NULL, NULL, 'MolfaR_Ru', NULL, 'График напряжённый, тупо не успеваю приходить. После 25-го должно быть посвободнее.', '2020-12-19 15:54:48', '2021-02-07 13:41:48', 1, ''),
+(57, 1, 50, '{\"from\":\"2020-12-20\",\"to\":\"2020-12-27\"}', NULL, NULL, 'Dimone22RUS', NULL, 'Экзамены :(', '2020-12-20 15:22:51', '2021-02-07 13:41:48', 1, ''),
+(58, 1, 31, '{\"from\":\"2020-12-20\",\"to\":\"2020-12-27\"}', NULL, NULL, 'Влад_161RUS', NULL, NULL, '2020-12-20 15:24:47', '2021-02-07 13:41:48', 1, ''),
 (59, 5, 26, NULL, NULL, NULL, 'Koperka', NULL, 'Не попадаю с временем', '2020-12-20 18:03:12', '2020-12-20 20:56:13', 1, 'Жалько но ладно'),
-(60, 1, 49, '2020-12-26', NULL, NULL, 'sivtsev31', NULL, 'школа', '2020-12-20 21:25:34', '2020-12-20 22:45:27', 1, ''),
-(61, 1, 46, '2021-01-03', NULL, NULL, 'lllAnkylll', NULL, NULL, '2020-12-21 09:00:50', '2020-12-21 12:39:13', 1, ''),
-(62, 1, 8, '2020-12-28', NULL, NULL, 'Jake the Dog', NULL, 'Чего-то пока не получается ходить, надеюсь прийду скоро.', '2020-12-21 12:25:59', '2020-12-21 12:39:30', 1, ''),
+(60, 1, 49, '{\"from\":\"2020-12-20\",\"to\":\"2020-12-26\"}', NULL, NULL, 'sivtsev31', NULL, 'школа', '2020-12-20 21:25:34', '2021-02-07 13:41:48', 1, ''),
+(61, 1, 46, '{\"from\":\"2020-12-21\",\"to\":\"2021-01-03\"}', NULL, NULL, 'lllAnkylll', NULL, NULL, '2020-12-21 09:00:50', '2021-02-07 13:41:48', 1, ''),
+(62, 1, 8, '{\"from\":\"2020-12-21\",\"to\":\"2020-12-28\"}', NULL, NULL, 'Jake the Dog', NULL, 'Чего-то пока не получается ходить, надеюсь прийду скоро.', '2020-12-21 12:25:59', '2021-02-07 13:41:48', 1, ''),
 (63, 5, 53, NULL, NULL, NULL, 'sanyaveter', NULL, NULL, '2020-12-21 16:40:56', '2020-12-21 21:21:56', 1, 'Обидно, досадно, но ладно. ('),
-(64, 1, 38, '2021-01-07', NULL, NULL, 'Женек 43 rus', NULL, NULL, '2020-12-24 10:01:34', '2020-12-24 13:34:03', 1, ''),
-(65, 1, 27, '2021-01-09', NULL, NULL, 'Low-', NULL, '-', '2020-12-26 15:43:43', '2020-12-26 17:42:05', 1, ''),
-(66, 1, 36, '2021-01-03', NULL, NULL, 'maluha03', NULL, NULL, '2020-12-27 09:07:24', '2020-12-27 14:10:23', 1, ''),
-(67, 1, 10, '2020-12-29', NULL, NULL, 'R a r e', NULL, 'уезжаю в гости.', '2020-12-27 16:19:16', '2020-12-27 21:01:12', 1, ''),
+(64, 1, 38, '{\"from\":\"2020-12-24\",\"to\":\"2021-01-07\"}', NULL, NULL, 'Женек 43 rus', NULL, NULL, '2020-12-24 10:01:34', '2021-02-07 13:41:48', 1, ''),
+(65, 1, 27, '{\"from\":\"2020-12-26\",\"to\":\"2021-01-09\"}', NULL, NULL, 'Low-', NULL, '-', '2020-12-26 15:43:43', '2021-02-07 13:41:48', 1, ''),
+(66, 1, 36, '{\"from\":\"2020-12-27\",\"to\":\"2021-01-03\"}', NULL, NULL, 'maluha03', NULL, NULL, '2020-12-27 09:07:24', '2021-02-07 13:41:48', 1, ''),
+(67, 1, 10, '{\"from\":\"2020-12-27\",\"to\":\"2020-12-29\"}', NULL, NULL, 'R a r e', NULL, 'уезжаю в гости.', '2020-12-27 16:19:16', '2021-02-07 13:41:48', 1, ''),
 (68, 5, 43, NULL, NULL, NULL, 'Тwin', NULL, NULL, '2020-12-27 21:59:04', '2020-12-28 08:54:50', 1, 'Ну'),
 (69, 5, 58, NULL, NULL, NULL, 'amphetamin223', NULL, 'Жаль конечно что так вышло, казалось что с нового года будет больше времени на игры но не тут то было. Работаю во вторую смену до конца этого месяца и просто физически не успею зайти ни на один конвой, так как работаю до поздней ночи. Всем удачи, и спасибо что дали шанс прокатиться с Вами пару раз, было круто и интересно. Возможно в будущем снова вернусь если появится такой шанс, посмотрим.', '2021-01-04 23:53:55', '2021-01-05 23:30:23', 1, 'F'),
 (70, 5, 30, NULL, NULL, NULL, 'Sanek', NULL, 'С вязи с отездом на вахту сроком на 4 месяца, с возвратом в ряды ВТК EVOQUE', '2021-01-10 05:42:46', '2021-01-10 19:40:29', 1, ''),
-(71, 1, 15, '2021-01-24', NULL, NULL, 'Antoxa 73 Rus', NULL, NULL, '2021-01-10 12:52:02', '2021-01-10 14:06:29', 2, 'Ещё можно прогулять'),
+(71, 1, 15, '{\"from\":\"2021-01-10\",\"to\":\"2021-01-24\"}', NULL, NULL, 'Antoxa 73 Rus', NULL, NULL, '2021-01-10 12:52:02', '2021-02-07 13:41:48', 2, 'Ещё можно прогулять'),
 (72, 5, 27, NULL, NULL, NULL, 'Low-', NULL, 'Переезд в общежитие.', '2021-01-11 13:05:58', '2021-01-11 20:23:05', 1, 'Учись на пятёрки :)'),
-(73, 1, 13, '2021-01-18', NULL, NULL, 'Урал', NULL, NULL, '2021-01-12 14:39:41', '2021-01-12 15:49:34', 1, ''),
-(74, 1, 11, '2021-01-24', NULL, NULL, 'chilik116rus', NULL, 'повредил спину на работе!', '2021-01-14 17:05:23', '2021-01-15 08:22:15', 1, NULL),
-(75, 1, 15, '2021-01-31', NULL, NULL, 'Antoxa 73 Rus', NULL, 'работаю во вторую смену без выходных,не успеваю по времени', '2021-01-17 10:46:49', '2021-01-17 11:48:41', 1, NULL),
-(76, 1, 31, '2021-01-23', NULL, NULL, 'Влад_161RUS', NULL, NULL, '2021-01-17 11:28:13', '2021-01-17 11:48:46', 1, NULL),
-(77, 1, 46, '2021-01-31', NULL, NULL, 'lllAnkylll', NULL, NULL, '2021-01-17 18:04:00', '2021-01-17 18:58:20', 1, NULL),
-(78, 1, 52, '2021-01-19', NULL, NULL, 'Usmedinski', NULL, 'Много работы в храме, а также много праздников, а я как священник не могу отвлекаться от этих дел. Спасибо!', '2021-01-18 00:30:05', '2021-01-18 07:13:28', 1, NULL),
-(79, 1, 35, '2021-02-01', NULL, NULL, 'staff4rd.', NULL, NULL, '2021-01-18 14:30:33', '2021-01-18 15:01:26', 1, NULL),
-(80, 1, 49, '2021-02-01', NULL, NULL, 'sivtsev31', NULL, 'учОба', '2021-01-18 15:21:12', '2021-01-18 17:31:32', 1, NULL),
-(83, 1, 9, '2021-02-06', NULL, NULL, 'Psy', NULL, 'Чо т работы привалило :(\r\nНе успеваю покатитаться вечерком :(', '2021-01-23 21:37:43', '2021-01-23 21:39:00', 1, NULL),
-(84, 1, 60, '2021-01-31', NULL, NULL, 'Ronytea', NULL, 'Учебная парктика в больнице', '2021-01-24 14:34:50', '2021-01-24 19:37:02', 1, NULL),
-(85, 1, 47, '2021-01-29', NULL, NULL, 'VerVoer', NULL, NULL, '2021-01-24 16:13:34', '2021-01-24 19:37:06', 1, NULL),
-(86, 1, 16, '2021-02-07', NULL, NULL, 'Виктор_102RUS', NULL, NULL, '2021-01-25 11:10:53', '2021-01-25 13:08:34', 1, NULL),
-(87, 1, 59, '2021-02-09', NULL, NULL, 'Aveboyare_34', NULL, NULL, '2021-01-27 08:08:58', '2021-01-27 09:31:53', 1, NULL),
-(88, 1, 63, '2021-02-01', NULL, NULL, 'Skazochniсk', NULL, 'Не обязательно', '2021-01-30 19:46:59', '2021-01-30 20:16:56', 1, NULL),
-(89, 1, 60, '2021-02-20', NULL, NULL, 'Ronytea', NULL, NULL, '2021-02-06 17:35:21', '2021-02-07 11:27:34', 1, NULL);
+(73, 1, 13, '{\"from\":\"2021-01-12\",\"to\":\"2021-01-18\"}', NULL, NULL, 'Урал', NULL, NULL, '2021-01-12 14:39:41', '2021-02-07 13:41:48', 1, ''),
+(74, 1, 11, '{\"from\":\"2021-01-14\",\"to\":\"2021-01-24\"}', NULL, NULL, 'chilik116rus', NULL, 'повредил спину на работе!', '2021-01-14 17:05:23', '2021-02-07 13:41:48', 1, NULL),
+(75, 1, 15, '{\"from\":\"2021-01-17\",\"to\":\"2021-01-31\"}', NULL, NULL, 'Antoxa 73 Rus', NULL, 'работаю во вторую смену без выходных,не успеваю по времени', '2021-01-17 10:46:49', '2021-02-07 13:41:48', 1, NULL),
+(76, 1, 31, '{\"from\":\"2021-01-17\",\"to\":\"2021-01-23\"}', NULL, NULL, 'Влад_161RUS', NULL, NULL, '2021-01-17 11:28:13', '2021-02-07 13:41:48', 1, NULL),
+(77, 1, 46, '{\"from\":\"2021-01-17\",\"to\":\"2021-01-31\"}', NULL, NULL, 'lllAnkylll', NULL, NULL, '2021-01-17 18:04:00', '2021-02-07 13:41:48', 1, NULL),
+(78, 1, 52, '{\"from\":\"2021-01-18\",\"to\":\"2021-01-19\"}', NULL, NULL, 'Usmedinski', NULL, 'Много работы в храме, а также много праздников, а я как священник не могу отвлекаться от этих дел. Спасибо!', '2021-01-18 00:30:05', '2021-02-07 13:41:48', 1, NULL),
+(79, 1, 35, '{\"from\":\"2021-01-18\",\"to\":\"2021-02-01\"}', NULL, NULL, 'staff4rd.', NULL, NULL, '2021-01-18 14:30:33', '2021-02-07 13:41:48', 1, NULL),
+(80, 1, 49, '{\"from\":\"2021-01-18\",\"to\":\"2021-02-01\"}', NULL, NULL, 'sivtsev31', NULL, 'учОба', '2021-01-18 15:21:12', '2021-02-07 13:41:48', 1, NULL),
+(83, 1, 9, '{\"from\":\"2021-01-23\",\"to\":\"2021-02-06\"}', NULL, NULL, 'Psy', NULL, 'Чо т работы привалило :(\r\nНе успеваю покатитаться вечерком :(', '2021-01-23 21:37:43', '2021-02-07 13:41:48', 1, NULL),
+(84, 1, 60, '{\"from\":\"2021-01-24\",\"to\":\"2021-01-31\"}', NULL, NULL, 'Ronytea', NULL, 'Учебная парктика в больнице', '2021-01-24 14:34:50', '2021-02-07 13:41:48', 1, NULL),
+(85, 1, 47, '{\"from\":\"2021-01-24\",\"to\":\"2021-01-29\"}', NULL, NULL, 'VerVoer', NULL, NULL, '2021-01-24 16:13:34', '2021-02-07 13:41:48', 1, NULL),
+(86, 1, 16, '{\"from\":\"2021-01-25\",\"to\":\"2021-02-07\"}', NULL, NULL, 'Виктор_102RUS', NULL, NULL, '2021-01-25 11:10:53', '2021-02-07 13:41:48', 1, NULL),
+(87, 1, 59, '{\"from\":\"2021-01-27\",\"to\":\"2021-02-09\"}', NULL, NULL, 'Aveboyare_34', NULL, NULL, '2021-01-27 08:08:58', '2021-02-07 13:41:48', 1, NULL),
+(88, 1, 63, '{\"from\":\"2021-01-30\",\"to\":\"2021-02-01\"}', NULL, NULL, 'Skazochniсk', NULL, 'Не обязательно', '2021-01-30 19:46:59', '2021-02-07 13:41:48', 1, NULL),
+(89, 1, 60, '{\"from\":\"2021-02-06\",\"to\":\"2021-02-20\"}', NULL, NULL, 'Ronytea', NULL, NULL, '2021-02-06 17:35:21', '2021-02-07 13:41:48', 1, NULL),
+(90, 1, 5, '{\"from\":\"2021-02-17\",\"to\":\"2021-02-25\"}', NULL, NULL, 'Mayday', NULL, 'Уезжаю в другую страну', '2021-02-07 13:53:51', '2021-02-07 15:51:46', 1, NULL),
+(91, 5, 55, NULL, NULL, NULL, 'Макаренко', NULL, NULL, '2021-02-08 07:48:40', '2021-02-08 16:48:19', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -2378,7 +2380,91 @@ INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `
 (2181, 'App\\User', 7, 'updated', 'App\\Member', 20, '{\"convoys\":2,\"scores\":852}', '{\"convoys\":3,\"scores\":854}', 'https://evoque.team/evoque/convoys/tab/accept/155', '2a00:1370:810c:74af:40d2:d8b5:14e8:da1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 11:30:04', '2021-02-07 11:30:04'),
 (2182, 'App\\User', 7, 'updated', 'App\\Member', 8, '{\"convoys\":0,\"scores\":535,\"money\":18}', '{\"convoys\":1,\"scores\":537,\"money\":19}', 'https://evoque.team/evoque/convoys/tab/accept/155', '2a00:1370:810c:74af:40d2:d8b5:14e8:da1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 11:30:04', '2021-02-07 11:30:04'),
 (2183, 'App\\User', 7, 'updated', 'App\\Member', 41, '{\"convoys\":2,\"scores\":263}', '{\"convoys\":3,\"scores\":265}', 'https://evoque.team/evoque/convoys/tab/accept/155', '2a00:1370:810c:74af:40d2:d8b5:14e8:da1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 11:30:04', '2021-02-07 11:30:04'),
-(2184, 'App\\User', 1, 'updated', 'App\\Member', 29, '{\"money\":17.5}', '{\"money\":\"15\"}', 'https://evoque.team/evoque/admin/member/29', '185.44.239.33', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 OPR/73.0.3856.344', NULL, '2021-02-07 12:18:00', '2021-02-07 12:18:00');
+(2184, 'App\\User', 1, 'updated', 'App\\Member', 29, '{\"money\":17.5}', '{\"money\":\"15\"}', 'https://evoque.team/evoque/admin/member/29', '185.44.239.33', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 OPR/73.0.3856.344', NULL, '2021-02-07 12:18:00', '2021-02-07 12:18:00'),
+(2185, 'App\\User', 3, 'updated', 'App\\Member', 9, '[]', '[]', 'https://evoque.team/evoque/applications/cmv', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:42:02', '2021-02-07 13:42:02'),
+(2186, 'App\\User', 3, 'updated', 'App\\Member', 16, '[]', '[]', 'https://evoque.team/evoque/applications/cmv', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:42:02', '2021-02-07 13:42:02'),
+(2187, 'App\\User', 3, 'updated', 'App\\Member', 35, '[]', '[]', 'https://evoque.team/evoque/applications/cmv', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:42:02', '2021-02-07 13:42:02'),
+(2188, 'App\\User', 3, 'updated', 'App\\Member', 59, '[]', '[]', 'https://evoque.team/evoque/applications/cmv', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:42:02', '2021-02-07 13:42:02'),
+(2189, 'App\\User', 3, 'updated', 'App\\Member', 60, '[]', '[]', 'https://evoque.team/evoque/applications/cmv', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:42:02', '2021-02-07 13:42:02'),
+(2190, 'App\\User', 3, 'updated', 'App\\Member', 63, '[]', '[]', 'https://evoque.team/evoque/applications/cmv', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:42:02', '2021-02-07 13:42:02'),
+(2191, 'App\\User', 3, 'updated', 'App\\Member', 63, '{\"join_date\":\"2021-01-09 19:04:19\",\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-01-18\\\",\\\"to\\\":\\\"2021-02-01\\\"}\",\"trainee_until\":\"2021-01-19\"}', '{\"join_date\":\"2021-01-09 00:00:00\",\"on_vacation_till\":null,\"trainee_until\":null}', 'https://evoque.team/evoque/admin/member/63', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:47:43', '2021-02-07 13:47:43'),
+(2192, 'App\\User', 3, 'updated', 'App\\Member', 63, '{\"on_vacation_till\":null}', '{\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-02-18\\\",\\\"to\\\":\\\"2021-03-01\\\"}\"}', 'https://evoque.team/evoque/admin/member/63', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:48:12', '2021-02-07 13:48:12'),
+(2193, 'App\\User', 3, 'updated', 'App\\Member', 63, '{\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-02-18\\\",\\\"to\\\":\\\"2021-03-01\\\"}\"}', '{\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-01-18\\\",\\\"to\\\":\\\"2021-02-01\\\"}\"}', 'https://evoque.team/evoque/admin/member/63', '134.249.177.129', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 13:48:41', '2021-02-07 13:48:41'),
+(2194, 'App\\User', 7, 'updated', 'App\\Member', 5, '{\"vacations\":0,\"on_vacation_till\":null}', '{\"vacations\":1,\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-02-17\\\",\\\"to\\\":\\\"2021-02-25\\\"}\"}', 'https://evoque.team/evoque/applications/accept/90', '2a00:1370:810c:74af:40d2:d8b5:14e8:da1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 15:51:46', '2021-02-07 15:51:46'),
+(2195, NULL, NULL, 'created', 'App\\Member', 70, '[]', '{\"user_id\":68,\"nickname\":\"Man_RaY\",\"join_date\":\"2021-02-07 21:40:13\",\"trainee_until\":\"2021-02-17 21:40:13\",\"id\":70}', 'https://evoque.team/auth/steam/handle?openid.assoc_handle=1234567890&openid.claimed_id=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198086268710&openid.identity=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198086268710&openid.mode=id_res&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.op_endpoint=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Flogin&openid.response_nonce=2021-02-07T18%3A40%3A12ZbfPs03WwRipALciFlir4DkFNLgc%3D&openid.return_to=http%3A%2F%2Fevoque.team%2Fauth%2Fsteam%2Fhandle&openid.sig=6mLQEIE4c29t0bNlABl8KMbzfjk%3D&openid.signed=signed%2Cop_endpoint%2Cclaimed_id%2Cidentity%2Creturn_to%2Cresponse_nonce%2Cassoc_handle', '46.50.254.207', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-07 19:40:13', '2021-02-07 19:40:13'),
+(2196, 'App\\User', 1, 'updated', 'App\\Convoy', 211, '{\"title\":\"\\u041e\\u0442\\u043a\\u0440\\u044b\\u0442\\u044b\\u0439 \\u043a\\u043e\\u043d\\u0432\\u043e\\u0439 \\u043e\\u0442 \\u0412\\u0422\\u041a \\\"TruckersMP - \\u0420\\u0443\\u0441\\u0441\\u043a\\u043e\\u044f\\u0437\\u044b\\u0447\\u043d\\u043e\\u0435 \\u0421\\u043e\\u043e\\u0431\\u0449\\u0435\\u0441\\u0442\\u0432\\u043e\\\"\"}', '{\"title\":\"\\u041e\\u0442\\u043a\\u0440\\u044b\\u0442\\u044b\\u0439 \\u043a\\u043e\\u043d\\u0432\\u043e\\u0439 \\u043e\\u0442 \\\"TruckersMP - \\u0420\\u0443\\u0441\\u0441\\u043a\\u043e\\u044f\\u0437\\u044b\\u0447\\u043d\\u043e\\u0435 \\u0421\\u043e\\u043e\\u0431\\u0449\\u0435\\u0441\\u0442\\u0432\\u043e\\\"\"}', 'https://evoque.team/evoque/admin/convoys/edit/211', '185.44.239.33', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 OPR/73.0.3856.344', NULL, '2021-02-08 05:30:51', '2021-02-08 05:30:51'),
+(2197, 'App\\User', 7, 'updated', 'App\\Member', 1, '{\"convoys\":2}', '{\"convoys\":3}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2198, 'App\\User', 7, 'updated', 'App\\Member', 42, '{\"convoys\":4}', '{\"convoys\":5}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2199, 'App\\User', 7, 'updated', 'App\\Member', 5, '{\"convoys\":1,\"scores\":409,\"money\":19.5}', '{\"convoys\":2,\"scores\":411,\"money\":20}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2200, 'App\\User', 7, 'updated', 'App\\Member', 31, '{\"convoys\":0,\"scores\":174}', '{\"convoys\":1,\"scores\":176}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2201, 'App\\User', 7, 'updated', 'App\\Member', 36, '{\"convoys\":0,\"scores\":46}', '{\"convoys\":1,\"scores\":48}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2202, 'App\\User', 7, 'updated', 'App\\Member', 54, '{\"convoys\":3,\"scores\":37}', '{\"convoys\":4,\"scores\":39}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2203, 'App\\User', 7, 'updated', 'App\\Member', 23, '{\"convoys\":0,\"scores\":28}', '{\"convoys\":1,\"scores\":30}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2204, 'App\\User', 7, 'updated', 'App\\Member', 67, '{\"convoys\":0,\"scores\":13}', '{\"convoys\":1,\"scores\":15}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2205, 'App\\User', 7, 'updated', 'App\\Member', 56, '{\"convoys\":0,\"scores\":12}', '{\"convoys\":1,\"scores\":14}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2206, 'App\\User', 7, 'updated', 'App\\Member', 62, '{\"convoys\":0}', '{\"convoys\":1}', 'https://evoque.team/evoque/convoys/tab/accept/157', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:32', '2021-02-08 12:18:32'),
+(2207, 'App\\User', 7, 'updated', 'App\\Member', 50, '{\"convoys\":0,\"scores\":9,\"money\":0}', '{\"convoys\":1,\"scores\":11,\"money\":0.5}', 'https://evoque.team/evoque/convoys/tab/accept/156', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:18:58', '2021-02-08 12:18:58'),
+(2208, 'App\\User', 7, 'updated', 'App\\Member', 42, '{\"money\":66}', '{\"money\":66.5}', 'https://evoque.team/evoque/add', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:22:55', '2021-02-08 12:22:55'),
+(2209, 'App\\User', 7, 'updated', 'App\\Member', 42, '{\"money\":66.5}', '{\"money\":67}', 'https://evoque.team/evoque/add', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:22:57', '2021-02-08 12:22:57'),
+(2210, 'App\\User', 7, 'updated', 'App\\Member', 17, '{\"money\":47.5}', '{\"money\":48}', 'https://evoque.team/evoque/add', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:23:00', '2021-02-08 12:23:00'),
+(2211, 'App\\User', 7, 'updated', 'App\\Member', 38, '{\"money\":4.5}', '{\"money\":5}', 'https://evoque.team/evoque/add', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:23:06', '2021-02-08 12:23:06'),
+(2212, 'App\\User', 7, 'updated', 'App\\Member', 54, '{\"money\":1}', '{\"money\":1.5}', 'https://evoque.team/evoque/add', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:23:13', '2021-02-08 12:23:13'),
+(2213, 'App\\User', 7, 'updated', 'App\\Member', 9, '{\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-01-23\\\",\\\"to\\\":\\\"2021-02-06\\\"}\"}', '{\"on_vacation_till\":null}', 'https://evoque.team/evoque/admin/member/9', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:23:40', '2021-02-08 12:23:40'),
+(2214, 'App\\User', 7, 'updated', 'App\\Member', 16, '{\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-01-24\\\",\\\"to\\\":\\\"2021-02-07\\\"}\"}', '{\"on_vacation_till\":null}', 'https://evoque.team/evoque/admin/member/16', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:23:49', '2021-02-08 12:23:49'),
+(2215, 'App\\User', 7, 'updated', 'App\\Member', 35, '{\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-01-18\\\",\\\"to\\\":\\\"2021-02-01\\\"}\"}', '{\"on_vacation_till\":null}', 'https://evoque.team/evoque/admin/member/35', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:23:58', '2021-02-08 12:23:58'),
+(2216, 'App\\User', 7, 'updated', 'App\\Member', 63, '{\"on_vacation_till\":\"{\\\"from\\\":\\\"2021-01-18\\\",\\\"to\\\":\\\"2021-02-01\\\"}\"}', '{\"on_vacation_till\":null}', 'https://evoque.team/evoque/admin/member/63', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:24:05', '2021-02-08 12:24:05'),
+(2217, 'App\\User', 7, 'updated', 'App\\Member', 1, '{\"convoys\":3}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2218, 'App\\User', 7, 'updated', 'App\\Member', 2, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2219, 'App\\User', 7, 'updated', 'App\\Member', 5, '{\"convoys\":2}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2220, 'App\\User', 7, 'updated', 'App\\Member', 8, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2221, 'App\\User', 7, 'updated', 'App\\Member', 10, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2222, 'App\\User', 7, 'updated', 'App\\Member', 11, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2223, 'App\\User', 7, 'updated', 'App\\Member', 12, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2224, 'App\\User', 7, 'updated', 'App\\Member', 14, '{\"convoys\":2}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2225, 'App\\User', 7, 'updated', 'App\\Member', 15, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2226, 'App\\User', 7, 'updated', 'App\\Member', 17, '{\"convoys\":4}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2227, 'App\\User', 7, 'updated', 'App\\Member', 20, '{\"convoys\":3}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2228, 'App\\User', 7, 'updated', 'App\\Member', 21, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2229, 'App\\User', 7, 'updated', 'App\\Member', 23, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2230, 'App\\User', 7, 'updated', 'App\\Member', 24, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2231, 'App\\User', 7, 'updated', 'App\\Member', 25, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2232, 'App\\User', 7, 'updated', 'App\\Member', 29, '{\"convoys\":3}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2233, 'App\\User', 7, 'updated', 'App\\Member', 31, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2234, 'App\\User', 7, 'updated', 'App\\Member', 36, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2235, 'App\\User', 7, 'updated', 'App\\Member', 38, '{\"convoys\":4}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2236, 'App\\User', 7, 'updated', 'App\\Member', 41, '{\"convoys\":3}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2237, 'App\\User', 7, 'updated', 'App\\Member', 42, '{\"convoys\":5}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2238, 'App\\User', 7, 'updated', 'App\\Member', 47, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2239, 'App\\User', 7, 'updated', 'App\\Member', 50, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2240, 'App\\User', 7, 'updated', 'App\\Member', 54, '{\"convoys\":4}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2241, 'App\\User', 7, 'updated', 'App\\Member', 56, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2242, 'App\\User', 7, 'updated', 'App\\Member', 57, '{\"convoys\":3}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2243, 'App\\User', 7, 'updated', 'App\\Member', 62, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2244, 'App\\User', 7, 'updated', 'App\\Member', 67, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2245, 'App\\User', 7, 'updated', 'App\\Member', 69, '{\"convoys\":1}', '{\"convoys\":0}', 'https://evoque.team/evoque/reset?_=1612785153560&_token=4Mf6QD2GiKNmMM9T2URXotmugex6g3k2i5utoZnW', '46.138.96.25', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 12:52:34', '2021-02-08 12:52:34'),
+(2246, 'App\\User', 2, 'created', 'App\\Convoy', 214, '[]', '{\"title\":\"\\u0412\\u043e\\u043a\\u0440\\u0443\\u0433 \\u0441\\u0432\\u0435\\u0442\\u0430, \\u0447\\u0430\\u0441\\u0442\\u044c 3\",\"lead\":\"Norines\",\"booking\":true,\"visible\":true,\"start_time\":\"2021-02-12 22:00:00\",\"type\":2,\"id\":214}', 'https://evoque.team/evoque/convoys/plans', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 15:33:31', '2021-02-08 15:33:31'),
+(2247, 'App\\User', 2, 'deleted', 'App\\Member', 55, '{\"id\":55,\"user_id\":53,\"nickname\":\"\\u041c\\u0430\\u043a\\u0430\\u0440\\u0435\\u043d\\u043a\\u043e\",\"join_date\":\"2020-12-21 00:00:00\",\"convoys\":0,\"scores\":18,\"money\":0,\"vacations\":0,\"on_vacation_till\":null,\"plate\":\"639\",\"visible\":1,\"sort\":0,\"trainee_until\":null,\"trainee_convoys\":4,\"tmp_banned\":0,\"tmp_banned_until\":null,\"tmp_bans_hidden\":0}', '[]', 'https://evoque.team/evoque/admin/member/fire/55', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 16:44:41', '2021-02-08 16:44:41'),
+(2248, 'App\\User', 2, 'deleted', 'App\\Convoy', 214, '{\"id\":214,\"public\":0,\"visible\":1,\"title\":\"\\u0412\\u043e\\u043a\\u0440\\u0443\\u0433 \\u0441\\u0432\\u0435\\u0442\\u0430, \\u0447\\u0430\\u0441\\u0442\\u044c 3\",\"start_time\":\"2021-02-12 22:00:00\",\"server\":null,\"communication\":null,\"lead\":\"Norines\",\"booked_by_id\":null,\"truck\":null,\"truck_tuning\":null,\"truck_paint\":null,\"truck_image\":null,\"trailer\":null,\"trailer_tuning\":null,\"trailer_paint\":null,\"trailer_image\":null,\"cargo\":null,\"route\":null,\"communication_link\":null,\"communication_channel\":null,\"start_city\":null,\"start_company\":null,\"rest_city\":null,\"rest_company\":null,\"finish_city\":null,\"finish_company\":null,\"alt_trailer_image\":null,\"alt_trailer\":null,\"alt_trailer_tuning\":null,\"alt_trailer_paint\":null,\"alt_cargo\":null,\"dlc\":null,\"trailer_public\":\"0\",\"truck_public\":0,\"booking\":1,\"comment\":null,\"type\":2}', '[]', 'https://evoque.team/evoque/admin/convoys/delete/214', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 16:47:31', '2021-02-08 16:47:31'),
+(2249, 'App\\User', 2, 'created', 'App\\Convoy', 215, '[]', '{\"title\":\"\\u0412\\u043e\\u043a\\u0440\\u0443\\u0433 \\u0441\\u0432\\u0435\\u0442\\u0430, \\u0447\\u0430\\u0441\\u0442\\u044c 3\",\"lead\":\"Norines\",\"booking\":true,\"visible\":true,\"start_time\":\"2021-02-11 20:00:00\",\"type\":1,\"id\":215}', 'https://evoque.team/evoque/convoys/plans', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 16:47:57', '2021-02-08 16:47:57'),
+(2250, NULL, NULL, 'created', 'App\\Member', 71, '[]', '{\"user_id\":69,\"nickname\":\"sahoOK\",\"join_date\":\"2021-02-08 19:13:38\",\"trainee_until\":\"2021-02-18 19:13:38\",\"id\":71}', 'https://evoque.team/auth/steam/handle?openid.assoc_handle=1234567890&openid.claimed_id=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198273566357&openid.identity=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198273566357&openid.mode=id_res&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.op_endpoint=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Flogin&openid.response_nonce=2021-02-08T16%3A13%3A37Zq5JNEotBrxcKh7eTJ%2B0M%2BNRf%2BnY%3D&openid.return_to=http%3A%2F%2Fevoque.team%2Fauth%2Fsteam%2Fhandle&openid.sig=4iK0goDiEiBUVIV20Oq6V9k9PLg%3D&openid.signed=signed%2Cop_endpoint%2Cclaimed_id%2Cidentity%2Creturn_to%2Cresponse_nonce%2Cassoc_handle', '2a00:1fa1:231:97c1:0:b:c275:8b01', 'Mozilla/5.0 (Linux; arm_64; Android 10; SM-A505FM) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 YaBrowser/20.12.0.141.00 SA/3 Mobile Safari/537.36', NULL, '2021-02-08 17:13:38', '2021-02-08 17:13:38'),
+(2251, NULL, NULL, 'created', 'App\\Member', 72, '[]', '{\"user_id\":70,\"nickname\":\"Svarog Asov\",\"join_date\":\"2021-02-08 19:37:00\",\"trainee_until\":\"2021-02-18 19:37:00\",\"id\":72}', 'https://evoque.team/auth/steam/handle?openid.assoc_handle=1234567890&openid.claimed_id=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198194726454&openid.identity=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Fid%2F76561198194726454&openid.mode=id_res&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.op_endpoint=https%3A%2F%2Fsteamcommunity.com%2Fopenid%2Flogin&openid.response_nonce=2021-02-08T16%3A36%3A58Z3KnCi7ER%2BPzfuPw2r%2BVX01UB%2FlA%3D&openid.return_to=http%3A%2F%2Fevoque.team%2Fauth%2Fsteam%2Fhandle&openid.sig=6nXYEMIhR%2FOcdOr372ZcG5wiu8g%3D&openid.signed=signed%2Cop_endpoint%2Cclaimed_id%2Cidentity%2Creturn_to%2Cresponse_nonce%2Cassoc_handle', '178.218.102.107', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 YaBrowser/20.12.3.140 Yowser/2.5 Safari/537.36', NULL, '2021-02-08 17:37:00', '2021-02-08 17:37:00'),
+(2252, 'App\\User', 70, 'updated', 'App\\Member', 72, '{\"plate\":null}', '{\"plate\":\"027\"}', 'https://evoque.team/evoque/profile/edit', '178.218.102.107', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 YaBrowser/20.12.3.140 Yowser/2.5 Safari/537.36', NULL, '2021-02-08 17:39:39', '2021-02-08 17:39:39'),
+(2253, 'App\\User', 7, 'updated', 'App\\Member', 1, '{\"convoys\":0}', '{\"convoys\":1}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36'),
+(2254, 'App\\User', 7, 'updated', 'App\\Member', 2, '{\"convoys\":0}', '{\"convoys\":1}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36'),
+(2255, 'App\\User', 7, 'updated', 'App\\Member', 42, '{\"convoys\":0}', '{\"convoys\":1}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36'),
+(2256, 'App\\User', 7, 'updated', 'App\\Member', 24, '{\"convoys\":0,\"scores\":226}', '{\"convoys\":1,\"scores\":228}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36'),
+(2257, 'App\\User', 7, 'updated', 'App\\Member', 36, '{\"convoys\":0,\"scores\":48}', '{\"convoys\":1,\"scores\":50}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36'),
+(2258, 'App\\User', 7, 'updated', 'App\\Member', 57, '{\"convoys\":0,\"scores\":48}', '{\"convoys\":1,\"scores\":50}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36'),
+(2259, 'App\\User', 7, 'updated', 'App\\Member', 54, '{\"convoys\":0,\"scores\":39}', '{\"convoys\":1,\"scores\":41}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36'),
+(2260, 'App\\User', 7, 'updated', 'App\\Member', 63, '{\"convoys\":0,\"scores\":2}', '{\"convoys\":1,\"scores\":4}', 'https://evoque.team/evoque/convoys/tab/accept/159', '2a00:1370:810c:74af:c5d2:f3c4:25f2:c616', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-08 20:16:36', '2021-02-08 20:16:36');
+INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `auditable_id`, `old_values`, `new_values`, `url`, `ip_address`, `user_agent`, `tags`, `created_at`, `updated_at`) VALUES
+(2261, 'App\\User', 2, 'updated', 'App\\Convoy', 215, '{\"server\":null,\"communication\":null,\"truck\":null,\"truck_tuning\":null,\"truck_paint\":null,\"trailer\":null,\"trailer_tuning\":null,\"trailer_paint\":null,\"trailer_image\":null,\"cargo\":null,\"route\":null,\"communication_link\":null,\"communication_channel\":null,\"start_city\":null,\"start_company\":null,\"rest_city\":null,\"rest_company\":null,\"finish_city\":null,\"finish_company\":null,\"dlc\":null,\"booking\":1,\"comment\":null}', '{\"server\":\"Simulation 1\",\"communication\":\"Discord\",\"truck\":\"\\u041b\\u044e\\u0431\\u043e\\u0439\",\"truck_tuning\":\"\\u041b\\u044e\\u0431\\u043e\\u0439, \\u043d\\u043e \\u0448\\u0430\\u0441\\u0441\\u0438 6\\u04454 \\u0438\\u043b\\u0438 6\\u04452\",\"truck_paint\":\"\\u041e\\u0444\\u0438\\u0446\\u0438\\u0430\\u043b\\u044c\\u043d\\u044b\\u0439\",\"trailer\":\"\\u041a\\u043e\\u043d\\u0442\\u0435\\u0439\\u043d\\u0435\\u0440\\u043e\\u0432\\u043e\\u0437\",\"trailer_tuning\":\"\\u041b\\u044e\\u0431\\u043e\\u0439, \\u043e\\u0434\\u0438\\u043d\\u043e\\u0447\\u043d\\u0430\\u044f \\u0441\\u0446\\u0435\\u043f\\u043a\\u0430\",\"trailer_paint\":\"\\u041b\\u044e\\u0431\\u043e\\u0439\",\"trailer_image\":\"e949d.png\",\"cargo\":\"\\u041b\\u044e\\u0431\\u043e\\u0439 (\\u043d\\u0435 \\u0431\\u043e\\u043b\\u0435\\u0435 30 \\u0442\\u043e\\u043d\\u043d)\",\"route\":\"[\\\"74e55.png\\\",\\\"b02bc.png\\\",\\\"329b8.png\\\",\\\"16c92.png\\\",\\\"0890f.png\\\"]\",\"communication_link\":\"\\u041d\\u0430\\u0448 \\u0434\\u0438\\u0441\\u043a\\u043e\\u0440\\u0434\",\"communication_channel\":\"\\u041a\\u043e\\u043c\\u043d\\u0430\\u0442\\u0430 \\u0434\\u043b\\u044f \\u043a\\u043e\\u043d\\u0432\\u043e\\u0435\\u0432.\",\"start_city\":\"\\u041a\\u0438\\u043b\\u044c (Kiel)\",\"start_company\":\"Stokes\",\"rest_city\":\"\\u0411\\u0435\\u0440\\u0433\\u0435\\u043d (Bergen)\",\"rest_company\":\"Polaris Lines\",\"finish_city\":\"\\u042d\\u0440\\u0435\\u0431\\u0440\\u0443 (\\u00d6rebro)\",\"finish_company\":\"Norrsken\",\"dlc\":\"[\\\"DLC Scandinavia\\\"]\",\"booking\":false,\"comment\":\"\\u0421\\u043b\\u0430\\u0431\\u043e \\u043e\\u0431\\u044a\\u0435\\u0445\\u0430\\u0442\\u044c \\u0432\\u0441\\u044e \\u043a\\u0430\\u0440\\u0442\\u0443? \\u041a\\u043e\\u043c\\u0443 \\u043d\\u0435 \\u0441\\u043b\\u0430\\u0431\\u043e, \\u0442\\u043e\\u0442 \\u0432\\u0443\\u0430\\u0449\\u0435 \\u043a\\u0440\\u0430\\u0441\\u0430\\u0443\\u0447\\u0438\\u0433. ![\\u043a\\u0435\\u043a](http:\\/\\/risovach.ru\\/upload\\/2013\\/04\\/mem\\/chetko_16557114_orig_.jpg)\"}', 'https://evoque.team/evoque/admin/convoys/edit/215', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-09 00:35:16', '2021-02-09 00:35:16'),
+(2262, 'App\\User', 2, 'updated', 'App\\Convoy', 215, '{\"comment\":\"\\u0421\\u043b\\u0430\\u0431\\u043e \\u043e\\u0431\\u044a\\u0435\\u0445\\u0430\\u0442\\u044c \\u0432\\u0441\\u044e \\u043a\\u0430\\u0440\\u0442\\u0443? \\u041a\\u043e\\u043c\\u0443 \\u043d\\u0435 \\u0441\\u043b\\u0430\\u0431\\u043e, \\u0442\\u043e\\u0442 \\u0432\\u0443\\u0430\\u0449\\u0435 \\u043a\\u0440\\u0430\\u0441\\u0430\\u0443\\u0447\\u0438\\u0433. ![\\u043a\\u0435\\u043a](http:\\/\\/risovach.ru\\/upload\\/2013\\/04\\/mem\\/chetko_16557114_orig_.jpg)\"}', '{\"comment\":\"\\u0421\\u043b\\u0430\\u0431\\u043e \\u043e\\u0431\\u044a\\u0435\\u0445\\u0430\\u0442\\u044c \\u0432\\u0441\\u044e \\u043a\\u0430\\u0440\\u0442\\u0443? \\u041a\\u043e\\u043c\\u0443 \\u043d\\u0435 \\u0441\\u043b\\u0430\\u0431\\u043e, \\u0442\\u043e\\u0442 \\u0432\\u0443\\u0430\\u0449\\u0435 \\u043a\\u0440\\u0430\\u0441\\u0430\\u0443\\u0447\\u0438\\u0433. ![\\u043a\\u0435\\u043a](https:\\/\\/i.imgur.com\\/aGvdsNV.jpg)\"}', 'https://evoque.team/evoque/admin/convoys/edit/215', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-09 00:38:19', '2021-02-09 00:38:19'),
+(2263, 'App\\User', 2, 'updated', 'App\\Convoy', 215, '{\"comment\":\"\\u0421\\u043b\\u0430\\u0431\\u043e \\u043e\\u0431\\u044a\\u0435\\u0445\\u0430\\u0442\\u044c \\u0432\\u0441\\u044e \\u043a\\u0430\\u0440\\u0442\\u0443? \\u041a\\u043e\\u043c\\u0443 \\u043d\\u0435 \\u0441\\u043b\\u0430\\u0431\\u043e, \\u0442\\u043e\\u0442 \\u0432\\u0443\\u0430\\u0449\\u0435 \\u043a\\u0440\\u0430\\u0441\\u0430\\u0443\\u0447\\u0438\\u0433. ![\\u043a\\u0435\\u043a](https:\\/\\/i.imgur.com\\/aGvdsNV.jpg)\"}', '{\"comment\":\"# \\u0421\\u043b\\u0430\\u0431\\u043e \\u043e\\u0431\\u044a\\u0435\\u0445\\u0430\\u0442\\u044c \\u0432\\u0441\\u044e \\u043a\\u0430\\u0440\\u0442\\u0443? \\u041a\\u043e\\u043c\\u0443 \\u043d\\u0435 \\u0441\\u043b\\u0430\\u0431\\u043e, \\u0442\\u043e\\u0442 ![\\u043a\\u0435\\u043a](https:\\/\\/i.imgur.com\\/aGvdsNV.jpg)\"}', 'https://evoque.team/evoque/admin/convoys/edit/215', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-09 00:40:28', '2021-02-09 00:40:28'),
+(2264, 'App\\User', 2, 'updated', 'App\\Convoy', 215, '{\"comment\":\"# \\u0421\\u043b\\u0430\\u0431\\u043e \\u043e\\u0431\\u044a\\u0435\\u0445\\u0430\\u0442\\u044c \\u0432\\u0441\\u044e \\u043a\\u0430\\u0440\\u0442\\u0443? \\u041a\\u043e\\u043c\\u0443 \\u043d\\u0435 \\u0441\\u043b\\u0430\\u0431\\u043e, \\u0442\\u043e\\u0442 ![\\u043a\\u0435\\u043a](https:\\/\\/i.imgur.com\\/aGvdsNV.jpg)\"}', '{\"comment\":\"# \\u0421\\u043b\\u0430\\u0431\\u043e \\u043e\\u0431\\u044a\\u0435\\u0445\\u0430\\u0442\\u044c \\u0432\\u0441\\u044e \\u043a\\u0430\\u0440\\u0442\\u0443? \\u041a\\u043e\\u043c\\u0443 \\u043d\\u0435 \\u0441\\u043b\\u0430\\u0431\\u043e, \\u0442\\u043e\\u0442 ![\\u043a\\u0435\\u043a](https:\\/\\/i.imgur.com\\/aGvdsNV.jpg)\\r\\n\\u0413\\u043e \\u0441\\u043b\\u0435\\u0434\\u0443\\u044e\\u0449\\u0443\\u044e \\u0447\\u0430\\u0441\\u0442\\u044c. \\u041d\\u0430 \\u0441\\u0435\\u0439 \\u0440\\u0430\\u0437 \\u0432 \\u043f\\u044f\\u0442\\u043d\\u0438\\u0446\\u0443 \\u043d\\u0435 \\u043f\\u043e\\u043b\\u0443\\u0447\\u0438\\u043b\\u043e\\u0441\\u044c, \\u0442\\u0430\\u043c \\u043b\\u0435\\u0436\\u0438\\u0442 \\u043a\\u043e\\u043d\\u0432\\u043e\\u0439 \\u043e\\u0442 \\u0422\\u0440\\u0443\\u0446\\u043a\\u0435\\u0440\\u0441\\u041c\\u041f.\\r\\n![\\u041a\\u0430\\u0440\\u0442\\u0430](https:\\/\\/i.imgur.com\\/BJVqbEP.png)\\r\\n![\\u041f\\u0440\\u043e\\u0433\\u0440\\u0435\\u0441\\u0441](https:\\/\\/i.imgur.com\\/SQjNrmy.png)\\r\\n\\u0412\\u0441\\u0451 \\u0442\\u0430\\u043a\\u0436\\u0435 \\u0431\\u0443\\u0434\\u0435\\u043c \\u043f\\u044b\\u0442\\u0430\\u0442\\u044c\\u0441\\u044f \\u043f\\u0440\\u043e\\u0435\\u0437\\u0436\\u0430\\u0442\\u044c \\u043a\\u0430\\u043a\\u0443\\u044e-\\u0442\\u043e \\u0447\\u0430\\u0441\\u0442\\u044c \\u0432 \\u043d\\u0435\\u0434\\u0435\\u043b\\u044e. \\u0418 \\u0432\\u0441\\u0451 \\u0442\\u0430\\u043a\\u0436\\u0435 \\u0443\\u0441\\u043b\\u043e\\u0432\\u0438\\u044f \\u043c\\u0438\\u043d\\u0438-\\u043a\\u043e\\u043d\\u043a\\u0443\\u0440\\u0441\\u0430 \\u043d\\u0435\\u0438\\u0437\\u043c\\u0435\\u043d\\u043d\\u044b:\\r\\n\\u0412 \\u043a\\u043e\\u043d\\u0446\\u0435 - \\u0440\\u0430\\u043d\\u0434\\u043e\\u043c\\u043e\\u043c \\u0432\\u044b\\u0431\\u0435\\u0440\\u0435\\u043c \\u0443\\u0447\\u0430\\u0441\\u0442\\u043d\\u0438\\u043a\\u0430, \\u0441\\u0440\\u0435\\u0434\\u0438 \\u0442\\u0435\\u0445, \\u043a\\u0442\\u043e \\u043f\\u0440\\u043e\\u0435\\u0445\\u0430\\u043b \\u0432\\u0441\\u0435 \\u0447\\u0430\\u0441\\u0442\\u0438. \\u041f\\u043e\\u0431\\u0435\\u0434\\u0438\\u0442\\u0435\\u043b\\u044c \\u043f\\u043e\\u043b\\u0443\\u0447\\u0438\\u0442 DLC Iberia!\\r\\n![DLC](https:\\/\\/i.imgur.com\\/H2yGcv3.jpg)\"}', 'https://evoque.team/evoque/admin/convoys/edit/215', '185.177.191.33', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-09 00:45:59', '2021-02-09 00:45:59'),
+(2265, 'App\\User', 10, 'created', 'App\\Convoy', 216, '[]', '{\"title\":\"\\u041e\\u0442\\u043a\\u0440\\u044b\\u0442\\u044b\\u0439 \\u043a\\u043e\\u043d\\u0432\\u043e\\u0439 \\u043e\\u0442 \\u0412\\u0422\\u041a \\\"\\u0421\\u041e\\u042e\\u0417 \\u0422\\u0420\\u0410\\u041d\\u0421\\\"\",\"lead\":\"\\u041d\\u0430 \\u043c\\u0435\\u0441\\u0442\\u0435 \\u0440\\u0430\\u0437\\u0431\\u0435\\u0440\\u0451\\u043c\\u0441\\u044f\",\"booking\":true,\"visible\":true,\"start_time\":\"2021-02-13 20:00:00\",\"type\":1,\"id\":216}', 'https://evoque.team/evoque/convoys/plans', '185.13.132.130', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-09 01:37:58', '2021-02-09 01:37:58'),
+(2266, 'App\\User', 10, 'created', 'App\\Convoy', 217, '[]', '{\"title\":\"\\u041e\\u0442\\u043a\\u0440\\u044b\\u0442\\u044b\\u0439 \\u043a\\u043e\\u043d\\u0432\\u043e\\u0439 \\u043e\\u0442 \\u0412\\u0422\\u041a \\\"Tiger Logistic Company\\\"\",\"lead\":\"\\u041d\\u0430 \\u043c\\u0435\\u0441\\u0442\\u0435 \\u0440\\u0430\\u0437\\u0431\\u0435\\u0440\\u0451\\u043c\\u0441\\u044f\",\"booking\":true,\"visible\":true,\"start_time\":\"2021-02-15 20:00:00\",\"type\":1,\"id\":217}', 'https://evoque.team/evoque/convoys/plans', '185.13.132.130', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-09 01:38:18', '2021-02-09 01:38:18'),
+(2267, 'App\\User', 10, 'created', 'App\\Convoy', 218, '[]', '{\"title\":\"\\u041e\\u0442\\u043a\\u0440\\u044b\\u0442\\u044b\\u0439 \\u043a\\u043e\\u043d\\u0432\\u043e\\u0439 \\u043d\\u0430\\u0448\\u0435\\u0439 \\u0412\\u0422\\u041a\",\"lead\":\"\\u041d\\u0430 \\u043c\\u0435\\u0441\\u0442\\u0435 \\u0440\\u0430\\u0437\\u0431\\u0435\\u0440\\u0451\\u043c\\u0441\\u044f\",\"booking\":true,\"visible\":true,\"start_time\":\"2021-02-16 19:30:00\",\"type\":1,\"id\":218}', 'https://evoque.team/evoque/convoys/plans', '185.13.132.130', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.146 Safari/537.36', NULL, '2021-02-09 01:38:34', '2021-02-09 01:38:34');
 
 -- --------------------------------------------------------
 
@@ -2591,9 +2677,13 @@ INSERT INTO `convoys` (`id`, `public`, `visible`, `title`, `start_time`, `server
 (208, 0, 1, 'Открытый конвой от ВТК \"Taiwan_ B.A.P VTC X Logistics X\"', '2021-02-06 15:30:00', 'Simulation 1', 'Discord', 'На месте разберёмся', NULL, 'Любой', 'Любой', 'Официальный!', NULL, 'Одиночный фургон (без DLC)', 'Из официального мода', 'Официальный!', '85a1f.png', 'Любой', '[\"e5380.png\"]', '2021-02-02 20:42:37', '2021-02-04 20:51:20', 'https://discord.gg/Gj53a8d', 'Комната для конвоев', 'Лион (Lyon)', 'STEIN BRUCH', 'Нет', NULL, 'Мангейм (Mannheim)', 'STEIN BRUCH', NULL, NULL, NULL, NULL, NULL, '[]', '0', 0, 0, 'Language: Chinese', 0),
 (209, 0, 1, 'Heavy duty ATS', '2021-02-06 19:30:00', '[US] Simulation', 'Discord', 'Jake the Dog', 8, 'Петя 365 или Кеша W900 *', 'Как в коментах или на скрине**', 'HSV 15 100 77 ***', '343d6.jpg', 'Низкорамник', 'любой', 'любой', NULL, 'Бревноукладчик, ричкастер или его шасси, погрузчик бревен, фрезерная машина, скрепер, тяжелый бульдозер', '[\"54437.jpg\",\"d8ae5.jpg\",\"46b4f.jpg\"]', '2021-02-04 14:09:58', '2021-02-04 19:09:40', 'https://discord.gg/Gj53a8d', 'Комната для конвоев', 'Phoenix', 'Phoenix Freight', 'Точка №2', 'Паркопка', 'Santa-Cruz', 'т.6', NULL, 'Низкорамник', NULL, NULL, 'Любой тяжелый груз, со строительной техникой', '[\"DLC Heavy Cargo Pa\\u0441k\",\"DLC Forest Machinery\"]', '0', 0, 0, '* Пример как должен выглядить тюнинг на скрине, оба тягача 625 л.с., 6х4 база, 18 передач.\r\n ** Подробней расскажу: low rood  sleaper для пети, для кеши studio sleeper, обязательно oversize low на бампере + флажки, колеса heavy duty dynamix. Остальное свободное. Если чего нет ничего страшного.\r\n *** Металик прописываем в графе HSV 15 100 77\r\nостальные вопросы в чате через собаку', 1),
 (210, 0, 1, 'Открытый конвой от ВТК \"RLC\"', '2021-02-06 22:00:00', 'Simulation 2', 'Discord', 'На месте разберёмся', NULL, 'Любой', 'Любой', 'Официальный!', NULL, 'Одиночный фургон (без DLC)', 'Как на картинке', 'Официальный!', 'e6d67.png', 'Любой', '[\"eeab2.png\"]', '2021-02-04 19:17:05', '2021-02-04 19:17:49', 'https://discord.gg/Gj53a8d', 'Комната для конвоев', 'Бургас (Burgas)', 'Container Port', 'Нет', NULL, 'Пловдив (Plovdiv)', 'Sporklift', NULL, NULL, NULL, NULL, NULL, '[\"DLC Road To The Black Sea\"]', '1', 0, 0, 'Main Language:	English', 2),
-(211, 0, 1, 'Открытый конвой от ВТК \"TruckersMP - Русскоязычное Сообщество\"', '2021-02-12 19:00:00', 'Simulation 2', 'Discord', 'На месте разберёмся', NULL, 'Любой', 'Любой', 'Официальный!', NULL, 'Одиночный фургон (без DLC)', 'Из официального мода', 'Официальный!', '366fa.png', 'Любой', '[\"52607.jpg\"]', '2021-02-04 21:33:44', '2021-02-04 21:33:44', 'https://discord.gg/AvKMYbQh5v', 'Открытый конвой', 'Дортмунд (Dortmund)', 'STEIN BRUCH', 'Нет', NULL, 'Осло (Oslo)', 'Polaris Lines', NULL, NULL, NULL, NULL, NULL, '[\"DLC Scandinavia\"]', '1', 0, 0, NULL, 1),
+(211, 0, 1, 'Открытый конвой от \"TruckersMP - Русскоязычное Сообщество\"', '2021-02-12 19:00:00', 'Simulation 2', 'Discord', 'На месте разберёмся', NULL, 'Любой', 'Любой', 'Официальный!', NULL, 'Одиночный фургон (без DLC)', 'Из официального мода', 'Официальный!', '366fa.png', 'Любой', '[\"52607.jpg\"]', '2021-02-04 21:33:44', '2021-02-08 05:30:51', 'https://discord.gg/AvKMYbQh5v', 'Открытый конвой', 'Дортмунд (Dortmund)', 'STEIN BRUCH', 'Нет', NULL, 'Осло (Oslo)', 'Polaris Lines', NULL, NULL, NULL, NULL, NULL, '[\"DLC Scandinavia\"]', '1', 0, 0, NULL, 1),
 (212, 0, 1, 'Открытый конвой от ВТК \"𝙎𝙝𝙚𝙫𝙖 𝙇𝙤𝙜𝙞𝙨𝙩𝙞𝙘𝙨\"', '2021-02-18 21:00:00', 'Simulation 1', 'Discord', 'На месте разберёмся', NULL, 'Любой', 'Любой', 'Официальный!', NULL, 'Одиночный фургон (без DLC)', 'Из официального мода', 'Официальный!', 'd1476.png', 'Любой', '[\"49437.png\"]', '2021-02-05 07:29:08', '2021-02-05 07:39:13', 'https://discord.gg/Gj53a8d', 'Комната для конвоев', 'Сегед (Szeged)', 'LKW', 'Точка №3', 'Заправка', 'Лодзь (Łódź)', 'LKW', NULL, NULL, NULL, NULL, NULL, '[\"DLC Going East!\"]', '1', 0, 0, 'Main Language:	English\r\nПо ситуации переходим в их дискорд:\r\nhttps://discord.gg/Njjh3nG', 1),
-(213, 0, 1, 'Открытый конвой от ВТК \"АЛЛО КЛИНИКА\"', '2021-02-14 20:00:00', NULL, NULL, 'На месте разберёмся', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-07 05:30:39', '2021-02-07 05:30:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 1, NULL, 1);
+(213, 0, 1, 'Открытый конвой от ВТК \"АЛЛО КЛИНИКА\"', '2021-02-14 20:00:00', NULL, NULL, 'На месте разберёмся', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-07 05:30:39', '2021-02-07 05:30:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 1, NULL, 1),
+(215, 0, 1, 'Вокруг света, часть 3', '2021-02-11 20:00:00', 'Simulation 1', 'Discord', 'Norines', NULL, 'Любой', 'Любой, но шасси 6х4 или 6х2', 'Официальный', NULL, 'Контейнеровоз', 'Любой, одиночная сцепка', 'Любой', 'e949d.png', 'Любой (не более 30 тонн)', '[\"74e55.png\",\"b02bc.png\",\"329b8.png\",\"16c92.png\",\"0890f.png\"]', '2021-02-08 16:47:57', '2021-02-09 00:45:59', 'Наш дискорд', 'Комната для конвоев.', 'Киль (Kiel)', 'Stokes', 'Берген (Bergen)', 'Polaris Lines', 'Эребру (Örebro)', 'Norrsken', NULL, NULL, NULL, NULL, NULL, '[\"DLC Scandinavia\"]', '0', 0, 0, '# Слабо объехать всю карту? Кому не слабо, тот ![кек](https://i.imgur.com/aGvdsNV.jpg)\r\nГо следующую часть. На сей раз в пятницу не получилось, там лежит конвой от ТруцкерсМП.\r\n![Карта](https://i.imgur.com/BJVqbEP.png)\r\n![Прогресс](https://i.imgur.com/SQjNrmy.png)\r\nВсё также будем пытаться проезжать какую-то часть в неделю. И всё также условия мини-конкурса неизменны:\r\nВ конце - рандомом выберем участника, среди тех, кто проехал все части. Победитель получит DLC Iberia!\r\n![DLC](https://i.imgur.com/H2yGcv3.jpg)', 1),
+(216, 0, 1, 'Открытый конвой от ВТК \"СОЮЗ ТРАНС\"', '2021-02-13 20:00:00', NULL, NULL, 'На месте разберёмся', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-09 01:37:58', '2021-02-09 01:37:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 1, NULL, 1),
+(217, 0, 1, 'Открытый конвой от ВТК \"Tiger Logistic Company\"', '2021-02-15 20:00:00', NULL, NULL, 'На месте разберёмся', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-09 01:38:18', '2021-02-09 01:38:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 1, NULL, 1),
+(218, 0, 1, 'Открытый конвой нашей ВТК', '2021-02-16 19:30:00', NULL, NULL, 'На месте разберёмся', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2021-02-09 01:38:34', '2021-02-09 01:38:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', 0, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2650,11 +2740,12 @@ INSERT INTO `gallery` (`id`, `author`, `image_full`, `image_thumb`, `visible`, `
 (12, NULL, 'd023389649ebdb00dfff4045038fe6b5.jpg', 'd023389649ebdb00dfff4045038fe6b5_thumb.jpg', 1, 0, '2021-01-16 20:39:01', '2021-01-16 20:39:01', 18),
 (13, NULL, '3f9ae9d341a2994cfd55dc9e73dadc44.jpg', '3f9ae9d341a2994cfd55dc9e73dadc44_thumb.jpg', 1, 0, '2021-01-18 13:36:24', '2021-01-29 15:01:15', 3),
 (14, NULL, '63cb4fd57380e545efe3140bdca594c4.jpg', '63cb4fd57380e545efe3140bdca594c4_thumb.jpg', 1, 0, '2021-01-18 13:46:44', '2021-01-18 13:46:44', 3),
-(25, NULL, '3caf71661f9b2ef8d4cf3566ec5a73d8.jpg', '3caf71661f9b2ef8d4cf3566ec5a73d8_thumb.jpg', 0, 0, '2021-02-07 11:21:10', '2021-02-07 11:21:10', 18),
+(25, NULL, '3caf71661f9b2ef8d4cf3566ec5a73d8.jpg', '3caf71661f9b2ef8d4cf3566ec5a73d8_thumb.jpg', 1, 0, '2021-02-07 11:21:10', '2021-02-07 13:53:05', 18),
 (22, NULL, '9a0080580e57fa79a70768de65378e9e.jpg', '9a0080580e57fa79a70768de65378e9e_thumb.jpg', 1, 0, '2021-01-27 17:51:15', '2021-01-27 19:07:53', 18),
 (18, NULL, 'd2539bc96636ee5451d402c2d579a4b5.jpg', 'd2539bc96636ee5451d402c2d579a4b5_thumb.jpg', 1, 0, '2021-01-21 14:04:29', '2021-01-22 17:36:00', 40),
 (23, NULL, 'f66943787d0199d4687fce65c231da3d.jpg', 'f66943787d0199d4687fce65c231da3d_thumb.jpg', 1, 0, '2021-01-27 17:51:39', '2021-02-01 15:31:21', 18),
-(24, NULL, '2557c1b182ff11295a2e1cdf640d01b0.jpg', '2557c1b182ff11295a2e1cdf640d01b0_thumb.jpg', 1, 0, '2021-01-31 19:59:54', '2021-01-31 23:43:09', 15);
+(24, NULL, '2557c1b182ff11295a2e1cdf640d01b0.jpg', '2557c1b182ff11295a2e1cdf640d01b0_thumb.jpg', 1, 0, '2021-01-31 19:59:54', '2021-01-31 23:43:09', 15),
+(26, NULL, '734dd1513413c7d3f181cb52222a79e4.jpg', '734dd1513413c7d3f181cb52222a79e4_thumb.jpg', 1, 0, '2021-02-08 16:02:30', '2021-02-08 20:20:32', 15);
 
 -- --------------------------------------------------------
 
@@ -2707,7 +2798,7 @@ CREATE TABLE `members` (
   `scores` int(11) DEFAULT '0',
   `money` double DEFAULT '0',
   `vacations` int(11) NOT NULL DEFAULT '0',
-  `on_vacation_till` date DEFAULT NULL,
+  `on_vacation_till` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `plate` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `visible` tinyint(1) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
@@ -2725,47 +2816,49 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`id`, `user_id`, `nickname`, `join_date`, `convoys`, `scores`, `money`, `vacations`, `on_vacation_till`, `plate`, `visible`, `created_at`, `updated_at`, `sort`, `trainee_until`, `trainee_convoys`, `tmp_banned`, `tmp_banned_until`, `tmp_bans_hidden`) VALUES
-(1, 1, 'Виталя 43RUS', '2016-11-01 00:00:00', 2, NULL, NULL, 0, NULL, '043', 1, '2020-09-19 20:43:14', '2021-02-07 11:30:04', 1, NULL, NULL, 0, NULL, 0),
-(2, 2, 'Norines', '2016-11-01 00:00:00', 1, NULL, 74, 0, NULL, '020', 1, '2020-09-20 05:06:08', '2021-02-07 11:28:49', 0, NULL, NULL, 0, NULL, 0),
-(5, 3, 'Mayday', '2018-08-25 00:00:00', 1, 409, 19.5, 0, NULL, '888', 1, '2020-09-19 20:31:48', '2021-02-02 06:25:23', 0, NULL, NULL, 0, NULL, 0),
-(8, 6, 'Jake the Dog', '2016-11-01 00:00:00', 1, 537, 19, 1, NULL, '178', 1, '2020-09-28 12:00:59', '2021-02-07 11:30:04', 0, NULL, NULL, 0, NULL, 1),
-(9, 7, 'Psy', '2019-02-03 00:00:00', 0, NULL, 4.5, 1, '2021-02-06', '050', 1, '2020-09-28 13:47:49', '2021-01-23 21:39:00', 1, NULL, NULL, 0, NULL, 1),
-(10, 8, 'R a r e', '2016-11-01 00:00:00', 1, NULL, 37, 1, NULL, '747', 1, '2020-09-28 18:15:31', '2021-02-07 11:28:49', 1, NULL, NULL, 0, NULL, 1),
-(11, 9, 'chilik116rus', '2019-11-15 00:00:00', 1, 143, 4, 1, NULL, '116', 1, '2020-09-29 14:51:11', '2021-02-07 11:28:49', 0, NULL, NULL, 0, NULL, 1),
-(12, 10, 'AVENTAD0R', '2020-02-24 00:00:00', 1, 293, 45.5, 0, NULL, '800', 1, '2020-10-05 19:43:22', '2021-02-07 11:28:49', 0, NULL, NULL, 0, NULL, 0),
-(14, 12, 'YURA (RU_777)', '2020-07-28 00:00:00', 2, 72, 0.5, 0, NULL, '777', 1, '2020-10-25 22:55:31', '2021-02-05 08:16:25', 0, NULL, NULL, 0, NULL, 0),
-(15, 13, 'Antoxa 73 Rus', '2020-04-14 00:00:00', 1, 74, 8, 2, NULL, '073', 1, '2020-10-26 12:14:42', '2021-02-05 08:16:25', 0, NULL, NULL, 0, NULL, 1),
-(16, 14, 'Виктор_102RUS', '2020-08-20 00:00:00', 0, 75, 1, 2, '2021-02-07', '666', 1, '2020-10-26 14:02:21', '2021-01-25 13:08:34', 0, NULL, NULL, 0, NULL, 0),
-(17, 15, 'Charming', '2017-02-02 00:00:00', 4, NULL, 47.5, 0, NULL, '995', 1, '2020-10-26 15:21:57', '2021-02-07 11:30:04', 1, NULL, NULL, 0, NULL, 1),
-(20, 18, 'Chudo9422', '2017-11-03 00:00:00', 3, 854, 2, 0, NULL, '942', 1, '2020-10-27 04:21:01', '2021-02-07 11:30:04', 0, NULL, NULL, 0, NULL, 1),
-(21, 19, 'Dnepryanin[UA]', '2016-11-01 00:00:00', 1, 598, 14, 0, NULL, '001', 1, '2020-10-27 06:00:29', '2021-02-05 08:16:25', 0, NULL, NULL, 0, NULL, 1),
-(23, 21, 'Conar', '2020-09-26 00:00:00', 0, 28, 1.5, 0, NULL, '560', 1, '2020-10-27 08:20:54', '2021-02-01 12:16:07', 0, NULL, NULL, 0, NULL, 1),
-(24, 22, 'Qwerber', '2020-02-28 00:00:00', 1, 226, 16, 0, NULL, '891', 1, '2020-10-27 08:29:48', '2021-02-07 11:29:29', 0, NULL, NULL, 0, NULL, 0),
-(25, 23, 'MolfaR_Ru', '2020-09-02 00:00:00', 1, 83, 0.5, 1, NULL, '294', 1, '2020-10-27 08:57:05', '2021-02-02 20:01:14', 0, NULL, NULL, 0, NULL, 0),
-(29, 27, 'Юлий', '2019-09-05 00:00:00', 3, 751, 15, 0, NULL, '099', 1, '2020-10-27 16:50:49', '2021-02-07 12:18:00', 0, NULL, NULL, 0, NULL, 1),
+(1, 1, 'Виталя 43RUS', '2016-11-01 00:00:00', 1, NULL, NULL, 0, NULL, '043', 1, '2020-09-19 20:43:14', '2021-02-08 20:16:36', 1, NULL, NULL, 0, NULL, 0),
+(2, 2, 'Norines', '2016-11-01 00:00:00', 1, NULL, 74, 0, NULL, '020', 1, '2020-09-20 05:06:08', '2021-02-08 20:16:36', 0, NULL, NULL, 0, NULL, 0),
+(5, 3, 'Mayday', '2018-08-25 00:00:00', 0, 411, 20, 1, '{\"from\":\"2021-02-17\",\"to\":\"2021-02-25\"}', '888', 1, '2020-09-19 20:31:48', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 0),
+(8, 6, 'Jake the Dog', '2016-11-01 00:00:00', 0, 537, 19, 1, NULL, '178', 1, '2020-09-28 12:00:59', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 1),
+(9, 7, 'Psy', '2019-02-03 00:00:00', 0, NULL, 4.5, 1, NULL, '050', 1, '2020-09-28 13:47:49', '2021-02-08 12:23:40', 1, NULL, NULL, 0, NULL, 1),
+(10, 8, 'R a r e', '2016-11-01 00:00:00', 0, NULL, 37, 1, NULL, '747', 1, '2020-09-28 18:15:31', '2021-02-08 12:52:34', 1, NULL, NULL, 0, NULL, 1),
+(11, 9, 'chilik116rus', '2019-11-15 00:00:00', 0, 143, 4, 1, NULL, '116', 1, '2020-09-29 14:51:11', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 1),
+(12, 10, 'AVENTAD0R', '2020-02-24 00:00:00', 0, 293, 45.5, 0, NULL, '800', 1, '2020-10-05 19:43:22', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 0),
+(14, 12, 'YURA (RU_777)', '2020-07-28 00:00:00', 0, 72, 0.5, 0, NULL, '777', 1, '2020-10-25 22:55:31', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 0),
+(15, 13, 'Antoxa 73 Rus', '2020-04-14 00:00:00', 0, 74, 8, 2, NULL, '073', 1, '2020-10-26 12:14:42', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 1),
+(16, 14, 'Виктор_102RUS', '2020-08-20 00:00:00', 0, 75, 1, 2, NULL, '666', 1, '2020-10-26 14:02:21', '2021-02-08 12:23:49', 0, NULL, NULL, 0, NULL, 0),
+(17, 15, 'Charming', '2017-02-02 00:00:00', 0, NULL, 48, 0, NULL, '995', 1, '2020-10-26 15:21:57', '2021-02-08 12:52:34', 1, NULL, NULL, 0, NULL, 1),
+(20, 18, 'Chudo9422', '2017-11-03 00:00:00', 0, 854, 2, 0, NULL, '942', 1, '2020-10-27 04:21:01', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 1),
+(21, 19, 'Dnepryanin[UA]', '2016-11-01 00:00:00', 0, 598, 14, 0, NULL, '001', 1, '2020-10-27 06:00:29', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 1),
+(23, 21, 'Conar', '2020-09-26 00:00:00', 0, 30, 1.5, 0, NULL, '560', 1, '2020-10-27 08:20:54', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 1),
+(24, 22, 'Qwerber', '2020-02-28 00:00:00', 1, 228, 16, 0, NULL, '891', 1, '2020-10-27 08:29:48', '2021-02-08 20:16:36', 0, NULL, NULL, 0, NULL, 0),
+(25, 23, 'MolfaR_Ru', '2020-09-02 00:00:00', 0, 83, 0.5, 1, NULL, '294', 1, '2020-10-27 08:57:05', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 0),
+(29, 27, 'Юлий', '2019-09-05 00:00:00', 0, 751, 15, 0, NULL, '099', 1, '2020-10-27 16:50:49', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 1),
 (30, 28, 'Sanek', '2019-06-02 00:00:00', 0, 326, 5.5, 0, NULL, '997', 0, '2020-10-27 19:34:18', '2021-01-11 14:14:45', 0, NULL, NULL, 0, NULL, 0),
-(31, 29, 'Влад_161RUS', '2018-10-29 00:00:00', 0, 174, 0, 2, NULL, '161', 1, '2020-10-27 20:50:43', '2021-02-01 12:16:07', 0, NULL, NULL, 0, NULL, 0),
+(31, 29, 'Влад_161RUS', '2018-10-29 00:00:00', 0, 176, 0, 2, NULL, '161', 1, '2020-10-27 20:50:43', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 0),
 (33, 31, 'Artem565', '2019-05-23 00:00:00', 0, 72, 1, 2, NULL, 'https://i.imgur.com/D0aXUn2.png', 0, '2020-10-28 23:20:17', '2020-12-26 11:17:05', 0, NULL, NULL, 0, NULL, 1),
-(35, 33, 'staff4rd.', '2020-10-30 00:00:00', 0, 5, 0, 2, '2021-02-01', '911', 1, '2020-10-30 18:34:01', '2021-01-18 15:01:26', 0, NULL, NULL, 0, NULL, 0),
-(36, 34, 'maluha03', '2020-11-02 00:00:00', 0, 46, 0, 1, NULL, '240', 1, '2020-11-02 18:19:20', '2021-02-03 09:58:33', 0, NULL, NULL, 0, NULL, 0),
-(38, 36, 'Женек 43 rus', '2020-11-02 00:00:00', 4, 70, 4.5, 1, NULL, '333', 1, '2020-11-02 19:57:35', '2021-02-07 11:28:49', 0, NULL, NULL, 0, NULL, 0),
-(41, 39, 'TokS', '2019-06-02 00:00:00', 3, 265, 8.5, 0, NULL, '077', 1, '2020-11-09 10:49:14', '2021-02-07 11:30:04', 0, NULL, NULL, 0, NULL, 0),
-(42, 40, 'ARTIST UA', '2017-02-17 00:00:00', 4, NULL, 66, 0, NULL, '102', 1, '2020-11-09 16:07:28', '2021-02-07 11:28:49', 1, NULL, NULL, 0, NULL, 0),
+(35, 33, 'staff4rd.', '2020-10-30 00:00:00', 0, 5, 0, 2, NULL, '911', 1, '2020-10-30 18:34:01', '2021-02-08 12:23:58', 0, NULL, NULL, 0, NULL, 0),
+(36, 34, 'maluha03', '2020-11-02 00:00:00', 1, 50, 0, 1, NULL, '240', 1, '2020-11-02 18:19:20', '2021-02-08 20:16:36', 0, NULL, NULL, 0, NULL, 0),
+(38, 36, 'Женек 43 rus', '2020-11-02 00:00:00', 0, 70, 5, 1, NULL, '333', 1, '2020-11-02 19:57:35', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 0),
+(41, 39, 'TokS', '2019-06-02 00:00:00', 0, 265, 8.5, 0, NULL, '077', 1, '2020-11-09 10:49:14', '2021-02-08 12:52:34', 0, NULL, NULL, 0, NULL, 0),
+(42, 40, 'ARTIST UA', '2017-02-17 00:00:00', 1, NULL, 67, 0, NULL, '102', 1, '2020-11-09 16:07:28', '2021-02-08 20:16:36', 1, NULL, NULL, 0, NULL, 0),
 (46, 44, 'lllAnkylll', '2017-08-04 00:00:00', 0, 74, 4, 2, NULL, '022', 1, '2020-11-23 16:23:31', '2021-02-02 20:01:33', 0, NULL, NULL, 0, NULL, 1),
-(47, 45, 'VerVoer', '2020-11-25 00:00:00', 1, 15, 0, 1, NULL, '054', 1, '2020-11-25 14:41:21', '2021-02-07 11:28:49', 0, NULL, 3, 0, NULL, 0),
-(50, 48, 'Dimone22RUS', '2020-12-02 00:00:00', 0, 9, 0, 1, NULL, '525', 1, '2020-12-02 19:28:14', '2021-02-01 12:16:07', 0, NULL, 3, 0, NULL, 0),
+(47, 45, 'VerVoer', '2020-11-25 00:00:00', 0, 15, 0, 1, NULL, '054', 1, '2020-11-25 14:41:21', '2021-02-08 12:52:34', 0, NULL, 3, 0, NULL, 0),
+(50, 48, 'Dimone22RUS', '2020-12-02 00:00:00', 0, 11, 0.5, 1, NULL, '525', 1, '2020-12-02 19:28:14', '2021-02-08 12:52:34', 0, NULL, 3, 0, NULL, 0),
 (52, 50, 'Usmedinski', '2020-12-08 00:00:00', 0, 6, 0, 1, NULL, '228', 1, '2020-12-08 20:00:24', '2021-01-25 07:24:09', 0, NULL, 3, 0, NULL, 0),
-(54, 52, 'thealewka', '2020-12-15 00:00:00', 3, 37, 1, 0, NULL, '177', 1, '2020-12-15 20:06:57', '2021-02-05 08:16:25', 0, NULL, 3, 0, NULL, 0),
-(55, 53, 'Макаренко', '2020-12-21 00:00:00', 0, 18, 0, 0, NULL, '639', 1, '2020-12-21 18:42:59', '2021-02-01 12:16:07', 0, NULL, 4, 0, NULL, 0),
-(56, 54, 'EV_project', '2020-12-22 00:00:00', 0, 12, 0, 0, NULL, '905', 1, '2020-12-22 20:10:25', '2021-02-01 12:16:07', 0, NULL, 3, 0, NULL, 0),
-(57, 55, 'RusBozh', '2020-12-25 00:00:00', 3, 48, 1, 0, NULL, '051', 1, '2020-12-24 22:34:55', '2021-02-04 15:14:14', 0, NULL, 3, 0, NULL, 0),
-(59, 57, 'Aveboyare_34', '2020-12-28 00:00:00', 0, 3, 0, 1, '2021-02-09', '669', 1, '2020-12-28 17:32:35', '2021-01-27 09:31:53', 0, NULL, 3, 0, NULL, 0),
-(60, 58, 'Ronytea', '2021-01-04 00:00:00', 0, 14, 1, 2, '2021-02-20', '010', 1, '2021-01-04 17:42:45', '2021-02-07 11:27:34', 0, NULL, 3, 0, NULL, 0),
-(62, 60, 'K1pa', '2021-01-07 00:00:00', 0, 10, 0, 0, NULL, '112', 1, '2021-01-07 12:10:30', '2021-02-01 17:10:44', 0, NULL, 3, 0, NULL, 0),
-(63, 61, 'Skazochniсk', '2021-01-09 19:04:19', 0, 2, 0, 1, '2021-02-01', '052', 1, '2021-01-09 17:04:19', '2021-01-30 20:16:56', 0, '2021-01-19', 3, 0, NULL, 1),
+(54, 52, 'thealewka', '2020-12-15 00:00:00', 1, 41, 1.5, 0, NULL, '177', 1, '2020-12-15 20:06:57', '2021-02-08 20:16:36', 0, NULL, 3, 0, NULL, 0),
+(56, 54, 'EV_project', '2020-12-22 00:00:00', 0, 14, 0, 0, NULL, '905', 1, '2020-12-22 20:10:25', '2021-02-08 12:52:34', 0, NULL, 3, 0, NULL, 0),
+(57, 55, 'RusBozh', '2020-12-25 00:00:00', 1, 50, 1, 0, NULL, '051', 1, '2020-12-24 22:34:55', '2021-02-08 20:16:36', 0, NULL, 3, 0, NULL, 0),
+(59, 57, 'Aveboyare_34', '2020-12-28 00:00:00', 0, 3, 0, 1, '{\"from\":\"2021-01-26\",\"to\":\"2021-02-09\"}', '669', 1, '2020-12-28 17:32:35', '2021-02-07 13:42:02', 0, NULL, 3, 0, NULL, 0),
+(60, 58, 'Ronytea', '2021-01-04 00:00:00', 0, 14, 1, 2, '{\"from\":\"2021-02-06\",\"to\":\"2021-02-20\"}', '010', 1, '2021-01-04 17:42:45', '2021-02-07 13:42:02', 0, NULL, 3, 0, NULL, 0),
+(62, 60, 'K1pa', '2021-01-07 00:00:00', 0, 10, 0, 0, NULL, '112', 1, '2021-01-07 12:10:30', '2021-02-08 12:52:34', 0, NULL, 3, 0, NULL, 0),
+(63, 61, 'Skazochniсk', '2021-01-09 00:00:00', 1, 4, 0, 1, NULL, '052', 1, '2021-01-09 17:04:19', '2021-02-08 20:16:36', 0, NULL, 3, 0, NULL, 1),
 (66, 64, 'Daxenore', '2021-01-13 23:32:42', 0, 5, 0, 0, NULL, '008', 1, '2021-01-13 21:32:42', '2021-02-01 12:16:07', 0, '2021-01-23', 3, 0, NULL, 0),
-(67, 65, 'ProFitLKS (RUS)', '2021-01-17 18:57:01', 0, 13, 1.5, 0, NULL, '173', 1, '2021-01-17 16:57:01', '2021-02-01 12:16:07', 0, '2021-01-27', 3, 0, NULL, 0),
-(69, 67, 'PolskiBelgia6', '2021-01-31 20:32:25', 1, 0, 0, 0, NULL, NULL, 1, '2021-01-31 18:32:25', '2021-02-04 15:14:14', 0, '2021-02-10', 1, 0, NULL, 1);
+(67, 65, 'ProFitLKS (RUS)', '2021-01-17 18:57:01', 0, 15, 1.5, 0, NULL, '173', 1, '2021-01-17 16:57:01', '2021-02-08 12:52:34', 0, '2021-01-27', 3, 0, NULL, 0),
+(69, 67, 'PolskiBelgia6', '2021-01-31 20:32:25', 0, 0, 0, 0, NULL, NULL, 1, '2021-01-31 18:32:25', '2021-02-08 12:52:34', 0, '2021-02-10', 1, 0, NULL, 1),
+(70, 68, 'Man_RaY', '2021-02-07 21:40:13', 0, 0, 0, 0, NULL, NULL, 1, '2021-02-07 19:40:13', '2021-02-07 19:40:13', 0, '2021-02-17', 0, 0, NULL, 0),
+(71, 69, 'sahoOK', '2021-02-08 19:13:38', 0, 0, 0, 0, NULL, NULL, 1, '2021-02-08 17:13:38', '2021-02-08 17:13:38', 0, '2021-02-18', 0, 0, NULL, 0),
+(72, 70, 'Svarog Asov', '2021-02-08 19:37:00', 0, 0, 0, 0, NULL, '027', 1, '2021-02-08 17:37:00', '2021-02-08 22:00:12', 0, '2021-02-18', 0, 0, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2847,7 +2940,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (83, '2021_01_11_135515_add_gallery_to_roles_table', 33),
 (84, '2021_01_18_114334_add_fired_at_to_users_table', 34),
 (85, '2021_01_20_192124_add_discord_to_users_table', 35),
-(86, '2021_01_29_192101_add_discord_name_to_recruitment_table', 36);
+(86, '2021_01_29_192101_add_discord_name_to_recruitment_table', 36),
+(87, '2021_02_06_164513_change_vacation_till_type_in_applications', 37),
+(88, '2021_02_07_141059_change_on_vacation_till_type_in_members', 37);
 
 -- --------------------------------------------------------
 
@@ -2932,7 +3027,8 @@ INSERT INTO `recruitment` (`id`, `status`, `name`, `nickname`, `age`, `hours_pla
 (60, '1', 'Filip Jankowski', '[G-P-N] PolskiBelgia6', 20, 2151, 'https://vk.com/polskibelgia6', 'https://steamcommunity.com/id/PolskiBelgia6/', 'https://truckersmp.com/user/1469825', 1, 1, 1, 'Я нашел вас через систему TMP VTC. Я собирался подать заявку здесь больше месяца назад, но выбрал другую компанию. У этой компании не получилось, и Skazochnick пригласил меня присоединиться, по его словам, эта ВТК лучше в том аспекте, что меня разочаровало в &laquo;Газпромнефти&raquo;.', '2021-01-31 17:50:15', '2021-01-31 21:52:38', 'recruitment', NULL, '2017-05-25 00:00:00', NULL),
 (61, '2', 'Аркадий Гончаренко', 'Man_RaY', 20, 2, 'https://vk.com/id136966679', 'https://steamcommunity.com/id/136966679/', 'https://truckersmp.com/user/4060311', 1, 1, 0, 'Друг пригласил', '2021-02-02 16:59:11', '2021-02-03 20:23:12', 'recruitment', 'Мало опыта ETS2MP.', '2021-02-02 00:00:00', NULL),
 (62, '2', 'Станислав Антипов', 'Svarog Asov', 35, 38, 'https://vk.com/id498374170', 'https://steamcommunity.com/profiles/76561198194726454/', 'https://truckersmp.com/user/4055583', 1, 0, 1, 'Нашел через поиск русскоязычных ВТК, а Ваша компания одна из крупнейших!', '2021-02-05 03:46:56', '2021-02-06 08:38:14', 'recruitment', 'Не подходит по времени (+7 от МСК)', '2021-01-31 00:00:00', 'Ariec_DV(Stas)#4296'),
-(63, '0', 'Александр Бороденко', 'sahoOK', 18, 87, 'https://m.vk.com/id307696718', 'https://steamcommunity.com/profiles/76561198273566357/', 'https://truckersmp.com/user/2582489', 1, 0, 1, '', '2021-02-06 18:31:48', '2021-02-06 18:31:48', 'recruitment', NULL, '2019-01-04 00:00:00', 'sahoOK#2926');
+(63, '1', 'Александр Бороденко', 'sahoOK', 18, 87, 'https://m.vk.com/id307696718', 'https://steamcommunity.com/profiles/76561198273566357/', 'https://truckersmp.com/user/2582489', 1, 0, 1, '', '2021-02-06 18:31:48', '2021-02-08 17:32:52', 'recruitment', 'Молчун немного, но говорит всё понял.', '2019-01-04 00:00:00', 'sahoOK#2926'),
+(64, '2', 'Zolot Pashe', 'rebo456', 34, 38, 'https://vk.com/z.pavel1987', 'https://steamcommunity.com/profiles/76561198987064190/', 'https://truckersmp.com/user/3258762', 1, 0, 1, 'В игре Euro Truck Simulator 2 , было объявление о вашем наборе', '2021-02-08 07:29:53', '2021-02-08 18:22:48', 'recruitment', 'Мало опыта ETS2MP, личка закрыта.', '2020-02-15 00:00:00', 'pavel1987#8931');
 
 -- --------------------------------------------------------
 
@@ -3065,21 +3161,15 @@ INSERT INTO `role_member` (`member_id`, `role_id`) VALUES
 (12, 6),
 (20, 8),
 (21, 8),
-(16, 11),
 (14, 11),
 (17, 8),
 (23, 12),
-(9, 5),
 (41, 9),
 (30, 9),
 (10, 8),
 (8, 8),
-(35, 13),
 (38, 11),
-(55, 12),
 (25, 11),
-(63, 13),
-(50, 13),
 (24, 9),
 (59, 13),
 (66, 13),
@@ -3087,7 +3177,6 @@ INSERT INTO `role_member` (`member_id`, `role_id`) VALUES
 (11, 7),
 (31, 10),
 (52, 13),
-(54, 12),
 (56, 12),
 (57, 11),
 (67, 12),
@@ -3098,7 +3187,16 @@ INSERT INTO `role_member` (`member_id`, `role_id`) VALUES
 (47, 12),
 (60, 12),
 (36, 11),
-(29, 8);
+(29, 8),
+(70, 14),
+(50, 12),
+(9, 5),
+(16, 11),
+(35, 13),
+(63, 13),
+(71, 14),
+(72, 14),
+(54, 11);
 
 -- --------------------------------------------------------
 
@@ -3124,7 +3222,7 @@ CREATE TABLE `rp_reports` (
 --
 
 INSERT INTO `rp_reports` (`id`, `member_id`, `images`, `game`, `note`, `status`, `created_at`, `updated_at`, `comment`, `comment_by`) VALUES
-(227, 56, '[\"69917daf601cba1798cb50333eb95e4b.png\",\"7da403d51e16d87baaf28fa5baba2444.png\"]', 'ets2', NULL, 0, '2021-02-07 13:24:21', '2021-02-07 13:24:21', NULL, NULL),
+(227, 56, '[\"69917daf601cba1798cb50333eb95e4b.png\",\"7da403d51e16d87baaf28fa5baba2444.png\"]', 'ets2', NULL, 1, '2021-02-07 13:24:21', '2021-02-07 14:34:28', NULL, NULL),
 (197, 29, '[\"e2f8c28f2f0e7f76179119e67872e7be.png\",\"70e2a2b57874440b7091f54cd7978b43.png\"]', 'ets2', NULL, 1, '2021-01-26 15:01:20', '2021-01-26 19:26:45', NULL, NULL),
 (198, 62, '[\"8bacf66aee0e0df816ff37a4635af5ea.png\",\"d8c303d89e3d8de7dc8f6ed05452fdbb.png\"]', 'ets2', NULL, 1, '2021-01-27 08:34:24', '2021-01-27 16:21:34', NULL, NULL),
 (199, 62, '[\"125840eb6150170307fabebfcdc33eb6.png\",\"eb15830478620dce0e5454e7a6b3be06.png\"]', 'ets2', NULL, 1, '2021-01-27 08:34:48', '2021-01-27 16:22:29', NULL, NULL),
@@ -3196,7 +3294,12 @@ INSERT INTO `rp_reports` (`id`, `member_id`, `images`, `game`, `note`, `status`,
 (162, 62, '[\"8878d80b7eb55eafe01bcdce695d247f.jpg\",\"b3f275596d8fd65a05c690d14517ce78.jpg\"]', 'ets2', NULL, 1, '2021-01-14 15:51:26', '2021-01-15 09:28:25', NULL, NULL),
 (163, 24, '[\"533a0e331ecb104dbde9685c04521d22.png\",\"bc506ba39f38784298a7c9183240228f.png\"]', 'ets2', NULL, 1, '2021-01-14 19:50:23', '2021-01-15 09:29:38', NULL, NULL),
 (164, 54, '[\"9d7a9eb16f7b5b9cba0265ae0dc42df3.png\",\"a8c9af2f8c048ef610ef0218878e5c03.png\",\"3225261c54322c38c74001cf0ea89b75.png\"]', 'ets2', 'Просьаб строго не судить в 1 раз катаюсь тут, для отчёта о перевозках)) Если не правильно сделал скрины напишите в ВК\r\nНик TheAlewka', 2, '2021-01-14 20:41:35', '2021-01-15 09:32:28', 'К сожалению всё не правильно. Посмотри как должны выглядеть скрины у ребят в этой теме.', 'Виталя 43RUS'),
-(165, 24, '[\"fe18b2a621b33c041f1960bdfc43d11c.png\",\"8196a5bc14be588422810e4613b7d741.png\"]', 'ets2', 'Пройд. расст. меньше, т.к. в порту я выбрал другой путь.', 2, '2021-01-15 10:34:34', '2021-01-15 11:15:23', 'Правила, есть правила.\r\nНарушение пункта 5 правил:\r\nСданные грузы с маршрутом превышающим на обоих скринах +/- 100 км не учитываются.', 'Виталя 43RUS');
+(165, 24, '[\"fe18b2a621b33c041f1960bdfc43d11c.png\",\"8196a5bc14be588422810e4613b7d741.png\"]', 'ets2', 'Пройд. расст. меньше, т.к. в порту я выбрал другой путь.', 2, '2021-01-15 10:34:34', '2021-01-15 11:15:23', 'Правила, есть правила.\r\nНарушение пункта 5 правил:\r\nСданные грузы с маршрутом превышающим на обоих скринах +/- 100 км не учитываются.', 'Виталя 43RUS'),
+(228, 56, '[\"75d53e0aa87d935328fac19360d20ad9.png\",\"17076ac9999c0ff70f2cf64defeb5e09.png\"]', 'ets2', NULL, 1, '2021-02-07 16:29:04', '2021-02-08 01:41:29', NULL, NULL),
+(229, 62, '[\"53a564aa413f80f52906a7cac5538719.png\",\"a50c2b9cc5eaad2d97ec63d564714bac.png\"]', 'ets2', NULL, 0, '2021-02-08 11:49:42', '2021-02-08 11:49:42', NULL, NULL),
+(230, 56, '[\"7dcf9a32c2ca95ce8f83231449ff08ef.png\",\"a3ce6cdc3ce6c48326166af57a4bdc49.png\",\"6b14c36168a9a72db2321f6476114863.png\"]', 'ets2', NULL, 0, '2021-02-09 08:52:11', '2021-02-09 08:52:11', NULL, NULL),
+(231, 38, '[\"74399c39412bfbfe3851269be25ef1ed.png\",\"88ebe686d6887abda984e397d91dbfc1.png\"]', 'ats', NULL, 0, '2021-02-09 09:22:56', '2021-02-09 09:22:56', NULL, NULL),
+(232, 62, '[\"63feaf12ee092d378af801caf5139f84.png\",\"119e7c2ee7cafbff3becb82be37e45f4.png\"]', 'ets2', NULL, 0, '2021-02-09 10:56:53', '2021-02-09 10:56:53', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3237,7 +3340,7 @@ INSERT INTO `rp_stats` (`id`, `member_id`, `distance`, `distance_total`, `weight
 (11, 9, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', NULL, NULL),
 (12, 10, 0, 10075, 0, 92, 0, 7, 0, 0, 'ets2', NULL, '2020-10-21 15:38:03'),
 (13, 10, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', NULL, NULL),
-(14, 11, 6224, 150559, 59, 1625, 2, 44, 40, 2583.2, 'ets2', NULL, '2021-02-07 11:03:28'),
+(14, 11, 0, 159366, 0, 1684, 0, 46, 40, 0, 'ets2', NULL, '2021-02-08 01:49:14'),
 (15, 11, 0, 13020, 0, 143, 0, 7, 17, 0, 'ats', NULL, '2020-12-21 08:02:21'),
 (16, 12, 0, 196486, 0, 2480, 0, 103, 101, 0, 'ets2', NULL, '2021-01-11 03:38:53'),
 (17, 12, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', NULL, NULL),
@@ -3258,7 +3361,7 @@ INSERT INTO `rp_stats` (`id`, `member_id`, `distance`, `distance_total`, `weight
 (30, 19, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2020-10-26 19:12:19', '2020-10-26 19:12:19'),
 (31, 19, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-10-26 19:12:19', '2020-10-26 19:12:19'),
 (32, 20, 0, 202736, 0, 2003, 0, 96, 283, 0, 'ets2', '2020-10-27 04:21:01', '2020-11-01 11:49:44'),
-(33, 20, 2462, 96314, 34, 1206, 2, 52, 90, 246.2, 'ats', '2020-10-27 04:21:01', '2021-02-03 16:04:29'),
+(33, 20, 0, 99022, 0, 1240, 0, 54, 90, 0, 'ats', '2020-10-27 04:21:01', '2021-02-08 01:49:48'),
 (34, 21, 0, 54926, 0, 819, 0, 41, 87, 0, 'ets2', '2020-10-27 06:00:29', '2020-12-07 16:50:23'),
 (35, 21, 0, 65335, 0, 871, 0, 45, 81, 0, 'ats', '2020-10-27 06:00:29', '2020-12-07 16:45:58'),
 (36, 22, 0, 85566, 0, 660, 0, 26, 147165, 0, 'ets2', '2020-10-27 08:08:58', '2020-11-01 11:55:02'),
@@ -3276,7 +3379,7 @@ INSERT INTO `rp_stats` (`id`, `member_id`, `distance`, `distance_total`, `weight
 (48, 28, 0, 86004, 0, 1332, 0, 51, 153563, 0, 'ets2', '2020-10-27 15:05:16', '2020-11-01 11:54:19'),
 (49, 28, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-10-27 15:05:16', '2020-10-27 15:05:16'),
 (79, 43, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-11-12 07:45:24', '2020-11-12 07:45:24'),
-(50, 29, 4174, 137912, 226, 2516, 5, 75, 378, 2921.8, 'ets2', '2020-10-27 16:50:49', '2021-02-07 07:43:55'),
+(50, 29, 0, 145008, 0, 2742, 0, 80, 378, 0, 'ets2', '2020-10-27 16:50:49', '2021-02-08 01:49:14'),
 (51, 29, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-10-27 16:50:49', '2020-10-27 16:50:49'),
 (52, 30, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2020-10-27 19:34:18', '2020-10-27 19:34:18'),
 (53, 30, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-10-27 19:34:18', '2020-10-27 19:34:18'),
@@ -3327,7 +3430,7 @@ INSERT INTO `rp_stats` (`id`, `member_id`, `distance`, `distance_total`, `weight
 (101, 54, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-12-15 20:06:57', '2020-12-15 20:06:57'),
 (103, 55, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-12-21 18:42:59', '2020-12-21 18:42:59'),
 (102, 55, 0, 9650, 0, 112, 0, 5, 21, 0, 'ets2', '2020-12-21 18:42:59', '2021-01-11 03:38:53'),
-(104, 56, 962, 21106, 22, 297, 1, 9, 61, 288.6, 'ets2', '2020-12-22 20:10:25', '2021-02-07 07:44:48'),
+(104, 56, 0, 28474, 0, 369, 0, 12, 62, 0, 'ets2', '2020-12-22 20:10:25', '2021-02-08 01:49:14'),
 (105, 56, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-12-22 20:10:25', '2020-12-22 20:10:25'),
 (106, 57, 0, 6265, 0, 134, 0, 4, 94, 0, 'ets2', '2020-12-24 22:34:55', '2021-01-18 16:17:30'),
 (107, 57, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2020-12-24 22:34:55', '2020-12-24 22:34:55'),
@@ -3340,7 +3443,7 @@ INSERT INTO `rp_stats` (`id`, `member_id`, `distance`, `distance_total`, `weight
 (113, 60, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-04 17:42:45', '2021-01-04 17:42:45'),
 (114, 61, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2021-01-04 19:49:34', '2021-01-04 19:49:34'),
 (115, 61, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-04 19:49:34', '2021-01-04 19:49:34'),
-(116, 62, 2103, 30023, 34, 538, 1, 18, 1498, 1472.1, 'ets2', '2021-01-07 12:10:30', '2021-02-07 07:41:03'),
+(116, 62, 0, 33598, 0, 572, 0, 19, 1498, 0, 'ets2', '2021-01-07 12:10:30', '2021-02-08 01:49:14'),
 (117, 62, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-07 12:10:30', '2021-01-07 12:10:30'),
 (125, 66, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-13 21:32:42', '2021-01-13 21:32:42'),
 (118, 63, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2021-01-09 17:04:19', '2021-01-09 17:04:19'),
@@ -3354,7 +3457,13 @@ INSERT INTO `rp_stats` (`id`, `member_id`, `distance`, `distance_total`, `weight
 (127, 67, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-17 16:57:01', '2021-01-17 16:57:01'),
 (129, 68, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-18 17:29:48', '2021-01-18 17:29:48'),
 (130, 69, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2021-01-31 18:32:25', '2021-01-31 18:32:25'),
-(131, 69, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-31 18:32:25', '2021-01-31 18:32:25');
+(131, 69, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-01-31 18:32:25', '2021-01-31 18:32:25'),
+(132, 70, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2021-02-07 19:40:13', '2021-02-07 19:40:13'),
+(133, 70, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-02-07 19:40:13', '2021-02-07 19:40:13'),
+(134, 71, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2021-02-08 17:13:38', '2021-02-08 17:13:38'),
+(135, 71, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-02-08 17:13:38', '2021-02-08 17:13:38'),
+(136, 72, 0, 0, 0, 0, 0, 0, NULL, 0, 'ets2', '2021-02-08 17:37:00', '2021-02-08 17:37:00'),
+(137, 72, 0, 0, 0, 0, 0, 0, NULL, 0, 'ats', '2021-02-08 17:37:00', '2021-02-08 17:37:00');
 
 -- --------------------------------------------------------
 
@@ -3418,12 +3527,7 @@ INSERT INTO `tabs` (`id`, `member_id`, `lead_id`, `date`, `convoy_title`, `scree
 (153, 2, 2, '2021-02-05', 'Вокруг света, часть 2', 'b87675f9819b15833e6ce00add035b92.png', '', 1, '2021-02-05 20:11:05', '2021-02-07 11:28:49', NULL),
 (150, 29, 29, '2021-02-02', 'Открытый конвой нашей ВТК', '39a40f39cf99e918433c3cb9e8370931.png', '', 1, '2021-02-02 19:35:58', '2021-02-02 20:01:14', NULL),
 (151, 38, 38, '2021-02-03', 'Совместный конвой с ВТК \"King Cargo\"', 'f43c5bbcfe1456634776c99d5de721f2.png', '', 1, '2021-02-03 19:33:44', '2021-02-04 15:14:14', NULL),
-(135, 42, 42, '2021-01-21', 'Совместный конвой с ВТК \"Флагман\"', '58aa5eeccd5b74595622534d2b5ea003.png', 'Макаренко конвой не защитан (окрас не по регламенту и присоединился только на финише)', 1, '2021-01-22 08:18:33', '2021-01-22 10:04:48', NULL),
-(136, 2, 2, '2021-01-22', 'Однажды вечерком на Аркаде...', '46cced79061c92830c2f42bcbb2fa05b.png', '', 1, '2021-01-22 19:55:50', '2021-01-22 22:48:46', NULL),
-(137, 29, 29, '2021-01-23', 'Открытый конвой от ВТК \"King Cargo\"', '87798e4d333e6910a8d0e71e1d54e53f.png', '', 1, '2021-01-23 19:40:52', '2021-01-23 21:35:05', NULL),
-(138, 8, 8, '2021-01-24', 'Дневной конвой по АТС', 'cd9ee591ee49dfbb2718026c6692e5f4.jpg', '', 1, '2021-01-24 15:35:26', '2021-01-24 19:38:15', NULL),
-(139, 2, 2, '2021-01-24', 'Открытый конвой АЛЛО КЛИНИКА', '658fd87d6cc154b9c8ff7851ddeb7817.png', '', 1, '2021-01-24 20:05:45', '2021-01-24 20:25:31', NULL),
-(140, 29, 29, '2021-01-25', 'Открытый конвой от ВТК \"PRIME LOGISTICS\" [ENG]', 'e262ff1ea799c767a3514b703698a906.png', '', 1, '2021-01-25 21:30:41', '2021-01-26 20:27:02', NULL),
+(159, 1, 1, '2021-02-08', 'Открытый Тигров', '66f480919653696f07ed0c14b7440bc1.png', '+ Малуха', 1, '2021-02-08 20:13:03', '2021-02-08 20:16:36', NULL),
 (141, 1, 1, '2021-01-26', 'Наш Отрытый', '5d53f05df1c8ba63b4dd64fd7d08e111.png', 'Днепрянин ехал с перерыва, поэтому 1 балл.', 1, '2021-01-26 19:22:42', '2021-01-26 20:28:39', NULL),
 (149, 5, 5, '2021-02-01', 'Открытый конвой от ВТК \"Tiger Logistic Company\"', '337f0fa6dc9189c215281f0061c0b505.png', '', 1, '2021-02-01 19:50:57', '2021-02-02 06:25:23', NULL),
 (143, 10, 10, '2021-01-29', 'Дневной Конвой', 'aa514d49978b65d79e14fff81742abca.jpg', 'Все выехали, и доехали.', 1, '2021-01-29 14:55:52', '2021-01-29 21:48:19', NULL),
@@ -3433,7 +3537,9 @@ INSERT INTO `tabs` (`id`, `member_id`, `lead_id`, `date`, `convoy_title`, `scree
 (147, 23, 23, '2021-01-31', 'Открытый конвой от ВТК \"АЛЛО КЛИНИКА\"', '7782e3851a85a02a37273d67e1361f29.jpg', '', 1, '2021-01-31 20:01:03', '2021-01-31 20:33:56', NULL),
 (155, 8, 8, '2021-02-06', 'Heavy duty ATS', 'f7b76eaab8d3a5a043d9f038eb253a01.jpg', '', 1, '2021-02-06 19:06:24', '2021-02-07 11:30:04', NULL),
 (144, 2, 2, '2021-01-29', 'Вокруг света, часть 1', '54254250b5a66aa4654296e51a81238d.png', '', 1, '2021-01-29 19:41:50', '2021-01-29 21:50:23', NULL),
-(154, 1, 1, '2021-02-06', 'Открытый у Корейцев (҉TW_ ̷B̷.̷A̷.̷P̷™ VTC҉ MONTHIY PUBLIC CONVOY !)', '713865546243eba1d730eb5ce1f2813b.png', '', 1, '2021-02-06 14:43:58', '2021-02-07 11:29:29', NULL);
+(154, 1, 1, '2021-02-06', 'Открытый у Корейцев (҉TW_ ̷B̷.̷A̷.̷P̷™ VTC҉ MONTHIY PUBLIC CONVOY !)', '713865546243eba1d730eb5ce1f2813b.png', '', 1, '2021-02-06 14:43:58', '2021-02-07 11:29:29', NULL),
+(156, 2, 50, '2021-02-07', 'Открытый Yukon Union', '157c79ac9faca450aec3c33b0387f03a.jpg', 'Димон один ехал из наших.', 1, '2021-02-07 20:09:37', '2021-02-08 12:18:58', NULL),
+(157, 5, 5, '2021-02-07', 'Открытый Клиники', '7df0c981c530904bad355d00d1385f20.png', 'K1pa - посещение, но без баллов', 1, '2021-02-07 20:09:49', '2021-02-08 12:18:32', NULL);
 
 -- --------------------------------------------------------
 
@@ -3466,7 +3572,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `steamid64`, `truckersmp_id`, `remember_token`, `created_at`, `updated_at`, `image`, `city`, `country`, `birth_date`, `vk`, `fired_at`, `discord_id`, `discord_name`, `email`) VALUES
 (1, 'Виталий Коробейников', '76561198097619642', '348684', '1m9hNIohynSq91S0RpwuAHoB1cWUXTVRrut13JdMRpUnxobG5Ps0lL0a8Ru3', '2020-09-19 20:43:14', '2021-01-20 19:45:08', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/12/126ce455630072d94b4978ef1938d6622504297a_full.jpg', 'Киров', 'Россия', '1990-01-01', 'https://vk.com/wutnik', NULL, '264769483942395904', '[EVOQUE] Виталя 43RUS#2910', 'wutnik@mail.ru'),
-(2, 'Вячеслав Клименко', '76561198155191405', '68916', 'UGTq0Xe6XTQB6DWsTKqu0I3Elj6pX50GcKn3L2z43JjeGrHwV1hoyrMG2WW1', '2020-09-20 05:06:08', '2021-01-20 19:41:40', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/18/1820bffa9cece4e074e11fcca1e5c53e8a233c42_full.jpg', 'Хмельницкий', 'Украина', '1995-04-20', 'https://vk.com/norines', NULL, '277122860793724932', '[EVOQUE] Norines#1506', 'mrnorines@gmail.com'),
+(2, 'Вячеслав Клименко', '76561198155191405', '68916', 'XM96WeDfwTs2uSmJC44r5X4KX7HaHROaCXmCL2JVynN87XqTPbsXilOqWTLi', '2020-09-20 05:06:08', '2021-01-20 19:41:40', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/18/1820bffa9cece4e074e11fcca1e5c53e8a233c42_full.jpg', 'Хмельницкий', 'Украина', '1995-04-20', 'https://vk.com/norines', NULL, '277122860793724932', '[EVOQUE] Norines#1506', 'mrnorines@gmail.com'),
 (3, 'Євгеній Зайчук', '76561198042812354', '131815', 'IoPV4c30bh5IpIBYLOMyiE4MP4zkEvtxHBd9QLUfTdlvpNpEH4JUuTkkKBhU', '2020-09-19 20:31:48', '2021-01-22 14:45:25', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/18/18447df61d77a6184f4918b0879cb8a694932c9e_full.jpg', 'Киев', 'Украина', '1994-10-03', 'https://vk.com/jackthemay', NULL, '267771270656032769', 'Mayday#0318', 'viiper94@gmail.com'),
 (6, 'Гаганов Валентин', '76561198018840602', '431022', 'LnfQ7W2eTdsNNgf0xFnTjFhkML0I9eYPbyJI4L1KYd6cW8erqxL3SgfGM3KK', '2020-09-28 12:00:59', '2020-09-28 12:03:37', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/07/078bd9f05f8c2a21241f545ea84aa5a8bdddcb73_full.jpg', 'Санкт-Петербург', 'Россия', '1996-09-24', 'https://vk.com/id53759572', NULL, NULL, NULL, NULL),
 (7, 'Кирилл Короленко', '76561198127978121', '1176079', '7DdCt9CvVuUT382BYcyQRBcIXLsk8DRHgrgLgwKT3Cvjm7peKMM2NFMsze7s', '2020-09-28 13:47:49', '2020-10-27 19:43:39', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/12/126ce455630072d94b4978ef1938d6622504297a_full.jpg', 'Реутов', 'Россия', '1988-01-13', 'https://vk.com/psychotic', NULL, NULL, NULL, NULL),
@@ -3515,7 +3621,7 @@ INSERT INTO `users` (`id`, `name`, `steamid64`, `truckersmp_id`, `remember_token
 (50, 'Руслан Усмединський', '76561198121237320', '3720240', 'tAt1E4J7kJCCaeSVHeMXhjnVns50Ha7HxO4bZL0kcRFUFqWlOxBGPexKqESo', '2020-12-08 20:00:24', '2020-12-08 20:01:05', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/1d/1d3ba458bbdad24c7f23d12f48dd5b2567bc7199_full.jpg', 'Киев', 'Украина', '1999-11-17', 'https://vk.com/trolls1191', NULL, NULL, NULL, NULL),
 (51, 'Александр Паньков', '76561198331233763', '1896432', NULL, '2020-12-08 21:14:16', '2021-01-18 10:38:54', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/7d/7d8bb5ea1adafca71c0403a9744511de54f8f9a9_full.jpg', 'Пермь', 'Россия', '1978-05-10', 'https://vk.com/id56714549', '2021-01-18 10:38:54', NULL, NULL, NULL),
 (52, 'Алексей Глухов', '76561198862704420', '3836980', 'T08Uge2nA4x2eV9vP2z4NOdpbpFd224hik5xz3qP9dvJCWq3IKU2emp1Ru0i', '2020-12-15 20:06:57', '2021-01-21 12:46:30', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/87/87b4acd4c1ec64f22690996b7a067c92e99aee76_full.jpg', 'Москва', 'Россия', '1987-07-09', 'https://vk.com/id2716347', NULL, '785455759252389898', '[EVOQUE] thealewka#5839', NULL),
-(53, 'Никита Макаренко', '76561198968795325', '3722985', 'oOzqtaXvpiBD0D45hNsNXH7FbliB3LAzTjqjnJrFuSXD2mDphTUkb1lckoUv', '2020-12-21 18:42:59', '2021-01-10 16:33:30', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/81/8196ddb3986f1b917e86b8a746b76886062eeaea_full.jpg', 'Новый Уренгой', 'Россия', '2003-03-11', 'https://vk.com/makarenko006', NULL, NULL, NULL, NULL),
+(53, 'Никита Макаренко', '76561198968795325', '3722985', NULL, '2020-12-21 18:42:59', '2021-02-08 16:44:41', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/81/8196ddb3986f1b917e86b8a746b76886062eeaea_full.jpg', 'Новый Уренгой', 'Россия', '2003-03-11', 'https://vk.com/makarenko006', '2021-02-08 16:44:41', NULL, NULL, NULL),
 (54, 'Эдуард Вавринчук', '76561198147817255', '2708999', 'VdqK2jWNouJOs2IQrlifuQpE5b2kS4c4qrbLmlx211xvmjcjZkA75adgR66M', '2020-12-22 20:10:25', '2021-01-20 19:39:13', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/e0/e09c634dc566bf34d5f30618084e7d748f9e1e1e_full.jpg', 'Киев', 'Украина', '1999-05-09', 'https://vk.com/id162017750', NULL, '331033526654861314', 'Y0ur_Bunny_Wr0te#3123', NULL),
 (55, 'Руслан Божок', '76561198170948077', '1357498', 'jdJUWRL1d6xJSRsrc5io5h6Wm9qh8vt6CCiMfv86goohsrYwYGW86FQPVnQG', '2020-12-24 22:34:55', '2020-12-24 22:36:50', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ac/acbd48252373db1f4b1b6ad580c676d88e63a1f6_full.jpg', 'Мурманск', 'Россия', '1994-04-19', 'https://vk.com/ksimelin94', NULL, NULL, NULL, NULL),
 (56, 'Нодар Тамарян', '76561198232963524', '3653981', NULL, '2020-12-26 16:03:56', '2021-01-18 10:38:54', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/5e/5e7b1bfb00debfb9fa87ba4d336cf913f85291b5_full.jpg', 'Лодзь', 'Польша', '2001-09-25', 'https://vk.com/xxxfsocietyxxx', '2021-01-18 10:38:54', NULL, NULL, NULL),
@@ -3529,7 +3635,10 @@ INSERT INTO `users` (`id`, `name`, `steamid64`, `truckersmp_id`, `remember_token
 (64, 'Пономарев Александр', '76561198330276227', '2905932', 'zgRXeg7RtJEfADKapUVKPqZrKCT77m4OHx66qoXZhEuvfk6SQIUMYSVJEcOM', '2021-01-13 21:32:42', '2021-01-13 21:34:14', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/32/329644761764cc4c1b64920e0004aaf550c1cc77_full.jpg', 'Елец', 'Россия', '1999-09-02', 'https://vk.com/sashaponomarev2000', NULL, NULL, NULL, NULL),
 (65, 'Алексей Малов', '76561198280835238', '847899', 'Enc3AQbIhuxw6W6aLzV9Jv2zo7weMdQx2FhCtfA72qzDsFPEUHL8LCoKZsOw', '2021-01-17 16:57:01', '2021-01-28 21:52:46', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/f7/f72e02222b2abeab7beb4251a4d80ea2bbf2f31d_full.jpg', 'Барыш', 'Россия', '1990-12-01', 'https://vk.com/malov_leha', NULL, '600274108869247007', 'ProFitLKS (RUS)#9440', 'malov_corp@mail.ru'),
 (66, 'Доронин Петр', '76561198294519389', '3004174', NULL, '2021-01-18 17:29:48', '2021-01-28 19:35:29', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/47/4740773428259829c44ac1e8ebe6a6281c13ad09_full.jpg', 'Барнаул', 'Россия', '2002-07-03', 'https://vk.com/pkdoronin', '2021-01-28 19:35:29', NULL, NULL, NULL),
-(67, 'Filip Jankowski', '76561198348095312', '1469825', 'wuDQZukHEoVF5nE0KgcPfRFkoPy5GwhBQCyuXwgTOsETsaEr3t9CbazVMCVq', '2021-01-31 18:32:25', '2021-01-31 18:38:03', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ae/aee27d23d827c0079ae93e128ea5ec7fc243f4a3_full.jpg', 'Schriek', 'Бельгия', '2000-04-29', 'https://vk.com/polskibelgia6', NULL, '345857448428568576', 'PolskiBelgia6#6666', 'filip.jankowski.fj@gmail.com');
+(67, 'Filip Jankowski', '76561198348095312', '1469825', 'wuDQZukHEoVF5nE0KgcPfRFkoPy5GwhBQCyuXwgTOsETsaEr3t9CbazVMCVq', '2021-01-31 18:32:25', '2021-01-31 18:38:03', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/ae/aee27d23d827c0079ae93e128ea5ec7fc243f4a3_full.jpg', 'Schriek', 'Бельгия', '2000-04-29', 'https://vk.com/polskibelgia6', NULL, '345857448428568576', 'PolskiBelgia6#6666', 'filip.jankowski.fj@gmail.com'),
+(68, 'Аркадий Гончаренко', '76561198086268710', '4060311', 'bmD6KFeq6DQJJahH7T23vGVLaD2R3EYBUj5rcgDRmw7ylSJkSQjVzBs4wsDr', '2021-02-07 19:40:13', '2021-02-07 19:41:58', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/17/1783f195ac21d15dc601e81d71e8f517f075430d_full.jpg', 'Барнаул', 'Россия', '2000-05-12', 'https://vk.com/id136966679', NULL, NULL, NULL, 'goncharenko.arkadiy@gmail.com'),
+(69, 'Александр Бороденко', '76561198273566357', '2582489', 'P0MLgahzqbPLt2Y7qlu5t1fDtCK4sIJ2WbYsv6dbU9vAf7APj0ebTQhKsGl8', '2021-02-08 17:13:38', '2021-02-08 17:15:26', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/e3/e353ee05314417ed70827229019aad834c417b9e_full.jpg', 'Армавир', 'Россия', '2002-09-05', 'https://m.vk.com/id307696718', NULL, NULL, NULL, NULL),
+(70, 'Станислав Антипов', '76561198194726454', '4055583', 'nWDSXSzYTmt1C2certt1VN8POsuZwiXMeSviaS9qt4WiGvPt9zcfFiaRyhNg', '2021-02-08 17:37:00', '2021-02-08 17:40:18', 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/8e/8eded0d6b50be76082a8fce4e79df283ed92e499_full.jpg', 'Комсомольск-на-Амуре', 'Россия', '1985-04-17', 'https://vk.com/id498374170', NULL, '281638578390564864', 'Svarog Asov(Stas)#4296', 'dvmens@gmail.com');
 
 --
 -- Індекси збережених таблиць
@@ -3635,19 +3744,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблиці `applications`
 --
 ALTER TABLE `applications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT для таблиці `audits`
 --
 ALTER TABLE `audits`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2185;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2268;
 
 --
 -- AUTO_INCREMENT для таблиці `convoys`
 --
 ALTER TABLE `convoys`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=214;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
 
 --
 -- AUTO_INCREMENT для таблиці `errors`
@@ -3659,7 +3768,7 @@ ALTER TABLE `errors`
 -- AUTO_INCREMENT для таблиці `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT для таблиці `kb`
@@ -3671,19 +3780,19 @@ ALTER TABLE `kb`
 -- AUTO_INCREMENT для таблиці `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT для таблиці `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT для таблиці `recruitment`
 --
 ALTER TABLE `recruitment`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT для таблиці `roles`
@@ -3695,13 +3804,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT для таблиці `rp_reports`
 --
 ALTER TABLE `rp_reports`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
 
 --
 -- AUTO_INCREMENT для таблиці `rp_stats`
 --
 ALTER TABLE `rp_stats`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT для таблиці `rules`
@@ -3713,13 +3822,13 @@ ALTER TABLE `rules`
 -- AUTO_INCREMENT для таблиці `tabs`
 --
 ALTER TABLE `tabs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- AUTO_INCREMENT для таблиці `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

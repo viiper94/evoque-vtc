@@ -16,6 +16,8 @@
     <script src="/js/fotorama-4.6.4/fotorama.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
     <script src="/js/simplemde/dist/simplemde.min.js"></script>
+{{--    <link rel="stylesheet" type="text/css" href="/js/dropzone/dropzone.min.css">--}}
+{{--    <script src="/js/dropzone/dropzone.min.js"></script>--}}
 @endsection
 
 @section('content')
@@ -430,6 +432,14 @@
             promptURLs: true,
 
         });
+
+        {{--Dropzone.autoDiscover = false;--}}
+        {{--$("#route-dropzone").dropzone({--}}
+        {{--    url: '{{ route('evoque.admin.convoy.upload') }}',--}}
+        {{--    params: {--}}
+        {{--        _token: '{{ csrf_token() }}'--}}
+        {{--    }--}}
+        {{--});--}}
     </script>
 
     <script type="text/html" id="route_images_template">

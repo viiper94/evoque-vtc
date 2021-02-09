@@ -37,6 +37,7 @@ class Convoy extends Model implements Auditable{
         'alt_cargo',
         'dlc',
         'comment',
+        'links',
     ];
 
     protected $casts = [
@@ -47,6 +48,7 @@ class Convoy extends Model implements Auditable{
         'booking' => 'boolean',
         'dlc' => 'array',
         'route' => 'array',
+        'links' => 'array',
     ];
 
     protected $dates = [
@@ -60,6 +62,7 @@ class Convoy extends Model implements Auditable{
         'title' => 'required|string',
         'start_time' => 'required|date',
         'server' => 'required|string',
+        'links' => 'required|nullable|array',
 
         'route' => 'nullable|array',
         'start_city' => 'required|string',

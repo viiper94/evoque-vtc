@@ -33,8 +33,9 @@
         <h1 class="convoy-title text-center pt-5">{{ $convoy->title }} {{ $convoy->start_time->isoFormat('L') }}</h1>
         @can('update', \App\Convoy::class)
             <div class="row justify-content-center">
-                <a href="{{ route('convoy.discord', $convoy->id) }}" class="btn btn-sm btn-outline-warning"
+                <a href="{{ route('convoy.discord', $convoy->id) }}" class="btn btn-sm btn-outline-info m-1"
                     onclick="return confirm('Запостить регламент?')">Запостить регламент в Дискорд</a>
+                <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="btn btn-sm btn-outline-warning m-1">Редактировать</a>
             </div>
         @endcan
         <div class="row mb-5 pt-5">

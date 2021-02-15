@@ -14,7 +14,7 @@
     @include('layout.alert')
     <h2 class="mt-3 text-center text-primary">Сотрудники ВТК EVOQUE</h2>
     <div class="table-responsive mb-5" data-fl-scrolls>
-        <table class="table table-dark table-bordered table-hover">
+        <table class="table table-sm table-dark table-bordered table-hover">
             <thead>
             <tr>
                 <th scope="col">#</th>

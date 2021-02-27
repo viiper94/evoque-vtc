@@ -113,7 +113,7 @@
                             @endswitch
                             @if($app->reason)
                                 <p class="mb-0 pt-3">Причина: </p>
-                                <div class="markdown-content">
+                                <div class="markdown-content referral">
                                     @markdown($app->reason)
                                 </div>
                             @endif

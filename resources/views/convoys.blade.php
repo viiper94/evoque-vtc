@@ -243,6 +243,17 @@
             </section>
         @endif
 
+        @if($convoy->links)
+            <section class="apply mt-5 mb-5">
+                <div class="apply-wrapper text-center">
+                    <h3 class="mb-3">Подпишись на конвой!</h3>
+                    @foreach($convoy->links as $to => $link)
+                        <a class="btn btn-outline-warning btn-lg" href="{{ $link }}" target="_blank">{{ $to }}</a>
+                    @endforeach
+                </div>
+            </section>
+        @endif
+
     @else
         <div class="row justify-content-center pt-5 pb-5">
             <h1 class="text-center text-primary m-5">Мы проводим открытые мероприятия по вторникам. Ближайший конвой уже готовится!</h1>

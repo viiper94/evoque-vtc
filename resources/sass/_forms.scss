@@ -40,6 +40,8 @@ form{
         background-color: $background-lighten-2;
         border-color: $background-lighten-2;
         color: $primary-text;
+        white-space: nowrap;
+        overflow: hidden;
         &::after{
             content: "Открыть";
             background-color: $background-lighten-3;

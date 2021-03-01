@@ -36,3 +36,8 @@
         position: fixed !important;
     }
 }
+ul, ol{
+    &.list-style-none{
+        list-style-type: none;
+    }
+}

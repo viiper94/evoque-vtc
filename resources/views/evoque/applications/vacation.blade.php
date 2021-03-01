@@ -38,6 +38,7 @@
     <script>
         const picker = new Litepicker({
             element: document.getElementById('vacation_till'),
+            plugins: ['mobilefriendly'],
             inlineMode: true,
             lang: 'ru-RU',
             maxDays: 14,

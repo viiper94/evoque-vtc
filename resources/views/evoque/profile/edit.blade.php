@@ -112,28 +112,12 @@
     </div>
 
     <script>
-        $('#birth_date').datetimepicker({
-            i18n:{
-                ru:{
-                    months:[
-                        'Январь','Февраль','Март','Апрель',
-                        'Май','Июнь','Июль','Август',
-                        'Сентябрь','Октябрь','Ноябрь','Декабрь',
-                    ],
-                    dayOfWeek:[
-                        "Вс", "Пн", "Вт", "Ср",
-                        "Чт", "Пт", "Сб",
-                    ]
-                }
-            },
-            format: 'd.m.Y',
-            theme: 'dark',
-            maxDate: 0,
-            dayOfWeekStart: '1',
-            timepicker: false,
-            scrollInput: false
+        const picker = new Litepicker({
+            element: document.getElementById('birth_date'),
+            plugins: ['mobilefriendly'],
+            lang: 'ru-RU',
+            format: 'DD.MM.YYYY'
         });
-        $.datetimepicker.setLocale('ru');
     </script>
 
 @endsection

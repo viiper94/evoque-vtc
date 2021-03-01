@@ -276,6 +276,7 @@
     <script>
         const pickerVacation = new Litepicker({
             element: document.getElementById('on_vacation_till'),
+            plugins: ['mobilefriendly'],
             inlineMode: true,
             lang: 'ru-RU',
             singleMode: false,
@@ -286,11 +287,13 @@
         });
         const pickerJoin = new Litepicker({
             element: document.getElementById('join_date'),
+            plugins: ['mobilefriendly'],
             lang: 'ru-RU',
             format: 'DD.MM.YYYY'
         });
         const pickerTrainee = new Litepicker({
             element: document.getElementById('trainee_until'),
+            plugins: ['mobilefriendly'],
             lang: 'ru-RU',
             format: 'DD.MM.YYYY'
         });

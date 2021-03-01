@@ -79,6 +79,7 @@
     <script>
         const picker = new Litepicker({
             element: document.getElementById('date'),
+            plugins: ['mobilefriendly'],
             lang: 'ru-RU',
             inlineMode: true,
             startDate: Date.now()

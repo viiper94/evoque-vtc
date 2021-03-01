@@ -1,6 +1,7 @@
 import $ from "jquery"
 import bsCustomFileInput from 'bs-custom-file-input'
 import Litepicker from 'litepicker'
+import 'litepicker/dist/plugins/mobilefriendly';
 
 window.$ = window.jQuery = require('jquery');
 

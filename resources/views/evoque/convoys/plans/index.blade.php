@@ -4,11 +4,6 @@
     Планы по конвоям | @lang('general.vtc_evoque')
 @endsection
 
-@section('assets')
-    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
-    <script src="/js/jquery.datetimepicker.full.min.js"></script>
-@endsection
-
 @section('content')
 
 <div class="container plans py-5">
@@ -152,7 +147,17 @@
                             </div>
                             <div class="form-group col">
                                 <label for="datetimepicker">Время выезда</label>
-                                <input type="text" class="form-control" id="time" name="time" autocomplete="off" required>
+                                <select name="time" id="time" class="form-control" required>
+                                    @foreach($types as $type => $time)
+                                        <optgroup label="{{ \App\Convoy::getTypeByNum($type) }}">
+                                            @foreach($time as $item)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endforeach
+                                            <option disabled selected></option>
+                                        </optgroup>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" class="form-control" id="time" name="time" autocomplete="off" required>--}}
                             </div>
                         </div>
                         <div class="form-group">
@@ -172,19 +177,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $('#time').datetimepicker({
-            format: 'H:i',
-            step: 30,
-            theme: 'dark',
-            datepicker: false,
-            minTime: '12:00',
-            maxTime: '23:31',
-            defaultTime: '19:30',
-            scrollInput: false
-        });
-    </script>
 @endcan
 
 @endsection

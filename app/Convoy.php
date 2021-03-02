@@ -124,6 +124,13 @@ class Convoy extends Model implements Auditable{
         ]
     ];
 
+    public static $timesToType = [
+        -1 => ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30'],
+        0 => ['13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'],
+        1 => ['17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30'],
+        2 => ['21:00', '21:30', '22:00', '22:30', '23:00', '23:30'],
+    ];
+
     public function isUpcoming(){
         $now = Carbon::now();
         return $now->subMinutes(45)->lessThan($this->start_time);
@@ -182,12 +189,12 @@ class Convoy extends Model implements Auditable{
 
     public function setTypeByTime(): bool{
         $convoy_date = $this->start_time->format('Y-m-d');
-        $morning_convoy_end = Carbon::parse($convoy_date . ' 11:00');
-        $day_convoy_start = Carbon::parse($convoy_date . ' 11:30');
-        $day_convoy_end = Carbon::parse($convoy_date . ' 17:00');
-        $evening_convoy_start = Carbon::parse($convoy_date . ' 17:30');
-        $evening_convoy_end = Carbon::parse($convoy_date . ' 20:30');
-        $night_convoy_start = Carbon::parse($convoy_date . ' 21:00');
+        $morning_convoy_end = Carbon::parse($convoy_date . ' '.end(self::$timesToType[-1]));
+        $day_convoy_start = Carbon::parse($convoy_date . ' '. self::$timesToType[0][0]);
+        $day_convoy_end = Carbon::parse($convoy_date . ' '.end(self::$timesToType[0]));
+        $evening_convoy_start = Carbon::parse($convoy_date . ' '. self::$timesToType[1][0]);
+        $evening_convoy_end = Carbon::parse($convoy_date . ' '.end(self::$timesToType[1]));
+        $night_convoy_start = Carbon::parse($convoy_date . ' '. self::$timesToType[2][0]);
 
         if($this->start_time->lessThanOrEqualTo($morning_convoy_end)){
             $this->type = -1;

@@ -243,11 +243,12 @@
             </section>
         @endif
 
-        @if($convoy->links)
+        @if(isset($convoy->links['public']) && $convoy->links['public'] === 'on')
             <section class="apply mt-5 mb-5">
                 <div class="apply-wrapper text-center">
                     <h3 class="mb-3">Подпишись на конвой!</h3>
                     @foreach($convoy->links as $to => $link)
+                        @if($to === 'public' || $link === null) @continue @endif
                         <a class="btn btn-outline-warning btn-lg" href="{{ $link }}" target="_blank">{{ $to }}</a>
                     @endforeach
                 </div>

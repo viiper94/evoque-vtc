@@ -187,12 +187,13 @@
                         <label for="dlc">@lang('attributes.dlc')</label>
                         <select class="form-control" size="22" name="dlc[]" id="dlc" multiple>
                             @foreach($dlc as $game => $list)
-                                <option disabled>{{ strtoupper($game) }}</option>
-                                @php $dlc_list = old('dlc') ?? $convoy->dlc @endphp
-                                @foreach($list as $item)
-                                    <option value="{{ $item }}" @if(is_array($dlc_list) && in_array($item, $dlc_list)) selected @endif>{{ $item }}</option>
-                                @endforeach
-                                <option disabled></option>
+                                <optgroup label="{{ strtoupper($game) }}">
+                                    @php $dlc_list = old('dlc') ?? $convoy->dlc @endphp
+                                    @foreach($list as $item)
+                                        <option value="{{ $item }}" @if(is_array($dlc_list) && in_array($item, $dlc_list)) selected @endif>{{ $item }}</option>
+                                    @endforeach
+                                    <option disabled></option>
+                                </optgroup>
                             @endforeach
                         </select>
                         <label for="" class="text-muted">удерживать Ctrl для выбора нескольких или снятия выбора</label>

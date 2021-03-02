@@ -56,6 +56,7 @@ class PlansController extends Controller{
         return view('evoque.convoys.plans.index', [
             'days' => $days,
             'members' => Member::where('visible', '1')->orderBy('nickname')->get(),
+            'types' => Convoy::$timesToType
         ]);
     }
 
@@ -112,7 +113,7 @@ class PlansController extends Controller{
                     $convoy->$key = $convoy->saveImage($file);
                 }
             }
-            $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             $convoy->booking = true;
             $convoy->booked_by_id = Auth::user()->member->id;
@@ -124,12 +125,12 @@ class PlansController extends Controller{
         $tmp = new Client();
         $servers = $tmp->servers()->get();
         return view('evoque.convoys.edit', [
-            'allowTimes' => $this->timesToType[$type],
             'booking' => true,
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::where('id', Auth::user()->member->id)->get(),
-            'dlc' => $convoy->dlcList
+            'dlc' => $convoy->dlcList,
+            'types' => [$type => Convoy::$timesToType[$type]]
         ]);
     }
 

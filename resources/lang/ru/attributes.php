@@ -12,6 +12,7 @@ return [
 
     // convoy
     'start_time' => 'Время выезда по МСК',
+    'start_date' => 'Дата конвоя',
     'server' => 'Сервер',
     'communication' => 'Связь',
     'lead' => 'Ведущий',

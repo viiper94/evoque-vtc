@@ -10,8 +10,6 @@
 @endsection
 
 @section('assets')
-    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
-    <script src="/js/jquery.datetimepicker.full.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
     <script src="/js/fotorama-4.6.4/fotorama.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
@@ -53,25 +51,66 @@
                     <small class="form-text">{{ $errors->first('title') }}</small>
                 @endif
             </div>
-            <div class="form-group">
-                <label for="server">Сервер</label>
-                <select class="form-control" id="server" name="server" required>
-                    @foreach($servers as $server)
-                        <option value="{{ $server->getName() }}" @if($server->getName() === (old('server') ?? $convoy->server)) selected @endif >
-                            [{{ $server->getGame() }}] {{ $server->getName() }} ({{ $server->getPlayers() }}/{{ $server->getMaxPlayers() }})
-                        </option>
-                    @endforeach
-                    <option value="Выделенный ивент сервер" @if((old('server') ?? $convoy->server) === 'Выделенный ивент сервер') selected @endif >Выделенный ивент сервер</option>
-                    <option value="Определимся позже" @if((old('server') ?? $convoy->server) === 'Определимся позже') selected @endif >Определимся позже</option>
-                </select>
+            <div class="row">
+                <div class="form-group col-xs-12 col-md-6">
+                    <label for="server">Сервер</label>
+                    <select class="form-control" id="server" name="server" required>
+                        @foreach($servers as $server)
+                            <option value="{{ $server->getName() }}" @if($server->getName() === (old('server') ?? $convoy->server)) selected @endif >
+                                [{{ $server->getGame() }}] {{ $server->getName() }} ({{ $server->getPlayers() }}/{{ $server->getMaxPlayers() }})
+                            </option>
+                        @endforeach
+                        <option value="Выделенный ивент сервер" @if((old('server') ?? $convoy->server) === 'Выделенный ивент сервер') selected @endif >Выделенный ивент сервер</option>
+                        <option value="Определимся позже" @if((old('server') ?? $convoy->server) === 'Определимся позже') selected @endif >Определимся позже</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3 col-sm-6">
+                    <label for="start_date">@lang('attributes.start_date')</label>
+                    <input type="text" class="form-control" id="start_date" name="start_date" value="{{ old('start_date') ?? $convoy->start_time->format('d.m.Y') }}" autocomplete="off" @if($booking) readonly @endif required>
+                </div>
+                <div class="form-group col-md-3 col-sm-6">
+                    <label for="start_time">@lang('attributes.start_time')</label>
+                    <select name="start_time" id="start_time" class="form-control" required>
+                        @foreach($types as $type => $time)
+                            <optgroup label="{{ \App\Convoy::getTypeByNum($type) }}">
+                                @foreach($time as $item)
+                                    <option value="{{ $item }}" @if($item === (old('start_time') ?? $convoy->start_time->format('H:i'))) selected @endif>{{ $item }}</option>
+                                @endforeach
+                                    <option disabled></option>
+                            </optgroup>
+                        @endforeach
+                    </select>
+                    @if($errors->has('start_time'))
+                        <small class="form-text">{{ $errors->first('start_time') }}</small>
+                    @endif
+                </div>
             </div>
-            <div class="form-group">
-                <label for="datetimepicker">@lang('attributes.start_time')</label>
-                <input type="text" class="form-control" id="datetimepicker" name="start_time" value="{{ old('start_time') ?? $convoy->start_time->format('d.m.Y H:i') }}" autocomplete="off" required>
-                @if($errors->has('start_time'))
-                    <small class="form-text">{{ $errors->first('start_time') }}</small>
-                @endif
-            </div>
+            @if(!$booking)
+                <div class="links">
+                    <h3 class="text-primary mt-3">@lang('attributes.links')</h3>
+                    <h5>Для нашего открытого конвоя</h5>
+                    <div class="custom-control custom-checkbox mb-2">
+                        <input type="checkbox" class="custom-control-input" id="links[public]" name="links[public]" @if(isset($convoy->links['public']) || old('public') === 'on') checked @endif>
+                        <label class="custom-control-label" for="links[public]">Показывать ссылки</label>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="links[TruckersMP]">Ссылка на мероприятие в TruckersMP</label>
+                            <input type="text" class="form-control" id="links[TruckersMP]" name="links[TruckersMP]"
+                                   value="{{ old('links[TruckersMP]') ?? ($convoy->links['TruckersMP'] ?? '') }}" placeholder="Подписаться на TruckersMP">
+                        </div>
+                        <div class="form-group col">
+                            <label for="links[TrucksBook]">Ссылка на мероприятие в TrucksBook</label>
+                            <input type="text" class="form-control" id="links[TrucksBook]" name="links[TrucksBook]"
+                                   value="{{ old('links[TrucksBook]') ?? ($convoy->links['TrucksBook'] ?? '') }}" placeholder="Подписаться на TrucksBook">
+                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="links[VTCWorld]">Ссылка на мероприятие в VTCWorld</label>--}}
+{{--                            <input type="text" class="form-control" id="links[VTCWorld]" name="links[VTCWorld]" value="{{ old('links[VTCWorld]') ?? ($convoy->links['VTCWorld'] ?? '') }}">--}}
+{{--                        </div>--}}
+                    </div>
+                </div>
+            @endif
             <h3 class="text-primary">@lang('attributes.route')</h3>
             <div class="row">
                 <div class="col-md-5 route-images">
@@ -398,32 +437,14 @@
     </div>
 
     <script>
-        $('#datetimepicker').datetimepicker({
-            i18n:{
-                ru:{
-                    months:[
-                        'Январь','Февраль','Март','Апрель',
-                        'Май','Июнь','Июль','Август',
-                        'Сентябрь','Октябрь','Ноябрь','Декабрь',
-                    ],
-                    dayOfWeek:[
-                        "Вс", "Пн", "Вт", "Ср",
-                        "Чт", "Пт", "Сб",
-                    ]
-                }
-            },
-            format: 'd.m.Y H:i',
-            lang: 'ru',
-            minDate: '0',
-            step: 30,
-            theme: 'dark',
-            dayOfWeekStart: '1',
-            defaultTime: {!! $convoy->type == 0 ? "'16:00'" : ($convoy->type == 1 ? "'19:30'" : "'22:00'") !!},
-            scrollInput: false,
-            datepicker: {{ $booking ? 'false' : 'true' }},
-            allowTimes: {!! $allowTimes ?? 'true' !!}
-        });
-        $.datetimepicker.setLocale('ru');
+        @if(!$booking)
+            const picker = new Litepicker({
+                element: document.getElementById('start_date'),
+                plugins: ['mobilefriendly'],
+                lang: 'ru-RU',
+                format: 'DD.MM.YYYY'
+            });
+        @endif
 
         var simplemde = new SimpleMDE({
             element: $('#comment')[0],

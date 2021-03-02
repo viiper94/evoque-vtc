@@ -78,7 +78,7 @@ class ConvoysController extends Controller{
                     $convoy->$key = $convoy->saveImage($file);
                 }
             }
-            $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
                 redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно создан!']) :
@@ -91,12 +91,12 @@ class ConvoysController extends Controller{
         $convoy->trailer_public = true;
         $convoy->route = ['1' => null];
         return view('evoque.convoys.edit', [
-            'allowTimes' => null,
             'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::all(),
-            'dlc' => $convoy->dlcList
+            'dlc' => $convoy->dlcList,
+            'types' => Convoy::$timesToType
         ]);
     }
 
@@ -133,7 +133,7 @@ class ConvoysController extends Controller{
                 }
             }
             $convoy->booking = false;
-            $convoy->start_time = Carbon::parse($request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
                 redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
@@ -142,12 +142,12 @@ class ConvoysController extends Controller{
         $tmp = new Client();
         $servers = $tmp->servers()->get();
         return view('evoque.convoys.edit', [
-            'allowTimes' => null,
             'booking' => false,
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::all(),
-            'dlc' => $convoy->dlcList
+            'dlc' => $convoy->dlcList,
+            'types' => Convoy::$timesToType
         ]);
     }
 

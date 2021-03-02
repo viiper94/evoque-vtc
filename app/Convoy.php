@@ -60,7 +60,8 @@ class Convoy extends Model implements Auditable{
 
     public $attributes_validation = [
         'title' => 'required|string',
-        'start_time' => 'required|date',
+        'start_date' => 'required|date',
+        'start_time' => 'required|string',
         'server' => 'required|string',
         'links' => 'required|nullable|array',
 

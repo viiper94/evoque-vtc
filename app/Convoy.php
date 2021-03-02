@@ -198,11 +198,11 @@ class Convoy extends Model implements Auditable{
 
         if($this->start_time->lessThanOrEqualTo($morning_convoy_end)){
             $this->type = -1;
-        }elseif($this->start_time->lessThanOrEqualTo($day_convoy_end) && $this->start_time->greaterThan($day_convoy_start)){
+        }elseif($this->start_time->lessThanOrEqualTo($day_convoy_end) && $this->start_time->greaterThanOrEqualTo($day_convoy_start)){
             $this->type = 0;
-        }elseif($this->start_time->lessThanOrEqualTo($evening_convoy_end) && $this->start_time->greaterThan($evening_convoy_start)){
+        }elseif($this->start_time->lessThanOrEqualTo($evening_convoy_end) && $this->start_time->greaterThanOrEqualTo($evening_convoy_start)){
             $this->type = 1;
-        }elseif($this->start_time->greaterThan($night_convoy_start)){
+        }elseif($this->start_time->greaterThanOrEqualTo($night_convoy_start)){
             $this->type = 2;
         }else{
             $this->type = 1;

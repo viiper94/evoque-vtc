@@ -17,6 +17,18 @@
  */
 
 /*!
+ * 
+ * plugins/mobilefriendly.js
+ * Litepicker v2.0.3 (https://github.com/wakirin/Litepicker)
+ * Package: litepicker (https://www.npmjs.com/package/litepicker)
+ * License: MIT (https://github.com/wakirin/Litepicker/blob/master/LICENCE.md)
+ * Copyright 2019-2021 Rinat G.
+ *     
+ * Hash: 2dcde5e2a741b7bd4b19
+ * 
+ */
+
+/*!
  * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *

@@ -63,7 +63,7 @@ class Convoy extends Model implements Auditable{
         'start_date' => 'required|date',
         'start_time' => 'required|string',
         'server' => 'required|string',
-        'links' => 'required|nullable|array',
+        'links' => 'nullable|array',
 
         'route' => 'nullable|array',
         'route.*' => 'image|max:3000',

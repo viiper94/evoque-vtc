@@ -12,7 +12,7 @@
         <div class="row pt-3 justify-content-center">
             <a href="{{ route('evoque.applications') }}" class="btn btn-outline-warning btn-sm">
                 Заявки сотрудников
-                @can('accept', \App\Application::class)
+                @can('viewAll', \App\Application::class)
                     @if($apps > 0)<span class="badge badge-danger">{{ $apps }}</span>@endif
                 @endcan
             </a>
@@ -26,7 +26,7 @@
                         <div class="card-header row mx-0 pr-2">
                             <div class="col px-0 app-title">
                                 <h5 class="mb-0">
-                                    @can('claim', $application)
+                                    @can('view', $application)
                                         <a href="{{ route('evoque.applications.recruitment', $application->id) }}">{{ $application->name }}</a>
                                     @else
                                         {{ $application->name }}

@@ -18,7 +18,7 @@
                 <a href="{{ route('evoque.applications.fire') }}" class="btn btn-lg btn-outline-danger m-1">Увольняюсь!</a>
             </div>
         @endcan
-        @cannot('view', \App\Application::class)
+        @cannot('viewAll', \App\Application::class)
             <h2 class="mt-3 text-primary text-center">Мои заявки</h2>
         @else
             <h2 class="mt-3 text-primary text-center">Все заявки сотрудников</h2>
@@ -49,7 +49,7 @@
                                     @elseif($app->status == '2')
                                         <i class="fas fa-times-circle text-danger"></i>
                                     @endif
-                                    @can('claim', $app)
+                                    @can('view', $app)
                                         <a href="{{ route('evoque.applications', $app->id) }}">Заявка на {{ $app->getCategory() }}</a>
                                     @else
                                         Заявка на {{ $app->getCategory() }}

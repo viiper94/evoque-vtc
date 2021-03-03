@@ -15,9 +15,26 @@ class ApplicationPolicy
      * Determine whether the user can view all applications.
      *
      * @param  \App\User  $user
+     * @param  \App\Application  $app
      * @return mixed
      */
-    public function view(User $user){
+    public function view(User $user, Application $app){
+        if($user->member){
+            if($user->member->id === $app->member_id) return true;
+            foreach($user->member->role as $role){
+                if($role->manage_applications || $role->view_applications) return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Determine whether the user can view all applications.
+     *
+     * @param  \App\User  $user
+     * @return mixed
+     */
+    public function viewAll(User $user){
         if($user->member){
             foreach($user->member->role as $role){
                 if($role->manage_applications || $role->view_applications) return true;

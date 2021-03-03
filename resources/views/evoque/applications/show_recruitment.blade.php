@@ -56,20 +56,22 @@
                 <h2 class="text-primary">{!! nl2br($app->referral) !!}</h2>
             </div>
         @endif
-        <form method="post" action="{{ route('evoque.applications.accept.recruitment', $app->id) }}">
-            @csrf
-            <h4 class="text-center mb-0">Комментарий</h4>
-            <textarea class="form-control simple-mde" id="comment" name="comment">{{ $app->comment }}</textarea>
-            @if($errors->has('comment'))
-                <small class="form-text">{{ $errors->first('comment') }}</small>
-            @endif
-            <div class="row justify-content-center">
-                <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1"
-                        onclick="return confirm('Принять заявку?')">Принять</button>
-                <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
-                        onclick="return confirm('Отклонить заявку?')">Отклонить</button>
-            </div>
-        </form>
+        @can('claim', $app)
+            <form method="post" action="{{ route('evoque.applications.accept.recruitment', $app->id) }}">
+                @csrf
+                <h4 class="text-center mb-0">Комментарий</h4>
+                <textarea class="form-control simple-mde" id="comment" name="comment">{{ $app->comment }}</textarea>
+                @if($errors->has('comment'))
+                    <small class="form-text">{{ $errors->first('comment') }}</small>
+                @endif
+                <div class="row justify-content-center">
+                    <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1"
+                            onclick="return confirm('Принять заявку?')">Принять</button>
+                    <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
+                            onclick="return confirm('Отклонить заявку?')">Отклонить</button>
+                </div>
+            </form>
+        @endcan
     </div>
 
     <script>

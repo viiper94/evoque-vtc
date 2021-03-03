@@ -18,7 +18,7 @@ class ApplicationsController extends Controller{
         if(Auth::guest() || !Auth::user()->member) abort(404);
         if(isset($id)){
             $app = Application::with('member')->where('id', $id)->firstOrFail();
-            $this->authorize('claim', $app);
+            $this->authorize('view', $app);
             $rp = null;
             if($app->new_rp_profile) $rp = RpStats::where(['member_id' => $app->member_id, 'game' => $app->new_rp_profile[0]])->first();
             return view('evoque.applications.show', [
@@ -27,7 +27,7 @@ class ApplicationsController extends Controller{
             ]);
         }
         $apps = Application::with('member');
-        if(Auth::user()->cant('view', Application::class)){
+        if(Auth::user()->cant('viewAll', Application::class)){
             $apps = $apps->where('member_id', Auth::user()->member->id);
         }
         return view('evoque.applications.index', [
@@ -40,7 +40,6 @@ class ApplicationsController extends Controller{
         $this->authorize('view', Recruitment::class);
         if(isset($id)){
             $app = Recruitment::where('id', $id)->firstOrFail();
-            $this->authorize('claim', $app);
             return view('evoque.applications.show_recruitment', [
                 'app' => $app
             ]);

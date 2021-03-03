@@ -257,7 +257,7 @@
 
     @else
         <div class="row justify-content-center pt-5 pb-5">
-            <h1 class="text-center text-primary m-5">Мы проводим открытые мероприятия по вторникам. Ближайший конвой уже готовится!</h1>
+            <h1 class="text-center text-primary m-5">Мы проводим открытые мероприятия по вторникам. Следующий конвой уже готовится!</h1>
         </div>
     @endif
 

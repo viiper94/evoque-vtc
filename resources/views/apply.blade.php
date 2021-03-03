@@ -55,6 +55,12 @@
                 </li>
                 <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <p>Иметь исправный микрофон, быть готовым к голосовому общению в Discord</p>
+                </li>
+                <li class="row mt-5 ml-1 ml-md-0">
+                    <div class="icon-wrapper">
                         <i class="fas fa-map"></i>
                     </div>
                     <p>Наличие DLC Going East!, Scandinavia, Vive la France! и Italia<br>
@@ -125,10 +131,6 @@
                         <small class="form-text">{{ $errors->first('discord_name') }}</small>
                     @endif
                 </div>
-            </div>
-            <div class="custom-control custom-checkbox mb-4">
-                <input type="checkbox" class="custom-control-input" id="have_mic" name="have_mic" @if(old('have_mic')) checked @endif>
-                <label class="custom-control-label" for="have_mic">Есть микрофон</label>
             </div>
             <div class="form-group">
                 <label for="referral">Откуда Вы узнали о нас?</label>

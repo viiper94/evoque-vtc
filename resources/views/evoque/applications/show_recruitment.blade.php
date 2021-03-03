@@ -34,7 +34,9 @@
                 <h1 class="text-primary">{{ $app->hours_played }} {{ trans_choice('час|часа|часов', $app->hours_played) }}</h1>
             </div>
             <div class="col-md-4">
-                <h4 class="mb-0 text-center">Микрофон: @if($app->have_mic) <i class="fas fa-check text-success"></i> @else <i class="fas fa-times text-danger"></i> @endif</h4>
+                @if($app->have_mic)
+                    <h4 class="mb-0 text-center">Микрофон: @if($app->have_mic) <i class="fas fa-check text-success"></i> @else <i class="fas fa-times text-danger"></i> @endif</h4>
+                @endif
                 <h4 class="mb-0 text-center">Discord: @if($app->have_ts3) <i class="fas fa-check text-success"></i> @else <i class="fas fa-times text-danger"></i> @endif</h4>
                 <h4 class="mb-0 text-center">Наличие ATS: @if($app->have_ats) <i class="fas fa-check text-success"></i> @else <i class="fas fa-times text-danger"></i> @endif</h4>
             </div>

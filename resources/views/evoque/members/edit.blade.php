@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="nickname">Игровой ник</label>
+                            <label for="nickname">@lang('attributes.nickname')</label>
                             <input type="text" class="form-control" id="nickname" name="nickname" value="{{ $member->nickname }}" required>
                             @if($errors->has('nickname'))
                                 <small class="form-text">{{ $errors->first('nickname') }}</small>
@@ -35,14 +35,14 @@
                             <label class="custom-control-label" for="visible">Виден на сайте (снять галочку, чтобы уволить с восстановлением)</label>
                         </div>
                         <div class="form-group">
-                            <label for="join_date">Дата присоединения</label>
+                            <label for="join_date">@lang('attributes.join_date')</label>
                             <input type="text" class="form-control" id="join_date" name="join_date" value="{{ $member->join_date->format('d.m.Y') }}" autocomplete="off">
                             @if($errors->has('join_date'))
                                 <small class="form-text">{{ $errors->first('join_date') }}</small>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="plate">Номерной знак (три цифры)</label>
+                            <label for="plate">@lang('attributes.plate')</label>
                             <input type="text" class="form-control" id="plate" name="plate" value="{{ $member->plate }}">
                             @if($errors->has('plate'))
                                 <small class="form-text">{{ $errors->first('plate') }}</small>
@@ -53,7 +53,7 @@
                     <div class="col-md-6">
                         <div class="custom-control custom-checkbox mb-2">
                             <input type="checkbox" class="custom-control-input" id="sort" name="sort" @if($member->sort) checked @endif>
-                            <label class="custom-control-label" for="sort">Показывать вверху списка</label>
+                            <label class="custom-control-label" for="sort">@lang('attributes.sort')</label>
                         </div>
                         <div class="form-group">
                             <label for="roles">Должность (выбрать несколько с зажатым Ctrl)</label>
@@ -74,14 +74,14 @@
                         </div>
                         @if($member->isTrainee())
                             <div class="form-group">
-                                <label for="trainee_until">Испытательный срок до</label>
+                                <label for="trainee_until">@lang('attributes.trainee_until')</label>
                                 <input type="text" class="form-control" id="trainee_until" name="trainee_until" value="{{ $member->trainee_until ? $member->trainee_until->format('d.m.Y') : '' }}" autocomplete="off">
                                 @if($errors->has('trainee_until'))
                                     <small class="form-text">{{ $errors->first('trainee_until') }}</small>
                                 @endif
                             </div>
                             <div class="form-group">
-                                <label for="trainee_convoys">Конвоев на исп. сроке</label>
+                                <label for="trainee_convoys">@lang('attributes.trainee_convoys')</label>
                                 <input type="text" class="form-control" id="trainee_convoys" name="trainee_convoys" value="{{ $member->trainee_convoys }}" autocomplete="off">
                                 @if($errors->has('trainee_convoys'))
                                     <small class="form-text">{{ $errors->first('trainee_convoys') }}</small>
@@ -94,21 +94,21 @@
                     <div class="col">
                         <h5>Игровая статистика</h5>
                         <div class="form-group">
-                            <label for="scores">Баллы</label>
+                            <label for="scores">@lang('attributes.scores')</label>
                             <input type="number" class="form-control" id="scores" name="scores" value="{{ $member->scores }}" placeholder="∞">
                             @if($errors->has('scores'))
                                 <small class="form-text">{{ $errors->first('scores') }}</small>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="money">Эвики</label>
+                            <label for="money">@lang('attributes.money')</label>
                             <input type="text" class="form-control" id="money" name="money" value="{{ $member->money }}" placeholder="∞">
                             @if($errors->has('money'))
                                 <small class="form-text">{{ $errors->first('money') }}</small>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="convoys">Посещение конвоев за неделю</label>
+                            <label for="convoys">@lang('attributes.convoys')</label>
                             <input type="number" class="form-control" id="convoys" name="convoys" value="{{ $member->convoys }}" required>
                             @if($errors->has('convoys'))
                                 <small class="form-text">{{ $errors->first('convoys') }}</small>
@@ -118,14 +118,14 @@
                     <div class="col-auto">
                         <h5>Отпуски</h5>
                         <div class="form-group">
-                            <label for="on_vacation_till">Последний отпуск</label> <br>
+                            <label for="on_vacation_till">@lang('attributes.on_vacation_till')</label> <br>
                             <input type="hidden" id="on_vacation_till" name="on_vacation_till" value="{{ $member->on_vacation_till ? $member->on_vacation_till['from'].' - '.$member->on_vacation_till['to'] : '' }}">
                             @if($errors->has('on_vacation_till'))
                                 <small class="form-text">{{ $errors->first('on_vacation_till') }}</small>
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="vacations">Использовано отпусков</label>
+                            <label for="vacations">@lang('attributes.vacations')</label>
                             <input type="number" class="form-control" id="vacations" name="vacations" value="{{ $member->vacations }}">
                             @if($errors->has('vacations'))
                                 <small class="form-text">{{ $errors->first('vacations') }}</small>
@@ -258,7 +258,7 @@
                                         <tr>
                                             <td class="text-primary">{{ $item->user->member->nickname }}</td>
                                             <td>{{ $item->created_at->format('d.m.Y в H:i') }}</td>
-                                            <td>{{ $key }}</td>
+                                            <td>{{ trans('attributes.'.$key) }}</td>
                                             <td class="text-danger font-weight-bold">{!! $value !!}</td>
                                             <td class="text-success font-weight-bold">{!! $item->new_values[$key] !!}</td>
                                         </tr>

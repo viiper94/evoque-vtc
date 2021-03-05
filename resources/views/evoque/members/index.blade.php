@@ -21,8 +21,8 @@
                 <th scope="col">Ник в игре</th>
                 <th scope="col">Возраст</th>
                 <th scope="col">Должность</th>
-                <th scope="col">Баллы</th>
-                <th scope="col">Эвики</th>
+                <th scope="col">@lang('attributes.scores')</th>
+                <th scope="col">@lang('attributes.money')</th>
                 <th scope="col" class="with-btn">
                     @can('resetActivity', \App\Member::class)
                         <a class="reset-btn text-shadow" data-token="{{ csrf_token() }}">

@@ -26,28 +26,28 @@
 
 // RP stats
 td, th{
-    &.stage-1{
+    &.stage-1, &.stage-1 a{
         color: $success;
     }
-    &.stage-2{
+    &.stage-2, &.stage-2 a{
         color: $primary;
     }
-    &.stage-3{
+    &.stage-3, &.stage-3 a{
         color: $danger;
     }
-    &.stage-4{
+    &.stage-4, &.stage-4 a{
         color: #ca5e5e;
     }
-    &.stage-5{
+    &.stage-5, &.stage-5 a{
         color: $info;
     }
-    &.stage-6{
+    &.stage-6, &.stage-6 a{
         color: #1163bb;
     }
-    &.stage-7{
+    &.stage-7, &.stage-7 a{
         color: #3d4ca2;
     }
-    &.stage-8{
+    &.stage-8, &.stage-8 a{
         color: #b0139b;
     }
 }

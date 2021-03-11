@@ -104,7 +104,7 @@ class ConvoysController extends Controller{
         $this->authorize('update', Convoy::class);
         $convoy = Convoy::with(['audits' => function($query){
             $query->limit(10)->orderBy('created_at', 'desc');
-        }])->where('id', $id)->first();
+        }])->where('id', $id)->firstOrFail();
         if($request->ajax() && $request->input('action') == 'remove_img'){
             $attr = $request->input('target');
             $convoy->$attr = null;
@@ -172,7 +172,7 @@ class ConvoysController extends Controller{
     public function toDiscord($convoy_id){
         $this->authorize('update', Convoy::class);
 
-        $convoy = Convoy::find($convoy_id);
+        $convoy = Convoy::findOrFail($convoy_id);
 
         $fields = [
             [

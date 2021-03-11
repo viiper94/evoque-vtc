@@ -22,24 +22,31 @@
 
 <div class="container mt-5">
     @include('layout.alert')
-    <section class="apply-requirements row pt-5 pb-5">
+    <section class="features text-center row pt-3 pb-3">
+        <h1 class="col-12 mb-5">Требования к сотрудникам</h1>
+        <div class="feature col-md-4 col-sm-12">
+            <h1 class="display-2 font-weight-bold">17+</h1>
+            <hr class="m-auto pb-3">
+            <p>Ваш возраст должен <br> быть <b>не менее 17 лет</b></p>
+        </div>
+        <div class="feature col-md-4 col-sm-12">
+            <div class="row justify-content-center">
+                <h1 class="col display-2 col-auto pr-0 pl-0 font-weight-bold"><i class="fas fa-headset"></i></h1>
+            </div>
+            <hr class="m-auto pb-3">
+            <p>Иметь <b>исправный микрофон</b>, быть готовым к голосовому общению в Discord</p>
+        </div>
+        <div class="feature col-md-4 col-sm-12">
+            <h1 class="display-2 font-weight-bold"><i class="fab fa-steam-symbol"></i></h1>
+            <hr class="m-auto pb-3">
+            <p>Ваш профиль в Steam <br> <b>не должен</b> быть скрытым<br>
+                <button data-toggle="modal" data-target="#steam-privacy-modal" class="btn btn-outline-warning btn-sm">Как открыть?</button></p>
+        </div>
+    </section>
+    <section class="apply-requirements row pt-3 pb-5">
         <div class="col mr-5 with-img"></div>
         <div class="col ml-md-5">
-            <h1>Требования</h1>
             <ul>
-                <li class="row mt-5 ml-1 ml-md-0">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-address-book"></i>
-                    </div>
-                    <p>Ваш возраст должен быть не менее 17 лет</p>
-                </li>
-                <li class="row mt-5 ml-1 ml-md-0" style="flex-wrap: nowrap">
-                    <div class="icon-wrapper">
-                        <i class="fab fa-steam-symbol"></i>
-                    </div>
-                    <p>Ваш профиль в Steam не должен быть скрытым<br>
-                        <button data-toggle="modal" data-target="#steam-privacy-modal" class="btn btn-outline-warning btn-sm">Как открыть?</button></p>
-                </li>
                 <li class="row mt-5 ml-1 ml-md-0" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
                         <i class="fas fa-ban"></i>
@@ -52,12 +59,6 @@
                         <i class="fab fa-vk"></i>
                     </div>
                     <p>Ваши личные сообщения ВК должны быть открытыми</p>
-                </li>
-                <li class="row mt-5 ml-1 ml-md-0">
-                    <div class="icon-wrapper">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <p>Иметь исправный микрофон, быть готовым к голосовому общению в Discord</p>
                 </li>
                 <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">

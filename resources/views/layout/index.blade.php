@@ -16,7 +16,7 @@
         gtag('config', 'UA-139146641-2');
     </script>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}" media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="@if(\Carbon\Carbon::parse('2021-04-01')->isToday()) /css/app-01-04.css @else {{  mix('css/app.css') }} @endif" media="screen,projection"/>
     @include('layout.scripts')
     @yield('assets')
     <title>@yield('title', trans('general.vtc_evoque'))</title>

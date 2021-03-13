@@ -66,7 +66,7 @@ class KbController extends Controller{
             $kb->visible = $request->input('visible') === 'on';
             $kb->public = $request->input('public') === 'on';
             return $kb->save() ?
-                redirect()->route('kb')->with(['success' => 'Статья успешно отредактирована!']) :
+                redirect()->route('kb.view', $id)->with(['success' => 'Статья успешно отредактирована!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('kb.add', [

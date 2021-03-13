@@ -44,7 +44,7 @@ class KbController extends Controller{
             if($kb->save()){
                 $kb->sort = $kb->id;
                 return $kb->save() ?
-                    redirect()->route('kb')->with(['success' => 'Статья успешно создана!']) :
+                    redirect()->route('kb.view', $kb->id)->with(['success' => 'Статья успешно создана!']) :
                     redirect()->back()->withErrors(['Возникла ошибка =(']);
             }
         }

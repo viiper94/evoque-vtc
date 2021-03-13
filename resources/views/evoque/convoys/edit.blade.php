@@ -114,7 +114,7 @@
             <h3 class="text-primary">@lang('attributes.route')</h3>
             <div class="row">
                 <div class="col-md-5 route-images">
-                    @if($convoy->start_city)
+                    @if($convoy->start_city && $convoy->route)
                         <h6>{{ trans_choice('Текущее изображение|Текущие изображения', $convoy->route) }}</h6>
                         <div class="fotorama mb-3 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
                             @foreach($convoy->route as $item)

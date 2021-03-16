@@ -24,6 +24,7 @@ class TabsController extends Controller{
 
     public function add(Request $request){
         $this->authorize('create', Tab::class);
+        $tab = new Tab();
         if($request->post()){
             $this->validate($request, [
                 'convoy_title' => 'required|string',
@@ -32,7 +33,6 @@ class TabsController extends Controller{
                 'screenshot' => 'required|image',
                 'description' => 'nullable|string',
             ]);
-            $tab = new Tab();
             $tab->fill($request->post());
             $tab->description = htmlentities(trim($request->input('description')));
             $tab->member_id = Auth::user()->member->id;
@@ -44,8 +44,9 @@ class TabsController extends Controller{
                 redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно подан!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
+        $tab->date = Carbon::today();
         return view('evoque.convoys.tab.edit', [
-            'tab' => new Tab(),
+            'tab' => $tab,
             'members' => Member::where('visible', '1')->get()
         ]);
     }
@@ -57,7 +58,7 @@ class TabsController extends Controller{
             $this->validate($request, [
                 'convoy_title' => 'required|string',
                 'lead_id' => 'required|numeric',
-                'date' => 'required|date_format:d.m.Y',
+                'date' => 'required|date',
                 'screenshot' => 'nullable|image',
             ]);
             $tab->fill($request->post());

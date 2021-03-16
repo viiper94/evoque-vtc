@@ -9,11 +9,6 @@
     | @lang('general.vtc_evoque')
 @endsection
 
-@section('assets')
-    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
-    <script src="/js/jquery.datetimepicker.full.min.js"></script>
-@endsection
-
 @section('content')
 
     <div class="container pt-5 pb-5">
@@ -34,7 +29,6 @@
                             <small class="form-text">{{ $errors->first('convoy_title') }}</small>
                         @endif
                     </div>
-
                     <div class="form-group">
                         <label for="lead_id">Ведущий</label>
                         <select class="form-control" id="lead_id" name="lead_id" required>
@@ -45,23 +39,23 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="description">Дополнительная информация</label>
+                        <textarea class="form-control" id="description" rows="2" name="description" placeholder="Кто не доехал? Кому минус бал? Кому не защитать?">{{ $tab->description }}</textarea>
+                        @if($errors->has('description'))
+                            <small class="form-text">{{ $errors->first('description') }}</small>
+                        @endif
+                    </div>
                 </div>
                 <div class="col-auto">
                     <div class="form-group">
                         <label for="date">Дата конвоя</label><br>
-                        <input type="hidden" name="date" id="date" value="{{ $tab->date ? $tab->date->format('d.m.Y') : '' }}" required>
+                        <input type="hidden" name="date" id="date" value="{{ $tab->date }}" required>
                         @if($errors->has('date'))
                             <small class="form-text">{{ $errors->first('date') }}</small>
                         @endif
                     </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="description">Дополнительная информация</label>
-                <textarea class="form-control" id="description" rows="2" name="description" placeholder="Кто не доехал? Кому минус бал? Кому не защитать?">{{ $tab->description }}</textarea>
-                @if($errors->has('description'))
-                    <small class="form-text">{{ $errors->first('description') }}</small>
-                @endif
             </div>
             <div class="form-group pt-3">
                 <div class="custom-file custom-file-dark mb-3">
@@ -82,7 +76,7 @@
             plugins: ['mobilefriendly'],
             lang: 'ru-RU',
             inlineMode: true,
-            startDate: Date.now()
+            maxDate: Date.now()
         });
     </script>
 

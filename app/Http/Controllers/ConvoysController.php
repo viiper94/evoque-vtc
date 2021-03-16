@@ -60,7 +60,7 @@ class ConvoysController extends Controller{
             'convoy' => Convoy::where([
                 ['visible', '=', '1'],
                 ['public', '=', '1'],
-                ['start_time', '>', Carbon::now()->subMinutes(120)->format('Y-m-d H:i')]
+                ['start_time', '>', Carbon::now()->subMinutes(90)->format('Y-m-d H:i')]
             ])->orderBy('start_time')->first()
         ]);
     }

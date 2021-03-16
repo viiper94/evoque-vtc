@@ -14,7 +14,11 @@
     <div class="container py-5 private-convoys">
         @can('viewAny', \App\Convoy::class)
             <div class="row pt-5 justify-content-center">
-                <a href="{{ route('convoys.private', 'all') }}" class="btn btn-outline-warning">Смотреть все регламенты</a>
+                @if($all)
+                    <a href="{{ route('convoys.private') }}" class="btn btn-outline-danger btn-sm">Вернуть текущие регламенты</a>
+                @else
+                    <a href="{{ route('convoys.private', 'all') }}" class="btn btn-outline-success btn-sm">Показать будущие регламенты</a>
+                @endif
             </div>
         @endcan
         @foreach($grouped as $day => $convoys)

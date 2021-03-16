@@ -15,9 +15,9 @@
         @can('viewAny', \App\Convoy::class)
             <div class="row pt-5 justify-content-center">
                 @if($all)
-                    <a href="{{ route('convoys.private') }}" class="btn btn-outline-danger btn-sm">Вернуть текущие регламенты</a>
+                    <a href="{{ route('convoys.private') }}" class="btn btn-outline-danger btn-sm"><i class="fas fa-minus"></i> Вернуть текущие регламенты</a>
                 @else
-                    <a href="{{ route('convoys.private', 'all') }}" class="btn btn-outline-success btn-sm">Показать будущие регламенты</a>
+                    <a href="{{ route('convoys.private', 'all') }}" class="btn btn-outline-success btn-sm"><i class="fas fa-plus"></i> Показать будущие регламенты</a>
                 @endif
             </div>
         @endcan

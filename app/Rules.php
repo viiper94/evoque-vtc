@@ -22,4 +22,8 @@ class Rules extends Model implements Auditable{
 //        'history' => 'array'
     ];
 
+    protected $auditExclude = [
+        'id',
+    ];
+
 }

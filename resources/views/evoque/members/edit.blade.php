@@ -253,16 +253,37 @@
                             </thead>
                             <tbody>
                             @foreach($member->audits as $item)
-                                @if($item->old_values)
-                                    @foreach($item->old_values as $key => $value)
+                                @if($item->event !== 'deleted' && $item->new_values)
+                                    @foreach($item->getModified() as $key => $values)
                                         <tr>
-                                            <td class="text-primary">{{ $item->user->member->nickname }}</td>
-                                            <td>{{ $item->created_at->format('d.m.Y в H:i') }}</td>
-                                            <td>{{ trans('attributes.'.$key) }}</td>
-                                            <td class="text-danger font-weight-bold">{!! $value !!}</td>
-                                            <td class="text-success font-weight-bold">{!! $item->new_values[$key] !!}</td>
+                                            <td class="nowrap"><span class="text-primary font-weight-bold">{{ $item->user->member->nickname }}</span> @lang('audits.'.$item->event)</td>
+                                            <td class="nowrap">{{ $item->created_at->format('d.m.Y в H:i') }}</td>
+                                            <td class="nowrap">{{ trans('attributes.'.$key) }}</td>
+                                            <td class="text-danger font-weight-bold">
+                                                @if(isset($values['old']) && is_array($values['old']))
+                                                    @foreach($values['old'] as $k => $v)
+                                                        {{ $k }}: {{ $v }}<br>
+                                                    @endforeach
+                                                @else
+                                                    {!! $values['old'] ?? null !!}
+                                                @endif
+                                            </td>
+                                            <td class="text-success font-weight-bold">
+                                                @if(isset($values['new']) && is_array($values['new']))
+                                                    @foreach($values['new'] as $k => $v)
+                                                        {{ $k }}: {{ $v }}<br>
+                                                    @endforeach
+                                                @else
+                                                    {!! $values['new'] ?? null !!}
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
+                                @else
+                                    <tr>
+                                        <td><span class="text-primary font-weight-bold">{{ $item->user->member->nickname }}</span> @lang('audits.'.$item->event)</td>
+                                        <td colspan="4">{{ $item->created_at->format('d.m.Y в H:i') }}</td>
+                                    </tr>
                                 @endif
                             @endforeach
                             </tbody>

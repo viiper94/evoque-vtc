@@ -142,6 +142,10 @@ class Convoy extends Model implements Auditable{
             '23:00', '23:15', '23:30', '23:45'],
     ];
 
+    protected $auditExclude = [
+        'id',
+    ];
+
     public function isUpcoming(){
         $now = Carbon::now();
         return $now->subMinutes(45)->lessThan($this->start_time);

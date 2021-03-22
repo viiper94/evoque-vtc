@@ -6,21 +6,28 @@ use App\Convoy;
 use App\Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use TruckersMP\APIClient\Client;
 
 class ConvoysController extends Controller{
 
-    public function index(){
+    public function view(Request $request){
         $this->authorize('update', Convoy::class);
         $list = array();
         $convoys = Convoy::with('bookedBy')->orderBy('start_time', 'desc')->get();
         foreach($convoys as $convoy){
             $list[$convoy->start_time->format('d.m').', '.$convoy->start_time->isoFormat('dd')][] = $convoy;
         }
+        $list = collect($list);
         return view('evoque.convoys.index', [
-            'convoys' => $list
+            'convoys' => $list->forPage($request->input('page'), 8),
+            'paginator' => new LengthAwarePaginator($list, count($list), 8, $request->input('page'), [
+                'path' => url()->current(),
+                'pageName' => 'page'
+            ])
         ]);
     }
 
@@ -37,8 +44,14 @@ class ConvoysController extends Controller{
         foreach($convoys as $convoy){
             $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
         }
+        $list = collect(array_reverse($grouped));
         return view('evoque.convoys.private', [
-            'grouped' => collect(array_reverse($grouped))->slice(0, !$all ? 7 : 20)
+            'all' => $all,
+            'grouped' => $list->forPage($request->input('page'), !$all ? 7 : 20),
+            'paginator' => new LengthAwarePaginator($list, count($list), !$all ? 7 : 20, $request->input('page'), [
+                'path' => url()->current(),
+                'pageName' => 'page'
+            ])
         ]);
     }
 
@@ -47,7 +60,7 @@ class ConvoysController extends Controller{
             'convoy' => Convoy::where([
                 ['visible', '=', '1'],
                 ['public', '=', '1'],
-                ['start_time', '>', Carbon::now()->subMinutes(45)->format('Y-m-d H:i')]
+                ['start_time', '>', Carbon::now()->subMinutes(90)->format('Y-m-d H:i')]
             ])->orderBy('start_time')->first()
         ]);
     }

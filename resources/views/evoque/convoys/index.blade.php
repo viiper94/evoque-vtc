@@ -57,7 +57,6 @@
                                     @endcan
                                 </h6>
                                 <div class="card-body">
-{{--                                    <h4 class="convoy-date mb-0">{{ $convoy->start_time->isoFormat('dddd, LL, H:mm') }}</h4>--}}
                                     <p class="card-text">
                                         Ведущий: <b>{{ $convoy->lead }}</b>
                                         @if($convoy->leadMember && $convoy->leadMember->user->vk)
@@ -71,6 +70,7 @@
                 </div>
                 <div class="clearfix"></div>
             @endforeach
+            {{ $paginator->links('layout.pagination') }}
         </div>
     </div>
 @endsection

@@ -111,4 +111,13 @@ class MemberPolicy
         return false;
     }
 
+    public function restore(User $user){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_members || $role->restore_members) return true;
+            }
+        }
+        return true;
+    }
+
 }

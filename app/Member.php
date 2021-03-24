@@ -4,12 +4,14 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 use TruckersMP\APIClient\Client;
 
 class Member extends Model implements Auditable{
 
     use \OwenIt\Auditing\Auditable;
+    use SoftDeletes;
 
     protected $casts = [
         'visible' => 'boolean',
@@ -24,6 +26,7 @@ class Member extends Model implements Auditable{
         'trainee_until',
         'join_date',
         'created_at',
+        'deleted_at',
         'updated_at'
     ];
 

@@ -137,4 +137,11 @@ class MembersController extends Controller{
         ]);
     }
 
+    public function trash(Request $request){
+        $this->authorize('restore', Member::class);
+        return view('evoque.members.trash', [
+            'members' => Member::with('user')->onlyTrashed()->get()
+        ]);
+    }
+
 }

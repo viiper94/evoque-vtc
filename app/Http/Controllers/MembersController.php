@@ -45,7 +45,7 @@ class MembersController extends Controller{
                 'vacations' => 'required|numeric',
                 'plate' => 'nullable|string'
             ]);
-            $member = Member::with('role')->findOrFail($id);
+            $member = Member::with('role')->withTrashed()->findOrFail($id);
             $this->authorize('update', Member::class);
             $member->fill($request->post());
             $member->visible = $request->input('visible') === 'on' ? 1 : 0;
@@ -72,7 +72,7 @@ class MembersController extends Controller{
         return view('evoque.members.edit', [
             'member' => Member::with(['role', 'user', 'audits' => function($query){
                 $query->limit(10)->orderBy('created_at', 'desc');
-            }, 'audits.user.member', 'stats'])->where('id', $id)->first(),
+            }, 'audits.user.member', 'stats'])->where('id', $id)->withTrashed()->firstOrFail(),
             'roles' => Role::all()
         ]);
     }
@@ -80,7 +80,7 @@ class MembersController extends Controller{
     public function fire(Request $request, $id){
         $member = Member::with(['user', 'role'])->where('id', $id)->first();
         $this->authorize('fire', $member);
-        $member->role()->detach();
+//        $member->role()->detach();
         $member->user->remember_token = null;
         $member->user->fired_at = Carbon::now();
         $member->user->save();
@@ -139,9 +139,20 @@ class MembersController extends Controller{
 
     public function trash(Request $request){
         $this->authorize('restore', Member::class);
+        $members = Member::with('user')->onlyTrashed();
+        if($request->input('q')){
+            $members = $members->where('nickname', 'like', '%'.$request->input('q').'%');
+        }
         return view('evoque.members.trash', [
-            'members' => Member::with('user')->onlyTrashed()->get()
+            'members' => $members->orderBy('deleted_at', 'desc')->paginate(20)
         ]);
+    }
+
+    public function restore(Request $request, $id){
+        $this->authorize('restore', Member::class);
+        return Member::withTrashed()->where('id', $id)->restore() ?
+            redirect()->route('evoque.members')->with(['success' => 'Сотрудник восстановлен!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

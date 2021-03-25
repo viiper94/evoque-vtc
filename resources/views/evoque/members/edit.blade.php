@@ -32,7 +32,7 @@
                                 <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($member->visible) checked @endif disabled>
                                 <input type="hidden" name="visible" value="{{ $member->visible ? 'on' : 'off' }}">
                             @endcan
-                            <label class="custom-control-label" for="visible">Виден на сайте (снять галочку, чтобы уволить с восстановлением)</label>
+                            <label class="custom-control-label" for="visible">Виден на сайте</label>
                         </div>
                         <div class="form-group">
                             <label for="join_date">@lang('attributes.join_date')</label>
@@ -134,11 +134,20 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <button type="submit" class="btn btn-outline-warning btn-lg"><i class="fas fa-save"></i> Сохранить</button>
-                    @can('fire', $member)
-                        <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-danger ml-5"
-                           onclick="return confirm('Уволить этого сотрудника без восстановления?')"><i class="fas fa-user-times"></i> Уволить</a>
-                    @endcan
+                    @if($member->trashed())
+                        @can('restore', \App\Member::class)
+                            <a href="{{ route('evoque.admin.members.restore', $member->id) }}" class="btn btn-lg btn-outline-success ml-5"
+                               onclick="return confirm('Восстановить этого сотрудника?')"><i class="fas fa-undo"></i> Восстановить</a>
+                        @endcan
+                    @else
+                        <button type="submit" class="btn btn-outline-warning btn-lg"><i class="fas fa-save"></i> Сохранить</button>
+                        @can('fire', $member)
+                            <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-danger ml-5"
+                               onclick="return confirm('Уволить этого сотрудника?')"><i class="fas fa-user-times"></i> Уволить</a>
+                            <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-warning ml-5"
+                               onclick="return confirm('Уволить этого сотрудника с восстановлением?')"><i class="fas fa-user-times"></i> Уволить с восстановлением</a>
+                        @endcan
+                    @endif
                 </div>
             </form>
         @endcan

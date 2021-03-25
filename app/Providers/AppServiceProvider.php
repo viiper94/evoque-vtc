@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
             return $match ? false : true;
         });
 
-        view()->composer('*', function($view){
+        view()->composer('layout.navbar', function($view){
             $convoys_badge = 0;
             $applications_badge = 0;
 

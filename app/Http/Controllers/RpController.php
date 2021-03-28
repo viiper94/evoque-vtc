@@ -11,29 +11,49 @@ use Illuminate\Support\Facades\Auth;
 
 class RpController extends Controller{
 
-    public function index($game = 'ets2'){
+    public function index(){
         if(Auth::guest() || !Auth::user()->member) abort(404);
         return view('evoque.rp.index', [
-            'roles' => Role::with([
-                'members' => function($query){
-                                $query->where('visible', '1');
-                            },
-                'members.role' => function($query){
-                                $query->where('visible', '1');
-                            },
-                'members.stat' => function($query) use ($game){
-                                $query->where('game', $game)->whereNotNull('level');
-                            }
-            ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
-                foreach($group as $role){
-                    foreach($role->members as $member){
-                        $has = $member->stat && $member->topRole() == $role->id;
-                        if($has) return true;
+            'roles' => [
+                'ets2' => Role::with([
+                    'members' => function($query){
+                        $query->where('visible', '1');
+                    },
+                    'members.role' => function($query){
+                        $query->where('visible', '1');
+                    },
+                    'members.stat' => function($query){
+                        $query->where('game', 'ets2')->whereNotNull('level');
                     }
-                }
-                return false;
-            }),
-            'game' => $game
+                ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
+                    foreach($group as $role){
+                        foreach($role->members as $member){
+                            $has = $member->stat && $member->topRole() == $role->id;
+                            if($has) return true;
+                        }
+                    }
+                    return false;
+                }),
+                'ats' => Role::with([
+                    'members' => function($query){
+                        $query->where('visible', '1');
+                    },
+                    'members.role' => function($query){
+                        $query->where('visible', '1');
+                    },
+                    'members.stat' => function($query){
+                        $query->where('game', 'ats')->whereNotNull('level');
+                    }
+                ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
+                    foreach($group as $role){
+                        foreach($role->members as $member){
+                            $has = $member->stat && $member->topRole() == $role->id;
+                            if($has) return true;
+                        }
+                    }
+                    return false;
+                })
+            ]
         ]);
     }
 
@@ -154,9 +174,9 @@ class RpController extends Controller{
         ]);
     }
 
-    public function createResults($game){
+    public function createResults(){
         $this->authorize('resetStats', RpReport::class);
-        $stats = RpStats::where([['game', '=', $game], ['quantity', '>', '0']])->get();
+        $stats = RpStats::where('distance', '>', '0')->get();
         foreach($stats as $stat){
             $stat->quantity_total += $stat->quantity;
             $stat->distance_total = $stat->distance_total + $stat->distance + $stat->bonus;

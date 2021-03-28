@@ -57,6 +57,26 @@ class RpController extends Controller{
         ]);
     }
 
+    public function weekly(){
+        return view('evoque.rp.weekly', [
+            'stats' => RpStats::selectRaw(
+                'rp_stats.*,
+                    ats.distance as ats_distance,
+                    ats.distance_total as ats_distance_total,
+                    ats.bonus as ats_bonus,
+                    (rp_stats.distance+ats.distance) as sum_distance,
+                    (rp_stats.quantity+ats.quantity) as sum_quantity,
+                    (rp_stats.weight+ats.weight) as sum_weight,
+                    (rp_stats.bonus+ats.bonus) as sum_bonus')
+                ->with('member')->where('rp_stats.game', 'ets2')
+                ->leftJoin('rp_stats as ats', function($join){
+                    $join->on('rp_stats.member_id', '=', 'ats.member_id')
+                        ->where('ats.game', '=', 'ats');
+                })
+                ->orderByRaw('(sum_distance+sum_bonus) desc')->orderBy('rp_stats.id')->get()
+        ]);
+    }
+
     public function reports(){
         if(Auth::guest() || !Auth::user()->member) abort(404);
         $reports = RpReport::with('member');

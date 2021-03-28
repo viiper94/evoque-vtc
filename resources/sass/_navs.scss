@@ -1,0 +1,6 @@
+// Navs
+.nav-pills{
+    .nav-link.active, .show>.nav-link{
+        color: $text-on-primary;
+    }
+}

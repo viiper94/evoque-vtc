@@ -23,7 +23,7 @@
             <div class="tab-pane @if($loop->first) show active @endif" id="{{ $game }}" role="tabpanel" aria-labelledby="home-tab">
                 <div class="container-fluid members-table">
                     <div class="table-responsive">
-                        <table class="table table-dark table-bordered table-hover">
+                        <table class="table table-sm table-dark table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th colspan="4"></th>

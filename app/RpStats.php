@@ -55,10 +55,11 @@ class RpStats extends Model{
         return $this->belongsTo('App\Member');
     }
 
-    public function getStage(){
-        $stages = array_keys(self::$stages[$this->game]);
+    public function getStage($km = null, $game = null){
+        $stages = array_keys(self::$stages[$game ?? $this->game]);
+        $distance = $km ?? $this->distance_total;
         foreach($stages as $index => $km){
-            if($this->distance_total >= $km && (!isset($stages[$index+1]) || $this->distance_total < $stages[$index+1])) return $index+1;
+            if($distance >= $km && (!isset($stages[$index+1]) || $distance < $stages[$index+1])) return $index+1;
         }
         return 0;
     }

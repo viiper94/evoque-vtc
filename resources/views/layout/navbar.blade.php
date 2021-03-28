@@ -101,8 +101,8 @@
                                 @endcan
                             </a>
                             <div class="dropdown-menu" aria-labelledby="rpDropdown">
-                                <a class="dropdown-item" href="{{ route('evoque.rp', 'ets2') }}">Статистика ETS2</a>
-                                <a class="dropdown-item" href="{{ route('evoque.rp', 'ats') }}">Статистика ATS</a>
+                                <a class="dropdown-item" href="{{ route('evoque.rp') }}">Статистика</a>
+                                <a class="dropdown-item" href="{{ route('evoque.rp.weekly') }}">Итоги за неделю</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">
                                     Отчёты
@@ -112,9 +112,7 @@
                                         @endif
                                     @endcan
                                 </a>
-{{--                                @can('claim', \App\RpReport::class)--}}
-{{--                                    <a class="dropdown-item" href="{{ route('evoque.rp.results') }}">Результаты</a>--}}
-{{--                                @endcan--}}
+                                <a class="dropdown-item" href="{{ route('evoque.rp.reports.add') }}">Подать отчёт</a>
                             </div>
                         </li>
                         @if(\Illuminate\Support\Facades\Auth::user()->can('view', \App\Role::class) || \Illuminate\Support\Facades\Auth::user()->can('view', \App\User::class))

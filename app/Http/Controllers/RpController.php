@@ -58,6 +58,7 @@ class RpController extends Controller{
     }
 
     public function weekly(){
+        if(Auth::guest() || !Auth::user()->member) abort(404);
         return view('evoque.rp.weekly', [
             'stats' => RpStats::selectRaw(
                 'rp_stats.*,

@@ -10,7 +10,6 @@
 @endsection
 
 @section('content')
-
     <div class="container pt-5">
         <h2 class="mt-3 text-primary">Редактирование сотрудника {{ $member->nickname }}</h2>
         @can('update', \App\Member::class)
@@ -144,7 +143,7 @@
                         @can('fire', $member)
                             <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-danger ml-5"
                                onclick="return confirm('Уволить этого сотрудника?')"><i class="fas fa-user-times"></i> Уволить</a>
-                            <a href="{{ route('evoque.admin.members.fire', $member->id) }}" class="btn btn-lg btn-outline-warning ml-5"
+                            <a href="{{ route('evoque.admin.members.fire', [$member->id, 'soft']) }}" class="btn btn-lg btn-outline-warning ml-5"
                                onclick="return confirm('Уволить этого сотрудника с восстановлением?')"><i class="fas fa-user-times"></i> Уволить с восстановлением</a>
                         @endcan
                     @endif

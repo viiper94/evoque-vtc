@@ -37,7 +37,7 @@
                 @if($app->have_mic)
                     <h4 class="mb-0 text-center">Микрофон: @if($app->have_mic) <i class="fas fa-check text-success"></i> @else <i class="fas fa-times text-danger"></i> @endif</h4>
                 @endif
-                <h4 class="mb-0 text-center">Discord: @if($app->have_ts3) <i class="fas fa-check text-success"></i> @else <i class="fas fa-times text-danger"></i> @endif</h4>
+                <h4 class="mb-0 text-center">Discord: @if($app->discord_name) <span class="text-success">{{ $app->discord_name }}</span> @else <i class="fas fa-times text-danger"></i> @endif</h4>
                 <h4 class="mb-0 text-center">Наличие ATS: @if($app->have_ats) <i class="fas fa-check text-success"></i> @else <i class="fas fa-times text-danger"></i> @endif</h4>
             </div>
             <div class="col-md-4">

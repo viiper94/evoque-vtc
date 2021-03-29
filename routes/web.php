@@ -51,7 +51,7 @@ Route::post('/evoque/add', 'MembersController@add');
 Route::get('/evoque/reset', 'MembersController@resetConvoys');
 Route::get('/evoque/trash', 'MembersController@trash')->name('evoque.members.trash');;
 Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
-Route::any('/evoque/admin/member/fire/{id}', 'MembersController@fire')->name('evoque.admin.members.fire');
+Route::any('/evoque/admin/member/fire/{id}/{restore?}', 'MembersController@fire')->name('evoque.admin.members.fire');
 Route::any('/evoque/admin/member/restore/{id}', 'MembersController@restore')->name('evoque.admin.members.restore');
 
 Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');

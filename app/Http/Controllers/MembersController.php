@@ -79,7 +79,7 @@ class MembersController extends Controller{
         ]);
     }
 
-    public function fire(Request $request, $id){
+    public function fire(Request $request, $id, $restore = false){
         $member = Member::with(['user', 'role'])->where('id', $id)->first();
         $this->authorize('fire', $member);
         if($restore === 'soft'){

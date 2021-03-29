@@ -144,12 +144,24 @@ class MembersController extends Controller{
 
     public function trash(Request $request){
         $this->authorize('restore', Member::class);
-        $members = Member::with('user')->onlyTrashed();
         if($request->input('q')){
-            $members = $members->where('nickname', 'like', '%'.$request->input('q').'%');
+            $members = Member::select(['members.*', 'users.name', 'users.vk', 'users.steamid64', 'users.discord_name', 'users.truckersmp_id'])
+                ->rightJoin('users', function($query) use ($request){
+                    $query->on('users.id', '=', 'members.user_id')
+                        ->where(function($query) use ($request){
+                            $query->orWhere('name', 'like', '%'.$request->input('q').'%')
+                                ->orWhere('nickname', 'like', '%'.$request->input('q').'%')
+                                ->orWhere('vk', 'like', '%'.$request->input('q').'%')
+                                ->orWhere('steamid64', 'like', '%'.$request->input('q').'%')
+                                ->orWhere('discord_name', 'like', '%'.$request->input('q').'%')
+                                ->orWhere('truckersmp_id', 'like', '%'.$request->input('q').'%');
+                        });
+                    });
+        }else{
+            $members = Member::with('user');
         }
         return view('evoque.members.trash', [
-            'members' => $members->orderBy('deleted_at', 'desc')->paginate(20)
+            'members' => $members->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate(20)
         ]);
     }
 

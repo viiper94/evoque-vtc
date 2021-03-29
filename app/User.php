@@ -47,9 +47,17 @@ class User extends Authenticatable
     }
 
     public static function deleteOldUsers(){
-        $users = User::with('member')->whereDate('fired_at', '<', Carbon::now()->subMonths(3))->get();
+        $users = User::with(['member' => function($query){
+            $query->withTrashed();
+        }])->whereDate('fired_at', '<', Carbon::now()->subMonths(3))->get();
         foreach($users as $user){
-            if(!$user->member){
+            $hasMember = isset($user->member);
+            $isFired3MothAgo = $hasMember && isset($user->member->deleted_at) && Carbon::now()->subMonths(3)->gt($user->member->deleted_at);
+            $firedWithRestore = $hasMember && $user->member->restore;
+            if($hasMember && $isFired3MothAgo && !$firedWithRestore){
+                $user->member->forceDelete();
+            }
+            if(!$hasMember || ($isFired3MothAgo && !$firedWithRestore)){
                 $recruitments = Recruitment::where('tmp_link', 'https://truckersmp.com/user/'.$user->truckersmp_id)->get();
                 foreach($recruitments as $recruitment){
                     $recruitment->delete();

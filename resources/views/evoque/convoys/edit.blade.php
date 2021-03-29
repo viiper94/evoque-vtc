@@ -419,8 +419,10 @@
                                 @if($item->event !== 'deleted' && $item->new_values)
                                     @foreach($item->getModified() as $key => $values)
                                         <tr>
-                                            <td class="nowrap"><span class="text-primary font-weight-bold">{{ $item->user->member->nickname }}</span> @lang('audits.'.$item->event)</td>
-                                            <td class="nowrap">{{ $item->created_at->format('d.m.Y в H:i') }}</td>
+                                            @if($loop->index === 0)
+                                                <td class="nowrap" rowspan="{{ count($item->getModified()) }}"><span class="text-primary font-weight-bold">{{ $item->user->member->nickname }}</span> @lang('audits.'.$item->event)</td>
+                                                <td class="nowrap" rowspan="{{ count($item->getModified()) }}">{{ $item->created_at->format('d.m.Y в H:i') }}</td>
+                                            @endif
                                             <td class="nowrap">{{ trans('attributes.'.$key) }}</td>
                                             <td class="text-danger font-weight-bold">
                                                 @if(isset($values['old']) && is_array($values['old']))

@@ -14,6 +14,7 @@ class Member extends Model implements Auditable{
     use SoftDeletes;
 
     protected $casts = [
+        'restore' => 'boolean',
         'visible' => 'boolean',
         'sort' => 'boolean',
         'tmp_banned' => 'boolean',

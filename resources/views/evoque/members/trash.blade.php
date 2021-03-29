@@ -46,7 +46,7 @@
                         <td>{{ $member->join_date->isoFormat('DD.MM.Y') }}</td>
                         <td>{{ $member->user->created_at->isoFormat('DD.MM.Y HH:mm') }}</td>
                         <td>{{ $member->deleted_at->isoFormat('DD.MM.Y HH:mm') }}</td>
-                        <td></td>
+                        <td>@if($member->restore) <span class="text-success">С восстановлением</span> @endif</td>
                         <td><a href="{{ route('evoque.admin.members.restore', $member->id) }}" onclick="return confirm('Восстановить сотрудника?')"><i class="fas fa-undo"></i></a></td>
                     </tr>
                 @endforeach

@@ -80,7 +80,10 @@ class MembersController extends Controller{
     public function fire(Request $request, $id){
         $member = Member::with(['user', 'role'])->where('id', $id)->first();
         $this->authorize('fire', $member);
-//        $member->role()->detach();
+        if($restore === 'soft'){
+            $member->restore = true;
+            $member->save();
+        }
         $member->user->remember_token = null;
         $member->user->fired_at = Carbon::now();
         $member->user->save();

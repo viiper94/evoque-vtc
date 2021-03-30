@@ -48,10 +48,12 @@
                                     <small class="form-text">{{ $errors->first('plate') }}</small>
                                 @endif
                             </div>
-                            <div class="col-auto">
-                                <label>Превью</label><br>
-                                @isset($member->plate) <img src="/images/plates/{{ $member->plate }}.png" style="height: 38px"> @endisset
-                            </div>
+                            @isset($member->plate)
+                                <div class="col-auto">
+                                    <label>Превью</label><br>
+                                    <img src="/images/plates/{{ $member->plate }}.png" style="height: 38px">
+                                </div>
+                            @endisset
                         </div>
                         <div class="form-group">
                             <label for="vk">@lang('attributes.vk')</label>

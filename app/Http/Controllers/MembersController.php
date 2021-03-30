@@ -65,6 +65,8 @@ class MembersController extends Controller{
                 }
             }
             $member->checkRoles();
+            $member->user->vk = $request->input('vk');
+            $member->user->save();
             return $member->save() ?
                 redirect()->route('evoque.members')->with(['success' => 'Сотрудник успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

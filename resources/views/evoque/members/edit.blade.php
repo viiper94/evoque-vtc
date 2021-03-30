@@ -40,13 +40,25 @@
                                 <small class="form-text">{{ $errors->first('join_date') }}</small>
                             @endif
                         </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="plate">@lang('attributes.plate')</label>
+                                <input type="text" class="form-control" id="plate" name="plate" value="{{ $member->plate }}">
+                                @if($errors->has('plate'))
+                                    <small class="form-text">{{ $errors->first('plate') }}</small>
+                                @endif
+                            </div>
+                            <div class="col-auto">
+                                <label>Превью</label><br>
+                                @isset($member->plate) <img src="/images/plates/{{ $member->plate }}.png" style="height: 38px"> @endisset
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <label for="plate">@lang('attributes.plate')</label>
-                            <input type="text" class="form-control" id="plate" name="plate" value="{{ $member->plate }}">
-                            @if($errors->has('plate'))
-                                <small class="form-text">{{ $errors->first('plate') }}</small>
+                            <label for="vk">@lang('attributes.vk')</label>
+                            <input type="url" class="form-control" id="vk" name="vk" value="{{ $member->user->vk }}">
+                            @if($errors->has('vk'))
+                                <small class="form-text">{{ $errors->first('vk') }}</small>
                             @endif
-                            @isset($member->plate) <img class="mt-1" src="/images/plates/{{ $member->plate }}.png"> @endisset
                         </div>
                     </div>
                     <div class="col-md-6">

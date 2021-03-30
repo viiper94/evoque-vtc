@@ -78,7 +78,7 @@ class MemberPolicy
      * @return mixed
      */
     public function updateRoles(User $user, Member $member){
-        if($user->member && $member->topRole() >= $user->member->topRole()){
+        if($user->member && ($member->topRole() >= $user->member->topRole() || $user->member->topRole() === 1)){
             foreach($user->member->role as $role){
                 if($role->manage_members || $role->edit_members) return true;
             }

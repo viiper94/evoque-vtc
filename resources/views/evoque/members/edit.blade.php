@@ -246,7 +246,7 @@
         @endcan
         @can('update', \App\Member::class)
             @if(count($member->audits) > 0)
-                <div class="member-changelog mb-5">
+                <div class="member-changelog mb-3">
                     <h3 class="text-primary">История изменений</h3>
                     <div class="changelog-item mb-3 table-responsive">
                         <table class="table table-sm table-dark table-bordered table-hover">
@@ -303,6 +303,9 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="row justify-content-center mb-5">
+                    <a href="{{ route('evoque.admin.members.changelog', $member->id) }}" class="btn btn-sm btn-outline-warning ml-3 btn-lg"><i class="fas fa-history"></i> Полная история изменений</a>
                 </div>
             @endif
         @endcan

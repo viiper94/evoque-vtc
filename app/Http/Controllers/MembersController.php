@@ -172,4 +172,11 @@ class MembersController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function changelog(Request $request, $id){
+        $this->authorize('update', Member::class);
+        return view('evoque.members.changelog', [
+            'member' => Member::find($id)
+        ]);
+    }
+
 }

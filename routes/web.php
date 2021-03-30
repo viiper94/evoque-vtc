@@ -53,6 +53,7 @@ Route::get('/evoque/trash', 'MembersController@trash')->name('evoque.members.tra
 Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
 Route::any('/evoque/admin/member/fire/{id}/{restore?}', 'MembersController@fire')->name('evoque.admin.members.fire');
 Route::any('/evoque/admin/member/restore/{id}', 'MembersController@restore')->name('evoque.admin.members.restore');
+Route::any('/evoque/admin/member/changelog/{id}', 'MembersController@changelog')->name('evoque.admin.members.changelog');
 
 Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');
 Route::get('/evoque/rules/changelog/{id}', 'RulesController@changelog')->name('evoque.rules.changelog');

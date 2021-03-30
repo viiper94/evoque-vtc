@@ -61,5 +61,9 @@ return [
     'plate' => 'Номерной знак (три цифры)',
     'trainee_until' => 'Испытательный срок до',
     'trainee_convoys' => 'Конвоев на исп. сроке',
+    'tmp_banned' => 'Забанен',
+    'tmp_banned_until' => 'Забанен до',
+    'tmp_bans_hidden' => 'Баны скрыты',
+    'restore' => 'Уволен с восстановлением',
 
 ];

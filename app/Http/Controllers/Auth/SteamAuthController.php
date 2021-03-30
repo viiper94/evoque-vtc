@@ -68,7 +68,7 @@ class SteamAuthController extends Controller
                 }
 
                 $user = $this->findOrNewUser($steam_info, $tmp_info);
-                if($user->member && !$user->member->visible)
+                if($user->member && $user->member->restore)
                     return redirect(route('apply'))
                     ->withErrors([trans('general.not_visible_member')]);
 
@@ -86,34 +86,77 @@ class SteamAuthController extends Controller
      * @param $steam_info
      * @param $tmp_info
      */
-    protected function findOrNewUser($steam_info, $tmp_info)
-    {
-        $user = User::with('member')->where('steamid64', $steam_info->steamID64)->first();
+    protected function findOrNewUser($steam_info, $tmp_info){
+        $user = User::with(['member' => function($query){
+            $query->withTrashed();
+        }])->where('steamid64', $steam_info->steamID64)->first();
 
-        if(!is_null($user) && !is_null($user->member)){
-            return $user;
-        }else{
-            if(is_null($user)){
-                $user = User::create([
-                    'name' => $steam_info->realname,
-                    'image' => $steam_info->avatarfull,
-                    'steamid64' => $steam_info->steamID64,
-                    'truckersmp_id' => $tmp_info->getId()
-                ]);
+        if(!is_null($user)){
+            if(!is_null($user->member)){
+                if($user->member->trashed()){
+                    if(!$user->member->restore){
+                        $this->resetMember($user->member, $tmp_info);
+                    }
+                }
+            }else{
+                $this->createMember($user, $tmp_info);
             }
-            $member = Member::create([
-                'user_id' => $user->id,
-                'nickname' => str_replace('[EVOQUE] ', '', $tmp_info->getName()),
-                'join_date' => Carbon::now(),
-                'trainee_until' => Carbon::now()->addDays(10),
-            ]);
-            $member->role()->attach('14');
-            $member->save();
-            $member->stats()->saveMany([
-                new RpStats(['game' => 'ets2']),
-                new RpStats(['game' => 'ats']),
-            ]);
-            return $user;
+        }else{
+            $user = $this->createUser($steam_info, $tmp_info);
+            $this->createMember($user, $tmp_info);
         }
+        return $user;
     }
+
+    private function createUser($steam_info, $tmp_info){
+        return User::create([
+            'name' => $steam_info->realname,
+            'image' => $steam_info->avatarfull,
+            'steamid64' => $steam_info->steamID64,
+            'truckersmp_id' => $tmp_info->getId()
+        ]);
+    }
+
+    private function createMember($user, $tmp_info){
+        $member = Member::create([
+            'user_id' => $user->id,
+            'nickname' => str_replace('[EVOQUE] ', '', $tmp_info->getName()),
+            'join_date' => Carbon::today(),
+            'trainee_until' => Carbon::today()->addDays(10),
+        ]);
+        $member->role()->attach('14');
+        $member->save();
+        $member->stats()->saveMany([
+            new RpStats(['game' => 'ets2']),
+            new RpStats(['game' => 'ats']),
+        ]);
+    }
+
+    private function resetMember($member, $tmp_info){
+        $member->fill([
+            'join_date' => Carbon::today(),
+            'trainee_until' => Carbon::today()->addDays(10),
+            'nickname' => str_replace('[EVOQUE] ', '', $tmp_info->getName()),
+            'scores' => 0,
+            'money' => 0,
+            'convoys' => 0,
+            'trainee_convoys' => 0,
+            'vacations' => 0,
+            'plate' => null,
+            'sort' => false,
+        ]);
+        $member->money = 0;
+        $member->visible = true;
+        $member->restore = false;
+        $member->role()->detach();
+        $member->role()->attach('14');
+        $member->save();
+        $member->stats()->delete();
+        $member->stats()->saveMany([
+            new RpStats(['game' => 'ets2']),
+            new RpStats(['game' => 'ats']),
+        ]);
+        $member->restore();
+    }
+
 }

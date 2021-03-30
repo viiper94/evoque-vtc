@@ -74,7 +74,6 @@ class RulesController extends Controller{
         $paragraph = Rules::find($id);
         return view('evoque.rules.changelog', [
             'paragraph' => $paragraph,
-            'changelog' => $paragraph->audits()->with(['user', 'user.member'])->orderBy('created_at', 'desc')->get()
         ]);
     }
 

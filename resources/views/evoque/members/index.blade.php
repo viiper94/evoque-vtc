@@ -13,7 +13,7 @@
 <div class="container-fluid pt-5 members-table">
     @include('layout.alert')
     <h2 class="mt-3 text-center text-primary">Сотрудники ВТК EVOQUE</h2>
-    <div class="table-responsive mb-5" data-fl-scrolls>
+    <div class="table-responsive" data-fl-scrolls>
         <table class="table table-sm table-dark table-bordered table-hover">
             <thead>
             <tr>
@@ -194,6 +194,11 @@
             </tr>
             </thead>
         </table>
+    </div>
+    <div class="row justify-content-center mb-5 mr-0">
+        <a href="{{ route('evoque.members.weekly') }}" class="btn btn-outline-success ml-3 mt-3 btn-lg">
+            <i class="fas fa-trophy"></i> Итоги за неделю
+        </a>
     </div>
 </div>
 

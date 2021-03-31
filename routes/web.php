@@ -47,6 +47,7 @@ Route::get('/evoque/profile/dump', 'UsersController@dumpData');
 Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.profile');
 
 Route::get('/evoque', 'MembersController@index')->name('evoque.members');
+Route::get('/evoque/stats', 'MembersController@weekly')->name('evoque.members.weekly');
 Route::post('/evoque/add', 'MembersController@add');
 Route::get('/evoque/reset', 'MembersController@resetConvoys');
 Route::get('/evoque/trash', 'MembersController@trash')->name('evoque.members.trash');;

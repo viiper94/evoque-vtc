@@ -181,4 +181,13 @@ class MembersController extends Controller{
         ]);
     }
 
+    public function weekly(){
+        if(Auth::guest() || !Auth::user()->member) abort(404);
+        return view('evoque.members.weekly', [
+            'members' => Member::with(['user', 'role' => function($query){
+                $query->where('visible', '1');
+            }])->orderBy('convoys', 'desc')->orderBy('sort', 'desc')->orderBy('scores', 'desc')->get()
+        ]);
+    }
+
 }

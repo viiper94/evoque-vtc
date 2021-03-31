@@ -68,7 +68,7 @@ class SteamAuthController extends Controller
                 }
 
                 $user = $this->findOrNewUser($steam_info, $tmp_info);
-                if($user->member && $user->member->restore)
+                if($user->member && $user->member->trashed() && $user->member->restore)
                     return redirect(route('apply'))
                     ->withErrors([trans('general.not_visible_member')]);
 

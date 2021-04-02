@@ -177,7 +177,7 @@
                     @endforeach
                 </div>
         @endforeach
-        {{ $paginator->links('layout.pagination') }}
+        {{ $paginator->onEachSide(1)->links('layout.pagination') }}
     </div>
 
 @endsection

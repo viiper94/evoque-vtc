@@ -70,7 +70,7 @@
                 </div>
                 <div class="clearfix"></div>
             @endforeach
-            {{ $paginator->links('layout.pagination') }}
+            {{ $paginator->onEachSide(1)->links('layout.pagination') }}
         </div>
     </div>
 @endsection

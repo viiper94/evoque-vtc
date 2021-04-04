@@ -74,7 +74,13 @@
                                             </div>
                                         </div>
                                         @if($convoy->dlc)
-                                            <h4 class="pt-5 pb-5 text-center"><i class="fas fa-exclamation-triangle text-warning"></i> Для участия требуется {{ implode(', ', $convoy->dlc) }}</h4>
+                                            <h4 class="pt-5 pb-5 text-center">
+                                                <i class="fas fa-exclamation-triangle text-warning"></i>
+                                                Для участия требуется
+                                                @foreach($convoy->dlc as $item)
+                                                    <span style="white-space: nowrap">{{ $item }}@if(!$loop->last), @endif</span>
+                                                @endforeach
+                                            </h4>
                                         @endif
                                         <div class="row convoy-info pt-5">
                                             <div class="col-sm-6 pr-md-5 pr-3 text-md-right text-center">

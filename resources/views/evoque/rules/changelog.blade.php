@@ -4,6 +4,10 @@
     История изменения параграфа | @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <script src="/js/htmldiff.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container pt-5">
@@ -24,6 +28,24 @@
                         @foreach($paragraph->audits as $item)
                             @if($item->event !== 'deleted' && $item->new_values)
                                 @foreach($item->getModified() as $key => $values)
+                                    @php
+                                        $diff = new cogpowered\FineDiff\Diff(new cogpowered\FineDiff\Granularity\Word);
+                                        $old_value = '';
+                                        if(isset($values['old']) && is_array($values['old'])){
+                                            foreach($values['old'] as $k => $v){
+                                                $old_value .= $k .': '. $v .'<br>';
+                                            }
+                                        }else{
+                                            $old_value .= $values['old'] ?? '';
+                                        }$new_value = '';
+                                        if(isset($values['new']) && is_array($values['new'])){
+                                            foreach($values['new'] as $k => $v){
+                                                $new_value .= $k .': '. $v .'<br>';
+                                            }
+                                        }else{
+                                            $new_value .= $values['new'] ?? '';
+                                        }
+                                    @endphp
                                     <tr>
                                         @if($loop->index === 0)
                                             <td class="nowrap" rowspan="{{ count($item->getModified()) }}">
@@ -34,23 +56,11 @@
                                             </td>
                                         @endif
                                         <td class="nowrap">{{ trans('attributes.'.$key) }}</td>
-                                        <td class="text-danger font-weight-bold">
-                                            @if(isset($values['old']) && is_array($values['old']))
-                                                @foreach($values['old'] as $k => $v)
-                                                    {{ $k }}: {{ $v }}<br>
-                                                @endforeach
-                                            @else
-                                                {!! $values['old'] ?? null !!}
-                                            @endif
+                                        <td class="font-weight-bold no-ins">
+                                            {!! $diff->render($old_value, $new_value) !!}
                                         </td>
-                                        <td class="text-success font-weight-bold">
-                                            @if(isset($values['new']) && is_array($values['new']))
-                                                @foreach($values['new'] as $k => $v)
-                                                    {{ $k }}: {{ $v }}<br>
-                                                @endforeach
-                                            @else
-                                                {!! $values['new'] ?? null !!}
-                                            @endif
+                                        <td class="font-weight-bold no-del">
+                                            {!! $diff->render($old_value, $new_value) !!}
                                         </td>
                                     </tr>
                                 @endforeach

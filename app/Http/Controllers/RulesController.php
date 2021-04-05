@@ -71,7 +71,9 @@ class RulesController extends Controller{
 
     public function changelog(Request $request, $id){
         $this->authorize('viewChangelog', Rules::class);
-        $paragraph = Rules::find($id);
+        $paragraph = Rules::with(['audits' => function($query){
+            $query->orderBy('created_at', 'desc');
+        }])->find($id);
         return view('evoque.rules.changelog', [
             'paragraph' => $paragraph,
         ]);

@@ -45,3 +45,21 @@ ul, ol{
     white-space: nowrap;
     overflow: hidden;
 }
+ins{
+    background-color: green;
+    text-decoration: none;
+}
+del{
+    background-color: red;
+    text-decoration: none;
+}
+.no-del{
+    del{
+        display: none;
+    }
+}
+.no-ins{
+    ins{
+        display: none;
+    }
+}

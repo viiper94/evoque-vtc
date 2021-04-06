@@ -74,11 +74,15 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown @if(Route::current() && Route::current()->getName() === 'evoque.rules')active @endif">
-                            <a class="nav-link dropdown-toggle" href="#" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
-                            <div class="dropdown-menu" aria-labelledby="rulesDropdown">
-                                <a class="dropdown-item" href="{{ route('evoque.rules', 'private') }}">Закрытые правила</a>
-                                <a class="dropdown-item" href="{{ route('evoque.rules', 'public') }}">Публичные правила</a>
-                            </div>
+                            @can('update', \App\Rules::class)
+                                <a class="nav-link dropdown-toggle" href="#" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
+                                <div class="dropdown-menu" aria-labelledby="rulesDropdown">
+                                    <a class="dropdown-item" href="{{ route('evoque.rules', 'private') }}">Закрытые правила</a>
+                                    <a class="dropdown-item" href="{{ route('evoque.rules', 'public') }}">Публичные правила</a>
+                                </div>
+                            @else
+                                <a class="nav-link" href="{{ route('evoque.rules', 'private') }}">Правила</a>
+                            @endcan
                         </li>
                         <li class="nav-item @if(Request::is('evoque/applications*'))active @endif">
                             <a class="nav-link" href="{{ route('evoque.applications') }}">

@@ -7,8 +7,8 @@
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="/assets/img/EVOQUE_Gold_Sign_256.png" alt="@lang('general.vtc_evoque')">
             </a>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0 text-uppercase font-weight-bold text-shadow">
+            <div class="collapse navbar-collapse pb-5 pb-lg-0 mb-5 mb-lg-0" id="navbarTogglerDemo01">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0 pb-5 pb-lg-0 mb-5 mb-lg-0 text-uppercase font-weight-bold text-shadow">
                     @if(\Illuminate\Support\Facades\Auth::guest() || !\Illuminate\Support\Facades\Auth::user()->member)
                         <li class="nav-item @if(Route::current() && Route::current()->getName() === 'home')active @endif">
                             <a class="nav-link" href="{{ route('home') }}">О нас</a>
@@ -96,7 +96,8 @@
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
                         <li class="nav-item dropdown @if(Request::is('evoque/rp*'))active @endif">
-                            <a class="nav-link dropdown-toggle" href="#" id="rpDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-shadow" href="#" id="rpDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Рейтинговые перевозки
                                 @can('claim', \App\RpReport::class)
                                     @if($reports_c > 0)
@@ -138,8 +139,9 @@
                             </li>
                         @endif
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle avatar p-0" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ Auth::user()->image }}" alt="Профиль">
+                            <a class="nav-link dropdown-toggle avatar p-0 d-flex align-items-center" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ Auth::user()->image }}" alt="{{ Auth::user()->member->nickname }}">
+                                <span class="ml-1 d-lg-none">{{ Auth::user()->member->nickname }}</span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="profileDropdown">
                                 <form method="post" action="{{ route('logout') }}">

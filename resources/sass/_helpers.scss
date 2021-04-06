@@ -46,11 +46,11 @@ ul, ol{
     overflow: hidden;
 }
 ins{
-    background-color: green;
+    color: $success;
     text-decoration: none;
 }
 del{
-    background-color: red;
+    color: $danger;
     text-decoration: none;
 }
 .no-del{

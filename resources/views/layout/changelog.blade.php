@@ -35,9 +35,14 @@
                             <tr>
                                 @if($loop->index === 0)
                                     <td class="nowrap" rowspan="{{ count($item->getModified()) }}">
-                                        <span class="text-primary font-weight-bold">
-                                            {{ $item->user ? $item->user->member->nickname : '' }}
-                                        </span> @lang('audits.'.$item->event) <br>
+                                        @if($item->user)
+                                            <span class="text-primary font-weight-bold">
+                                                {{ $item->user->member ? $item->user->member->nickname : $item->user->name }}
+                                            </span>
+                                        @else
+                                            <i>Уволенный пользователь</i>
+                                        @endif
+                                        @lang('audits.'.$item->event) <br>
                                         {{ $item->created_at->format('d.m.Y в H:i') }}
                                     </td>
                                 @endif

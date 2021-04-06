@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Member;
+use App\Recruitment;
 use App\RpStats;
 use Carbon\Carbon;
 use Invisnik\LaravelSteamAuth\SteamAuth;
@@ -109,11 +110,13 @@ class SteamAuthController extends Controller
     }
 
     private function createUser($steam_info, $tmp_info){
+        $recruitment = Recruitment::where('tmp_link', 'https://truckersmp.com/user/'.$tmp_info->getId())->latest()->first();
         return User::create([
-            'name' => $steam_info->realname,
+            'name' => $recruitment ? $recruitment->name : $steam_info->realname,
             'image' => $steam_info->avatarfull,
             'steamid64' => $steam_info->steamID64,
-            'truckersmp_id' => $tmp_info->getId()
+            'truckersmp_id' => $tmp_info->getId(),
+            'vk' => $recruitment ? $recruitment->vk_link : null,
         ]);
     }
 

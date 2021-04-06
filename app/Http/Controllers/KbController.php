@@ -82,4 +82,14 @@ class KbController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function changelog(Request $request, $id){
+        $article = Kb::with(['audits' => function($query){
+            $query->orderBy('created_at', 'desc');
+        }])->findOrFail($id);
+        $this->authorize('update', $article);
+        return view('kb.changelog', [
+            'article' => $article,
+        ]);
+    }
+
 }

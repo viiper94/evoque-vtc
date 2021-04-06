@@ -41,6 +41,9 @@
             <a href="{{ route('kb.delete', $article->id) }}" class="btn btn-outline-danger"
                onclick="return confirm('Удалить эту статью?')">Удалить</a>
         @endcan
+        @can('update', $article)
+            <a href="{{ route('kb.changelog', $article->id) }}" class="btn btn-outline-info"><i class="fas fa-history"></i></a>
+        @endcan
     </div>
 
 @endsection

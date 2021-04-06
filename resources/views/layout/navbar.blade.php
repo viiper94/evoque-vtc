@@ -103,16 +103,18 @@
                             <div class="dropdown-menu" aria-labelledby="rpDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.rp') }}">Статистика</a>
                                 <a class="dropdown-item" href="{{ route('evoque.rp.weekly') }}">Итоги за неделю</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">
-                                    Отчёты
-                                    @can('claim', \App\RpReport::class)
-                                        @if($reports_c > 0)
-                                            <span class="badge badge-danger">{{ $reports_c }}</span>
-                                        @endif
-                                    @endcan
-                                </a>
-                                <a class="dropdown-item" href="{{ route('evoque.rp.reports.add') }}">Подать отчёт</a>
+                                @can('create', \App\RpReport::class)
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">
+                                        Отчёты
+                                        @can('claim', \App\RpReport::class)
+                                            @if($reports_c > 0)
+                                                <span class="badge badge-danger">{{ $reports_c }}</span>
+                                            @endif
+                                        @endcan
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('evoque.rp.reports.add') }}">Подать отчёт</a>
+                                @endcan
                             </div>
                         </li>
                         @if(\Illuminate\Support\Facades\Auth::user()->can('view', \App\Role::class) || \Illuminate\Support\Facades\Auth::user()->can('view', \App\User::class))

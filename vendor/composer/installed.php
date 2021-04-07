@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '7c7d24cb020ea07b687955a0ba3f640a723b70f7',
+    'reference' => '3e8b982c5895e76436a5334aba22d10e2b5973ba',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -46,6 +46,15 @@
       array (
       ),
       'reference' => 'aeb7d8ea49c7963d3b581378955dbf5bc49aa320',
+    ),
+    'cogpowered/finediff' => 
+    array (
+      'pretty_version' => '0.3.1',
+      'version' => '0.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '339ddc8c3afb656efed4f2f0a80e5c3d026f8ea8',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -494,7 +503,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '7c7d24cb020ea07b687955a0ba3f640a723b70f7',
+      'reference' => '3e8b982c5895e76436a5334aba22d10e2b5973ba',
     ),
     'laravel/socialite' => 
     array (
@@ -1423,6 +1432,15 @@
       array (
       ),
       'reference' => '6964c76c7804814a842473e0c8fd15bab0f18e25',
+    ),
+    'woeler/phpdiscord' => 
+    array (
+      'pretty_version' => 'v2.0.0',
+      'version' => '2.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'bbfd91f64fb32e1e800e8caa2ca1ae865cf0eab2',
     ),
   ),
 );

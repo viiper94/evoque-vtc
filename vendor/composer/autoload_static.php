@@ -53,6 +53,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         ),
         'W' => 
         array (
+            'Woeler\\DiscordPhp\\' => 18,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
@@ -213,6 +214,10 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'XdgBaseDir\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
+        ),
+        'Woeler\\DiscordPhp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/woeler/phpdiscord/src',
         ),
         'Whoops\\' => 
         array (
@@ -809,6 +814,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'Clue\\StreamFilter\\CallbackFilter' => __DIR__ . '/..' . '/clue/stream-filter/src/CallbackFilter.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
@@ -5076,7 +5082,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
-        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcherInterface.php',
@@ -5446,7 +5451,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Symfony\\Component\\Routing\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/GlobFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ObjectLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectLoader.php',
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
-        'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/XmlFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/YamlFileLoader.php',
         'Symfony\\Component\\Routing\\Matcher\\CompiledUrlMatcher' => __DIR__ . '/..' . '/symfony/routing/Matcher/CompiledUrlMatcher.php',
@@ -5738,6 +5742,11 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Woeler\\DiscordPhp\\Exception\\DiscordInvalidResponseException' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Exception/DiscordInvalidResponseException.php',
+        'Woeler\\DiscordPhp\\Message\\AbstractDiscordMessage' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Message/AbstractDiscordMessage.php',
+        'Woeler\\DiscordPhp\\Message\\DiscordEmbedMessage' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Message/DiscordEmbedMessage.php',
+        'Woeler\\DiscordPhp\\Message\\DiscordTextMessage' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Message/DiscordTextMessage.php',
+        'Woeler\\DiscordPhp\\Webhook\\DiscordWebhook' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Webhook/DiscordWebhook.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
         'cogpowered\\FineDiff\\Delimiters' => __DIR__ . '/..' . '/cogpowered/finediff/src/cogpowered/FineDiff/Delimiters.php',
         'cogpowered\\FineDiff\\Diff' => __DIR__ . '/..' . '/cogpowered/finediff/src/cogpowered/FineDiff/Diff.php',

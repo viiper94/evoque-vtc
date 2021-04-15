@@ -70,6 +70,9 @@
 
 // Admin convoys
 .convoys{
+    .day{
+        flex-wrap: nowrap;
+    }
     .convoys-day{
         width: 125px;
         @media (max-width: 768px){
@@ -81,20 +84,14 @@
             border-left: 1px solid $primary;
         }
     }
-    .card{
-        &.upcoming .convoy-date{
-            color: $primary;
+    span, p, label, h1, h2, h3, h4, h5, h6, a, small, button{
+         &:not(.upcoming){
+            color: $primary-text-darker;
         }
-        &:not(.upcoming){
-            span, p, label, h1, h2, h3, h4, h5, h6, a, small, button{
-                color: $primary-text-darker;
-            }
-            a:hover, i.active{
-                color: $primary-text;
-            }
+        a:hover, i.active{
+            color: $primary-text;
         }
     }
-
 }
 .private-convoys{
     .accordion{

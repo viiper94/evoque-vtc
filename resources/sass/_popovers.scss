@@ -11,3 +11,8 @@
 .bs-popover-right>.arrow:after{
     border-right-color: $background-lighten-3;
 }
+
+.bs-popover-auto[x-placement^=bottom]>.arrow:after,
+.bs-popover-bottom>.arrow:after{
+    border-bottom-color: $background-lighten-3;
+}

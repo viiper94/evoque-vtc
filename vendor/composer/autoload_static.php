@@ -47,10 +47,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
-        'X' => 
-        array (
-            'XdgBaseDir\\' => 11,
-        ),
         'W' => 
         array (
             'Woeler\\DiscordPhp\\' => 18,
@@ -210,10 +206,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-        ),
-        'XdgBaseDir\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
         ),
         'Woeler\\DiscordPhp\\' => 
         array (
@@ -618,7 +610,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'App\\Application' => __DIR__ . '/../..' . '/app/Application.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Convoy' => __DIR__ . '/../..' . '/app/Convoy.php',
-        'App\\Discord' => __DIR__ . '/../..' . '/app/Discord.php',
         'App\\Error' => __DIR__ . '/../..' . '/app/Error.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Gallery' => __DIR__ . '/../..' . '/app/Gallery.php',
@@ -633,7 +624,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\ConvoysController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConvoysController.php',
-        'App\\Http\\Controllers\\DiscordController' => __DIR__ . '/../..' . '/app/Http/Controllers/DiscordController.php',
         'App\\Http\\Controllers\\GalleryController' => __DIR__ . '/../..' . '/app/Http/Controllers/GalleryController.php',
         'App\\Http\\Controllers\\KbController' => __DIR__ . '/../..' . '/app/Http/Controllers/KbController.php',
         'App\\Http\\Controllers\\MembersController' => __DIR__ . '/../..' . '/app/Http/Controllers/MembersController.php',
@@ -814,7 +804,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
         'Clue\\StreamFilter\\CallbackFilter' => __DIR__ . '/..' . '/clue/stream-filter/src/CallbackFilter.php',
-        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
         'Cron\\DayOfMonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
@@ -1412,6 +1401,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Facade\\FlareClient\\Http\\Response' => __DIR__ . '/..' . '/facade/flare-client-php/src/Http/Response.php',
         'Facade\\FlareClient\\Middleware\\AddGlows' => __DIR__ . '/..' . '/facade/flare-client-php/src/Middleware/AddGlows.php',
         'Facade\\FlareClient\\Middleware\\AnonymizeIp' => __DIR__ . '/..' . '/facade/flare-client-php/src/Middleware/AnonymizeIp.php',
+        'Facade\\FlareClient\\Middleware\\CensorRequestBodyFields' => __DIR__ . '/..' . '/facade/flare-client-php/src/Middleware/CensorRequestBodyFields.php',
         'Facade\\FlareClient\\Report' => __DIR__ . '/..' . '/facade/flare-client-php/src/Report.php',
         'Facade\\FlareClient\\Solutions\\ReportSolution' => __DIR__ . '/..' . '/facade/flare-client-php/src/Solutions/ReportSolution.php',
         'Facade\\FlareClient\\Stacktrace\\Codesnippet' => __DIR__ . '/..' . '/facade/flare-client-php/src/Stacktrace/Codesnippet.php',
@@ -4562,6 +4552,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Psy\\ConsoleColorFactory' => __DIR__ . '/..' . '/psy/psysh/src/ConsoleColorFactory.php',
         'Psy\\Context' => __DIR__ . '/..' . '/psy/psysh/src/Context.php',
         'Psy\\ContextAware' => __DIR__ . '/..' . '/psy/psysh/src/ContextAware.php',
+        'Psy\\EnvInterface' => __DIR__ . '/..' . '/psy/psysh/src/EnvInterface.php',
         'Psy\\Exception\\BreakException' => __DIR__ . '/..' . '/psy/psysh/src/Exception/BreakException.php',
         'Psy\\Exception\\DeprecatedException' => __DIR__ . '/..' . '/psy/psysh/src/Exception/DeprecatedException.php',
         'Psy\\Exception\\ErrorException' => __DIR__ . '/..' . '/psy/psysh/src/Exception/ErrorException.php',
@@ -4607,6 +4598,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Psy\\Shell' => __DIR__ . '/..' . '/psy/psysh/src/Shell.php',
         'Psy\\Sudo' => __DIR__ . '/..' . '/psy/psysh/src/Sudo.php',
         'Psy\\Sudo\\SudoVisitor' => __DIR__ . '/..' . '/psy/psysh/src/Sudo/SudoVisitor.php',
+        'Psy\\SuperglobalsEnv' => __DIR__ . '/..' . '/psy/psysh/src/SuperglobalsEnv.php',
         'Psy\\TabCompletion\\AutoCompleter' => __DIR__ . '/..' . '/psy/psysh/src/TabCompletion/AutoCompleter.php',
         'Psy\\TabCompletion\\Matcher\\AbstractContextAwareMatcher' => __DIR__ . '/..' . '/psy/psysh/src/TabCompletion/Matcher/AbstractContextAwareMatcher.php',
         'Psy\\TabCompletion\\Matcher\\AbstractDefaultParametersMatcher' => __DIR__ . '/..' . '/psy/psysh/src/TabCompletion/Matcher/AbstractDefaultParametersMatcher.php',
@@ -5082,6 +5074,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => __DIR__ . '/..' . '/symfony/event-dispatcher/Debug/WrappedListener.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
+        'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => __DIR__ . '/..' . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcher.php',
         'Symfony\\Component\\EventDispatcher\\EventDispatcherInterface' => __DIR__ . '/..' . '/symfony/event-dispatcher/EventDispatcherInterface.php',
@@ -5451,6 +5444,7 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Symfony\\Component\\Routing\\Loader\\GlobFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/GlobFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\ObjectLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/ObjectLoader.php',
         'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
+        'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/PhpFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/XmlFileLoader.php',
         'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => __DIR__ . '/..' . '/symfony/routing/Loader/YamlFileLoader.php',
         'Symfony\\Component\\Routing\\Matcher\\CompiledUrlMatcher' => __DIR__ . '/..' . '/symfony/routing/Matcher/CompiledUrlMatcher.php',
@@ -5747,7 +5741,6 @@ class ComposerStaticInitfff7d5d3db1b94f5dd8877c0ea0f3d4a
         'Woeler\\DiscordPhp\\Message\\DiscordEmbedMessage' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Message/DiscordEmbedMessage.php',
         'Woeler\\DiscordPhp\\Message\\DiscordTextMessage' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Message/DiscordTextMessage.php',
         'Woeler\\DiscordPhp\\Webhook\\DiscordWebhook' => __DIR__ . '/..' . '/woeler/phpdiscord/src/Webhook/DiscordWebhook.php',
-        'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
         'cogpowered\\FineDiff\\Delimiters' => __DIR__ . '/..' . '/cogpowered/finediff/src/cogpowered/FineDiff/Delimiters.php',
         'cogpowered\\FineDiff\\Diff' => __DIR__ . '/..' . '/cogpowered/finediff/src/cogpowered/FineDiff/Diff.php',
         'cogpowered\\FineDiff\\Exceptions\\GranularityCountException' => __DIR__ . '/..' . '/cogpowered/finediff/src/cogpowered/FineDiff/Exceptions/GranularityCountException.php',

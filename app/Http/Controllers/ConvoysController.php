@@ -20,11 +20,11 @@ class ConvoysController extends Controller{
     public function view(Request $request){
         $this->authorize('update', Convoy::class);
         $list = array();
-        $convoys = Convoy::with('bookedBy')->orderBy('start_time', 'desc')->get();
+        $convoys = Convoy::with('bookedBy')->orderBy('start_time')->get();
         foreach($convoys as $convoy){
-            $list[$convoy->start_time->format('d.m').', '.$convoy->start_time->isoFormat('dd')][] = $convoy;
+            $list[$convoy->start_time->format('Y-m-d')][] = $convoy;
         }
-        $list = collect($list);
+        $list = collect(array_reverse($list));
         return view('evoque.convoys.index', [
             'convoys' => $list->forPage($request->input('page'), 8),
             'paginator' => new LengthAwarePaginator($list, count($list), 8, $request->input('page'), [

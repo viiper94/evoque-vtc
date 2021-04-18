@@ -1,7 +1,7 @@
 // Toast
 .toast{
     &.toast-dark{
-        background-color: hsl(0deg 0% 0% / 50%);
+        background-color: hsl(0deg 0% 0% / 70%);
         color: $primary-text;
     }
     &.toast-success .toast-header{
@@ -16,6 +16,7 @@
     right: 60px;
     top: 60px;
     min-width: 300px;
+    z-index: 9;
     button{
         outline: none;
     }

@@ -10,7 +10,8 @@ import "./cookie.notice";
 
 $(document).ready(function(){
 
-    $('[data-toggle="popover"]').popover()
+    $('.toast').toast();
+    $('[data-toggle="popover"]').popover();
     bsCustomFileInput.init();
 
     $('#rules_agreed, #requirements_agreed, #terms_agreed').change(function(){

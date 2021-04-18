@@ -1,0 +1,22 @@
+// Toast
+.toast{
+    &.toast-dark{
+        background-color: hsl(0deg 0% 0% / 50%);
+        color: $primary-text;
+    }
+    &.toast-success .toast-header{
+        background-color: $success;
+        color: #fff;
+    }
+    &.toast-danger .toast-header{
+        background-color: $danger;
+        color: #fff;
+    }
+    position: fixed;
+    right: 60px;
+    top: 60px;
+    min-width: 300px;
+    button{
+        outline: none;
+    }
+}

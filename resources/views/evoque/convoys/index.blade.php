@@ -32,6 +32,7 @@
                         @foreach($convoys_per_day as $convoy)
                             <div class="card card-dark text-shadow-m my-md-2 ml-md-5 col-12 px-md-0
                                 @if($convoy->booking && !$convoy->visible) border-danger
+                                @elseif($convoy->public && $convoy->isUpcoming()) border-primary
                                 @elseif(!$convoy->start_city) border-info @endif">
                                 <div class="card-header row mb-0 mx-0" id="convoy-{{ $convoy->id }}-header"
                                      data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}-info"
@@ -62,7 +63,7 @@
                                         </div>
                                     @endcan
                                 </div>
-                                <div class="card-header row">
+                                <div class="card-header row justify-content-center mx-0">
                                     <p class="mb-0 col-auto text-muted"><i class="fas fa-clock"></i> <b>{{ $convoy->start_time->format('H:i') }}</b></p>
                                     @if($convoy->isFulfilled())
                                         <p class="mb-0 col-auto text-muted"><i class="fas fa-server"></i> <b>{{ $convoy->server }}</b></p>
@@ -94,7 +95,7 @@
                                 </div>
                                 @if($convoy->isFulfilled())
                                     <div class="collapse" id="convoy-{{ $convoy->id }}-info" aria-labelledby="convoy-{{ $convoy->id }}-header">
-                                        <div class="card-body row @if($convoy->isUpcoming())upcoming @endif">
+                                        <div class="card-body row mx-0 @if($convoy->isUpcoming())upcoming @endif" style="flex-wrap: nowrap">
                                             <div class="col-auto">
                                                 <p class="text-muted mb-0">Старт:</p>
                                                 <h4>{{ $convoy->start_city }}</h4>
@@ -108,7 +109,7 @@
                                                 <p class="mt-4 mb-0 text-muted">Сбор:</p>
                                                 <h5>{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h5>
                                                 <p class="text-muted mb-0">Выезд:</p>
-                                                <h5>{{ $convoy->start_time->format('H:i  ') }} по МСК</h5>
+                                                <h5>{{ $convoy->start_time->format('H:i') }} по МСК</h5>
                                                 <p class="text-muted mb-0">Связь {{ $convoy->communication }}:</p>
                                                 <h5><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication_link }}</a></h5>
                                                 @if($convoy->communication_channel)
@@ -176,15 +177,20 @@
                                                 @endif
                                             </div>
                                             @if($convoy->route)
-                                                <div class="col" style="flex-grow: 2">
+                                                <div class="col" style="max-width: 50%; max-height: 80vh">
                                                     <h4 class="text-center">Маршрут конвоя</h4>
-                                                    <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" data-width="99%">
+                                                    <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="80%">
                                                         @foreach($convoy->route as $item)
                                                             <img src="/images/convoys/{{ $item }}">
                                                         @endforeach
                                                     </div>
                                                 </div>
                                             @endif
+                                        </div>
+                                        <div class="card-footer row mx-0 justify-content-center">
+                                            <p class="mb-0 col-auto"><i class="fas fa-arrows-alt-h"></i> <b>70-150м</b></p>
+                                            <p class="mb-0 col-auto"><i class="fas fa-rss"></i> <b>7</b></p>
+                                            <p class="mb-0 col-auto"><i class="fas fa-sun"></i> <b>Ближний свет фар</b></p>
                                         </div>
                                     </div>
                                 @endif

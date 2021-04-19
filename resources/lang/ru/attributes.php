@@ -22,6 +22,7 @@ return [
     'start_time' => 'Время выезда по МСК',
     'start_date' => 'Дата конвоя',
     'server' => 'Сервер',
+    'cargoman' => 'Код CargoMan',
     'communication' => 'Связь',
     'lead' => 'Ведущий',
     'booked_by_id' => 'Забронировал',

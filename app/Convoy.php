@@ -38,6 +38,7 @@ class Convoy extends Model implements Auditable{
         'dlc',
         'comment',
         'links',
+        'cargoman',
     ];
 
     protected $casts = [
@@ -64,6 +65,7 @@ class Convoy extends Model implements Auditable{
         'start_time' => 'required|string',
         'server' => 'required|string',
         'links' => 'nullable|array',
+        'cargoman' => 'nullable|string',
 
         'route' => 'nullable|array',
         'route.*' => 'image|max:3000',

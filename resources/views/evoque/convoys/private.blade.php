@@ -54,6 +54,11 @@
                                                 <h3 >{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h3>
                                                 <p class="text-muted">Выезд:</p>
                                                 <h3>{{ $convoy->start_time->format('H:i  ') }} по МСК</h3>
+                                                @if($convoy->cargoman)
+                                                    <p class="text-muted mt-4">CargoMan :</p>
+                                                    <h2 class="mb-0">{{ $convoy->cargoman }}</h2>
+                                                    <p><a href="{{route('kb.view', 18) }}" class="text-muted">Как присоединиться?</a></p>
+                                                @endif
                                             </div>
                                             <div class="col-sm-6 pl-md-5 pl-3 text-md-left text-center">
                                                 <p class="text-muted">Сервер:</p>

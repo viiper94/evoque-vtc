@@ -44,11 +44,22 @@
                     <label class="custom-control-label" for="visible">Опубликовать для сотрудников</label>
                 </div>
             @endif
-            <div class="form-group">
-                <label for="nickname">Название</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $convoy->title }}" required>
-                @if($errors->has('title'))
-                    <small class="form-text">{{ $errors->first('title') }}</small>
+            <div class="row">
+                <div class="form-group col-md col-12">
+                    <label for="nickname">Название</label>
+                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $convoy->title }}" required>
+                    @if($errors->has('title'))
+                        <small class="form-text">{{ $errors->first('title') }}</small>
+                    @endif
+                </div>
+                @if(!$booking)
+                    <div class="form-group col-md col-12">
+                        <label for="cargoman">@lang('attributes.cargoman')</label>
+                        <input type="text" class="form-control" id="cargoman" name="cargoman" value="{{ old('cargoman') ?? $convoy->cargoman }}">
+                        @if($errors->has('cargoman'))
+                            <small class="form-text">{{ $errors->first('cargoman') }}</small>
+                        @endif
+                    </div>
                 @endif
             </div>
             <div class="row">

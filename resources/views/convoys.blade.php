@@ -107,6 +107,20 @@
                             <i class="fas fa-clock"></i>
                         </div>
                     </li>
+                    @if($convoy->cargoman)
+                        <li class="row justify-content-end">
+                            <div class="mr-3 mr-md-4 mb-4">
+                                <p>CargoMan:</p>
+                                <h4>{{ $convoy->cargoman }}</h4>
+                                <p>
+                                    <a class="text-muted" href="{{ route('kb.view', 18) }}">Что это такое?</a>
+                                </p>
+                            </div>
+                            <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </li>
+                    @endif
                 </ul>
             </section>
             <section class="route col-md-6 col-sm-12">

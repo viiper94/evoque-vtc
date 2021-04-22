@@ -59,6 +59,7 @@ class Controller extends BaseController{
             $application->nickname = $tmp_data->getName();
             $application->have_ats = (bool)$steam_games['ats'];
             $application->hours_played = $steam_games['ets2'];
+            if($application->have_ats) $application->hours_played += $steam_games['ats'];
             $application->tmp_join_date = $tmp_data->getJoinDate()->format('Y-m-d');
             if($request->input('referral')) $application->referral = htmlentities(trim($request->input('referral')));
             $application->status = 0;

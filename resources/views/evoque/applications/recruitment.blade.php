@@ -67,7 +67,7 @@
                             <p class="card-text">
                                 Ник в игре: <b>{{ $application->nickname }}</b><br>
                                 Возраст: <b>{{ $application->age }} {{ trans_choice('год|года|лет', $application->age) }}</b><br>
-                                Часов в ETS2: <b>{{ $application->hours_played }} {{ trans_choice('час|часа|часов', $application->hours_played) }}</b><br>
+                                Часов наиграно: <b>{{ $application->hours_played }} {{ trans_choice('час|часа|часов', $application->hours_played) }}</b><br>
                                 @if($application->tmp_join_date)
                                     В TruckersMP с: <b>{{ $application->tmp_join_date->isoFormat('LL') }}</b>
                                 @endif

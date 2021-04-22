@@ -30,7 +30,7 @@
         </div>
         <div class="row justify-content-between text-center mt-5">
             <div class="col-md-4">
-                <h4 class="mb-0">Часов в ETS2</h4>
+                <h4 class="mb-0">Часов наиграно</h4>
                 <h1 class="text-primary">{{ $app->hours_played }} {{ trans_choice('час|часа|часов', $app->hours_played) }}</h1>
             </div>
             <div class="col-md-4">

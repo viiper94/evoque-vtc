@@ -57,10 +57,10 @@ class Controller extends BaseController{
             $application->fill($request->post());
             $application->steam_link = $steam_data['profileurl'];
             $application->nickname = $tmp_data->getName();
+            $application->have_ats = (bool)$steam_games['ats'];
             $application->hours_played = $steam_games['ets2'];
             $application->tmp_join_date = $tmp_data->getJoinDate()->format('Y-m-d');
-            $application->have_ats = $steam_games['ets2'] ? true : false;
-            $application->referral = htmlentities(trim($request->input('referral')));
+            if($request->input('referral')) $application->referral = htmlentities(trim($request->input('referral')));
             $application->status = 0;
             return $application->save() ?
                 redirect()->route('apply')->with(['success' => 'Заявка успешно подана! Наш Отдел кадров скоро свяжется с вами.']) :

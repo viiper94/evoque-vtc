@@ -11,6 +11,7 @@ use Invisnik\LaravelSteamAuth\SteamAuth;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use TruckersMP\APIClient\Client;
+use TruckersMP\APIClient\Exceptions\RequestException;
 
 class SteamAuthController extends Controller
 {
@@ -63,7 +64,7 @@ class SteamAuthController extends Controller
                 $tmp = new Client();
                 $tmp_info= $tmp->player($steam_info->steamID64)->get();
 
-                if($tmp_info->getCompanyId() !== 11682){
+                if(!$tmp_info || $tmp_info->getCompanyId() !== 11682){
                     return redirect(route('apply'))
                         ->withErrors([trans('general.not_member')]);
                 }

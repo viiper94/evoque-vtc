@@ -50,11 +50,13 @@ class PlayerRequest extends Request
      * @throws Exception
      * @throws ClientExceptionInterface
      */
-    public function get(): Player
+    public function get()
     {
-        return new Player(
-            $this->send()['response']
-        );
+        return is_array($response = $this->send()['response']) ?
+            new Player(
+                $this->send()['response']
+            ) :
+            false;
     }
 
     /**

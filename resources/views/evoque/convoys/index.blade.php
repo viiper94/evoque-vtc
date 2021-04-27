@@ -169,7 +169,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="col-md-12 col-xl-6 row justify-content-start mx-0 trailer-info">
-                                                    <div class="row mx-0 flex-column flex-md-row mt-5 mt-md-3">
+                                                    <div class="row mx-0 flex-column flex-md-row mt-5 mt-md-3 mt-lg-0">
                                                         @if($convoy->trailer_image)
                                                             <div class="col">
                                                                 <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank">

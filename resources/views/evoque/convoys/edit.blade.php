@@ -127,7 +127,7 @@
                 <div class="col-md-5 route-images">
                     @if($convoy->start_city && $convoy->route)
                         <h6>{{ trans_choice('Текущее изображение|Текущие изображения', $convoy->route) }}</h6>
-                        <div class="fotorama mb-3 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
+                        <div class="fotorama mb-3 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="740px">
                             @foreach($convoy->route as $item)
                                 <img src="/images/convoys/{{ $item }}" class="w-100">
                             @endforeach

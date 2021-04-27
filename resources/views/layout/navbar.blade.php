@@ -41,20 +41,25 @@
                             </a>
                         </li>
                         <li class="nav-item dropdown @if(Route::current() && in_array(Route::current()->getName(), ['evoque.convoys.tab', 'evoque.convoys', 'convoys']))active @endif">
-                            <a class="nav-link dropdown-toggle" href="#" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle nowrap" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Конвои
                                 @if($convoys_c > 0)
                                     <span class="badge badge-danger">{{ $convoys_c }}</span>
                                 @endif
                             </a>
                             <div class="dropdown-menu" aria-labelledby="convoysDropdown">
-                                <a class="dropdown-item" href="{{ route('convoys.private') }}">Регламенты</a>
+                                <a class="dropdown-item" href="{{ route('convoys.private') }}">
+                                    Регламенты
+                                    @if($bookings_c > 0)
+                                        <span class="badge badge-danger">{{ $bookings_c }}</span>
+                                    @endif
+                                </a>
                                 @can('update', \App\Convoy::class)
                                     <a class="dropdown-item" href="{{ route('convoy.public') }}">Открытый конвой</a>
                                 @endcan
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('evoque.convoys.plans') }}">Планы по конвоям</a>
-                                <a class="dropdown-item" href="{{ route('evoque.convoys.tab') }}">
+                                <a class="dropdown-item nowrap" href="{{ route('evoque.convoys.tab') }}">
                                     Скрины TAB
                                     @can('accept', \App\Tab::class)
                                         @if($tabs_c > 0)
@@ -62,20 +67,11 @@
                                         @endif
                                     @endcan
                                 </a>
-                                @can('update', \App\Convoy::class)
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ route('evoque.admin.convoys') }}">
-                                        Редактирование
-                                        @if($bookings_c > 0)
-                                            <span class="badge badge-danger">{{ $bookings_c }}</span>
-                                        @endif
-                                    </a>
-                                @endcan
                             </div>
                         </li>
                         <li class="nav-item dropdown @if(Route::current() && Route::current()->getName() === 'evoque.rules')active @endif">
                             @can('update', \App\Rules::class)
-                                <a class="nav-link dropdown-toggle" href="#" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
+                                <a class="nav-link dropdown-toggle" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
                                 <div class="dropdown-menu" aria-labelledby="rulesDropdown">
                                     <a class="dropdown-item" href="{{ route('evoque.rules', 'private') }}">Закрытые правила</a>
                                     <a class="dropdown-item" href="{{ route('evoque.rules', 'public') }}">Публичные правила</a>
@@ -85,7 +81,7 @@
                             @endcan
                         </li>
                         <li class="nav-item @if(Request::is('evoque/applications*'))active @endif">
-                            <a class="nav-link" href="{{ route('evoque.applications') }}">
+                            <a class="nav-link nowrap" href="{{ route('evoque.applications') }}">
                                 Заявки
                                 @if($applications_badge > 0)
                                     <span class="badge badge-danger">{{ $applications_badge }}</span>
@@ -96,7 +92,7 @@
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
                         <li class="nav-item dropdown @if(Request::is('evoque/rp*'))active @endif">
-                            <a class="nav-link dropdown-toggle text-shadow" href="#" id="rpDropdown" role="button"
+                            <a class="nav-link dropdown-toggle nowrap" id="rpDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Рейтинговые перевозки
                                 @can('claim', \App\RpReport::class)
@@ -124,7 +120,7 @@
                         </li>
                         @if(\Illuminate\Support\Facades\Auth::user()->can('view', \App\Role::class) || \Illuminate\Support\Facades\Auth::user()->can('view', \App\User::class))
                             <li class="nav-item dropdown @if(Request::is('evoque/admin*'))active @endif">
-                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
+                                <a class="nav-link dropdown-toggle" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
                                     @can('view', \App\Role::class)
                                         <a class="dropdown-item" href="{{ route('evoque.admin.roles') }}">Должности</a>
@@ -139,7 +135,7 @@
                             </li>
                         @endif
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle avatar p-0 d-flex align-items-center" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle avatar p-0 d-flex align-items-center" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img src="{{ Auth::user()->image }}" alt="{{ Auth::user()->member->nickname }}">
                                 <span class="ml-1 d-lg-none">{{ Auth::user()->member->nickname }}</span>
                             </a>

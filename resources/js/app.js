@@ -11,7 +11,7 @@ import "./cookie.notice";
 $(document).ready(function(){
 
     $('.toast').toast();
-    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="tooltip"]').tooltip();
     bsCustomFileInput.init();
 
     $('#rules_agreed, #requirements_agreed, #terms_agreed').change(function(){

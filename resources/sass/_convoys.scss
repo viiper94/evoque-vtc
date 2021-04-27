@@ -1,4 +1,4 @@
-// Convoys
+// Public convoy
 .convoy-title{
     color: $primary;
     @media (max-width: 576px){
@@ -68,76 +68,67 @@
     }
 }
 
-// Admin convoys
-.convoys{
+// Private convoys
+.private-convoys{
+    @media (min-width: 992px) {
+        &.container{
+            max-width: calc(100% - 160px);
+            margin-right: 0;
+            margin-left: 160px;
+        }
+    }
     .day{
         flex-wrap: nowrap;
-    }
-    .convoys-day{
-        width: 125px;
-        @media (max-width: 768px){
-            width: 100%;
+        .date{
+            @media (min-width: 992px) {
+                margin-left: -160px;
+                width: 125px;
+                margin-right: 35px;
+            }
+            .past{
+                color: $primary-text-darker;
+            }
         }
-    }
-    @media (min-width: 768px){
-        .convoys-list{
-            border-left: 1px solid $primary;
-        }
-    }
-    span, p, label, h1, h2, h3, h4, h5, h6, a, small, button{
-         &:not(.upcoming){
-            color: $primary-text-darker;
-        }
-        a:hover, i.active{
-            color: $primary-text;
-        }
-    }
-}
-.private-convoys{
-    .accordion{
-        .card-header{
-            cursor: pointer;
+        .day-convoys{
+            margin: 0;
             align-items: center;
-            i.arrow{
-                font-size: 20px;
-                color: $primary-text;
-                transition: .3s ease transform;
+            flex-direction: column;
+            @media (min-width: 992px) {
+                border-left: $primary 1px solid;
+                padding-left: 35px;
             }
-            h4{
-                overflow: hidden;
-                text-overflow: ellipsis;
-                @media (min-width: 768px) {
-                    white-space: nowrap;
+            .past{
+                .card-header h5{
+                    color: $primary-text-darker;
                 }
-                max-width: 86%;
-            }
-            &.active{
-                i.arrow{
-                    transform: rotate(180deg);
+                .card-body, .markdown-content{
+                    p, h1, h2, h3, h4, h5, h6, span, label, a, hr{
+                        color: $primary-text-darker;
+                    }
                 }
             }
-            &:not(.upcoming){
-                h4, i.arrow{
+            .convoy-main-info{
+                p{
+                    margin: 0 1rem;
+                    font-weight: bold;
+                }
+                p, i, span{
                     color: $primary-text-darker;
                 }
             }
-        }
-    }
-    p{
-        font-style: normal;
-        margin-bottom: 0;
-    }
-    a:not(.btn){
-        color: $primary;
-    }
-    .convoy-info {
-        @media (min-width: 576px) {
-            & > div:first-child{
-                border-right: 1px solid $primary;
+            .card-body{
+                h5, h3, a{
+                    color: $primary;
+                }
+                .trailer-info{
+                    @media (min-width: 1200px) {
+                        border-left: 1px solid $primary;
+                    }
+                }
             }
         }
-        img{
-            width: 100%;
+        p, h1, h2, h3, h4, h5, h6{
+            margin-bottom: 0;
         }
     }
 }

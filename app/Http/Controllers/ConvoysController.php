@@ -7,7 +7,6 @@ use App\Member;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use TruckersMP\APIClient\Client;
@@ -17,41 +16,23 @@ use Woeler\DiscordPhp\Webhook\DiscordWebhook;
 
 class ConvoysController extends Controller{
 
-    public function view(Request $request){
-        $this->authorize('update', Convoy::class);
+    public function view(Request $request, $all = false){
         $list = array();
-        $convoys = Convoy::with('bookedBy')->orderBy('start_time')->get();
+        $convoys = Convoy::with('leadMember', 'leadMember.user');
+        if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
+            $operator = '<';
+            if(Carbon::now()->format('H') >= '21') $operator = '<=';
+            $convoys = $convoys->whereDate('start_time', $operator, Carbon::tomorrow())->where('visible', '1');
+        }
+        $convoys = $convoys->orderBy('start_time')->get();
         foreach($convoys as $convoy){
             $list[$convoy->start_time->format('Y-m-d')][] = $convoy;
         }
         $list = collect(array_reverse($list));
         return view('evoque.convoys.index', [
+            'all' => $all,
             'convoys' => $list->forPage($request->input('page'), 8),
             'paginator' => new LengthAwarePaginator($list, count($list), 8, $request->input('page'), [
-                'path' => url()->current(),
-                'pageName' => 'page'
-            ])
-        ]);
-    }
-
-    public function private(Request $request, $all = false){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
-        $convoys = Convoy::with('leadMember', 'leadMember.user');
-        if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
-            $operator = '<';
-            if(Carbon::now()->format('H') >= '21') $operator = '<=';
-            $convoys = $convoys->whereDate('start_time', $operator, Carbon::tomorrow());
-        }
-        $convoys = $convoys->where('visible', '1')->orderBy('start_time')->get();
-        $grouped = array();
-        foreach($convoys as $convoy){
-            $grouped[$convoy->start_time->isoFormat('DD.MM, dddd')][] = $convoy;
-        }
-        $list = collect(array_reverse($grouped));
-        return view('evoque.convoys.private', [
-            'all' => $all,
-            'grouped' => $list->forPage($request->input('page'), !$all ? 7 : 20),
-            'paginator' => new LengthAwarePaginator($list, count($list), !$all ? 7 : 20, $request->input('page'), [
                 'path' => url()->current(),
                 'pageName' => 'page'
             ])
@@ -97,7 +78,7 @@ class ConvoysController extends Controller{
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
-                redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно создан!']) :
+                redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно создан!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $tmp = new Client();
@@ -152,7 +133,7 @@ class ConvoysController extends Controller{
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
-                redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
+                redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $tmp = new Client();
@@ -172,7 +153,7 @@ class ConvoysController extends Controller{
         $convoy = Convoy::findOrFail($id);
         $convoy->deleteImages(public_path('/images/convoys/'));
         return $convoy->delete() ?
-            redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно удалён!']) :
+            redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
@@ -181,7 +162,7 @@ class ConvoysController extends Controller{
         $convoy = Convoy::findOrFail($id);
         $convoy->visible = !$convoy->visible;
         return $convoy->save() ?
-            redirect()->route('evoque.admin.convoys')->with(['success' => 'Конвой успешно отредактирован!']) :
+            redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно отредактирован!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

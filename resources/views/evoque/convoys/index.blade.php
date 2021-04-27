@@ -10,196 +10,244 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid pt-5">
-        @include('layout.alert')
-        <h1 class="mt-3 text-primary ml-3 text-center">
-            Все конвои
-            @can('create', \App\Convoy::class)
-                <a href="{{ route('evoque.admin.convoy.add') }}" class="btn btn-outline-warning"><i class="fas fa-plus"></i></a>
-            @endcan
-        </h1>
-        <div class="convoys mt-3 mb-5">
-            @foreach($convoys as $day => $convoys_per_day)
-                @php
-                    $c_day = \Carbon\Carbon::parse($day);
-                @endphp
-                <div class="day row flex-column flex-md-row mx-0">
-                    <h1 class="@if($c_day->isToday())text-primary @elseif($c_day->isFuture()) upcoming @endif text-md-right
-                        text-center col-md-auto my-md-3 mt-3 p-0 align-self-center convoys-day">
-                        {{ $c_day->format('d.m').' '.$c_day->isoFormat('dd') }}
+    <div class="container pt-5 private-convoys">
+        @can('update', \App\Convoy::class)
+            <h1 class="text-primary text-center">Все конвои</h1>
+            <h5 class="text-center">
+                <a href="{{ route('evoque.admin.convoy.add') }}" class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-plus"></i> Новый конвой
+                </a>
+                @if(!$all)
+                    <a href="{{ route('convoys.private', 'all') }}" class="btn btn-sm btn-outline-success">
+                        <i class="fas fa-plus"></i> Будущие регламенты
+                    </a>
+                @else
+                    <a href="{{ route('convoys.private') }}" class="btn btn-sm btn-outline-danger">
+                        <i class="fas fa-minus"></i> Текущие регламенты
+                    </a>
+                @endif
+            </h5>
+        @else
+            <h1 class="text-primary text-center">Регламенты конвоев</h1>
+        @endcan
+
+        @foreach($convoys as $formatted_day => $day_convoys)
+            @php $day = \Carbon\Carbon::parse($formatted_day); @endphp
+            <div class="row day my-5 mx-0 flex-column flex-lg-row">
+
+                <div class="date">
+                    <h1 class="text-center text-lg-right @if($day->isToday()) text-primary @elseif($day->isPast())past @endif">
+                        {{ $day->format('d.m').' '.$day->isoFormat('dd') }}
                     </h1>
-                    <div class="col-md convoys-list m-0 p-0 my-0 my-md-3 mx-md-5 px-md-0">
-                        @foreach($convoys_per_day as $convoy)
-                            <div class="card card-dark text-shadow-m my-md-2 ml-md-5 col-12 px-md-0
-                                @if($convoy->booking && !$convoy->visible) border-danger
-                                @elseif($convoy->public && $convoy->isUpcoming()) border-primary
-                                @elseif(!$convoy->start_city) border-info @endif">
-                                <div class="card-header row mb-0 mx-0" id="convoy-{{ $convoy->id }}-header"
-                                     data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}-info"
-                                     aria-expanded="false" aria-controls="convoy-{{ $convoy->id }}-info">
-                                    <div class="col px-0 app-title">
-                                        <h5 class="m-auto text-center @if($convoy->isUpcoming())upcoming @endif">
-                                            {{ $convoy->title }}
-                                        </h5>
-                                    </div>
-                                    @can('update', \App\Convoy::class)
-                                        <div class="dropdown dropdown-dark col-auto px-0 dropleft">
-                                            <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                            <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                                <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Редактировать</a>
-                                                @if(!$convoy->visible)
-                                                    <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Опубликовать</a>
-                                                @else
-                                                    <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye-slash"></i> Спрятать</a>
-                                                @endif
-                                                @can('delete', \App\Convoy::class)
-                                                    <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}"
-                                                       onclick="return confirm('Удалить этот конвой?')" class="dropdown-item"><i class="fas fa-trash"></i> Удалить</a>
-                                                @endcan
-                                            </div>
-                                        </div>
-                                    @endcan
-                                </div>
-                                <div class="card-header row justify-content-center mx-0">
-                                    <p class="mb-0 col-auto text-muted"><i class="fas fa-clock"></i> <b>{{ $convoy->start_time->format('H:i') }}</b></p>
-                                    @if($convoy->isFulfilled())
-                                        <p class="mb-0 col-auto text-muted"><i class="fas fa-server"></i> <b>{{ $convoy->server }}</b></p>
-                                        <p class="mb-0 col-auto text-muted nowrap">
-                                            <i class="fas fa-map-marker"></i> <b>{{ $convoy->start_city }}</b>
-                                            <i class="fas fa-arrow-right mx-2"></i><b>{{ $convoy->finish_city }}</b>
-                                        </p>
-                                    @endif
-                                    @if($convoy->dlc)
-                                        <p class="mb-0 col-auto text-muted" data-toggle="popover" data-placement="bottom"
-                                           data-content="Для участия требуется
-                                                @foreach($convoy->dlc as $item)
-                                                    {{ $item }}@if(!$loop->last), @endif
-                                                @endforeach" data-trigger="hover">
-                                            <i class="fas fa-puzzle-piece"></i>
-                                        </p>
-                                    @endif
-                                    <p class="mb-0 col-auto text-muted" data-toggle="popover" data-placement="bottom"
-                                       data-content="Ведущий" data-trigger="hover">
-                                        <i class="fas fa-bookmark"></i>
-                                        <b>
-                                            @if($convoy->leadMember && $convoy->leadMember->user->vk)
-                                                <a href="{{ $convoy->leadMember->user->vk }}" target="_blank" class="text-muted">{{ $convoy->lead }}</a>
+                </div>
+                <div class="day-convoys col row">
+
+                    @foreach($day_convoys as $convoy)
+                        <div class="card card-dark col px-0 my-1 text-center text-md-left
+                                @if($convoy->start_time->addMinutes(60)->isPast())past @endif
+                                @if($convoy->public)border-primary
+                                @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
+                                @elseif($convoy->booking && !$convoy->visible)border-info @endif">
+
+                            <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header">
+                                <h5 class="text-center col" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
+                                    aria-expanded="false" aria-controls="{{ $convoy->id }}">
+                                    {{ $convoy->title }}
+                                </h5>
+                                @can('update', \App\Convoy::class)
+                                    <div class="dropdown dropdown-dark col-auto px-0 dropleft">
+                                        <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
+                                            <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Редактировать</a>
+                                            @if(!$convoy->visible)
+                                                <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Опубликовать</a>
                                             @else
-                                                {{ $convoy->lead }}
+                                                <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye-slash"></i> Спрятать</a>
                                             @endif
-                                        </b>
-                                    </p>
-                                </div>
+                                            @can('delete', \App\Convoy::class)
+                                                <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}"
+                                                   onclick="return confirm('Удалить этот конвой?')" class="dropdown-item"><i class="fas fa-trash"></i> Удалить</a>
+                                            @endcan
+                                        </div>
+                                    </div>
+                                @endcan
+                            </div>
+                            <div class="card-header convoy-main-info justify-content-center d-none d-xl-flex d-lg-flex">
+                                <p data-toggle="tooltip" title="Выезд по МСК"><i class="fas fa-clock"></i> {{ $convoy->start_time->format('H:i') }}</p>
+                                @if($convoy->server)<p data-toggle="tooltip" title="Сервер"><i class="fas fa-server"></i> {{ $convoy->server }}</p> @endif
                                 @if($convoy->isFulfilled())
-                                    <div class="collapse" id="convoy-{{ $convoy->id }}-info" aria-labelledby="convoy-{{ $convoy->id }}-header">
-                                        <div class="card-body row mx-0 @if($convoy->isUpcoming())upcoming @endif" style="flex-wrap: nowrap">
-                                            <div class="col-auto">
-                                                <p class="text-muted mb-0">Старт:</p>
-                                                <h4>{{ $convoy->start_city }}</h4>
-                                                <h6>{{ $convoy->start_company }}</h6>
-                                                <p class="mb-0 text-muted">Перерыв:</p>
-                                                <h4>{{ $convoy->rest_city }}</h4>
-                                                <h6>{{ $convoy->rest_company }}</h6>
-                                                <p class="mb-0 text-muted">Финиш:</p>
-                                                <h4>{{ $convoy->finish_city }}</h4>
-                                                <h6>{{ $convoy->finish_company }}</h6>
-                                                <p class="mt-4 mb-0 text-muted">Сбор:</p>
-                                                <h5>{{ $convoy->start_time->subMinutes(30)->format('H:i') }} по МСК</h5>
-                                                <p class="text-muted mb-0">Выезд:</p>
-                                                <h5>{{ $convoy->start_time->format('H:i') }} по МСК</h5>
-                                                <p class="text-muted mb-0">Связь {{ $convoy->communication }}:</p>
-                                                <h5><a href="{{ $convoy->getCommunicationLink() }}" target="_blank">{{ $convoy->communication_link }}</a></h5>
-                                                @if($convoy->communication_channel)
-                                                    <p class="text-muted mb-0">Канал на сервере:</p>
-                                                    <h5>{{ $convoy->communication_channel }}</h5>
-                                                @endif
-                                            </div>
-                                            <div class="col convoy-info">
-                                                <p class="text-muted mb-0">Тягач:</p>
-                                                <h6>{{ $convoy->truck ?? 'Любой' }}</h6>
-                                                @if($convoy->truck_image)
-                                                    <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank">
-                                                        <img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
-                                                    </a>
-                                                @endif
-                                                @if($convoy->truck_tuning)
-                                                    <p class="text-muted mb-0">Тюнинг:</p>
-                                                    <h6>{{ $convoy->truck_tuning }}</h6>
-                                                @endif
-                                                @if($convoy->truck_paint)
-                                                    <p class="text-muted mb-0">Окрас:</p>
-                                                    <h6>{{ $convoy->truck_paint }}</h6>
-                                                @endif
-                                            </div>
-                                            <div class="col">
-                                                <p class="text-muted mb-0">Прицеп:</p>
-                                                <h6>{{ $convoy->trailer ?? 'Любой' }}</h6>
-                                                @if($convoy->trailer_image)
-                                                    <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank">
-                                                        <img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m w-100">
-                                                    </a>
-                                                @endif
-                                                @if($convoy->trailer_tuning)
-                                                    <p class="text-muted mb-0">Тюнинг:</p>
-                                                    <h6>{{ $convoy->trailer_tuning }}</h6>
-                                                @endif
-                                                @if($convoy->trailer_paint)
-                                                    <p class="text-muted mb-0">Окрас:</p>
-                                                    <h6>{{ $convoy->trailer_paint }}</h6>
-                                                @endif
-                                                @if($convoy->cargo)
-                                                    <p class="text-muted mb-0">Груз:</p>
-                                                    <h6>{{ $convoy->cargo }}</h6>
-                                                @endif
-                                                @if($convoy->alt_trailer)
-                                                    <p class="mt-4 text-muted mb-0">Прицеп без ДЛС:</p>
-                                                    <h6>{{ $convoy->alt_trailer }}</h6>
-                                                    @if($convoy->alt_trailer_image)
-                                                        <a href="/images/convoys/{{ $convoy->alt_trailer_image }}" target="_blank">
-                                                            <img src="/images/convoys/{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m w-100">
-                                                        </a>
-                                                    @endif
-                                                    @if($convoy->alt_trailer_tuning)
-                                                        <p class="text-muted mb-0">Тюнинг:</p>
-                                                        <h6>{{ $convoy->alt_trailer_tuning }}</h6>
-                                                    @endif
-                                                    @if($convoy->alt_trailer_paint)
-                                                        <p class="text-muted mb-0">Окрас:</p>
-                                                        <h6>{{ $convoy->alt_trailer_paint }}</h6>
-                                                    @endif
-                                                    @if($convoy->alt_cargo)
-                                                        <p class="text-muted mb-0">Груз:</p>
-                                                        <h6>{{ $convoy->alt_cargo }}</h6>
-                                                    @endif
-                                                @endif
-                                            </div>
-                                            @if($convoy->route)
-                                                <div class="col" style="max-width: 50%; max-height: 80vh">
-                                                    <h4 class="text-center">Маршрут конвоя</h4>
-                                                    <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="80%">
-                                                        @foreach($convoy->route as $item)
-                                                            <img src="/images/convoys/{{ $item }}">
-                                                        @endforeach
-                                                    </div>
+                                    <p>
+                                        <span data-toggle="tooltip" title="Старт"><i class="fas fa-map-marked-alt"></i> {{ $convoy->start_city }}</span>
+                                        <span data-toggle="tooltip" title="Финиш"><i class="fas fa-arrow-right mx-2"></i> {{ $convoy->finish_city }}</span>
+                                    </p>
+                                @endif
+                                @if($convoy->lead) <p data-toggle="tooltip" title="Ведущий"><i class="fas fa-bookmark"></i> {{ $convoy->lead }}</p> @endif
+                                @if($convoy->dlc)
+                                    <p data-toggle="tooltip" data-html="true"
+                                       title='Для участия требуется: @foreach($convoy->dlc as $item) <span class="nowrap font-weight-bold">{{ $item }}</span> @endforeach'>
+                                        <i class="fas fa-puzzle-piece"></i>
+                                    </p>
+                                @endif
+                            </div>
+
+                            <div class="collapse" id="convoy-{{ $convoy->id }}" aria-labelledby="convoy-{{ $convoy->id }}-header">
+                                @if($convoy->isFulfilled())
+                                    <div class="card-body">
+                                        @if($convoy->route)
+                                            <div class="row">
+                                                <div class="col-xl-4 col-md-6">
+                                                    <p class="text-muted">@lang('attributes.start_city')</p>
+                                                    <h3>{{ $convoy->start_city }}</h3>
+                                                    <h5 class="mb-3">{{ $convoy->start_company }}</h5>
+                                                    <p class="text-muted">@lang('attributes.rest_city')</p>
+                                                    <h3>{{ $convoy->rest_city }}</h3>
+                                                    <h5 class="mb-3">{{ $convoy->rest_company }}</h5>
+                                                    <p class="text-muted">@lang('attributes.finish_city')</p>
+                                                    <h3>{{ $convoy->finish_city }}</h3>
+                                                    <h5 class="mb-3">{{ $convoy->finish_company }}</h5>
+                                                    <p class="text-muted">Сбор по МСК</p>
+                                                    <h5 class="mb-1">{{ $convoy->start_time->subMinutes(30)->format('H:i') }}</h5>
+                                                    <p class="text-muted">@lang('attributes.start_time')</p>
+                                                    <h5>{{ $convoy->start_time->format('H:i') }}</h5>
                                                 </div>
-                                            @endif
-                                        </div>
-                                        <div class="card-footer row mx-0 justify-content-center">
-                                            <p class="mb-0 col-auto"><i class="fas fa-arrows-alt-h"></i> <b>70-150м</b></p>
-                                            <p class="mb-0 col-auto"><i class="fas fa-rss"></i> <b>7</b></p>
-                                            <p class="mb-0 col-auto"><i class="fas fa-sun"></i> <b>Ближний свет фар</b></p>
-                                        </div>
+                                                <div class="col-xl-4 col-md-6">
+                                                    @if($convoy->cargoman)
+                                                        <p class="text-muted">CargoMan :</p>
+                                                        <h5>{{ $convoy->cargoman }}</h5>
+                                                        <p class="mb-1"><a href="{{route('kb.view', 18) }}" class="text-muted">Как присоединиться?</a></p>
+                                                    @endif
+                                                    <p class="text-muted">Сервер:</p>
+                                                    <h5 class="mb-1">{{ $convoy->server }}</h5>
+                                                    <p class="text-muted">Ведущий:</p>
+                                                    <h5 class="mb-1">
+                                                        @if($convoy->leadMember && $convoy->leadMember->user->vk)
+                                                            <a href="{{ $convoy->leadMember->user->vk }}" target="_blank">{{ $convoy->lead }}</a>
+                                                        @else
+                                                            {{ $convoy->lead }}
+                                                        @endif
+                                                    </h5>
+                                                    <p class="text-muted">Связь {{ $convoy->communication }}:</p>
+                                                    <h5 class="mb-1">
+                                                        <a href="{{ $convoy->getCommunicationLink() }}" target="_blank">
+                                                            {{ $convoy->communication_link }}
+                                                        </a>
+                                                    </h5>
+                                                    @if($convoy->communication_channel)
+                                                        <p class="text-muted">Канал на сервере:</p>
+                                                        <h5 >{{ $convoy->communication_channel }}</h5>
+                                                    @endif
+                                                </div>
+                                                <div class="fotorama col-xl-4 col-md-12 align-self-baseline text-shadow-m" data-allowfullscreen="native" data-nav="thumbs" data-maxheight="700px">
+                                                    @foreach($convoy->route as $image)
+                                                        <img src="/images/convoys/{{ $image }}">
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-center mt-5">
+                                                <div class="col-md-12 col-xl-6 text-center text-md-left text-xl-right row justify-content-end mx-0 flex-column-reverse flex-md-row-reverse flex-xl-row truck-info">
+                                                    <div class="col">
+                                                        <p class="text-muted">@lang('attributes.truck')</p>
+                                                        <h5 class="mb-1">{{ $convoy->truck ?? 'Любой' }}</h5>
+                                                        @if($convoy->truck_tuning)
+                                                            <p class="text-muted">Тюнинг:</p>
+                                                            <h5 class="mb-1">{{ $convoy->truck_tuning }}</h5>
+                                                        @endif
+                                                        @if($convoy->truck_paint)
+                                                            <p class="text-muted">Окрас:</p>
+                                                            <h5>{{ $convoy->truck_paint }}</h5>
+                                                        @endif
+                                                    </div>
+                                                    @if($convoy->truck_image)
+                                                        <div class="col truck-img">
+                                                            <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank">
+                                                                <img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
+                                                            </a>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-12 col-xl-6 row justify-content-start mx-0 trailer-info">
+                                                    <div class="row mx-0 flex-column flex-md-row mt-5 mt-md-3">
+                                                        @if($convoy->trailer_image)
+                                                            <div class="col">
+                                                                <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank">
+                                                                    <img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m w-100">
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                        <div class="col">
+                                                            <p class="text-muted">@lang('attributes.trailer')</p>
+                                                            <h5 class="mb-1">{{ $convoy->trailer ?? 'Любой' }}</h5>
+                                                            @if($convoy->trailer_tuning)
+                                                                <p class="text-muted">Тюнинг:</p>
+                                                                <h5 class="mb-1">{{ $convoy->trailer_tuning }}</h5>
+                                                            @endif
+                                                            @if($convoy->trailer_paint)
+                                                                <p class="text-muted">Окрас:</p>
+                                                                <h5 class="mb-1">{{ $convoy->trailer_paint }}</h5>
+                                                            @endif
+                                                            @if($convoy->cargo)
+                                                                <p class="text-muted">Груз:</p>
+                                                                <h5>{{ $convoy->cargo }}</h5>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    @if($convoy->alt_trailer)
+                                                        <div class="row mt-3 mx-0 flex-column flex-md-row mt-5 mt-md-3">
+                                                            @if($convoy->alt_trailer_image)
+                                                                <div class="col">
+                                                                    <a href="/images/convoys/{{ $convoy->alt_trailer_image }}" target="_blank">
+                                                                        <img src="/images/convoys/{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m w-100">
+                                                                    </a>
+                                                                </div>
+                                                            @endif
+                                                            <div class="col">
+                                                                <p class="text-muted">@lang('attributes.alt_trailer')</p>
+                                                                <h5 class="mb-1">{{ $convoy->alt_trailer ?? 'Любой' }}</h5>
+                                                                @if($convoy->alt_trailer_tuning)
+                                                                    <p class="text-muted">Тюнинг:</p>
+                                                                    <h5 class="mb-1">{{ $convoy->alt_trailer_tuning }}</h5>
+                                                                @endif
+                                                                @if($convoy->alt_trailer_paint)
+                                                                    <p class="text-muted">Окрас:</p>
+                                                                    <h5 class="mb-1">{{ $convoy->alt_trailer_paint }}</h5>
+                                                                @endif
+                                                                @if($convoy->alt_cargo)
+                                                                    <p class="text-muted">Груз:</p>
+                                                                    <h5>{{ $convoy->alt_cargo }}</h5>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if(isset($convoy->comment))
+                                            <div class="comment py-3 markdown-content">
+                                                @markdown($convoy->comment)
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="card-footer convoy-main-info row mx-0 justify-content-center">
+                                        <p><i class="fas fa-arrows-alt-h"></i> Дистанция 70-150м</p>
+                                        <p><i class="fas fa-rss"></i> Канал рации №7</p>
+                                        <p><i class="fas fa-sun"></i> Ближний свет фар</p>
+                                        <p><i class="fab fa-discord"></i> Сбор в нашем Discord</p>
                                     </div>
                                 @endif
                             </div>
-                        @endforeach
-                    </div>
+
+                        </div>
+                    @endforeach
+
                 </div>
-            @endforeach
-            {{ $paginator->onEachSide(1)->links('layout.pagination') }}
-        </div>
+
+            </div>
+        @endforeach
+
+        {{ $paginator->onEachSide(1)->links('layout.pagination') }}
+
     </div>
 @endsection

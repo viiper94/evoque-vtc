@@ -95,8 +95,7 @@ Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->na
 
 Route::get('/convoy/public', 'ConvoysController@public')->name('convoy.public');
 Route::get('/convoy/discord/{convoy_id}', 'ConvoysController@toDiscord')->name('convoy.discord');
-Route::get('/evoque/convoys/private/{all?}', 'ConvoysController@private')->name('convoys.private');
-Route::get('/evoque/admin/convoys', 'ConvoysController@view')->name('evoque.admin.convoys');
+Route::get('/evoque/convoys/private/{all?}', 'ConvoysController@view')->name('convoys.private');
 Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
 Route::any('/evoque/admin/convoys/toggle/{id}', 'ConvoysController@toggle')->name('evoque.admin.convoy.toggle');
 Route::get('/evoque/admin/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');

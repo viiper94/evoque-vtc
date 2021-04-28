@@ -104,6 +104,11 @@
                 .card-header h5{
                     color: $primary-text-darker;
                 }
+                .convoy-main-info {
+                    p, i, span{
+                        color: $primary-text-darker;
+                    }
+                }
                 .card-body, .markdown-content{
                     p, h1, h2, h3, h4, h5, h6, span, label, a, hr{
                         color: $primary-text-darker;
@@ -114,9 +119,6 @@
                 p{
                     margin: 0 1rem;
                     font-weight: bold;
-                }
-                p, i, span{
-                    color: $primary-text-darker;
                 }
             }
             .card-body{

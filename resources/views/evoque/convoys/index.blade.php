@@ -234,7 +234,7 @@
                                         @endif
                                     </div>
                                     <div class="card-footer convoy-main-info row mx-0 justify-content-center">
-                                        <p><i class="fas fa-arrows-alt-h"></i> Дистанция 50-100м</p>
+                                        <p><i class="fas fa-arrows-alt-h"></i> Дистанция 70-150м</p>
                                         <p><i class="fas fa-rss"></i> Канал рации №7</p>
                                         <p><i class="fas fa-sun"></i> Ближний свет фар</p>
                                         <p><i class="fab fa-discord"></i> Сбор в нашем Discord</p>

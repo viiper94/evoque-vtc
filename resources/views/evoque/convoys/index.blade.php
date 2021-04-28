@@ -45,9 +45,11 @@
                     @foreach($day_convoys as $convoy)
                         <div class="card card-dark col px-0 my-1 text-center text-md-left
                                 @if($convoy->start_time->addMinutes(60)->isPast())past @endif
-                                @if($convoy->public)border-primary
-                                @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
-                                @elseif($convoy->booking && !$convoy->visible)border-info @endif">
+                                @if(!$convoy->start_time->addMinutes(60)->isPast())
+                                    @if($convoy->public)border-primary
+                                    @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
+                                    @elseif($convoy->booking && !$convoy->visible)border-info @endif
+                                @endif">
 
                             <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header">
                                 <h5 class="text-center col" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"

@@ -52,9 +52,9 @@
                                     @elseif($convoy->booking && !$convoy->visible)border-info @endif
                                 @endif">
 
-                            <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header">
-                                <h5 class="text-center col" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
-                                    aria-expanded="false" aria-controls="{{ $convoy->id }}">
+                            <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
+                                 aria-expanded="false" aria-controls="{{ $convoy->id }}">
+                                <h5 class="text-center col">
                                     {{ $convoy->title }}
                                 </h5>
                                 @can('update', \App\Convoy::class)

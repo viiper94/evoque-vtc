@@ -94,7 +94,10 @@
             align-items: center;
             flex-direction: column;
             @media (min-width: 992px) {
-                border-left: $primary 1px solid;
+                border-left: $primary-text-darker 1px solid;
+                &:not(.past){
+                    border-left: $primary 1px solid;
+                }
                 padding-left: 35px;
             }
             .past{

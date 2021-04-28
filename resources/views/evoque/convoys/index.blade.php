@@ -40,7 +40,7 @@
                         {{ $day->format('d.m').' '.$day->isoFormat('dd') }}
                     </h1>
                 </div>
-                <div class="day-convoys col row">
+                <div class="day-convoys col row @if($day->isToday()) text-primary @elseif($day->isPast())past @endif">
 
                     @foreach($day_convoys as $convoy)
                         <div class="card card-dark col px-0 my-1 text-center text-md-left

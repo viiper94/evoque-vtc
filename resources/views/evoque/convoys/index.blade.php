@@ -11,6 +11,7 @@
 
 @section('content')
     <div class="container pt-5 private-convoys">
+        @include('layout.alert')
         @can('update', \App\Convoy::class)
             <h1 class="text-primary text-center">Все конвои</h1>
             <h5 class="text-center">

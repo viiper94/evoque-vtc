@@ -22,37 +22,30 @@
 
 <div class="container mt-5">
     @include('layout.alert')
-    <section class="features text-center row pt-3 pb-3">
-        <h1 class="col-12 mb-5">Требования к сотрудникам</h1>
-        <div class="feature col-md-4 col-sm-12">
-            <h1 class="display-2 font-weight-bold">17+</h1>
-            <hr class="m-auto pb-3">
-            <p>Ваш возраст должен <br> быть <b>не менее 17 лет</b></p>
-        </div>
-        <div class="feature col-md-4 col-sm-12">
-            <div class="row justify-content-center">
-                <h1 class="col display-2 col-auto pr-0 pl-0 font-weight-bold"><i class="fas fa-headset"></i></h1>
-            </div>
-            <hr class="m-auto pb-3">
-            <p>Иметь <b>исправный микрофон</b>, быть готовым к голосовому общению в Discord</p>
-        </div>
-        <div class="feature col-md-4 col-sm-12">
-            <h1 class="display-2 font-weight-bold"><i class="fab fa-steam-symbol"></i></h1>
-            <hr class="m-auto pb-3">
-            <p>Ваш профиль в Steam <br> <b>не должен</b> быть скрытым<br>
-                <button data-toggle="modal" data-target="#steam-privacy-modal" class="btn btn-outline-warning btn-sm">Как открыть?</button></p>
-        </div>
-    </section>
     <section class="apply-requirements row pt-3 pb-5">
+        <h1 class="col-12 mb-5 text-center">Требования к сотрудникам</h1>
         <div class="col mr-5 with-img"></div>
         <div class="col ml-md-5">
             <ul>
+                <li class="row mt-5 ml-1 ml-md-0">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <p>Ваш возраст должен <br> быть <b>не менее 17 лет</b></p>
+                </li>
+                <li class="row mt-5 ml-1 ml-md-0">
+                    <div class="icon-wrapper">
+                        <i class="fab fa-steam"></i>
+                    </div>
+                    <p>Ваш профиль в Steam <br> <b>не должен</b> быть скрытым<br>
+                        <a href="{{ route('kb.view', 15) }}" target="_blank" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
+                </li>
                 <li class="row mt-5 ml-1 ml-md-0" style="flex-wrap: nowrap">
                     <div class="icon-wrapper">
                         <i class="fas fa-ban"></i>
                     </div>
                     <p>Ваша история банов на сайте TruckersMP должна быть открыта<br>
-                        <a data-toggle="modal" data-target="#ban-history-modal" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
+                        <a href="{{ route('kb.view', 16) }}" target="_blank" class="btn btn-outline-warning btn-sm">Как открыть?</a></p>
                 </li>
                 <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
@@ -62,17 +55,9 @@
                 </li>
                 <li class="row mt-5 ml-1 ml-md-0">
                     <div class="icon-wrapper">
-                        <i class="fas fa-map"></i>
+                        <i class="fas fa-headset"></i>
                     </div>
-                    <p>Наличие DLC Going East!, Scandinavia, Vive la France! и Italia<br>
-                        <button class="btn btn-outline-warning btn-sm"
-                                data-toggle="popover"
-                                data-content="Отсутствие вышеупомянутых DLC не будет поводом в отказе при приеме,
-                                            но большая часть конвоев в ВТК проходит именно по этим расширениям!"
-                                data-trigger="focus">
-                            А что если нет?
-                        </button>
-                    </p>
+                    <p>Иметь <b>исправный микрофон</b>, быть готовым к голосовому общению в Discord</p>
                 </li>
             </ul>
         </div>
@@ -81,7 +66,6 @@
     <section class="apply-call-to-action row flex-column m-auto justify-content-center text-center pt-5 pb-5">
         <h1>Подходишь по требованиям?<br> Заполняй анкету!</h1>
         <a href="#apply-form" class="mt-4 text-shadow-m align-self-center" id="apply-go-to-form"><i class="fas fa-arrow-circle-down"></i></a>
-
     </section>
 
     <section id="apply-form" class="pt-5 mb-5">
@@ -122,7 +106,7 @@
                     <label for="discord_name">
                         Ваше имя в Дискорд
                     </label>
-                    <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="Найти своё имя можно в
+                    <a tabindex="0" data-toggle="tooltip" data-title="Найти своё имя можно в
                         клиенте или веб-версии Дискорда в самом низу слева. Возле вашего аватара будет ваш ник и дискриминатор (4 цифры).
                         Чтобы их скопировать, достаточно нажать на них один раз." class="text-light">
                         <i class="fas fa-question-circle"></i>
@@ -140,9 +124,21 @@
                     <small class="form-text">{{ $errors->first('referral') }}</small>
                 @endif
             </div>
+
+            <div class="rules text-muted p-3">
+                <ul>
+                    <li>В вашей коллекции в Steam должны быть <a href="https://store.steampowered.com/bundle/5555/Euro_Truck_Simulator_2_Map_Booster/" target="_blank" class="text-muted">основные картовые DLC</a>
+                        к ETS2. Отсутствие вышеупомянутых DLC не будет поводом в отказе при приеме, но большая часть конвоев в ВТК проходит именно по дополнениям!</li>
+                    <li>Большинство конвоев начинаются в 19:00 по МСК, вы должны быть уверены что сможете посещать наши конвои в своем часовом поясе!</li>
+                </ul>
+            </div>
+
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="rules_agreed" name="rules_agreed">
-                <label class="custom-control-label" for="rules_agreed">Правила мультиплеера и основные правила ВТК обязуюсь соблюдать!
+                <label class="custom-control-label" for="rules_agreed">
+                    <a href="https://truckersmp.com/kb/744" target="_blank" class="text-primary">Правила мультиплеера</a>
+                    и <a href="{{ route('rules') }}" target="_blank" class="text-primary">основные правила ВТК</a> обязуюсь соблюдать!
+                </label>
                     @if($errors->has('rules_agreed'))
                         <small class="form-text">{{ $errors->first('rules_agreed') }}</small>
                 @endif
@@ -168,80 +164,6 @@
             </div>
         </form>
     </section>
-</div>
-
-<!-- Steam privacy modal -->
-<div class="modal fade" id="steam-privacy-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
-        <div class="modal-content modal-content-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Как открыть профиль в Steam?</h5>
-                <button type="button" class="close text-shadow" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <ol class="pl-4">
-                    <li>
-                        <p>Зайдите в свой Steam профиль через браузер или клиент. <br>
-                            Зайдите в раздел <a href="https://steamcommunity.com/id/14/edit/settings">редактирвания профиля</a>.</p>
-                    </li>
-                    <li>
-                        <p>Перейдите в раздел <b>Приватность</b>.</p>
-                    </li>
-                    <li>
-                        <p>Установите параметр <b>Мой профиль</b> и <b>Доступ к игровой информации</b> в значение <b>Открытый</b>.</p>
-                    </li>
-                    <li>
-                        <p><b>Снимите</b> голочку с пункта <b>Скрывать общее время в игре, даже если видны другие данные об играх</b>.<br>
-                            На скриншоте снизу показан финальный результат.<br>
-                            <img src="/assets/img/modals/steam-privacy2.jpg"></p>
-                    </li>
-                    <li>
-                        <p>Готово! Данные автоматически сохранятся.</p>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Ban history modal -->
-<div class="modal fade" id="ban-history-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
-        <div class="modal-content modal-content-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Как открыть историю банов в TruckersMP?</h5>
-                <button type="button" class="close text-shadow" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>По умолчанию список банов на TruckersMP не виден для других пользователей.<br>
-                    Чтобы открыть список банов — нужно:</p>
-                <ol class="pl-4">
-                    <li>
-                        <p>Зайдите под своими данными в свой профиль на TruckersMP.</p>
-                    </li>
-                    <li>
-                        <p>Перейдите по пунктам меню <b>Account > Settings</b><br>
-                            или по ссылке - <a href="https://truckersmp.com/profile/settings" target="_blank">https://truckersmp.com/profile/settings</a></p>
-                    </li>
-                    <li>
-                        <p>В открывшемся меню настроек, промотайте страницу вниз и<br>
-                            установите галочку напротив пункта <b>Display your bans on your profile and API</b>.<br>
-                            <img src="/assets/img/modals/ban-history.jpg"></p>
-                    </li>
-                    <li>
-                        <p>Нажмите <b>Save</b> для сохранения настроек профиля.</p>
-                    </li>
-                    <li>
-                        <p>Готово!</p>
-                    </li>
-                </ol>
-            </div>
-        </div>
-    </div>
 </div>
 
 @endsection

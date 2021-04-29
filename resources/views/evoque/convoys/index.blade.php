@@ -11,6 +11,7 @@
 
 @section('content')
     <div class="container pt-5 private-convoys">
+        @include('layout.alert')
         @can('update', \App\Convoy::class)
             <h1 class="text-primary text-center">Все конвои</h1>
             <h5 class="text-center">
@@ -40,18 +41,20 @@
                         {{ $day->format('d.m').' '.$day->isoFormat('dd') }}
                     </h1>
                 </div>
-                <div class="day-convoys col row">
+                <div class="day-convoys col row @if($day->isToday()) text-primary @elseif($day->isPast())past @endif">
 
                     @foreach($day_convoys as $convoy)
-                        <div class="card card-dark col px-0 my-1 text-center text-md-left
+                        <div class="card card-dark text-shadow-m col px-0 my-1 text-center text-md-left
                                 @if($convoy->start_time->addMinutes(60)->isPast())past @endif
-                                @if($convoy->public)border-primary
-                                @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
-                                @elseif($convoy->booking && !$convoy->visible)border-info @endif">
+                                @if(!$convoy->start_time->addMinutes(60)->isPast())
+                                    @if($convoy->public)border-primary
+                                    @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
+                                    @elseif($convoy->booking && !$convoy->visible)border-info @endif
+                                @endif">
 
-                            <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header">
-                                <h5 class="text-center col" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
-                                    aria-expanded="false" aria-controls="{{ $convoy->id }}">
+                            <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
+                                 aria-expanded="false" aria-controls="{{ $convoy->id }}">
+                                <h5 class="text-center col">
                                     {{ $convoy->title }}
                                 </h5>
                                 @can('update', \App\Convoy::class)

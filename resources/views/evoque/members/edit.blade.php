@@ -70,11 +70,12 @@
                         </div>
                         <div class="form-group">
                             <label for="roles">Должность (выбрать несколько с зажатым Ctrl)</label>
+                            @if($member->role->contains(0))
+                                <input type="hidden" name="roles[]" value="0">
+                            @endif
                             <select multiple class="form-control" id="roles" name="roles[]" size="14">
                                 @foreach($roles as $role)
-                                    @if($role->id === 0)
-                                        <option value="0" disabled @if($member->role->contains($role->id)) selected @endif>{{ $role->title }}</option>
-                                    @else
+                                    @if($role->id !== 0)
                                         <option value="{{ $role->id }}" @if($member->role->contains($role->id)) selected @endif @cannot('updateRoles', $member) disabled @endcannot>{{ $role->title }}</option>
                                     @endif
                                 @endforeach

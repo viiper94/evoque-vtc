@@ -47,7 +47,7 @@
                     <th colspan="14" class="text-center">
                         {{ $role_group[0]->group }}
                         @if($role_group[0]->description)
-                            <a tabindex="0" data-toggle="popover" data-trigger="focus" data-content="{{ $role_group[0]->description }}"><i class="fas fa-info-circle"></i></a>
+                            <a tabindex="0" data-toggle="tooltip" data-placement="right" data-title="{{ $role_group[0]->description }}"><i class="fas fa-info-circle"></i></a>
                         @endif
                     </th>
                 </tr>

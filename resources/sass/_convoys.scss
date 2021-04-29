@@ -94,12 +94,20 @@
             align-items: center;
             flex-direction: column;
             @media (min-width: 992px) {
-                border-left: $primary 1px solid;
+                border-left: $primary-text-darker 1px solid;
+                &:not(.past){
+                    border-left: $primary 1px solid;
+                }
                 padding-left: 35px;
             }
             .past{
                 .card-header h5{
                     color: $primary-text-darker;
+                }
+                .convoy-main-info {
+                    p, i, span{
+                        color: $primary-text-darker;
+                    }
                 }
                 .card-body, .markdown-content{
                     p, h1, h2, h3, h4, h5, h6, span, label, a, hr{
@@ -111,9 +119,6 @@
                 p{
                     margin: 0 1rem;
                     font-weight: bold;
-                }
-                p, i, span{
-                    color: $primary-text-darker;
                 }
             }
             .card-body{

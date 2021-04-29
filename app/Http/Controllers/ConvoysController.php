@@ -17,6 +17,7 @@ use Woeler\DiscordPhp\Webhook\DiscordWebhook;
 class ConvoysController extends Controller{
 
     public function view(Request $request, $all = false){
+        if(Auth::guest() || !Auth::user()->member) abort(404);
         $list = array();
         $convoys = Convoy::with('leadMember', 'leadMember.user');
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){

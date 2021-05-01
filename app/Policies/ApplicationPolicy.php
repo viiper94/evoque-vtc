@@ -67,7 +67,11 @@ class ApplicationPolicy
     public function createVacation(User $user){
         if($user->member){
             foreach($user->member->role as $role){
-                if($role->manage_applications || ($role->make_applications && $user->member->vacations < 2)) return true;
+                $hasUnapprovedApplication = Application::where(['member_id' => $user->member->id, 'category' => 1, 'status' => 0])->count() > 0;
+                $hasFutureVacation = isset($user->member->on_vacation_till['to']) && Carbon::parse($user->member->on_vacation_till['to'])->isFuture();
+                if($role->manage_applications ||
+                    ($role->make_applications && $user->member->vacations < 2
+                        && !$hasFutureVacation && !$hasUnapprovedApplication)) return true;
             }
         }
         return false;

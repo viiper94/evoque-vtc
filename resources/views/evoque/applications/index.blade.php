@@ -10,9 +10,10 @@
         @include('layout.alert')
         @can('create', \App\Application::class)
             <div class="application-buttons mt-5 mb-5 row justify-content-center">
-                @can('createVacation', \App\Application::class)
-                    <a href="{{ route('evoque.applications.vacation') }}" class="btn btn-lg btn-outline-warning m-1">Хочу в отпуск!</a>
-                @endcan
+                <a href="{{ route('evoque.applications.vacation') }}"
+                   class="btn btn-lg m-1 @cannot('createVacation', \App\Application::class) btn-outline-secondary disabled @else btn-outline-warning @endcannot">
+                    Хочу в отпуск!
+                </a>
                 <a href="{{ route('evoque.applications.rp') }}" class="btn btn-lg btn-outline-success m-1">Сменить уровень в рейтинговых</a>
                 <a href="{{ route('evoque.applications.nickname') }}" class="btn btn-lg btn-outline-info m-1">Сменить ник</a>
                 <a href="{{ route('evoque.applications.fire') }}" class="btn btn-lg btn-outline-danger m-1">Увольняюсь!</a>

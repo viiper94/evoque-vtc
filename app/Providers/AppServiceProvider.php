@@ -63,10 +63,17 @@ class AppServiceProvider extends ServiceProvider
             $convoys_badge = 0;
             $applications_badge = 0;
 
-            $bookings_c = Convoy::where(['booking' => '1', 'visible' => '0'])->count();
-            $tabs_c = Tab::where('status', 0)->count();
-            if(Auth::check() && Auth::user()->can('accept', Tab::class)) $convoys_badge += $tabs_c;
-            if(Auth::check() && Auth::user()->can('update', Convoy::class)) $convoys_badge += $bookings_c;
+            $tabs_c = 0;
+            $bookings_c = 0;
+
+            if(Auth::check() && Auth::user()->can('accept', Tab::class)){
+                $tabs_c = Tab::where('status', 0)->count();
+                $convoys_badge += $tabs_c;
+            }
+            if(Auth::check() && Auth::user()->can('update', Convoy::class)){
+                $bookings_c = Convoy::where(['booking' => '1', 'visible' => '0'])->count();
+                $convoys_badge += $bookings_c;
+            }
             View::share('convoys_c', $convoys_badge);
             View::share('tabs_c', $tabs_c);
             View::share('bookings_c', $bookings_c);

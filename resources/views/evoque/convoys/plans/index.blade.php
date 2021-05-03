@@ -69,22 +69,22 @@
         <div class="feature col-lg-2 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">SIM</h1>
             <hr class="m-auto pb-3">
-            <p>2000+ км</p>
+            <p>1800+ км</p>
         </div>
         <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">ARC</h1>
             <hr class="m-auto pb-3">
-            <p>2500+ км</p>
+            <p>2300+ км</p>
         </div>
         <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Тяжёлые грузы</h2>
             <hr class="m-auto pb-3">
-            <p>1500+ км</p>
+            <p>1400+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
             <hr class="m-auto pb-3">
-            <p>SIM: 2200+ км<br>ARC: 2700+ км</p>
+            <p>SIM: 2000+ км<br>ARC: 2500+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
@@ -97,22 +97,22 @@
         <div class="feature col-lg-2 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">SIM</h1>
             <hr class="m-auto pb-3">
-            <p>2100+ км</p>
+            <p>1900+ км</p>
         </div>
         <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h1 class="display-4 font-weight-bold">ARC</h1>
             <hr class="m-auto pb-3">
-            <p>2600+ км</p>
+            <p>2400+ км</p>
         </div>
         <div class="feature col-lg-2 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Тяжёлые грузы</h2>
             <hr class="m-auto pb-3">
-            <p>1500+ км</p>
+            <p>1400+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Легковые и головастики</h2>
             <hr class="m-auto pb-3">
-            <p>SIM: 2500+ км<br>ARC: 2700+ км</p>
+            <p>SIM: 2300+ км<br>ARC: 2500+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
             <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>

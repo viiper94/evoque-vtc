@@ -12,7 +12,6 @@
         border-color: $primary-darker;
     }
 }
-
 .btn-warning{
     background-color: $primary;
     border-color: $primary;
@@ -26,19 +25,9 @@
         border-color: $primary-darker;
     }
 }
-.card-dark{
-    background-color: $background-lighten-2;
-    border-color: $background-lighten-2;
-}
-
 @media (min-width: 768px){
     .position-md-fixed{
         position: fixed !important;
-    }
-}
-ul, ol{
-    &.list-style-none{
-        list-style-type: none;
     }
 }
 .nowrap{

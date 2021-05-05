@@ -2,6 +2,7 @@
 .card{
     &.card-dark{
         background-color: $background;
+        border-color: $background-lighten-2;
     }
     .card-actions{
         padding: 1.25rem;

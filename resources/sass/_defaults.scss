@@ -1,0 +1,9 @@
+// Defaults
+ul, ol{
+    &.list-style-none{
+        list-style-type: none;
+    }
+}
+.container-fluid{
+    max-width: 2560px;
+}

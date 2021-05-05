@@ -287,6 +287,10 @@ $(document).ready(function(){
         $('#discord').prop('disabled', false).prop('readonly', true).attr('name', 'discord_id').attr('value', '');
     });
 
+    $('.add-cargoman').click(function(){
+        $('#cargomanModal form #id').val($(this).data('id'));
+    })
+
 });
 
 function getPreloaderHtml(){

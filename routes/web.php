@@ -97,6 +97,7 @@ Route::get('/convoy/public', 'ConvoysController@public')->name('convoy.public');
 Route::get('/convoy/discord/{convoy_id}', 'ConvoysController@toDiscord')->name('convoy.discord');
 Route::get('/evoque/convoys/private/{all?}', 'ConvoysController@view')->name('convoys.private');
 Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
+Route::post('/evoque/admin/convoys/addcargoman', 'ConvoysController@addCargoMan')->name('evoque.admin.convoy.add.cargoman');
 Route::any('/evoque/admin/convoys/toggle/{id}', 'ConvoysController@toggle')->name('evoque.admin.convoy.toggle');
 Route::get('/evoque/admin/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');
 Route::any('/evoque/admin/convoys/edit/{id}/{booking?}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');

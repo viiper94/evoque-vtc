@@ -105,7 +105,7 @@
                     color: $primary-text-darker;
                 }
                 .convoy-main-info {
-                    p, i, span{
+                    p, i, a, span{
                         color: $primary-text-darker;
                     }
                 }
@@ -116,7 +116,7 @@
                 }
             }
             .convoy-main-info{
-                p{
+                p, a{
                     margin: 0 1rem;
                     font-weight: bold;
                 }

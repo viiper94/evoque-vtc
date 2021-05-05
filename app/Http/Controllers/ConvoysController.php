@@ -208,4 +208,16 @@ class ConvoysController extends Controller{
         return redirect()->back()->with(['success' => 'Конвой успешно запощен в Дискорде!']);
     }
 
+    public function addCargoman(Request $request){
+        if(Auth::guest() || !Auth::user()->member) abort(404);
+        $convoy = Convoy::findOrFail($request->input('id'));
+        $this->validate($request, [
+            'cargoman' => 'numeric|required'
+        ]);
+        $convoy->cargoman = $request->input('cargoman');
+        return $convoy->save() ?
+            redirect()->route('convoys.private')->with(['success' => 'Код CargoMan успешно добавлен!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
 }

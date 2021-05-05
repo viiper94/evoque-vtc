@@ -91,8 +91,11 @@
                                 @if($convoy->dlc)
                                     <p data-toggle="tooltip" data-html="true"
                                        title='Для участия требуется: @foreach($convoy->dlc as $item) <span class="nowrap font-weight-bold">{{ $item }}</span> @endforeach'>
-                                        <i class="fas fa-puzzle-piece"></i>
+                                        <i class="fas fa-puzzle-piece"></i> DLC
                                     </p>
+                                @endif
+                                @if($convoy->cargoman) <p data-toggle="tooltip" title="Код CargoMan"><i class="fas fa-sign-in-alt"></i> {{ $convoy->cargoman }}</p>
+                                @elseif($convoy->start_time->isFuture()) <a class="add-cargoman" data-toggle="modal" href="#cargomanModal" data-id="{{ $convoy->id }}">Добавить код CargoMan</a>
                                 @endif
                             </div>
 
@@ -252,5 +255,35 @@
 
         {{ $paginator->onEachSide(1)->links('layout.pagination') }}
 
+    </div>
+
+    <div class="modal fade" id="cargomanModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 600px">
+            <div class="modal-content modal-content-dark">
+                <form action="{{ route('evoque.admin.convoy.add.cargoman') }}" method="post">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Добавление кода CargoMan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="text-muted ml-3">
+                            <li>Ознакомьтесь со статьей - <a href="{{ route('kb.view', 17) }}" target="_blank">Как раздать груз?</a></li>
+                            <li>Избегайте использования DLC при раздаче прицепа/тягача/груза.</li>
+                            <li>Код будет доступен всего 30 минут с момента его создания.</li>
+                        </ul>
+                        <div class="form-group">
+                            <input type="number" class="form-control form-control-lg" id="cargoman" name="cargoman" placeholder="Вставьте код" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="hidden" id="id" name="id">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @endsection

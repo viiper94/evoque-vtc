@@ -11,7 +11,7 @@ class GalleryController extends Controller{
 
     public function index(){
         $photos = Gallery::with('user', 'user.member');
-        if(Auth::guest() || Auth::user()->cant('toggle', Gallery::class)){
+        if(Auth::user()?->cant('toggle', Gallery::class)){
             $photos = $photos->where('visible', '1');
         }
         return view('gallery.index', [

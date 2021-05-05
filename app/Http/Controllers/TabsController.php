@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class TabsController extends Controller{
 
     public function index(){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         $tabs = Tab::with(['member', 'lead']);
         if(Auth::user()->cant('viewAny', Tab::class)){
             $tabs = $tabs->where('member_id', Auth::user()->member->id);

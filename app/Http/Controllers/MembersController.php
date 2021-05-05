@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Gate;
 class MembersController extends Controller{
 
     public function index(){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         return view('evoque.members.index', [
             'roles' => Role::with([
                 'members' => function($query){
@@ -36,7 +36,7 @@ class MembersController extends Controller{
     }
 
     public function edit(Request $request, $id){
-        if(Auth::user()->cant('update', Member::class) && Auth::user()->cant('updateRpStats', Member::class)) abort(403);
+        if(Auth::user()?->cant('update', Member::class) && Auth::user()?->cant('updateRpStats', Member::class)) abort(403);
         if($request->post()){
             $this->validate($request, [
                 'nickname' => 'required|string',
@@ -184,7 +184,7 @@ class MembersController extends Controller{
     }
 
     public function weekly(){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         return view('evoque.members.weekly', [
             'members' => Member::with(['user', 'role' => function($query){
                 $query->where('visible', '1');

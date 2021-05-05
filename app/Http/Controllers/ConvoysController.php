@@ -17,7 +17,7 @@ use Woeler\DiscordPhp\Webhook\DiscordWebhook;
 class ConvoysController extends Controller{
 
     public function view(Request $request, $all = false){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         $list = array();
         $convoys = Convoy::with('leadMember', 'leadMember.user');
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
@@ -111,7 +111,6 @@ class ConvoysController extends Controller{
             ]);
         }
         if($request->post()){
-//            dd($request->files);
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on' ? 1 : 0;
@@ -209,7 +208,7 @@ class ConvoysController extends Controller{
     }
 
     public function addCargoman(Request $request){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         $convoy = Convoy::findOrFail($request->input('id'));
         $this->validate($request, [
             'cargoman' => 'numeric|required'

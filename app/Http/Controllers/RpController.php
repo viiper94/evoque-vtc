@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class RpController extends Controller{
 
     public function index(){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         return view('evoque.rp.index', [
             'roles' => [
                 'ets2' => Role::with([
@@ -58,7 +58,7 @@ class RpController extends Controller{
     }
 
     public function weekly(){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         return view('evoque.rp.weekly', [
             'stats' => RpStats::selectRaw(
                 'rp_stats.*,
@@ -79,7 +79,7 @@ class RpController extends Controller{
     }
 
     public function reports(){
-        if(Auth::guest() || !Auth::user()->member) abort(404);
+        if(!Auth::user()?->member) abort(404);
         $reports = RpReport::with('member');
         if(Auth::user()->cant('viewAll', RpReport::class)) $reports->where('member_id', Auth::user()->member->id);
         return view('evoque.rp.reports', [

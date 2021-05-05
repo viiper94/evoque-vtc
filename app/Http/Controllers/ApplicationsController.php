@@ -55,12 +55,12 @@ class ApplicationsController extends Controller{
         $this->authorize('claim', $application);
         $application->status = $request->input('accept');
         $application->comment = $request->input('comment');
-        $messages = [
-            '1' => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.',
-            '2' => 'Зявка отклонена!',
-        ];
         return $application->save() ?
-            redirect()->route('evoque.applications.recruitment')->with(['success' => $messages[$application->status]]) :
+            redirect()->route('evoque.applications.recruitment')->with(['success' => match($application->status){
+                '1' => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.',
+                '2' => 'Зявка отклонена!',
+                '3' => 'Зявка отредактирована!'
+            }]) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
@@ -105,7 +105,12 @@ class ApplicationsController extends Controller{
         $application->status = $request->input('accept');
         $application->comment = $request->input('comment');
         return $result && $application->save() ?
-            redirect()->route('evoque.applications')->with(['success' => 'Зявка '. ($request->input('accept') === '1' ? 'принята' : 'отклонена') .'!']) :
+            redirect()->route('evoque.applications')
+                ->with(['success' => 'Зявка '. (match($application->status){
+                    '1' => 'принята',
+                    '2' => 'отклонена',
+                    '3' => 'отредактирована',
+                    }) .'!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

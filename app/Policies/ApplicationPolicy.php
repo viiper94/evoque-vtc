@@ -119,7 +119,7 @@ class ApplicationPolicy
      * @return mixed
      */
     public function claim(User $user, Application $application){
-        if($user->member && $application->status == 0){
+        if($user->member && $application->status !== 1 && $application->status !== 2){
             foreach($user->member->role as $role){
                 if($role->manage_applications || $role->claim_applications) return true;
             }

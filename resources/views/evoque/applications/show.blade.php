@@ -87,6 +87,7 @@
                             onclick="return confirm('Принять заявку?')">Принять</button>
                     <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
                             onclick="return confirm('Отклонить заявку?')">Отклонить</button>
+                    <button type="submit" name="accept" value="3" class="btn btn-outline-info btn-lg m-1">Сохранить</button>
                 </div>
             </form>
         @endcan

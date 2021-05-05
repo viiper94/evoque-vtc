@@ -48,7 +48,7 @@ class RecruitmentPolicy
      * @return mixed
      */
     public function claim(User $user, Recruitment $recruitment){
-        if($user->member && $recruitment->status == 0){
+        if($user->member && $recruitment->status !== 1 && $recruitment->status !== 2){
             foreach($user->member->role as $role){
                 if($role->manage_applications || $role->claim_recruitments) return true;
             }

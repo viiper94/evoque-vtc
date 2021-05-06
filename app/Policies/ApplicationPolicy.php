@@ -85,7 +85,7 @@ class ApplicationPolicy
      * @return mixed
      */
     public function update(User $user, Application $application){
-        if($user->member && $user->member->id === $application->member_id && $application->status === 0){
+        if($user->member?->id === $application->member_id && $application->status === 0){
             foreach($user->member->role as $role){
                 if($role->manage_applications || $role->edit_applications) return true;
             }

@@ -129,7 +129,7 @@
                                                     <h5 class="mb-1">{{ $convoy->server }}</h5>
                                                     <p class="text-muted">Ведущий:</p>
                                                     <h5 class="mb-1">
-                                                        @if($convoy->leadMember && $convoy->leadMember->user->vk)
+                                                        @if($convoy->leadMember?->user->vk)
                                                             <a href="{{ $convoy->leadMember->user->vk }}" target="_blank">{{ $convoy->lead }}</a>
                                                         @else
                                                             {{ $convoy->lead }}

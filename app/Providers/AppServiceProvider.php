@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Validator::extend('no_vk', function ($attribute, $value, $parameters, $validator) {
-            return !stripos($value, 'userapi.com');
+            return !str_contains($value, 'userapi.com');
         });
 
         Validator::extend('nullPlate', function ($attribute, $value, $parameters, $validator) {
@@ -66,11 +66,11 @@ class AppServiceProvider extends ServiceProvider
             $tabs_c = 0;
             $bookings_c = 0;
 
-            if(Auth::check() && Auth::user()->can('accept', Tab::class)){
+            if(Auth::user()?->can('accept', Tab::class)){
                 $tabs_c = Tab::where('status', 0)->count();
                 $convoys_badge += $tabs_c;
             }
-            if(Auth::check() && Auth::user()->can('update', Convoy::class)){
+            if(Auth::user()?->can('update', Convoy::class)){
                 $bookings_c = Convoy::where(['booking' => '1', 'visible' => '0'])->count();
                 $convoys_badge += $bookings_c;
             }
@@ -81,8 +81,9 @@ class AppServiceProvider extends ServiceProvider
             $applications_c = Application::where('status', 0)->count();
             $recruitments_c = Recruitment::where('status', 0)->count();
             $gallery_c = Gallery::where('visible', 0)->count();
-            if(Auth::check() && Auth::user()->can('accept', Application::class)) $applications_badge += $applications_c;
-            if(Auth::check() && Auth::user()->can('accept', Recruitment::class)) $applications_badge += $recruitments_c;
+            if(Auth::user()?->can('toggle', \App\Gallery::class)) $gallery_badge += $gallery_c;
+            if(Auth::user()?->can('accept', Application::class)) $applications_badge += $applications_c;
+            if(Auth::user()?->can('accept', Recruitment::class)) $applications_badge += $recruitments_c;
             View::share('applications_badge', $applications_badge);
             View::share('applications_c', $applications_c);
             View::share('recruitments_c', $recruitments_c);

@@ -86,7 +86,7 @@
                                 <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
                             @endcan
                         </td>
-                        <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>
+                        <td>{{ $member->join_date?->isoFormat('DD.MM.Y') ?? '–' }}</td>
                     </tr>
                 @endforeach
                 </tbody>

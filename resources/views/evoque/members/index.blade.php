@@ -57,8 +57,8 @@
                             <tr class="member-{{ $member->id }}">
                                 <td>{{ $i++ }}</td>
                                 <td><b>{{ $member->nickname }}</b></td>
-                                <td @if($member->user->birth_date && $member->user->birth_date->format('d-m') == \Carbon\Carbon::now()->format('d-m')) class="text-warning font-weight-bold" @endif>
-                                    <b>{{ $member->user->birth_date ? $member->user->birth_date->age .' '. trans_choice('год|года|лет', $member->user->birth_date->age) : '–' }}</b>
+                                <td @if($member->user->birth_date?->format('d-m') == \Carbon\Carbon::now()->format('d-m')) class="text-warning font-weight-bold" @endif>
+                                    <b>{{ $member->user->birth_date ? $member->user->birth_date?->age .' '. trans_choice('год|года|лет', $member->user->birth_date->age) : '–' }}</b>
                                 </td>
                                 <td>
                                     @foreach($member->role as $item)
@@ -66,10 +66,11 @@
                                     @endforeach
                                 </td>
                                 @if($member->isTrainee())
-                                    <td colspan="2">Испытательный срок до {{ $member->trainee_until ? $member->trainee_until->format('d.m') : $member->join_date->addDays(10)->format('d.m') }}</td>
+                                    <td colspan="2">Испытательный срок до {{ $member->trainee_until?->format('d.m') ?? $member->join_date->addDays(10)->format('d.m') }}</td>
                                     <td class="member-convoys @if($member->isTraineeExpired() && $member->trainee_convoys < 4) text-danger font-weight-bold @endif">
                                         @can('setActivity', \App\Member::class)
-                                            <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                            <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}"
+                                               data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>
                                             </a>
                                         @endcan
@@ -79,7 +80,8 @@
                                     <td class="member-scores">
                                         @can('setActivity', \App\Member::class)
                                             @if($member->scores !== null)
-                                                <a class="add-btn text-shadow" data-amount="1" data-target="бал" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
+                                                <a class="add-btn text-shadow" data-amount="1" data-target="бал" data-id="{{ $member->id }}"
+                                                   data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                     <i class="fas fa-plus"></i>
                                                 </a>
                                             @endif
@@ -149,7 +151,7 @@
                                         <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
                                     @endcan
                                 </td>
-                                <td>{{ !isset($member->join_date) ? '–' : $member->join_date->isoFormat('DD.MM.Y') }}</td>
+                                <td>{{ $member->join_date?->isoFormat('DD.MM.Y') ?? '–' }}</td>
                                 <td class="plate-img p-0">
                                     @if($member->isTrainee())
                                         <img src="/assets/img/u.png">

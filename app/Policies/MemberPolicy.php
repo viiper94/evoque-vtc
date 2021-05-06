@@ -78,7 +78,7 @@ class MemberPolicy
      * @return mixed
      */
     public function updateRoles(User $user, Member $member){
-        if($user->member && ($member->topRole() >= $user->member->topRole() || $user->member->topRole() === 1)){
+        if($member->topRole() >= $user->member?->topRole() || $user->member?->topRole() === 1){
             foreach($user->member->role as $role){
                 if($role->manage_members || $role->edit_members) return true;
             }
@@ -94,7 +94,7 @@ class MemberPolicy
      * @return mixed
      */
     public function fire(User $user, Member $member){
-        if($user->member && $member->topRole() >= $user->member->topRole()){
+        if($member->topRole() >= $user->member?->topRole()){
             foreach($user->member->role as $role){
                 if($role->manage_members || $role->fire_members) return true;
             }

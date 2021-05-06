@@ -37,7 +37,7 @@
                                     <td class="nowrap" rowspan="{{ count($item->getModified()) }}">
                                         @if($item->user)
                                             <span class="text-primary font-weight-bold">
-                                                {{ $item->user->member ? $item->user->member->nickname : $item->user->name }}
+                                                {{ $item->user->member?->nickname ?? $item->user->name }}
                                             </span>
                                         @else
                                             <i>Уволенный пользователь</i>

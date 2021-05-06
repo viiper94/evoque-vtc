@@ -33,7 +33,7 @@
                         <td><a href="{{ route('evoque.profile', $user->id) }}">{{ $user->name }}</td>
                         <td>{{ $user->city }}</td>
                         <td>{{ $user->country }}</td>
-                        <td>{{ !isset($user->birth_date) ? '' : $user->birth_date->isoFormat('DD.MM.Y') }}</td>
+                        <td>{{ $user->birth_date?->isoFormat('DD.MM.Y') ?? '-' }}</td>
                         <td><a href="{{ $user->vk }}" target="_blank">{{ $user->vk }}</a></td>
                         <td><a href="https://steamcommunity.com/profiles/{{ $user->steamid64 }}" target="_blank">{{ $user->steamid64 }}</a></td>
                         <td><a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank">{{ $user->truckersmp_id }}</a></td>
@@ -57,7 +57,7 @@
                             @endif
                         </td>
                         <td>{{ $user->created_at->isoFormat('DD.MM.Y HH:mm') }}</td>
-                        <td>{{ !$user->fired_at ? '-' : $user->fired_at->isoFormat('DD.MM.Y HH:mm') }}</td>
+                        <td>{{ $user->fired_at?->isoFormat('DD.MM.Y HH:mm') ?? '-' }}</td>
                         <td>
                             @can('setAsMember', $user)
                                 <a href="{{ route('evoque.admin.users.setAsMember', $user->id) }}" onclick="return confirm('Назначить этого юзера сотрудником Эвок?')"><i class="fas fa-user-plus"></i></a>

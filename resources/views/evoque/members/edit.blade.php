@@ -89,7 +89,7 @@
                         @if($member->isTrainee())
                             <div class="form-group">
                                 <label for="trainee_until">@lang('attributes.trainee_until')</label>
-                                <input type="text" class="form-control" id="trainee_until" name="trainee_until" value="{{ $member->trainee_until ? $member->trainee_until->format('d.m.Y') : '' }}" autocomplete="off">
+                                <input type="text" class="form-control" id="trainee_until" name="trainee_until" value="{{ $member->trainee_until?->format('d.m.Y') ?? '' }}" autocomplete="off">
                                 @if($errors->has('trainee_until'))
                                     <small class="form-text">{{ $errors->first('trainee_until') }}</small>
                                 @endif

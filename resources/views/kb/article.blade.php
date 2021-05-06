@@ -14,7 +14,7 @@
             </div>
             <div class="col-auto col-md">
                 <p class="mb-0 text-muted">Автор</p>
-                <h4 class="text-primary">{{ $article->user->member ? $article->user->member->nickname : $article->user->name }}</h4>
+                <h4 class="text-primary">{{ $article->user->member?->nickname ?? $article->user->name }}</h4>
                 @if($article->user->member)
                     <h5>{{ $article->user->name }}</h5>
                 @endif

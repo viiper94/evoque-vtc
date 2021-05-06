@@ -156,7 +156,7 @@ class Convoy extends Model implements Auditable{
     public function getCommunicationLink(){
         $href = '';
         if($this->communication === 'TeamSpeak 3'){
-            $href .= 'https://invite.teamspeak.com/';
+            $href .= 'ts3server://';
         }
         return $href . $this->communication_link;
     }

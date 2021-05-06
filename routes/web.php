@@ -51,16 +51,16 @@ Route::get('/evoque/stats', 'MembersController@weekly')->name('evoque.members.we
 Route::post('/evoque/add', 'MembersController@add');
 Route::get('/evoque/reset', 'MembersController@resetConvoys');
 Route::get('/evoque/trash', 'MembersController@trash')->name('evoque.members.trash');;
-Route::any('/evoque/admin/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
-Route::any('/evoque/admin/member/fire/{id}/{restore?}', 'MembersController@fire')->name('evoque.admin.members.fire');
-Route::any('/evoque/admin/member/restore/{id}', 'MembersController@restore')->name('evoque.admin.members.restore');
-Route::any('/evoque/admin/member/changelog/{id}', 'MembersController@changelog')->name('evoque.admin.members.changelog');
+Route::any('/evoque/member/{id}', 'MembersController@edit')->name('evoque.admin.members.edit');
+Route::any('/evoque/member/fire/{id}/{restore?}', 'MembersController@fire')->name('evoque.admin.members.fire');
+Route::any('/evoque/member/restore/{id}', 'MembersController@restore')->name('evoque.admin.members.restore');
+Route::any('/evoque/member/changelog/{id}', 'MembersController@changelog')->name('evoque.admin.members.changelog');
 
 Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');
 Route::get('/evoque/rules/changelog/{id}', 'RulesController@changelog')->name('evoque.rules.changelog');
-Route::any('/evoque/admin/rules/edit/{id}', 'RulesController@edit')->name('evoque.rules.edit');
-Route::get('/evoque/admin/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
-Route::any('/evoque/admin/rules/add', 'RulesController@add')->name('evoque.rules.add');
+Route::any('/evoque/rules/edit/{id}', 'RulesController@edit')->name('evoque.rules.edit');
+Route::get('/evoque/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
+Route::any('/evoque/rules/add', 'RulesController@add')->name('evoque.rules.add');
 
 Route::get('/evoque/rp/reports', 'RpController@reports')->name('evoque.rp.reports');
 Route::any('/evoque/rp/reports/add', 'RpController@addReport')->name('evoque.rp.reports.add');
@@ -96,11 +96,11 @@ Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->na
 Route::get('/convoy/public', 'ConvoysController@public')->name('convoy.public');
 Route::get('/convoy/discord/{convoy_id}', 'ConvoysController@toDiscord')->name('convoy.discord');
 Route::get('/evoque/convoys/private/{all?}', 'ConvoysController@view')->name('convoys.private');
-Route::any('/evoque/admin/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
-Route::post('/evoque/admin/convoys/addcargoman', 'ConvoysController@addCargoMan')->name('evoque.admin.convoy.add.cargoman');
-Route::any('/evoque/admin/convoys/toggle/{id}', 'ConvoysController@toggle')->name('evoque.admin.convoy.toggle');
-Route::get('/evoque/admin/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');
-Route::any('/evoque/admin/convoys/edit/{id}/{booking?}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');
+Route::any('/evoque/convoys/add', 'ConvoysController@add')->name('evoque.admin.convoy.add');
+Route::post('/evoque/convoys/addcargoman', 'ConvoysController@addCargoMan')->name('evoque.admin.convoy.add.cargoman');
+Route::any('/evoque/convoys/toggle/{id}', 'ConvoysController@toggle')->name('evoque.admin.convoy.toggle');
+Route::get('/evoque/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');
+Route::any('/evoque/convoys/edit/{id}/{booking?}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');
 
 Route::get('/evoque/convoys/tab', 'TabsController@index')->name('evoque.convoys.tab');
 Route::any('/evoque/convoys/tab/add', 'TabsController@add')->name('evoque.convoys.tab.add');

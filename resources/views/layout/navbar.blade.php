@@ -88,7 +88,7 @@
                                 @endif
                             </a>
                         </li>
-                        <li class="nav-item @if(Route::current()?->getName() === 'evoque.members')active @endif">
+                        <li class="nav-item @if($controller === 'memberscontroller')active @endif">
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
                         <li class="nav-item dropdown @if(Request::is('evoque/rp*'))active @endif">

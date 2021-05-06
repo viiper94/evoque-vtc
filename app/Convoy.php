@@ -228,7 +228,7 @@ class Convoy extends Model implements Auditable{
     }
 
     public function isFulfilled(): bool{
-        return $this->start_city;
+        return (bool) $this->start_city;
     }
 
 }

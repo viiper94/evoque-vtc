@@ -16,7 +16,7 @@
         перевозки, грузоперевозки, виртуальная транспортная компания, truckersmp, truckers mp, ets2mp, atsmp, ets2 mp,
         euro truck simulator 2, american truck simulator, ets2, ats, multiplayer, мультиплеер, симулятор дальнобойщика,
         вступить в втк, втупить в компанию">
-    <meta property="og:title" content="{{ $convoy ? $convoy->title : 'Открытый конвой' }}">
+    <meta property="og:title" content="Открытый конвой @lang('general.vtc_evoque')">
     <meta property="og:type" content="article">
     @if($convoy)
         <meta property="og:image" content="{{ \Illuminate\Support\Facades\URL::to('/') }}/images/convoys/{{ $convoy->route[0] }}">
@@ -30,7 +30,7 @@
 <div class="container pt-5">
     @include('layout.alert')
     @if($convoy)
-        <h1 class="convoy-title text-center pt-5">{{ $convoy->title }} {{ $convoy->start_time->isoFormat('L') }}</h1>
+        <h1 class="convoy-title text-center pt-5">Открытый конвой @lang('general.vtc_evoque') {{ $convoy->start_time->isoFormat('L') }}</h1>
         @can('update', \App\Convoy::class)
             <div class="row justify-content-center">
                 <a href="{{ route('convoy.discord', $convoy->id) }}" class="btn btn-sm btn-outline-info m-1"

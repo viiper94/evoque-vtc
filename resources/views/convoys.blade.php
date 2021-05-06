@@ -174,7 +174,7 @@
             @if($convoy->communication === 'TeamSpeak 3')
                 <div class="ts-download col-md-6 col-sm-12 row flex-column align-items-center justify-content-center">
                     <a href="https://teamspeak.com/ru/downloads/" target="_blank" class="btn btn-warning btn-lg mb-2"><i class="fas fa-download"></i> Скачать TeamSpeak 3</a>
-                    <button data-toggle="modal" data-target="#ts3-overlay-modal" class="btn btn-outline-warning mt-2">Как настроить оверлей для TS3?</button>
+                    <a href="{{ route('kb.view', 8)  }}" class="btn btn-outline-warning mt-2" target="_blank">Как настроить оверлей для TS3?</a>
                 </div>
             @elseif($convoy->communication === 'Discord')
                 <div class="ts-download col-md-6 col-sm-12 row flex-column align-items-center justify-content-center">
@@ -277,52 +277,4 @@
 
 </div>
 
-@if($convoy && $convoy->communication === 'TeamSpeak 3')
-    <!-- TS3 overlay modal -->
-    <div class="modal fade" id="ts3-overlay-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-            <div class="modal-content modal-content-dark">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Установки и настройка оверлея TSNotifier для TeamSpeak 3</h5>
-                    <button type="button" class="close text-shadow" data-dismiss="modal" aria-label="Close">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ol class="pl-4">
-                        <li>
-                            <p>Скачайте с сайта <a href="http://tsnotifier.eu/" target="_blank">http://tsnotifier.eu/</a> последнюю версию оверлея.</p>
-                        </li>
-                        <li>
-                            <p>Запустите установщик, выбираем путь установки и устанавливаем. <br>
-                                Во время установки у вас появятся два окна с подтверждением установки от Teamspeak, выбираете Yes дважды.</p>
-                        </li>
-                        <li>
-                            <p>Запустите Teamspeak, затем TSNotifier.</p>
-                        </li>
-                        <li>
-                            <p>Ищите программу TSNotifier в трее (она обозначена как TS).<br>
-                                <img src="/assets/img/modals/ts3-overlay4.jpg"></p>
-                        </li>
-                        <li>
-                            <p>Кликните правой клавишей мыши по ней и ищите строчку <b>Edit gamesettings.ini</b> и один раз кликните левой кнопкой мыши по ней. Должен открыться блокнот.<br>
-                                <img src="/assets/img/modals/ts3-overlay5.jpg"></p>
-                        </li>
-                        <li>
-                            <p>Ищите 2 строчки: <br>
-                                <code>
-                                    [eurotrucks2.exe] <br>
-                                    game.enabled=0 <br>
-                                </code>
-                                "0"- исправьте на "1" и выходите с сохранением.</p>
-                        </li>
-                        <li>
-                            <p>Рекомендуем выставить настройку «Запуска вместе с TS». Для этого правой кнопкой мышки кликните по иконке TSNotifier, затем выберете вкладку General и кликните на строчку «Start with TS3».</p>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-@endif
 @endsection

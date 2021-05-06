@@ -10,37 +10,37 @@
             <div class="collapse navbar-collapse pb-5 pb-lg-0 mb-5 mb-lg-0" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 pb-5 pb-lg-0 mb-5 mb-lg-0 text-uppercase font-weight-bold text-shadow">
                     @if(\Illuminate\Support\Facades\Auth::guest() || !\Illuminate\Support\Facades\Auth::user()->member)
-                        <li class="nav-item @if(Route::current() && Route::current()->getName() === 'home')active @endif">
+                        <li class="nav-item @if(Route::is('home'))active @endif">
                             <a class="nav-link" href="{{ route('home') }}">О нас</a>
                         </li>
-                        <li class="nav-item @if(Route::current() && Route::current()->getName() === 'convoys')active @endif">
+                        <li class="nav-item @if(Route::is('convoy.public'))active @endif">
                             <a class="nav-link" href="{{ route('convoy.public') }}">Конвой</a>
                         </li>
-                        <li class="nav-item @if(Route::current() && Request::is('members'))active @endif">
+                        <li class="nav-item @if(Route::is('members'))active @endif">
                             <a class="nav-link" href="{{ route('members') }}">Сотрудники</a>
                         </li>
-                        <li class="nav-item @if(Route::current() && Request::is('rules'))active @endif">
+                        <li class="nav-item @if(Route::is('rules'))active @endif">
                             <a class="nav-link" href="{{ route('rules') }}">Правила</a>
                         </li>
-                        <li class="nav-item @if(Route::current() && Request::is('apply'))active @endif">
+                        <li class="nav-item @if(Route::is('apply'))active @endif">
                             <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                         </li>
-                        <li class="nav-item @if(Route::current() && Request::is('gallery'))active @endif">
+                        <li class="nav-item @if(Route::is('gallery'))active @endif">
                             <a class="nav-link" href="{{ route('gallery') }}">Галерея</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('auth.steam') }}">Войти <i class="fab fa-steam"></i></a>
                         </li>
                     @else
-                        <li class="nav-item @if(Route::current()->getName() === 'gallery')active @endif">
+                        <li class="nav-item @if($controller === 'gallerycontroller')active @endif">
                             <a class="nav-link" href="{{ route('gallery') }}">
                                 Галерея
-                                @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->can('toggle', \App\Gallery::class) && $gallery_c > 0)
+                                @if($gallery_c > 0)
                                     <span class="badge badge-danger">{{ $gallery_c }}</span>
                                 @endif
                             </a>
                         </li>
-                        <li class="nav-item dropdown @if(Route::current() && in_array(Route::current()->getName(), ['evoque.convoys.tab', 'evoque.convoys', 'convoys']))active @endif">
+                        <li class="nav-item dropdown @if(in_array($controller, ['tabscontroller', 'convoyscontroller', 'planscontroller']))active @endif">
                             <a class="nav-link dropdown-toggle nowrap" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Конвои
                                 @if($convoys_c > 0)
@@ -69,7 +69,7 @@
                                 </a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown @if(Route::current() && Route::current()->getName() === 'evoque.rules')active @endif">
+                        <li class="nav-item dropdown @if($controller === 'rulescontroller')active @endif">
                             @can('update', \App\Rules::class)
                                 <a class="nav-link dropdown-toggle" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
                                 <div class="dropdown-menu" aria-labelledby="rulesDropdown">

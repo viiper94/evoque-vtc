@@ -10,6 +10,7 @@ use App\Recruitment;
 use App\RpReport;
 use App\Tab;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -60,6 +61,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('layout.navbar', function($view){
+            View::share('controller', strtolower(class_basename(Route::current()->getController())));
+
             $convoys_badge = 0;
             $applications_badge = 0;
 

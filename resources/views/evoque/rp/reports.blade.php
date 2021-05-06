@@ -55,7 +55,7 @@
                                     @endcan
                                 </h5>
                             </div>
-                            <h5 class="col-auto text-md-right text-muted mb-0">{{ $report->game === 'ets2' ? 'ETS2' : 'ATS' }}</h5>
+                            <h5 class="col-auto text-md-right text-muted mb-0">{{ strtoupper($report->game) }}</h5>
                             @if(\Illuminate\Support\Facades\Auth::user()->can('decline', $report) ||
                                         \Illuminate\Support\Facades\Auth::user()->can('delete', $report))
                                 <div class="dropdown dropdown-dark col-auto px-0 dropleft">

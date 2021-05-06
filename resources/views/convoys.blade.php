@@ -211,7 +211,6 @@
                     <div class="fotorama w-100 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs">
                         <img src="/images/convoys/{{ $convoy->truck_image }}">
                     </div>
-{{--                    <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank"></a>--}}
                 </section>
             </div>
         @endif

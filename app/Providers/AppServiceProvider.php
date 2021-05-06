@@ -57,7 +57,7 @@ class AppServiceProvider extends ServiceProvider
                 ['plate', '=', $value],
                 ['user_id', '!=', Auth::id()]
             ])->first();
-            return $match ? false : true;
+            return !$match;
         });
 
         view()->composer('layout.navbar', function($view){

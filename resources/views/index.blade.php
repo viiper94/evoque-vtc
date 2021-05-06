@@ -104,7 +104,7 @@
         <div class="feature col-md-4 col-sm-12">
             <h1 class="display-2 font-weight-bold">{{ $members_count }}</h1>
             <hr class="m-auto pb-3">
-            <p>{{ \Illuminate\Support\Facades\Lang::choice('опытный водитель|опытных водителя|опытных водителей', $members_count) }}</p>
+            <p>{{ trans_choice('опытный водитель|опытных водителя|опытных водителей', $members_count) }}</p>
         </div>
     </section>
 
@@ -112,7 +112,7 @@
         <div class="feature col-md-4 col-sm-12">
             <h1 class="display-4"><i class="fas fa-money-bill-alt"></i></h1>
             <hr class="m-auto pb-3">
-            <p>Cвоя игровая валюта - <strong>Эвик</strong>.<br>
+            <p>Своя игровая валюта - <strong>Эвик</strong>.<br>
                 Проводя конвои можно заработать <br>
                 на любимую игру или DLC</p>
         </div>

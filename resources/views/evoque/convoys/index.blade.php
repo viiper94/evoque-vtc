@@ -45,8 +45,7 @@
 
                     @foreach($day_convoys as $convoy)
                         <div class="card card-dark text-shadow-m col px-0 my-1 text-center text-md-left
-                                @if($convoy->start_time->addMinutes(60)->isPast())past @endif
-                                @if(!$convoy->start_time->addMinutes(60)->isPast())
+                                @if($convoy->start_time->addMinutes(60)->isPast())past
                                     @if($convoy->public)border-primary
                                     @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
                                     @elseif($convoy->booking && !$convoy->visible)border-info @endif

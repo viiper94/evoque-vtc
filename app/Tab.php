@@ -18,7 +18,6 @@ class Tab extends Model{
         'convoy_title',
         'lead_id',
         'comment',
-//        'description',
     ];
 
     public $statuses = [

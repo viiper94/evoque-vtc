@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    @if($convoy->start_city)
+    @if($convoy->title)
         Редактирование конвоя
     @else
         Новый конвой
@@ -24,7 +24,7 @@
             @csrf
             <div class="mt-3 row justify-content-between">
                 <h2 class="text-primary col-md-6">
-                    @if($convoy->start_city)
+                    @if($convoy->title)
                         Редактирование конвоя
                     @else
                         Новый конвой
@@ -262,7 +262,7 @@
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
                         </div>
-                        <img src="/images/convoys/{{ $convoy->truck_image ? $convoy->truck_image : "image-placeholder.jpg" }}" class="w-100" id="truck_image-preview">
+                        <img src="/images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }}" class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif
@@ -307,7 +307,7 @@
                             <label class="custom-file-label" for="trailer_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
                         </div>
-                        <img src="/images/convoys/{{ $convoy->trailer_image ? $convoy->trailer_image : "image-placeholder.jpg" }}" class="w-100" id="trailer_image-preview">
+                        <img src="/images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="trailer_image-preview">
                         @if($errors->has('trailer_image'))
                             <small class="form-text">{{ $errors->first('trailer_image') }}</small>
                         @endif
@@ -359,7 +359,7 @@
                             <label class="custom-file-label" for="alt_trailer_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
                         </div>
-                        <img src="/images/convoys/{{ $convoy->alt_trailer_image ? $convoy->alt_trailer_image : "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
+                        <img src="/images/convoys/{{ $convoy->alt_trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
                         @if($errors->has('alt_trailer_image'))
                             <small class="form-text">{{ $errors->first('alt_trailer_image') }}</small>
                         @endif

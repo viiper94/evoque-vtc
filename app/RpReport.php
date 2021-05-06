@@ -33,7 +33,7 @@ class RpReport extends Model{
     }
 
     private function removeFile($path){
-        return is_file($path) ? unlink($path) : false;
+        return is_file($path) && unlink($path);
     }
 
     public function getStatus(){

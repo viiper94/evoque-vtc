@@ -187,7 +187,7 @@ class Convoy extends Model implements Auditable{
     }
 
     private function removeFile($path){
-        return is_file($path) ? unlink($path) : false;
+        return is_file($path) && unlink($path);
     }
 
     public function getType(){
@@ -228,7 +228,7 @@ class Convoy extends Model implements Auditable{
     }
 
     public function isFulfilled(): bool{
-        return $this->start_city ? true : false;
+        return $this->start_city;
     }
 
 }

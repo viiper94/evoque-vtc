@@ -19,7 +19,6 @@ class Rules extends Model implements Auditable{
 
     protected $casts = [
         'public' => 'boolean',
-//        'history' => 'array'
     ];
 
     protected $auditExclude = [

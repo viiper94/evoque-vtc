@@ -65,6 +65,7 @@ class AppServiceProvider extends ServiceProvider
 
             $convoys_badge = 0;
             $applications_badge = 0;
+            $gallery_badge = 0;
 
             $tabs_c = 0;
             $bookings_c = 0;
@@ -90,7 +91,7 @@ class AppServiceProvider extends ServiceProvider
             View::share('applications_badge', $applications_badge);
             View::share('applications_c', $applications_c);
             View::share('recruitments_c', $recruitments_c);
-            View::share('gallery_c', $gallery_c);
+            View::share('gallery_c', $gallery_badge);
 
             View::share('reports_c', RpReport::where('status', '0')->count());
         });

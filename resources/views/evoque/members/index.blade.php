@@ -131,8 +131,8 @@
                                         @can('seeBans', \App\Member::class)
                                             @if($member->isBanned())
                                                 <a href="https://truckersmp.com/user/{{ $member->user->truckersmp_id }}"
-                                                   target="_blank" class="text-danger" data-toggle="popover" data-trigger="hover"
-                                                   data-content="Забанен {{ isset($member->tmp_banned_until) ? 'до '.$member->tmp_banned_until->isoFormat('DD.MM.YYYY, HH:MM') : 'перманентно!' }}">
+                                                   target="_blank" class="text-danger" data-toggle="tooltip"
+                                                   data-title="Забанен {{ isset($member->tmp_banned_until) ? 'до '.$member->tmp_banned_until->isoFormat('DD.MM.YYYY, HH:MM') : 'перманентно!' }}">
                                                     <i class="fas fa-truck-pickup"></i>
                                                 </a>
                                             @else

@@ -101,134 +101,134 @@
                             <div class="collapse" id="convoy-{{ $convoy->id }}" aria-labelledby="convoy-{{ $convoy->id }}-header">
                                 @if($convoy->isFulfilled())
                                     <div class="card-body">
-                                        @if($convoy->route)
-                                            <div class="row">
-                                                <div class="col-xl-4 col-md-6">
-                                                    <p class="text-muted">@lang('attributes.start_city')</p>
-                                                    <h3>{{ $convoy->start_city }}</h3>
-                                                    <h5 class="mb-3">{{ $convoy->start_company }}</h5>
-                                                    <p class="text-muted">@lang('attributes.rest_city')</p>
-                                                    <h3>{{ $convoy->rest_city }}</h3>
-                                                    <h5 class="mb-3">{{ $convoy->rest_company }}</h5>
-                                                    <p class="text-muted">@lang('attributes.finish_city')</p>
-                                                    <h3>{{ $convoy->finish_city }}</h3>
-                                                    <h5 class="mb-3">{{ $convoy->finish_company }}</h5>
-                                                    <p class="text-muted">Сбор по МСК</p>
-                                                    <h5 class="mb-1">{{ $convoy->start_time->subMinutes(30)->format('H:i') }}</h5>
-                                                    <p class="text-muted">@lang('attributes.start_time')</p>
-                                                    <h5>{{ $convoy->start_time->format('H:i') }}</h5>
-                                                </div>
-                                                <div class="col-xl-4 col-md-6">
-                                                    @if($convoy->cargoman)
-                                                        <p class="text-muted">CargoMan :</p>
-                                                        <h5>{{ $convoy->cargoman }}</h5>
-                                                        <p class="mb-1"><a href="{{route('kb.view', 18) }}" class="text-muted">Как присоединиться?</a></p>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-md-6">
+                                                <p class="mb-0 text-muted">@lang('attributes.start_city')</p>
+                                                <h3>{{ $convoy->start_city }}</h3>
+                                                <h5 class="mb-3">{{ $convoy->start_company }}</h5>
+                                                <p class="mb-0 text-muted">@lang('attributes.rest_city')</p>
+                                                <h3>{{ $convoy->rest_city }}</h3>
+                                                <h5 class="mb-3">{{ $convoy->rest_company }}</h5>
+                                                <p class="mb-0 text-muted">@lang('attributes.finish_city')</p>
+                                                <h3>{{ $convoy->finish_city }}</h3>
+                                                <h5 class="mb-3">{{ $convoy->finish_company }}</h5>
+                                                <p class="mb-0 text-muted">Сбор по МСК</p>
+                                                <h5 class="mb-1">{{ $convoy->start_time->subMinutes(30)->format('H:i') }}</h5>
+                                                <p class="mb-0 text-muted">@lang('attributes.start_time')</p>
+                                                <h5>{{ $convoy->start_time->format('H:i') }}</h5>
+                                            </div>
+                                            <div class="col-xl-4 col-md-6">
+                                                @if($convoy->cargoman)
+                                                    <p class="mb-0 text-muted">CargoMan :</p>
+                                                    <h5>{{ $convoy->cargoman }}</h5>
+                                                    <p class="mb-1"><a href="{{route('kb.view', 18) }}" class="text-muted">Как присоединиться?</a></p>
+                                                @endif
+                                                <p class="mb-0 text-muted">Сервер:</p>
+                                                <h5 class="mb-1">{{ $convoy->server }}</h5>
+                                                <p class="mb-0 text-muted">Ведущий:</p>
+                                                <h5 class="mb-1">
+                                                    @if($convoy->leadMember?->user->vk)
+                                                        <a href="{{ $convoy->leadMember->user->vk }}" target="_blank">{{ $convoy->lead }}</a>
+                                                    @else
+                                                        {{ $convoy->lead }}
                                                     @endif
-                                                    <p class="text-muted">Сервер:</p>
-                                                    <h5 class="mb-1">{{ $convoy->server }}</h5>
-                                                    <p class="text-muted">Ведущий:</p>
-                                                    <h5 class="mb-1">
-                                                        @if($convoy->leadMember?->user->vk)
-                                                            <a href="{{ $convoy->leadMember->user->vk }}" target="_blank">{{ $convoy->lead }}</a>
-                                                        @else
-                                                            {{ $convoy->lead }}
-                                                        @endif
-                                                    </h5>
-                                                    <p class="text-muted">Связь {{ $convoy->communication }}:</p>
-                                                    <h5 class="mb-1">
-                                                        <a href="{{ $convoy->getCommunicationLink() }}" target="_blank">
-                                                            {{ $convoy->communication_link }}
-                                                        </a>
-                                                    </h5>
-                                                    @if($convoy->communication_channel)
-                                                        <p class="text-muted">Канал на сервере:</p>
-                                                        <h5 >{{ $convoy->communication_channel }}</h5>
-                                                    @endif
-                                                </div>
+                                                </h5>
+                                                <p class="mb-0 text-muted">Связь {{ $convoy->communication }}:</p>
+                                                <h5 class="mb-1">
+                                                    <a href="{{ $convoy->getCommunicationLink() }}" target="_blank">
+                                                        {{ $convoy->communication_link }}
+                                                    </a>
+                                                </h5>
+                                                @if($convoy->communication_channel)
+                                                    <p class="mb-0 text-muted">Канал на сервере:</p>
+                                                    <h5 >{{ $convoy->communication_channel }}</h5>
+                                                @endif
+                                            </div>
+                                            @if($convoy->route)
                                                 <div class="fotorama col-xl-4 col-md-12 align-self-baseline text-shadow-m" data-allowfullscreen="native" data-nav="thumbs" data-maxheight="700px">
                                                     @foreach($convoy->route as $image)
                                                         <img src="/images/convoys/{{ $image }}">
                                                     @endforeach
                                                 </div>
-                                            </div>
-                                            <div class="row justify-content-center mt-5">
-                                                <div class="col-md-12 col-xl-6 text-center text-md-left text-xl-right row justify-content-end mx-0 flex-column-reverse flex-md-row-reverse flex-xl-row truck-info">
-                                                    <div class="col">
-                                                        <p class="text-muted">@lang('attributes.truck')</p>
-                                                        <h5 class="mb-1">{{ $convoy->truck ?? 'Любой' }}</h5>
-                                                        @if($convoy->truck_tuning)
-                                                            <p class="text-muted">Тюнинг:</p>
-                                                            <h5 class="mb-1">{{ $convoy->truck_tuning }}</h5>
-                                                        @endif
-                                                        @if($convoy->truck_paint)
-                                                            <p class="text-muted">Окрас:</p>
-                                                            <h5>{{ $convoy->truck_paint }}</h5>
-                                                        @endif
+                                            @endif
+                                        </div>
+                                        <div class="row justify-content-center mt-5">
+                                            <div class="col-md-12 col-xl-6 text-center text-md-left text-xl-right row justify-content-end mx-0 flex-column-reverse flex-md-row-reverse flex-xl-row truck-info">
+                                                <div class="col">
+                                                    <p class="mb-0 text-muted">@lang('attributes.truck')</p>
+                                                    <h5 class="mb-1">{{ $convoy->truck ?? 'Любой' }}</h5>
+                                                    @if($convoy->truck_tuning)
+                                                        <p class="mb-0 text-muted">Тюнинг:</p>
+                                                        <h5 class="mb-1">{{ $convoy->truck_tuning }}</h5>
+                                                    @endif
+                                                    @if($convoy->truck_paint)
+                                                        <p class="mb-0 text-muted">Окрас:</p>
+                                                        <h5>{{ $convoy->truck_paint }}</h5>
+                                                    @endif
+                                                </div>
+                                                @if($convoy->truck_image)
+                                                    <div class="col truck-img">
+                                                        <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank">
+                                                            <img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
+                                                        </a>
                                                     </div>
-                                                    @if($convoy->truck_image)
-                                                        <div class="col truck-img">
-                                                            <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank">
-                                                                <img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
+                                                @endif
+                                            </div>
+                                            <div class="col-md-12 col-xl-6 row justify-content-start mx-0 trailer-info">
+                                                <div class="row mx-0 flex-column flex-md-row mt-5 mt-md-3 mt-lg-0">
+                                                    @if($convoy->trailer_image)
+                                                        <div class="col">
+                                                            <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank">
+                                                                <img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m w-100">
                                                             </a>
                                                         </div>
                                                     @endif
+                                                    <div class="col">
+                                                        <p class="mb-0 text-muted">@lang('attributes.trailer')</p>
+                                                        <h5 class="mb-1">{{ $convoy->trailer ?? 'Любой' }}</h5>
+                                                        @if($convoy->trailer_tuning)
+                                                            <p class="mb-0 text-muted">Тюнинг:</p>
+                                                            <h5 class="mb-1">{{ $convoy->trailer_tuning }}</h5>
+                                                        @endif
+                                                        @if($convoy->trailer_paint)
+                                                            <p class="mb-0 text-muted">Окрас:</p>
+                                                            <h5 class="mb-1">{{ $convoy->trailer_paint }}</h5>
+                                                        @endif
+                                                        @if($convoy->cargo)
+                                                            <p class="mb-0 text-muted">Груз:</p>
+                                                            <h5>{{ $convoy->cargo }}</h5>
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-12 col-xl-6 row justify-content-start mx-0 trailer-info">
-                                                    <div class="row mx-0 flex-column flex-md-row mt-5 mt-md-3 mt-lg-0">
-                                                        @if($convoy->trailer_image)
+                                                @if($convoy->alt_trailer)
+                                                    <div class="row mt-3 mx-0 flex-column flex-md-row mt-5 mt-md-3">
+                                                        @if($convoy->alt_trailer_image)
                                                             <div class="col">
-                                                                <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank">
-                                                                    <img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m w-100">
+                                                                <a href="/images/convoys/{{ $convoy->alt_trailer_image }}" target="_blank">
+                                                                    <img src="/images/convoys/{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m w-100">
                                                                 </a>
                                                             </div>
                                                         @endif
                                                         <div class="col">
-                                                            <p class="text-muted">@lang('attributes.trailer')</p>
-                                                            <h5 class="mb-1">{{ $convoy->trailer ?? 'Любой' }}</h5>
-                                                            @if($convoy->trailer_tuning)
-                                                                <p class="text-muted">Тюнинг:</p>
-                                                                <h5 class="mb-1">{{ $convoy->trailer_tuning }}</h5>
+                                                            <p class="mb-0 text-muted">@lang('attributes.alt_trailer')</p>
+                                                            <h5 class="mb-1">{{ $convoy->alt_trailer ?? 'Любой' }}</h5>
+                                                            @if($convoy->alt_trailer_tuning)
+                                                                <p class="mb-0 text-muted">Тюнинг:</p>
+                                                                <h5 class="mb-1">{{ $convoy->alt_trailer_tuning }}</h5>
                                                             @endif
-                                                            @if($convoy->trailer_paint)
-                                                                <p class="text-muted">Окрас:</p>
-                                                                <h5 class="mb-1">{{ $convoy->trailer_paint }}</h5>
+                                                            @if($convoy->alt_trailer_paint)
+                                                                <p class="mb-0 text-muted">Окрас:</p>
+                                                                <h5 class="mb-1">{{ $convoy->alt_trailer_paint }}</h5>
                                                             @endif
-                                                            @if($convoy->cargo)
-                                                                <p class="text-muted">Груз:</p>
-                                                                <h5>{{ $convoy->cargo }}</h5>
+                                                            @if($convoy->alt_cargo)
+                                                                <p class="mb-0 text-muted">Груз:</p>
+                                                                <h5>{{ $convoy->alt_cargo }}</h5>
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    @if($convoy->alt_trailer)
-                                                        <div class="row mt-3 mx-0 flex-column flex-md-row mt-5 mt-md-3">
-                                                            @if($convoy->alt_trailer_image)
-                                                                <div class="col">
-                                                                    <a href="/images/convoys/{{ $convoy->alt_trailer_image }}" target="_blank">
-                                                                        <img src="/images/convoys/{{ $convoy->alt_trailer_image }}" alt="{{ $convoy->alt_trailer }}" class="text-shadow-m w-100">
-                                                                    </a>
-                                                                </div>
-                                                            @endif
-                                                            <div class="col">
-                                                                <p class="text-muted">@lang('attributes.alt_trailer')</p>
-                                                                <h5 class="mb-1">{{ $convoy->alt_trailer ?? 'Любой' }}</h5>
-                                                                @if($convoy->alt_trailer_tuning)
-                                                                    <p class="text-muted">Тюнинг:</p>
-                                                                    <h5 class="mb-1">{{ $convoy->alt_trailer_tuning }}</h5>
-                                                                @endif
-                                                                @if($convoy->alt_trailer_paint)
-                                                                    <p class="text-muted">Окрас:</p>
-                                                                    <h5 class="mb-1">{{ $convoy->alt_trailer_paint }}</h5>
-                                                                @endif
-                                                                @if($convoy->alt_cargo)
-                                                                    <p class="text-muted">Груз:</p>
-                                                                    <h5>{{ $convoy->alt_cargo }}</h5>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                </div>
+                                                @endif
                                             </div>
-                                        @endif
+                                        </div>
                                         @if(isset($convoy->comment))
                                             <div class="comment py-3 markdown-content">
                                                 @markdown($convoy->comment)

@@ -103,6 +103,7 @@ class MembersController extends Controller{
             if($request->input('target') === 'бал'){
                 $scores = $member->scores;
                 $member->scores += 1;
+                $member->checkRoles();
                 return response()->json([
                     'scores' => $member->save() ? $member->scores : $scores,
                     'status' => 'OK'

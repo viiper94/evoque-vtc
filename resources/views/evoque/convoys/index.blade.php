@@ -44,7 +44,6 @@
                 <div class="day-convoys col row @if($day->isToday()) text-primary @elseif($day->isPast())past @endif">
 
                     @foreach($day_convoys as $convoy)
-                        @dump($convoy->isFulfilled())
                         <div class="card card-dark text-shadow-m col px-0 my-1 text-center text-md-left
                                 @if($convoy->start_time->addMinutes(60)->isPast())
                                     past

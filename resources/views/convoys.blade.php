@@ -113,7 +113,7 @@
                                 <p>CargoMan:</p>
                                 <h4>{{ $convoy->cargoman }}</h4>
                                 <p>
-                                    <a class="text-muted" href="{{ route('kb.view', 18) }}">Что это такое?</a>
+                                    <a class="text-muted" href="{{ route('kb.view', 18) }}" target="_blank">Что это такое?</a>
                                 </p>
                             </div>
                             <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">

@@ -7,13 +7,11 @@ use Monolog\Formatter\LineFormatter;
 
 class Logger{
 
-    protected $request;
-    protected $exception;
+    public function __construct(
+        protected ?Request $request = null,
+        protected ?\Exception $exception = null
+    ){}
 
-    public function __construct(Request $request = null, \Exception $exception = null){
-        $this->request = $request;
-        $this->exception = $exception;
-    }
     public function __invoke($logger){
 
         foreach ($logger->getHandlers() as $handler) {

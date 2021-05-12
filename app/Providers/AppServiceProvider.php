@@ -61,7 +61,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         view()->composer('layout.navbar', function($view){
-            View::share('controller', strtolower(class_basename(Route::current()->getController())));
+            View::share('controller', strtolower(class_basename(Route::current()?->getController())));
 
             $convoys_badge = 0;
             $applications_badge = 0;

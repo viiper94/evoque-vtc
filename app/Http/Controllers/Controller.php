@@ -48,7 +48,9 @@ class Controller extends BaseController{
             $steam = new Steam();
             $tmp_data = $tmp->player(explode('user/', $request->input('tmp_link'))[1])->get();
             $steam_data = $steam->getPlayerData($tmp_data->getSteamID64());
+            if(isset($steam_data['error'])) return redirect()->back()->withErrors([$steam_data['message']]);
             $steam_games = $steam->getSCSGamesData($tmp_data->getSteamID64());
+            if(isset($steam_games['error'])) return redirect()->back()->withErrors([$steam_games['message']]);
             if(!$steam_games['ets2'] && !$steam_games['ats']){
                 return redirect()->back()->withErrors(['Ваш профиль Steam скрыт! Откройте его и подайте заявку еще раз.']);
             }

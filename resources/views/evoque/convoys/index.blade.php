@@ -55,9 +55,17 @@
 
                             <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
                                  aria-expanded="false" aria-controls="{{ $convoy->id }}">
-                                <h5 class="text-center col">
-                                    {{ $convoy->title }}
-                                </h5>
+                                @if(!$convoy->isFulfilled() && \Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class))
+                                    <h5 class="text-center col">
+                                        <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}">
+                                            {{ $convoy->title }}
+                                        </a>
+                                    </h5>
+                                @else
+                                    <h5 class="text-center col">
+                                        {{ $convoy->title }}
+                                    </h5>
+                                @endif
                                 @can('update', \App\Convoy::class)
                                     <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                         <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"

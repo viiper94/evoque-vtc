@@ -101,8 +101,10 @@
                 padding-left: 35px;
             }
             .past{
-                .card-header h5{
-                    color: $primary-text-darker;
+                .card-header {
+                    h5, a{
+                        color: $primary-text-darker;
+                    }
                 }
                 .convoy-main-info {
                     p, i, a, span{

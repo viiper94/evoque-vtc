@@ -18,7 +18,7 @@ class TabsController extends Controller{
             $tabs = $tabs->where('member_id', Auth::user()->member->id);
         }
         return view('evoque.convoys.tab.index', [
-            'tabs' => $tabs->orderBy('date', 'desc')->get()
+            'tabs' => $tabs->orderBy('date', 'desc')->paginate(8)
         ]);
     }
 

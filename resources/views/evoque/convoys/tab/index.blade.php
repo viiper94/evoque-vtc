@@ -94,6 +94,8 @@
                 </div>
             @endforeach
         </div>
+
+        {{ $tabs->links('layout.pagination') }}
     </div>
 
 @endsection

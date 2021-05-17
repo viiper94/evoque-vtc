@@ -148,10 +148,9 @@ class Member extends Model implements Auditable{
 
     public function canReportRP() :bool{
         $reports = RpReport::where('member_id', $this->id)
-            ->where('created_at', '>', Carbon::now()->subHour())
-            ->orderBy('created_at', 'desc')
+            ->where('created_at', '>', Carbon::now()->subMinutes(30))
             ->count();
-        return $reports < 2;
+        return $reports < 1;
     }
 
 }

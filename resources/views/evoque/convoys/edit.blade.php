@@ -138,7 +138,7 @@
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input" id="route-0" name="route[]" accept="image/*">
                             <label class="custom-file-label" for="route-0">{{ $convoy->route ? 'Загрузить новое изображение' : 'Выберите изображение' }}</label>
-                            <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
                         <img class="w-100" id="route-0-preview">
                     </div>
@@ -260,7 +260,7 @@
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*">
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
-                            <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
                         <img src="/images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }}" class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
@@ -305,7 +305,7 @@
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input" id="trailer_image" name="trailer_image" accept="image/*">
                             <label class="custom-file-label" for="trailer_image">Выберите изображение</label>
-                            <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
                         <img src="/images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="trailer_image-preview">
                         @if($errors->has('trailer_image'))
@@ -357,7 +357,7 @@
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
                             <label class="custom-file-label" for="alt_trailer_image">Выберите изображение</label>
-                            <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
+                            <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
                         <img src="/images/convoys/{{ $convoy->alt_trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
                         @if($errors->has('alt_trailer_image'))
@@ -438,7 +438,7 @@
             <div class="custom-file custom-file-dark mb-3">
                 <input type="file" class="custom-file-input" id="route-%i%" name="route[%i%]" accept="image/*">
                 <label class="custom-file-label" for="route-%i%">Выберите изображение</label>
-                <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
+                <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
             </div>
             <img class="w-100" id="route-%i%-preview">
         </div>

@@ -67,6 +67,10 @@ class Member extends Model implements Auditable{
         return $this->hasOne('App\RpStats');
     }
 
+    public function reports(){
+        return $this->hasMany('App\RpReport');
+    }
+
     public function getPlace(){
         if(isset($this->user->city) || isset($this->user->country)){
             return implode('/', array_filter([$this->user->city, $this->user->country]));
@@ -140,6 +144,14 @@ class Member extends Model implements Auditable{
             }
             $member->save();
         }
+    }
+
+    public function canReportRP() :bool{
+        $reports = RpReport::where('member_id', $this->id)
+            ->where('created_at', '>', Carbon::now()->subHour())
+            ->orderBy('created_at', 'desc')
+            ->count();
+        return $reports < 2;
     }
 
 }

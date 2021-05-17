@@ -49,7 +49,7 @@ class RpReportPolicy
     public function create(User $user){
         if($user->member){
             foreach($user->member->role as $role){
-                if($role->manage_rp || $role->add_reports) return true;
+                if($role->manage_rp || ($role->add_reports && $user->member->canReportRP())) return true;
             }
         }
         return false;

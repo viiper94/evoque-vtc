@@ -14,7 +14,7 @@
     <div class="container pt-5">
         @include('layout.alert')
         @can('viewAll', \App\RpReport::class)
-            <h2 class="mt-3 text-primary ml-3 text-center">Все отчёты рейтинговых перевозок</h2>
+            <h2 class="mt-3 text-primary ml-3 text-center">Отчёты рейтинговых перевозок</h2>
         @else
             <h2 class="mt-3 text-primary ml-3 text-center">Мои отчёты рейтинговых перевозок</h2>
         @endcan

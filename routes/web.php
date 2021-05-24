@@ -112,4 +112,9 @@ Route::get('/evoque/convoys/plans', 'PlansController@plans')->name('evoque.convo
 Route::post('/evoque/convoys/plans', 'PlansController@quickBook');
 Route::any('/evoque/convoys/plans/book/{offset}/{type}', 'PlansController@book')->name('evoque.convoys.plans.book');
 
+Route::get('/evoque/test', 'TestController@index')->name('evoque.test');
+Route::any('/evoque/test/add', 'TestController@add')->name('evoque.test.add');
+Route::any('/evoque/test/edit/{id?}', 'TestController@edit')->name('evoque.test.edit');
+Route::get('/evoque/test/delete/{id}', 'TestController@delete')->name('evoque.test.delete');
+
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

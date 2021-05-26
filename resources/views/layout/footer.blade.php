@@ -33,7 +33,11 @@
                         <a class="nav-link" href="{{ route('members') }}">Команда</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://truckersmp.com/reports/create" target="_blank">Жалоба на водителя</a>
+                        @if(\Illuminate\Support\Facades\Auth::user()?->member)
+                            <a class="nav-link" href="{{ route('evoque.test') }}">Тест на знание ВТК</a>
+                        @else
+                            <a class="nav-link" href="https://truckersmp.com/reports/create" target="_blank">Жалоба на водителя</a>
+                        @endif
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('convoy.public') }}">Открытый конвой</a>

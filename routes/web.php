@@ -116,5 +116,6 @@ Route::get('/evoque/test', 'TestController@index')->name('evoque.test');
 Route::any('/evoque/test/add', 'TestController@add')->name('evoque.test.add');
 Route::any('/evoque/test/edit/{id?}', 'TestController@edit')->name('evoque.test.edit');
 Route::get('/evoque/test/delete/{id}', 'TestController@delete')->name('evoque.test.delete');
+Route::get('/evoque/test/sort/{id}/{direction}', 'TestController@sort')->name('evoque.test.sort');
 
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

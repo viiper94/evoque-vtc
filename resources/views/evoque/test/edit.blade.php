@@ -32,7 +32,8 @@
                                value="{{ old('answers['.$key.']') ?? $question->question }}" required>
                     </div>
                     <div class="custom-control custom-radio col-sm-3 pl-5">
-                        <input type="radio" id="correct-{{ $key }}" name="correct" value="{{ $key }}" class="custom-control-input" required>
+                        <input type="radio" id="correct-{{ $key }}" name="correct" value="{{ $key }}"
+                               class="custom-control-input" @if($question->correct == $key)checked @endif required>
                         <label class="custom-control-label" for="correct-{{ $key }}">Правильный ответ</label>
                     </div>
                 @endforeach

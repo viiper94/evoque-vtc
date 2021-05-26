@@ -82,4 +82,20 @@ class Controller extends BaseController{
         ]);
     }
 
+    protected function getLatestSortId($class){
+        $item = $class::select('sort')->orderBy('sort', 'desc')->first();
+        if($item){
+            $item->toArray();
+            return $item['sort'];
+        }
+        return false;
+    }
+
+    protected function swapSort($item, $slave_item){
+        $tmp = $item->sort;
+        $item->sort = $slave_item->sort;
+        $slave_item->sort = $tmp;
+        return $item->save() && $slave_item->save();
+    }
+
 }

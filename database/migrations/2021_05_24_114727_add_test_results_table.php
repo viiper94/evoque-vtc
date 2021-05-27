@@ -13,7 +13,14 @@ class AddTestResultsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('test_results', function(Blueprint $table){
+            $table->id();
+            $table->integer('member_id');
+            $table->integer('question_id');
+            $table->integer('answer');
+            $table->boolean('correct');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +30,6 @@ class AddTestResultsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('test_results');
     }
 }

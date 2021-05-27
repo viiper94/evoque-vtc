@@ -13,6 +13,9 @@
             <a href="{{ route('evoque.test.add') }}" class="btn btn-sm btn-outline-primary">
                 <i class="fas fa-plus"></i> Добавить вопрос
             </a>
+            <a href="{{ route('evoque.test') }}" class="btn btn-sm btn-outline-info">
+                К тесту
+            </a>
         </h5>
         @if(count($questions) > 0)
             @foreach($questions as $question)

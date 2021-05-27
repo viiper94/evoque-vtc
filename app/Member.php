@@ -71,6 +71,10 @@ class Member extends Model implements Auditable{
         return $this->hasMany('App\RpReport');
     }
 
+    public function testResult(){
+        return $this->hasOne('App\TestResult');
+    }
+
     public function getPlace(){
         if(isset($this->user->city) || isset($this->user->country)){
             return implode('/', array_filter([$this->user->city, $this->user->country]));

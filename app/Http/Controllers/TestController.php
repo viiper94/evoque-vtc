@@ -3,12 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\TestQuestion;
+use App\TestResult;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller{
 
-    public function index(){
-        return view('evoque.test.index');
+    public function index(Request $request, int $question_number = null){
+        $question = TestQuestion::whereSort($question_number)->first();
+        if($request->post()){
+            $prev_question = TestQuestion::whereSort($question_number - 1)->first();
+            $result = new TestResult();
+            $result->member_id = Auth::user()->member->id;
+            $result->question_id = $prev_question->id;
+            $result->answer = $request->input('answer');
+            $result->correct = $request->input('answer') == $prev_question->correct;
+            $result->save();
+        }
+        return view('evoque.test.index', [
+            'results' => TestResult::with('question')->whereMemberId(Auth::user()->member->id)->get()->keyBy('question.sort'),
+            'count' => TestQuestion::count(),
+            'question' => $question,
+            'question_number' => $question_number
+        ]);
     }
 
     public function add(Request $request){

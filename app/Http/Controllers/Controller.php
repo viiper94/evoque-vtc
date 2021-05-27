@@ -17,7 +17,7 @@ use TruckersMP\APIClient\Client;
 class Controller extends BaseController{
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function index(){
+    public function home(){
         return view('index', [
             'members_count' => Member::where('visible', 1)->count()
         ]);

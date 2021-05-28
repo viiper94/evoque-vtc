@@ -25,4 +25,9 @@ class TestQuestion extends Model{
         parent::__construct($attributes);
     }
 
+    public function isLast(){
+        $next = TestQuestion::whereSort($this->sort + 1)->first();
+        return !$next;
+    }
+
 }

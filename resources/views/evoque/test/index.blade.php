@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="container pt-5">
-{{--        @dd($results)--}}
+{{--        @dd($correct)--}}
         @include('layout.alert')
         <h2 class="mt-3 mb-3 text-primary text-center">Тест на знание ВТК</h2>
         <h5 class="text-center">
@@ -15,7 +15,7 @@
                 <i class="fas fa-edit"></i> Редактировать вопросы
             </a>
         </h5>
-        @include('evoque.test.inc.'.($question_number ? 'question' : 'start'))
+        @include('evoque.test.inc.'.$view)
     </div>
 
 @endsection

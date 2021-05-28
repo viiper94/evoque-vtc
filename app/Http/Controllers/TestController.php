@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class TestController extends Controller{
 
     public function index(Request $request, int $question_number = null){
-        $question = TestQuestion::whereSort($question_number)->first();
+        $questions = TestQuestion::all()->keyBy('sort');
         if($request->post()){
-            $prev_question = TestQuestion::whereSort($question_number - 1)->first();
+            $prev_question = $questions[$request->input('sort')];
             $result = new TestResult();
             $result->member_id = Auth::user()->member->id;
             $result->question_id = $prev_question->id;
@@ -20,10 +20,15 @@ class TestController extends Controller{
             $result->correct = $request->input('answer') == $prev_question->correct;
             $result->save();
         }
+        $results = TestResult::with('question')->whereMemberId(Auth::user()->member->id)->get()->keyBy('question.sort');
         return view('evoque.test.index', [
-            'results' => TestResult::with('question')->whereMemberId(Auth::user()->member->id)->get()->keyBy('question.sort'),
+            'results' => $results,
+            'correct' => $results->filter(function($value){
+                return $value->correct;
+            }),
             'count' => TestQuestion::count(),
-            'question' => $question,
+            'question' => $question_number ? $questions[$question_number] : null,
+            'view' => !$question_number ? (Auth::user()->member->hasCompleteTest() ? 'result' : 'start') : 'question',
             'question_number' => $question_number
         ]);
     }

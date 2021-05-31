@@ -211,7 +211,7 @@ class ConvoysController extends Controller{
         if(!Auth::user()?->member) abort(404);
         $convoy = Convoy::findOrFail($request->input('id'));
         $this->validate($request, [
-            'cargoman' => 'numeric|required'
+            'cargoman' => 'numeric|required|digits:6'
         ]);
         $convoy->cargoman = $request->input('cargoman');
         return $convoy->save() ?

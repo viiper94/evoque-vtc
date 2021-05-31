@@ -283,7 +283,7 @@
                             <li>Код будет доступен всего 30 минут с момента его создания.</li>
                         </ul>
                         <div class="form-group">
-                            <input type="number" class="form-control form-control-lg" id="cargoman" name="cargoman" placeholder="Вставьте код" required>
+                            <input type="text" class="form-control form-control-lg" id="cargoman" name="cargoman" placeholder="Вставьте код" maxlength="6" required>
                         </div>
                     </div>
                     <div class="modal-footer">

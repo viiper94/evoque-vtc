@@ -66,10 +66,8 @@
                 <div class="form-group col-xs-12 col-md-6">
                     <label for="server">Сервер</label>
                     <select class="form-control" id="server" name="server" required>
-                        @foreach($servers as $server)
-                            <option value="{{ $server->getName() }}" @if($server->getName() === (old('server') ?? $convoy->server)) selected @endif >
-                                [{{ $server->getGame() }}] {{ $server->getName() }} ({{ $server->getPlayers() }}/{{ $server->getMaxPlayers() }})
-                            </option>
+                        @foreach($servers as $server => $game)
+                            <option value="{{ $server }}" @if($server === (old('server') ?? $convoy->server)) selected @endif >[{{ strtoupper($game) }}] {{ $server }}</option>
                         @endforeach
                         <option value="Выделенный ивент сервер" @if((old('server') ?? $convoy->server) === 'Выделенный ивент сервер') selected @endif >Выделенный ивент сервер</option>
                         <option value="Определимся позже" @if((old('server') ?? $convoy->server) === 'Определимся позже') selected @endif >Определимся позже</option>

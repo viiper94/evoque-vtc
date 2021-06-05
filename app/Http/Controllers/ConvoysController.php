@@ -82,9 +82,10 @@ class ConvoysController extends Controller{
                 redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно создан!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        $tmp = new Client();
-        $servers = $tmp->servers()->get();
         $convoy = new Convoy();
+//        $tmp = new Client();
+//        $servers = $tmp->servers()->get();
+        $servers = $convoy->defaultServers;
         $convoy->start_time = Carbon::now();
         $convoy->trailer_public = true;
         $convoy->route = ['1' => null];
@@ -136,8 +137,9 @@ class ConvoysController extends Controller{
                 redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        $tmp = new Client();
-        $servers = $tmp->servers()->get();
+//        $tmp = new Client();
+//        $servers = $tmp->servers()->get();
+        $servers = $convoy->defaultServers;
         return view('evoque.convoys.edit', [
             'booking' => false,
             'convoy' => $convoy,

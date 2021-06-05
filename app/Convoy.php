@@ -144,6 +144,17 @@ class Convoy extends Model implements Auditable{
             '23:00', '23:15', '23:30', '23:45'],
     ];
 
+    public $defaultServers = [
+        'Simulation 1' => 'ets2',
+        'Simulation 2' => 'ets2',
+        '[US] Simulation' => 'ets2',
+        'Arcade' => 'ets2',
+        'ProMods' => 'ets2',
+        'Simulation' => 'ats',
+        '[US] Simulation ' => 'ats',
+        '[US] Arcade' => 'ats',
+    ];
+
     protected $auditExclude = [
         'id',
     ];

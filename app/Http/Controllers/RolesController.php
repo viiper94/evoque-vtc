@@ -95,8 +95,16 @@ class RolesController extends Controller{
             $role->toggle_visibility = $request->input('toggle_visibility') == 'on';
             $role->delete_screenshots = $request->input('delete_screenshots') == 'on';
 
+            $role->manage_test = $request->input('manage_test') == 'on';
+            $role->add_questions = $request->input('add_questions') == 'on';
+            $role->edit_questions = $request->input('edit_questions') == 'on';
+            $role->delete_questions = $request->input('delete_questions') == 'on';
+            $role->view_results = $request->input('view_results') == 'on';
+            $role->delete_results = $request->input('delete_results') == 'on';
+            $role->do_test = $request->input('do_test') == 'on';
+
             return $role->save() ?
-                redirect()->route('evoque.admin.roles')->with(['success' => 'Права роли успешно отредактирована!']) :
+                redirect()->route('evoque.admin.roles')->with(['success' => 'Права роли успешно отредактированы!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return redirect()->back();

@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <h3 class="text-primary">Управление учасниками</h3>
+                        <h3 class="text-primary">Сотрудники</h3>
                         <div class="custom-control custom-checkbox mb-4">
                             <input type="checkbox" class="custom-control-input" id="manage_members" name="manage_members" @if($role->manage_members)checked @endif>
                             <label class="custom-control-label text-danger" for="manage_members">Полные права по управлению сотрудниками</label>
@@ -346,6 +346,38 @@
                         <div class="custom-control custom-checkbox mb-2">
                             <input type="checkbox" class="custom-control-input" id="delete_screenshots" name="delete_screenshots" @if($role->delete_screenshots)checked @endif>
                             <label class="custom-control-label" for="delete_screenshots">Удалять скриншоты</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <h3 class="text-primary">Тест</h3>
+                        <div class="custom-control custom-checkbox mb-4">
+                            <input type="checkbox" class="custom-control-input" id="manage_test" name="manage_test" @if($role->manage_test)checked @endif>
+                            <label class="custom-control-label text-danger" for="manage_test">Полные права по тесту и вопросам</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="add_questions" name="add_questions" @if($role->add_questions)checked @endif>
+                            <label class="custom-control-label " for="add_questions">Добавлять вопросы</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="edit_questions" name="edit_questions" @if($role->edit_questions)checked @endif>
+                            <label class="custom-control-label" for="edit_questions">Редактировать вопросы</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="delete_questions" name="delete_questions" @if($role->delete_questions)checked @endif>
+                            <label class="custom-control-label" for="delete_questions">Удалять вопросы</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="view_results" name="view_results" @if($role->view_results)checked @endif>
+                            <label class="custom-control-label" for="view_results">Смотреть результаты всех сотрудников</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="delete_results" name="delete_results" @if($role->delete_results)checked @endif>
+                            <label class="custom-control-label" for="delete_results">Удалять результаты</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="do_test" name="do_test" @if($role->do_test)checked @endif>
+                            <label class="custom-control-label" for="do_test">Проходить тест</label>
                         </div>
                     </div>
 

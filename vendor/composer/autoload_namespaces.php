@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'cogpowered\\FineDiff' => array($vendorDir . '/cogpowered/finediff/src'),
+    'ParsedownExtra' => array($vendorDir . '/erusev/parsedown-extra'),
     'Parsedown' => array($vendorDir . '/erusev/parsedown'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
 );

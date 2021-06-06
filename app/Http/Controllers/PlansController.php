@@ -115,8 +115,9 @@ class PlansController extends Controller{
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $convoy->start_time = Carbon::today()->addDays($offset)->addHours($type == 0 ? 16 : ($type == 2 ? 22 : 19))->addMinutes($type == 1 ? 30 : 0);
-        $tmp = new Client();
-        $servers = $tmp->servers()->get();
+//        $tmp = new Client();
+//        $servers = $tmp->servers()->get();
+        $servers = $convoy->defaultServers;
         return view('evoque.convoys.edit', [
             'booking' => true,
             'convoy' => $convoy,

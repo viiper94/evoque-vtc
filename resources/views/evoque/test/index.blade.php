@@ -7,13 +7,19 @@
 @section('content')
 
     <div class="container pt-5">
-{{--        @dd($correct)--}}
         @include('layout.alert')
         <h2 class="mt-3 mb-3 text-primary text-center">Тест на знание ВТК</h2>
         <h5 class="text-center">
-            <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info">
-                <i class="fas fa-edit"></i> Редактировать вопросы
-            </a>
+            @can('accessToEditPage', \App\TestQuestion::class)
+                <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-success">
+                    <i class="fas fa-poll"></i> Результаты
+                </a>
+            @endcan
+            @can('view', \App\TestResult::class)
+                <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info">
+                    <i class="fas fa-edit"></i> Редактировать вопросы
+                </a>
+            @endcan
         </h5>
         @include('evoque.test.inc.'.$view)
     </div>

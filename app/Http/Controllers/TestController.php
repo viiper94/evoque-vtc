@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class TestController extends Controller{
 
     public function index(Request $request, int $question_number = null){
+        $this->authorize('do', TestResult::class);
         $questions = TestQuestion::all()->keyBy('sort');
         if($request->post()){
             $prev_question = $questions[$request->input('sort')];
@@ -34,6 +35,7 @@ class TestController extends Controller{
     }
 
     public function add(Request $request){
+        $this->authorize('create', TestQuestion::class);
         if($request->post()){
             $this->validate($request, [
                 'question' => 'string|required',
@@ -55,6 +57,7 @@ class TestController extends Controller{
 
     public function edit(Request $request, $id = null){
         if($id){
+            $this->authorize('update', TestQuestion::class);
             $question = TestQuestion::findOrFail($id);
             if($request->post()){
                 $this->validate($request, [
@@ -72,12 +75,14 @@ class TestController extends Controller{
                 'question' => $question
             ]);
         }
+        $this->authorize('accessToEditPage', TestQuestion::class);
         return view('evoque.test.manage', [
             'questions' => TestQuestion::orderBy('sort', 'asc')->get()
         ]);
     }
 
     public function sort(Request $request, $id, $direction){
+        $this->authorize('update', TestQuestion::class);
         if(!isset($id)) abort(404);
         $question = TestQuestion::findOrFail($id);
         if($direction === 'up') $next_question = TestQuestion::where('sort', '<', $question->sort)->orderBy('sort', 'desc')->first();
@@ -89,8 +94,8 @@ class TestController extends Controller{
     }
 
     public function delete(Request $request, $id){
+        $this->authorize('delete', TestQuestion::class);
         $question = TestQuestion::findOrFail($id);
-//        $this->authorize('delete', $report);
         return $question->delete() ?
             redirect()->route('evoque.test.edit')->with(['success' => 'Вопрос успешно удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);

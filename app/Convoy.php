@@ -151,7 +151,7 @@ class Convoy extends Model implements Auditable{
         'Arcade' => 'ets2',
         'ProMods' => 'ets2',
         'Simulation' => 'ats',
-        '[US] Simulation ' => 'ats',
+        '[US] Simulatiоn' => 'ats',
         '[US] Arcade' => 'ats',
     ];
 

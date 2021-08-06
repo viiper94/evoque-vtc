@@ -42,4 +42,15 @@
         </form>
     </div>
 
+    <script type="text/html" id="answer_template">
+        <div class="form-group col-sm-9">
+            <input type="text" class="form-control mb-2 " id="answer-%id%" name="answers[]" required>
+        </div>
+        <div class="custom-control custom-radio col-sm-3 pl-5">
+            <input type="radio" id="correct-%id%" name="correct" value="%id%"
+                   class="custom-control-input" required>
+            <label class="custom-control-label" for="correct-%id%">Правильный ответ</label>
+        </div>
+    </script>
+
 @endsection

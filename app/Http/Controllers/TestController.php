@@ -101,4 +101,8 @@ class TestController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function results(){
+        return view('evoque.test.results');
+    }
+
 }

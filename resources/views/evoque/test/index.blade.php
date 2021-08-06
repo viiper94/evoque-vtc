@@ -11,7 +11,7 @@
         <h2 class="mt-3 mb-3 text-primary text-center">Тест на знание ВТК</h2>
         <h5 class="text-center">
             @can('accessToEditPage', \App\TestQuestion::class)
-                <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-success">
+                <a href="{{ route('evoque.test.results') }}" class="btn btn-sm btn-outline-success">
                     <i class="fas fa-poll"></i> Результаты
                 </a>
             @endcan

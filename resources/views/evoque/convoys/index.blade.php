@@ -151,7 +151,13 @@
                                                 </h5>
                                                 @if($convoy->communication_channel)
                                                     <p class="mb-0 text-muted">Канал на сервере:</p>
-                                                    <h5 >{{ $convoy->communication_channel }}</h5>
+                                                    <h5>{{ $convoy->communication_channel }}</h5>
+                                                @endif
+                                                @if($convoy->dlc)
+                                                    <div class="d-lg-none">
+                                                        <p class="mb-0 text-muted">Для участия требуется</p>
+                                                        <h5>@foreach($convoy->dlc as $item) <span class="nowrap font-weight-bold">{{ $item }}</span> @endforeach</h5>
+                                                    </div>
                                                 @endif
                                             </div>
                                             @if($convoy->route)

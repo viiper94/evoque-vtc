@@ -18,8 +18,8 @@ class TestQuestion extends Model{
 
     public function __construct(array $attributes = []){
         $this->answers = [
-            0 => [],
-            1 => [],
+            0 => '',
+            1 => '',
         ];
 
         parent::__construct($attributes);

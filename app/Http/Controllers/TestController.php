@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\TestQuestion;
 use App\TestResult;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class TestController extends Controller{
@@ -12,7 +13,7 @@ class TestController extends Controller{
     public function index(Request $request, int $question_number = null){
         $this->authorize('do', TestResult::class);
         $questions = TestQuestion::all()->keyBy('sort');
-        if($request->post()){
+        if($request->post() && $request->input('answer') !== null){
             $prev_question = $questions[$request->input('sort')];
             $result = new TestResult();
             $result->member_id = Auth::user()->member->id;
@@ -102,7 +103,33 @@ class TestController extends Controller{
     }
 
     public function results(){
-        return view('evoque.test.results');
+        $total = TestQuestion::count();
+        $test_results = TestResult::with(['question', 'member'])->get();
+
+        // sorting results by member
+        $results = array();
+        foreach($test_results as $item){
+            $results[$item->member->nickname][] = $item;
+        }
+
+        // parsing data
+        $data = array();
+        foreach($results as $nickname => $answers){
+            $correct = 0;
+            $last = Carbon::create(2020, 12, 31, 00, 00);
+            foreach($answers as $answer){
+                $correct += $answer->correct ? 1 : 0;
+                $last = $last->gte($answer->created_at) ? $last : $answer->created_at;
+            }
+            $data[$nickname]['correct'] = $correct;
+            $data[$nickname]['last'] = $last->format('d.m.Y');
+            $data[$nickname]['count'] = count($answers);
+            $data[$nickname]['complete'] = $total === count($answers);
+        }
+
+        return view('evoque.test.results', [
+            'results' =>$data
+        ]);
     }
 
 }

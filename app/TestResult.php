@@ -14,4 +14,8 @@ class TestResult extends Model{
         return $this->belongsTo('App\TestQuestion', 'question_id', 'id');
     }
 
+    public function member(){
+        return $this->belongsTo('App\Member', 'member_id', 'id');
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Member;
 use App\TestQuestion;
 use App\TestResult;
 use Illuminate\Http\Request;
@@ -121,6 +122,7 @@ class TestController extends Controller{
                 $correct += $answer->correct ? 1 : 0;
                 $last = $last->gte($answer->created_at) ? $last : $answer->created_at;
             }
+            $data[$nickname]['id'] = $answers[0]->member->id;
             $data[$nickname]['correct'] = $correct;
             $data[$nickname]['last'] = $last->format('d.m.Y');
             $data[$nickname]['count'] = count($answers);
@@ -128,7 +130,15 @@ class TestController extends Controller{
         }
 
         return view('evoque.test.results', [
-            'results' =>$data
+            'results' => $data
+        ]);
+    }
+
+    public function memberResults($id){
+        $results = TestResult::with('question')->whereMemberId($id)->get();
+        return view('evoque.test.member_results', [
+            'results' => $results,
+            'member' => Member::findOrFail($id)
         ]);
     }
 

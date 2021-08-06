@@ -9,6 +9,16 @@
 <div class="container py-5">
     @include('layout.alert')
     <h2 class="mt-3 mb-3 text-primary text-center">Результаты тестирования</h2>
+    <h5 class="text-center">
+        <a href="{{ route('evoque.test') }}" class="btn btn-sm btn-outline-success">
+            <i class="fas fa-poll"></i> К тесту
+        </a>
+        @can('view', \App\TestResult::class)
+            <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info">
+                <i class="fas fa-edit"></i> Редактировать вопросы
+            </a>
+        @endcan
+    </h5>
     <div class="table-responsive mb-3">
         <table class="table table-dark table-hover roles-table text-center">
             <thead>
@@ -24,7 +34,7 @@
             @foreach($results as $nickname => $result)
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
-                    <td>{{ $nickname }}</td>
+                    <td><a href="{{ route('evoque.test.results.member', $result['id']) }}">{{ $nickname }}</a></td>
                     <td>@if($result['complete'])<i class="fas fa-check text-success"></i> @else<i class="fas fa-times text-danger"></i> @endif</td>
                     <td>{{ $result['correct'] }}/{{ $result['count'] }}</td>
                     <td>{{ $result['last'] }}</td>

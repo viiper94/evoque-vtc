@@ -29,7 +29,7 @@
                 @foreach($question->answers as $key => $answer)
                     <div class="form-group col-sm-9">
                         <input type="text" class="form-control mb-2 " id="answer-{{ $key }}" name="answers[]"
-                               value="{{ old('answers['.$key.']') ?? $question->question }}" required>
+                               value="{{ old('answers['.$key.']') ?? $question->answers[$key] }}" required>
                     </div>
                     <div class="custom-control custom-radio col-sm-3 pl-5">
                         <input type="radio" id="correct-{{ $key }}" name="correct" value="{{ $key }}"

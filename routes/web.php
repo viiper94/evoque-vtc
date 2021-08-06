@@ -114,6 +114,7 @@ Route::any('/evoque/convoys/plans/book/{offset}/{type}', 'PlansController@book')
 
 Route::any('/evoque/test/add', 'TestController@add')->name('evoque.test.add');
 Route::any('/evoque/test/results', 'TestController@results')->name('evoque.test.results');
+Route::any('/evoque/test/results/{id}', 'TestController@memberResults')->name('evoque.test.results.member');
 Route::any('/evoque/test/edit/{id?}', 'TestController@edit')->name('evoque.test.edit');
 Route::get('/evoque/test/delete/{id}', 'TestController@delete')->name('evoque.test.delete');
 Route::get('/evoque/test/sort/{id}/{direction}', 'TestController@sort')->name('evoque.test.sort');

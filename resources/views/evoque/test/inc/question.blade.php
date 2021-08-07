@@ -16,7 +16,7 @@
         @csrf
         <div class="col btn-group-toggle" data-toggle="buttons">
             @foreach($question->answers as $key => $answer)
-                <label class="btn @if(isset($results[$question_number]) && $question->correct == $key) btn-success disabled
+                <label class="btn @if(isset($results[$question_number]) && $question->correct == $key && $results[$question_number]->answer == $key) btn-success disabled
                         @elseif(isset($results[$question_number]) && !$results[$question_number]?->correct && $results[$question_number]->answer == $key) btn-danger disabled
                         @elseif(isset($results[$question_number]) && $results[$question_number]) btn-secondary disabled
                         @else btn-secondary

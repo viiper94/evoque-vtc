@@ -14173,6 +14173,17 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
   jquery__WEBPACK_IMPORTED_MODULE_0___default()('.add-cargoman').click(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#cargomanModal form #id').val(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('id'));
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#add_answer').click(function () {
+    if (jquery__WEBPACK_IMPORTED_MODULE_0___default()('input[name=correct]').length >= 4) {
+      return false;
+    }
+
+    var index = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('index') + 1;
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('index', index);
+    var template = jquery__WEBPACK_IMPORTED_MODULE_0___default()('#' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target') + '_template').html().replace(/%i%/g, index);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('.' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target')).append(template);
+    return true;
+  });
 });
 
 function getPreloaderHtml() {

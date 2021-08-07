@@ -19,10 +19,10 @@
                     <small class="form-text">{{ $errors->first('question') }}</small>
                 @endif
             </div>
-            <div class="row col mt-5">
+            <div class="row col mt-5 test-answers">
                 <h5 class="col-12">
                     Ответы
-                    <a href="{{ route('evoque.test.add') }}" class="btn btn-sm text-primary">
+                    <a class="btn btn-sm text-primary" id="add_answer" data-index="1" data-target="test-answers">
                         <i class="fas fa-plus"></i>
                     </a>
                 </h5>
@@ -42,14 +42,14 @@
         </form>
     </div>
 
-    <script type="text/html" id="answer_template">
+    <script type="text/html" id="test-answers_template">
         <div class="form-group col-sm-9">
-            <input type="text" class="form-control mb-2 " id="answer-%id%" name="answers[]" required>
+            <input type="text" class="form-control mb-2 " id="answer-%i%" name="answers[]" required>
         </div>
         <div class="custom-control custom-radio col-sm-3 pl-5">
-            <input type="radio" id="correct-%id%" name="correct" value="%id%"
+            <input type="radio" id="correct-%i%" name="correct" value="%i%"
                    class="custom-control-input" required>
-            <label class="custom-control-label" for="correct-%id%">Правильный ответ</label>
+            <label class="custom-control-label" for="correct-%i%">Правильный ответ</label>
         </div>
     </script>
 

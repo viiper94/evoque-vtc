@@ -27,14 +27,16 @@
                     </a>
                 </h5>
                 @foreach($question->answers as $key => $answer)
-                    <div class="form-group col-sm-9">
-                        <input type="text" class="form-control mb-2 " id="answer-{{ $key }}" name="answers[]"
-                               value="{{ old('answers['.$key.']') ?? $question->answers[$key] }}" required>
-                    </div>
-                    <div class="custom-control custom-radio col-sm-3 pl-5">
-                        <input type="radio" id="correct-{{ $key }}" name="correct" value="{{ $key }}"
-                               class="custom-control-input" @if($question->correct == $key)checked @endif required>
-                        <label class="custom-control-label" for="correct-{{ $key }}">Правильный ответ</label>
+                    <div class="answer col-12 row" id="answer-{{ $key }}">
+                        <div class="form-group col-sm-9">
+                            <input type="text" class="form-control" id="answer-{{ $key }}" name="answers[]"
+                                   value="{{ old('answers['.$key.']') ?? $question->answers[$key] }}" required>
+                        </div>
+                        <div class="custom-control custom-radio col-sm-3 pl-5">
+                            <input type="radio" id="correct-{{ $key }}" name="correct" value="{{ $key }}"
+                                   class="custom-control-input" @if($question->correct == $key)checked @endif required>
+                            <label class="custom-control-label" for="correct-{{ $key }}">Правильный ответ</label>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -43,13 +45,24 @@
     </div>
 
     <script type="text/html" id="test-answers_template">
-        <div class="form-group col-sm-9">
-            <input type="text" class="form-control mb-2 " id="answer-%i%" name="answers[]" required>
-        </div>
-        <div class="custom-control custom-radio col-sm-3 pl-5">
-            <input type="radio" id="correct-%i%" name="correct" value="%i%"
-                   class="custom-control-input" required>
-            <label class="custom-control-label" for="correct-%i%">Правильный ответ</label>
+        <div class="answer col-12 row" id="answer-%i%">
+            <div class="form-group col-sm-9">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="answers[]" required>
+                    <div class="input-group-append">
+                        <div class="input-group-text p-0">
+                            <a class="btn btn-sm text-primary remove_answer" data-index="%i%">
+                                <i class="fas fa-minus text-danger"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom-control custom-radio col-sm-3 pl-5">
+                <input type="radio" id="correct-%i%" name="correct" value="%i%"
+                       class="custom-control-input" required>
+                <label class="custom-control-label" for="correct-%i%">Правильный ответ</label>
+            </div>
         </div>
     </script>
 

@@ -14184,6 +14184,10 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('.' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('target')).append(template);
     return true;
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on('click', 'a.remove_answer', function () {
+    console.log(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('#answer-' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('index')).remove();
+  });
 });
 
 function getPreloaderHtml() {
@@ -14504,8 +14508,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/evoque.local/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/evoque.local/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

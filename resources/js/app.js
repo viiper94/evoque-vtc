@@ -302,6 +302,11 @@ $(document).ready(function(){
         return true;
     });
 
+    $(document).on('click', 'a.remove_answer', function(){
+        console.log($(this));
+        $('#answer-'+$(this).data('index')).remove();
+    });
+
 });
 
 function getPreloaderHtml(){

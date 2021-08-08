@@ -130,7 +130,8 @@ class TestController extends Controller{
         }
 
         return view('evoque.test.results', [
-            'results' => $data
+            'results' => $data,
+            'total' => $total
         ]);
     }
 

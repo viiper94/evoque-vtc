@@ -25,7 +25,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Сотрудник</th>
-                <th scope="col">Тест пройден</th>
+                <th scope="col">Вопросов пройдено</th>
                 <th scope="col">Правильных ответов</th>
                 <th scope="col">Последний ответ дан</th>
             </tr>
@@ -35,8 +35,9 @@
                 <tr>
                     <th scope="row">{{ $loop->iteration }}</th>
                     <td><a href="{{ route('evoque.test.results.member', $result['id']) }}">{{ $nickname }}</a></td>
-                    <td>@if($result['complete'])<i class="fas fa-check text-success"></i> @else<i class="fas fa-times text-danger"></i> @endif</td>
-                    <td>{{ $result['correct'] }}/{{ $result['count'] }}</td>
+{{--                    <td>@if($result['complete'])<i class="fas fa-check text-success"></i> @else<i class="fas fa-times text-danger"></i> @endif</td>--}}
+                    <td>{{ $result['count'] }}/{{ $total }}</td>
+                    <td>{{ $result['correct'] }} <span class="text-muted">({{ floor($result['correct']/$result['count']*100) }}%)</span></td>
                     <td>{{ $result['last'] }}</td>
                 </tr>
             @endforeach

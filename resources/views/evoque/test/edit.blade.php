@@ -29,8 +29,19 @@
                 @foreach($question->answers as $key => $answer)
                     <div class="answer col-12 row" id="answer-{{ $key }}">
                         <div class="form-group col-sm-9">
-                            <input type="text" class="form-control" id="answer-{{ $key }}" name="answers[]"
-                                   value="{{ old('answers['.$key.']') ?? $question->answers[$key] }}" required>
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="answers[]"
+                                       value="{{ old('answers['.$key.']') ?? $question->answers[$key] }}" required>
+                                @if($loop->iteration > 2)
+                                    <div class="input-group-append">
+                                        <div class="input-group-text p-0">
+                                            <a class="btn btn-sm text-primary remove_answer" data-index="{{ $key }}">
+                                                <i class="fas fa-minus text-danger"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                         <div class="custom-control custom-radio col-sm-3 pl-5">
                             <input type="radio" id="correct-{{ $key }}" name="correct" value="{{ $key }}"

@@ -21,7 +21,7 @@
         </h5>
         @if(count($questions) > 0)
             @foreach($questions as $question)
-                <div class="card card-dark mb-3">
+                <div class="card card-dark mb-3 text-shadow-m">
                     <div class="card-header row mx-0">
                         <h5 class="mb-0 px-0 col">{{ $question->question }}</h5>
                         @can('update', \App\TestQuestion::class)

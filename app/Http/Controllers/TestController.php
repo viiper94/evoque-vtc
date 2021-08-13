@@ -69,7 +69,7 @@ class TestController extends Controller{
                     'correct' => 'numeric|required',
                 ]);
                 $question->fill($request->post());
-                return $question->save() && TestResult::whereQuestionId($id)->delete() ?
+                return $question->save() && TestResult::whereQuestionId($id)->delete() !== false ?
                     redirect()->route('evoque.test.edit')->with(['success' => 'Вопрос успешно изменён!']) :
                     redirect()->back()->withErrors(['Возникла ошибка =(']);
             }
@@ -98,7 +98,7 @@ class TestController extends Controller{
     public function delete(Request $request, $id){
         $this->authorize('delete', TestQuestion::class);
         $question = TestQuestion::findOrFail($id);
-        return $question->delete() && TestResult::whereQuestionId($id)->delete() && TestQuestion::resort() ?
+        return $question->delete() && TestResult::whereQuestionId($id)->delete() !== false && TestQuestion::resort() ?
             redirect()->route('evoque.test.edit')->with(['success' => 'Вопрос успешно удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }

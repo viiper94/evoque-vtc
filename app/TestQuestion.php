@@ -43,4 +43,17 @@ class TestQuestion extends Model{
         return true;
     }
 
+    public static function getBtnClass($question, $i, $results){
+        $class = 'btn-';
+        if($i !== $question->sort){
+            $class .= 'outline-';
+        }
+        if($results->has($i)){
+            $class .= $results[$i]->correct ? 'success' : 'danger';
+        }else{
+            $class .= 'secondary';
+        }
+        return $class;
+    }
+
 }

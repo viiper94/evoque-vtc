@@ -1,13 +1,8 @@
 <div class="row flex-column align-items-center my-3">
     <div class="btn-group btn-group-sm my-3" role="group" aria-label="Basic example">
         @for($i = 1; $i <= $count; $i++)
-            <a href="{{ route('evoque.test', $i) }}" class="btn
-                @if($i == $question->sort) btn-primary
-                @elseif($results->has($i))
-                    @if($results[$i]->correct) btn-outline-success
-                    @else btn-outline-danger @endif
-                @else btn-outline-secondary
-                @endif" >{{ $i }}
+            <a href="{{ route('evoque.test', $i) }}"
+               class="btn {{ \App\TestQuestion::getBtnClass($question, $i, $results) }}">{{ $i }}
             </a>
         @endfor
     </div>

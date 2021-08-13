@@ -10,12 +10,12 @@
         @include('layout.alert')
         <h2 class="mt-3 mb-3 text-primary text-center">Результаты сотрудника {{ $member->nickname }}</h2>
         <h5 class="text-center">
-            @can('accessToEditPage', \App\TestQuestion::class)
+            @can('view', \App\TestResult::class)
                 <a href="{{ route('evoque.test.results') }}" class="btn btn-sm btn-outline-success">
                     <i class="fas fa-poll"></i> Результаты всех
                 </a>
             @endcan
-            @can('view', \App\TestResult::class)
+                @can('accessToEditPage', \App\TestQuestion::class)
                 <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info">
                     <i class="fas fa-edit"></i> Редактировать вопросы
                 </a>

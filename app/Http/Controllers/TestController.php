@@ -106,6 +106,7 @@ class TestController extends Controller{
     }
 
     public function results(){
+        $this->authorize('view', TestResult::class);
         $total = TestQuestion::count();
         $test_results = TestResult::with(['question', 'member'])
             ->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->format('Y-m-d H:i'))
@@ -140,6 +141,7 @@ class TestController extends Controller{
     }
 
     public function memberResults($id){
+        $this->authorize('view', TestResult::class);
         $results = TestResult::with('question')->whereMemberId($id)
             ->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->format('Y-m-d H:i'))
             ->get();

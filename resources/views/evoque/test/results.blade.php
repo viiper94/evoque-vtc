@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-{{--    @dd($results)--}}
 <div class="container py-5">
     @include('layout.alert')
     <h2 class="mt-3 mb-3 text-primary text-center">Результаты тестирования</h2>
@@ -13,7 +12,7 @@
         <a href="{{ route('evoque.test') }}" class="btn btn-sm btn-outline-success">
             <i class="fas fa-poll"></i> К тесту
         </a>
-        @can('view', \App\TestResult::class)
+        @can('accessToEditPage', \App\TestQuestion::class)
             <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info">
                 <i class="fas fa-edit"></i> Редактировать вопросы
             </a>

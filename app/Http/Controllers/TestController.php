@@ -69,7 +69,7 @@ class TestController extends Controller{
                     'correct' => 'numeric|required',
                 ]);
                 $question->fill($request->post());
-                return $question->save() ?
+                return $question->save() && TestResult::whereQuestionId($id)->delete() ?
                     redirect()->route('evoque.test.edit')->with(['success' => 'Вопрос успешно изменён!']) :
                     redirect()->back()->withErrors(['Возникла ошибка =(']);
             }

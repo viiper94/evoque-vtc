@@ -23,7 +23,9 @@ class TestController extends Controller{
             $result->correct = $request->input('answer') == $prev_question->correct;
             $result->save();
         }
-        $results = TestResult::with('question')->whereMemberId(Auth::user()->member->id)->get()->keyBy('question.sort');
+        $results = TestResult::with('question')->whereMemberId(Auth::user()->member->id)
+            ->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->format('Y-m-d H:i'))
+            ->get()->keyBy('question.sort');
         return view('evoque.test.index', [
             'results' => $results,
             'correct' => $results->filter(function($value){
@@ -105,7 +107,9 @@ class TestController extends Controller{
 
     public function results(){
         $total = TestQuestion::count();
-        $test_results = TestResult::with(['question', 'member'])->get();
+        $test_results = TestResult::with(['question', 'member'])
+            ->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->format('Y-m-d H:i'))
+            ->get();
 
         // sorting results by member
         $results = array();
@@ -136,7 +140,9 @@ class TestController extends Controller{
     }
 
     public function memberResults($id){
-        $results = TestResult::with('question')->whereMemberId($id)->get();
+        $results = TestResult::with('question')->whereMemberId($id)
+            ->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->format('Y-m-d H:i'))
+            ->get();
         return view('evoque.test.member_results', [
             'results' => $results,
             'member' => Member::findOrFail($id)

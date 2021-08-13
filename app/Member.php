@@ -158,7 +158,8 @@ class Member extends Model implements Auditable{
     }
 
     public function hasCompleteTest(){
-        $results = TestResult::whereMemberId($this->id)->count();
+        $results = TestResult::whereMemberId($this->id)->where('created_at', '>', Carbon::now()->subMonth()->format('Y-m-d H:i'))->count();
+//        dd($results);
         $total_questions = TestQuestion::count();
         return $results === $total_questions;
     }

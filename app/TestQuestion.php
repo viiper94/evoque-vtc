@@ -30,4 +30,17 @@ class TestQuestion extends Model{
         return !$next;
     }
 
+    public static function getFirstQuestionId(){
+        return TestQuestion::select('sort')->orderBy('sort', 'asc')->first();
+    }
+
+    public static function resort(){
+        $questions = TestQuestion::orderBy('sort')->get();
+        foreach($questions as $key => $question){
+            $question->sort = $key + 1;
+            $question->save();
+        }
+        return true;
+    }
+
 }

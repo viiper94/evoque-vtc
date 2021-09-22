@@ -101,21 +101,23 @@ class TabsController extends Controller{
                 'comment' => 'nullable|string'
             ]);
             $lead = explode(',', $request->input('lead'));
-            foreach($request->input('scores') as $member_id => $value){
-                $member = Member::with('role')->find($member_id);
-                $member->convoys += 1;
-                if($member->isTrainee()){
-                    if($member->trainee_convoys === 3){
-                        $member->role()->detach(14);
-                        $member->role()->attach(13);
-                    }else{
-                        $member->trainee_convoys += 1;
+            if($request->input('scores') && $request->input('accept') === 1){
+                foreach($request->input('scores') as $member_id => $value){
+                    $member = Member::with('role')->find($member_id);
+                    $member->convoys += 1;
+                    if($member->isTrainee()){
+                        if($member->trainee_convoys === 3){
+                            $member->role()->detach(14);
+                            $member->role()->attach(13);
+                        }else{
+                            $member->trainee_convoys += 1;
+                        }
                     }
+                    if(isset($member->scores)) $member->scores += $value;
+                    $member->checkRoles();
+                    if(isset($member->money) && $lead[0] == $member->id) $member->money += $lead[1];
+                    $member->save();
                 }
-                if(isset($member->scores)) $member->scores += $value;
-                $member->checkRoles();
-                if(isset($member->money) && $lead[0] == $member->id) $member->money += $lead[1];
-                $member->save();
             }
             $tab->status = $request->input('accept');
             $tab->comment = $request->input('comment');

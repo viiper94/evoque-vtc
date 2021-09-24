@@ -101,7 +101,7 @@ class TabsController extends Controller{
                 'comment' => 'nullable|string'
             ]);
             $lead = explode(',', $request->input('lead'));
-            if($request->input('scores') && $request->input('accept') === 1){
+            if($request->input('scores') && $request->input('accept') == 1){
                 foreach($request->input('scores') as $member_id => $value){
                     $member = Member::with('role')->find($member_id);
                     $member->convoys += 1;

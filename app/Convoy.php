@@ -112,7 +112,7 @@ class Convoy extends Model implements Auditable{
             'DLC Iberia',
             'DLC High Power Cargo Pack',
             'DLC Heavy Cargo Pack',
-            'Volvo Construction Equipment'
+            'DLC Volvo Construction Equipment'
         ],
         'ats' => [
             'ProMods Canada',
@@ -124,7 +124,7 @@ class Convoy extends Model implements Auditable{
             'DLC Colorado',
             'DLC Heavy Cargo Paсk',
             'DLC Forest Machinery',
-            'Volvo Construction Equipment'
+            'DLC Volvo Construction Equipment'
         ]
     ];
 

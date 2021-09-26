@@ -152,9 +152,11 @@ class Convoy extends Model implements Auditable{
         '[US] Simulation' => 'ets2',
         'Arcade' => 'ets2',
         'ProMods' => 'ets2',
+        'Закрытая сeссия' => 'ets2',
         'Simulation' => 'ats',
         '[US] Simulatiоn' => 'ats',
         '[US] Arcade' => 'ats',
+        'Закрытая сессия' => 'ats',
     ];
 
     protected $auditExclude = [

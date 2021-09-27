@@ -30,14 +30,14 @@ class PlansController extends Controller{
             $convoy_that_day = array();
             foreach($convoys as $convoy){
                 if($convoy->start_time->format('d.m.Y') === Carbon::today()->addDays($i)->format('d.m.Y')){
-                    $convoy_that_day[$convoy->type] = $convoy;
+                    $convoy_that_day[$convoy->type][] = $convoy;
                 }
             }
             foreach($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] as $type){
                 if(key_exists($type, $convoy_that_day)){
                     continue;
                 }elseif($i !== 0){
-                    $convoy_that_day[$type] = [];
+                    $convoy_that_day[$type][] = [];
                 }
             }
             ksort($convoy_that_day);
@@ -46,6 +46,7 @@ class PlansController extends Controller{
                 'convoys' => $convoy_that_day
             ];
         }
+//        dd($days);
         return view('evoque.convoys.plans.index', [
             'days' => $days,
             'members' => Member::where('visible', '1')->orderBy('nickname')->get(),

@@ -51,7 +51,7 @@
                                         @can('quickBook', \App\Convoy::class)
                                             <a data-date="{{ $day['date']->format('d.m.Y') }}" data-toggle="modal" data-target="#book-modal" class="book-convoy text-primary">Забронировать конвой</a>
                                         @elsecan('book', \App\Convoy::class)
-                                            <a href="{{ route('evoque.convoys.plans.book', [$loop->parent->index, $type]) }}" class="book-convoy text-primary">Забронировать конвой</a>
+                                            <a href="{{ route('evoque.convoys.plans.book', [$loop->parent->parent->index, $type]) }}" class="book-convoy text-primary">Забронировать конвой</a>
                                         @else
                                             Свободно
                                         @endcan

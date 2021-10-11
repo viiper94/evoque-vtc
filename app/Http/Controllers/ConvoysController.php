@@ -101,7 +101,7 @@ class ConvoysController extends Controller{
             'members' => Member::all(),
             'dlc' => $convoy->dlcList,
             'types' => Convoy::$timesToType,
-            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()
+            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()->groupBy('vendor')
         ]);
     }
 
@@ -157,7 +157,7 @@ class ConvoysController extends Controller{
             'members' => Member::all(),
             'dlc' => $convoy->dlcList,
             'types' => Convoy::$timesToType,
-            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()
+            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()->groupBy('vendor')
         ]);
     }
 

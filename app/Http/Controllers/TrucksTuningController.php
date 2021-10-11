@@ -15,7 +15,7 @@ class TrucksTuningController extends Controller{
                 ->orWhere('model', 'like', '%'.$request->input('q').'%');
         }
         return view('evoque.trucks_tuning.index', [
-            'tunings' => $tunings->get()
+            'vendors' => $tunings->get()->groupBy('vendor')
         ]);
     }
 

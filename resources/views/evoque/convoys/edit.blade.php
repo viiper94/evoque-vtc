@@ -267,8 +267,12 @@
                         <label for="truck_with_tuning" class="my-1 text-muted">Или выберите тягач с официальным тюнингом</label>
                         <select id="truck_with_tuning" name="truck_with_tuning" class="custom-select custom-select-dark" data-token="{{ csrf_token() }}">
                             <option value="">Официальный тюнинг не обязательный</option>
-                            @foreach($trucks_tuning as $item)
-                                <option value="{{ $item->id }}">{{ $item->vendor }} {{ $item->model }}</option>
+                            @foreach($trucks_tuning as $vendor => $tunings)
+                                <optgroup label="{{ $vendor }}">
+                                    @foreach($tunings as $item)
+                                        <option value="{{ $item->id }}">{{ $item->vendor }} {{ $item->model }}</option>
+                                    @endforeach
+                                </optgroup>
                             @endforeach
                         </select>
                     </div>

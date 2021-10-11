@@ -103,6 +103,12 @@ class RolesController extends Controller{
             $role->delete_results = $request->input('delete_results') == 'on';
             $role->do_test = $request->input('do_test') == 'on';
 
+            $role->manage_tunings = $request->input('manage_tunings') == 'on';
+            $role->add_tunings = $request->input('add_tunings') == 'on';
+            $role->edit_tunings = $request->input('edit_tunings') == 'on';
+            $role->delete_tunings = $request->input('delete_tunings') == 'on';
+            $role->view_tunings = $request->input('view_tunings') == 'on';
+
             return $role->save() ?
                 redirect()->route('evoque.admin.roles')->with(['success' => 'Права роли успешно отредактированы!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

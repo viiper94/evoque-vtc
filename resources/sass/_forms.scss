@@ -55,3 +55,8 @@ form{
         }
     }
 }
+.custom-select.custom-select-dark{
+    background-color: $background-lighten-1;
+    border: $primary solid 1px;
+    color: $primary-text;
+}

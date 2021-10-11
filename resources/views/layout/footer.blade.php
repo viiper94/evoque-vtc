@@ -13,11 +13,17 @@
             </div>
             <div class="col-md-6 col-sm-12 col-xl-auto mb-md-3">
                 <ul class="nav flex-column text-center text-md-right text-xl-center">
+                    @auth
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('evoque.tuning') }}">Официальный тюнинг</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('auth.steam') }}">Войти на сайт</a>
+                        </li>
+                    @endauth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('gallery') }}">Галерея</a>
+                        <a class="nav-link" href="{{ route('apply') }}">Вступить в ВТК</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('kb') }}">База знаний</a>

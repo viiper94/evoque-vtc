@@ -131,6 +131,9 @@
                                     @can('restore', \App\Member::class)
                                         <a class="dropdown-item" href="{{ route('evoque.members.trash') }}">Уволенные сотрудники</a>
                                     @endcan
+{{--                                    @can('restore', \App\Member::class)--}}
+                                        <a class="dropdown-item" href="{{ route('evoque.tuning') }}">Официальный тюнинг</a>
+{{--                                    @endcan--}}
                                 </div>
                             </li>
                         @endif

@@ -279,6 +279,15 @@
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
+                        <label for="truck_with_tuning" class="my-1 text-muted">Или выберите тягач с официальным тюнингом</label>
+                        <select id="truck_with_tuning" class="custom-select custom-select-dark">
+                            <option>Официальный тюнинг не обязательный</option>
+                            <option value="1">DAF XF105</option>
+                            <option value="2">DAF XF (Euro 6)</option>
+                            <option value="2">DAF XG</option>
+                            <option value="3">MAN TGX</option>
+                            <option value="3">MAN TGX Euro 6</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="truck_tuning">@lang('attributes.truck_tuning')</label>

@@ -381,6 +381,30 @@
                         </div>
                     </div>
 
+                    <div class="col-md-6 mb-3">
+                        <h3 class="text-primary">Официальный тюнинг</h3>
+                        <div class="custom-control custom-checkbox mb-4">
+                            <input type="checkbox" class="custom-control-input" id="manage_tunings" name="manage_tunings" @if($role->manage_tunings)checked @endif>
+                            <label class="custom-control-label text-danger" for="manage_tunings">Полные права по разделу тюнинга</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="add_tunings" name="add_tunings" @if($role->add_tunings)checked @endif>
+                            <label class="custom-control-label " for="add_tunings">Добавлять тюнинг</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="edit_tunings" name="edit_tunings" @if($role->edit_tunings)checked @endif>
+                            <label class="custom-control-label" for="edit_tunings">Редактировать тюнинг</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="delete_tunings" name="delete_tunings" @if($role->delete_tunings)checked @endif>
+                            <label class="custom-control-label" for="delete_tunings">Удалять тюнинг</label>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-2">
+                            <input type="checkbox" class="custom-control-input" id="view_tunings" name="view_tunings" @if($role->view_tunings)checked @endif>
+                            <label class="custom-control-label" for="view_tunings">Смотреть тюнинги</label>
+                        </div>
+                    </div>
+
                 </div>
                 <button type="submit" class="btn btn-outline-warning">Сохранить права</button>
             </form>

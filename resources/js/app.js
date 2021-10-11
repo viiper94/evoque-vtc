@@ -307,6 +307,41 @@ $(document).ready(function(){
         $('#answer-'+$(this).data('index')).remove();
     });
 
+    $('#truck_with_tuning').change(function(){
+        let select = $(this);
+        let id = select.find(':selected').val();
+        console.log(id);
+        if(id){
+            $.ajax('/evoque/tuning/load',{
+                data: {
+                    '_token' : select.data('token'),
+                    'id' : id
+                },
+                beforeSend : function(){
+                    select.after(getPreloaderHtml());
+                },
+                success : function(response){
+                    $('#truck_image').val('');
+                    $('#truck_image-preview').attr('src', response.path);
+                    $('#truck').val(select.find(':selected').text()).attr('readonly', true);
+                    $('#truck_tuning').val('Официальный из мода, стекло чистое');
+                    $('#truck_paint').val('Официальный').attr('readonly', true);
+                    $('#truck_public').attr('checked', false).attr('disabled', true);
+                },
+                complete : function(){
+                    $('.spinner-border').remove();
+                },
+            });
+        }else{
+            $('#truck_image').val('');
+            $('#truck_image-preview').attr('src', '/images/tuning/image-placeholder.jpg');
+            $('#truck').val('').attr('readonly', false);
+            $('#truck_tuning').val('');
+            $('#truck_paint').val('').attr('readonly', false);
+            $('#truck_public').attr('checked', false).attr('disabled', false);
+        }
+    });
+
 });
 
 function getPreloaderHtml(){

@@ -184,8 +184,9 @@
                                                 </div>
                                                 @if($convoy->truck_image)
                                                     <div class="col truck-img">
-                                                        <a href="/images/convoys/{{ $convoy->truck_image }}" target="_blank">
-                                                            <img src="/images/convoys/{{ $convoy->truck_image }}" alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
+                                                        <a href="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image }} @else /images/convoys/{{ $convoy->truck_image }}@endif" target="_blank">
+                                                            <img src="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image }} @else /images/convoys/{{ $convoy->truck_image }}@endif"
+                                                                 alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
                                                         </a>
                                                     </div>
                                                 @endif

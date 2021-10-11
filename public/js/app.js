@@ -14188,6 +14188,41 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
     console.log(jquery__WEBPACK_IMPORTED_MODULE_0___default()(this));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()('#answer-' + jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).data('index')).remove();
   });
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_with_tuning').change(function () {
+    var select = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this);
+    var id = select.find(':selected').val();
+    console.log(id);
+
+    if (id) {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default.a.ajax('/evoque/tuning/load', {
+        data: {
+          '_token': select.data('token'),
+          'id': id
+        },
+        beforeSend: function beforeSend() {
+          select.after(getPreloaderHtml());
+        },
+        success: function success(response) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image').val('');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image-preview').attr('src', response.path);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck').val(select.find(':selected').text()).attr('readonly', true);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_tuning').val('Официальный из мода, стекло чистое');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_paint').val('Официальный').attr('readonly', true);
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_public').attr('checked', false).attr('disabled', true);
+        },
+        complete: function complete() {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.spinner-border').remove();
+        }
+      });
+    } else {
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image').val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image-preview').attr('src', '/images/tuning/image-placeholder.jpg');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck').val('').attr('readonly', false);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_tuning').val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_paint').val('').attr('readonly', false);
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_public').attr('checked', false).attr('disabled', false);
+    }
+  });
 });
 
 function getPreloaderHtml() {
@@ -14508,8 +14543,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/evoque.local/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/evoque.local/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

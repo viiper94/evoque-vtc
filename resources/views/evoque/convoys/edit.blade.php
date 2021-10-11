@@ -260,10 +260,17 @@
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="/images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }}" class="w-100" id="truck_image-preview">
+                        <img src="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image ?? "image-placeholder.jpg" }} @else /images/convoys/{{ $convoy->truck_image }} @endif" class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif
+                        <label for="truck_with_tuning" class="my-1 text-muted">Или выберите тягач с официальным тюнингом</label>
+                        <select id="truck_with_tuning" name="truck_with_tuning" class="custom-select custom-select-dark" data-token="{{ csrf_token() }}">
+                            <option value="">Официальный тюнинг не обязательный</option>
+                            @foreach($trucks_tuning as $item)
+                                <option value="{{ $item->id }}">{{ $item->vendor }} {{ $item->model }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="truck_image"><i class="fas fa-trash"></i> Удалить картинку</button>
                 </div>
@@ -279,15 +286,6 @@
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
-                        <label for="truck_with_tuning" class="my-1 text-muted">Или выберите тягач с официальным тюнингом</label>
-                        <select id="truck_with_tuning" class="custom-select custom-select-dark">
-                            <option>Официальный тюнинг не обязательный</option>
-                            <option value="1">DAF XF105</option>
-                            <option value="2">DAF XF (Euro 6)</option>
-                            <option value="2">DAF XG</option>
-                            <option value="3">MAN TGX</option>
-                            <option value="3">MAN TGX Euro 6</option>
-                        </select>
                     </div>
                     <div class="form-group">
                         <label for="truck_tuning">@lang('attributes.truck_tuning')</label>

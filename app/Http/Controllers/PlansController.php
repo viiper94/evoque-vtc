@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Convoy;
 use App\Member;
+use App\TrucksTuning;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,6 +108,10 @@ class PlansController extends Controller{
                     $convoy->$key = $convoy->saveImage($file);
                 }
             }
+            if($request->input('truck_with_tuning')){
+                $tuning = TrucksTuning::find($request->input('truck_with_tuning'));
+                $convoy->truck_image = '/images/tuning/'.$tuning->image;
+            }
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             $convoy->booking = true;
@@ -125,7 +130,8 @@ class PlansController extends Controller{
             'servers' => $servers,
             'members' => Member::where('id', Auth::user()->member->id)->get(),
             'dlc' => $convoy->dlcList,
-            'types' => [$type => Convoy::$timesToType[$type]]
+            'types' => [$type => Convoy::$timesToType[$type]],
+            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()
         ]);
     }
 

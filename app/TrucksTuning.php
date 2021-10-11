@@ -15,6 +15,10 @@ class TrucksTuning extends Model{
         'game',
     ];
 
+    public $casts = [
+        'visible' => 'boolean'
+    ];
+
     public function saveImage(UploadedFile $file, $path = '/images/tuning/'){
         $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
         $file->move(public_path($path), $name);

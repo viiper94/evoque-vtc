@@ -87,4 +87,15 @@ class TrucksTuningController extends Controller{
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
+    public function load(Request $request){
+        if($request->ajax()){
+            $tuning = TrucksTuning::find($request->input('id'));
+            return response()->json([
+                'path' => '/images/tuning/'.$tuning->image,
+                'status' => 'OK'
+            ]);
+        }
+        return false;
+    }
+
 }

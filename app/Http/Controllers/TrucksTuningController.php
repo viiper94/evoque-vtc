@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TrucksTuningController extends Controller{
 
     public function index(Request $request){
-        // insert policy here
+        $this->authorize('view', TrucksTuning::class);
         $tunings = TrucksTuning::select();
         if($request->input('q')){
             $tunings = $tunings->where('vendor', 'like', $request->input('q').'%')
@@ -20,7 +20,7 @@ class TrucksTuningController extends Controller{
     }
 
     public function add(Request $request){
-        // insert policy here
+        $this->authorize('add', TrucksTuning::class);
         $tuning = new TrucksTuning();
         if($request->post()){
             $this->validate($request, [
@@ -47,7 +47,7 @@ class TrucksTuningController extends Controller{
     }
 
     public function edit(Request $request, $id){
-        // insert policy here
+        $this->authorize('edit', TrucksTuning::class);
         $tuning = TrucksTuning::find($id);
         if($request->post()){
             $this->validate($request, [
@@ -77,7 +77,7 @@ class TrucksTuningController extends Controller{
     }
 
     public function delete(Request $request, $id){
-        // insert policy here
+        $this->authorize('delete', TrucksTuning::class);
         $tuning = TrucksTuning::find($id);
         if($tuning->image && is_file(public_path('images/tuning/'.$tuning->image))){
             unlink(public_path('images/tuning/'.$tuning->image));

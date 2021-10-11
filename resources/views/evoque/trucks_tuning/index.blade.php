@@ -9,7 +9,7 @@
     <div class="container pt-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary ml-3 text-center">Официальные тюнинги тягачей</h2>
-        @can('create', \App\RpReport::class)
+        @can('add', \App\TrucksTuning::class)
             <div class="row justify-content-center">
                 <a href="{{ route('evoque.tuning.add') }}" class="btn btn-outline-warning mt-3 btn-lg"><i class="fas fa-plus"></i> Добавить</a>
             </div>
@@ -39,24 +39,24 @@
                                 <h5 class="mb-0">{{ $tuning->vendor }} {{ $tuning->model }}</h5>
                             </div>
                             <h5 class="col-auto text-md-right text-muted mb-0">{{ strtoupper($tuning->game) }}</h5>
-{{--                            @if(\Illuminate\Support\Facades\Auth::user()->can('decline', $report) ||--}}
-{{--                                        \Illuminate\Support\Facades\Auth::user()->can('delete', $report))--}}
+                            @if(\Illuminate\Support\Facades\Auth::user()->can('edit', \App\TrucksTuning::class) ||
+                                        \Illuminate\Support\Facades\Auth::user()->can('delete', \App\TrucksTuning::class))
                                 <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                     <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-ellipsis-v"></i>
                                     </button>
                                     <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-{{--                                        @can('decline', $report)--}}
+                                        @can('edit', \App\TrucksTuning::class)
                                             <a href="{{ route('evoque.tuning.edit', $tuning->id) }}" class="dropdown-item"><i class="fas fa-pen"></i> Редактировать</a>
-{{--                                        @endcan--}}
-{{--                                        @can('delete', $report)--}}
+                                        @endcan
+                                        @can('delete', \App\TrucksTuning::class)
                                             <a href="{{ route('evoque.tuning.delete', $tuning->id) }}"
                                                class="dropdown-item" onclick="return confirm('Удалить тюнинг?')"><i class="fas fa-trash"></i> Удалить</a>
-{{--                                        @endcan--}}
+                                        @endcan
                                     </div>
                                 </div>
-{{--                            @endif--}}
+                            @endif
                         </div>
                         <div class="card-body p-0">
                             <a href="/images/tuning/{{ $tuning->image }}" target="_blank">

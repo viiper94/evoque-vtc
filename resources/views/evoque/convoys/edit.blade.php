@@ -260,7 +260,7 @@
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image ?? "image-placeholder.jpg" }} @else /images/convoys/{{ $convoy->truck_image }} @endif" class="w-100" id="truck_image-preview">
+                        <img src="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif" class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif

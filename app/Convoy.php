@@ -43,7 +43,6 @@ class Convoy extends Model implements Auditable{
     ];
 
     protected $casts = [
-        'truck_with_tuning' => 'boolean',
         'truck_public' => 'boolean',
         'trailer_public' => 'boolean',
         'public' => 'boolean',

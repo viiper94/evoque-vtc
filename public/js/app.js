@@ -14203,7 +14203,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
           select.after(getPreloaderHtml());
         },
         success: function success(response) {
-          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image').val('');
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image').val('').attr('disabled', true).hide();
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('.truck_image-input').hide();
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image-preview').attr('src', response.path);
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck').val(select.find(':selected').text()).attr('readonly', true);
           jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_tuning').val('Официальный из мода, стекло чистое');
@@ -14215,7 +14216,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
         }
       });
     } else {
-      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image').val('');
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image').val('').attr('disabled', false).show();
+      jquery__WEBPACK_IMPORTED_MODULE_0___default()('.truck_image-input').show();
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_image-preview').attr('src', '/images/tuning/image-placeholder.jpg');
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck').val('').attr('readonly', false);
       jquery__WEBPACK_IMPORTED_MODULE_0___default()('#truck_tuning').val('');
@@ -14543,8 +14545,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\evoque.ee\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

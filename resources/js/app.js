@@ -321,7 +321,8 @@ $(document).ready(function(){
                     select.after(getPreloaderHtml());
                 },
                 success : function(response){
-                    $('#truck_image').val('');
+                    $('#truck_image').val('').attr('disabled', true).hide();
+                    $('.truck_image-input').hide();
                     $('#truck_image-preview').attr('src', response.path);
                     $('#truck').val(select.find(':selected').text()).attr('readonly', true);
                     $('#truck_tuning').val('Официальный из мода, стекло чистое');
@@ -333,7 +334,8 @@ $(document).ready(function(){
                 },
             });
         }else{
-            $('#truck_image').val('');
+            $('#truck_image').val('').attr('disabled', false).show();
+            $('.truck_image-input').show();
             $('#truck_image-preview').attr('src', '/images/tuning/image-placeholder.jpg');
             $('#truck').val('').attr('readonly', false);
             $('#truck_tuning').val('');

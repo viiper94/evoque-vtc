@@ -39,9 +39,11 @@ class Convoy extends Model implements Auditable{
         'comment',
         'links',
         'cargoman',
+        'truck_with_tuning',
     ];
 
     protected $casts = [
+        'truck_with_tuning' => 'boolean',
         'truck_public' => 'boolean',
         'trailer_public' => 'boolean',
         'public' => 'boolean',
@@ -83,6 +85,7 @@ class Convoy extends Model implements Auditable{
         'lead' => 'nullable|string',
 
         'truck_image' => 'nullable|image|max:5000',
+        'truck_with_tuning' => 'nullable|numeric',
         'truck' => 'nullable|string',
         'truck_tuning' => 'nullable|string',
         'truck_paint' => 'nullable|string',
@@ -182,6 +185,10 @@ class Convoy extends Model implements Auditable{
 
     public function leadMember(){
         return $this->hasOne('App\Member', 'nickname', 'lead');
+    }
+
+    public function tuning(){
+        return $this->hasOne('App\TrucksTuning', 'id', 'truck_with_tuning');
     }
 
     public function saveImage(UploadedFile $file, $path = '/images/convoys/', $key = null){

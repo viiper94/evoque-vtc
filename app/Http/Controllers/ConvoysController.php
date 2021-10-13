@@ -20,7 +20,7 @@ class ConvoysController extends Controller{
     public function view(Request $request, $all = false){
         if(!Auth::user()?->member) abort(404);
         $list = array();
-        $convoys = Convoy::with('leadMember', 'leadMember.user');
+        $convoys = Convoy::with('leadMember', 'leadMember.user', 'tuning');
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
@@ -77,10 +77,6 @@ class ConvoysController extends Controller{
                     $convoy->$key = $convoy->saveImage($file);
                 }
             }
-            if($request->input('truck_with_tuning')){
-                $tuning = TrucksTuning::find($request->input('truck_with_tuning'));
-                $convoy->truck_image = '/images/tuning/'.$tuning->image;
-            }
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
@@ -135,10 +131,6 @@ class ConvoysController extends Controller{
                 }else{
                     $convoy->$key = $convoy->saveImage($file);
                 }
-            }
-            if($request->input('truck_with_tuning')){
-                $tuning = TrucksTuning::find($request->input('truck_with_tuning'));
-                $convoy->truck_image = '/images/tuning/'.$tuning->image;
             }
             $convoy->booking = false;
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');

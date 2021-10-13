@@ -55,6 +55,7 @@ return [
     'booking' => 'Бронь',
     'type' => 'Тип',
     'links' => 'Ссылки',
+    'truck_with_tuning' => 'Официальный тюнинг',
 
     // member
     'nickname' => 'Ник в игре',

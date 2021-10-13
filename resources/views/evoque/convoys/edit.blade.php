@@ -255,12 +255,13 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group truck_image">
-                        <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*">
+                        <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->tuning) style="display: none" @endif>
+                            <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*" @if($convoy->tuning) disabled @endif>
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif" class="w-100" id="truck_image-preview">
+                        <img src="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
+                             class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif
@@ -270,7 +271,7 @@
                             @foreach($trucks_tuning as $vendor => $tunings)
                                 <optgroup label="{{ $vendor }}">
                                     @foreach($tunings as $item)
-                                        <option value="{{ $item->id }}">{{ $item->vendor }} {{ $item->model }}</option>
+                                        <option value="{{ $item->id }}" @if($convoy->tuning?->id === $item->id) selected @endif>{{ $item->vendor }} {{ $item->model }}</option>
                                     @endforeach
                                 </optgroup>
                             @endforeach
@@ -281,26 +282,34 @@
                 <div class="col-md-7">
                     @if(!$booking)
                         <div class="custom-control custom-checkbox mb-2">
-                            <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public" @if($convoy->truck_public || old('truck_public') === 'on') checked @endif>
+                            <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public"
+                                   @if(!$convoy->tuning && ($convoy->truck_public || old('truck_public') === 'on')) checked @endif
+                                   @if($convoy->tuning) disabled @endif>
                             <label class="custom-control-label" for="truck_public">@lang('attributes.truck_public')</label>
                         </div>
                     @endif
                     <div class="form-group">
-                        <input type="text" class="form-control" id="truck" name="truck" value="{{ old('truck') ?? $convoy->truck }}" placeholder="Марка">
+                        <input type="text" class="form-control" id="truck" name="truck"
+                               value="{{ old('truck') ?? $convoy->truck }}"
+                               placeholder="Марка"  @if($convoy->tuning) readonly @endif>
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="truck_tuning">@lang('attributes.truck_tuning')</label>
-                        <input type="text" class="form-control" id="truck_tuning" name="truck_tuning" value="{{ old('truck_tuning') ?? $convoy->truck_tuning }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="truck_tuning" name="truck_tuning"
+                               value="{{ old('truck_tuning') ?? $convoy->truck_tuning }}"
+                               placeholder="Не обязательно">
                         @if($errors->has('truck_tuning'))
                             <small class="form-text">{{ $errors->first('truck_tuning') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
                         <label for="truck_paint">@lang('attributes.truck_paint')</label>
-                        <input type="text" class="form-control" id="truck_paint" name="truck_paint" value="{{ old('truck_paint') ?? $convoy->truck_paint }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="truck_paint" name="truck_paint"
+                               value="{{ old('truck_paint') ?? $convoy->truck_paint }}"
+                               placeholder="Не обязательно"  @if($convoy->tuning) readonly @endif>
                         @if($errors->has('truck_paint'))
                             <small class="form-text">{{ $errors->first('truck_paint') }}</small>
                         @endif

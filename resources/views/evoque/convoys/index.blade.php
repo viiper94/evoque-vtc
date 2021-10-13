@@ -172,7 +172,19 @@
                                             <div class="col-md-12 col-xl-6 text-center text-md-left text-xl-right row justify-content-end mx-0 flex-column-reverse flex-md-row-reverse flex-xl-row truck-info">
                                                 <div class="col">
                                                     <p class="mb-0 text-muted">@lang('attributes.truck')</p>
-                                                    <h5 class="mb-1">{{ $convoy->truck ?? 'Любой' }}</h5>
+                                                    <h5 class="mb-1">
+                                                        {{ $convoy->truck ?? 'Любой' }}
+                                                        @if($convoy->tuning)
+                                                             <a class="text-success px-1" target="_blank"
+                                                                @if($convoy->tuning->game === 'ats')
+                                                                    href="https://bit.ly/3oTNWBc"
+                                                                @else
+                                                                    href="https://bit.ly/2O7v8x7"
+                                                                @endif>
+                                                                <i class="fas fa-download"></i>
+                                                             </a>
+                                                        @endif
+                                                    </h5>
                                                     @if($convoy->truck_tuning)
                                                         <p class="mb-0 text-muted">Тюнинг:</p>
                                                         <h5 class="mb-1">{{ $convoy->truck_tuning }}</h5>
@@ -184,8 +196,8 @@
                                                 </div>
                                                 @if($convoy->truck_image)
                                                     <div class="col truck-img">
-                                                        <a href="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image }} @else /images/convoys/{{ $convoy->truck_image }}@endif" target="_blank">
-                                                            <img src="@if(str_contains($convoy->truck_image, 'images/tuning')) {{ $convoy->truck_image }} @else /images/convoys/{{ $convoy->truck_image }}@endif"
+                                                        <a href="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif" target="_blank">
+                                                            <img src="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
                                                                  alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
                                                         </a>
                                                     </div>

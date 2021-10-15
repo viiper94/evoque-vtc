@@ -124,6 +124,7 @@ class Convoy extends Model implements Auditable{
             'DLC Utah',
             'DLC Idaho',
             'DLC Colorado',
+            'DLC Wyoming',
             'DLC Heavy Cargo Paсk',
             'DLC Forest Machinery',
             'DLC Volvo Construction Equipment'

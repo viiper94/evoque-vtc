@@ -194,7 +194,7 @@
                                                         <h5>{{ $convoy->truck_paint }}</h5>
                                                     @endif
                                                 </div>
-                                                @if($convoy->truck_image)
+                                                @if($convoy->truck_image || $convoy->tuning)
                                                     <div class="col truck-img">
                                                         <a href="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif" target="_blank">
                                                             <img src="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"

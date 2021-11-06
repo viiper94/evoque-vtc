@@ -31,6 +31,7 @@ class TestController extends Controller{
             'correct' => $results->filter(function($value){
                 return $value->correct;
             }),
+            'first_answered' => $results->sortBy('created_at')->first(),
             'count' => TestQuestion::count(),
             'question' => $question_number ? $questions[$question_number] : null,
             'view' => !$question_number ? (Auth::user()->member->hasCompleteTest() ? 'result' : 'start') : 'question',

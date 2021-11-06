@@ -87,10 +87,11 @@
 </div>
 <div class="container">
     <section class="features text-center row pt-5 pb-5 mt-5 mb-5">
+        @php $diff = \Carbon\Carbon::create(2016, 11)->diffInYears(\Carbon\Carbon::now()) @endphp
         <div class="feature col-md-4 col-sm-12">
-            <h1 class="display-2 font-weight-bold">4</h1>
+            <h1 class="display-2 font-weight-bold">{{ $diff }}</h1>
             <hr class="m-auto pb-3">
-            <p>года на дорогах</p>
+            <p> {{ trans_choice('год|года|лет', $diff) }} на дорогах</p>
         </div>
         <div class="feature col-md-4 col-sm-12">
             <div class="row justify-content-center">

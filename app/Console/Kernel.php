@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Member;
+use App\TestResult;
 use App\User;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -25,12 +26,19 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule){
+
         $schedule->call(function(){
             Member::checkBans();
         })->everySixHours();
+
         $schedule->call(function(){
             User::deleteOldUsers();
         })->daily();
+
+        $schedule->call(function(){
+            TestResult::deleteOldResults();
+        })->daily();
+
     }
 
     /**

@@ -23,9 +23,7 @@ class TestController extends Controller{
             $result->correct = $request->input('answer') == $prev_question->correct;
             $result->save();
         }
-        $results = TestResult::with('question')->whereMemberId(Auth::user()->member->id)
-            ->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->format('Y-m-d H:i'))
-            ->get()->keyBy('question.sort');
+        $results = TestResult::with('question')->whereMemberId(Auth::user()->member->id)->get()->keyBy('question.sort');
         return view('evoque.test.index', [
             'results' => $results,
             'correct' => $results->filter(function($value){

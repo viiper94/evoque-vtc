@@ -127,7 +127,7 @@
 
             <div class="rules text-muted p-3">
                 <ul>
-                    <li>В вашей коллекции в Steam должны быть <a href="https://store.steampowered.com/bundle/5555/Euro_Truck_Simulator_2_Map_Booster/" target="_blank" class="text-muted">основные картовые DLC</a>
+                    <li>В вашей коллекции в Steam должны быть <a href="https://store.steampowered.com/bundle/5555/Euro_Truck_Simulator_2_Map_Booster/" target="_blank" class="text-primary">основные картовые DLC</a>
                         к ETS2. Отсутствие вышеупомянутых DLC не будет поводом в отказе при приеме, но большая часть конвоев в ВТК проходит именно по дополнениям!</li>
                     <li>Большинство конвоев начинаются в 19:00 по МСК, вы должны быть уверены что сможете посещать наши конвои в своем часовом поясе!</li>
                 </ul>

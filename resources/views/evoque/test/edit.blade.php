@@ -19,7 +19,7 @@
                     <small class="form-text">{{ $errors->first('question') }}</small>
                 @endif
             </div>
-            <div class="row col mt-5 test-answers">
+            <div class="row col mt-5 mx-0 px-0 test-answers">
                 <h5 class="col-12">
                     Ответы
                     <a class="btn btn-sm text-primary" id="add_answer" data-index="1" data-target="test-answers">
@@ -27,8 +27,8 @@
                     </a>
                 </h5>
                 @foreach($question->answers as $key => $answer)
-                    <div class="answer col-12 row" id="answer-{{ $key }}">
-                        <div class="form-group col-sm-9">
+                    <div class="answer col-12 row mx-0" id="answer-{{ $key }}">
+                        <div class="form-group col-sm-9 col-xs-12 px-0 mb-0 mb-sm-3">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="answers[]"
                                        value="{{ old('answers['.$key.']') ?? $question->answers[$key] }}" required>
@@ -43,7 +43,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="custom-control custom-radio col-sm-3 pl-5">
+                        <div class="custom-control custom-radio col-sm-3 col-xs-12 pl-4 pl-sm-5 pr-0 mb-3">
                             <input type="radio" id="correct-{{ $key }}" name="correct" value="{{ $key }}"
                                    class="custom-control-input" @if($question->correct == $key)checked @endif required>
                             <label class="custom-control-label" for="correct-{{ $key }}">Правильный ответ</label>

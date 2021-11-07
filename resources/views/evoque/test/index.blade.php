@@ -11,12 +11,12 @@
         <h2 class="mt-3 mb-3 text-primary text-center">Тест на знание ВТК</h2>
         <h5 class="text-center">
             @can('view', \App\TestResult::class)
-                <a href="{{ route('evoque.test.results') }}" class="btn btn-sm btn-outline-success">
+                <a href="{{ route('evoque.test.results') }}" class="btn btn-sm btn-outline-success my-1">
                     <i class="fas fa-poll"></i> Результаты
                 </a>
             @endcan
             @can('accessToEditPage', \App\TestQuestion::class)
-                <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info">
+                <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info my-1">
                     <i class="fas fa-edit"></i> Редактировать вопросы
                 </a>
             @endcan

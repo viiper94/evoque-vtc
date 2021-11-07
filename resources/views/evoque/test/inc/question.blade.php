@@ -1,12 +1,12 @@
-<div class="row flex-column align-items-center my-3">
-    <div class="btn-group btn-group-sm my-3" role="group">
+<div class="row flex-column align-items-center my-3 mx-0">
+    <div class="btn-group btn-group-sm flex-wrap" role="group">
         @for($i = 1; $i <= $count; $i++)
             <a href="{{ route('evoque.test', $i) }}"
-               class="btn {{ \App\TestQuestion::getBtnClass($question, $i, $results) }}">{{ $i }}
+               class="question-number btn {{ \App\TestQuestion::getBtnClass($question, $i, $results) }}">{{ $i }}
             </a>
         @endfor
     </div>
-    <h4 class="my-5">{{ $question->question }}</h4>
+    <h4 class="my-5 text-center">{{ $question->question }}</h4>
     <form method="post" class="row align-items-center flex-column" action="{{ route('evoque.test', $question->isLast() ? null : $question->sort + 1) }}">
         @csrf
         <div class="col btn-group-toggle text-center" data-toggle="buttons">

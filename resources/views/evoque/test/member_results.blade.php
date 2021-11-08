@@ -6,7 +6,7 @@
 
 @section('content')
 {{--    @dd($results)--}}
-    <div class="container pt-5 pb-5">
+    <div class="container-fluid pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 mb-3 text-primary text-center">Результаты сотрудника {{ $member->nickname }}</h2>
         <h5 class="text-center">

@@ -23,7 +23,13 @@
             @foreach($questions as $question)
                 <div class="card card-dark mb-3 text-shadow-m">
                     <div class="card-header row mx-0">
-                        <h5 class="mb-0 px-0 col">{{ $question->question }}</h5>
+                        <h5 class="mb-0 px-0 col">
+                            @can('update', \App\TestQuestion::class)
+                                <a href="{{ route('evoque.test.edit', $question->id) }}">{{ $question->question }}</a>
+                            @else
+                                {{ $question->question }}
+                            @endcan
+                        </h5>
                         @can('update', \App\TestQuestion::class)
                             <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                 <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"

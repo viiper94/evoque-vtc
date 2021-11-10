@@ -150,4 +150,11 @@ class TestController extends Controller{
         ]);
     }
 
+    public function deleteResults(Request $request, $id){
+        $this->authorize('delete', TestResult::class);
+        return TestResult::whereMemberId($id)->delete() ?
+            redirect()->route('evoque.test.results')->with(['success' => 'Результаты успешно удалёны!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
 }

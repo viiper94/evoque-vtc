@@ -27,6 +27,7 @@
                 <th scope="col">Вопросов пройдено</th>
                 <th scope="col">Правильных ответов</th>
                 <th scope="col">Последний ответ дан</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -38,6 +39,13 @@
                     <td>{{ $result['count'] }}/{{ $total }}</td>
                     <td>{{ $result['correct'] }} <span class="text-muted">({{ floor($result['correct']/$result['count']*100) }}%)</span></td>
                     <td>{{ $result['last'] }}</td>
+                    <td>
+                        @can('delete', \App\TestResult::class)
+                            <a href="{{ route('evoque.test.results.delete', $result['id']) }}" onclick="return confirm('Удалить результаты?')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        @endcan
+                    </td>
                 </tr>
             @endforeach
             </tbody>

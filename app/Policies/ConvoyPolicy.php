@@ -55,6 +55,15 @@ class ConvoyPolicy
         return false;
     }
 
+    public function updateOne(User $user, Convoy $convoy){
+        if($user->member){
+            foreach($user->member->role as $role){
+                if($role->manage_convoys || $role->edit_convoys || ($convoy->booked_by_id == $user->member->id && !$convoy->visible)) return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Determine whether the user can delete the model.
      *

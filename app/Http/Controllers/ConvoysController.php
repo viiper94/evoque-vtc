@@ -8,6 +8,7 @@ use App\TrucksTuning;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use TruckersMP\APIClient\Client;
@@ -24,7 +25,12 @@ class ConvoysController extends Controller{
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
-            $convoys = $convoys->whereDate('start_time', $operator, Carbon::tomorrow())->where('visible', '1');
+            $convoys = $convoys->whereDate('start_time', $operator, Carbon::tomorrow())
+                ->where('visible', '1')
+                ->orWhere(function($query){
+                    $query->where('start_time', '>', Carbon::now())
+                        ->where('booked_by_id', Auth::user()->member->id);
+                });
         }
         $convoys = $convoys->orderBy('start_time')->get();
         foreach($convoys as $convoy){
@@ -102,10 +108,10 @@ class ConvoysController extends Controller{
     }
 
     public function edit(Request $request, $id, $booking = false){
-        $this->authorize('update', Convoy::class);
         $convoy = Convoy::with(['audits' => function($query){
             $query->limit(10)->orderBy('created_at', 'desc');
         }])->where('id', $id)->firstOrFail();
+        $this->authorize('updateOne', $convoy);
         if($request->ajax() && $request->input('action') == 'remove_img'){
             $attr = $request->input('target');
             $convoy->$attr = null;
@@ -132,23 +138,22 @@ class ConvoysController extends Controller{
                     $convoy->$key = $convoy->saveImage($file);
                 }
             }
-            $convoy->booking = false;
+            $convoy->booking = !Auth::user()->can('update', Convoy::class);
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
                 redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-//        $tmp = new Client();
-//        $servers = $tmp->servers()->get();
         $servers = $convoy->defaultServers;
+        $booking = Auth::user()->cant('update', Convoy::class) && Auth::user()->can('updateOne', $convoy);
         return view('evoque.convoys.edit', [
-            'booking' => false,
+            'booking' => $booking,
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::all(),
             'dlc' => $convoy->dlcList,
-            'types' => Convoy::$timesToType,
+            'types' => $booking ? [$convoy->type => Convoy::$timesToType[$convoy->type]] : Convoy::$timesToType,
             'trucks_tuning' => TrucksTuning::whereVisible(true)->get()->groupBy('vendor')
         ]);
     }
@@ -166,6 +171,7 @@ class ConvoysController extends Controller{
         $this->authorize('update', Convoy::class);
         $convoy = Convoy::findOrFail($id);
         $convoy->visible = !$convoy->visible;
+        $convoy->booking = false;
         return $convoy->save() ?
             redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно отредактирован!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);

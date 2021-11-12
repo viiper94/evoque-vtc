@@ -52,33 +52,36 @@
                                     @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
                                     @elseif($convoy->booking && !$convoy->visible)border-info @endif
                                 @endif">
-
                             <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
                                  aria-expanded="false" aria-controls="{{ $convoy->id }}">
-                                @if(!$convoy->isFulfilled() && \Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class))
-                                    <h5 class="text-center col">
+                                <h5 class="text-center col">
+                                    @if(!$convoy->isFulfilled() && \Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class))
                                         <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}">
                                             {{ $convoy->title }}
                                         </a>
-                                    </h5>
-                                @else
-                                    <h5 class="text-center col">
+                                    @else
                                         {{ $convoy->title }}
-                                    </h5>
-                                @endif
-                                @can('update', \App\Convoy::class)
+                                    @endif
+                                    @if($convoy->leadMember?->user->id === \Illuminate\Support\Facades\Auth::user()->id) <span class="text-info">Мой конвой</span> @endif
+                                    @if($convoy->booking && !$convoy->visible) <span class="text-danger">Неактивный - ожидает модерации</span> @endif
+                                </h5>
+                                @can('updateOne', $convoy)
                                     <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                         <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                            <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Редактировать</a>
-                                            @if(!$convoy->visible)
-                                                <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Опубликовать</a>
-                                            @else
-                                                <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye-slash"></i> Спрятать</a>
-                                            @endif
+                                            @can('updateOne', $convoy)
+                                                <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Редактировать</a>
+                                            @endcan
+                                            @can('update', \App\Convoy::class)
+                                                @if(!$convoy->visible)
+                                                    <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Опубликовать</a>
+                                                @else
+                                                    <a href="{{ route('evoque.admin.convoy.toggle', $convoy->id) }}" class="dropdown-item"><i class="fas fa-eye-slash"></i> Спрятать</a>
+                                                @endif
+                                            @endcan
                                             @can('delete', \App\Convoy::class)
                                                 <a href="{{ route('evoque.admin.convoy.delete', $convoy->id) }}"
                                                    onclick="return confirm('Удалить этот конвой?')" class="dropdown-item"><i class="fas fa-trash"></i> Удалить</a>

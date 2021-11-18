@@ -5,8 +5,10 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Arr;
 use OwenIt\Auditing\Contracts\Auditable;
 use TruckersMP\APIClient\Client;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
 
 class Member extends Model implements Auditable{
 
@@ -161,13 +163,44 @@ class Member extends Model implements Auditable{
 
     public function hasCompleteTest(){
         $results = TestResult::whereMemberId($this->id)->where('created_at', '>', Carbon::now()->subMonth()->format('Y-m-d H:i'))->count();
-//        dd($results);
         $total_questions = TestQuestion::count();
         return $results === $total_questions;
     }
 
-    public function getPermissions(){
-        return true;
+    public function getRolesPermissions(){
+        $permissions = array();
+        foreach($this->role as $role){
+            if($role->admin) $permissions += ['admin' => 1];
+            foreach(Arr::flatten(Role::$permission_list) as $item){
+                if($role->$item) $permissions += [$item => $role->$item];
+            }
+        }
+        return $permissions;
+    }
+
+    public function getMemberPermissionCheckboxState($attribute, $rolePermissions) :string{
+        $string = '';
+        if(isset($this->permissions[$attribute])){
+            if($this->permissions[$attribute] == 'on') $string .= 'checked';
+        }else{
+            $string .= 'disabled ';
+            if(isset($rolePermissions[$attribute])) $string .= 'checked';
+        }
+
+//
+//        if(isset($this->permissions[$attribute]) && $this->permissions[$attribute] == 'on'){
+//            return 'checked';
+//        }
+//        if(isset($this->permissions[$attribute]) && isset($this->permissions[$attribute]) && $this->permissions[$attribute] == 'off'){
+//            return '';
+//        }
+//        if(isset($this->permissions[$attribute]) && !isset($this->permissions[$attribute])){
+//            return 'checked disabled';
+//        }
+//        if(!isset($this->permissions[$attribute]) && !isset($this->permissions[$attribute])){
+//            return 'disabled';
+//        }
+        return $string;
     }
 
 }

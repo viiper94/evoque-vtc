@@ -182,8 +182,10 @@
                                 <div class="col-12">
                                     <div class="custom-control custom-checkbox my-4">
                                         <input type="hidden" name="permissions[admin]" value="off" disabled>
-                                        <input type="checkbox" class="custom-control-input" id="admin" name="permissions[admin]" value="on" @if($role->admin)checked @endif disabled>
+                                        <input type="checkbox" class="custom-control-input" id="admin" name="permissions[admin]" value="on"
+                                            {{ $member->getMemberPermissionCheckboxState('admin', $rolePermissions) }}>
                                         <label class="custom-control-label text-danger" for="admin">Полные админские права</label>
+                                        <a class="reset-permission text-primary">Сбросить</a>
                                     </div>
                                 </div>
                                 @foreach(\App\Role::$permission_list as $category => $perms)
@@ -194,11 +196,12 @@
                                         @foreach($perms as $item)
                                             <div class="custom-control custom-checkbox @if($loop->index === 0) mb-4 @endif">
                                                 <input type="hidden" name="permissions[{{ $item }}]" value="off" disabled>
-                                                <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="permissions[{{ $item }}]" value="on" @if($role->$item)checked @endif disabled>
+                                                <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="permissions[{{ $item }}]" value="on"
+                                                       {{ $member->getMemberPermissionCheckboxState($item, $rolePermissions) }}>
                                                 <label class="custom-control-label  @if($loop->index === 0) text-danger @endif" for="{{ $item }}">
                                                     @lang('attributes.'.$item)
                                                 </label>
-                                                <a class="reset-permission text-primary" data-target="{{ $item }}">Сбросить</a>
+                                                <a class="reset-permission text-primary">Сбросить</a>
                                             </div>
                                         @endforeach
                                         <hr class="border-secondary">

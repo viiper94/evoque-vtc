@@ -79,7 +79,7 @@ class MembersController extends Controller{
         return view('evoque.members.edit', [
             'member' => $member,
             'roles' => Role::all(),
-            'permissions' => $member->getPermissions()
+            'rolePermissions' => $member->getRolesPermissions()
         ]);
     }
 
@@ -199,7 +199,7 @@ class MembersController extends Controller{
         $member = Member::find($id);
         $this->authorize('updatePermissions', $member);
         if(!$request->post()) abort(404);
-        $member->fill($request->post());
+        $member->permissions = $request->post('permissions') ?? null;
         return $member->save() ?
             redirect()->route('evoque.members')->with(['success' => 'Права сотрудника успешно отредактированы!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);

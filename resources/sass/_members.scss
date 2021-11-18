@@ -106,6 +106,7 @@
 .member-permissions{
     .custom-checkbox a{
         display: none;
+        cursor: pointer;
     }
     .custom-checkbox:hover input:not([disabled]) ~ a{
         display: inline-block;

@@ -102,3 +102,12 @@
         }
     }
 }
+
+.member-permissions{
+    .custom-checkbox a{
+        display: none;
+    }
+    .custom-checkbox:hover input:not([disabled]) ~ a{
+        display: inline-block;
+    }
+}

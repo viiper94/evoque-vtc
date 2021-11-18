@@ -344,6 +344,21 @@ $(document).ready(function(){
         }
     });
 
+    $('.member-permissions .custom-checkbox').click(function(e){
+        let $checkbox = $(this).find('input');
+        if($checkbox.prop('disabled') !== false){
+            e.preventDefault();
+            $checkbox.prop('disabled', false);
+        }
+    });
+
+    $('a.reset-permission').click(function(e){
+        let $checkbox = $(this).parent().find('input');
+        console.log($checkbox);
+        $checkbox.prop('disabled', 'disabled');
+        e.stopPropagation();
+    });
+
 });
 
 function getPreloaderHtml(){

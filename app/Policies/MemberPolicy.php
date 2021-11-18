@@ -86,6 +86,16 @@ class MemberPolicy
         return false;
     }
 
+    public function updatePermissions(User $user, Member $member){
+        if($user->member || $user->member?->topRole() === 1){
+            foreach($user->member->role as $role){
+                if($role->manage_roles || $role->edit_roles_permissions ||
+                    ($role->manage_members && $member->topRole() >= $user->member?->topRole())) return true;
+            }
+        }
+        return true;
+    }
+
     /**
      * Determine whether the user can permanently delete the model.
      *

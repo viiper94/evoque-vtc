@@ -71,13 +71,15 @@ class MembersController extends Controller{
                 redirect()->route('evoque.members')->with(['success' => 'Сотрудник успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
+        $member = Member::with(['role', 'user', 'audits' => function($query){
+            $query->limit(10)->orderBy('created_at', 'desc');
+        }, 'audits.user.member' => function($query){
+            $query->withTrashed();
+        }, 'stats'])->where('id', $id)->withTrashed()->firstOrFail();
         return view('evoque.members.edit', [
-            'member' => Member::with(['role', 'user', 'audits' => function($query){
-                $query->limit(10)->orderBy('created_at', 'desc');
-            }, 'audits.user.member' => function($query){
-                $query->withTrashed();
-            }, 'stats'])->where('id', $id)->withTrashed()->firstOrFail(),
-            'roles' => Role::all()
+            'member' => $member,
+            'roles' => Role::all(),
+            'permissions' => $member->getPermissions()
         ]);
     }
 
@@ -191,6 +193,16 @@ class MembersController extends Controller{
                 $query->where('visible', '1');
             }])->orderBy('convoys', 'desc')->orderBy('sort', 'desc')->orderBy('scores', 'desc')->get()
         ]);
+    }
+
+    public function editPermissions(Request $request, $id){
+        $member = Member::find($id);
+        $this->authorize('updatePermissions', $member);
+        if(!$request->post()) abort(404);
+        $member->fill($request->post());
+        return $member->save() ?
+            redirect()->route('evoque.members')->with(['success' => 'Права сотрудника успешно отредактированы!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

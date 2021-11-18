@@ -165,6 +165,55 @@
                 </div>
             </form>
         @endcan
+
+        @can('updatePermissions', $member)
+            <form action="{{ route('evoque.admin.members.editPermissions', $member->id) }}" method="post" class="member-permissions">
+                @csrf
+                <div class="accordion my-5" id="accordion">
+                    <div class="card card-dark">
+                        <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
+                            <h5 class="mb-0">Редактирование прав на сайте</h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-outline-warning"><i class="fas fa-save"></i> Сохранить права</button>
+                                </div>
+                                <div class="col-12">
+                                    <div class="custom-control custom-checkbox my-4">
+                                        <input type="hidden" name="permissions[admin]" value="off" disabled>
+                                        <input type="checkbox" class="custom-control-input" id="admin" name="permissions[admin]" value="on" @if($role->admin)checked @endif disabled>
+                                        <label class="custom-control-label text-danger" for="admin">Полные админские права</label>
+                                    </div>
+                                </div>
+                                @foreach(\App\Role::$permission_list as $category => $perms)
+                                    <div class="col-md-6 mb-3">
+                                        <h5 class="text-primary">
+                                            @lang('attributes.'.$category)
+                                        </h5>
+                                        @foreach($perms as $item)
+                                            <div class="custom-control custom-checkbox @if($loop->index === 0) mb-4 @endif">
+                                                <input type="hidden" name="permissions[{{ $item }}]" value="off" disabled>
+                                                <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="permissions[{{ $item }}]" value="on" @if($role->$item)checked @endif disabled>
+                                                <label class="custom-control-label  @if($loop->index === 0) text-danger @endif" for="{{ $item }}">
+                                                    @lang('attributes.'.$item)
+                                                </label>
+                                                <a class="reset-permission text-primary" data-target="{{ $item }}">Сбросить</a>
+                                            </div>
+                                        @endforeach
+                                        <hr class="border-secondary">
+                                    </div>
+                                @endforeach
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-outline-warning"><i class="fas fa-save"></i> Сохранить права</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        @endcan
+
         @can('updateRpStats', \App\Member::class)
             @if(count($member->stats) > 0)
                 <div class="member-rp-stat mb-5">

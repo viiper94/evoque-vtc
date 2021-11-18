@@ -20,6 +20,7 @@ class Member extends Model implements Auditable{
         'tmp_banned' => 'boolean',
         'tmp_bans_hidden' => 'boolean',
         'on_vacation_till' => 'array',
+        'permissions' => 'array',
     ];
 
     protected $dates = [
@@ -44,6 +45,7 @@ class Member extends Model implements Auditable{
         'trainee_until',
         'plate',
         'sort',
+        'permissions',
     ];
 
     protected $auditExclude = [
@@ -162,6 +164,10 @@ class Member extends Model implements Auditable{
 //        dd($results);
         $total_questions = TestQuestion::count();
         return $results === $total_questions;
+    }
+
+    public function getPermissions(){
+        return true;
     }
 
 }

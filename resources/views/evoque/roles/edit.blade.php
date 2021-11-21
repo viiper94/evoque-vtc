@@ -48,13 +48,6 @@
                 <h1 class="text-primary mb-3">Права должности на сайте</h1>
                 <button type="submit" class="btn btn-outline-warning">Сохранить права</button>
                 <div class="row mt-3">
-                    <div class="col-12">
-                        <div class="custom-control custom-checkbox mb-4">
-                            <input type="checkbox" class="custom-control-input" id="admin" name="admin" @if($role->admin)checked @endif>
-                            <label class="custom-control-label text-danger" for="admin">Полные админские права</label>
-                        </div>
-                    </div>
-
                     @foreach(\App\Role::$permission_list as $category => $perms)
                         <div class="col-md-6 mb-3">
                             <div class="card card-dark">

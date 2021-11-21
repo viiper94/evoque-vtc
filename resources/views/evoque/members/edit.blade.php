@@ -179,17 +179,8 @@
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-outline-warning"><i class="fas fa-save"></i> Сохранить права</button>
                                 </div>
-                                <div class="col-12">
-                                    <div class="custom-control custom-checkbox my-4">
-                                        <input type="hidden" name="permissions[admin]" value="off" disabled>
-                                        <input type="checkbox" class="custom-control-input" id="admin" name="permissions[admin]" value="on"
-                                            {{ $member->getMemberPermissionCheckboxState('admin', $rolePermissions) }}>
-                                        <label class="custom-control-label text-danger" for="admin">Полные админские права</label>
-                                        <a class="reset-permission text-primary">Сбросить</a>
-                                    </div>
-                                </div>
                                 @foreach(\App\Role::$permission_list as $category => $perms)
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 my-3">
                                         <h5 class="text-primary">
                                             @lang('attributes.'.$category)
                                         </h5>

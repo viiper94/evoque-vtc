@@ -93,7 +93,7 @@ return [
     'make_applications' => 'Подавать заявки',
     'view_applications' => 'Смотреть все заявки сотрудников',
     'claim_applications' => 'Принимать или отклонять заявки сотрудников',
-    'delete_applications' => 'Удалять заявки сотрудников',
+    'delete_applications' => 'Удалять свои заявки',
     'convoy' => 'Конвои',
     'manage_convoys' => 'Полные права по конвоям',
     'view_all_convoys' => 'Смотреть все регламенты будущих конвоев',

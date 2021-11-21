@@ -12,12 +12,14 @@
 @section('content')
     <div class="container pt-5 private-convoys">
         @include('layout.alert')
-        @can('update', \App\Convoy::class)
-            <h1 class="text-primary text-center">Все конвои</h1>
-            <h5 class="text-center">
+        <h1 class="text-primary text-center">Регламенты конвоев</h1>
+        <h5 class="text-center">
+            @can('create', \App\Convoy::class)
                 <a href="{{ route('evoque.admin.convoy.add') }}" class="btn btn-sm btn-outline-primary">
                     <i class="fas fa-plus"></i> Новый конвой
                 </a>
+            @endcan
+            @can('viewAny', \App\Convoy::class)
                 @if(!$all)
                     <a href="{{ route('convoys.private', 'all') }}" class="btn btn-sm btn-outline-success">
                         <i class="fas fa-plus"></i> Будущие регламенты
@@ -27,10 +29,8 @@
                         <i class="fas fa-minus"></i> Текущие регламенты
                     </a>
                 @endif
-            </h5>
-        @else
-            <h1 class="text-primary text-center">Регламенты конвоев</h1>
-        @endcan
+            @endcan
+        </h5>
 
         @foreach($convoys as $formatted_day => $day_convoys)
             @php $day = \Carbon\Carbon::parse($formatted_day); @endphp

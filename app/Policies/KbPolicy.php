@@ -6,62 +6,22 @@ use App\Kb;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class KbPolicy
-{
+class KbPolicy extends Policy{
+
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view any models.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
     public function viewAny(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_kb || $role->view_hidden) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_kb', 'view_hidden');
     }
 
-    /**
-     * Determine whether the user can view the model.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
     public function viewPrivate(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_kb || $role->view_private) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_kb', 'view_private');
     }
 
-    /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
     public function create(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_kb || $role->add_article) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_kb', 'add_article');
     }
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Kb  $kb
-     * @return mixed
-     */
     public function update(User $user, Kb $kb){
         if($user->member){
             foreach($user->member->role as $role){
@@ -72,13 +32,6 @@ class KbPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Kb  $kb
-     * @return mixed
-     */
     public function delete(User $user, Kb $kb){
         if($user->member){
             foreach($user->member->role as $role){

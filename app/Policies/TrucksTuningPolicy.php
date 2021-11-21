@@ -5,43 +5,24 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TrucksTuningPolicy{
+class TrucksTuningPolicy extends Policy{
+
     use HandlesAuthorization;
 
     public function view(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_tunings || $role->view_tunings) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_tunings', 'view_tunings');
     }
 
     public function add(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_tunings || $role->add_tunings) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_tunings', 'add_tunings');
     }
 
     public function edit(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_tunings || $role->edit_tunings) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_tunings', 'edit_tunings');
     }
 
     public function delete(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_tunings || $role->delete_tunings) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_tunings', 'delete_tunings');
     }
 
 }

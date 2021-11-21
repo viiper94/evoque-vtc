@@ -6,35 +6,20 @@ use App\TestResult;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TestResultPolicy
-{
+class TestResultPolicy extends Policy{
+
     use HandlesAuthorization;
 
     public function do(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_test || $role->do_test) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_test', 'add_questions');
     }
 
     public function view(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_test || $role->view_results) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_test', 'view_results');
     }
 
     public function delete(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_test || $role->delete_results) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_test', 'delete_results');
     }
 
 }

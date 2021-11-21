@@ -7,63 +7,23 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ApplicationPolicy
-{
+class ApplicationPolicy extends Policy{
+
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view all applications.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Application  $app
-     * @return mixed
-     */
     public function view(User $user, Application $app){
-        if($user->member){
-            if($user->member->id === $app->member_id) return true;
-            foreach($user->member->role as $role){
-                if($role->manage_applications || $role->view_applications) return true;
-            }
-        }
-        return false;
+        if($user->member?->id === $app->member_id) return true;
+        return $this->checkPermission($user, 'manage_applications', 'view_applications');
     }
 
-    /**
-     * Determine whether the user can view all applications.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
     public function viewAll(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_applications || $role->view_applications) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_applications', 'view_applications');
     }
 
-    /**
-     * Determine whether the user can create application.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
     public function create(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_applications || $role->make_applications) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_applications', 'make_applications');
     }
 
-    /**
-     * Determine whether the user can create vacation application.
-     *
-     * @param  \App\User  $user
-     * @return mixed
-     */
     public function createVacation(User $user){
         if($user->member){
             foreach($user->member->role as $role){
@@ -77,13 +37,6 @@ class ApplicationPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can update his own applications.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Application  $application
-     * @return mixed
-     */
     public function update(User $user, Application $application){
         if($user->member?->id === $application->member_id && $application->status === 0){
             foreach($user->member->role as $role){
@@ -93,13 +46,6 @@ class ApplicationPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can delete the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Application  $application
-     * @return mixed
-     */
     public function delete(User $user, Application $application){
         if($user->member && $application->status === 0){
             foreach($user->member->role as $role){
@@ -111,13 +57,6 @@ class ApplicationPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can accept or decline applications.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Application  $application
-     * @return mixed
-     */
     public function claim(User $user, Application $application){
         if($user->member && $application->status !== 1 && $application->status !== 2){
             foreach($user->member->role as $role){
@@ -127,20 +66,8 @@ class ApplicationPolicy
         return false;
     }
 
-    /**
-     * Determine whether the user can accept or decline applications.
-     *
-     * @param  \App\User  $user
-     * @param  \App\Application  $application
-     * @return mixed
-     */
     public function accept(User $user){
-        if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_applications || $role->claim_applications) return true;
-            }
-        }
-        return false;
+        return $this->checkPermission($user, 'manage_applications', 'claim_applications');
     }
 
 }

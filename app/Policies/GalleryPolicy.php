@@ -16,6 +16,9 @@ class GalleryPolicy extends Policy{
 
     public function forceCreate(User $user){
         if($user->member){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_gallery', 'upload_without_moderation'))){
+                return $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_gallery || ($role->upload_screenshots && $role->upload_without_moderation)) return true;
             }

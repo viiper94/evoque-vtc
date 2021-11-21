@@ -24,6 +24,9 @@ class ConvoyPolicy extends Policy{
 
     public function updateOne(User $user, Convoy $convoy){
         if($user->member){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_convoys', 'edit_convoys'))){
+                return $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_convoys || $role->edit_convoys || ($convoy->booked_by_id == $user->member->id && !$convoy->visible)) return true;
             }

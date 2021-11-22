@@ -28,6 +28,9 @@ class MemberPolicy extends Policy{
 
     public function updateRoles(User $user, Member $member){
         if($member->topRole() >= $user->member?->topRole() || $user->member?->topRole() === 1){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_members', 'edit_members'))){
+                return $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_members || $role->edit_members) return true;
             }
@@ -37,6 +40,12 @@ class MemberPolicy extends Policy{
 
     public function updatePermissions(User $user, Member $member){
         if($user->member || $user->member?->topRole() === 1){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_roles', 'edit_roles_permissions'))){
+                return $result;
+            }
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_members', 'manage_members'))){
+                return $result && $member->topRole() >= $user->member?->topRole();
+            }
             foreach($user->member->role as $role){
                 if($role->manage_roles || $role->edit_roles_permissions ||
                     ($role->manage_members && $member->topRole() >= $user->member?->topRole())) return true;
@@ -47,6 +56,9 @@ class MemberPolicy extends Policy{
 
     public function fire(User $user, Member $member){
         if($member->topRole() >= $user->member?->topRole()){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_members', 'fire_members'))){
+                return $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_members || $role->fire_members) return true;
             }

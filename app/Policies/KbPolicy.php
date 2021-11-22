@@ -24,6 +24,12 @@ class KbPolicy extends Policy{
 
     public function update(User $user, Kb $kb){
         if($user->member){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_kb', 'edit_all_articles'))){
+                return $result;
+            }
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_kb', 'edit_own_article'))){
+                return $kb->author == $user->id && $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_kb || $role->edit_all_articles ||
                     ($kb->author == $user->id && $role->edit_own_article)) return true;
@@ -34,6 +40,12 @@ class KbPolicy extends Policy{
 
     public function delete(User $user, Kb $kb){
         if($user->member){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_kb', 'delete_all_articles'))){
+                return $result;
+            }
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_kb', 'delete_own_article'))){
+                return $kb->author == $user->id && $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_kb || $role->delete_all_articles ||
                     ($kb->author == $user->id && $role->delete_own_article)) return true;

@@ -89,9 +89,9 @@
             <p>SIM: 2000+ км<br>ARC: 2500+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
-            <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
+            <h2 class="text-primary font-weight-bold">Скорость ведущего</h2>
             <hr class="m-auto pb-3">
-            <p>SIM: 100 км/ч<br>ARC: 150 км/ч</p>
+            <p>SIM: до 100 км/ч<br>ARC: до 150 км/ч</p>
         </div>
     </section>
     <section class="features lead-rules text-center row justify-content-around">
@@ -117,9 +117,9 @@
             <p>SIM: 2300+ км<br>ARC: 2500+ км</p>
         </div>
         <div class="feature col-lg-3 col-sm-4 col-sm-12 mb-md-0 mb-5">
-            <h2 class="text-primary font-weight-bold">Макс. скорость ведущего</h2>
+            <h2 class="text-primary font-weight-bold">Скорость ведущего</h2>
             <hr class="m-auto pb-3">
-            <p>SIM: 115 км/ч<br>ARC: 150 км/ч</p>
+            <p>SIM: до 115 км/ч<br>ARC: до 150 км/ч</p>
         </div>
     </section>
 </div>

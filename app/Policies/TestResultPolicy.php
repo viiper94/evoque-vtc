@@ -11,7 +11,7 @@ class TestResultPolicy extends Policy{
     use HandlesAuthorization;
 
     public function do(User $user){
-        return $this->checkPermission($user, 'manage_test', 'add_questions');
+        return $this->checkPermission($user, 'manage_test', 'do_test');
     }
 
     public function view(User $user){

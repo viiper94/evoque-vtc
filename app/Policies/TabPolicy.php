@@ -25,6 +25,12 @@ class TabPolicy extends Policy{
 
     public function create(User $user){
         if($user->member){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_convoys', 'manage_convoys'))){
+                return $result;
+            }
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_tab', 'book_convoys'))){
+                return $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_convoys || $role->manage_tab || $role->book_convoys) return true;
             }
@@ -38,6 +44,9 @@ class TabPolicy extends Policy{
 
     public function claim(User $user, Tab $tab){
         if($user->member && $tab->status == 0){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_tab', 'accept_tab'))){
+                return $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_tab || $role->accept_tab) return true;
             }

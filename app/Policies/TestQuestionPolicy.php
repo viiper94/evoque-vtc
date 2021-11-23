@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\TestQuestion;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class TestQuestionPolicy extends Policy{
 
@@ -24,9 +25,9 @@ class TestQuestionPolicy extends Policy{
 
     public function accessToEditPage(User $user){
         if($user->member){
-            foreach($user->member->role as $role){
-                if($role->manage_test || $role->delete_questions || $role->add_questions || $role->edit_questions) return true;
-            }
+            return Auth::user()->can('create', TestQuestion::class)
+                || Auth::user()->can('update', TestQuestion::class)
+                || Auth::user()->can('delete', TestQuestion::class);
         }
         return false;
     }

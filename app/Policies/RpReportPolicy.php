@@ -20,6 +20,9 @@ class RpReportPolicy extends Policy{
 
     public function create(User $user){
         if($user->member){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_rp', 'add_reports'))){
+                return $result && $user->member->canReportRP();
+            }
             foreach($user->member->role as $role){
                 if($role->manage_rp || ($role->add_reports && $user->member->canReportRP())) return true;
             }

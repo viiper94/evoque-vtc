@@ -24,6 +24,9 @@ class RolePolicy extends Policy{
 
     public function updatePermissions(User $user, Role $role){
         if($user->member?->topRole() < $role->id || $user->member?->topRole() === 0){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_roles', 'edit_roles_permissions'))){
+                return $result;
+            }
             foreach($user->member->role as $role){
                 if($role->manage_roles || $role->edit_roles_permissions) return true;
             }

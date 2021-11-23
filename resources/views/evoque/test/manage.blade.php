@@ -30,14 +30,16 @@
                                 {{ $question->question }}
                             @endcan
                         </h5>
-                        @can('update', \App\TestQuestion::class)
+                        @can('accessToEditPage', \App\TestQuestion::class)
                             <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                 <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
                                 <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                    <a href="{{ route('evoque.test.edit', $question->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Редактировать</a>
+                                    @can('update', \App\TestQuestion::class)
+                                        <a href="{{ route('evoque.test.edit', $question->id) }}" class="dropdown-item"><i class="fas fa-edit"></i> Редактировать</a>
+                                    @endcan
                                     @can('delete', \App\TestQuestion::class)
                                         <a href="{{ route('evoque.test.delete', $question->id) }}"
                                            onclick="return confirm('Удалить вопрос?')" class="dropdown-item"><i class="fas fa-trash"></i> Удалить</a>

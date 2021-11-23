@@ -25,21 +25,10 @@
                         <li class="nav-item @if(Route::is('apply'))active @endif">
                             <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                         </li>
-                        <li class="nav-item @if(Route::is('gallery'))active @endif">
-                            <a class="nav-link" href="{{ route('gallery') }}">Галерея</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('auth.steam') }}">Войти <i class="fab fa-steam"></i></a>
                         </li>
                     @else
-{{--                        <li class="nav-item @if($controller === 'gallerycontroller')active @endif">--}}
-{{--                            <a class="nav-link" href="{{ route('gallery') }}">--}}
-{{--                                Галерея--}}
-{{--                                @if($gallery_c > 0)--}}
-{{--                                    <span class="badge badge-danger">{{ $gallery_c }}</span>--}}
-{{--                                @endif--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
                         <li class="nav-item dropdown @if(in_array($controller, ['tabscontroller', 'convoyscontroller', 'planscontroller']))active @endif">
                             <a class="nav-link dropdown-toggle nowrap" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Конвои
@@ -131,9 +120,7 @@
                                     @can('restore', \App\Member::class)
                                         <a class="dropdown-item" href="{{ route('evoque.members.trash') }}">Уволенные сотрудники</a>
                                     @endcan
-{{--                                    @can('restore', \App\Member::class)--}}
-                                        <a class="dropdown-item" href="{{ route('evoque.tuning') }}">Официальный тюнинг</a>
-{{--                                    @endcan--}}
+                                    <a class="dropdown-item" href="{{ route('evoque.tuning') }}">Официальный тюнинг</a>
                                 </div>
                             </li>
                         @endif

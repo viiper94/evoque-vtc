@@ -51,12 +51,12 @@
                     @foreach(\App\Role::$permission_list as $category => $perms)
                         <div class="col-md-6 mb-3">
                             <div class="card card-dark">
-                                <h5 class="card-header text-primary">@lang('attributes.'.$category)</h5>
+                                <h5 class="card-header text-primary">@lang('roles.'.$category)</h5>
                                 <div class="card-body">
                                     @foreach($perms as $item)
                                         <div class="custom-control custom-checkbox @if($loop->index === 0) mb-4 @endif">
                                             <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="{{ $item }}" @if($role->$item)checked @endif>
-                                            <label class="custom-control-label  @if($loop->index === 0) text-danger @endif" for="{{ $item }}">@lang('attributes.'.$item)</label>
+                                            <label class="custom-control-label  @if($loop->index === 0) text-danger @endif" for="{{ $item }}">@lang('roles.'.$item)</label>
                                         </div>
                                     @endforeach
                                 </div>

@@ -182,7 +182,7 @@
                                 @foreach(\App\Role::$permission_list as $category => $perms)
                                     <div class="col-md-6 my-3">
                                         <h5 class="text-primary">
-                                            @lang('attributes.'.$category)
+                                            @lang('roles.'.$category)
                                         </h5>
                                         @foreach($perms as $item)
                                             <div class="custom-control custom-checkbox @if($loop->index === 0) mb-4 @endif">
@@ -190,7 +190,7 @@
                                                 <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="permissions[{{ $item }}]" value="on"
                                                        {{ $member->getMemberPermissionCheckboxState($item, $rolePermissions) }}>
                                                 <label class="custom-control-label  @if($loop->index === 0) text-danger @endif" for="{{ $item }}">
-                                                    @lang('attributes.'.$item)
+                                                    @lang('roles.'.$item)
                                                 </label>
                                                 <a class="reset-permission text-primary">Сбросить</a>
                                             </div>

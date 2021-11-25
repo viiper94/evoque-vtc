@@ -19,14 +19,14 @@
                                 $old_value = '';
                                 if(isset($values['old']) && is_array($values['old'])){
                                     foreach($values['old'] as $k => $v){
-                                        $old_value .= $k .': '. $v .'; ';
+                                        $old_value .= trans('changelog.'.$k) .': '. $v .'; ';
                                     }
                                 }else{
                                     $old_value .= $values['old'] ?? '';
                                 }$new_value = '';
                                 if(isset($values['new']) && is_array($values['new'])){
                                     foreach($values['new'] as $k => $v){
-                                        $new_value .= $k .': '. $v .'; ';
+                                        $new_value .= trans('changelog.'.$k) .': '. $v .'; ';
                                     }
                                 }else{
                                     $new_value .= $values['new'] ?? '';

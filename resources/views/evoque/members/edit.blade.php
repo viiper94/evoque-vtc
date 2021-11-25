@@ -210,13 +210,13 @@
 
         @can('updateRpStats', \App\Member::class)
             @if(count($member->stats) > 0)
-                <div class="member-rp-stat accordion my-5" id="accordion-permissions">
+                <div class="member-rp-stat accordion my-5" id="accordion-rp">
                     <div class="card card-dark">
                         <div class="card-header" id="heading-rp" data-toggle="collapse" data-target="#collapse-rp">
                             <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Статистика рейтинговых перевозок</h5>
                         </div>
                         <div id="collapse-rp" class="collapse" aria-labelledby="heading-rp" data-parent="#accordion-rp">
-                            <div class="card-body row">
+                            <div class="card-body row mx-0">
                                 <div class="row">
                                     @foreach($member->stats as $stat)
                                         <div class="col-md-{{ count($member->stats) > 1 ? '6' : '12' }} ets2">

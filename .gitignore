@@ -13,3 +13,4 @@ yarn-error.log
 /public/images/*
 !/public/images/plates
 /public/dumps/*
+/vendor

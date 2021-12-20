@@ -40,7 +40,7 @@ class Steam extends Model{
             }else{
                 return collect([
                     'error' => true,
-                    'message' => 'Проверьте профиль TruckersMP!'
+                    'message' => 'Похоже, что ваш профиль Steam скрыт... =('
                 ]);
             }
         }catch(\ErrorException $e){

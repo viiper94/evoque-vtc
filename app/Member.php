@@ -186,20 +186,6 @@ class Member extends Model implements Auditable{
             $string .= 'disabled ';
             if(isset($rolePermissions[$attribute])) $string .= 'checked';
         }
-
-//
-//        if(isset($this->permissions[$attribute]) && $this->permissions[$attribute] == 'on'){
-//            return 'checked';
-//        }
-//        if(isset($this->permissions[$attribute]) && isset($this->permissions[$attribute]) && $this->permissions[$attribute] == 'off'){
-//            return '';
-//        }
-//        if(isset($this->permissions[$attribute]) && !isset($this->permissions[$attribute])){
-//            return 'checked disabled';
-//        }
-//        if(!isset($this->permissions[$attribute]) && !isset($this->permissions[$attribute])){
-//            return 'disabled';
-//        }
         return $string;
     }
 

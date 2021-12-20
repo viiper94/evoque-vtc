@@ -38,6 +38,10 @@ class Recruitment extends Model{
         '3' => 'В работе',
     ];
 
+    public function comments(){
+        return $this->hasMany('App\Comment', 'instance_id')->where('instance', 'App\Recruitment');
+    }
+
     public function getStatus(){
         return $this->statuses[$this->status];
     }

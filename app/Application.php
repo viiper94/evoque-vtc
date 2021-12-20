@@ -36,6 +36,10 @@ class Application extends Model{
         return $this->belongsTo('App\Member');
     }
 
+    public function comments(){
+        return $this->hasMany('App\Comment', 'instance_id')->where('instance', 'App\Application');
+    }
+
     public function getCategory(){
         return $this->categories[$this->category];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Convoy;
 use App\Member;
 use App\Recruitment;
@@ -96,6 +97,14 @@ class Controller extends BaseController{
         $item->sort = $slave_item->sort;
         $slave_item->sort = $tmp;
         return $item->save() && $slave_item->save();
+    }
+
+    public function deleteComment(Request $request, $id){
+//        $this->authorize('delete', Comment::class);
+        $comment = Comment::findOrFail($id);
+        return $comment->delete() ?
+            redirect()->back()->with(['success' => 'Коментарий удалён!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

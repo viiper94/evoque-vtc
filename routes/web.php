@@ -128,4 +128,6 @@ Route::any('/evoque/tuning/edit/{id}', 'TrucksTuningController@edit')->name('evo
 Route::get('/evoque/tuning/delete/{id}', 'TrucksTuningController@delete')->name('evoque.tuning.delete');
 Route::get('/evoque/tuning/{q?}', 'TrucksTuningController@index')->name('evoque.tuning');
 
+Route::get('/evoque/comment/delete/{id?}', 'Controller@deleteComment')->name('evoque.comment.delete');
+
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

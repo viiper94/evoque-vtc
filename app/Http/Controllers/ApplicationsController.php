@@ -36,6 +36,20 @@ class ApplicationsController extends Controller{
         ]);
     }
 
+    public function comment(Request $request, $id){
+        $application = Application::findOrFail($id);
+//        $this->authorize('comment', $application);
+        return $application->comments()->create([
+            'author_id' => Auth::id(),
+            'text' => $request->input('comment'),
+            'instance' => 'App\Application',
+            'instance_id' => $id,
+            'public' => true,
+        ]) ?
+            redirect()->back()->with(['success' => 'Коментарий сохранен!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
     public function accept(Request $request, $id){
         $application = Application::with('member', 'member.stats')->where('id', $id)->first();
         $this->authorize('claim', $application);

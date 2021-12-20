@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    Заявка от {{ !in_array($app->category, [4, 5]) ? $app->member->nickname : $app->old_nickname }} | @lang('general.vtc_evoque')
+    Заявка от {{ !in_array($app->category, [4, 5]) && $app->member ? $app->member?->nickname : $app->old_nickname }} | @lang('general.vtc_evoque')
 @endsection
 
 @section('assets')
@@ -13,7 +13,13 @@
 
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary text-center">Заявка на {{ $app->getCategory() }} от {{ !in_array($app->category, [4, 5]) ? $app->member->nickname : $app->old_nickname }}</h2>
+        <h2 class="mt-3 text-primary text-center">Заявка на {{ $app->getCategory() }} от {{ !in_array($app->category, [4, 5]) && $app->member ? $app->member?->nickname : $app->old_nickname }}</h2>
+        <div class="row justify-content-center">
+            <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1"
+                    onclick="return confirm('Принять заявку?')">Принять</button>
+            <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
+                    onclick="return confirm('Отклонить заявку?')">Отклонить</button>
+        </div>
         <div class="row justify-content-between text-center mt-5">
             @switch($app->category)
                 @case(1)
@@ -74,23 +80,51 @@
         @elseif($app->status === 2)
             <h3 class="text-danger text-center">Заявка отклонена!</h3>
         @endif
-        @can('claim', $app)
-            <form method="post" action="{{ route('evoque.applications.accept', $app->id) }}">
-                @csrf
-                <h4 class="text-center mb-0">Комментарий</h4>
-                <textarea class="form-control simple-mde" id="comment" name="comment">{{ $app->comment }}</textarea>
-                @if($errors->has('comment'))
-                    <small class="form-text">{{ $errors->first('comment') }}</small>
-                @endif
-                <div class="row justify-content-center">
-                    <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1"
-                            onclick="return confirm('Принять заявку?')">Принять</button>
-                    <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
-                            onclick="return confirm('Отклонить заявку?')">Отклонить</button>
-                    <button type="submit" name="accept" value="3" class="btn btn-outline-info btn-lg m-1">Сохранить</button>
-                </div>
-            </form>
-        @endcan
+        @if($app->isClosed() && count($app->comments) > 0 || !$app->isClosed())
+            <div class="comments border-top border-primary pt-5 mt-5">
+                <form method="post" action="{{ route('evoque.applications.comment', $app->id) }}">
+                    @csrf
+                    <h4 class="text-center mb-3">Комментарии</h4>
+                    @foreach($app->comments as $comment)
+                        <div class="card card-dark text-shadow-m mb-2">
+                            <div class="card-header row mx-0 pr-2">
+                                <div class="col px-0 app-title">
+                                    @if($comment->author || $comment->author?->member)
+                                        <b class="text-primary">{{ $comment->author->member?->nickname ?? $comment->author?->name }}</b>
+                                    @else
+                                        <span class="font-italic">Уволенный сотрудник</span>
+                                    @endif
+                                    <span class="text-muted"> написал:</span>
+                                </div>
+                                <span class="col-auto text-muted">{{ $comment->created_at->isoFormat('LLL') }}</span>
+                                @can('delete', \App\Recruitment::class)
+                                    <div class="dropdown dropdown-dark col-auto px-0 dropleft">
+                                        <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
+                                                data-toggle="dropdown" aria-haspopup="tr?ue" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
+                                            <a href="{{ route('evoque.comment.delete', $comment->id) }}"
+                                               class="dropdown-item" onclick="return confirm('Удалить эту заявку?')"><i class="fas fa-trash"></i> Удалить</a>
+                                        </div>
+                                    </div>
+                                @endcan
+                            </div>
+                            <div class="card-body"><p class="mb-0">{{ $comment->text }}</p></div>
+                        </div>
+                    @endforeach
+                    @if(!$app->isClosed())
+                        <div class="new-comment mt-5">
+                            <textarea class="form-control simple-mde" id="comment" name="comment">{{ $app->comment }}</textarea>
+                            @if($errors->has('comment'))
+                                <small class="form-text">{{ $errors->first('comment') }}</small>
+                            @endif
+                            <button type="submit" name="accept" value="3" class="btn btn-outline-info m-1">Сохранить коментарий</button>
+                        </div>
+                    @endif
+                </form>
+            </div>
+        @endif
     </div>
 
     <script>

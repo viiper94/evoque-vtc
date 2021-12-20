@@ -26,7 +26,7 @@
         @endcannot
         @can('view', \App\Recruitment::class)
             <div class="row pt-3 justify-content-center">
-                <a href="{{ route('evoque.applications.recruitment') }}" class="btn btn-outline-warning btn-sm">
+                <a href="{{ route('evoque.recruitments') }}" class="btn btn-outline-warning btn-sm">
                     Заявки на вступление
                     @can('accept', \App\Recruitment::class)
                         @if($recruitments > 0)<span class="badge badge-danger">{{ $recruitments }}</span>@endif
@@ -83,12 +83,6 @@
                             @if($app->member && $app->category === 4)
                                 <p class="text-muted">Текущий ник: <b>{{ $app->member->nickname }}</b></p>
                             @endif
-                            @if($app->comment)
-                                <p class="mb-0 pt-3 text-danger">Комментарий от администратора: </p>
-                                <div class="markdown-content">
-                                    @markdown($app->comment)
-                                </div>
-                            @endif
                             @switch($app->category)
                                 @case(1)
                                     <p class="mb-0 mt-3">Отпуск: </p>
@@ -119,8 +113,13 @@
                                 </div>
                             @endif
                         </div>
-                        <div class="card-footer text-muted">
-                            {{ $app->created_at->isoFormat('LLL') }}
+                        <div class="card-footer row text-muted">
+                            <span class="col">{{ $app->created_at->isoFormat('LLL') }}</span>
+                            @if(count($app->comments) > 0)
+                                <div class="comments-count col-auto text-muted">
+                                    <i class="fas fa-comment-dots"></i> {{ count($app->comments) }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach

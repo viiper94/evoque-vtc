@@ -34,7 +34,8 @@ class Recruitment extends Model{
     public $statuses = [
         '0' => 'Новая',
         '1' => 'Принята',
-        '2' => 'Отклонена'
+        '2' => 'Отклонена',
+        '3' => 'В работе',
     ];
 
     public function getStatus(){

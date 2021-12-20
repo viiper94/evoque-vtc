@@ -44,4 +44,8 @@ class Application extends Model{
         return $this->statuses[$this->status];
     }
 
+    public function isClosed(){
+        return $this->status == 1 || $this->status == 2;
+    }
+
 }

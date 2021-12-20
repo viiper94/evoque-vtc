@@ -38,11 +38,6 @@
                                     @endcan
                                 </h5>
                             </div>
-                            @if(count($application->comments) > 0)
-                                <div class="comments-count col-auto text-muted">
-                                    <i class="fas fa-comment-dots"></i> {{ count($application->comments) }}
-                                </div>
-                            @endif
                             @if(\Illuminate\Support\Facades\Auth::user()->can('claim', $application) ||
                                     \Illuminate\Support\Facades\Auth::user()->can('delete', \App\Recruitment::class))
                                 <div class="dropdown dropdown-dark col-auto px-0 dropleft">
@@ -105,8 +100,13 @@
                                 <p class="referral mb-0">Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
                             @endif
                         </div>
-                        <div class="card-footer text-muted">
-                            {{ $application->created_at->isoFormat('LLL') }}
+                        <div class="card-footer row text-muted">
+                            <span class="col">{{ $application->created_at->isoFormat('LLL') }}</span>
+                            @if(count($application->comments) > 0)
+                                <div class="comments-count col-auto text-muted">
+                                    <i class="fas fa-comment-dots"></i> {{ count($application->comments) }}
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach

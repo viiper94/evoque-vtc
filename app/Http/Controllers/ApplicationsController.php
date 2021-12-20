@@ -36,42 +36,6 @@ class ApplicationsController extends Controller{
         ]);
     }
 
-    public function recruitment(Request $request, $id = null){
-        $this->authorize('view', Recruitment::class);
-        if(isset($id)){
-            $app = Recruitment::where('id', $id)->firstOrFail();
-            return view('evoque.applications.show_recruitment', [
-                'app' => $app
-            ]);
-        }
-        return view('evoque.applications.recruitment', [
-            'applications' => Recruitment::orderBy('created_at', 'desc')->paginate(15),
-            'apps' => Application::where('status', 0)->count()
-        ]);
-    }
-
-    public function acceptRecruitment(Request $request, $id){
-        $application = Recruitment::findOrFail($id);
-        $this->authorize('claim', $application);
-        $application->status = $request->input('accept');
-        $application->comment = $request->input('comment');
-        return $application->save() ?
-            redirect()->route('evoque.applications.recruitment')->with(['success' => match($application->status){
-                '1' => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.',
-                '2' => 'Зявка отклонена!',
-                '3' => 'Зявка отредактирована!'
-            }]) :
-            redirect()->back()->withErrors(['Возникла ошибка =(']);
-    }
-
-    public function deleteRecruitment(Request $request, $id){
-        $this->authorize('delete', Recruitment::class);
-        $application = Recruitment::findOrFail($id);
-        return $application->delete() ?
-            redirect()->back()->with(['success' => 'Зявка удалена!']) :
-            redirect()->back()->withErrors(['Возникла ошибка =(']);
-    }
-
     public function accept(Request $request, $id){
         $application = Application::with('member', 'member.stats')->where('id', $id)->first();
         $this->authorize('claim', $application);

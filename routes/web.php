@@ -73,9 +73,11 @@ Route::any('/evoque/rp/reports/stat/{id}', 'RpController@editStat')->name('evoqu
 Route::any('/evoque/rp/stats', 'RpController@weekly')->name('evoque.rp.weekly');
 Route::get('/evoque/rp', 'RpController@index')->name('evoque.rp');
 
-Route::get('/evoque/applications/recruitment/{id?}', 'ApplicationsController@recruitment')->name('evoque.applications.recruitment');
-Route::any('/evoque/applications/acceptRecruitment/{id}', 'ApplicationsController@acceptRecruitment')->name('evoque.applications.accept.recruitment');
-Route::get('/evoque/applications/deleteRecruitment/{id}', 'ApplicationsController@deleteRecruitment')->name('evoque.applications.delete.recruitment');
+Route::get('/evoque/recruitments/{id?}', 'RecruitmentController@index')->name('evoque.recruitments');
+Route::post('/evoque/recruitments/comment/{id}', 'RecruitmentController@comment')->name('evoque.recruitments.comment');
+Route::post('/evoque/recruitments/accept/{id}', 'RecruitmentController@accept')->name('evoque.recruitments.accept');
+Route::get('/evoque/recruitments/delete/{id}', 'RecruitmentController@delete')->name('evoque.recruitments.delete');
+
 Route::get('/evoque/applications/edit/{id?}', 'ApplicationsController@edit')->name('evoque.applications.edit');
 Route::any('/evoque/applications/accept/{id}', 'ApplicationsController@accept')->name('evoque.applications.accept');
 Route::get('/evoque/applications/delete/{id}', 'ApplicationsController@delete')->name('evoque.applications.delete');

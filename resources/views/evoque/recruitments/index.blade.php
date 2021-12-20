@@ -26,13 +26,23 @@
                         <div class="card-header row mx-0 pr-2">
                             <div class="col px-0 app-title">
                                 <h5 class="mb-0">
+                                    @if($application->status == '1')
+                                        <i class="fas fa-check-circle text-success"></i>
+                                    @elseif($application->status == '2')
+                                        <i class="fas fa-times-circle text-danger"></i>
+                                    @endif
                                     @can('view', $application)
-                                        <a href="{{ route('evoque.applications.recruitment', $application->id) }}">{{ $application->name }}</a>
+                                        <a href="{{ route('evoque.recruitments', $application->id) }}">{{ $application->name }}</a>
                                     @else
                                         {{ $application->name }}
                                     @endcan
                                 </h5>
                             </div>
+                            @if(count($application->comments) > 0)
+                                <div class="comments-count col-auto text-muted">
+                                    <i class="fas fa-comment-dots"></i> {{ count($application->comments) }}
+                                </div>
+                            @endif
                             @if(\Illuminate\Support\Facades\Auth::user()->can('claim', $application) ||
                                     \Illuminate\Support\Facades\Auth::user()->can('delete', \App\Recruitment::class))
                                 <div class="dropdown dropdown-dark col-auto px-0 dropleft">
@@ -42,10 +52,10 @@
                                     </button>
                                     <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
                                         @can('claim', $application)
-                                            <a href="{{ route('evoque.applications.recruitment', $application->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Смотреть</a>
+                                            <a href="{{ route('evoque.recruitments', $application->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Смотреть</a>
                                         @endcan
                                         @can('delete', \App\Recruitment::class)
-                                            <a href="{{ route('evoque.applications.delete.recruitment', $application->id) }}"
+                                            <a href="{{ route('evoque.recruitments.delete', $application->id) }}"
                                                class="dropdown-item" onclick="return confirm('Удалить эту заявку?')"><i class="fas fa-trash"></i> Удалить</a>
                                         @endcan
                                     </div>
@@ -53,12 +63,6 @@
                             @endif
                         </div>
                         <div class="card-body">
-                            @if($application->comment)
-                                <p class="mb-0 text-danger">Комментарий от администратора: </p>
-                                <div class="markdown-content">
-                                    @markdown($application->comment)
-                                </div>
-                            @endif
                             <p>
                                 <a class="mr-3" href="{{ $application->vk_link }}" target="_blank"><i class="fab fa-vk"></i></a>
                                 <a class="mr-3" href="{{ $application->steam_link }}" target="_blank"><i class="fab fa-steam"></i></a>

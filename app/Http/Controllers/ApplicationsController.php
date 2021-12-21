@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Member;
 use App\Recruitment;
 use App\RpStats;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
@@ -38,7 +40,7 @@ class ApplicationsController extends Controller{
 
     public function comment(Request $request, $id){
         $application = Application::findOrFail($id);
-//        $this->authorize('comment', $application);
+        $this->authorize('addComment', $application);
         return $application->comments()->create([
             'author_id' => Auth::id(),
             'text' => $request->input('comment'),
@@ -47,6 +49,15 @@ class ApplicationsController extends Controller{
             'public' => true,
         ]) ?
             redirect()->back()->with(['success' => 'Коментарий сохранен!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
+    public function deleteComment(Request $request, $id){
+        $comment = Comment::findOrFail($id);
+        $application = Application::find($comment->instance_id);
+        $this->authorize('deleteComment', [$application, $comment]);
+        return $comment->delete() ?
+            redirect()->back()->with(['success' => 'Коментарий удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application;
+use App\Comment;
 use App\Recruitment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,15 @@ class RecruitmentController extends Controller{
             'public' => true,
         ]) ?
             redirect()->back()->with(['success' => 'Коментарий сохранен!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
+    public function deleteComment(Request $request, $id){
+        $comment = Comment::findOrFail($id);
+        $application = Recruitment::find($comment->instance_id);
+        $this->authorize('deleteComment', [$application, $comment]);
+        return $comment->delete() ?
+            redirect()->back()->with(['success' => 'Коментарий удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

@@ -73,11 +73,13 @@ Route::any('/evoque/rp/reports/stat/{id}', 'RpController@editStat')->name('evoqu
 Route::any('/evoque/rp/stats', 'RpController@weekly')->name('evoque.rp.weekly');
 Route::get('/evoque/rp', 'RpController@index')->name('evoque.rp');
 
+Route::get('/evoque/recruitments/comment/delete/{id?}', 'RecruitmentController@deleteComment')->name('evoque.recruitments.comment.delete');
 Route::get('/evoque/recruitments/{id?}', 'RecruitmentController@index')->name('evoque.recruitments');
 Route::post('/evoque/recruitments/comment/{id}', 'RecruitmentController@comment')->name('evoque.recruitments.comment');
 Route::post('/evoque/recruitments/accept/{id}', 'RecruitmentController@accept')->name('evoque.recruitments.accept');
 Route::get('/evoque/recruitments/delete/{id}', 'RecruitmentController@delete')->name('evoque.recruitments.delete');
 
+Route::get('/evoque/applications/comment/delete/{id?}', 'ApplicationsController@deleteComment')->name('evoque.applications.comment.delete');
 Route::get('/evoque/applications/edit/{id?}', 'ApplicationsController@edit')->name('evoque.applications.edit');
 Route::any('/evoque/applications/accept/{id}', 'ApplicationsController@accept')->name('evoque.applications.accept');
 Route::get('/evoque/applications/delete/{id}', 'ApplicationsController@delete')->name('evoque.applications.delete');
@@ -130,7 +132,5 @@ Route::any('/evoque/tuning/add', 'TrucksTuningController@add')->name('evoque.tun
 Route::any('/evoque/tuning/edit/{id}', 'TrucksTuningController@edit')->name('evoque.tuning.edit');
 Route::get('/evoque/tuning/delete/{id}', 'TrucksTuningController@delete')->name('evoque.tuning.delete');
 Route::get('/evoque/tuning/{q?}', 'TrucksTuningController@index')->name('evoque.tuning');
-
-Route::get('/evoque/comment/delete/{id?}', 'Controller@deleteComment')->name('evoque.comment.delete');
 
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

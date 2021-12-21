@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Application;
+use App\Comment;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -79,7 +80,7 @@ class ApplicationPolicy extends Policy{
     }
 
     public function claim(User $user, Application $application){
-        if($user->member && $application->status !== 1 && $application->status !== 2){
+        if($user->member && !$application->isClosed()){
             if(is_bool($result = $this->checkMemberPermission($user, 'manage_applications', 'claim_applications'))){
                 return $result;
             }
@@ -92,6 +93,20 @@ class ApplicationPolicy extends Policy{
 
     public function accept(User $user){
         return $this->checkPermission($user, 'manage_applications', 'claim_applications');
+    }
+
+    public function addComment(User $user, Application $application){
+        if($user->member){
+            if(!$application->isClosed() && $user->member->id === $application->member_id) return true;
+        }
+        return false;
+    }
+
+    public function deleteComment(User $user, Application $application, Comment $comment){
+        if($user->member){
+            if(!$application->isClosed() && $user->id === $comment->author_id) return true;
+        }
+        return false;
     }
 
 }

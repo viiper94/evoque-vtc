@@ -88,14 +88,14 @@
                                     <span class="text-muted"> написал:</span>
                                 </div>
                                 <span class="col-auto text-muted">{{ $comment->created_at->isoFormat('LLL') }}</span>
-                                @can('delete', \App\Recruitment::class)
+                                @can('deleteComment', [$app, $comment])
                                     <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                         <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                                 data-toggle="dropdown" aria-haspopup="tr?ue" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                            <a href="{{ route('evoque.comment.delete', $comment->id) }}"
+                                            <a href="{{ route('evoque.recruitments.comment.delete', $comment->id) }}"
                                                class="dropdown-item" onclick="return confirm('Удалить эту заявку?')"><i class="fas fa-trash"></i> Удалить</a>
                                         </div>
                                     </div>

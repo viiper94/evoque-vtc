@@ -14,12 +14,17 @@
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary text-center">Заявка на {{ $app->getCategory() }} от {{ !in_array($app->category, [4, 5]) && $app->member ? $app->member?->nickname : $app->old_nickname }}</h2>
-        <div class="row justify-content-center">
-            <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1"
-                    onclick="return confirm('Принять заявку?')">Принять</button>
-            <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
-                    onclick="return confirm('Отклонить заявку?')">Отклонить</button>
-        </div>
+        @can('claim', $app)
+            <div class="row justify-content-center">
+                <form method="post" action="{{ route('evoque.applications.accept', $app->id) }}">
+                    @csrf
+                    <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1"
+                            onclick="return confirm('Принять заявку?')">Принять</button>
+                    <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
+                            onclick="return confirm('Отклонить заявку?')">Отклонить</button>
+                </form>
+            </div>
+        @endcan
         <div class="row justify-content-between text-center mt-5">
             @switch($app->category)
                 @case(1)
@@ -97,14 +102,14 @@
                                     <span class="text-muted"> написал:</span>
                                 </div>
                                 <span class="col-auto text-muted">{{ $comment->created_at->isoFormat('LLL') }}</span>
-                                @can('delete', \App\Recruitment::class)
+                                @can('deleteComment', [$app, $comment])
                                     <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                         <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                                 data-toggle="dropdown" aria-haspopup="tr?ue" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                            <a href="{{ route('evoque.comment.delete', $comment->id) }}"
+                                            <a href="{{ route('evoque.applications.comment.delete', $comment->id) }}"
                                                class="dropdown-item" onclick="return confirm('Удалить эту заявку?')"><i class="fas fa-trash"></i> Удалить</a>
                                         </div>
                                     </div>

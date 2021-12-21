@@ -99,12 +99,4 @@ class Controller extends BaseController{
         return $item->save() && $slave_item->save();
     }
 
-    public function deleteComment(Request $request, $id){
-//        $this->authorize('delete', Comment::class);
-        $comment = Comment::findOrFail($id);
-        return $comment->delete() ?
-            redirect()->back()->with(['success' => 'Коментарий удалён!']) :
-            redirect()->back()->withErrors(['Возникла ошибка =(']);
-    }
-
 }

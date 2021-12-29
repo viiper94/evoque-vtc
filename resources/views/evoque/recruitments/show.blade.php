@@ -75,7 +75,7 @@
             <div class="comments border-top border-primary pt-5 mt-5">
                 <form method="post" action="{{ route('evoque.recruitments.comment', $app->id) }}">
                     @csrf
-                    <h4 class="text-center mb-3">Комментарии</h4>
+                    <h4 class="text-center mb-3">@if(count($app->comments) === 0)Нет комментариев @else Комментарии @endif</h4>
                     @foreach($app->comments as $comment)
                         <div class="card card-dark text-shadow-m mb-2">
                             <div class="card-header row mx-0 pr-2">
@@ -104,7 +104,7 @@
                             <div class="card-body"><p class="mb-0">{{ $comment->text }}</p></div>
                         </div>
                     @endforeach
-                    @if(!$app->isClosed())
+                    @can('addComment', $app)
                         <div class="new-comment mt-5">
                             <textarea class="form-control simple-mde" id="comment" name="comment">{{ $app->comment }}</textarea>
                             @if($errors->has('comment'))
@@ -112,7 +112,7 @@
                             @endif
                             <button type="submit" name="accept" value="3" class="btn btn-outline-info m-1">Сохранить коментарий</button>
                         </div>
-                    @endif
+                    @endcan
                 </form>
             </div>
         @endif

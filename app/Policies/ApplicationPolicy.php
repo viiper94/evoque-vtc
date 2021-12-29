@@ -98,6 +98,7 @@ class ApplicationPolicy extends Policy{
     public function addComment(User $user, Application $application){
         if($user->member){
             if(!$application->isClosed() && $user->member->id === $application->member_id) return true;
+            if($user->can('claim', $application)) return true;
         }
         return false;
     }

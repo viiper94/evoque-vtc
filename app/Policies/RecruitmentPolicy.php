@@ -38,6 +38,7 @@ class RecruitmentPolicy extends Policy{
     public function addComment(User $user, Recruitment $recruitment){
         if($user->member){
             if(!$recruitment->isClosed() && $user->member->id === $recruitment->member_id) return true;
+            if($user->can('claim', $recruitment)) return true;
         }
         return false;
     }

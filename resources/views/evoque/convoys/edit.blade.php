@@ -164,7 +164,7 @@
                     <div class="form-row">
                         <div class="form-group col-7">
                             <label for="rest_city">@lang('attributes.rest_city')</label>
-                            <input type="text" class="form-control" id="rest_city" name="rest_city" value="{{ old('rest_city') ?? $convoy->rest_city }}" required placeholder="Город">
+                            <input type="text" class="form-control" id="rest_city" name="rest_city" value="{{ old('rest_city') ?? $convoy->rest_city }}" placeholder="Город">
                             @if($errors->has('rest_city'))
                                 <small class="form-text">{{ $errors->first('rest_city') }}</small>
                             @endif

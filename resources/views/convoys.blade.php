@@ -60,16 +60,18 @@
                             <i class="fas fa-map-marker"></i>
                         </div>
                     </li>
-                    <li class="row justify-content-end">
-                        <div class="mr-3 mr-md-4 mb-4">
-                            <p>Место отдыха:</p>
-                            <h2>{{ $convoy->rest_city }}</h2>
-                            <h4>{{ $convoy->rest_company }}</h4>
-                        </div>
-                        <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
-                            <i class="fas fa-map-marked-alt"></i>
-                        </div>
-                    </li>
+                    @if($convoy->rest_city)
+                        <li class="row justify-content-end">
+                            <div class="mr-3 mr-md-4 mb-4">
+                                <p>Место отдыха:</p>
+                                <h2>{{ $convoy->rest_city }}</h2>
+                                <h4>{{ $convoy->rest_company }}</h4>
+                            </div>
+                            <div class="convoy-icon pl-md-5 pl-4 pb-4 pr-4 text-left d-flex align-items-center">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                        </li>
+                    @endif
                     <li class="row justify-content-end">
                         <div class="mr-3 mr-md-4 mb-4">
                             <p>Место финиша:</p>

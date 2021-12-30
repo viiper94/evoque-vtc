@@ -72,7 +72,7 @@ class Convoy extends Model implements Auditable{
         'route.*' => 'image|max:3000',
         'start_city' => 'required|string',
         'start_company' => 'nullable|string',
-        'rest_city' => 'required|string',
+        'rest_city' => 'nullable|string',
         'rest_company' => 'nullable|string',
         'finish_city' => 'required|string',
         'finish_company' => 'nullable|string',

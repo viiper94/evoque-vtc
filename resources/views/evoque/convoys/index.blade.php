@@ -119,9 +119,11 @@
                                                 <p class="mb-0 text-muted">@lang('attributes.start_city')</p>
                                                 <h3>{{ $convoy->start_city }}</h3>
                                                 <h5 class="mb-3">{{ $convoy->start_company }}</h5>
-                                                <p class="mb-0 text-muted">@lang('attributes.rest_city')</p>
-                                                <h3>{{ $convoy->rest_city }}</h3>
-                                                <h5 class="mb-3">{{ $convoy->rest_company }}</h5>
+                                                @if($convoy->rest_city)
+                                                    <p class="mb-0 text-muted">@lang('attributes.rest_city')</p>
+                                                    <h3>{{ $convoy->rest_city }}</h3>
+                                                    <h5 class="mb-3">{{ $convoy->rest_company }}</h5>
+                                                @endif
                                                 <p class="mb-0 text-muted">@lang('attributes.finish_city')</p>
                                                 <h3>{{ $convoy->finish_city }}</h3>
                                                 <h5 class="mb-3">{{ $convoy->finish_company }}</h5>

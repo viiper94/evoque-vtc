@@ -34,18 +34,29 @@ class PlansController extends Controller{
 
         for($i = 0; $i <= 7; $i++){
             $convoy_that_day = array();
+            // adding existed convoys to day
             foreach($convoys as $convoy){
                 if($convoy->start_time->format('d.m.Y') === Carbon::today()->addDays($i)->format('d.m.Y')){
                     $convoy_that_day[$convoy->type][] = $convoy;
                 }
             }
+            // adding empty slots to day
             foreach($this->allowedConvoysPerDay[Carbon::now()->addDays($i)->isoFormat('dddd')] as $type){
                 if(key_exists($type, $convoy_that_day)){
                     continue;
-                }elseif($i !== 0){
+                }else{
                     $convoy_that_day[$type][] = [];
                 }
             }
+            // adding non-planed slot for today
+            if($i === 0){
+                for($j = 0; $j <= 2; $j++){
+                    if(!key_exists($j, $convoy_that_day)){
+                        $convoy_that_day[$j][] = [];
+                    }
+                }
+            }
+            // sorting and merging
             ksort($convoy_that_day);
             $days[Carbon::now()->addDays($i)->format('d.m')] = [
                 'date' => Carbon::now()->addDays($i),
@@ -83,16 +94,14 @@ class PlansController extends Controller{
 
     public function book(Request $request, $offset, $type){
         $this->authorize('book', Convoy::class);
-        $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->where('type', $type)->get();
-        if($offset === '0') return redirect()->route('evoque.convoys.plans')->withErrors(['На сегодня уже нельзя бронировать конвои!']);
+        $convoy_that_day = Convoy::whereDate('start_time', '=', Carbon::today()->addDays($offset))->where(['type' => $type, 'visible' => '1'])->get();
         if(!in_array($type, [0, 1, 2, 3])) return redirect()->route('evoque.convoys.plans')->withErrors(['Что то пошло не так =(']);
         if(count($convoy_that_day) > 0) return redirect()->route('evoque.convoys.plans')->withErrors(['Уже забронирован конвой на этот период!']);
         $convoy = new Convoy([
-            'title' => 'Закрытый конвой',
+            'title' => $offset == 0 ? 'Внеплановый конвой' : 'Закрытый конвой',
             'trailer_public' => false,
             'truck_public' => false,
             'public' => false,
-            'visible' => false,
             'route' => ['1' => null],
             'communication' => 'Discord',
             'communication_link' => 'https://discord.gg/Gj53a8d',
@@ -113,17 +122,18 @@ class PlansController extends Controller{
                     $convoy->$key = $convoy->saveImage($file);
                 }
             }
+            $convoy->visible = $offset == 0;
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             $convoy->booking = true;
             $convoy->booked_by_id = Auth::user()->member->id;
             return $convoy->save() ?
-                redirect()->route('evoque.convoys.plans')->with(['success' => 'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :
+                redirect()->route('evoque.convoys.plans')->with(['success' => $offset == 0 ?
+                    'Внеплановый конвой создан, не забудь опубликовать регламент в чате в ВК!' :
+                    'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $convoy->start_time = Carbon::today()->addDays($offset)->addHours($type == 0 ? 16 : ($type == 2 ? 22 : 19))->addMinutes($type == 1 ? 30 : 0);
-//        $tmp = new Client();
-//        $servers = $tmp->servers()->get();
         $servers = $convoy->defaultServers;
         return view('evoque.convoys.edit', [
             'booking' => true,

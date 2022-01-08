@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Convoy;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ConvoyPolicy extends Policy{
@@ -28,7 +29,10 @@ class ConvoyPolicy extends Policy{
                 return $result;
             }
             foreach($user->member->role as $role){
-                if($role->manage_convoys || $role->edit_convoys || ($convoy->booked_by_id == $user->member->id && !$convoy->visible)) return true;
+                if($role->manage_convoys || $role->edit_convoys ||
+                    ($convoy->booked_by_id == $user->member->id && !$convoy->visible) ||
+                    ($convoy->booked_by_id == $user->member->id && $convoy->visible && Carbon::now()->diffInMinutes($convoy->created_at) <= 15)
+                ) return true;
             }
         }
         return false;

@@ -43,14 +43,6 @@ class PlansController extends Controller{
                     $convoy_that_day[$type][] = [];
                 }
             }
-            // adding non-planed slot for today
-            if($i === 0){
-                for($j = 0; $j <= 2; $j++){
-                    if(!key_exists($j, $convoy_that_day)){
-                        $convoy_that_day[$j][] = [];
-                    }
-                }
-            }
             // sorting and merging
             ksort($convoy_that_day);
             $days[Carbon::now()->addDays($i)->format('d.m')] = [

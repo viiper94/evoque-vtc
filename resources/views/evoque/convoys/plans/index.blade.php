@@ -49,7 +49,7 @@
                                     <p class="my-2">
                                         {{ \App\Convoy::getTypeByNum($type) }} -
                                         @can('quickBook', \App\Convoy::class)
-                                            <a data-date="{{ $day['date']->format('d.m.Y') }}" data-toggle="modal" data-target="#book-modal" class="book-convoy text-primary">Создать конвой</a>
+                                            <a data-date="{{ $day['date']->format('d.m.Y') }}" data-toggle="modal" data-target="#book-modal" class="book-convoy text-primary">Создать @if($loop->parent->parent->iteration === 1) внеплановый @endif конвой</a>
                                         @elsecan('book', \App\Convoy::class)
                                             <a href="{{ route('evoque.convoys.plans.book', [$loop->parent->parent->index, $type]) }}" class="book-convoy text-primary">Забронировать @if($loop->parent->parent->iteration === 1) внеплановый @endif конвой</a>
                                         @else

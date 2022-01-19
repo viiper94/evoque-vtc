@@ -115,7 +115,11 @@
                                     </div>
                                 @endcan
                             </div>
-                            <div class="card-body"><p class="mb-0">{{ $comment->text }}</p></div>
+                            <div class="card-body"><p class="mb-0">
+                                <div class="markdown-content">
+                                    @markdown($comment->text)
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                     @can('addComment', $app)

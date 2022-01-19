@@ -4,19 +4,25 @@
     Заявки | @lang('general.vtc_evoque')
 @endsection
 
+@section('assets')
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
+    <script src="/js/simplemde/dist/simplemde.min.js"></script>
+@endsection
+
 @section('content')
 
     <div class="container pt-5">
         @include('layout.alert')
         @can('create', \App\Application::class)
             <div class="application-buttons mt-5 mb-5 row justify-content-center">
-                <a href="{{ route('evoque.applications.vacation') }}"
-                   class="btn btn-lg m-1 @cannot('createVacation', \App\Application::class) btn-outline-secondary disabled @else btn-outline-warning @endcannot">
+                <button class="btn btn-lg m-1 @cannot('createVacation', \App\Application::class) btn-outline-secondary disabled @else btn-outline-warning" data-toggle="modal" data-target="#vacationModal" data-fake=" @endcannot">
                     Хочу в отпуск!
-                </a>
-                <a href="{{ route('evoque.applications.rp') }}" class="btn btn-lg btn-outline-success m-1">Сменить уровень в рейтинговых</a>
-                <a href="{{ route('evoque.applications.nickname') }}" class="btn btn-lg btn-outline-info m-1">Сменить ник</a>
-                <a href="{{ route('evoque.applications.fire') }}" class="btn btn-lg btn-outline-danger m-1">Увольняюсь!</a>
+                </button>
+                <button class="btn btn-lg btn-outline-success m-1" data-toggle="modal" data-target="#rpModal">Сменить уровень в рейтинговых</button>
+                <button class="btn btn-lg btn-outline-info m-1" data-toggle="modal" data-target="#nicknameModal">Сменить ник</button>
+                <button class="btn btn-lg btn-outline-danger m-1" data-toggle="modal" data-target="#fireModal">Увольняюсь!</button>
             </div>
         @endcan
         @cannot('viewAll', \App\Application::class)
@@ -131,5 +137,14 @@
             </div>
         @endif
     </div>
+
+    @can('create', \App\Application::class)
+        @include('evoque.applications.fire')
+        @include('evoque.applications.nickname')
+        @include('evoque.applications.rp')
+        @can('createVacation', \App\Application::class)
+            @include('evoque.applications.vacation')
+        @endcan
+    @endcan
 
 @endsection

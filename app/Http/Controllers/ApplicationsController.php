@@ -117,84 +117,76 @@ class ApplicationsController extends Controller{
 
     public function vacation(Request $request){
         $this->authorize('createVacation', Application::class);
-        if($request->post()){
-            $this->validate($request, [
-                'vacation_till' => 'required|string',
-                'reason' => 'nullable|string'
-            ]);
-            $app = new Application();
-            $app->member_id = Auth::user()->member->id;
-            $app->old_nickname = Auth::user()->member->nickname;
-            $app->category = 1;
-            $app->vacation_till = [
-                'from' => explode(' - ', $request->input('vacation_till'))[0],
-                'to' => explode(' - ', $request->input('vacation_till'))[1],
-            ];
-            $app->reason = $request->input('reason');
-            return $app->save() ?
-                redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        return view('evoque.applications.vacation');
+        if(!$request->post()) return abort(404);
+        $this->validate($request, [
+            'vacation_till' => 'required|string',
+            'reason' => 'nullable|string'
+        ]);
+        $app = new Application();
+        $app->member_id = Auth::user()->member->id;
+        $app->old_nickname = Auth::user()->member->nickname;
+        $app->category = 1;
+        $app->vacation_till = [
+            'from' => explode(' - ', $request->input('vacation_till'))[0],
+            'to' => explode(' - ', $request->input('vacation_till'))[1],
+        ];
+        $app->reason = $request->input('reason');
+        return $app->save() ?
+            redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
     public function rp(Request $request){
         $this->authorize('create', Application::class);
-        if($request->post()){
-            $this->validate($request, [
-                'new_rp_profile' => 'required|numeric',
-                'reason' => 'nullable|string'
-            ]);
-            $app = new Application();
-            $app->member_id = Auth::user()->member->id;
-            $app->old_nickname = Auth::user()->member->nickname;
-            $app->new_rp_profile = [$request->input('game'), $request->input('new_rp_profile')];
-            $app->category = 3;
-            $app->reason = $request->input('reason');
-            return $app->save() ?
-                redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        return view('evoque.applications.rp');
+        if(!$request->post()) return abort(404);
+        $this->validate($request, [
+            'new_rp_profile' => 'required|numeric',
+            'reason' => 'nullable|string'
+        ]);
+        $app = new Application();
+        $app->member_id = Auth::user()->member->id;
+        $app->old_nickname = Auth::user()->member->nickname;
+        $app->new_rp_profile = [$request->input('game'), $request->input('new_rp_profile')];
+        $app->category = 3;
+        $app->reason = $request->input('reason');
+        return $app->save() ?
+            redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
     public function nickname(Request $request){
         $this->authorize('create', Application::class);
-        if($request->post()){
-            $this->validate($request, [
-                'new_nickname' => 'required|string',
-                'reason' => 'nullable|string'
-            ]);
-            $app = new Application();
-            $app->member_id = Auth::user()->member->id;
-            $app->old_nickname = Auth::user()->member->nickname;
-            $app->new_nickname = $request->input('new_nickname');
-            $app->category = 4;
-            $app->reason = $request->input('reason');
-            return $app->save() ?
-                redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        return view('evoque.applications.nickname');
+        if(!$request->post()) return abort(404);
+        $this->validate($request, [
+            'new_nickname' => 'required|string',
+            'reason' => 'nullable|string'
+        ]);
+        $app = new Application();
+        $app->member_id = Auth::user()->member->id;
+        $app->old_nickname = Auth::user()->member->nickname;
+        $app->new_nickname = $request->input('new_nickname');
+        $app->category = 4;
+        $app->reason = $request->input('reason');
+        return $app->save() ?
+            redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
     public function fire(Request $request){
+        if(!$request->post()) return abort(404);
         $this->authorize('create', Application::class);
-        if($request->post()){
-            $this->validate($request, [
-                'fire' => 'accepted',
-                'reason' => 'nullable|string'
-            ]);
-            $app = new Application();
-            $app->member_id = Auth::user()->member->id;
-            $app->old_nickname = Auth::user()->member->nickname;
-            $app->category = 5;
-            $app->reason = $request->input('reason');
-            return $app->save() ?
-                redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        return view('evoque.applications.fire');
+        $this->validate($request, [
+            'fire' => 'accepted',
+            'reason' => 'nullable|string'
+        ]);
+        $app = new Application();
+        $app->member_id = Auth::user()->member->id;
+        $app->old_nickname = Auth::user()->member->nickname;
+        $app->category = 5;
+        $app->reason = $request->input('reason');
+        return $app->save() ?
+            redirect()->route('evoque.applications')->with(['success' => 'Зявка успешно подана!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
 }

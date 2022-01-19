@@ -4,11 +4,15 @@
     justify-content: center;
     .card{
         width: 320px;
+        transition: transform .15s ease;
+        &:hover{
+            transform: scale(1.05);
+        }
         &:not(.new){
             span, p, label, h1, h2, h3, h4, h5, h6, a, small{
                 color: $primary-text-darker;
             }
-            a:hover, i.active{
+            i.active{
                 color: $primary-text;
             }
         }
@@ -21,6 +25,9 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
+            }
+            a{
+                text-decoration: none;
             }
         }
         & .referral{

@@ -47,7 +47,7 @@
                 @foreach($apps as $app)
                     <div class="m-3 card card-dark text-shadow-m @if($app->status == 0) new border-primary @elseif($app->status == '1') border-success @else border-danger @endif">
                         <div class="card-header mx-0 row @if($app->status == 0) @if($app->category === 1) text-warning @elseif($app->category === 5) text-danger @endif @endif">
-                            <div class="col px-0 app-title">
+                            <div class="col px-0 app-title position-static">
                                 <h5 class="mb-0">
                                     @if($app->status == '0')
                                         <i class="fas fa-arrow-alt-circle-up text-warning"></i>
@@ -57,7 +57,7 @@
                                         <i class="fas fa-times-circle text-danger"></i>
                                     @endif
                                     @can('view', $app)
-                                        <a href="{{ route('evoque.applications', $app->id) }}">Заявка на {{ $app->getCategory() }}</a>
+                                        <a href="{{ route('evoque.applications', $app->id) }}" class="stretched-link">Заявка на {{ $app->getCategory() }}</a>
                                     @else
                                         Заявка на {{ $app->getCategory() }}
                                     @endcan

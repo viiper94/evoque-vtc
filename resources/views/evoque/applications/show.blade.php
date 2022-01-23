@@ -122,3 +122,10 @@
         </form>
     </div>
 @endcan
+
+<script>
+    var comment = new SimpleMDE({
+        element: $('#comment')[0],
+        promptURLs: true
+    });
+</script>

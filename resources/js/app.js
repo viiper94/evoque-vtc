@@ -375,10 +375,6 @@ $(document).ready(function(){
             },
             success : function(response){
                 $('#appModal .modal-content').html(response.html);
-                var simplemde = new SimpleMDE({
-                    element: $('#comment')[0],
-                    promptURLs: true
-                });
             },
             complete: function(){
                 $('.spinner-border').remove();

@@ -7,8 +7,6 @@
 @section('assets')
     <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
     <script src="/js/simplemde/dist/simplemde.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
-    <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
 
 @section('content')
@@ -45,7 +43,8 @@
         @if(count($apps) > 0)
             <div class="applications pt-3 pb-5 row">
                 @foreach($apps as $app)
-                    <div class="m-3 card card-dark text-shadow-m @if($app->status == 0) new border-primary @elseif($app->status == '1') border-success @else border-danger @endif">
+                    <div class="m-3 application card card-dark text-shadow-m @if($app->status == 0) new border-primary @elseif($app->status == '1') border-success @else border-danger @endif"
+                        data-id="{{ $app->id }}">
                         <div class="card-header mx-0 row @if($app->status == 0) @if($app->category === 1) text-warning @elseif($app->category === 5) text-danger @endif @endif">
                             <div class="col px-0 app-title position-static">
                                 <h5 class="mb-0">
@@ -56,11 +55,7 @@
                                     @elseif($app->status == '2')
                                         <i class="fas fa-times-circle text-danger"></i>
                                     @endif
-                                    @can('view', $app)
-                                        <a href="{{ route('evoque.applications', $app->id) }}" class="stretched-link">Заявка на {{ $app->getCategory() }}</a>
-                                    @else
-                                        Заявка на {{ $app->getCategory() }}
-                                    @endcan
+                                    Заявка на {{ $app->getCategory() }}
                                 </h5>
                             </div>
                         </div>
@@ -127,6 +122,15 @@
         @can('createVacation', \App\Application::class)
             @include('evoque.applications.vacation')
         @endcan
+    @endcan
+
+    @can('view', $app)
+        <!-- Application Modal -->
+        <div class="modal fade" id="appModal" tabindex="-1" aria-labelledby="appModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content modal-content-dark text-shadow-m"></div>
+            </div>
+        </div>
     @endcan
 
 @endsection

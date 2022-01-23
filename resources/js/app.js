@@ -359,6 +359,34 @@ $(document).ready(function(){
         e.stopPropagation();
     });
 
+    $('.application').click(function(){
+        let $icon = $(this).find('i');
+        let id = $(this).data('id');
+        $.ajax({
+            data: {
+                'id': id
+            },
+            beforeSend : function(){
+                $icon.parent().prepend(getPreloaderHtml());
+                $icon.hide();
+                $('#appModal').modal().on('hidden.bs.modal', function(e){
+                    $('#appModal .modal-content').html('');
+                });
+            },
+            success : function(response){
+                $('#appModal .modal-content').html(response.html);
+                var simplemde = new SimpleMDE({
+                    element: $('#comment')[0],
+                    promptURLs: true
+                });
+            },
+            complete: function(){
+                $('.spinner-border').remove();
+                $icon.show();
+            }
+        });
+    });
+
 });
 
 function getPreloaderHtml(){

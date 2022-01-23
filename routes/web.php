@@ -88,7 +88,7 @@ Route::any('/evoque/applications/vacation', 'ApplicationsController@vacation')->
 Route::any('/evoque/applications/rp', 'ApplicationsController@rp')->name('evoque.applications.rp');
 Route::any('/evoque/applications/nickname', 'ApplicationsController@nickname')->name('evoque.applications.nickname');
 Route::any('/evoque/applications/fire', 'ApplicationsController@fire')->name('evoque.applications.fire');
-Route::get('/evoque/applications/{id?}', 'ApplicationsController@app')->name('evoque.applications');
+Route::any('/evoque/applications', 'ApplicationsController@app')->name('evoque.applications');
 
 Route::get('/evoque/admin/roles', 'RolesController@roles')->name('evoque.admin.roles');
 Route::any('/evoque/admin/roles/edit/{id}', 'RolesController@edit')->name('evoque.admin.roles.edit');

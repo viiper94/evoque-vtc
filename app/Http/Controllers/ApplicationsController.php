@@ -16,16 +16,18 @@ use Illuminate\Support\Facades\Gate;
 
 class ApplicationsController extends Controller{
 
-    public function app(Request $request, $id = null){
+    public function app(Request $request){
         if(!Auth::user()?->member) abort(404);
-        if(isset($id)){
+        if(($id = $request->post('id')) && $request->ajax()){
             $app = Application::with('member')->where('id', $id)->firstOrFail();
             $this->authorize('view', $app);
             $rp = null;
             if($app->new_rp_profile) $rp = RpStats::where(['member_id' => $app->member_id, 'game' => $app->new_rp_profile[0]])->first();
-            return view('evoque.applications.show', [
-                'app' => $app,
-                'rp' => $rp
+            return response()->json([
+                'html' => view('evoque.applications.show', [
+                    'app' => $app,
+                    'rp' => $rp
+                ])->render()
             ]);
         }
         $apps = Application::with('member');

@@ -73,7 +73,7 @@ class RecruitmentController extends Controller{
         $this->authorize('delete', Recruitment::class);
         $application = Recruitment::findOrFail($id);
         return $application->delete() ?
-            redirect()->back()->with(['success' => 'Зявка удалена!']) :
+            redirect()->route('evoque.recruitments')->with(['success' => 'Зявка удалена!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

@@ -63,24 +63,6 @@
                                     @endcan
                                 </h5>
                             </div>
-                            @if(\Illuminate\Support\Facades\Auth::user()->can('claim', $app) ||
-                                    \Illuminate\Support\Facades\Auth::user()->can('delete', $app))
-                                <div class="dropdown dropdown-dark col-auto px-0 dropleft">
-                                    <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                        @can('claim', $app)
-                                            <a href="{{ route('evoque.applications', $app->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Смотреть</a>
-                                        @endcan
-                                        @can('delete', $app)
-                                            <a href="{{ route('evoque.applications.delete', $app->id) }}"
-                                               class="dropdown-item" onclick="return confirm('Удалить эту заявку?')"><i class="fas fa-trash"></i> Удалить</a>
-                                        @endcan
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                         <div class="card-body">
                             <h4 class="card-title mb-0">

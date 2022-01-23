@@ -24,7 +24,7 @@
                 @foreach($applications as $application)
                     <div class="m-3 card card-dark text-shadow-m @if($application->status == 0) border-primary new @elseif($application->status == 1) border-success @elseif($application->status == 2) border-danger @endif">
                         <div class="card-header row mx-0 pr-2">
-                            <div class="col px-0 app-title">
+                            <div class="col px-0 app-title position-static">
                                 <h5 class="mb-0">
                                     @if($application->status == '1')
                                         <i class="fas fa-check-circle text-success"></i>
@@ -32,30 +32,12 @@
                                         <i class="fas fa-times-circle text-danger"></i>
                                     @endif
                                     @can('view', $application)
-                                        <a href="{{ route('evoque.recruitments', $application->id) }}">{{ $application->name }}</a>
+                                        <a href="{{ route('evoque.recruitments', $application->id) }}" class="stretched-link">{{ $application->name }}</a>
                                     @else
                                         {{ $application->name }}
                                     @endcan
                                 </h5>
                             </div>
-                            @if(\Illuminate\Support\Facades\Auth::user()->can('claim', $application) ||
-                                    \Illuminate\Support\Facades\Auth::user()->can('delete', \App\Recruitment::class))
-                                <div class="dropdown dropdown-dark col-auto px-0 dropleft">
-                                    <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </button>
-                                    <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                        @can('claim', $application)
-                                            <a href="{{ route('evoque.recruitments', $application->id) }}" class="dropdown-item"><i class="fas fa-eye"></i> Смотреть</a>
-                                        @endcan
-                                        @can('delete', \App\Recruitment::class)
-                                            <a href="{{ route('evoque.recruitments.delete', $application->id) }}"
-                                               class="dropdown-item" onclick="return confirm('Удалить эту заявку?')"><i class="fas fa-trash"></i> Удалить</a>
-                                        @endcan
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                         <div class="card-body">
                             <p>

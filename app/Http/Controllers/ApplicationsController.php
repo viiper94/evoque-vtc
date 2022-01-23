@@ -106,13 +106,9 @@ class ApplicationsController extends Controller{
     public function delete(Request $request, $id){
         $app = Application::findOrFail($id);
         $this->authorize('delete', $app);
-        if(($app->member_id === Auth::user()->member->id && $app->status === 0) || Gate::allows('manage_members')){
-            return $app->delete() ?
-                redirect()->back()->with(['success' => 'Зявка удалена!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }else{
-            return abort(403);
-        }
+        return $app->delete() ?
+            redirect()->route('evoque.applications')->with(['success' => 'Зявка удалена!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
     public function vacation(Request $request){

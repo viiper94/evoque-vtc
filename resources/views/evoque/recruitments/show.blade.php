@@ -14,10 +14,10 @@
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary text-center">Заявка на вступление</h2>
-        @can('claim', $app)
-            <form method="post" action="{{ route('evoque.recruitments.accept', $app->id) }}">
-                @csrf
-                <div class="row justify-content-center">
+        <div class="row justify-content-center">
+            @can('claim', $app)
+                <form method="post" action="{{ route('evoque.recruitments.accept', $app->id) }}">
+                    @csrf
                     @if($app->status == 0)
                         <button type="submit" name="accept" value="3" class="btn btn-outline-info m-1 btn-lg">Взять в работу</button>
                     @elseif($app->status == 3)
@@ -26,9 +26,13 @@
                         <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
                                 onclick="return confirm('Отклонить заявку?')">Отклонить</button>
                     @endif
-                </div>
-            </form>
-        @endcan
+                </form>
+            @endcan
+            @can('delete', \App\Recruitment::class)
+                <a href="{{ route('evoque.recruitments.delete', $app->id) }}" class="btn btn-outline-secondary btn-lg m-1"
+                        onclick="return confirm('Удалить заявку?')">Удалить</a>
+            @endcan
+        </div>
         <div class="row justify-content-between text-center mt-5">
             <div class="col-md-4">
                 <h4 class="mb-0">Имя</h4>

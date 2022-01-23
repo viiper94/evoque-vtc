@@ -14,8 +14,8 @@
     <div class="report-accept container pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary text-center">Заявка на {{ $app->getCategory() }} от {{ !in_array($app->category, [4, 5]) && $app->member ? $app->member?->nickname : $app->old_nickname }}</h2>
-        @can('claim', $app)
-            <div class="row justify-content-center">
+        <div class="row justify-content-center">
+            @can('claim', $app)
                 <form method="post" action="{{ route('evoque.applications.accept', $app->id) }}">
                     @csrf
                     <button type="submit" name="accept" value="1" class="btn btn-outline-success btn-lg m-1"
@@ -23,8 +23,12 @@
                     <button type="submit" name="accept" value="2" class="btn btn-outline-danger btn-lg m-1"
                             onclick="return confirm('Отклонить заявку?')">Отклонить</button>
                 </form>
-            </div>
-        @endcan
+            @endcan
+            @can('delete', $app)
+                <a href="{{ route('evoque.applications.delete', $app->id) }}" class="btn btn-outline-secondary btn-lg m-1"
+                   onclick="return confirm('Удалить заявку?')">Удалить</a>
+            @endcan
+        </div>
         <div class="row justify-content-between text-center mt-5">
             @switch($app->category)
                 @case(1)

@@ -79,7 +79,7 @@
                                 @endif
                             </p>
                             @if(isset($application->referral))
-                                <p class="referral mb-0">Откуда узнал: <br><b>{!! nl2br($application->referral) !!}</b></p>
+                                <p class="referral mb-0">Откуда узнал: <br>{!! nl2br($application->referral) !!}</p>
                             @endif
                         </div>
                         <div class="card-footer row text-muted">

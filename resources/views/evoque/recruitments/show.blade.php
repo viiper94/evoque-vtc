@@ -71,8 +71,8 @@
 
         @if($app->referral)
             <div class="row flex-column text-center mb-3">
-                <h4 class="mb-0 pt-3">Откуда узнал</h4>
-                <h2 class="text-primary">{!! nl2br($app->referral) !!}</h2>
+                <h4 class="mb-0 pt-3">Откуда узнал:</h4>
+                <p>{!! nl2br($app->referral) !!}</p>
             </div>
         @endif
         @if($app->isClosed() && count($app->comments) > 0 || !$app->isClosed())

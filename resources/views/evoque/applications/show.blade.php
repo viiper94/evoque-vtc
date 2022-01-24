@@ -102,6 +102,12 @@
                         <button type="submit" name="accept" value="3" class="btn btn-outline-info m-1">Сохранить коментарий</button>
                     </div>
                 </form>
+                <script>
+                    var comment = new SimpleMDE({
+                        element: $('#comment')[0],
+                        promptURLs: true
+                    });
+                </script>
             @endcan
         </div>
     @endif
@@ -122,10 +128,3 @@
         </form>
     </div>
 @endcan
-
-<script>
-    var comment = new SimpleMDE({
-        element: $('#comment')[0],
-        promptURLs: true
-    });
-</script>

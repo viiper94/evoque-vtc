@@ -8,6 +8,7 @@ use App\Member;
 use App\Recruitment;
 use App\Role;
 use App\Steam;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -20,7 +21,12 @@ class Controller extends BaseController{
 
     public function home(){
         return view('index', [
-            'members_count' => Member::where('visible', 1)->count()
+            'members_count' => Member::where('visible', 1)->count(),
+            'public_convoy' => Convoy::where([
+                ['visible', '=', '1'],
+                ['public', '=', '1'],
+                ['start_time', '>', Carbon::now()->subMinutes(90)->format('Y-m-d H:i')]
+            ])->orderBy('start_time')->first()
         ]);
     }
 

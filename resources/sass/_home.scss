@@ -33,6 +33,12 @@ body{
                 bottom: auto;
             }
         }
+        &.convoy-slide{
+            background-color: #000;
+            img{
+                opacity: .15;
+            }
+        }
     }
     .carousel-control-prev, .carousel-control-next{
         i{

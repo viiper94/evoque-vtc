@@ -24,9 +24,22 @@
         <li data-target="#carousel" data-slide-to="4"></li>
         <li data-target="#carousel" data-slide-to="5"></li>
         <li data-target="#carousel" data-slide-to="6"></li>
+        @if($public_convoy)
+            <li data-target="#carousel" data-slide-to="7"></li>
+        @endif
     </ol>
     <div class="carousel-inner">
-        <div class="carousel-item active">
+        @if($public_convoy)
+            <div class="carousel-item convoy-slide active">
+                <img src="/images/convoys/{{ $public_convoy->route[0] }}" class="d-block w-100">
+                <div class="carousel-caption d-none d-md-block center-center">
+                    <h1 class="display-3 font-weight-bold">Приглашаем тебя<br> на наш конвой!</h1>
+                    <p>Мы проводим открытые мероприятия по вторникам</p>
+                    <a class="btn btn-outline-primary btn-lg" href="{{ route('convoy.public') }}">Регламент</a>
+                </div>
+            </div>
+        @endif
+        <div class="carousel-item @if(!$public_convoy) active @endif">
             <img src="/assets/img/carousel/0.jpg" class="d-block w-100">
             <div class="carousel-caption d-none d-md-block text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>

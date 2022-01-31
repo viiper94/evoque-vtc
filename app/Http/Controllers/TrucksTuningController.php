@@ -9,13 +9,8 @@ class TrucksTuningController extends Controller{
 
     public function index(Request $request){
         $this->authorize('view', TrucksTuning::class);
-        $tunings = TrucksTuning::select();
-        if($request->input('q')){
-            $tunings = $tunings->where('vendor', 'like', $request->input('q').'%')
-                ->orWhere('model', 'like', '%'.$request->input('q').'%');
-        }
         return view('evoque.trucks_tuning.index', [
-            'vendors' => $tunings->get()->groupBy('vendor')
+            'vendors' => TrucksTuning::all()->groupBy('vendor')
         ]);
     }
 

@@ -32,58 +32,58 @@
         @if($public_convoy)
             <div class="carousel-item convoy-slide active">
                 <img src="/images/convoys/{{ $public_convoy->route[0] }}" class="d-block w-100">
-                <div class="carousel-caption d-none d-md-block center-center">
-                    <h1 class="display-3 font-weight-bold">Приглашаем тебя<br> на наш конвой!</h1>
+                <div class="carousel-caption center-center">
+                    <h1 class="display-4 font-weight-bold">Приглашаем тебя<br> на наш конвой!</h1>
                     <p>Мы проводим открытые мероприятия по вторникам</p>
                     <a class="btn btn-outline-primary btn-lg" href="{{ route('convoy.public') }}">Регламент</a>
                 </div>
             </div>
         @endif
         <div class="carousel-item @if(!$public_convoy) active @endif">
-            <img src="/assets/img/carousel/0.jpg" class="d-block w-100">
-            <div class="carousel-caption d-none d-md-block text-shadow">
+            <img src="/assets/img/carousel/0.jpg" class="d-block">
+            <div class="carousel-caption text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>
                 <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="/assets/img/carousel/1.jpg" class="d-block w-100">
-            <div class="carousel-caption d-none d-md-block text-shadow">
+            <img src="/assets/img/carousel/1.jpg" class="d-block">
+            <div class="carousel-caption text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>
                 <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="/assets/img/carousel/2.jpg" class="d-block w-100">
-            <div class="carousel-caption d-none d-md-block text-shadow">
+            <img src="/assets/img/carousel/2.jpg" class="d-block">
+            <div class="carousel-caption text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>
                 <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="/assets/img/carousel/3.jpg" class="d-block w-100">
-            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+            <img src="/assets/img/carousel/3.jpg" class="d-block">
+            <div class="carousel-caption top-center text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>
                 <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="/assets/img/carousel/4.jpg" class="d-block w-100">
-            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+            <img src="/assets/img/carousel/4.jpg" class="d-block">
+            <div class="carousel-caption top-center text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>
                 <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="/assets/img/carousel/5.jpg" class="d-block w-100">
-            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+            <img src="/assets/img/carousel/5.jpg" class="d-block">
+            <div class="carousel-caption top-center text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>
                 <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="/assets/img/carousel/6.png" class="d-block w-100">
-            <div class="carousel-caption top-center d-none d-md-block text-shadow">
+            <img src="/assets/img/carousel/6.png" class="d-block">
+            <div class="carousel-caption top-center text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>
                 <p>Опытная, динамично развивающаяся виртуальная транспортная компания,<br>которая занимается грузоперевозками в мире TruckersMP.</p>
             </div>

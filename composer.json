@@ -2,10 +2,6 @@
     "name": "viiper94/evoque-vtc",
     "type": "project",
     "description": "EVOQUE VTC web site.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
     "license": "MIT",
     "require": {
         "php": "^8.0",
@@ -22,7 +18,7 @@
         "laravel/ui": "^3.3",
         "owen-it/laravel-auditing": "^12.0",
         "socialiteproviders/discord": "^4.1",
-        "truckersmp/api-client": "^1.2",
+        "truckersmp/api-client": "^2.0",
         "woeler/phpdiscord": "^3.0"
     },
     "require-dev": {

@@ -172,7 +172,8 @@ class MembersController extends Controller{
 
     public function restore(Request $request, $id){
         $this->authorize('restore', Member::class);
-        return Member::withTrashed()->where('id', $id)->restore() ?
+        $member = Member::withTrashed()->with('user')->where('id', $id)->first();
+        return $member->restore() && $member->user->update(['fired_at' => null]) ?
             redirect()->route('evoque.members')->with(['success' => 'Сотрудник восстановлен!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }

@@ -97,10 +97,16 @@ class SteamAuthController extends Controller
             if(!is_null($user->member)){
                 if($user->member->trashed()){
                     if(!$user->member->restore){
+                        $user->update([
+                            'fired_at' => null
+                        ]);
                         $this->resetMember($user->member, $tmp_info);
                     }
                 }
             }else{
+                $user->update([
+                    'fired_at' => null
+                ]);
                 $this->createMember($user, $tmp_info);
             }
         }else{

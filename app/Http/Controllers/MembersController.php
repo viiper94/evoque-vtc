@@ -180,7 +180,7 @@ class MembersController extends Controller{
     public function changelog(Request $request, $id){
         $this->authorize('update', Member::class);
         return view('evoque.members.changelog', [
-            'member' => Member::with(['audits' => function($query){
+            'member' => Member::withTrashed()->with(['audits' => function($query){
                 $query->orderBy('created_at', 'desc');
             }])->find($id)
         ]);

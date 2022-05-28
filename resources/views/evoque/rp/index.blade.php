@@ -17,9 +17,9 @@
             @endforeach
         </ul>
     </div>
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content">
         @foreach($roles as $game => $game_roles)
-            <div class="tab-pane @if($loop->first) show active @endif" id="{{ $game }}" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane @if($loop->first) show active @endif" id="{{ $game }}" role="tabpanel">
                 <div class="container-fluid members-table">
                     <div class="table-responsive">
                         <table class="table table-sm table-dark table-bordered table-hover">

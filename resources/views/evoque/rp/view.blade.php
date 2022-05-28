@@ -18,45 +18,56 @@
         @if($stat)
             <section class="features lead-rules row pt-3 justify-content-around text-center">
                 <h2 class="col-12 mb-3 text-primary text-left">Статистика {{ $report->member->nickname ?? 'уволенного сотрудника' }} по {{ strtoupper($stat->game) }}</h2>
-                <div class="feature col-lg-3 mb-md-3 mb-5">
-                    <h3>Дистанция<br>всего</h3>
-                    <hr class="m-auto pb-3">
-                    <p class="text-primary font-weight-bold">{{ $stat->distance_total }} км</p>
+                <div class="row col-12">
+                    <div class="feature col-lg mb-md-3 mb-5">
+                        <h3>Дистанция<br>всего</h3>
+                        <hr class="m-auto pb-3">
+                        <p class="text-primary font-weight-bold">{{ $stat->distance_total }} км</p>
+                    </div>
+                    <div class="feature col-lg col-sm-2 mb-md-3 mb-5">
+                        <h3>Вес<br>всего</h3>
+                        <hr class="m-auto pb-3">
+                        <p class="text-primary font-weight-bold">{{ $stat->weight_total }} т</p>
+                    </div>
+                    <div class="feature col-lg col-sm-2 mb-md-3 mb-5">
+                        <h3>Грузов<br>всего</h3>
+                        <hr class="m-auto pb-3">
+                        <p class="text-primary font-weight-bold">{{ $stat->quantity_total }}</p>
+                    </div>
+                    <div class="feature col-lg col-sm-2 mb-md-3 mb-5">
+                        <h3>Уровень в игре</h3>
+                        <hr class="m-auto pb-3">
+                        <h3 class="text-danger">{{ $stat->level }}</h3>
+                    </div>
+                    @if($report->game === 'ets2')
+                        <div class="feature col-lg col-sm-2 mb-md-3 mb-5">
+                            <h3>Уровень в ProMods</h3>
+                            <hr class="m-auto pb-3">
+                            <h3 class="text-danger">{{ $stat->level_promods }}</h3>
+                        </div>
+                    @endif
                 </div>
-                <div class="feature col-lg-3 col-sm-2 mb-md-3 mb-5">
-                    <h3>Вес<br>всего</h3>
-                    <hr class="m-auto pb-3">
-                    <p class="text-primary font-weight-bold">{{ $stat->weight_total }} т</p>
-                </div>
-                <div class="feature col-lg-3 col-sm-2 mb-md-3 mb-5">
-                    <h3>Грузов<br>всего</h3>
-                    <hr class="m-auto pb-3">
-                    <p class="text-primary font-weight-bold">{{ $stat->quantity_total }}</p>
-                </div>
-                <div class="feature col-lg-3 col-sm-2 mb-md-3 mb-5">
-                    <h2>Уровень</h2>
-                    <hr class="m-auto pb-3">
-                    <h3 class="text-danger">{{ $stat->level }}</h3>
-                </div>
-                <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
-                    <h3>Дистанция<br>за неделю</h3>
-                    <hr class="m-auto pb-3">
-                    <p class="text-primary font-weight-bold">{{ $stat->distance }} км</p>
-                </div>
-                <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
-                    <h3>Вес<br>за неделю</h3>
-                    <hr class="m-auto pb-3">
-                    <p class="text-primary font-weight-bold">{{ $stat->weight }} т</p>
-                </div>
-                <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
-                    <h3>Грузов<br>за неделю</h3>
-                    <hr class="m-auto pb-3">
-                    <p class="text-primary font-weight-bold">{{ $stat->quantity }}</p>
-                </div>
-                <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
-                    <h3>Бонус<br>за неделю</h3>
-                    <hr class="m-auto pb-3">
-                    <p class="text-primary font-weight-bold">{{ $stat->bonus }} км</p>
+                <div class="row col-12">
+                    <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
+                        <h3>Дистанция<br>за неделю</h3>
+                        <hr class="m-auto pb-3">
+                        <p class="text-primary font-weight-bold">{{ $stat->distance }} км</p>
+                    </div>
+                    <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
+                        <h3>Вес<br>за неделю</h3>
+                        <hr class="m-auto pb-3">
+                        <p class="text-primary font-weight-bold">{{ $stat->weight }} т</p>
+                    </div>
+                    <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
+                        <h3>Грузов<br>за неделю</h3>
+                        <hr class="m-auto pb-3">
+                        <p class="text-primary font-weight-bold">{{ $stat->quantity }}</p>
+                    </div>
+                    <div class="feature col-lg-3 col-sm-2 mb-md-0 mb-5">
+                        <h3>Бонус<br>за неделю</h3>
+                        <hr class="m-auto pb-3">
+                        <p class="text-primary font-weight-bold">{{ $stat->bonus }} км</p>
+                    </div>
                 </div>
             </section>
         @endif
@@ -72,14 +83,14 @@
                 </div>
             @endif
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <div class="fotorama w-100" data-allowfullscreen="true" data-nav="thumbs">
                         @foreach($report->images as $image)
                             <img src="/images/rp/{{ $image }}">
                         @endforeach
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="distance">Пройденая дистанция, км</label>
                         <input type="number" class="form-control" id="distance" name="distance" value="{{ old('distance') }}">
@@ -96,7 +107,8 @@
                     </div>
                     <div class="form-group">
                         <label for="bonus">Бонус</label>
-                        <input type="number" class="form-control" id="bonus" name="bonus" value="{{ old('bonus') }}" readonly>
+                        <input type="number" class="form-control" id="bonus" name="bonus" value="{{ old('bonus') }}" readonly
+                               placeholder="Рассчитывается автоматически">
                     </div>
                     <div class="form-group">
                         <label for="level">Уровень в игре после перевозки</label>

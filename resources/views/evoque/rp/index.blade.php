@@ -26,7 +26,7 @@
                         <table class="table table-sm table-dark table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th colspan="4"></th>
+                                <th colspan="5"></th>
                                 <th colspan="3" class="border-left-5 border-right-5">Всего</th>
                                 <th colspan="4">За неделю</th>
                             </tr>
@@ -34,6 +34,9 @@
                                 <th>#</th>
                                 <th>Ник в игре</th>
                                 <th>Уровень в игре</th>
+                                <th>
+                                    @if($game === 'ets2')Уровень в ProMods @endif
+                                </th>
                                 <th>Ступень</th>
                                 <th class="border-left-5">Пройденное расстояние</th>
                                 <th>Тоннаж</th>
@@ -48,7 +51,7 @@
                             @php $i = 1; @endphp
                             @foreach($game_roles as $role_group)
                                 <tr>
-                                    <th colspan="11" class="text-center text-primary">{{ $role_group[0]->group }}</th>
+                                    <th colspan="12" class="text-center text-primary">{{ $role_group[0]->group }}</th>
                                 </tr>
                                 @foreach($role_group as $role)
                                     @foreach($role->members as $member)
@@ -63,6 +66,11 @@
                                                     @endcan
                                                 </td>
                                                 <td>{{ $member->stat->level }}</td>
+                                                <td>
+                                                @if($member->stat->game === 'ets2')
+                                                    {{ $member->stat->level_promods }}
+                                                    @endif
+                                                </td>
                                                 <td><b>{{ $member->stat->getStage() }}</b></td>
                                                 <td class="border-left-5">{{ $member->stat->distance_total }} км</td>
                                                 <td>{{ $member->stat->weight_total }} т</td>

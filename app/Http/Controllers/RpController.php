@@ -7,6 +7,7 @@ use App\Role;
 use App\RpReport;
 use App\RpReward;
 use App\RpStats;
+use App\Rules\RpLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -135,7 +136,8 @@ class RpController extends Controller{
             $this->validate($request, [
                 'distance' => 'required_with:accept|nullable|numeric',
                 'weight' => 'required_with:accept|nullable|numeric',
-                'level' => 'required_with:accept|nullable|numeric',
+                'level' => [new RpLevel('level_promods'), 'nullable', 'numeric'],
+                'level_promods' => [new RpLevel('level'), 'nullable', 'numeric'],
                 'comment' => 'nullable|string',
             ]);
             $accept = $request->input('accept') ?? false;
@@ -150,7 +152,12 @@ class RpController extends Controller{
                 $stat->distance += $request->input('distance');
                 $stat->weight += $request->input('weight');
                 $stat->bonus += $request->input('bonus');
-                $stat->level = $request->input('level');
+                if($request->input('level') && !$request->input('level_promods')){
+                    $stat->level = $request->input('level');
+                }
+                if(!$request->input('level') && $request->input('level_promods')){
+                    $stat->level_promods = $request->input('level_promods');
+                }
                 $stat->game = $report->game;
                 $stat->quantity += 1;
                 $report->status = 1;
@@ -178,6 +185,7 @@ class RpController extends Controller{
         $this->validate($request, [
             'distance' => 'nullable|numeric',
             'level' => 'nullable|numeric',
+            'level_promods' => 'nullable|numeric',
             'bonus' => 'nullable|numeric',
             'weight' => 'nullable|numeric',
             'distance_total' => 'nullable|numeric',

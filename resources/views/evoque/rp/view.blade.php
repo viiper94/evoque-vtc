@@ -99,12 +99,23 @@
                         <input type="number" class="form-control" id="bonus" name="bonus" value="{{ old('bonus') }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="level">Уровень после перевозки</label>
-                        <input type="number" class="form-control" id="level" name="level" min="{{ $stat->level }}" value="{{ old('level') }}" required>
+                        <label for="level">Уровень в игре после перевозки</label>
+                        <input type="number" class="form-control" id="level" name="level" min="{{ $stat->level }}" value="{{ old('level') }}"
+                               placeholder="Если доставка была без модов">
                         @if($errors->has('level'))
                             <small class="form-text">{{ $errors->first('level') }}</small>
                         @endif
                     </div>
+                    @if($report->game === 'ets2')
+                        <div class="form-group">
+                            <label for="level_promods">Уровень в ProMods после перевозки</label>
+                            <input type="number" class="form-control" id="level_promods" name="level_promods" min="{{ $stat->level_promods }}" value="{{ old('level_promods') }}"
+                                   placeholder="Если доставка была по ProMods">
+                            @if($errors->has('level_promods'))
+                                <small class="form-text">{{ $errors->first('level_promods') }}</small>
+                            @endif
+                        </div>
+                    @endif
                 </div>
             </div>
             <hr class="border-primary">

@@ -18,6 +18,7 @@ class RpStats extends Model{
         'game',
         'distance',
         'level',
+        'level_promods',
         'bonus',
         'weight',
         'distance_total',

@@ -286,6 +286,15 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label for="level">Уровень в игре</label>
+                                                        <input type="number" class="form-control" id="level" name="level" value="{{ $stat->level }}" autocomplete="off">
+                                                        @if($errors->has('level'))
+                                                            <small class="form-text">{{ $errors->first('level') }}</small>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
                                                         <label for="quantity_total">Кол-во грузов</label>
                                                         <input type="number" class="form-control" id="quantity_total" name="quantity_total" value="{{ $stat->quantity_total }}" autocomplete="off">
                                                         @if($errors->has('quantity_total'))
@@ -295,10 +304,10 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label for="level">Уровень в игре</label>
-                                                        <input type="number" class="form-control" id="level" name="level" value="{{ $stat->level }}" autocomplete="off">
-                                                        @if($errors->has('level'))
-                                                            <small class="form-text">{{ $errors->first('level') }}</small>
+                                                        <label for="level_promods">Уровень в ProMods</label>
+                                                        <input type="number" class="form-control" id="level_promods" name="level_promods" value="{{ $stat->level_promods }}" autocomplete="off" @if($stat->game === 'ats') disabled @endif>
+                                                        @if($errors->has('level_promods'))
+                                                            <small class="form-text">{{ $errors->first('level_promods') }}</small>
                                                         @endif
                                                     </div>
                                                 </div>

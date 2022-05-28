@@ -10,12 +10,11 @@
     <h2 class="pt-5 mt-3 text-center text-primary">Статистика рейтинговых перевозок</h2>
     <div class="row justify-content-center mb-3 mr-0 ml-0">
         <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#ets2">Euro Truck Simulator 2</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#ats">American Truck Simulator</a>
-            </li>
+            @foreach($roles as $game => $game_roles)
+                <li class="nav-item">
+                    <a class="nav-link @if($loop->first) active @endif" data-toggle="tab" href="#{{ $game }}">@lang('general.'.$game)</a>
+                </li>
+            @endforeach
         </ul>
     </div>
     <div class="tab-content" id="myTabContent">

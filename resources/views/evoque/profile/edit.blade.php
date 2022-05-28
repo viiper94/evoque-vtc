@@ -24,7 +24,7 @@
                 </div>
                 <div class="col">
                     <div class="form-group">
-                        <label for="name">Имя и Фамилия</label>
+                        <label for="name">@lang('attributes.name')</label>
                         <input type="text" class="form-control" name="name" id="name" value="{{ $user->name }}" required>
                         @if($errors->has('name'))
                             <small class="form-text">{{ $errors->first('name') }}</small>
@@ -32,14 +32,14 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-sm-6">
-                            <label for="city">Город</label>
+                            <label for="city">@lang('attributes.city')</label>
                             <input type="text" class="form-control" name="city" id="city" value="{{ $user->city }}" required>
                             @if($errors->has('city'))
                                 <small class="form-text">{{ $errors->first('city') }}</small>
                             @endif
                         </div>
                         <div class="form-group col-sm-6">
-                            <label for="country">Страна</label>
+                            <label for="country">@lang('attributes.country')</label>
                             <input type="text" class="form-control" name="country" id="country" value="{{ $user->country }}" required>
                             @if($errors->has('country'))
                                 <small class="form-text">{{ $errors->first('country') }}</small>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="birth_date">Дата рождения</label>
+                        <label for="birth_date">@lang('attributes.birth_date')</label>
                         <input type="text" class="form-control" name="birth_date" id="birth_date"
                                value="{{ $user->birth_date?->format('d.m.Y') ?? '' }}" autocomplete="off"
                                placeholder="Укажите в формате дд.мм.гггг или выберите в календаре" required>
@@ -56,14 +56,14 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="email">E-Mail</label>
+                        <label for="email">@lang('attributes.email')</label>
                         <input type="email" class="form-control" name="email" id="email" value="{{ $user->email }}">
                         @if($errors->has('email'))
                             <small class="form-text">{{ $errors->first('email') }}</small>
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="vk">Ссылка ВК</label>
+                        <label for="vk">@lang('attributes.vk')</label>
                         <input type="url" class="form-control" name="vk" id="vk_link" value="{{ $user->vk }}">
                         @if($errors->has('vk'))
                             <small class="form-text">{{ $errors->first('vk') }}</small>

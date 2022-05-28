@@ -22,6 +22,10 @@ class MemberPolicy extends Policy{
         return $this->checkPermission($user, 'manage_members', 'edit_members');
     }
 
+    public function updatePersonalInfo(User $user){
+        return $this->checkPermission($user, 'manage_members', 'edit_members_personal_info');
+    }
+
     public function updateRpStats(User $user){
         return $this->checkPermission($user, 'manage_members', 'edit_members_rp_stats');
     }

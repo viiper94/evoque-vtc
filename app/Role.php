@@ -20,6 +20,7 @@ class Role extends Model{
             'edit_members',
 //            'edit_members_activity',
             'edit_members_rp_stats',
+            'edit_members_personal_info',
             'fire_members',
             'set_members_activity',
             'reset_members_activity',

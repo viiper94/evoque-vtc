@@ -26,6 +26,7 @@ class RolesController extends Controller{
             $role->edit_members = $request->input('edit_members') == 'on';
             $role->edit_members_activity = $request->input('edit_members_activity') == 'on';
             $role->edit_members_rp_stats = $request->input('edit_members_rp_stats') == 'on';
+            $role->edit_members_personal_info = $request->input('edit_members_personal_info') == 'on';
             $role->fire_members = $request->input('fire_members') == 'on';
             $role->set_members_activity = $request->input('set_members_activity') == 'on';
             $role->reset_members_activity = $request->input('reset_members_activity') == 'on';

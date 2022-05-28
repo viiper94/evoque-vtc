@@ -55,13 +55,6 @@
                                 </div>
                             @endisset
                         </div>
-                        <div class="form-group">
-                            <label for="vk">@lang('attributes.vk')</label>
-                            <input type="url" class="form-control" id="vk" name="vk" value="{{ $member->user->vk }}">
-                            @if($errors->has('vk'))
-                                <small class="form-text">{{ $errors->first('vk') }}</small>
-                            @endif
-                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="custom-control custom-checkbox mb-2">
@@ -104,6 +97,55 @@
                         @endif
                     </div>
                 </div>
+                @can('updatePersonalInfo', \App\Member::class)
+                    <div class="row my-3">
+                        <div class="col-12">
+                            <h5>Персональная информация</h5>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="name">@lang('attributes.name')</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ $member->user->name }}">
+                                @if($errors->has('name'))
+                                    <small class="form-text">{{ $errors->first('name') }}</small>
+                                @endif
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="city">@lang('attributes.city')</label>
+                                    <input type="text" class="form-control" id="city" name="city" value="{{ $member->user->city }}">
+                                    @if($errors->has('city'))
+                                        <small class="form-text">{{ $errors->first('city') }}</small>
+                                    @endif
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="country">@lang('attributes.country')</label>
+                                    <input type="text" class="form-control" id="country" name="country" value="{{ $member->user->country }}">
+                                    @if($errors->has('country'))
+                                        <small class="form-text">{{ $errors->first('country') }}</small>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="birth_date">@lang('attributes.birth_date')</label>
+                                <input type="text" class="form-control" name="birth_date" id="birth_date"
+                                       value="{{ $member->user->birth_date?->format('d.m.Y') ?? '' }}" autocomplete="off" required>
+                                @if($errors->has('birth_date'))
+                                    <small class="form-text">{{ $errors->first('birth_date') }}</small>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="vk">@lang('attributes.vk')</label>
+                                <input type="url" class="form-control" id="vk" name="vk" value="{{ $member->user->vk }}">
+                                @if($errors->has('vk'))
+                                    <small class="form-text">{{ $errors->first('vk') }}</small>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endcan
                 <div class="row my-3">
                     <div class="col">
                         <h5>Игровая статистика</h5>
@@ -339,12 +381,22 @@
             lang: 'ru-RU',
             format: 'DD.MM.YYYY'
         });
-        const pickerTrainee = new Litepicker({
-            element: document.getElementById('trainee_until'),
-            plugins: ['mobilefriendly'],
-            lang: 'ru-RU',
-            format: 'DD.MM.YYYY'
-        });
+        @can('updatePersonalInfo', \App\Member::class)
+            const pickerBirthDay = new Litepicker({
+                element: document.getElementById('birth_date'),
+                plugins: ['mobilefriendly'],
+                lang: 'ru-RU',
+                format: 'DD.MM.YYYY'
+            });
+        @endif
+        @if($member->isTrainee())
+            const pickerTrainee = new Litepicker({
+                element: document.getElementById('trainee_until'),
+                plugins: ['mobilefriendly'],
+                lang: 'ru-RU',
+                format: 'DD.MM.YYYY'
+            });
+        @endif
     </script>
 
 @endsection

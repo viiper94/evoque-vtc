@@ -65,8 +65,14 @@ class MembersController extends Controller{
                 }
             }
             $member->checkRoles();
-            $member->user->vk = $request->input('vk');
-            $member->user->save();
+            if(Auth::user()->can('updatePersonalInfo', Member::class)){
+                $member->user->name = $request->input('name');
+                $member->user->city = $request->input('city');
+                $member->user->country = $request->input('country');
+                $member->user->birth_date = Carbon::parse($request->input('birth_date'))->format('Y-m-d');
+                $member->user->vk = $request->input('vk');
+                $member->user->save();
+            }
             return $member->save() ?
                 redirect()->route('evoque.members')->with(['success' => 'Сотрудник успешно отредактирован!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);

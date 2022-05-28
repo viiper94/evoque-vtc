@@ -19,6 +19,7 @@
             <h4>1. Загрузите скриншоты</h4>
             @foreach($stats as $stat)
                 <p class="mb-0  text-muted">Ваш текущий уровень в {{ strtoupper($stat->game) }} - <b>{{ $stat->level }}</b></p>
+                @if($stat->game === 'ets2')<p class="mb-0  text-muted">Ваш текущий уровень в {{ strtoupper($stat->game) }} ProMods - <b>{{ $stat->level_promods }}</b></p> @endif
             @endforeach
             <div class="row">
                 <div class="form-group col-md-4 col-xs-12">

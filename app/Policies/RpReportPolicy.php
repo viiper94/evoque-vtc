@@ -14,6 +14,10 @@ class RpReportPolicy extends Policy{
         return $this->checkPermission($user, 'manage_rp', 'reset_stats');
     }
 
+    public function updateRewards(User $user){
+        return $this->checkPermission($user, 'manage_rp', 'edit_rp_rewards');
+    }
+
     public function viewAll(User $user){
         return $this->checkPermission($user, 'manage_rp', 'view_all_reports');
     }

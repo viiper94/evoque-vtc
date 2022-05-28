@@ -96,14 +96,34 @@
                                 <th></th>
                                 <th>Километраж</th>
                                 <th>Вознаграждение (одно на каждую ступень)</th>
+                                @can('updateRewards', \App\RpReport::class)
+                                    <th>
+                                        <a href="{{ route('evoque.rp.rewards.edit') }}" class="mx-2"
+                                           data-title="Добавить награду" data-toggle="tooltip">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    </th>
+                                @endcan
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach(\App\RpStats::$stages[$game] as $km => $reward)
+                            @foreach($rewards[$game] as $reward)
                                 <tr>
-                                    <th>{{ $loop->iteration }}</th>
-                                    <th class="w-25 stage-{{ $loop->iteration }}">{{ $km }}</th>
-                                    <td>{{ $reward }}</td>
+                                    <th>{{ $reward->stage }}</th>
+                                    <th class="w-25 stage-{{ $reward->stage }}">{{ $reward->km }}</th>
+                                    <td>{{ $reward->reward }}</td>
+                                    @can('updateRewards', \App\RpReport::class)
+                                        <td style="min-width: 90px;">
+                                            <a href="{{ route('evoque.rp.rewards.edit', $reward->id) }}" class="mx-2"
+                                               data-title="Редактировать" data-toggle="tooltip">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                            <a href="{{ route('evoque.rp.rewards.delete', $reward->id) }}" class="mx-2"
+                                               data-title="Удалить" data-toggle="tooltip" onclick="return confirm('Удалить эту награду?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    @endcan
                                 </tr>
                             @endforeach
                             </tbody>

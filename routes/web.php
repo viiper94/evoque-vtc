@@ -63,6 +63,9 @@ Route::any('/evoque/rules/edit/{id}', 'RulesController@edit')->name('evoque.rule
 Route::get('/evoque/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
 Route::any('/evoque/rules/add', 'RulesController@add')->name('evoque.rules.add');
 
+Route::any('/evoque/rp/rewards/edit/{id?}', 'RpRewardController@edit')->name('evoque.rp.rewards.edit');
+Route::get('/evoque/rp/rewards/delete/{id?}', 'RpRewardController@delete')->name('evoque.rp.rewards.delete');
+Route::get('/evoque/rp/reports', 'RpController@reports')->name('evoque.rp.reports');
 Route::get('/evoque/rp/reports', 'RpController@reports')->name('evoque.rp.reports');
 Route::any('/evoque/rp/reports/add', 'RpController@addReport')->name('evoque.rp.reports.add');
 Route::any('/evoque/rp/reports/results', 'RpController@results')->name('evoque.rp.results');

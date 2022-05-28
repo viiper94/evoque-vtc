@@ -63,6 +63,7 @@ class RolesController extends Controller{
             $role->delete_all_reports = $request->input('delete_all_reports') == 'on';
             $role->accept_reports = $request->input('accept_reports') == 'on';
             $role->reset_stats = $request->input('reset_stats') == 'on';
+            $role->edit_rp_rewards = $request->input('edit_rp_rewards') == 'on';
 
             $role->manage_rules = $request->input('manage_rules') == 'on';
             $role->add_rules = $request->input('add_rules') == 'on';

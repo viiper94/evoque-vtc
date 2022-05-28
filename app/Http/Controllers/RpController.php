@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Member;
 use App\Role;
 use App\RpReport;
+use App\RpReward;
 use App\RpStats;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,8 @@ class RpController extends Controller{
                     }
                     return false;
                 })
-            ]
+            ],
+            'rewards' => RpReward::all()->groupBy('game')
         ]);
     }
 

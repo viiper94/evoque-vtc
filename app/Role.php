@@ -61,6 +61,7 @@ class Role extends Model{
             'delete_all_reports',
             'accept_reports',
             'reset_stats',
+            'edit_rp_rewards',
         ],
         'rules' => [
             'manage_rules',

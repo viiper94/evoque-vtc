@@ -39,8 +39,10 @@
                                             <span class="text-primary font-weight-bold">
                                                 {{ $item->user->member?->nickname ?? $item->user->name }}
                                             </span>
-                                        @else
+                                        @elseif(isset($item->user_id))
                                             <i>Уволенный пользователь</i>
+                                        @else
+                                            <i>Сайт</i>
                                         @endif
                                         @lang('audits.'.$item->event) <br>
                                         {{ $item->created_at->format('d.m.Y в H:i') }}

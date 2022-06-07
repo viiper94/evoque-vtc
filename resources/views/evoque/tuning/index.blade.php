@@ -13,7 +13,7 @@
             @foreach($vendors as $vendor => $tunings)
                 <a href="#{{ $vendor }}-tuning" class="btn btn-outline-primary mx-2">{{ $vendor }}</a>
             @endforeach
-            @can('add', \App\TrucksTuning::class)
+            @can('add', \App\Tuning::class)
                 <a href="{{ route('evoque.tuning.add') }}" class="btn btn-outline-secondary mx-2"><i class="fas fa-plus"></i> Добавить</a>
             @endcan
         </div>
@@ -29,18 +29,18 @@
                                             <h5 class="mb-0">{{ $tuning->vendor }} {{ $tuning->model }}</h5>
                                         </div>
                                         <h5 class="col-auto text-md-right text-muted mb-0">{{ strtoupper($tuning->game) }}</h5>
-                                        @if(\Illuminate\Support\Facades\Auth::user()->can('edit', \App\TrucksTuning::class) ||
-                                                    \Illuminate\Support\Facades\Auth::user()->can('delete', \App\TrucksTuning::class))
+                                        @if(\Illuminate\Support\Facades\Auth::user()->can('edit', \App\Tuning::class) ||
+                                                    \Illuminate\Support\Facades\Auth::user()->can('delete', \App\Tuning::class))
                                             <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                                 <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fas fa-ellipsis-v"></i>
                                                 </button>
                                                 <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
-                                                    @can('edit', \App\TrucksTuning::class)
+                                                    @can('edit', \App\Tuning::class)
                                                         <a href="{{ route('evoque.tuning.edit', $tuning->id) }}" class="dropdown-item"><i class="fas fa-pen"></i> Редактировать</a>
                                                     @endcan
-                                                    @can('delete', \App\TrucksTuning::class)
+                                                    @can('delete', \App\Tuning::class)
                                                         <a href="{{ route('evoque.tuning.delete', $tuning->id) }}"
                                                            class="dropdown-item" onclick="return confirm('Удалить тюнинг?')"><i class="fas fa-trash"></i> Удалить</a>
                                                     @endcan

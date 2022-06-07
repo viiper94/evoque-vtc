@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\TrucksTuning;
+use App\Tuning;
 use Illuminate\Http\Request;
 
-class TrucksTuningController extends Controller{
+class TuningController extends Controller{
 
     public function index(Request $request){
         $this->authorize('view', TrucksTuning::class);
@@ -41,9 +41,9 @@ class TrucksTuningController extends Controller{
         ]);
     }
 
-    public function edit(Request $request, $id){
-        $this->authorize('edit', TrucksTuning::class);
-        $tuning = TrucksTuning::find($id);
+    public function edit(Request $request, $id = null){
+        $this->authorize('edit', Tuning::class);
+        $tuning = $id ? Tuning::find($id) : new Tuning();
         if($request->post()){
             $this->validate($request, [
                 'vendor' => 'required|string',
@@ -72,8 +72,8 @@ class TrucksTuningController extends Controller{
     }
 
     public function delete(Request $request, $id){
-        $this->authorize('delete', TrucksTuning::class);
-        $tuning = TrucksTuning::find($id);
+        $this->authorize('delete', Tuning::class);
+        $tuning = Tuning::find($id);
         if($tuning->image && is_file(public_path('images/tuning/'.$tuning->image))){
             unlink(public_path('images/tuning/'.$tuning->image));
         }
@@ -84,7 +84,7 @@ class TrucksTuningController extends Controller{
 
     public function load(Request $request){
         if($request->ajax()){
-            $tuning = TrucksTuning::find($request->input('id'));
+            $tuning = Tuning::find($request->input('id'));
             return response()->json([
                 'path' => '/images/tuning/'.$tuning->image,
                 'status' => 'OK'

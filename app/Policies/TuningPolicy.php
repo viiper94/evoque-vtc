@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class TrucksTuningPolicy extends Policy{
+class TuningPolicy extends Policy{
 
     use HandlesAuthorization;
 

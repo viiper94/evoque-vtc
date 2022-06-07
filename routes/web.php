@@ -130,10 +130,10 @@ Route::get('/evoque/test/delete/{id}', 'TestController@delete')->name('evoque.te
 Route::get('/evoque/test/sort/{id}/{direction}', 'TestController@sort')->name('evoque.test.sort');
 Route::any('/evoque/test/{question_number?}', 'TestController@index')->name('evoque.test');
 
-Route::any('/evoque/tuning/load', 'TrucksTuningController@load');
-Route::any('/evoque/tuning/add', 'TrucksTuningController@add')->name('evoque.tuning.add');
-Route::any('/evoque/tuning/edit/{id}', 'TrucksTuningController@edit')->name('evoque.tuning.edit');
-Route::get('/evoque/tuning/delete/{id}', 'TrucksTuningController@delete')->name('evoque.tuning.delete');
-Route::get('/evoque/tuning/{q?}', 'TrucksTuningController@index')->name('evoque.tuning');
+Route::any('/evoque/tuning/load', 'TuningController@load');
+Route::any('/evoque/tuning/add', 'TuningController@edit')->name('evoque.tuning.add');
+Route::any('/evoque/tuning/edit/{id}', 'TuningController@edit')->name('evoque.tuning.edit');
+Route::get('/evoque/tuning/delete/{id}', 'TuningController@delete')->name('evoque.tuning.delete');
+Route::get('/evoque/tuning/{q?}', 'TuningController@index')->name('evoque.tuning');
 
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');

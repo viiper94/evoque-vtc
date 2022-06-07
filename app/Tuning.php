@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class TrucksTuning extends Model{
+class Tuning extends Model{
 
     public $table = 'trucks_tuning';
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Convoy;
 use App\Member;
-use App\TrucksTuning;
+use App\Tuning;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;

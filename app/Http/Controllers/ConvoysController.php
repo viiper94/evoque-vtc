@@ -56,66 +56,19 @@ class ConvoysController extends Controller{
         ]);
     }
 
-    public function add(Request $request){
-        $this->authorize('create', Convoy::class);
-        if($request->ajax() && $request->input('action') == 'remove_img'){
-            return response()->json([
-                'status' => 'OK'
-            ]);
-        }
-        if($request->post()){
-            $convoy = new Convoy();
-            $this->validate($request, $convoy->attributes_validation);
-            $convoy->fill($request->post());
-            $convoy->visible = $request->input('visible') === 'on' ? 1 : 0;
-            $convoy->public = $request->input('public') === 'on' ? 1 : 0;
-            $convoy->truck_public = $request->input('truck_public') === 'on' ? 1 : 0;
-            $convoy->trailer_public = $request->input('trailer_public') === 'on' ? 1 : 0;
-            foreach($request->files as $key => $file){
-                if($key === 'route' && is_array($file)){
-                    $route_images = array();
-                    foreach($file as $i => $route){
-                        $route_images[] = $convoy->saveImage($route);
-                    }
-                    $convoy->route = $route_images;
-                }else{
-                    $convoy->$key = $convoy->saveImage($file);
-                }
-            }
-            $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
-            $convoy->setTypeByTime();
-            return $convoy->save() ?
-                redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно создан!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        $convoy = new Convoy();
-//        $tmp = new Client();
-//        $servers = $tmp->servers()->get();
-        $servers = $convoy->defaultServers;
-        $convoy->start_time = Carbon::now();
-        $convoy->trailer_public = true;
-        $convoy->route = ['1' => null];
-        return view('evoque.convoys.edit', [
-            'booking' => false,
-            'convoy' => $convoy,
-            'servers' => $servers,
-            'members' => Member::all(),
-            'dlc' => $convoy->dlcList,
-            'types' => Convoy::$timesToType,
-            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()->groupBy('vendor')
-        ]);
-    }
-
-    public function edit(Request $request, $id, $booking = false){
-        $convoy = Convoy::with(['audits' => function($query){
+    public function edit(Request $request, $id = null){
+        $convoy = $id ? Convoy::with(['audits' => function($query){
             $query->limit(10)->orderBy('created_at', 'desc');
-        }])->where('id', $id)->firstOrFail();
-        $this->authorize('updateOne', $convoy);
+        }])->where('id', $id)->firstOrFail() : new Convoy();
+        $id ? $this->authorize('updateOne', $convoy) : $this->authorize('create', Convoy::class);
         if($request->ajax() && $request->input('action') == 'remove_img'){
-            $attr = $request->input('target');
-            $convoy->$attr = null;
+            if($id){
+                $attr = $request->input('target');
+                $convoy->$attr = null;
+                $result = $convoy->save();
+            }else $result = true;
             return response()->json([
-                'status' => $convoy->save() ? 'OK' : 'Failed'
+                'status' => $result ? 'OK' : 'Не удалось удалить изображение из-за ошибки в БД...'
             ]);
         }
         if($request->post()){
@@ -127,7 +80,7 @@ class ConvoysController extends Controller{
             $convoy->truck_public = $request->input('truck_public') === 'on' ? 1 : 0;
             $convoy->trailer_public = $request->input('trailer_public') === 'on' ? 1 : 0;
             foreach($request->files as $key => $file){
-                $convoy->deleteImages(public_path('/images/convoys/'), [$key]);
+                if($id) $convoy->deleteImages(public_path('/images/convoys/'), [$key]);
                 if($key === 'route' && is_array($file)){
                     foreach($file as $i => $image){
                         $route_images[] = $convoy->saveImage($image, '/images/convoys/', $i);
@@ -141,10 +94,15 @@ class ConvoysController extends Controller{
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             return $convoy->save() ?
-                redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно отредактирован!']) :
+                redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно '.($id ? 'отредактирован!' : 'создан!')]) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $servers = $convoy->defaultServers;
+        if(!$id){
+            $convoy->start_time = Carbon::now();
+            $convoy->trailer_public = true;
+            $convoy->route = ['1' => null];
+        }
         $booking = Auth::user()->cant('update', Convoy::class) && Auth::user()->can('updateOne', $convoy);
         return view('evoque.convoys.edit', [
             'booking' => $booking,

@@ -8,36 +8,9 @@ use Illuminate\Http\Request;
 class TuningController extends Controller{
 
     public function index(Request $request){
-        $this->authorize('view', TrucksTuning::class);
-        return view('evoque.trucks_tuning.index', [
-            'vendors' => TrucksTuning::all()->groupBy('vendor')
-        ]);
-    }
-
-    public function add(Request $request){
-        $this->authorize('add', TrucksTuning::class);
-        $tuning = new TrucksTuning();
-        if($request->post()){
-            $this->validate($request, [
-                'vendor' => 'required|string',
-                'model' => 'required|string',
-                'game' => 'required|string',
-                'image' => 'required|image',
-                'description' => 'nullable|string',
-            ]);
-            $tuning->fill($request->post());
-            $tuning->visible = $request->input('visible') === 'on' ? 1 : 0;
-            $tuning->description = htmlentities(trim($request->input('description')));
-            if($request->file('image')){
-                $tuning->image = $tuning->saveImage($request->file('image'));
-            }
-            return $tuning->save() ?
-                redirect()->route('evoque.tuning')->with(['success' => 'Тюнинг успешно создан!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        $tuning->visible = true;
-        return view('evoque.trucks_tuning.edit', [
-            'tuning' => $tuning
+        $this->authorize('view', Tuning::class);
+        return view('evoque.tuning.index', [
+            'vendors' => Tuning::orderBy('type', 'desc')->get()->groupBy('vendor')
         ]);
     }
 
@@ -63,7 +36,7 @@ class TuningController extends Controller{
                 $tuning->image = $tuning->saveImage($image);
             }
             return $tuning->save() ?
-                redirect()->route('evoque.tuning')->with(['success' => 'Тюнинг успешно изменён!']) :
+                redirect()->route('evoque.tuning')->with(['success' => 'Тюнинг успешно '.($id ? 'изменён!' : 'создан!')]) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $tuning->visible = true;

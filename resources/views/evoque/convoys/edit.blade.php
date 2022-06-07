@@ -251,8 +251,8 @@
                     @endforeach
                 </select>
             </div>
-            <h3 class="text-primary mt-5">@lang('attributes.truck')</h3>
-            <div class="row">
+            <div class="row truck-section">
+                <h3 class="text-primary mt-5 col-12">@lang('attributes.truck')</h3>
                 <div class="col-md-5">
                     <div class="form-group truck_image">
                         <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->officialTruckTuning) style="display: none" @endif>
@@ -316,8 +316,8 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-primary mt-5">Прицеп (основной)</h3>
-            <div class="row">
+            <div class="row trailer-section">
+                <h3 class="text-primary mt-5 col-12">@lang('attributes.trailer')</h3>
                 <div class="col-md-5">
                     <div class="form-group trailer_image">
                         <div class="custom-file custom-file-dark mb-3" @if($convoy->officialTrailerTuning) style="display: none" @endif>
@@ -380,8 +380,8 @@
                     </div>
                 </div>
             </div>
-            <h3 class="text-primary mt-5">@lang('attributes.alt_trailer')</h3>
-            <div class="row">
+            <div class="row alt_trailer-section" style="display: @if($convoy->officialTrailerTuning)none @else flex @endif ;">
+                <h3 class="text-primary mt-5 col-12">@lang('attributes.alt_trailer')</h3>
                 <div class="col-md-5">
                     <div class="form-group alt_trailer_image">
                         <div class="custom-file custom-file-dark mb-3">
@@ -440,10 +440,12 @@
             </div>
         </form>
 
-        @can('update', \App\Convoy::class)
-            <h3 class="text-primary mt-3">История изменений</h3>
-            @include('layout.changelog', ['items' => $convoy->audits, 'granularity' => new cogpowered\FineDiff\Granularity\Word])
-        @endcan
+        @if(count($convoy->audits) > 0)
+            @can('update', \App\Convoy::class)
+                <h3 class="text-primary mt-3">История изменений</h3>
+                @include('layout.changelog', ['items' => $convoy->audits, 'granularity' => new cogpowered\FineDiff\Granularity\Word])
+            @endcan
+        @endif
 
     </div>
 

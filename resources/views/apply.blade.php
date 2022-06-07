@@ -90,14 +90,22 @@
             <div class="row">
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="vk_link">Ссылка на Ваш профиль ВКонтакте*</label>
-                    <input type="url" class="form-control" id="vk_link" name="vk_link" value="{{ old('vk_link') }}" required>
+                    <a tabindex="0" data-toggle="tooltip" data-title="Нужно зайти в ВК и перейти на вкладку Моя страница.
+                        Затем скопировать ссылку из адресной строки." class="text-light">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                    <input type="url" class="form-control" id="vk_link" name="vk_link" value="{{ old('vk_link') }}" placeholder="https://vk.com/username" required>
                     @if($errors->has('vk_link'))
                         <small class="form-text">{{ $errors->first('vk_link') }}</small>
                     @endif
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="tmp_link">Ссылка на Ваш аккаунт TruckersMP*</label>
-                    <input type="url" class="form-control" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" required>
+                    <a tabindex="0" data-toggle="tooltip" data-title="Нужно залогиниться на сайте TruckersMP, сверху справа найти и
+                        навести курсор мыши на свой ник. Из выпадающего меню перейти в раздел Profile. Затем скопировать ссылку из адресной строки." class="text-light">
+                        <i class="fas fa-question-circle"></i>
+                    </a>
+                    <input type="url" class="form-control" id="tmp_link" name="tmp_link" value="{{ old('tmp_link') }}" placeholder="https://truckersmp.com/user/11122233" required>
                     @if($errors->has('tmp_link'))
                         <small class="form-text">{{ $errors->first('tmp_link') }}</small>
                     @endif

@@ -307,40 +307,46 @@ $(document).ready(function(){
         $('#answer-'+$(this).data('index')).remove();
     });
 
-    $('#truck_with_tuning').change(function(){
+    $('[name=truck_with_tuning], [name=trailer_with_tuning]').change(function(){
         let select = $(this);
+        let target = select.data('target');
         let id = select.find(':selected').val();
-        console.log(id);
         if(id){
             $.ajax('/evoque/tuning/load',{
                 data: {
-                    '_token' : select.data('token'),
+                    '_token' : $('form [name=_token]').val(),
                     'id' : id
                 },
                 beforeSend : function(){
                     select.after(getPreloaderHtml());
                 },
                 success : function(response){
-                    $('#truck_image').val('').attr('disabled', true).hide();
-                    $('.truck_image-input').hide();
-                    $('#truck_image-preview').attr('src', response.path);
-                    $('#truck').val(select.find(':selected').text()).attr('readonly', true);
-                    $('#truck_tuning').val('Официальный из мода, стекло чистое');
-                    $('#truck_paint').val('Официальный').attr('readonly', true);
-                    $('#truck_public').attr('checked', false).attr('disabled', true);
+                    $('#'+target+'_image').val('').attr('disabled', true).hide();
+                    $('.'+target+'_image-input').hide();
+                    $('#'+target+'_image-preview').attr('src', response.path);
+                    $('#'+target+'').val(select.find(':selected').text()).attr('readonly', true);
+                    $('#'+target+'_tuning').val('Официальный из мода');
+                    $('#'+target+'_paint').val('Официальный').attr('readonly', true);
+                    $('#'+target+'_public').prop('checked', false).attr('disabled', true);
+                    if(target === 'trailer'){
+                        $('.alt_trailer-section').hide();
+                    }
                 },
                 complete : function(){
                     $('.spinner-border').remove();
                 },
             });
         }else{
-            $('#truck_image').val('').attr('disabled', false).show();
-            $('.truck_image-input').show();
-            $('#truck_image-preview').attr('src', '/images/tuning/image-placeholder.jpg');
-            $('#truck').val('').attr('readonly', false);
-            $('#truck_tuning').val('');
-            $('#truck_paint').val('').attr('readonly', false);
-            $('#truck_public').attr('checked', false).attr('disabled', false);
+            $('#'+target+'_image').val('').attr('disabled', false).show();
+            $('.'+target+'_image-input').show();
+            $('#'+target+'_image-preview').attr('src', '/images/tuning/image-placeholder.jpg');
+            $('#'+target+'').val('').attr('readonly', false);
+            $('#'+target+'_tuning').val('');
+            $('#'+target+'_paint').val('').attr('readonly', false);
+            $('#'+target+'_public').prop('checked', false).attr('disabled', false);
+            if(target === 'trailer'){
+                $('.alt_trailer-section').show();
+            }
         }
     });
 

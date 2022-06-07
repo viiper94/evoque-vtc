@@ -40,6 +40,7 @@ class Convoy extends Model implements Auditable{
         'links',
         'cargoman',
         'truck_with_tuning',
+        'trailer_with_tuning',
     ];
 
     protected $casts = [

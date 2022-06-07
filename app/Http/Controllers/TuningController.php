@@ -41,8 +41,9 @@ class TuningController extends Controller{
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         $tuning->visible = true;
-        return view('evoque.trucks_tuning.edit', [
-            'tuning' => $tuning
+        return view('evoque.tuning.edit', [
+            'tuning' => $tuning,
+            'type' => $tuning->type ? [$tuning->type] : ['truck', 'trailer']
         ]);
     }
 

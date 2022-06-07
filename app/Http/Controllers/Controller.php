@@ -43,9 +43,9 @@ class Controller extends BaseController{
             $this->validate($request, [
                 'name' => 'required|string',
                 'age' => 'required|numeric',
-                'vk_link' => 'required|url',
+                'vk_link' => ['required', 'url', 'regex:/((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/'],
                 'discord_name' => 'nullable|string',
-                'tmp_link' => 'required|url',
+                'tmp_link' => ['required', 'url', 'regex:/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/'],
                 'rules_agreed' => 'required',
                 'requirements_agreed' => 'required',
                 'terms_agreed' => 'required',

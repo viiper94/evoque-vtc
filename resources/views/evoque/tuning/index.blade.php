@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-{{--    @dd($tunings)--}}
+
     <div class="container pt-5">
         @include('layout.alert')
         <h2 class="mt-3 text-primary ml-3 text-center">Официальный тюнинг</h2>

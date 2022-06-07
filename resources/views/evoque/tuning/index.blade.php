@@ -59,9 +59,6 @@
                                             {{ $tuning->description }}
                                         </div>
                                     @endif
-                                    <div class="card-footer text-muted">
-                                        {{ $tuning->created_at->isoFormat('LLL') }}
-                                    </div>
                                 </div>
                             </div>
                         @endforeach

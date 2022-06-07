@@ -8,7 +8,6 @@ use App\Tuning;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use TruckersMP\APIClient\Client;
 
 class PlansController extends Controller{
 
@@ -50,7 +49,6 @@ class PlansController extends Controller{
                 'convoys' => $convoy_that_day
             ];
         }
-//        dd($days);
         return view('evoque.convoys.plans.index', [
             'days' => $days,
             'members' => Member::where('visible', '1')->orderBy('nickname')->get(),

@@ -79,7 +79,6 @@
                 </div>
                 <div class="form-group col-md-3 col-sm-6">
                     <label for="start_time">@lang('attributes.start_time')</label>
-{{--                    @dd($types)--}}
                     <select name="start_time" id="start_time" class="form-control" required>
                         @foreach($types as $type => $time)
                             <optgroup label="{{ \App\Convoy::getTypeByNum($type) }}">

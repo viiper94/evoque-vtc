@@ -25,6 +25,7 @@ class TuningController extends Controller{
                 'truck-image' => 'required_without:trailer-image|image|max:3000',
                 'trailer-image' => 'required_without:truck-image|image|max:3000',
                 'description' => 'nullable|string',
+                'type' => 'required|string',
             ]);
             $tuning->fill($request->post());
             $tuning->visible = $request->input('visible') === 'on' ? 1 : 0;

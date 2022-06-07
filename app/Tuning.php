@@ -7,12 +7,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Tuning extends Model{
 
-    public $table = 'trucks_tuning';
+    public $table = 'official_tuning';
 
     protected $fillable = [
         'vendor',
         'model',
         'game',
+        'type',
     ];
 
     public $casts = [

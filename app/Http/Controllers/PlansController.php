@@ -127,7 +127,8 @@ class PlansController extends Controller{
             'members' => Member::where('id', Auth::user()->member->id)->get(),
             'dlc' => $convoy->dlcList,
             'types' => [$type => Convoy::$timesToType[$type]],
-            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()->groupBy('vendor')
+            'trucks_tuning' => Tuning::where(['type' => 'truck', 'visible' => '1'])->get()->groupBy('vendor'),
+            'trailers_tuning' => Tuning::where(['type' => 'trailer', 'visible' => '1'])->get()->groupBy('vendor'),
         ]);
     }
 

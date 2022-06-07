@@ -46,20 +46,21 @@ class TuningController extends Controller{
         $tuning = $id ? Tuning::find($id) : new Tuning();
         if($request->post()){
             $this->validate($request, [
-                'vendor' => 'required|string',
+                'vendor' => 'required_if:type,truck|string|nullable',
                 'model' => 'required|string',
                 'game' => 'required|string',
-                'image' => 'required|image',
+                'truck-image' => 'required_without:trailer-image|image|max:3000',
+                'trailer-image' => 'required_without:truck-image|image|max:3000',
                 'description' => 'nullable|string',
             ]);
             $tuning->fill($request->post());
             $tuning->visible = $request->input('visible') === 'on' ? 1 : 0;
             $tuning->description = htmlentities(trim($request->input('description')));
-            if($request->file('image')){
+            if($image = $request->file('truck-image') ?? $request->file('trailer-image')){
                 if($tuning->image && is_file(public_path('images/tuning/'.$tuning->image))){
                     unlink(public_path('images/tuning/'.$tuning->image));
                 }
-                $tuning->image = $tuning->saveImage($request->file('image'));
+                $tuning->image = $tuning->saveImage($image);
             }
             return $tuning->save() ?
                 redirect()->route('evoque.tuning')->with(['success' => 'Тюнинг успешно изменён!']) :

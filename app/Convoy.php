@@ -187,8 +187,12 @@ class Convoy extends Model implements Auditable{
         return $this->hasOne('App\Member', 'nickname', 'lead');
     }
 
-    public function tuning(){
-        return $this->hasOne('App\TrucksTuning', 'id', 'truck_with_tuning');
+    public function officialTruckTuning(){
+        return $this->hasOne('App\Tuning', 'id', 'truck_with_tuning');
+    }
+
+    public function officialTrailerTuning(){
+        return $this->hasOne('App\Tuning', 'id', 'trailer_with_tuning');
     }
 
     public function saveImage(UploadedFile $file, $path = '/images/convoys/', $key = null){

@@ -20,7 +20,7 @@ class ConvoysController extends Controller{
     public function view(Request $request, $all = false){
         if(!Auth::user()?->member) abort(404);
         $list = array();
-        $convoys = Convoy::with('leadMember', 'leadMember.user', 'tuning');
+        $convoys = Convoy::with('leadMember', 'leadMember.user', 'officialTruckTuning', 'officialTrailerTuning');
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
@@ -153,7 +153,8 @@ class ConvoysController extends Controller{
             'members' => $booking ? Member::where('id', Auth::user()->member->id)->get() : Member::all(),
             'dlc' => $convoy->dlcList,
             'types' => $booking ? [$convoy->type => Convoy::$timesToType[$convoy->type]] : Convoy::$timesToType,
-            'trucks_tuning' => TrucksTuning::whereVisible(true)->get()->groupBy('vendor')
+            'trucks_tuning' => Tuning::where(['type' => 'truck', 'visible' => '1'])->get()->groupBy('vendor'),
+            'trailers_tuning' => Tuning::where(['type' => 'trailer', 'visible' => '1'])->get()->groupBy('vendor'),
         ]);
     }
 

@@ -60,7 +60,8 @@ return [
     'booking' => 'Бронь',
     'type' => 'Тип',
     'links' => 'Ссылки',
-    'truck_with_tuning' => 'Официальный тюнинг',
+    'truck_with_tuning' => 'Официальный тюнинг тягача',
+    'trailer_with_tuning' => 'Официальный тюнинг прицепа',
 
     // member
     'nickname' => 'Ник в игре',

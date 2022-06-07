@@ -179,9 +179,9 @@
                                                     <p class="mb-0 text-muted">@lang('attributes.truck')</p>
                                                     <h5 class="mb-1">
                                                         {{ $convoy->truck ?? 'Любой' }}
-                                                        @if($convoy->tuning)
+                                                        @if($convoy->officialTruckTuning)
                                                              <a class="text-success px-1" target="_blank"
-                                                                @if($convoy->tuning->game === 'ats')
+                                                                @if($convoy->officialTruckTuning->game === 'ats')
                                                                     href="https://bit.ly/3oTNWBc"
                                                                 @else
                                                                     href="https://bit.ly/2O7v8x7"
@@ -199,10 +199,10 @@
                                                         <h5>{{ $convoy->truck_paint }}</h5>
                                                     @endif
                                                 </div>
-                                                @if($convoy->truck_image || $convoy->tuning)
+                                                @if($convoy->truck_image || $convoy->officialTruckTuning)
                                                     <div class="col truck-img">
-                                                        <a href="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif" target="_blank">
-                                                            <img src="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
+                                                        <a href="@if($convoy->officialTruckTuning) /images/tuning/{{ $convoy->officialTruckTuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif" target="_blank">
+                                                            <img src="@if($convoy->officialTruckTuning) /images/tuning/{{ $convoy->officialTruckTuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
                                                                  alt="{{ $convoy->truck }}" class="text-shadow-m w-100">
                                                         </a>
                                                     </div>
@@ -210,16 +210,29 @@
                                             </div>
                                             <div class="col-md-12 col-xl-6 row justify-content-start mx-0 trailer-info">
                                                 <div class="row mx-0 flex-column flex-md-row mt-5 mt-md-3 mt-lg-0">
-                                                    @if($convoy->trailer_image)
+                                                    @if($convoy->trailer_image || $convoy->officialTrailerTuning)
                                                         <div class="col">
-                                                            <a href="/images/convoys/{{ $convoy->trailer_image }}" target="_blank">
-                                                                <img src="/images/convoys/{{ $convoy->trailer_image }}" alt="{{ $convoy->trailer }}" class="text-shadow-m w-100">
+                                                            <a href="@if($convoy->officialTrailerTuning) /images/tuning/{{ $convoy->officialTrailerTuning->image }} @else /images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }} @endif" target="_blank">
+                                                                <img src="@if($convoy->officialTrailerTuning) /images/tuning/{{ $convoy->officialTrailerTuning->image }} @else /images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }} @endif"
+                                                                     alt="{{ $convoy->trailer }}" class="text-shadow-m w-100">
                                                             </a>
                                                         </div>
                                                     @endif
                                                     <div class="col">
                                                         <p class="mb-0 text-muted">@lang('attributes.trailer')</p>
-                                                        <h5 class="mb-1">{{ $convoy->trailer ?? 'Любой' }}</h5>
+                                                        <h5 class="mb-1">
+                                                            {{ $convoy->trailer ?? 'Любой' }}
+                                                            @if($convoy->officialTrailerTuning)
+                                                                <a class="text-success px-1" target="_blank"
+                                                                   @if($convoy->officialTrailerTuning->game === 'ats')
+                                                                       href="https://bit.ly/3oTNWBc"
+                                                                   @else
+                                                                       href="https://bit.ly/2O7v8x7"
+                                                                    @endif>
+                                                                    <i class="fas fa-download"></i>
+                                                                </a>
+                                                            @endif
+                                                        </h5>
                                                         @if($convoy->trailer_tuning)
                                                             <p class="mb-0 text-muted">Тюнинг:</p>
                                                             <h5 class="mb-1">{{ $convoy->trailer_tuning }}</h5>

@@ -255,23 +255,23 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group truck_image">
-                        <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->tuning) style="display: none" @endif>
-                            <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*" @if($convoy->tuning) disabled @endif>
+                        <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->officialTruckTuning) style="display: none" @endif>
+                            <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*" @if($convoy->officialTruckTuning) disabled @endif>
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="@if($convoy->tuning) /images/tuning/{{ $convoy->tuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
+                        <img src="@if($convoy->officialTruckTuning) /images/tuning/{{ $convoy->officialTruckTuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
                              class="w-100" id="truck_image-preview">
                         @if($errors->has('truck_image'))
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif
                         <label for="truck_with_tuning" class="my-1 text-muted">Или выберите тягач с официальным тюнингом</label>
-                        <select id="truck_with_tuning" name="truck_with_tuning" class="custom-select custom-select-dark" data-token="{{ csrf_token() }}">
+                        <select id="truck_with_tuning" name="truck_with_tuning" class="custom-select custom-select-dark" data-target="truck">
                             <option value="">Официальный тюнинг не обязательный</option>
                             @foreach($trucks_tuning as $vendor => $tunings)
                                 <optgroup label="{{ $vendor }}">
                                     @foreach($tunings as $item)
-                                        <option value="{{ $item->id }}" @if($convoy->tuning?->id === $item->id) selected @endif>{{ $item->vendor }} {{ $item->model }}</option>
+                                        <option value="{{ $item->id }}" @if($convoy->officialTruckTuning?->id === $item->id) selected @endif>{{ $item->vendor }} {{ $item->model }}</option>
                                     @endforeach
                                 </optgroup>
                             @endforeach
@@ -283,15 +283,15 @@
                     @if(!$booking)
                         <div class="custom-control custom-checkbox mb-2">
                             <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public"
-                                   @if(!$convoy->tuning && ($convoy->truck_public || old('truck_public') === 'on')) checked @endif
-                                   @if($convoy->tuning) disabled @endif>
+                                   @if(!$convoy->officialTruckTuning && ($convoy->truck_public || old('truck_public') === 'on')) checked @endif
+                                   @if($convoy->officialTruckTuning) disabled @endif>
                             <label class="custom-control-label" for="truck_public">@lang('attributes.truck_public')</label>
                         </div>
                     @endif
                     <div class="form-group">
                         <input type="text" class="form-control" id="truck" name="truck"
                                value="{{ old('truck') ?? $convoy->truck }}"
-                               placeholder="Марка"  @if($convoy->tuning) readonly @endif>
+                               placeholder="Марка"  @if($convoy->officialTruckTuning) readonly @endif>
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
@@ -309,7 +309,7 @@
                         <label for="truck_paint">@lang('attributes.truck_paint')</label>
                         <input type="text" class="form-control" id="truck_paint" name="truck_paint"
                                value="{{ old('truck_paint') ?? $convoy->truck_paint }}"
-                               placeholder="Не обязательно"  @if($convoy->tuning) readonly @endif>
+                               placeholder="Не обязательно"  @if($convoy->officialTruckTuning) readonly @endif>
                         @if($errors->has('truck_paint'))
                             <small class="form-text">{{ $errors->first('truck_paint') }}</small>
                         @endif
@@ -320,15 +320,27 @@
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group trailer_image">
-                        <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input" id="trailer_image" name="trailer_image" accept="image/*">
+                        <div class="custom-file custom-file-dark mb-3" @if($convoy->officialTrailerTuning) style="display: none" @endif>
+                            <input type="file" class="custom-file-input" id="trailer_image" name="trailer_image" accept="image/*" @if($convoy->officialTrailerTuning) disabled @endif>
                             <label class="custom-file-label" for="trailer_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="/images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="trailer_image-preview">
+                        <img src="@if($convoy->officialTrailerTuning) /images/tuning/{{ $convoy->officialTrailerTuning->image }} @else /images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }} @endif"
+                            class="w-100" id="trailer_image-preview">
                         @if($errors->has('trailer_image'))
                             <small class="form-text">{{ $errors->first('trailer_image') }}</small>
                         @endif
+                        <label for="trailer_with_tuning" class="my-1 text-muted">Или выберите прицеп с официальным тюнингом</label>
+                        <select id="trailer_with_tuning" name="trailer_with_tuning" class="custom-select custom-select-dark" data-target="trailer">
+                            <option value="">Официальный тюнинг не обязательный</option>
+                            @foreach($trailers_tuning as $vendor => $tunings)
+                                <optgroup label="{{ $vendor }}">
+                                    @foreach($tunings as $item)
+                                        <option value="{{ $item->id }}" @if($convoy->officialTrailerTuning?->id === $item->id) selected @endif>{{ $item->model }} @if($item->$vendor){{ $item->vendor }}@endif</option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>

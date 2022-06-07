@@ -1,7 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    Новый тюнинг | @lang('general.vtc_evoque')
+    @if($tuning->id) Редактировать @else Добавить @endif официальный тюнинг | @lang('general.vtc_evoque')
 @endsection
 
 @section('content')

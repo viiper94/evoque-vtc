@@ -114,7 +114,7 @@ class PlansController extends Controller{
             $convoy->booked_by_id = Auth::user()->member->id;
             return $convoy->save() ?
                 redirect()->route('evoque.convoys.plans')->with(['success' => $offset == 0 ?
-                    'Внеплановый конвой создан, не забудь опубликовать регламент в чате в ВК!' :
+                    'Внеплановый конвой создан, не забудь продублировать регламент в чате в ВК!' :
                     'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }

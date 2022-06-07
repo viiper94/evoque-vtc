@@ -1,14 +1,14 @@
 @extends('layout.index')
 
 @section('title')
-    Официальный тюнинг тягачей | @lang('general.vtc_evoque')
+    Официальный тюнинг | @lang('general.vtc_evoque')
 @endsection
 
 @section('content')
 {{--    @dd($tunings)--}}
     <div class="container pt-5">
         @include('layout.alert')
-        <h2 class="mt-3 text-primary ml-3 text-center">Официальный тюнинг тягачей</h2>
+        <h2 class="mt-3 text-primary ml-3 text-center">Официальный тюнинг</h2>
         <div class="row justify-content-center py-3">
             @foreach($vendors as $vendor => $tunings)
                 <a href="#{{ $vendor }}-tuning" class="btn btn-outline-primary mx-2">{{ $vendor }}</a>

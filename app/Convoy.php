@@ -90,6 +90,7 @@ class Convoy extends Model implements Auditable{
         'truck_paint' => 'nullable|string',
 
         'trailer_image' => 'nullable|image|max:5000',
+        'trailer_with_tuning' => 'nullable|numeric',
         'trailer' => 'nullable|string',
         'trailer_tuning' => 'nullable|string',
         'trailer_paint' => 'nullable|string',

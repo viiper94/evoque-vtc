@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Gate;
 
 class ApplicationsController extends Controller{
 
-    public function app(Request $request){
+    public function app(Request $request, $id = null){
         if(!Auth::user()?->member) abort(404);
-        if(($id = $request->post('id')) && $request->ajax()){
+        if(($id = $request->get('id')) && $request->ajax()){
             $app = Application::with('member')->where('id', $id)->firstOrFail();
             $this->authorize('view', $app);
             $rp = null;

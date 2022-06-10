@@ -107,7 +107,7 @@
                                     </p>
                                 @endif
                                 @if($convoy->cargoman) <p data-toggle="tooltip" title="Код CargoMan"><i class="fas fa-sign-in-alt"></i> {{ $convoy->cargoman }}</p>
-                                @elseif($convoy->start_time->isFuture()) <a class="add-cargoman" data-toggle="modal" href="#cargomanModal" data-id="{{ $convoy->id }}">Добавить код CargoMan</a>
+                                @elseif($convoy->isUpcoming()) <a class="add-cargoman" data-toggle="modal" href="#cargomanModal" data-id="{{ $convoy->id }}">Добавить код CargoMan</a>
                                 @endif
                             </div>
 

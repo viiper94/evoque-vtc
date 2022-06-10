@@ -169,8 +169,7 @@ class Convoy extends Model implements Auditable{
     ];
 
     public function isUpcoming(){
-        $now = Carbon::now();
-        return $now->subMinutes(45)->lessThan($this->start_time);
+        return Carbon::now()->subMinutes(60)->lessThan($this->start_time);
     }
 
     public function getCommunicationLink(){

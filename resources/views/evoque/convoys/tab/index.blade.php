@@ -8,11 +8,7 @@
 
     <div class="container-fluid pt-5">
         @include('layout.alert')
-        @can('viewAny', \App\Tab::class)
-            <h2 class="mt-3 text-primary text-center">Все скрин TAB</h2>
-        @else
-            <h2 class="mt-3 text-primary text-center">Мои скрин TAB</h2>
-        @endcan
+        <h2 class="mt-3 text-primary text-center">@can('viewAny', \App\Tab::class)Все@elseМои@endcan скрин TAB</h2>
         @can('create', \App\Tab::class)
             <div class="row justify-content-center">
                 <a href="{{ route('evoque.convoys.tab.add') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"><i class="fas fa-plus"></i> Новый скрин TAB</a>
@@ -32,7 +28,7 @@
                                     <i class="fas fa-times-circle text-danger"></i>
                                 @endif
                                 @can('claim', $tab)
-                                        <a href="{{ route('evoque.admin.convoys.tab.accept', $tab->id) }}">{{ $tab->convoy_title }}</a>
+                                    <a href="{{ route('evoque.admin.convoys.tab.accept', $tab->id) }}">{{ $tab->convoy_title }}</a>
                                 @elsecan('update', $tab)
                                     <a href="{{ route('evoque.convoys.tab.edit', $tab->id) }}">{{ $tab->convoy_title }}</a>
                                 @else

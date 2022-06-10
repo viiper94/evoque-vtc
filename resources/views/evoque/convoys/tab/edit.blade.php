@@ -1,11 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    @if($tab->screenshot)
-        Редактирование скрин TAB
-    @else
-        Подать скрин TAB
-    @endif
+    @if($tab->screenshot)Редактирование@elseПодать@endif скрин TAB
     | @lang('general.vtc_evoque')
 @endsection
 
@@ -13,11 +9,7 @@
 
     <div class="container pt-5 pb-5">
         @include('layout.alert')
-        @if($tab->screenshot)
-            <h2 class="mt-3 text-primary text-center">Редактирование скрин TAB</h2>
-        @else
-            <h2 class="mt-3 text-primary text-center">Подать скрин TAB</h2>
-        @endif
+        <h2 class="mt-3 text-primary text-center">@if($tab->screenshot)Редактирование@elseПодать@endif скрин TAB</h2>
         <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">

@@ -47,18 +47,21 @@
             </div>
         </div>
     @endif
-    <div class="col-12">
-        @if($app->status === 1)
-            <h3 class="text-success">Заявка одобрена!</h3>
-        @elseif($app->status === 2)
-            <h3 class="text-danger">Заявка отклонена!</h3>
-        @endif
-    </div>
+    @if($app->status !== 0)
+        <div class="col-12">
+            <h3 class="{{ \App\Enums\Status::from($app->status)->colorClass('text-') }}">Заявка {{ $app->getStatus() }}!</h3>
+        </div>
+    @endif
 </div>
-<div class="modal-body">
-    @if($app->isClosed() && count($app->comments) > 0 || !$app->isClosed())
-        <div class="comments border-top border-primary pt-5">
-            <h4 class="mb-3">@if(count($app->comments) === 0)Нет комментариев @else Комментарии @endif</h4>
+
+@if($app->isClosed() && count($app->comments) > 0 || !$app->isClosed())
+    @if(count($app->comments) > 0)
+        <div class="modal-header">
+            <h5 class="modal-title">Комментарии</h5>
+        </div>
+    @endif
+    <div class="modal-body">
+        <div class="comments">
             @foreach($app->comments as $comment)
                 <div class="card card-dark mb-2">
                     <div class="card-header row mx-0 pr-2">

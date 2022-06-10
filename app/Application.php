@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model{
@@ -45,7 +46,7 @@ class Application extends Model{
     }
 
     public function getStatus(){
-        return $this->statuses[$this->status];
+        return trans('status.'.Status::from($this->status)->name);
     }
 
     public function isClosed(){

@@ -36,7 +36,7 @@
             @endif
             <div class="row">
                 <div class="form-group col-md col-12">
-                    <label for="nickname">Название</label>
+                    <label for="title">@lang('attributes.title')</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{ old('title') ?? $convoy->title }}" required>
                     @if($errors->has('title'))
                         <small class="form-text">{{ $errors->first('title') }}</small>
@@ -54,7 +54,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-6">
-                    <label for="server">Сервер</label>
+                    <label for="server">@lang('attributes.server')</label>
                     <select class="form-control" id="server" name="server" required>
                         @foreach($servers as $server => $game)
                             <option value="{{ $server }}" @if($server === (old('server') ?? $convoy->server)) selected @endif >[{{ strtoupper($game) }}] {{ $server }}</option>
@@ -94,12 +94,12 @@
                     </div>
                     <div class="row">
                         <div class="form-group col">
-                            <label for="links[TruckersMP]">Ссылка на мероприятие в TruckersMP</label>
+                            <label for="links[TruckersMP]">@lang('attributes.links_truckersmp')</label>
                             <input type="text" class="form-control" id="links[TruckersMP]" name="links[TruckersMP]"
                                    value="{{ old('links[TruckersMP]') ?? ($convoy->links['TruckersMP'] ?? '') }}" placeholder="Подписаться на TruckersMP">
                         </div>
                         <div class="form-group col">
-                            <label for="links[TrucksBook]">Ссылка на мероприятие в TrucksBook</label>
+                            <label for="links[TrucksBook]">@lang('attributes.links_trucksbook')</label>
                             <input type="text" class="form-control" id="links[TrucksBook]" name="links[TrucksBook]"
                                    value="{{ old('links[TrucksBook]') ?? ($convoy->links['TrucksBook'] ?? '') }}" placeholder="Подписаться на TrucksBook">
                         </div>

@@ -9,6 +9,9 @@
                 a.book-convoy{
                     cursor: pointer;
                 }
+                span{
+                    width: 85px;
+                }
                 @media (max-width: 768px) {
                     font-size: 17px;
                 }

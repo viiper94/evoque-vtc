@@ -41,13 +41,13 @@
                             @foreach($convoys as $convoy)
                                 @if($convoy)
                                     <p class="my-2">
-                                        {{ $convoy->getType() }} -
+                                        <span class="badge badge-warning text-center">{{ $convoy->getType() }}</span>
                                         <b class="text-primary">{{ $convoy->start_time->format('H:i') }}</b> -
                                         {{ $convoy->title }} @if($convoy->lead !== 'На месте разберёмся') (ведёт <b>{{ $convoy->lead }}</b>) @endif
                                     </p>
                                 @else
                                     <p class="my-2">
-                                        {{ \App\Convoy::getTypeByNum($type) }} -
+                                        <span class="badge badge-warning text-center">{{ \App\Convoy::getTypeByNum($type) }}</span>
                                         @can('quickBook', \App\Convoy::class)
                                             <a data-date="{{ $day['date']->format('d.m.Y') }}" data-toggle="modal" data-target="#book-modal" class="book-convoy text-primary">Создать @if($loop->parent->parent->iteration === 1) внеплановый @endif конвой</a>
                                         @elsecan('book', \App\Convoy::class)
@@ -159,7 +159,6 @@
                                         </optgroup>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" class="form-control" id="time" name="time" autocomplete="off" required>--}}
                             </div>
                         </div>
                         <div class="form-group">

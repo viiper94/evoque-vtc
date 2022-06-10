@@ -132,7 +132,7 @@
                                                 <p class="mb-0 text-muted">@lang('attributes.start_time')</p>
                                                 <h5>{{ $convoy->start_time->format('H:i') }}</h5>
                                             </div>
-                                            <div class="col-xl-4 col-md-6">
+                                            <div class="col-xl-4 col-md-6 text-center">
                                                 @if($convoy->cargoman)
                                                     <p class="mb-0 text-muted">CargoMan :</p>
                                                     <h5>{{ $convoy->cargoman }}</h5>

@@ -1,11 +1,7 @@
 @extends('layout.index')
 
 @section('title')
-    @if($convoy->id)
-        Редактирование конвоя
-    @else
-        Новый конвой
-    @endif
+    @if($convoy->id)Редактирование конвоя@elseНовый конвой@endif
     | @lang('general.vtc_evoque')
 @endsection
 
@@ -23,13 +19,7 @@
         <form method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
             <div class="mt-3 row justify-content-between">
-                <h2 class="text-primary col-md-6">
-                    @if($convoy->id)
-                        Редактирование конвоя
-                    @else
-                        Новый конвой
-                    @endif
-                </h2>
+                <h2 class="text-primary col-md-6">@if($convoy->id)Редактирование конвоя@elseНовый конвой@endif</h2>
                 <div class="btn-wrapper col-md-6 text-md-right">
                     <button class="btn btn-outline-warning mx-1" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
                 </div>

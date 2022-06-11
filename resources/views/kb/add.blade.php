@@ -31,11 +31,11 @@
                 @endif
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($kb->visible) checked @endif>
+                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @checked($kb->visible)>
                 <label class="custom-control-label" for="visible">Опубликована</label>
             </div>
             <div class="custom-control custom-checkbox mb-2">
-                <input type="checkbox" class="custom-control-input" id="public" name="public" @if($kb->public) checked @endif>
+                <input type="checkbox" class="custom-control-input" id="public" name="public" @checked($kb->public)>
                 <label class="custom-control-label" for="public">Публичная статья</label>
             </div>
             <textarea name="article" id="article">{{ old('article') ?? $kb->article }}</textarea>

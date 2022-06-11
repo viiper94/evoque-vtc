@@ -14,11 +14,11 @@
                 <div class="col-md-4 col-sm-12">
                     <h4>Выберите игру</h4>
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" @if($reward->game === 'ets2') checked @endif required>
+                        <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" @checked($reward->game === 'ets2') required>
                         <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" @if($reward->game === 'ats') checked @endif required>
+                        <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" @checked($reward->game === 'ats') required>
                         <label class="custom-control-label" for="game-ats">American Truck Simulator</label>
                     </div>
                 </div>

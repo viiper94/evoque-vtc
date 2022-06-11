@@ -37,21 +37,27 @@
             <div class="row day my-5 mx-0 flex-column flex-lg-row">
 
                 <div class="date">
-                    <h1 class="text-center text-lg-right @if($day->isToday()) text-primary @elseif($day->isPast())past @endif">
+                    <h1 @class([
+                            'text-center text-lg-right',
+                            'text-primary' => $day->isToday(),
+                            'past' => $day->isPast(),
+                        ])>
                         {{ $day->format('d.m').' '.$day->isoFormat('dd') }}
                     </h1>
                 </div>
-                <div class="day-convoys col row @if($day->isToday()) text-primary @elseif($day->isPast())past @endif">
-
+                <div @class([
+                        'day-convoys col row',
+                        'text-primary' => $day->isToday(),
+                        'past' => $day->isPast()
+                    ])>
                     @foreach($day_convoys as $convoy)
-                        <div class="card card-dark text-shadow-m col px-0 my-1 text-center text-md-left
-                                @if($convoy->start_time->addMinutes(60)->isPast())
-                                    past
-                                @else
-                                    @if($convoy->public)border-primary
-                                    @elseif(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled())border-danger
-                                    @elseif($convoy->booking && !$convoy->visible)border-info @endif
-                                @endif">
+                        <div @class([
+                            'card card-dark text-shadow-m col px-0 my-1 text-center text-md-left',
+                            'past' => !$convoy->isUpcoming(),
+                            'border-primary' => $convoy->isUpcoming() && $convoy->public,
+                            'border-danger' => $convoy->isUpcoming() && \Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled(),
+                            'border-info' => $convoy->isUpcoming() && !$convoy->visible,
+                        ])>
                             <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
                                  aria-expanded="false" aria-controls="{{ $convoy->id }}">
                                 <h5 class="text-center col">

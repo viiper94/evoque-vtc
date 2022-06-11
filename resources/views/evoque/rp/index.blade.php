@@ -12,14 +12,14 @@
         <ul class="nav nav-pills justify-content-center">
             @foreach($roles as $game => $game_roles)
                 <li class="nav-item">
-                    <a class="nav-link @if($loop->first) active @endif" data-toggle="tab" href="#{{ $game }}">@lang('general.'.$game)</a>
+                    <a @class(['nav-link', 'active' => $loop->first]) data-toggle="tab" href="#{{ $game }}">@lang('general.'.$game)</a>
                 </li>
             @endforeach
         </ul>
     </div>
     <div class="tab-content">
         @foreach($roles as $game => $game_roles)
-            <div class="tab-pane @if($loop->first) show active @endif" id="{{ $game }}" role="tabpanel">
+            <div @class(['tab-pane', 'show active' => $loop->first]) id="{{ $game }}" role="tabpanel">
                 <div class="container-fluid members-table">
                     <div class="table-responsive">
                         <table class="table table-sm table-dark table-bordered table-hover">
@@ -106,7 +106,7 @@
                                 @can('updateRewards', \App\RpReport::class)
                                     <th>
                                         <a href="{{ route('evoque.rp.rewards.edit') }}" class="mx-2"
-                                           data-title="Добавить награду" data-toggle="tooltip">
+                                           data-title="Добавить награду" data-toggle="tooltip" data-placement="left">
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </th>
@@ -114,25 +114,27 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($rewards[$game] as $reward)
-                                <tr>
-                                    <th>{{ $reward->stage }}</th>
-                                    <th class="w-25 stage-{{ $reward->stage }}">{{ $reward->km }}</th>
-                                    <td>{{ $reward->reward }}</td>
-                                    @can('updateRewards', \App\RpReport::class)
-                                        <td style="min-width: 90px;">
-                                            <a href="{{ route('evoque.rp.rewards.edit', $reward->id) }}" class="mx-2"
-                                               data-title="Редактировать" data-toggle="tooltip">
-                                                <i class="fas fa-pen"></i>
-                                            </a>
-                                            <a href="{{ route('evoque.rp.rewards.delete', $reward->id) }}" class="mx-2"
-                                               data-title="Удалить" data-toggle="tooltip" onclick="return confirm('Удалить эту награду?')">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    @endcan
-                                </tr>
-                            @endforeach
+                            @isset($rewards[$game])
+                                @foreach($rewards[$game] as $reward)
+                                    <tr>
+                                        <th>{{ $reward->stage }}</th>
+                                        <th class="w-25 stage-{{ $reward->stage }}">{{ $reward->km }}</th>
+                                        <td>{{ $reward->reward }}</td>
+                                        @can('updateRewards', \App\RpReport::class)
+                                            <td style="min-width: 90px;">
+                                                <a href="{{ route('evoque.rp.rewards.edit', $reward->id) }}" class="mx-2"
+                                                   data-title="Редактировать" data-toggle="tooltip">
+                                                    <i class="fas fa-pen"></i>
+                                                </a>
+                                                <a href="{{ route('evoque.rp.rewards.delete', $reward->id) }}" class="mx-2"
+                                                   data-title="Удалить" data-toggle="tooltip" onclick="return confirm('Удалить эту награду?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        @endcan
+                                    </tr>
+                                @endforeach
+                            @endisset
                             </tbody>
                         </table>
                     </div>

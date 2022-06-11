@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-{{--    @dd($results)--}}
+
     <div class="container-fluid pt-5 pb-5">
         @include('layout.alert')
         <h2 class="mt-3 mb-3 text-primary text-center">Результаты сотрудника {{ $member->nickname }}</h2>
@@ -38,9 +38,10 @@
                         <td>{{ $result->question->question }}</td>
                         <td>{{ $result->question->answers[$result->question->correct] }}</td>
                         <td>
-                            <b @if($result->question->correct === $result->answer)class="text-success"
-                               @else class="text-danger" @endif>
-                                {{ $result->question->answers[$result->answer] }}</b>
+                            <b @class([
+                                'text-success' => $result->question->correct === $result->answer,
+                                'text-danger' => $result->question->correct !== $result->answer
+                            ])>{{ $result->question->answers[$result->answer] }}</b>
                         </td>
                     </tr>
                 @endforeach

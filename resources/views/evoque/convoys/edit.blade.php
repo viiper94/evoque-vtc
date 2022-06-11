@@ -26,11 +26,11 @@
             </div>
             @if(!$booking)
                 <div class="custom-control custom-checkbox mb-2">
-                    <input type="checkbox" class="custom-control-input" id="public" name="public" @if($convoy->public || old('public') === 'on') checked @endif>
+                    <input type="checkbox" class="custom-control-input" id="public" name="public" @checked($convoy->public || old('public') === 'on')>
                     <label class="custom-control-label" for="public">Наш открытый конвой (виден всем)</label>
                 </div>
                 <div class="custom-control custom-checkbox mb-2">
-                    <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($convoy->visible || old('visible') === 'on') checked @endif>
+                    <input type="checkbox" class="custom-control-input" id="visible" name="visible" @checked($convoy->visible || old('visible') === 'on')>
                     <label class="custom-control-label" for="visible">Опубликовать для сотрудников</label>
                 </div>
             @endif
@@ -57,10 +57,10 @@
                     <label for="server">@lang('attributes.server')</label>
                     <select class="form-control" id="server" name="server" required>
                         @foreach($servers as $server => $game)
-                            <option value="{{ $server }}" @if($server === (old('server') ?? $convoy->server)) selected @endif >[{{ strtoupper($game) }}] {{ $server }}</option>
+                            <option value="{{ $server }}" @selected($server === (old('server') ?? $convoy->server))>[{{ strtoupper($game) }}] {{ $server }}</option>
                         @endforeach
-                        <option value="Выделенный ивент сервер" @if((old('server') ?? $convoy->server) === 'Выделенный ивент сервер') selected @endif >Выделенный ивент сервер</option>
-                        <option value="Определимся позже" @if((old('server') ?? $convoy->server) === 'Определимся позже') selected @endif >Определимся позже</option>
+                        <option value="Выделенный ивент сервер" @selected((old('server') ?? $convoy->server) === 'Выделенный ивент сервер')>Выделенный ивент сервер</option>
+                        <option value="Определимся позже" @selected((old('server') ?? $convoy->server) === 'Определимся позже')>Определимся позже</option>
                     </select>
                 </div>
                 <div class="form-group col-md-3 col-sm-6">
@@ -73,7 +73,7 @@
                         @foreach($types as $type => $time)
                             <optgroup label="{{ \App\Convoy::getTypeByNum($type) }}">
                                 @foreach($time as $item)
-                                    <option value="{{ $item }}" @if($item === (old('start_time') ?? $convoy->start_time->format('H:i'))) selected @endif>{{ $item }}</option>
+                                    <option value="{{ $item }}" @selected($item === (old('start_time') ?? $convoy->start_time->format('H:i')))>{{ $item }}</option>
                                 @endforeach
                                     <option disabled></option>
                             </optgroup>
@@ -189,28 +189,28 @@
                                 <optgroup label="{{ strtoupper($game) }}">
                                     @php $dlc_list = old('dlc') ?? $convoy->dlc @endphp
                                     @foreach($list as $item)
-                                        <option value="{{ $item }}" @if(is_array($dlc_list) && in_array($item, $dlc_list)) selected @endif>{{ $item }}</option>
+                                        <option value="{{ $item }}" @selected(is_array($dlc_list) && in_array($item, $dlc_list))>{{ $item }}</option>
                                     @endforeach
                                     <option disabled></option>
                                 </optgroup>
                             @endforeach
                         </select>
-                        <label for="" class="text-muted">удерживать Ctrl для выбора нескольких или снятия выбора</label>
                         @if($errors->has('dlc'))
                             <small class="form-text">{{ $errors->first('dlc') }}</small>
                         @endif
+                        <small class="text-muted">удерживать Ctrl для выбора нескольких или снятия выбора</small>
                     </div>
                 </div>
             </div>
             <h3 class="mt-5 text-primary">@lang('attributes.communication')</h3>
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3"
-                       @if((old('communication') ?? $convoy->communication) === 'TeamSpeak 3') checked @endif @if($booking) disabled @endif>
+                   @checked((old('communication') ?? $convoy->communication) === 'TeamSpeak 3') @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord"
-                       @if((old('communication') ?? $convoy->communication) === 'Discord' || (old('communication') ?? $convoy->communication) == '') checked @endif @if($booking) disabled @endif>
+                   @checked((old('communication') ?? $convoy->communication) === 'Discord' || (old('communication') ?? $convoy->communication) == '') @if($booking) disabled @endif>
                 <label class="custom-control-label" for="communication-discord">Discord</label>
                 @if($booking)
                     <input type="hidden" name="communication" value="{{ $convoy->communication }}">
@@ -234,10 +234,10 @@
                 <label for="lead">@lang('attributes.lead')</label>
                 <select class="form-control" id="lead" name="lead">
                     @if(!$booking)
-                        <option value="На месте разберёмся" @if((old('lead') ?? $convoy->lead) === 'На месте разберёмся') selected @endif >На месте разберёмся</option>
+                        <option value="На месте разберёмся" @selected((old('lead') ?? $convoy->lead) === 'На месте разберёмся')>На месте разберёмся</option>
                     @endif
                     @foreach($members as $member)
-                        <option value="{{ $member->nickname }}" @if($member->nickname === (old('lead') ?? $convoy->lead)) selected @endif >{{ $member->nickname }}</option>
+                        <option value="{{ $member->nickname }}" @selected($member->nickname === (old('lead') ?? $convoy->lead))>{{ $member->nickname }}</option>
                     @endforeach
                 </select>
             </div>
@@ -261,7 +261,7 @@
                             @foreach($trucks_tuning as $vendor => $tunings)
                                 <optgroup label="{{ $vendor }}">
                                     @foreach($tunings as $item)
-                                        <option value="{{ $item->id }}" @if($convoy->officialTruckTuning?->id === $item->id) selected @endif>{{ $item->vendor }} {{ $item->model }}</option>
+                                        <option value="{{ $item->id }}" @selected($convoy->officialTruckTuning?->id === $item->id)>{{ $item->vendor }} {{ $item->model }}</option>
                                     @endforeach
                                 </optgroup>
                             @endforeach
@@ -326,7 +326,7 @@
                             @foreach($trailers_tuning as $vendor => $tunings)
                                 <optgroup label="{{ $vendor }}">
                                     @foreach($tunings as $item)
-                                        <option value="{{ $item->id }}" @if($convoy->officialTrailerTuning?->id === $item->id) selected @endif>{{ $item->model }} @if($item->$vendor){{ $item->vendor }}@endif</option>
+                                        <option value="{{ $item->id }}" @selected($convoy->officialTrailerTuning?->id === $item->id)>{{ $item->model }} @if($item->vendor){{ $item->vendor }}@endif</option>
                                     @endforeach
                                 </optgroup>
                             @endforeach

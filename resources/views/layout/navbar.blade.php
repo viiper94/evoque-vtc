@@ -10,26 +10,26 @@
             <div class="collapse navbar-collapse pb-5 pb-lg-0 mb-5 mb-lg-0" id="navbarTogglerDemo01">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0 pb-5 pb-lg-0 mb-5 mb-lg-0 text-uppercase font-weight-bold text-shadow">
                     @if(\Illuminate\Support\Facades\Auth::guest() || !\Illuminate\Support\Facades\Auth::user()->member)
-                        <li class="nav-item @if(Route::is('home'))active @endif">
+                        <li @class(['nav-item', 'active' => Route::is('home')])>
                             <a class="nav-link" href="{{ route('home') }}">О нас</a>
                         </li>
-                        <li class="nav-item @if(Route::is('convoy.public'))active @endif">
+                        <li @class(['nav-item', 'active' => Route::is('convoy.public')])>
                             <a class="nav-link" href="{{ route('convoy.public') }}">Конвой</a>
                         </li>
-                        <li class="nav-item @if(Route::is('members'))active @endif">
+                        <li @class(['nav-item', 'active' => Route::is('members')])>
                             <a class="nav-link" href="{{ route('members') }}">Сотрудники</a>
                         </li>
-                        <li class="nav-item @if(Route::is('rules'))active @endif">
+                        <li @class(['nav-item', 'active' => Route::is('rules')])>
                             <a class="nav-link" href="{{ route('rules') }}">Правила</a>
                         </li>
-                        <li class="nav-item @if(Route::is('apply'))active @endif">
+                        <li @class(['nav-item', 'active' => Route::is('apply')])>
                             <a class="nav-link" href="{{ route('apply') }}">Вступить</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('auth.steam') }}">Войти <i class="fab fa-steam"></i></a>
                         </li>
                     @else
-                        <li class="nav-item dropdown @if(in_array($controller, ['tabscontroller', 'convoyscontroller', 'planscontroller']))active @endif">
+                        <li @class(['nav-item dropdown', 'active' => in_array($controller, ['tabscontroller', 'convoyscontroller', 'planscontroller'])])>
                             <a class="nav-link dropdown-toggle nowrap" id="convoysDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Конвои
                                 @if($convoys_c > 0)
@@ -58,7 +58,7 @@
                                 </a>
                             </div>
                         </li>
-                        <li class="nav-item dropdown @if($controller === 'rulescontroller')active @endif">
+                        <li @class(['nav-item dropdown', 'active' => in_array($controller, ['rulescontroller'])])>
                             @can('update', \App\Rules::class)
                                 <a class="nav-link dropdown-toggle" id="rulesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Правила</a>
                                 <div class="dropdown-menu" aria-labelledby="rulesDropdown">
@@ -69,7 +69,7 @@
                                 <a class="nav-link" href="{{ route('evoque.rules', 'private') }}">Правила</a>
                             @endcan
                         </li>
-                        <li class="nav-item @if(Request::is('evoque/applications*'))active @endif">
+                        <li @class(['nav-item', 'active' => in_array($controller, ['applicationscontroller', 'recruitmentcontroller'])])>
                             <a class="nav-link nowrap" href="{{ route('evoque.applications') }}">
                                 Заявки
                                 @if($applications_badge > 0)
@@ -77,10 +77,10 @@
                                 @endif
                             </a>
                         </li>
-                        <li class="nav-item @if($controller === 'memberscontroller')active @endif">
+                        <li @class(['nav-item', 'active' => $controller === 'memberscontroller'])>
                             <a class="nav-link" href="{{ route('evoque.members') }}">Таблица</a>
                         </li>
-                        <li class="nav-item dropdown @if(Request::is('evoque/rp*'))active @endif">
+                        <li @class(['nav-item dropdown', 'active' => Request::is('evoque/rp*')])>
                             <a class="nav-link dropdown-toggle nowrap" id="rpDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Рейтинговые перевозки
@@ -108,7 +108,7 @@
                             </div>
                         </li>
                         @if(\Illuminate\Support\Facades\Auth::user()->can('view', \App\Role::class) || \Illuminate\Support\Facades\Auth::user()->can('view', \App\User::class))
-                            <li class="nav-item dropdown @if(Request::is('evoque/admin*'))active @endif">
+                            <li @class(['nav-item dropdown', 'active' => Request::is('evoque/admin*')])>
                                 <a class="nav-link dropdown-toggle" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                                 <div class="dropdown-menu" aria-labelledby="adminDropdown">
                                     @can('view', \App\Role::class)

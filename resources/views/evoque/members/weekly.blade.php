@@ -35,7 +35,7 @@
                             @php $lastConvoys = $member->convoys @endphp
                         </td>
                         <td class="font-weight-bold">{{ $member->nickname }}</td>
-                        <td @if($member->convoys === 0 && !$member->onVacation(true))class="text-danger font-weight-bold" @endif>{{ $member->convoys }}</td>
+                        <td @class(['text-danger font-weight-bold' => $member->convoys === 0 && !$member->onVacation(true)])>{{ $member->convoys }}</td>
                         <td>{{ $member->scores ?? '∞' }}</td>
                         <td>{{ $member->money ?? '∞' }}</td>
                         <td>{{ $member->on_vacation_till && !\Carbon\Carbon::parse($member->on_vacation_till['from'])->isFuture() ? \Carbon\Carbon::parse($member->on_vacation_till['to'])->isoFormat('DD.MM.Y') : '–' }}</td>

@@ -21,11 +21,11 @@
         <form method="post">
             @csrf
             <div class="custom-control custom-radio">
-                <input type="radio" id="private" name="public" value="true" class="custom-control-input" @if($rules->public) checked @endif>
+                <input type="radio" id="private" name="public" value="true" class="custom-control-input" @checked($rules->public)>
                 <label class="custom-control-label" for="private">Публичные правила</label>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="public" name="public" value="false" class="custom-control-input" @if(!$rules->public) checked @endif>
+                <input type="radio" id="public" name="public" value="false" class="custom-control-input" @checked(!$rules->public)>
                 <label class="custom-control-label" for="public">Закрытые правила</label>
             </div>
             <div class="row">

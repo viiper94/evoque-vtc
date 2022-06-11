@@ -16,7 +16,7 @@
         @endcan
         <div class="tabs mt-3 mb-5 row justify-content-around align-items-baseline">
             @foreach($tabs as $tab)
-                <div class="card card-dark text-shadow-m col-auto m-3 px-0 @if($tab->status == 1)border-success @elseif($tab->status == 2) border-danger @else border-primary @endif">
+                <div class="card card-dark text-shadow-m col-auto m-3 px-0 {{ \App\Enums\Status::from($tab->status)->colorClass('border-') }}">
                     <div class="card-header row mx-0">
                         <div class="col tab-title px-0">
                             <h5 class="mb-0">

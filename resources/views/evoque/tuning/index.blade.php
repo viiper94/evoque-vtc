@@ -11,7 +11,11 @@
         <h2 class="mt-3 text-primary ml-3 text-center">Официальный тюнинг</h2>
         <div class="row justify-content-center py-3">
             @foreach($vendors as $vendor => $tunings)
-                <a href="#{{ $vendor }}-tuning" class="btn @if($tunings[0]->type === 'truck') btn-outline-primary @else btn-outline-info @endif mx-2">{{ $tunings[0]->type === 'truck' ? $vendor : 'Прицеп' }}</a>
+                <a href="#{{ $vendor }}-tuning" @class([
+                    'btn mx-2',
+                    'btn-outline-primary' => $tunings[0]->type === 'truck',
+                    'btn-outline-info' => $tunings[0]->type === 'trailer'
+                ])>{{ $tunings[0]->type === 'truck' ? $vendor : 'Прицеп' }}</a>
             @endforeach
             @can('add', \App\Tuning::class)
                 <a href="{{ route('evoque.tuning.add') }}" class="btn btn-outline-secondary mx-2"><i class="fas fa-plus"></i> Добавить</a>
@@ -20,8 +24,11 @@
         @if(count($vendors) > 0)
             @foreach($vendors as $vendor => $tunings)
                 <div class="vendor row nowrap">
-                    <div id="{{ $vendor }}-tuning" class="tunings mb-5 col row justify-content-around align-items-baseline border-right
-                        @if($tunings[0]->type === 'truck') border-primary @else border-info @endif">
+                    <div id="{{ $vendor }}-tuning" @class([
+                            'tunings mb-5 col row justify-content-around align-items-baseline border-right',
+                            'border-primary' => $tunings[0]->type === 'truck',
+                            'border-info' => $tunings[0]->type === 'trailer',
+                        ])>
                         @foreach($tunings as $tuning)
                             <div class="card-wrapper col-12 col-md-6 my-2">
                                 <div class="card card-dark text-shadow-m p-0">
@@ -63,8 +70,10 @@
                             </div>
                         @endforeach
                     </div>
-                    <h3 class="@if($tunings[0]->type === 'truck') text-primary @else text-info @endif text-center col-auto"
-                        style="writing-mode: vertical-lr">{{ $tunings[0]->type === 'truck' ? $vendor : 'Прицеп' }}</h3>
+                    <h3 @class(['text-center col-auto',
+                            'text-primary' => $tunings[0]->type === 'truck',
+                            'text-info' => $tunings[0]->type === 'trailer',
+                        ]) style="writing-mode: vertical-lr">{{ $tunings[0]->type === 'truck' ? $vendor : 'Прицеп' }}</h3>
                 </div>
             @endforeach
         @else

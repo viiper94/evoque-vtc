@@ -39,7 +39,7 @@
                 </div>
             </div>
         @endif
-        <div class="carousel-item @if(!$public_convoy) active @endif">
+        <div @class(['carousel-item', 'active' => !$public_convoy])>
             <img src="/assets/img/carousel/0.jpg" class="d-block">
             <div class="carousel-caption text-shadow">
                 <h1 class="display-3">Мы - EVOQUE</h1>

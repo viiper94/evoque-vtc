@@ -45,10 +45,10 @@
                                 $old_ats = $stat->getStage($stat->ats_distance_total, 'ats');
                                 $new_ats = $stat->getStage($stat->ats_distance + $stat->ats_bonus + $stat->ats_distance_total, 'ats');
                             @endphp
-                            <td @if($old_ets2 !== $new_ets2) class="text-success font-weight-bold" @endif>
+                            <td @class(['text-success font-weight-bold' => $old_ets2 !== $new_ets2])>
                                 {{ $old_ets2 }} <i class="fas fa-arrow-right"></i> {{ $new_ets2 }}
                             </td>
-                            <td @if($old_ats !== $new_ats) class="text-success font-weight-bold" @endif>
+                            <td @class(['text-success font-weight-bold' => $old_ats !== $new_ats])>
                                 {{ $old_ats }} <i class="fas fa-arrow-right"></i> {{ $new_ats }}
                             </td>
                         </tr>

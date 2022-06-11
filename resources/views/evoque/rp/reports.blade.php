@@ -28,20 +28,15 @@
         <div class="rp-reports pt-3 pb-5 row justify-content-around align-items-baseline">
             @if(count($reports) > 0)
                 @foreach($reports as $report)
-                    <div class="card card-dark col-12 col-md-auto text-shadow-m m-3 p-0
-                        @if($report->status === 2) border-danger
-                        @elseif($report->status === 1) border-success
-                        @else border-primary @endif">
+                    <div class="card card-dark col-12 col-md-auto text-shadow-m m-3 p-0 {{ \App\Enums\Status::from($report->status)->colorClass('border-') }}">
                         <div class="card-header row mx-0">
                             <div class="col row rp-title">
                                 <h5 class="mb-0">
-                                    @if($report->status == '0')
-                                        <i class="fas fa-arrow-alt-circle-up text-warning"></i>
-                                    @elseif($report->status == '1')
-                                        <i class="fas fa-check-circle text-success"></i>
-                                    @elseif($report->status == '2')
-                                        <i class="fas fa-times-circle text-danger"></i>
-                                    @endif
+                                    <i @class(['fas',
+                                            'fa-arrow-alt-circle-up text-warning' => $report->status === 0,
+                                            'fa-check-circle text-success' => $report->status === 1,
+                                            'fa-times-circle text-danger' => $report->status === 2,
+                                        ])></i>
                                     @can('decline', $report)
                                         <a href="{{ route('evoque.rp.reports.view', $report->id) }}">
                                             @endcan

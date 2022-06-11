@@ -25,7 +25,7 @@
                         <label for="lead_id">Ведущий</label>
                         <select class="form-control" id="lead_id" name="lead_id" required>
                             @foreach($members as $member)
-                                <option value="{{ $member->id }}" @if($member->nickname === \Illuminate\Support\Facades\Auth::user()->member->nickname) selected @endif >
+                                <option value="{{ $member->id }}" @selected($member->nickname === \Illuminate\Support\Facades\Auth::user()->member->nickname)>
                                     {{ $member->nickname }}
                                 </option>
                             @endforeach

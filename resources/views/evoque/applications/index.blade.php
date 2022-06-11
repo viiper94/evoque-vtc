@@ -43,25 +43,31 @@
         @if(count($apps) > 0)
             <div class="applications pt-3 pb-5 row">
                 @foreach($apps as $app)
-                    <div class="m-3 application card card-dark text-shadow-m @if($app->status == 0) new border-primary @elseif($app->status == '1') border-success @else border-danger @endif"
-                        data-id="{{ $app->id }}">
-                        <div class="card-header mx-0 row @if($app->status == 0) @if($app->category === 1) text-warning @elseif($app->category === 5) text-danger @endif @endif">
+                    <div @class([
+                            'm-3 application card card-dark text-shadow-m',
+                            'new border-primary' => $app->status === 0,
+                            'border-success' => $app->status === 1,
+                            'border-danger' => $app->status === 2,
+                         ]) data-id="{{ $app->id }}">
+                        <div @class([
+                                 'card-header mx-0 row',
+                                 'text-warning' => $app->status === 0 && $app->category === 1,
+                                 'text-danger' => $app->status === 0 && $app->category === 5,
+                             ])>
                             <div class="col px-0 app-title position-static">
                                 <h5 class="mb-0">
-                                    @if($app->status == '0')
-                                        <i class="fas fa-arrow-alt-circle-up text-warning"></i>
-                                    @elseif($app->status == '1')
-                                        <i class="fas fa-check-circle text-success"></i>
-                                    @elseif($app->status == '2')
-                                        <i class="fas fa-times-circle text-danger"></i>
-                                    @endif
+                                    @switch($app->status)
+                                        @case(0) <i class="fas fa-arrow-alt-circle-up text-warning"></i> @break
+                                        @case(1) <i class="fas fa-check-circle text-success"></i> @break
+                                        @case(2) <i class="fas fa-times-circle text-danger"></i> @break
+                                    @endswitch
                                     Заявка на {{ $app->getCategory() }}
                                 </h5>
                             </div>
                         </div>
                         <div class="card-body">
                             <h4 class="card-title mb-0">
-                                От <span class="@if($app->status == 0)text-primary @endif ">{{ $app->category === 4 || !$app->member ? $app->old_nickname : $app->member->nickname }}</span>
+                                От <span @class(['text-primary' => $app->status === 0])">{{ $app->category === 4 || !$app->member ? $app->old_nickname : $app->member->nickname }}</span>
                             </h4>
                             @if($app->member && $app->category === 4)
                                 <p class="text-muted">Текущий ник: <b>{{ $app->member->nickname }}</b></p>
@@ -69,12 +75,12 @@
                             @switch($app->category)
                                 @case(1)
                                     <p class="mb-0 mt-3">Отпуск: </p>
-                                    <h5 @if($app->status == 0) class="text-primary" @endif>с {{ \Carbon\Carbon::parse($app->vacation_till['from'])->isoFormat('LL') }}</h5>
-                                    <h5 @if($app->status == 0) class="text-primary" @endif>по {{ \Carbon\Carbon::parse($app->vacation_till['to'])->isoFormat('LL') }}</h5>
+                                    <h5 @class(['text-primary' => $app->status === 0])>с {{ \Carbon\Carbon::parse($app->vacation_till['from'])->isoFormat('LL') }}</h5>
+                                    <h5 @class(['text-primary' => $app->status === 0])>по {{ \Carbon\Carbon::parse($app->vacation_till['to'])->isoFormat('LL') }}</h5>
                                     @break
                                 @case(2)
                                     <p class="mb-0">Желаемый номер: </p>
-                                    <h5 @if($app->status == 0) class="text-primary" @endif>EVOQUE {{ $app->new_plate_number }}
+                                    <h5 @class(['text-primary' => $app->status === 0])>EVOQUE {{ $app->new_plate_number }}
                                         <a href="https://worldoftrucks.com/api/license_plate/eut2/germany/rear/evoque%20{{ $app->new_plate_number }}" target="_blank">
                                             <i class="fas fa-cogs"></i>
                                         </a>
@@ -85,7 +91,7 @@
                                     @break
                                 @case(4)
                                     <p class="mb-0">Новый никнейм: </p>
-                                    <h5 @if($app->status == 0) class="text-primary" @endif>{{ $app->new_nickname }}</h5>
+                                    <h5 @class(['text-primary' => $app->status === 0])>{{ $app->new_nickname }}</h5>
                                     @break
                                 @case(5) @break
                             @endswitch

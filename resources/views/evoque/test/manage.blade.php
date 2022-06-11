@@ -64,7 +64,7 @@
                         </div>
                         <div class="col">
                             @foreach($question->answers as $key => $answer)
-                                <p class="mb-0 @if($question->correct == $key)text-success @endif">{{ $answer }}</p>
+                                <p @class(['mb-0', 'text-success' => $question->correct == $key])>{{ $answer }}</p>
                             @endforeach
                         </div>
                     </div>

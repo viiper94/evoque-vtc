@@ -22,13 +22,16 @@
         @if(count($applications) > 0)
             <div class="applications pt-3 pb-5 row">
                 @foreach($applications as $application)
-                    <div class="m-3 card card-dark text-shadow-m @if($application->status == 0) border-primary new @elseif($application->status == 1) border-success @elseif($application->status == 2) border-danger @endif">
+                    <div @class(['m-3 card card-dark text-shadow-m',
+                            'new' => !$application->isClosed(),
+                            \App\Enums\Status::from($application->status)->colorClass('border-')
+                        ])>
                         <div class="card-header row mx-0 pr-2">
                             <div class="col px-0 app-title position-static">
                                 <h5 class="mb-0">
-                                    @if($application->status == '1')
+                                    @if($application->status === 1)
                                         <i class="fas fa-check-circle text-success"></i>
-                                    @elseif($application->status == '2')
+                                    @elseif($application->status === 2)
                                         <i class="fas fa-times-circle text-danger"></i>
                                     @endif
                                     @can('view', $application)
@@ -40,11 +43,6 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <p>
-                                <a class="mr-3" href="{{ $application->vk_link }}" target="_blank"><i class="fab fa-vk"></i></a>
-                                <a class="mr-3" href="{{ $application->steam_link }}" target="_blank"><i class="fab fa-steam"></i></a>
-                                <a class="mr-3" href="{{ $application->tmp_link }}" target="_blank"><i class="fas fa-truck-pickup"></i></a>
-                            </p>
                             <p class="card-text">
                                 Ник в игре: <b>{{ $application->nickname }}</b><br>
                                 Возраст: <b>{{ $application->age }} {{ trans_choice('год|года|лет', $application->age) }}</b><br>
@@ -55,27 +53,18 @@
                             </p>
                             <p class="mb-0">Discord:
                                 @if($application->discord_name)
-                                    <span class="text-success">{{ $application->discord_name }}</span>
+                                    <b @class(['text-success' => !$application->isClosed()])>{{ $application->discord_name }}</b>
                                 @elseif($application->have_ts3)
-                                    <span class="text-success">Есть</span>
+                                    <b @class(['text-success' => !$application->isClosed()])>Есть</b>
                                 @else
-                                    <span class="text-danger">Нет</span>
+                                    <b @class(['text-danger' => !$application->isClosed()])>Нет</b>
                                 @endif
                             </p>
-                            @if($application->have_mic)
-                                <p class="mb-0">Микрофон:
-                                    @if($application->have_mic)
-                                        <span class="text-success">Есть</span>
-                                    @else
-                                        <span class="text-danger">Нет</span>
-                                    @endif
-                                </p>
-                            @endif
                             <p>Наличие ATS:
                                 @if($application->have_ats)
-                                    <span class="text-success">Есть</span>
+                                    <b @class(['text-success' => !$application->isClosed()])>Есть</b>
                                 @else
-                                    <span class="text-danger">Нет</span>
+                                    <b @class(['text-danger' => !$application->isClosed()])>Нет</b>
                                 @endif
                             </p>
                             @if(isset($application->referral))

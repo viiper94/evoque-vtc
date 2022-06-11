@@ -46,11 +46,11 @@
             </div>
             <h4>2. Выберите игру</h4>
             <div class="custom-control custom-radio">
-                <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" required>
+                <input type="radio" id="game-ets2" name="game" class="custom-control-input" value="ets2" @selected(old('game') === 'ets2') required>
                 <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" required>
+                <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" @selected(old('game') === 'ats') required>
                 <label class="custom-control-label" for="game-ats">American Truck Simulator</label>
             </div>
             <h4 class="mt-4">3. Дополнительная информация</h4>

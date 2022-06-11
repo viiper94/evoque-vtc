@@ -26,9 +26,9 @@
                         </div>
                         <div class="custom-control custom-checkbox mb-2">
                             @can('fire', $member)
-                                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($member->visible) checked @endif>
+                                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @checked($member->visible)>
                             @else
-                                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @if($member->visible) checked @endif disabled>
+                                <input type="checkbox" class="custom-control-input" id="visible" name="visible" @checked($member->visible) disabled>
                                 <input type="hidden" name="visible" value="{{ $member->visible ? 'on' : 'off' }}">
                             @endcan
                             <label class="custom-control-label" for="visible">Виден на сайте</label>
@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="custom-control custom-checkbox mb-2">
-                            <input type="checkbox" class="custom-control-input" id="sort" name="sort" @if($member->sort) checked @endif>
+                            <input type="checkbox" class="custom-control-input" id="sort" name="sort" @checked($member->sort)>
                             <label class="custom-control-label" for="sort">@lang('attributes.sort')</label>
                         </div>
                         <div class="form-group">
@@ -69,7 +69,7 @@
                             <select multiple class="form-control" id="roles" name="roles[]" size="14">
                                 @foreach($roles as $role)
                                     @if($role->id !== 0)
-                                        <option value="{{ $role->id }}" @if($member->role->contains($role->id)) selected @endif @cannot('updateRoles', $member) disabled @endcannot>{{ $role->title }}</option>
+                                        <option value="{{ $role->id }}" @selected($member->role->contains($role->id)) @cannot('updateRoles', $member) disabled @endcannot>{{ $role->title }}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -231,7 +231,7 @@
                                                 <input type="hidden" name="permissions[{{ $item }}]" value="off" disabled>
                                                 <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="permissions[{{ $item }}]" value="on"
                                                        {{ $member->getMemberPermissionCheckboxState($item, $rolePermissions) }}>
-                                                <label class="custom-control-label  @if($loop->index === 0) text-danger @endif" for="{{ $item }}">
+                                                <label @class(['custom-control-label', 'text-danger' => $loop->index === 0]) for="{{ $item }}">
                                                     @lang('roles.'.$item)
                                                 </label>
                                                 <a class="reset-permission text-primary">Сбросить</a>

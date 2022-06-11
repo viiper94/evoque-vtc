@@ -67,7 +67,10 @@
                                 </td>
                                 @if($member->isTrainee())
                                     <td colspan="2">Испытательный срок до {{ $member->trainee_until?->format('d.m') ?? $member->join_date->addDays(10)->format('d.m') }}</td>
-                                    <td class="member-convoys @if($member->isTraineeExpired() && $member->trainee_convoys < 4) text-danger font-weight-bold @endif">
+                                    <td @class([
+                                            'member-convoys',
+                                            'text-danger font-weight-bold'=> $member->isTraineeExpired() && $member->trainee_convoys < 4
+                                        ])>
                                         @can('setActivity', \App\Member::class)
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}"
                                                data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
@@ -98,7 +101,10 @@
                                         @endcan
                                         <b class="number">{{ $member->money ?? '∞' }}</b>
                                     </td>
-                                    <td class="member-convoys @if(\Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0 && !$member->onVacation(true))text-danger font-weight-bold @endif">
+                                    <td @class([
+                                            'member-convoys',
+                                            'text-danger font-weight-bold' => \Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0 && !$member->onVacation(true)
+                                        ])>
                                         @can('setActivity', \App\Member::class)
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">
                                                 <i class="fas fa-plus"></i>

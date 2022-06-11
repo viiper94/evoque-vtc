@@ -54,9 +54,9 @@
                                 <h5 class="card-header text-primary">@lang('roles.'.$category)</h5>
                                 <div class="card-body">
                                     @foreach($perms as $item)
-                                        <div class="custom-control custom-checkbox @if($loop->index === 0) mb-4 @endif">
-                                            <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="{{ $item }}" @if($role->$item)checked @endif>
-                                            <label class="custom-control-label  @if($loop->index === 0) text-danger @endif" for="{{ $item }}">@lang('roles.'.$item)</label>
+                                        <div @class(['custom-control custom-checkbox', 'mb-4' => $loop->index === 0])>
+                                            <input type="checkbox" class="custom-control-input" id="{{ $item }}" name="{{ $item }}" @checked($role->$item)>
+                                            <label @class(['custom-control-label', 'text-danger' => $loop->index === 0]) for="{{ $item }}">@lang('roles.'.$item)</label>
                                         </div>
                                     @endforeach
                                 </div>

@@ -78,14 +78,14 @@
                                                     </td>
                                                     <td>
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="2" @if($tab->lead_id === $member->id) checked @endif>
+                                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="2" @checked($tab->lead_id === $member->id)>
                                                             <label class="custom-control-label" for="scores-{{ $member->id }}-2">2 балла</label>
                                                         </div>
                                                     </td>
                                                 @else
                                                     <td colspan="3">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="0" @if($tab->lead_id === $member->id) checked @endif>
+                                                            <input type="radio" class="custom-control-input" id="scores-{{ $member->id }}-2" name="scores[{{ $member->id }}]" value="0" @checked($tab->lead_id === $member->id)>
                                                             <label class="custom-control-label" for="scores-{{ $member->id }}-2">Посещение</label>
                                                         </div>
                                                     </td>
@@ -100,7 +100,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" id="lead-1-{{ $member->id }}" data-member="{{ $member->id }}" name="lead" value="{{ $member->id }},1" @if($tab->lead_id === $member->id) checked @endif>
+                                                            <input type="radio" class="custom-control-input" id="lead-1-{{ $member->id }}" data-member="{{ $member->id }}" name="lead" value="{{ $member->id }},1" @checked($tab->lead_id === $member->id)>
                                                             <label class="custom-control-label" for="lead-1-{{ $member->id }}">1 эвик</label>
                                                         </div>
                                                     </td>
@@ -110,7 +110,7 @@
                                                 @else
                                                     <td colspan="2">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input" id="lead-{{ $member->id }}" data-member="{{ $member->id }}" name="lead" value="{{ $member->id }},0" @if($tab->lead_id === $member->id) checked @endif>
+                                                            <input type="radio" class="custom-control-input" id="lead-{{ $member->id }}" data-member="{{ $member->id }}" name="lead" value="{{ $member->id }},0" @checked($tab->lead_id === $member->id)>
                                                             <label class="custom-control-label" for="lead-{{ $member->id }}">Ведущий</label>
                                                         </div>
                                                     </td>

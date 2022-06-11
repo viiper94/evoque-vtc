@@ -39,7 +39,7 @@
                                                 </button>
                                                 <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
                                                     @can('edit', \App\Tuning::class)
-                                                        <a href="{{ route('evoque.tuning.edit', $tuning->id) }}" class="dropdown-item"><i class="fas fa-pen"></i> Редактировать</a>
+                                                        <a href="{{ route('evoque.tuning.edit', [$tuning->type, $tuning->id]) }}" class="dropdown-item"><i class="fas fa-pen"></i> Редактировать</a>
                                                     @endcan
                                                     @can('delete', \App\Tuning::class)
                                                         <a href="{{ route('evoque.tuning.delete', $tuning->id) }}"

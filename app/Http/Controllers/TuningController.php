@@ -14,27 +14,27 @@ class TuningController extends Controller{
         ]);
     }
 
-    public function edit(Request $request, $id = null){
+    public function edit(Request $request, String $type = 'truck', Int $id = null){
         $this->authorize('edit', Tuning::class);
-        $tuning = $id ? Tuning::find($id) : new Tuning();
+        $tuning = $id ? Tuning::findOrFail($id) : new Tuning();
+        if(!$id) $tuning->type = $type;
         if($request->post()){
             $this->validate($request, [
                 'vendor' => 'required_if:type,truck|string|nullable',
                 'model' => 'required|string',
                 'game' => 'required|string',
-                'truck-image' => 'required_without:trailer-image|image|max:3000',
-                'trailer-image' => 'required_without:truck-image|image|max:3000',
+                'image' => 'image|max:3000',
                 'description' => 'nullable|string',
                 'type' => 'required|string',
             ]);
             $tuning->fill($request->post());
             $tuning->visible = $request->input('visible') === 'on' ? 1 : 0;
             $tuning->description = htmlentities(trim($request->input('description')));
-            if($image = $request->file('truck-image') ?? $request->file('trailer-image')){
+            if($request->file('image')){
                 if($tuning->image && is_file(public_path('images/tuning/'.$tuning->image))){
                     unlink(public_path('images/tuning/'.$tuning->image));
                 }
-                $tuning->image = $tuning->saveImage($image);
+                $tuning->image = $tuning->saveImage($request->file('image'));
             }
             return $tuning->save() ?
                 redirect()->route('evoque.tuning')->with(['success' => 'Тюнинг успешно '.($id ? 'изменён!' : 'создан!')]) :
@@ -42,8 +42,7 @@ class TuningController extends Controller{
         }
         $tuning->visible = true;
         return view('evoque.tuning.edit', [
-            'tuning' => $tuning,
-            'type' => $tuning->type ? [$tuning->type] : ['truck', 'trailer']
+            'tuning' => $tuning
         ]);
     }
 

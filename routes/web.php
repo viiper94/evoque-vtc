@@ -131,8 +131,8 @@ Route::get('/evoque/test/sort/{id}/{direction}', 'TestController@sort')->name('e
 Route::any('/evoque/test/{question_number?}', 'TestController@index')->name('evoque.test');
 
 Route::any('/evoque/tuning/load', 'TuningController@load');
-Route::any('/evoque/tuning/add', 'TuningController@edit')->name('evoque.tuning.add');
-Route::any('/evoque/tuning/edit/{id}', 'TuningController@edit')->name('evoque.tuning.edit');
+Route::any('/evoque/tuning/add/{type?}', 'TuningController@edit')->name('evoque.tuning.add');
+Route::any('/evoque/tuning/edit/{type}/{id}', 'TuningController@edit')->name('evoque.tuning.edit');
 Route::get('/evoque/tuning/delete/{id}', 'TuningController@delete')->name('evoque.tuning.delete');
 Route::get('/evoque/tuning/{q?}', 'TuningController@index')->name('evoque.tuning');
 

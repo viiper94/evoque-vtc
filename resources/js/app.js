@@ -175,15 +175,6 @@ $(document).ready(function(){
         if ((file = this.files[0])) {
             img = new Image();
             img.src = _URL.createObjectURL(file);
-            img.onload = function () {
-                if(this.width > 3000 || this.height > 3000){
-                    alert('Превышен лимит размера файла. Максимум 3000x3000px!');
-                    $(this).val('');
-                    $(this).parent().find('label').html('Виберите изображение');
-                    $(this).parent().parent().find('img').removeAttr('src');
-                    return false;
-                }
-            };
         }
         readURL(this, '#' + $(this).attr('id') + '-preview');
     });

@@ -8,18 +8,13 @@ class RpReport extends Model{
 
     protected $casts = [
         'images' => 'array',
+        'status' => 'integer',
     ];
 
     protected $fillable = [
         'note',
         'game',
         'comment'
-    ];
-
-    public $statuses = [
-        '0' => 'Новый',
-        '1' => 'Принят',
-        '2' => 'Отклонён'
     ];
 
     public function member(){

@@ -19,11 +19,8 @@ class Tab extends Model{
         'lead_id',
         'comment',
     ];
-
-    public $statuses = [
-        '0' => 'Новый',
-        '1' => 'Принят',
-        '2' => 'Отклонён'
+    protected $casts = [
+        'status' => 'integer',
     ];
 
     public function member(){

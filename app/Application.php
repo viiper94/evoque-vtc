@@ -16,6 +16,7 @@ class Application extends Model{
     protected $casts = [
         'new_rp_profile' => 'array',
         'vacation_till' => 'array',
+        'status' => 'integer',
     ];
 
     public $categories = [
@@ -24,13 +25,6 @@ class Application extends Model{
         '3' => 'смену уровня в рейтинговых перевозках',
         '4' => 'смену ника',
         '5' => 'увольнение',
-    ];
-
-    public $statuses = [
-        '0' => 'Новая',
-        '1' => 'Принята',
-        '2' => 'Отклонена',
-        '3' => 'В работе',
     ];
 
     public function member(){

@@ -12,6 +12,7 @@ class Recruitment extends Model{
         'have_mic' => 'boolean',
         'have_ts3' => 'boolean',
         'have_ats' => 'boolean',
+        'status' => 'integer',
     ];
 
     protected $dates = [
@@ -29,13 +30,6 @@ class Recruitment extends Model{
         'tmp_link',
         'have_mic',
         'discord_name',
-    ];
-
-    public $statuses = [
-        '0' => 'Новая',
-        '1' => 'Принята',
-        '2' => 'Отклонена',
-        '3' => 'В работе',
     ];
 
     public function comments(){

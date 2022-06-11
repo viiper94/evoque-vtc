@@ -95,9 +95,9 @@ class RpController extends Controller{
         $report = new RpReport();
         if($request->post()){
             $this->validate($request, [
-                'start-screen' => 'required|image|dimensions:max_width=3000,max_height=3000|max:6000',
-                'finish-screen' => 'required|image|dimensions:max_width=3000,max_height=3000|max:6000',
-                'new-id-screen' => 'nullable|image|dimensions:max_width=3000,max_height=3000|max:6000',
+                'start-screen' => 'required|image|max:6000',
+                'finish-screen' => 'required|image|max:6000',
+                'new-id-screen' => 'nullable|image|max:6000',
                 'game' => 'required|string',
                 'note' => 'nullable|string'
             ]);

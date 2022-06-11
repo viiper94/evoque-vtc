@@ -4,7 +4,7 @@
         <i class="fas fa-times"></i>
     </button>
 </div>
-<div class="modal-body row justify-content-between">
+<div class="modal-body row m-0">
     @switch($app->category)
         @case(1)
             <div class="col-12">
@@ -77,7 +77,7 @@
                         @can('deleteComment', [$app, $comment])
                             <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                 <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
-                                        data-toggle="dropdown" aria-haspopup="tr?ue" aria-expanded="false">
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v"></i>
                                 </button>
                                 <div class="dropdown-menu text-shadow-m" aria-labelledby="dropdownMenuButton">
@@ -97,7 +97,7 @@
             @can('addComment', $app)
                 <form method="post" action="{{ route('evoque.applications.comment', $app->id) }}">
                     @csrf
-                    <div class="new-comment mt-5">
+                    <div class="new-comment mt-3">
                         <textarea class="form-control simple-mde" id="comment" name="comment">{{ $app->comment }}</textarea>
                         @if($errors->has('comment'))
                             <small class="form-text">{{ $errors->first('comment') }}</small>
@@ -113,9 +113,9 @@
                 </script>
             @endcan
         </div>
-    @endif
+    </div>
+@endif
 
-</div>
 @can('claim', $app)
     <div class="modal-footer justify-content-start">
         <form method="post" action="{{ route('evoque.applications.accept', $app->id) }}">

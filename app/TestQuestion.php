@@ -25,7 +25,7 @@ class TestQuestion extends Model{
         parent::__construct($attributes);
     }
 
-    public function isLast(){
+    public function isLast() :bool{
         $next = TestQuestion::whereSort($this->sort + 1)->first();
         return !$next;
     }
@@ -43,9 +43,9 @@ class TestQuestion extends Model{
         return true;
     }
 
-    public static function getBtnClass($question, $i, $results){
+    public function getBtnClass($i, $results) :string{
         $class = 'btn-';
-        if($i !== $question->sort){
+        if($i !== $this->sort){
             $class .= 'outline-';
         }
         if($results->has($i)){
@@ -54,6 +54,20 @@ class TestQuestion extends Model{
             $class .= 'secondary';
         }
         return $class;
+    }
+
+    public function isAnswered($results) :bool{
+        return isset($results[$this->sort]);
+    }
+
+    public function isCorrectAnswer($results, $key) :bool{
+        if($this->isAnswered($results)) return $this->correct === $key;
+        else return false;
+    }
+
+    public function isWrongAnswer($results, $key) :bool{
+        if($this->isAnswered($results)) return !$results[$this->sort]?->correct && $results[$this->sort]?->answer == $key;
+        else return false;
     }
 
 }

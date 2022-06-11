@@ -2,7 +2,7 @@
     <div class="btn-group btn-group-sm flex-wrap" role="group">
         @for($i = 1; $i <= $count; $i++)
             <a href="{{ route('evoque.test', $i) }}"
-               class="question-number btn {{ \App\TestQuestion::getBtnClass($question, $i, $results) }}">{{ $i }}
+               class="question-number btn {{ $question->getBtnClass($i, $results) }}">{{ $i }}
             </a>
         @endfor
     </div>
@@ -21,7 +21,7 @@
             @endforeach
         </div>
         <input type="hidden" name="sort" value="{{ $question->sort }}">
-        @if(isset($results[$question_number]) && $results[$question_number])
+        @if($question->isAnswered($results))
             <a class="btn btn-lg btn-primary my-5" href="{{ route('evoque.test', $question->isLast() ? null : $question->sort + 1) }}">Далее <i class="fas fa-angle-right"></i></a>
         @else
             <button type="submit" class="btn btn-lg btn-primary my-5">Далее <i class="fas fa-angle-right"></i></button>

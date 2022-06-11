@@ -60,6 +60,8 @@ return [
     'booking' => 'Бронь',
     'type' => 'Тип',
     'links' => 'Ссылки',
+    'links_truckersmp' => 'Ссылка на мероприятие в TruckersMP',
+    'links_trucksbook' => 'Ссылка на мероприятие в TrucksBook',
     'truck_with_tuning' => 'Официальный тюнинг тягача',
     'trailer_with_tuning' => 'Официальный тюнинг прицепа',
 

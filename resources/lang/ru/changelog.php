@@ -1,6 +1,8 @@
 <?php
 
 $array = [
+    'TruckersMP' => 'TruckersMP',
+    'TrucksBook' => 'TrucksBook',
     'from' => 'С',
     'to' => 'До'
 ];

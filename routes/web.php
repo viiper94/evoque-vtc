@@ -42,6 +42,7 @@ Route::get('/gallery/delete/{id}', 'GalleryController@delete')->name('gallery.de
 
 Route::any('/evoque/profile/edit', 'ProfileController@edit')->name('evoque.profile.edit');
 Route::get('/evoque/profile/updateAvatar', 'ProfileController@updateAvatar')->name('evoque.profile.updateAvatar');
+Route::get('/evoque/profile/{id?}/resetAvatar', 'ProfileController@resetAvatar')->name('evoque.profile.resetAvatar');
 Route::post('/evoque/profile/checkPlate', 'ProfileController@checkPlate')->name('evoque.profile.checkPlate');
 Route::get('/evoque/profile/dump', 'UsersController@dumpData');
 Route::get('/evoque/profile/{id?}', 'ProfileController@profile')->name('evoque.profile');

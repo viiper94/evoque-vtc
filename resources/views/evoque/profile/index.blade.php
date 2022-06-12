@@ -29,6 +29,12 @@
                         </div>
                     @endif
                 @endcan
+                @can('resetAvatar', $user)
+                    <div class="mt-2">
+                        <a href="{{ route('evoque.profile.resetAvatar', $user->id) }}" class="btn btn-sm btn-outline-info"
+                           onclick="return confirm('Сбросить аватар этого юзера?')"><i class="fas fa-redo"></i> Сбросить аватар</a>
+                    </div>
+                @endcan
             </div>
             <div class="col-sm-6 info pl-sm-5 pt-3 pb-3 text-center text-sm-left">
                 <h1 class="text-primary">{{ $user->name }}</h1>

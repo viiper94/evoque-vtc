@@ -92,6 +92,7 @@ class Role extends Model{
             'manage_users',
             'view_users',
             'set_user_as_member',
+            'reset_user_avatar'
         ],
         'gallery' => [
             'manage_gallery',

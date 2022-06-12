@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Member;
-use App\Role;
 use App\Rules\NullPlate;
 use App\Rules\UniquePlate;
 use App\Steam;
 use App\User;
 use Carbon\Carbon;
+use \Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
-use Relisoft\Steam\Src\Api\Player;
 
 class ProfileController extends Controller{
 
@@ -70,6 +67,15 @@ class ProfileController extends Controller{
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
+    public function resetAvatar(Request $request, $id){
+        $user = User::findOrFail($id);
+        $this->authorize('resetAvatar', $user);
+        $user->image = URL::to('/').'/images/users/evoque.jpg';
+        return  $user->save() ?
+            redirect()->back()->with(['success' => 'Аватар успешно сброшен!']) :
+            redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 
     public function checkPlate(Request $request){

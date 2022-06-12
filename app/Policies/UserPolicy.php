@@ -25,4 +25,16 @@ class UserPolicy extends Policy{
         return false;
     }
 
+    public function resetAvatar(User $user, User $object){
+        if(!$object->member || $object->member->topRole() >= $user->member?->topRole() || $user->member?->topRole() === 1){
+            if(is_bool($result = $this->checkMemberPermission($user, 'manage_users', 'reset_user_avatar'))){
+                return $result;
+            }
+            foreach($user->member->role as $role){
+                if($role->manage_users || $role->reset_user_avatar) return true;
+            }
+        }
+        return false;
+    }
+
 }

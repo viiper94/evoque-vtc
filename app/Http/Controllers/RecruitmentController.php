@@ -62,9 +62,9 @@ class RecruitmentController extends Controller{
         $application->status = $request->input('accept');
         return $application->save() ?
             redirect()->route('evoque.recruitments')->with(['success' => match($application->status){
-                '1' => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.',
-                '2' => 'Зявка отклонена!',
-                '3' => 'Зявка сохранена!'
+                1 => 'Зявка принята! Для завершения процесса добавления сотрудника на сайт, ему надо вступить в ВТК на сайте TruckersMP.',
+                2 => 'Зявка отклонена!',
+                3 => 'Зявка сохранена!'
             }]) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }

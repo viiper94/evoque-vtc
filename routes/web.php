@@ -27,7 +27,7 @@ Route::get('/privacy-policy', 'Controller@privacy')->name('privacy');
 Route::get('/terms-of-use', 'Controller@terms')->name('terms');
 Route::get('/members', 'Controller@members')->name('members');
 
-Route::any('/kb/add', 'KbController@add')->name('kb.add');
+Route::any('/kb/add', 'KbController@edit')->name('kb.add');
 Route::any('/kb/edit/{id}', 'KbController@edit')->name('kb.edit');
 Route::get('/kb/delete/{id}', 'KbController@delete')->name('kb.delete');
 Route::get('/kb/sort/{id}/{direction}', 'KbController@sort')->name('kb.sort');

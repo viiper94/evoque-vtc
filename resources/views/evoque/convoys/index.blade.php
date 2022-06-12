@@ -55,13 +55,13 @@
                             'card card-dark text-shadow-m col px-0 my-1 text-center text-md-left',
                             'past' => !$convoy->isUpcoming(),
                             'border-primary' => $convoy->isUpcoming() && $convoy->public,
-                            'border-danger' => $convoy->isUpcoming() && \Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class) && !$convoy->isFulfilled(),
+                            'border-danger' => $convoy->isUpcoming() && \App\User::orCan(['update'], \App\Convoy::class) && !$convoy->isFulfilled(),
                             'border-info' => $convoy->isUpcoming() && !$convoy->visible,
                         ])>
                             <div class="card-header row mx-0" id="convoy-{{ $convoy->id }}-header" data-toggle="collapse" data-target="#convoy-{{ $convoy->id }}"
                                  aria-expanded="false" aria-controls="{{ $convoy->id }}">
                                 <h5 class="text-center col">
-                                    @if(!$convoy->isFulfilled() && \Illuminate\Support\Facades\Auth::user()->can('update', \App\Convoy::class))
+                                    @if(!$convoy->isFulfilled() && \App\User::orCan(['update'], \App\Convoy::class))
                                         <a href="{{ route('evoque.admin.convoy.edit', $convoy->id) }}">
                                             {{ $convoy->title }}
                                         </a>

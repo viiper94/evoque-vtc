@@ -39,8 +39,7 @@
                         <a class="nav-link" href="{{ route('members') }}">Команда</a>
                     </li>
                     <li class="nav-item">
-                        @if(\Illuminate\Support\Facades\Auth::user()?->member
-                            && \Illuminate\Support\Facades\Auth::user()?->can('do', \App\TestResult::class))
+                        @if(\App\User::orCan('do', \App\TestResult::class))
                             <a class="nav-link" href="{{ route('evoque.test') }}">Тест на знание ВТК</a>
                         @else
                             <a class="nav-link" href="https://truckersmp.com/reports/create" target="_blank">Жалоба на водителя</a>

@@ -152,8 +152,7 @@
                                             </a>
                                         @endcan
                                     @endisset
-                                    @if(\Illuminate\Support\Facades\Auth::user()->can('update', \App\Member::class) ||
-                                            \Illuminate\Support\Facades\Auth::user()->can('updateRpStats', \App\Member::class))
+                                    @if(\App\User::orCan(['update', 'updateRpStats'], \App\Member::class))
                                         <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><i class="fas fa-user-edit"></i></a>
                                     @endcan
                                 </td>

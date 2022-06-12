@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use OwenIt\Auditing\Models\Audit;
 
 class User extends Authenticatable
@@ -69,6 +70,28 @@ class User extends Authenticatable
                 $user->delete();
             }
         }
+    }
+
+    public static function andCan(Array|String $abilities, $argument) :bool{
+        is_array($abilities) ? : $abilities = [$abilities];
+        if(Auth::guest()) return false;
+        foreach($abilities as $ability){
+            if(Auth::user()?->cant($ability, $argument)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static function orCan(Array|String $abilities, $argument) :bool{
+        is_array($abilities) ? : $abilities = [$abilities];
+        if(Auth::guest()) return false;
+        foreach($abilities as $ability){
+            if(Auth::user()?->can($ability, $argument)){
+                return true;
+            }
+        }
+        return false;
     }
 
 }

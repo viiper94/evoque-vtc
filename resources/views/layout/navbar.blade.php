@@ -107,7 +107,7 @@
                                 @endcan
                             </div>
                         </li>
-                        @if(\Illuminate\Support\Facades\Auth::user()->can('view', \App\Role::class) || \Illuminate\Support\Facades\Auth::user()->can('view', \App\User::class))
+                        @if(\App\User::orCan('view', \App\Role::class) || \App\User::orCan('view', \App\User::class))
                             <li @class(['nav-item dropdown', 'active' => Request::is('evoque/admin*')])>
                                 <a class="nav-link dropdown-toggle" id="adminDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Управление</a>
                                 <div class="dropdown-menu" aria-labelledby="adminDropdown">

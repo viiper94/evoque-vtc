@@ -35,8 +35,7 @@
             <div @class(['gallery-image col-7 col-md-auto d-block p-0 m-2 text-shadow-m rounded',
                         'hidden-photo border-danger' => !$photo->visible
                     ]) style="background-image: url('/images/gallery/{{ $photo->image_thumb }}')" data-toggle="modal" data-target="#gallery-modal" data-frame="{{ $loop->index }}">
-                @if(\Illuminate\Support\Facades\Auth::user()?->can('toggle', \App\Gallery::class) ||
-                    \Illuminate\Support\Facades\Auth::user()?->can('delete', \App\Gallery::class))
+                @if(\App\User::orCan(['toggle', 'delete'], \App\Gallery::class))
                     <div class="dropdown dropdown-dark col-auto px-0 pt-2 dropleft text-right">
                         <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

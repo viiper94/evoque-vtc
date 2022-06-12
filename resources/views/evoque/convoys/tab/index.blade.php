@@ -36,9 +36,7 @@
                                 @endcan
                             </h5>
                         </div>
-                        @if(\Illuminate\Support\Facades\Auth::user()->can('update', $tab) ||
-                                \Illuminate\Support\Facades\Auth::user()->can('claim', $tab) ||
-                                \Illuminate\Support\Facades\Auth::user()->can('delete', \App\Tab::class))
+                        @if(\App\User::orCan(['update', 'claim', 'delete'], $tab))
                             <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                 <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

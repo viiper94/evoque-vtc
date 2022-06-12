@@ -37,8 +37,7 @@
                                             <h5 class="mb-0">{{ $tuning->vendor }} {{ $tuning->model }}</h5>
                                         </div>
                                         <h5 class="col-auto text-md-right text-muted mb-0">{{ strtoupper($tuning->game) }}</h5>
-                                        @if(\Illuminate\Support\Facades\Auth::user()->can('edit', \App\Tuning::class) ||
-                                                    \Illuminate\Support\Facades\Auth::user()->can('delete', \App\Tuning::class))
+                                        @if(\App\User::orCan(['edit', 'delete'], \App\Tuning::class))
                                             <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                                 <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

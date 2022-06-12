@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Member;
 use App\Role;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +37,7 @@ class MembersController extends Controller{
     }
 
     public function edit(Request $request, $id){
-        if(Auth::user()?->cant('update', Member::class) && Auth::user()?->cant('updateRpStats', Member::class)) abort(403);
+        if(!User::orCan(['update', 'updateRpStats'], Member::class)) abort(403);
         if($request->post()){
             $this->validate($request, [
                 'nickname' => 'required|string',

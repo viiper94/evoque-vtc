@@ -51,8 +51,7 @@
                                 </h5>
                             </div>
                             <h5 class="col-auto text-md-right text-muted mb-0">{{ strtoupper($report->game) }}</h5>
-                            @if(\Illuminate\Support\Facades\Auth::user()->can('decline', $report) ||
-                                        \Illuminate\Support\Facades\Auth::user()->can('delete', $report))
+                            @if(\App\User::orCan(['decline', 'delete'], $report))
                                 <div class="dropdown dropdown-dark col-auto px-0 dropleft">
                                     <button class="btn dropdown-toggle no-arrow py-0" type="button" id="dropdownMenuButton"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

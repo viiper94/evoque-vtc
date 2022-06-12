@@ -116,7 +116,7 @@
                                 <td>{{ $member->on_vacation_till && !\Carbon\Carbon::parse($member->on_vacation_till['from'])->isFuture() ? \Carbon\Carbon::parse($member->on_vacation_till['to'])->isoFormat('DD.MM.Y') : '–' }}</td>
                                 <td>{{ $member->vacations }}</td>
                                 <td>
-                                    @can('update', \App\Member::class)
+                                    @can('view', \App\User::class)
                                         <a href="{{ route('evoque.profile', $member->user->id) }}" target="_blank">{{ $member->user->name }}</a>
                                     @else
                                         {{ $member->user->name }}

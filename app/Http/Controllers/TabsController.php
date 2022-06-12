@@ -22,56 +22,31 @@ class TabsController extends Controller{
         ]);
     }
 
-    public function add(Request $request){
-        $this->authorize('create', Tab::class);
-        $tab = new Tab();
-        if($request->post()){
-            $this->validate($request, [
-                'convoy_title' => 'required|string',
-                'lead_id' => 'required|numeric',
-                'date' => 'required|date',
-                'screenshot' => 'required|image|max:5000',
-                'description' => 'nullable|string',
-            ]);
-            $tab->fill($request->post());
-            $tab->description = htmlentities(trim($request->input('description')));
-            $tab->member_id = Auth::user()->member->id;
-            $tab->date = $request->input('date');
-            if($request->file('screenshot')){
-                $tab->screenshot = $tab->saveImage($request->file('screenshot'), '/images/convoys/tab/');
-            }
-            return $tab->save() ?
-                redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно подан!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        $tab->date = Carbon::today();
-        return view('evoque.convoys.tab.edit', [
-            'tab' => $tab,
-            'members' => Member::where('visible', '1')->get()
-        ]);
-    }
-
-    public function edit(Request $request, $id){
-        $tab = Tab::with(['member', 'lead'])->where('id', $id)->first();
-        $this->authorize('update', $tab);
+    public function edit(Request $request, $id = null){
+        $tab = $id ? Tab::with(['member', 'lead'])->where('id', $id)->first() : new Tab();
+        $id ? $this->authorize('update', $tab) : $this->authorize('create', Tab::class);
         if($request->post()){
             $this->validate($request, [
                 'convoy_title' => 'required|string',
                 'lead_id' => 'required|numeric',
                 'date' => 'required|date',
                 'screenshot' => 'nullable|image|max:5000',
+                'description' => 'nullable|string',
             ]);
             $tab->fill($request->post());
             $tab->description = htmlentities(trim($request->input('description')));
+            if(!$id){
+                $tab->member_id = Auth::user()->member->id;
+            }
             $tab->date = Carbon::parse($request->input('date'))->format('Y-m-d');
             if($request->file('screenshot')){
-                if(is_file(public_path('/images/convoys/tab/').$tab->screenshot)){
+                if($id && is_file(public_path('/images/convoys/tab/').$tab->screenshot)){
                     unlink(public_path('/images/convoys/tab/').$tab->screenshot);
                 }
                 $tab->screenshot = $tab->saveImage($request->file('screenshot'), '/images/convoys/tab/');
             }
             return $tab->save() ?
-                redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно отредактирован!']) :
+                redirect()->route('evoque.convoys.tab')->with(['success' => 'Скрин TAB успешно '.($id ? 'отредактирован!' : 'подан!')]) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.convoys.tab.edit', [

@@ -58,11 +58,11 @@ Route::any('/evoque/member/restore/{id}', 'MembersController@restore')->name('ev
 Route::any('/evoque/member/editPermissions/{id}', 'MembersController@editPermissions')->name('evoque.admin.members.editPermissions');
 Route::any('/evoque/member/changelog/{id}', 'MembersController@changelog')->name('evoque.admin.members.changelog');
 
-Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');
+Route::any('/evoque/rules/add', 'RulesController@edit')->name('evoque.rules.add');
 Route::get('/evoque/rules/changelog/{id}', 'RulesController@changelog')->name('evoque.rules.changelog');
 Route::any('/evoque/rules/edit/{id}', 'RulesController@edit')->name('evoque.rules.edit');
 Route::get('/evoque/rules/delete/{id}', 'RulesController@delete')->name('evoque.rules.delete');
-Route::any('/evoque/rules/add', 'RulesController@add')->name('evoque.rules.add');
+Route::get('/evoque/rules/{type?}', 'RulesController@index')->name('evoque.rules');
 
 Route::any('/evoque/rp/rewards/edit/{id?}', 'RpRewardController@edit')->name('evoque.rp.rewards.edit');
 Route::get('/evoque/rp/rewards/delete/{id?}', 'RpRewardController@delete')->name('evoque.rp.rewards.delete');
@@ -95,10 +95,10 @@ Route::any('/evoque/applications/fire', 'ApplicationsController@fire')->name('ev
 Route::any('/evoque/applications', 'ApplicationsController@app')->name('evoque.applications');
 
 Route::get('/evoque/admin/roles', 'RolesController@roles')->name('evoque.admin.roles');
+Route::any('/evoque/admin/roles/add', 'RolesController@edit')->name('evoque.admin.roles.add');
 Route::any('/evoque/admin/roles/edit/{id}', 'RolesController@edit')->name('evoque.admin.roles.edit');
 Route::any('/evoque/admin/roles/editPermissions/{id}', 'RolesController@editPermissions')->name('evoque.admin.roles.editPermissions');
 Route::get('/evoque/admin/roles/delete/{id}', 'RolesController@delete')->name('evoque.admin.roles.delete');
-Route::any('/evoque/admin/roles/add', 'RolesController@add')->name('evoque.admin.roles.add');
 
 Route::get('/evoque/admin/users', 'UsersController@index')->name('evoque.admin.users');
 Route::get('/evoque/admin/users/member/{id}', 'UsersController@setAsMember')->name('evoque.admin.users.setAsMember');
@@ -113,7 +113,7 @@ Route::get('/evoque/convoys/delete/{id}', 'ConvoysController@delete')->name('evo
 Route::any('/evoque/convoys/edit/{id}/{booking?}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');
 
 Route::get('/evoque/convoys/tab', 'TabsController@index')->name('evoque.convoys.tab');
-Route::any('/evoque/convoys/tab/add', 'TabsController@add')->name('evoque.convoys.tab.add');
+Route::any('/evoque/convoys/tab/add', 'TabsController@edit')->name('evoque.convoys.tab.add');
 Route::any('/evoque/convoys/tab/edit/{id}', 'TabsController@edit')->name('evoque.convoys.tab.edit');
 Route::any('/evoque/convoys/tab/accept/{id}', 'TabsController@accept')->name('evoque.admin.convoys.tab.accept');
 Route::get('/evoque/convoys/tab/delete/{id}', 'TabsController@delete')->name('evoque.admin.convoys.tab.delete');
@@ -122,13 +122,14 @@ Route::get('/evoque/convoys/plans', 'PlansController@plans')->name('evoque.convo
 Route::post('/evoque/convoys/plans', 'PlansController@quickBook');
 Route::any('/evoque/convoys/plans/book/{offset}/{type}', 'PlansController@book')->name('evoque.convoys.plans.book');
 
-Route::any('/evoque/test/add', 'TestController@add')->name('evoque.test.add');
+Route::any('/evoque/test/manage/add', 'TestController@edit')->name('evoque.test.add');
 Route::any('/evoque/test/results', 'TestController@results')->name('evoque.test.results');
 Route::any('/evoque/test/results/{id}', 'TestController@memberResults')->name('evoque.test.results.member');
 Route::any('/evoque/test/results/delete/{id}', 'TestController@deleteResults')->name('evoque.test.results.delete');
-Route::any('/evoque/test/edit/{id?}', 'TestController@edit')->name('evoque.test.edit');
-Route::get('/evoque/test/delete/{id}', 'TestController@delete')->name('evoque.test.delete');
-Route::get('/evoque/test/sort/{id}/{direction}', 'TestController@sort')->name('evoque.test.sort');
+Route::any('/evoque/test/manage', 'TestController@manage')->name('evoque.test.manage');
+Route::any('/evoque/test/manage/edit/{id}', 'TestController@edit')->name('evoque.test.edit');
+Route::get('/evoque/test/manage/delete/{id}', 'TestController@delete')->name('evoque.test.delete');
+Route::get('/evoque/test/manage/sort/{id}/{direction}', 'TestController@sort')->name('evoque.test.sort');
 Route::any('/evoque/test/{question_number?}', 'TestController@index')->name('evoque.test');
 
 Route::any('/evoque/tuning/load', 'TuningController@load');

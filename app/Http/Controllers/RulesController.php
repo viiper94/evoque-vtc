@@ -18,45 +18,24 @@ class RulesController extends Controller{
         ]);
     }
 
-    public function edit(Request $request, $id){
-        $this->authorize('update', Rules::class);
+    public function edit(Request $request, $id = null){
+        $this->authorize($id ? 'update' : 'create', Rules::class);
+        $paragraph = $id ? Rules::findOrFail($id) : new Rules();
         if($request->post()){
             $this->validate($request, [
                 'paragraph' => 'required|numeric',
                 'title' => 'required|string',
                 'text' => 'required',
             ]);
-            $p = Rules::findOrFail($id);
-            $p->fill($request->post());
-            $p->public = $request->input('public') == 'true';
-            return $p->save() ?
-                redirect()->route('rules', $p->public ? 'public' : 'private')->with(['success' => 'Параграф правил успешно изменён!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        $paragraph = Rules::find($id);
-        return view('evoque.rules.edit', [
-            'rules' => $paragraph,
-            'changelog' => $paragraph->audits()->with(['user', 'user.member'])->orderBy('created_at', 'desc')->get()
-        ]);
-    }
-
-    public function add(Request $request){
-        $this->authorize('create', Rules::class);
-        if($request->post()){
-            $this->validate($request, [
-                'paragraph' => 'required|numeric',
-                'title' => 'required|string',
-                'text' => 'required',
-            ]);
-            $p = new Rules();
-            $p->fill($request->post());
-            $p->public = $request->input('public') == 'true';
-            return $p->save() ?
-                redirect()->route('rules', $p->public ? 'public' : 'private')->with(['success' => 'Параграф правил успешно создан!']) :
+            $paragraph->fill($request->post());
+            $paragraph->public = $request->input('public') == 'true';
+            return $paragraph->save() ?
+                redirect()->route('rules', $paragraph->public ? 'public' : 'private')
+                    ->with(['success' => 'Параграф правил успешно '.($id ? 'изменён!' : 'создан!')]) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.rules.edit', [
-            'rules' => new Rules()
+            'rules' => $paragraph
         ]);
     }
 

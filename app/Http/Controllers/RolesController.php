@@ -33,31 +33,9 @@ class RolesController extends Controller{
         return redirect()->back();
     }
 
-    public function edit(Request $request, $id){
-        $role = Role::findOrFail($id);
-        if($request->post() && $id !== false){
-            $this->authorize('update', Role::class);
-            $this->validate($request, [
-                'title' => 'required|string',
-                'group' => 'required|string',
-                'min_scores' => 'nullable|numeric',
-                'max_scores' => 'nullable|numeric',
-            ]);
-            $role->fill($request->post());
-            $role->visible = $request->input('visible') == 'on';
-            return $role->save() ?
-                redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно отредактирована!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
-        }
-        return view('evoque.roles.edit', [
-            'role' => $role,
-            'roles_list' => Role::where('visible', '1')->get()
-        ]);
-    }
-
-    public function add(Request $request){
-        $this->authorize('create', Role::class);
-        $role = new Role;
+    public function edit(Request $request, $id = null){
+        $this->authorize(($id !== null ? 'update' : 'create'), Role::class);
+        $role = $id !== null ? Role::findOrFail($id) : new Role();
         if($request->post()){
             $this->validate($request, [
                 'title' => 'required|string',
@@ -67,12 +45,10 @@ class RolesController extends Controller{
             ]);
             $role->fill($request->post());
             $role->visible = $request->input('visible') == 'on';
-
             return $role->save() ?
-                redirect()->route('evoque.admin.roles', $role->id)->with(['success' => 'Роль успешно добавлена!']) :
+                redirect()->route('evoque.admin.roles')->with(['success' => 'Роль успешно '.($id !== false ? 'отредактирована!' : 'добавлена!')]) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
-        $role->visible = true;
         return view('evoque.roles.edit', [
             'role' => $role
         ]);

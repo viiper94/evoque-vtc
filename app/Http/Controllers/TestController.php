@@ -36,8 +36,16 @@ class TestController extends Controller{
         ]);
     }
 
-    public function add(Request $request){
-        $this->authorize('create', TestQuestion::class);
+    public function manage(){
+        $this->authorize('accessToEditPage', TestQuestion::class);
+        return view('evoque.test.manage', [
+            'questions' => TestQuestion::orderBy('sort', 'asc')->get()
+        ]);
+    }
+
+    public function edit(Request $request, $id = null){
+        $this->authorize($id ? 'update' : 'create', TestQuestion::class);
+        $question = $id ? TestQuestion::findOrFail($id) : new TestQuestion();
         if($request->post()){
             $this->validate($request, [
                 'question' => 'string|required',
@@ -45,41 +53,14 @@ class TestController extends Controller{
                 'answers.*' => 'string|required',
                 'correct' => 'numeric|required',
             ]);
-            $question = new TestQuestion();
             $question->fill($request->post());
-            $question->sort = intval($this->getLatestSortId(TestQuestion::class)) + 1;
-            return $question->save() ?
-                redirect()->route('evoque.test.edit')->with(['success' => 'Вопрос успешно добавлен!']) :
+            if(!$id) $question->sort = intval($this->getLatestSortId(TestQuestion::class)) + 1;
+            return $question->save() && TestResult::whereQuestionId($id)->delete() !== false ?
+                redirect()->route('evoque.test.manage')->with(['success' => 'Вопрос успешно '.($id ? 'изменён!' : 'добавлен!')]) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.test.edit', [
-            'question' => new TestQuestion()
-        ]);
-    }
-
-    public function edit(Request $request, $id = null){
-        if($id){
-            $this->authorize('update', TestQuestion::class);
-            $question = TestQuestion::findOrFail($id);
-            if($request->post()){
-                $this->validate($request, [
-                    'question' => 'string|required',
-                    'answers' => 'array|required|max:4|min:2',
-                    'answers.*' => 'string|required',
-                    'correct' => 'numeric|required',
-                ]);
-                $question->fill($request->post());
-                return $question->save() && TestResult::whereQuestionId($id)->delete() !== false ?
-                    redirect()->route('evoque.test.edit')->with(['success' => 'Вопрос успешно изменён!']) :
-                    redirect()->back()->withErrors(['Возникла ошибка =(']);
-            }
-            return view('evoque.test.edit', [
-                'question' => $question
-            ]);
-        }
-        $this->authorize('accessToEditPage', TestQuestion::class);
-        return view('evoque.test.manage', [
-            'questions' => TestQuestion::orderBy('sort', 'asc')->get()
+            'question' => $question
         ]);
     }
 
@@ -99,7 +80,7 @@ class TestController extends Controller{
         $this->authorize('delete', TestQuestion::class);
         $question = TestQuestion::findOrFail($id);
         return $question->delete() && TestResult::whereQuestionId($id)->delete() !== false && TestQuestion::resort() ?
-            redirect()->route('evoque.test.edit')->with(['success' => 'Вопрос успешно удалён!']) :
+            redirect()->back()->with(['success' => 'Вопрос успешно удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
     }
 

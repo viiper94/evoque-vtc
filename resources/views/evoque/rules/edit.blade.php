@@ -46,7 +46,7 @@
             </div>
             <div class="form-group">
                 <label for="text">Текст параграфа</label>
-                <textarea name="text" id="text" required>{{ old('text') ?? $rules->text }}</textarea>
+                <textarea name="text" id="text">{{ old('text') ?? $rules->text }}</textarea>
                 @if($errors->has('text'))
                     <small class="form-text">{{ $errors->first('text') }}</small>
                 @endif

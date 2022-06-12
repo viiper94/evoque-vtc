@@ -34,7 +34,7 @@ class KbController extends Controller{
             $this->validate($request, [
                 'title' => 'required|string',
                 'category' => 'required|string',
-                'article' => 'required|string|no_vk',
+                'article' => ['required', 'string', new NoVk()],
             ]);
             $kb = new Kb();
             $kb->fill($request->post());

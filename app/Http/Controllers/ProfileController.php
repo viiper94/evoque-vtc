@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Member;
 use App\Role;
+use App\Rules\NullPlate;
+use App\Rules\UniquePlate;
 use App\Steam;
 use App\User;
 use Carbon\Carbon;
@@ -36,7 +38,7 @@ class ProfileController extends Controller{
                 'country' => 'required|string',
                 'email' => 'nullable|email',
                 'birth_date' => 'required|date_format:d.m.Y',
-                'plate' => 'uniquePlate|nullPlate|not_in:000,00,0',
+                'plate' => [new UniquePlate(), new NullPlate(), 'not_in:000,00,0'],
             ]);
             $user = Auth::user();
             $user->fill($request->post());

@@ -13,7 +13,7 @@
             <i class="fas fa-poll"></i> К тесту
         </a>
         @can('accessToEditPage', \App\TestQuestion::class)
-            <a href="{{ route('evoque.test.edit') }}" class="btn btn-sm btn-outline-info">
+            <a href="{{ route('evoque.test.manage') }}" class="btn btn-sm btn-outline-info">
                 <i class="fas fa-edit"></i> Редактировать вопросы
             </a>
         @endcan

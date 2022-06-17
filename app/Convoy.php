@@ -129,7 +129,8 @@ class Convoy extends Model implements Auditable{
             'DLC Wyoming',
             'DLC Heavy Cargo Paсk',
             'DLC Forest Machinery',
-            'DLC Volvo Construction Equipment'
+            'DLC Volvo Construction Equipment',
+            'DLC Lode King & Prestige Trailers'
         ]
     ];
 

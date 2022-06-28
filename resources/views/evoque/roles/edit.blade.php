@@ -41,7 +41,7 @@
                 <button type="submit" class="btn btn-outline-warning">Сохранить</button>
             </form>
         @endcan
-        @if($role->id)
+        @if(!is_null($role->id))
             @can('updatePermissions', $role)
                 <hr class="border-primary py-3">
                 <form action="{{ route('evoque.admin.roles.editPermissions', $role->id) }}" method="post">

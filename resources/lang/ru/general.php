@@ -3,6 +3,7 @@
 return [
 
     'ets2' => 'Euro Truck Simulator 2',
+    'promods' => 'ProMods',
     'ats' => 'American Truck Simulator',
 
     'vtc_evoque' => 'ВТК EVOQUE',

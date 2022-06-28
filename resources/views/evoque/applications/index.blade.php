@@ -78,14 +78,6 @@
                                     <h5 @class(['text-primary' => $app->status === 0])>с {{ \Carbon\Carbon::parse($app->vacation_till['from'])->isoFormat('LL') }}</h5>
                                     <h5 @class(['text-primary' => $app->status === 0])>по {{ \Carbon\Carbon::parse($app->vacation_till['to'])->isoFormat('LL') }}</h5>
                                     @break
-                                @case(2)
-                                    <p class="mb-0">Желаемый номер: </p>
-                                    <h5 @class(['text-primary' => $app->status === 0])>EVOQUE {{ $app->new_plate_number }}
-                                        <a href="https://worldoftrucks.com/api/license_plate/eut2/germany/rear/evoque%20{{ $app->new_plate_number }}" target="_blank">
-                                            <i class="fas fa-cogs"></i>
-                                        </a>
-                                    </h5>
-                                @break
                                 @case(3)
                                     <p class="mb-0">Новый уровень в {{ strtoupper($app->new_rp_profile[0]) }}
                                         @if(isset($app->new_rp_profile[2]))

@@ -87,7 +87,12 @@
                                     </h5>
                                 @break
                                 @case(3)
-                                    <p class="mb-0">Новый уровень в {{ strtoupper($app->new_rp_profile[0]) }}: <b>{{ $app->new_rp_profile[1] }}</b></p>
+                                    <p class="mb-0">Новый уровень в {{ strtoupper($app->new_rp_profile[0]) }}
+                                        @if(isset($app->new_rp_profile[2]))
+                                            (@lang('general.'.$app->new_rp_profile[2]))
+                                        @endif
+                                        : <b>{{ $app->new_rp_profile[1] }}</b>
+                                    </p>
                                     @break
                                 @case(4)
                                     <p class="mb-0">Новый никнейм: </p>
@@ -133,7 +138,7 @@
     @can('view', $app)
         <!-- Application Modal -->
         <div class="modal fade" id="appModal" tabindex="-1" aria-labelledby="appModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content modal-content-dark text-shadow-m"></div>
             </div>
         </div>

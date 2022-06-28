@@ -16,7 +16,11 @@
         @case(3)
             <div class="col-md-4">
                 <h4 class="mb-0">Игра</h4>
-                <h1 class="text-primary">{{ strtoupper($app->new_rp_profile[0]) }}</h1>
+                <h1 class="text-primary">{{ strtoupper($app->new_rp_profile[0]) }}
+                    @if(isset($app->new_rp_profile[2]))
+                        (@lang('general.'.$app->new_rp_profile[2]))
+                    @endif
+                </h1>
             </div>
             <div class="col-md-4 text-center">
                 <h4 class="mb-0">Новый уровень</h4>
@@ -24,7 +28,7 @@
             </div>
             <div class="col-md-4 text-right">
                 <h4 class="mb-0">Текущий уровень</h4>
-                <h1 class="text-primary">{{ $rp->level }}</h1>
+                <h1 class="text-primary">{{ isset($app->new_rp_profile[2]) ? $rp->level_promods : $rp->level }}</h1>
             </div>
             @break
         @case(4)

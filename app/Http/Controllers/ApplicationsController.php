@@ -77,7 +77,11 @@ class ApplicationsController extends Controller{
                 case 3:
                     foreach($application->member->stats as $stat){
                         if($stat->game == $application->new_rp_profile[0]){
-                            $stat->level = $application->new_rp_profile[1];
+                            if(isset($application->new_rp_profile[2])){
+                                $stat->level_promods = $application->new_rp_profile[1];
+                            }else{
+                                $stat->level = $application->new_rp_profile[1];
+                            }
                             $result = $stat->save();
                         }
                     }
@@ -140,7 +144,7 @@ class ApplicationsController extends Controller{
         $app = new Application();
         $app->member_id = Auth::user()->member->id;
         $app->old_nickname = Auth::user()->member->nickname;
-        $app->new_rp_profile = [$request->input('game'), $request->input('new_rp_profile')];
+        $app->new_rp_profile = [explode('_', $request->input('game'))[0], $request->input('new_rp_profile'), explode('_', $request->input('game'))[1] ?? null];
         $app->category = 3;
         $app->reason = $request->input('reason');
         return $app->save() ?

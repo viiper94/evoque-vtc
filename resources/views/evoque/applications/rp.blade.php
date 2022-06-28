@@ -16,6 +16,10 @@
                         <label class="custom-control-label" for="game-ets2">Euro Truck Simulator 2</label>
                     </div>
                     <div class="custom-control custom-radio">
+                        <input type="radio" id="game-ets2_promods" name="game" class="custom-control-input" value="ets2_promods" required>
+                        <label class="custom-control-label" for="game-ets2_promods">ProMods ETS2</label>
+                    </div>
+                    <div class="custom-control custom-radio">
                         <input type="radio" id="game-ats" name="game" class="custom-control-input" value="ats" required>
                         <label class="custom-control-label" for="game-ats">American Truck Simulator</label>
                     </div>

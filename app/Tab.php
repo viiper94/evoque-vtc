@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -38,7 +39,7 @@ class Tab extends Model{
     }
 
     public function getStatus(){
-        return $this->statuses[$this->status];
+        return Status::from($this->status)->name;
     }
 
 }

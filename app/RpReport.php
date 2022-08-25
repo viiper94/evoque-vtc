@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
 
 class RpReport extends Model{
@@ -32,7 +33,7 @@ class RpReport extends Model{
     }
 
     public function getStatus(){
-        return $this->statuses[$this->status];
+        return Status::from($this->status)->name;
     }
 
 }

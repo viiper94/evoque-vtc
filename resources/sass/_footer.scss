@@ -28,7 +28,7 @@ footer{
             width: 250px;
             @media (min-width: map-get($grid-breakpoints, 'md')){
                 padding-right: 1rem;
-                justify-content: space-between;
+                justify-content: space-around;
             }
             a{
                 i{

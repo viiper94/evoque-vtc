@@ -6,9 +6,7 @@
                 <div class="contacts-links mx-0">
                     <a href="https://vk.com/evoquevtc" target="_blank" class=""><i class="fab fa-vk"></i></a>
                     <a href="https://discord.gg/Gj53a8d" target="_blank" class=""><i class="fab fa-discord"></i></a>
-{{--                    <a href="ts3server://evoque.ts3srv.ru" target="_blank" class=""><i class="fab fa-teamspeak"></i></a>--}}
                     <a href="https://truckersmp.com/vtc/11682" target="_blank" class=""><i class="fas fa-truck-pickup"></i></a>
-                    <a href="https://trucksbook.eu/company/11661" target="_blank" class=""><i class="fontello icon-trucksbook"></i></a>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 col-xl-auto mb-md-3">

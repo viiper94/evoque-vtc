@@ -125,7 +125,7 @@ $(document).ready(function(){
 
     $('.reset-btn').click(function(){
         let button = $(this);
-        if(confirm('Обнулить посещаемость за неделю?')) {
+        if(confirm('Обнулить посещаемость за 10 дней?')) {
             $.ajax({
                 cache: false,
                 dataType: 'json',

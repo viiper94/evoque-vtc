@@ -92,7 +92,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="rpDropdown">
                                 <a class="dropdown-item" href="{{ route('evoque.rp') }}">Статистика</a>
-                                <a class="dropdown-item" href="{{ route('evoque.rp.weekly') }}">Итоги за неделю</a>
+                                <a class="dropdown-item" href="{{ route('evoque.rp.weekly') }}">Итоги за 10 дней</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('evoque.rp.reports') }}">
                                     Отчёты

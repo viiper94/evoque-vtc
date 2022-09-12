@@ -8,7 +8,7 @@
 
     <div class="container pt-5 members-table">
         @include('layout.alert')
-        <h2 class="mt-3 text-center text-primary">Итоги рейтинговых перевозок за неделю</h2>
+        <h2 class="mt-3 text-center text-primary">Итоги рейтинговых перевозок за 10 дней</h2>
         <div class="table-responsive">
             <table class="table table-dark table-bordered table-hover">
                 <thead>
@@ -61,7 +61,7 @@
             <div class="row justify-content-center mb-5">
                 <a href="{{ route('evoque.rp.results.create') }}" class="btn btn-outline-warning ml-3 mt-3 btn-lg"
                     onclick="return confirm('Вы уверены?')">
-                    <i class="fas fa-sync-alt"></i> Обнулить результаты за неделю
+                    <i class="fas fa-sync-alt"></i> Обнулить результаты за 10 дней
                 </a>
             </div>
         @endcan

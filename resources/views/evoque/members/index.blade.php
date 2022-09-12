@@ -29,7 +29,7 @@
                             <i class="fas fa-sync-alt"></i>
                         </a>
                     @endcan
-                    <span>Конвоев<br>за неделю</span>
+                    <span>Конвоев<br>за 10 дней</span>
                 </th>
                 <th scope="col">В отпуске<br>до</th>
                 <th scope="col">Исп.<br>отпусков</th>
@@ -189,7 +189,7 @@
                             <i class="fas fa-sync-alt"></i>
                         </a>
                     @endcan
-                    <span>Конвоев<br>за неделю</span>
+                    <span>Конвоев<br>за 10 дней</span>
                 </th>
                 <th scope="col">В отпуске<br>до</th>
                 <th scope="col">Исп.<br>отпусков</th>
@@ -204,7 +204,7 @@
     </div>
     <div class="row justify-content-center mb-5 mr-0">
         <a href="{{ route('evoque.members.weekly') }}" class="btn btn-outline-success ml-3 mt-3 btn-lg">
-            <i class="fas fa-trophy"></i> Итоги за неделю
+            <i class="fas fa-trophy"></i> Итоги за 10 дней
         </a>
     </div>
 </div>

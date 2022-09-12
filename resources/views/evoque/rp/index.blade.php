@@ -27,7 +27,7 @@
                             <tr>
                                 <th colspan="5"></th>
                                 <th colspan="3" class="border-left-5 border-right-5">Всего</th>
-                                <th colspan="4">За неделю</th>
+                                <th colspan="4">За 10 дней</th>
                             </tr>
                             <tr>
                                 <th>#</th>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="row justify-content-center mb-5 mr-0">
                     <a href="{{ route('evoque.rp.weekly') }}" class="btn btn-outline-success ml-3 mt-3 btn-lg">
-                        <i class="fas fa-trophy"></i> Итоги за неделю
+                        <i class="fas fa-trophy"></i> Итоги за 10 дней
                     </a>
                 </div>
                 <h3 class="text-center text-primary mt-3">

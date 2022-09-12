@@ -1,20 +1,20 @@
 @extends('layout.index')
 
 @section('title')
-    Статистика посещений за неделю | @lang('general.vtc_evoque')
+    Статистика посещений за 10 дней | @lang('general.vtc_evoque')
 @endsection
 
 @section('content')
 
     <div class="container-fluid pt-5 members-table">
-        <h2 class="mt-3 text-center text-primary">Статистика посещений за неделю</h2>
+        <h2 class="mt-3 text-center text-primary">Статистика посещений за 10 дней</h2>
         <div class="table-responsive mb-5" data-fl-scrolls>
             <table class="table table-sm table-dark table-bordered table-hover">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Ник в игре</th>
-                    <th scope="col">Конвоев<br>за неделю</th>
+                    <th scope="col">Конвоев<br>за 10 дней</th>
                     <th scope="col">@lang('attributes.scores')</th>
                     <th scope="col">@lang('attributes.money')</th>
                     <th scope="col">В отпуске<br>до</th>
@@ -93,7 +93,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Ник в игре</th>
-                    <th scope="col">Конвоев<br>за неделю</th>
+                    <th scope="col">Конвоев<br>за 10 дней</th>
                     <th scope="col">@lang('attributes.scores')</th>
                     <th scope="col">@lang('attributes.money')</th>
                     <th scope="col">В отпуске<br>до</th>

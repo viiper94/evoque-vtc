@@ -103,7 +103,7 @@
                                     </td>
                                     <td @class([
                                             'member-convoys',
-                                            'text-danger font-weight-bold' => \Carbon\Carbon::now()->format('N') == 7 && $member->convoys === 0 && !$member->onVacation(true)
+                                            'text-danger font-weight-bold' => $member->hasLowActivity() && !$member->onVacation(true)
                                         ])>
                                         @can('setActivity', \App\Member::class)
                                             <a class="add-btn text-shadow" data-amount="1" data-target="посещение" data-id="{{ $member->id }}" data-nickname="{{ $member->nickname }}" data-token="{{ csrf_token() }}">

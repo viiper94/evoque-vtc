@@ -193,4 +193,23 @@ class Member extends Model implements Auditable{
         return $string;
     }
 
+    public function hasLowActivity() :bool{
+        if($this->onVacation(true)) return false;
+        $todaysDay = (int) Carbon::now()->format('j');
+//        $todaysDay = (int) Carbon::parse('2022-10-30')->format('j');
+        $endOfMonth = Carbon::now()->endOfMonth();
+//        $endOfMonth = Carbon::parse('2022-10-30')->endOfMonth();
+        $days = [
+            0 => [9, 19, (int) $endOfMonth->subDay()->format('j')],
+            1 => [10, 20, (int) $endOfMonth->format('j')]
+        ];
+        if(in_array($todaysDay, $days[0])){
+            return $this->convoys === 0;
+        }
+        if(in_array($todaysDay, Arr::flatten($days))){
+            return $this->convoys <= 1;
+        }
+        return false;
+    }
+
 }

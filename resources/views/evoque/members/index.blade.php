@@ -161,7 +161,11 @@
                                     @if($member->isTrainee())
                                         <img src="/assets/img/u.png">
                                     @elseif($member->plate)
-                                        <img src="/images/plates/{{ $member->plate }}.png">
+                                        @if($loop->parent->parent->first)
+                                            <img src="/images/plates/{{ $member->plate }}y.png">
+                                        @else
+                                            <img src="/images/plates/{{ $member->plate }}.png">
+                                        @endif
                                     @else
                                         <img src="/images/plates/empty.png">
                                     @endif

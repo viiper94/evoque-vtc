@@ -98,8 +98,12 @@ class Member extends Model implements Auditable{
         if($this->on_vacation_till){
             $start = Carbon::parse($this->on_vacation_till['from']);
             $end = Carbon::parse($this->on_vacation_till['to']);
-            if($offset && $start->isPast() && $end->endOfWeek()->isFuture()) return true;
             if(!$offset && $start->isPast() && $end->isFuture()) return true;
+
+            $periodIndex = intdiv($end->format('j')-1, 10);
+            $periodEnd = $periodIndex >= 2 ? $end->endOfMonth() : Carbon::createFromDate(day: ($periodIndex+1)*10);
+
+            if($offset && $start->isPast() && $periodEnd->isFuture()) return true;
         }
         return false;
     }

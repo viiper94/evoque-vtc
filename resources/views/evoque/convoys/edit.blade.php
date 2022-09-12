@@ -84,32 +84,32 @@
                     @endif
                 </div>
             </div>
-            @if(!$booking)
-                <div class="links">
-                    <h3 class="text-primary mt-3">@lang('attributes.links')</h3>
-                    <h5>Для нашего открытого конвоя</h5>
-                    <div class="custom-control custom-checkbox mb-2">
-                        <input type="checkbox" class="custom-control-input" id="links[public]" name="links[public]" @if(isset($convoy->links['public']) || old('public') === 'on') checked @endif>
-                        <label class="custom-control-label" for="links[public]">Показывать ссылки</label>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="links[TruckersMP]">@lang('attributes.links_truckersmp')</label>
-                            <input type="text" class="form-control" id="links[TruckersMP]" name="links[TruckersMP]"
-                                   value="{{ old('links[TruckersMP]') ?? ($convoy->links['TruckersMP'] ?? '') }}" placeholder="Подписаться на TruckersMP">
-                        </div>
-                        <div class="form-group col">
-                            <label for="links[TrucksBook]">@lang('attributes.links_trucksbook')</label>
-                            <input type="text" class="form-control" id="links[TrucksBook]" name="links[TrucksBook]"
-                                   value="{{ old('links[TrucksBook]') ?? ($convoy->links['TrucksBook'] ?? '') }}" placeholder="Подписаться на TrucksBook">
-                        </div>
+{{--            @if(!$booking)--}}
+{{--                <div class="links">--}}
+{{--                    <h3 class="text-primary mt-3">@lang('attributes.links')</h3>--}}
+{{--                    <h5>Для нашего открытого конвоя</h5>--}}
+{{--                    <div class="custom-control custom-checkbox mb-2">--}}
+{{--                        <input type="checkbox" class="custom-control-input" id="links[public]" name="links[public]" @if(isset($convoy->links['public']) || old('public') === 'on') checked @endif>--}}
+{{--                        <label class="custom-control-label" for="links[public]">Показывать ссылки</label>--}}
+{{--                    </div>--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="form-group col">--}}
+{{--                            <label for="links[TruckersMP]">@lang('attributes.links_truckersmp')</label>--}}
+{{--                            <input type="text" class="form-control" id="links[TruckersMP]" name="links[TruckersMP]"--}}
+{{--                                   value="{{ old('links[TruckersMP]') ?? ($convoy->links['TruckersMP'] ?? '') }}" placeholder="Подписаться на TruckersMP">--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group col">--}}
+{{--                            <label for="links[TrucksBook]">@lang('attributes.links_trucksbook')</label>--}}
+{{--                            <input type="text" class="form-control" id="links[TrucksBook]" name="links[TrucksBook]"--}}
+{{--                                   value="{{ old('links[TrucksBook]') ?? ($convoy->links['TrucksBook'] ?? '') }}" placeholder="Подписаться на TrucksBook">--}}
+{{--                        </div>--}}
 {{--                        <div class="form-group">--}}
 {{--                            <label for="links[VTCWorld]">Ссылка на мероприятие в VTCWorld</label>--}}
 {{--                            <input type="text" class="form-control" id="links[VTCWorld]" name="links[VTCWorld]" value="{{ old('links[VTCWorld]') ?? ($convoy->links['VTCWorld'] ?? '') }}">--}}
 {{--                        </div>--}}
-                    </div>
-                </div>
-            @endif
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            @endif--}}
             <h3 class="text-primary">@lang('attributes.route')</h3>
             <div class="row">
                 <div class="col-md-5 route-images">

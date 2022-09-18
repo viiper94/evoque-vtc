@@ -1,4 +1,7 @@
 import $ from "jquery"
+import 'jquery-ui/ui/core';
+import 'jquery-ui/ui/widgets/mouse';
+import 'jquery-ui/ui/widgets/sortable';
 import bsCustomFileInput from 'bs-custom-file-input'
 import Litepicker from 'litepicker'
 import 'litepicker/dist/plugins/mobilefriendly';
@@ -7,6 +10,7 @@ window.$ = window.jQuery = require('jquery');
 
 import "bootstrap/dist/js/bootstrap.min";
 import "./cookie.notice";
+import {value} from "lodash/seq";
 
 $(document).ready(function(){
 
@@ -378,6 +382,47 @@ $(document).ready(function(){
                 $icon.show();
             }
         });
+    });
+
+    $('.sortable').sortable({
+        handle: '.sort-handle',
+        stop: function(event, ui){
+            let data = {};
+            $.map($(this).find('tr'), function(el){
+                data[$(el).index()] = $(el).data('id');
+            });
+            $.ajax({
+                type: 'POST',
+                data: {
+                    '_token' : $('[name=_token]').val(),
+                    'data': data
+                },
+                beforeSend : function(){
+                    $('.sort-th').html('Сортировка...').append(getPreloaderHtml())
+                },
+                success : function(response){
+                    $('.spinner-border').remove();
+                    $('.sort-th').html('Пересортировано')
+                },
+            });
+        }
+    });
+
+    $('.dlc-list .edit-dlc-list-btn').click(function(){
+        if($(this).data('id')){
+            console.log($(this).data('steam'));
+            $('#addDLCLabel').text('Редактирование DLC');
+            $('#dlc-modal #id').val($(this).data('id'));
+            $('#dlc-modal #title').val($(this).data('title'));
+            $('#dlc-modal #steam_link').val($(this).data('steam'));
+            $('#dlc-modal #game').val($(this).data('game'));
+        }else{
+            $('#addDLCLabel').text('Добавление DLC');
+            $('#dlc-modal #id').val('');
+            $('#dlc-modal #title').val('');
+            $('#dlc-modal #steam_link').val('');
+        }
+        $('#dlc-modal').modal('show');
     });
 
 });

@@ -187,9 +187,8 @@
                         <select class="form-control" size="22" name="dlc[]" id="dlc" multiple>
                             @foreach($dlc as $game => $list)
                                 <optgroup label="{{ strtoupper($game) }}">
-                                    @php $dlc_list = old('dlc') ?? $convoy->dlc @endphp
                                     @foreach($list as $item)
-                                        <option value="{{ $item }}" @selected(is_array($dlc_list) && in_array($item, $dlc_list))>{{ $item }}</option>
+                                        <option value="{{ $item->id }}" @selected((is_array(old('dlc')) && in_array($item->id, old('dlc'))) || $convoy->DLC->contains($item->id))>{{ $item->title }}</option>
                                     @endforeach
                                     <option disabled></option>
                                 </optgroup>

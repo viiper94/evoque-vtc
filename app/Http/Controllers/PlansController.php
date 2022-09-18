@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Convoy;
+use App\DLC;
 use App\Member;
 use App\Tuning;
 use Carbon\Carbon;
@@ -112,11 +113,14 @@ class PlansController extends Controller{
             $convoy->setTypeByTime();
             $convoy->booking = true;
             $convoy->booked_by_id = Auth::user()->member->id;
-            return $convoy->save() ?
-                redirect()->route('evoque.convoys.plans')->with(['success' => $offset == 0 ?
+            if($convoy->save()){
+                $convoy->DLC()->sync($request->input('dlc'));
+                return redirect()->route('evoque.convoys.plans')->with(['success' => $offset == 0 ?
                     'Внеплановый конвой создан, не забудь продублировать регламент в чате в ВК!' :
-                    'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
+                    'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']);
+            }else{
+                return redirect()->back()->withErrors(['Возникла ошибка =(']);
+            }
         }
         $convoy->start_time = Carbon::today()->addDays($offset)->addHours($type == 0 ? 16 : ($type == 2 ? 22 : 19))->addMinutes($type == 1 ? 30 : 0);
         $servers = $convoy->defaultServers;
@@ -125,7 +129,7 @@ class PlansController extends Controller{
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => Member::where('id', Auth::user()->member->id)->get(),
-            'dlc' => $convoy->dlcList,
+            'dlc' => DLC::orderBy('sort')->get()->groupBy('game'),
             'types' => [$type => Convoy::$timesToType[$type]],
             'trucks_tuning' => Tuning::where(['type' => 'truck', 'visible' => '1'])->get()->groupBy('vendor'),
             'trailers_tuning' => Tuning::where(['type' => 'trailer', 'visible' => '1'])->get()->groupBy('vendor'),

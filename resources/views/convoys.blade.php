@@ -134,9 +134,16 @@
             </section>
         </div>
 
-        @if($convoy->dlc)
+        @if(count($convoy->DLC) > 0)
             <section>
-                <h4 class="mt-5 text-center"><i class="fas fa-exclamation-triangle text-warning"></i> Для участия требуется {{ implode(', ', $convoy->dlc) }}</h4>
+                <h4 class="mt-5 text-center"><i class="fas fa-exclamation-triangle text-warning"></i>
+                    Для участия требуется <br>
+                    <b>
+                        @foreach($convoy->DLC as $item)
+                            {{ $item->title }}@if(!$loop->last)<br>@endif
+                        @endforeach
+                    </b>
+                </h4>
             </section>
         @endif
 

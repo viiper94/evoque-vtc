@@ -21,7 +21,7 @@ class ConvoysController extends Controller{
     public function view(Request $request, $all = false){
         if(!Auth::user()?->member) abort(404);
         $list = array();
-        $convoys = Convoy::with('leadMember', 'leadMember.user', 'officialTruckTuning', 'officialTrailerTuning');
+        $convoys = Convoy::with('DLC', 'leadMember', 'leadMember.user', 'officialTruckTuning', 'officialTrailerTuning');
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
             $operator = '<';
             if(Carbon::now()->format('H') >= '21') $operator = '<=';
@@ -77,7 +77,6 @@ class ConvoysController extends Controller{
             $convoy->fill($request->post());
             $convoy->visible = $request->input('visible') === 'on' ? 1 : 0;
             $convoy->public = $request->input('public') === 'on' ? 1 : 0;
-            $convoy->dlc = $request->input('dlc') ?? [];
             $convoy->truck_public = $request->input('truck_public') === 'on' ? 1 : 0;
             $convoy->trailer_public = $request->input('trailer_public') === 'on' ? 1 : 0;
             foreach($request->files as $key => $file){
@@ -94,9 +93,12 @@ class ConvoysController extends Controller{
             $convoy->booking = !Auth::user()->can('update', Convoy::class);
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
-            return $convoy->save() ?
-                redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно '.($id ? 'отредактирован!' : 'создан!')]) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
+            if($convoy->save()){
+                $convoy->DLC()->sync($request->input('dlc'));
+                return redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно '.($id ? 'отредактирован!' : 'создан!')]);
+            }else{
+                return redirect()->back()->withErrors(['Возникла ошибка =(']);
+            }
         }
         $servers = $convoy->defaultServers;
         if(!$id){
@@ -110,7 +112,7 @@ class ConvoysController extends Controller{
             'convoy' => $convoy,
             'servers' => $servers,
             'members' => $booking ? Member::where('id', Auth::user()->member->id)->get() : Member::all(),
-            'dlc' => $convoy->dlcList,
+            'dlc' => DLC::orderBy('sort')->get()->groupBy('game'),
             'types' => $booking ? [$convoy->type => Convoy::$timesToType[$convoy->type]] : Convoy::$timesToType,
             'trucks_tuning' => Tuning::where(['type' => 'truck', 'visible' => '1'])->get()->groupBy('vendor'),
             'trailers_tuning' => Tuning::where(['type' => 'trailer', 'visible' => '1'])->get()->groupBy('vendor'),
@@ -152,12 +154,14 @@ class ConvoysController extends Controller{
             ->addField('Место финиша', $convoy->finish_city.' - '. $convoy->finish_company, true)
             ->addField('Встречаемся на сервере', $convoy->server)
             ->addField('Начало конвоя', $convoy->start_time->subMinutes(30)->format('H:i') . ' по МСК', true)
-            ->addField('Выезд с места старта', $convoy->start_time->format('H:i') . ' по МСК', true)
-            ->addField($convoy->dlc ?
-                ':warning: Для участия требуется '. implode(', ', $convoy->dlc) :
-                '| ',
-                "> *Выставив маршрут, ваша поездка будет комфортной и спокойной!*")
-            ->addField('Связь ведём через', $convoy->getCommunicationLink(), true)
+            ->addField('Выезд с места старта', $convoy->start_time->format('H:i') . ' по МСК', true);
+        $dlcs = [];
+        foreach($convoy->DLC as $item){
+            $dlcs[] = $item->title;
+        }
+        $message->addField($dlcs ? ':warning: Для участия требуется '.implode(', ', $dlcs) : '| ',
+                "> *Выставив маршрут, ваша поездка будет комфортной и спокойной!*");
+        $message->addField('Связь ведём через', $convoy->getCommunicationLink(), true)
             ->addField('Канал на сервере', 'Открытый конвой', true)
             ->addField("> *В колонне держим дистанцию не менее 70 метров по TAB и соблюдаем правила TruckersMP. Помимо рации, флуд, мат, а так же фоновая музыка запрещены и в голосовом канале Discord.*", '___');
         if(isset($convoy->truck) && $convoy->truck_public) $message->addField('Тягач', $convoy->truck);

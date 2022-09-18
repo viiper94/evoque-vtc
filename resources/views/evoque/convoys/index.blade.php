@@ -106,9 +106,9 @@
                                     </p>
                                 @endif
                                 @if($convoy->lead) <p data-toggle="tooltip" title="Ведущий"><i class="fas fa-bookmark"></i> {{ $convoy->lead }}</p> @endif
-                                @if($convoy->dlc)
+                                @if(count($convoy->DLC) > 0)
                                     <p data-toggle="tooltip" data-html="true"
-                                       title='Для участия требуется: @foreach($convoy->dlc as $item) <span class="nowrap font-weight-bold">{{ $item }}</span> @endforeach'>
+                                       title='Для участия требуется: @foreach($convoy->DLC as $item) <span class="nowrap font-weight-bold">{{ $item->title }}</span> @endforeach'>
                                         <i class="fas fa-puzzle-piece"></i> DLC
                                     </p>
                                 @endif

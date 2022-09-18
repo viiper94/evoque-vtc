@@ -181,6 +181,10 @@ class Convoy extends Model implements Auditable{
         return $href . $this->communication_link;
     }
 
+    public function DLC(){
+        return $this->belongsToMany('App\DLC', 'convoy_dlc', 'convoy_id', 'dlc_id');
+    }
+
     public function bookedBy(){
         return $this->hasOne('App\Member', 'id', 'booked_by_id');
     }

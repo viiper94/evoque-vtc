@@ -1,42 +1,42 @@
 /*!
-  * Bootstrap v4.5.2 (https://getbootstrap.com/)
-  * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Bootstrap v4.6.2 (https://getbootstrap.com/)
+  * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 
 /*!
  * 
  * litepicker.umd.js
- * Litepicker v2.0.3 (https://github.com/wakirin/Litepicker)
+ * Litepicker v2.0.12 (https://github.com/wakirin/Litepicker)
  * Package: litepicker (https://www.npmjs.com/package/litepicker)
  * License: MIT (https://github.com/wakirin/Litepicker/blob/master/LICENCE.md)
  * Copyright 2019-2021 Rinat G.
  *     
- * Hash: 87300fcc3d546fcab844
+ * Hash: 504eef9c08cb42543660
  * 
  */
 
 /*!
  * 
  * plugins/mobilefriendly.js
- * Litepicker v2.0.3 (https://github.com/wakirin/Litepicker)
+ * Litepicker v2.0.12 (https://github.com/wakirin/Litepicker)
  * Package: litepicker (https://www.npmjs.com/package/litepicker)
  * License: MIT (https://github.com/wakirin/Litepicker/blob/master/LICENCE.md)
  * Copyright 2019-2021 Rinat G.
  *     
- * Hash: 2dcde5e2a741b7bd4b19
+ * Hash: b9a648207aabe31b2912
  * 
  */
 
 /*!
- * Sizzle CSS Selector Engine v2.3.5
+ * Sizzle CSS Selector Engine v2.3.6
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2020-03-14
+ * Date: 2021-02-16
  */
 
 /*!
@@ -46,17 +46,62 @@
  */
 
 /*!
- * jQuery JavaScript Library v3.5.1
+ * jQuery JavaScript Library v3.6.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
  * https://sizzlejs.com/
  *
- * Copyright JS Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-05-04T22:49Z
+ * Date: 2022-08-26T17:52Z
+ */
+
+/*!
+ * jQuery UI :data 1.13.2
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+/*!
+ * jQuery UI Mouse 1.13.2
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+/*!
+ * jQuery UI Scroll Parent 1.13.2
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+/*!
+ * jQuery UI Sortable 1.13.2
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
+ */
+
+/*!
+ * jQuery UI Widget 1.13.2
+ * http://jqueryui.com
+ *
+ * Copyright jQuery Foundation and other contributors
+ * Released under the MIT license.
+ * http://jquery.org/license
  */
 
 /**!

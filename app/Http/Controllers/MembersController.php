@@ -60,10 +60,7 @@ class MembersController extends Controller{
                 'to' => explode(' - ', $request->input('on_vacation_till'))[1],
             ] : null;
             if(Auth::user()->can('updateRoles', $member)){
-                $member->role()->detach();
-                foreach($request->input('roles') as $role){
-                    $member->role()->attach($role);
-                }
+                $member->role()->sync($request->input('roles'));
             }
             $member->checkRoles();
             if(Auth::user()->can('updatePersonalInfo', Member::class)){

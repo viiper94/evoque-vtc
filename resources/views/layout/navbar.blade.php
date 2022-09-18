@@ -117,6 +117,9 @@
                                     @can('view', \App\User::class)
                                         <a class="dropdown-item" href="{{ route('evoque.admin.users') }}">Пользователи</a>
                                     @endcan
+                                    @can('editDLCList', \App\Convoy::class)
+                                        <a class="dropdown-item" href="{{ route('evoque.convoys.dlc') }}">Список DLC</a>
+                                    @endcan
                                     @can('restore', \App\Member::class)
                                         <a class="dropdown-item" href="{{ route('evoque.members.trash') }}">Уволенные сотрудники</a>
                                     @endcan

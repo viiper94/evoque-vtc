@@ -183,7 +183,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="dlc">@lang('attributes.dlc')</label>
+                        <label for="dlc">
+                            @lang('attributes.dlc')
+                            @can('editDLCList', \App\Convoy::class)
+                                <a href="{{ route('evoque.convoys.dlc') }}">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                            @endcan
+                        </label>
                         <select class="form-control" size="22" name="dlc[]" id="dlc" multiple>
                             @foreach($dlc as $game => $list)
                                 <optgroup label="{{ strtoupper($game) }}">

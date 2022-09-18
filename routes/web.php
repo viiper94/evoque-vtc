@@ -118,6 +118,11 @@ Route::any('/evoque/convoys/tab/edit/{id}', 'TabsController@edit')->name('evoque
 Route::any('/evoque/convoys/tab/accept/{id}', 'TabsController@accept')->name('evoque.admin.convoys.tab.accept');
 Route::get('/evoque/convoys/tab/delete/{id}', 'TabsController@delete')->name('evoque.admin.convoys.tab.delete');
 
+Route::get('/evoque/convoys/dlc', 'DLCController@index')->name('evoque.convoys.dlc');
+Route::post('/evoque/convoys/dlc', 'DLCController@sort');
+Route::post('/evoque/convoys/dlc/edit', 'DLCController@edit')->name('evoque.convoys.dlc.edit');
+Route::get('/evoque/convoys/dlc/delete/{id}', 'DLCController@delete')->name('evoque.convoys.dlc.delete');
+
 Route::get('/evoque/convoys/plans', 'PlansController@plans')->name('evoque.convoys.plans');
 Route::post('/evoque/convoys/plans', 'PlansController@quickBook');
 Route::any('/evoque/convoys/plans/book/{offset}/{type}', 'PlansController@book')->name('evoque.convoys.plans.book');

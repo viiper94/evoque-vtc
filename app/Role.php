@@ -44,6 +44,7 @@ class Role extends Model{
             'add_convoys',
             'edit_convoys',
             'delete_convoys',
+            'edit_dlc_list',
         ],
         'tab' => [
             'manage_tab',

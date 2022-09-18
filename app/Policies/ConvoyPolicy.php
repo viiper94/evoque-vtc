@@ -50,4 +50,8 @@ class ConvoyPolicy extends Policy{
         return $this->checkPermission($user, 'manage_convoys', 'quick_book_convoys');
     }
 
+    public function editDLCList(User $user){
+        return $this->checkPermission($user, 'manage_convoys', 'edit_dlc_list');
+    }
+
 }

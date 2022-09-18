@@ -35,7 +35,6 @@ class Convoy extends Model implements Auditable{
         'alt_trailer_tuning',
         'alt_trailer_paint',
         'alt_cargo',
-        'dlc',
         'comment',
         'links',
         'cargoman',
@@ -49,7 +48,6 @@ class Convoy extends Model implements Auditable{
         'public' => 'boolean',
         'visible' => 'boolean',
         'booking' => 'boolean',
-        'dlc' => 'array',
         'route' => 'array',
         'links' => 'array',
     ];
@@ -104,35 +102,36 @@ class Convoy extends Model implements Auditable{
         'alt_cargo' => 'nullable|string',
     ];
 
-    public $dlcList = [
-        'ets2' => [
-            'ProMods',
-            'DLC Going East!',
-            'DLC Scandinavia',
-            'DLC Vive la France!',
-            'DLC Italia',
-            'DLC Beyond The Baltic Sea',
-            'DLC Road To The Black Sea',
-            'DLC Iberia',
-            'DLC High Power Cargo Pack',
-            'DLC Heavy Cargo Pack',
-            'DLC Volvo Construction Equipment'
-        ],
-        'ats' => [
-            'ProMods Canada',
-            'DLC New Mexico',
-            'DLC Oregon',
-            'DLC Washington',
-            'DLC Utah',
-            'DLC Idaho',
-            'DLC Colorado',
-            'DLC Wyoming',
-            'DLC Heavy Cargo Paсk',
-            'DLC Forest Machinery',
-            'DLC Volvo Construction Equipment',
-            'DLC Lode King & Prestige Trailers'
-        ]
-    ];
+//    public $dlcList = [
+//        'ets2' => [
+//            'ProMods',
+//            'DLC Going East!',
+//            'DLC Scandinavia',
+//            'DLC Vive la France!',
+//            'DLC Italia',
+//            'DLC Beyond The Baltic Sea',
+//            'DLC Road To The Black Sea',
+//            'DLC Iberia',
+//            'DLC High Power Cargo Pack',
+//            'DLC Heavy Cargo Pack',
+//            'DLC Volvo Construction Equipment'
+//        ],
+//        'ats' => [
+//            'ProMods Canada',
+//            'DLC New Mexico',
+//            'DLC Oregon',
+//            'DLC Washington',
+//            'DLC Utah',
+//            'DLC Idaho',
+//            'DLC Colorado',
+//            'DLC Wyoming',
+//            'DLC Montana',
+//            'DLC Heavy Cargo Paсk',
+//            'DLC Forest Machinery',
+//            'DLC Volvo Construction Equipment',
+//            'DLC Lode King & Prestige Trailers'
+//        ]
+//    ];
 
     public static $timesToType = [
         -1 => ['09:00', '09:15', '09:30', '09:45',

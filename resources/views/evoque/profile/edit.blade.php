@@ -4,11 +4,6 @@
     Редактирование профиля | @lang('general.vtc_evoque')
 @endsection
 
-@section('assets')
-    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.min.css">
-    <script src="/js/jquery.datetimepicker.full.min.js"></script>
-@endsection
-
 @section('content')
 
     <div class="container pt-5 pb-5">

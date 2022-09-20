@@ -16,7 +16,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="convoy_title">Название конвоя</label>
-                        <input type="text" class="form-control" id="convoy_title" name="convoy_title" value="{{ $tab->convoy_title }}" required>
+                        <input type="text" class="form-control" id="convoy_title" name="convoy_title" value="{{ old('convoy_title') ?? $tab->convoy_title }}" required>
                         @if($errors->has('convoy_title'))
                             <small class="form-text">{{ $errors->first('convoy_title') }}</small>
                         @endif

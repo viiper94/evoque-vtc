@@ -111,7 +111,7 @@ class ConvoysController extends Controller{
             'booking' => $booking,
             'convoy' => $convoy,
             'servers' => $servers,
-            'members' => $booking ? Member::where('id', Auth::user()->member->id)->get() : Member::all(),
+            'members' => $booking ? Member::where('id', Auth::user()->member->id)->get() : Member::orderBy('nickname')->get(),
             'dlc' => DLC::orderBy('sort')->get()->groupBy('game'),
             'types' => $booking ? [$convoy->type => Convoy::$timesToType[$convoy->type]] : Convoy::$timesToType,
             'trucks_tuning' => Tuning::where(['type' => 'truck', 'visible' => '1'])->get()->groupBy('vendor'),

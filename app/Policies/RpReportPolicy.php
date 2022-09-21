@@ -28,7 +28,7 @@ class RpReportPolicy extends Policy{
                 return $result && $user->member->canReportRP();
             }
             foreach($user->member->role as $role){
-                if($role->manage_rp || ($role->add_reports && $user->member->canReportRP())) return true;
+                if(($role->manage_rp || $role->add_reports) && $user->member->canReportRP()) return true;
             }
         }
         return false;

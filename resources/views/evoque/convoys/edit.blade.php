@@ -42,15 +42,28 @@
                         <small class="form-text">{{ $errors->first('title') }}</small>
                     @endif
                 </div>
-                @if(!$booking)
-                    <div class="form-group col-md col-12">
-                        <label for="cargoman">@lang('attributes.cargoman')</label>
-                        <input type="text" class="form-control" id="cargoman" name="cargoman" value="{{ old('cargoman') ?? $convoy->cargoman }}">
-                        @if($errors->has('cargoman'))
-                            <small class="form-text">{{ $errors->first('cargoman') }}</small>
+                <div class="form-group col-md col-12">
+                    <label for="lead">@lang('attributes.lead')</label>
+                    <select class="form-control" id="lead" name="lead">
+                        @if(!$booking)
+                            <option value="На месте разберёмся" @selected((old('lead') ?? $convoy->lead) === 'На месте разберёмся')>На месте разберёмся</option>
                         @endif
-                    </div>
-                @endif
+                        @foreach($members as $member)
+                                @if($member->topRole() < 13)
+                                    <option value="{{ $member->nickname }}" @selected($member->nickname === (old('lead') ?? $convoy->lead))>{{ $member->nickname }}</option>
+                                @endif
+                        @endforeach
+                    </select>
+                </div>
+{{--                @if(!$booking)--}}
+{{--                    <div class="form-group col-md col-12">--}}
+{{--                        <label for="cargoman">@lang('attributes.cargoman')</label>--}}
+{{--                        <input type="text" class="form-control" id="cargoman" name="cargoman" value="{{ old('cargoman') ?? $convoy->cargoman }}">--}}
+{{--                        @if($errors->has('cargoman'))--}}
+{{--                            <small class="form-text">{{ $errors->first('cargoman') }}</small>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
+{{--                @endif--}}
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 col-md-6">

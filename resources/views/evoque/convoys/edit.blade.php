@@ -245,8 +245,13 @@
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="@if($convoy->officialTruckTuning) /images/tuning/{{ $convoy->officialTruckTuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
-                             class="w-100" id="truck_image-preview">
+                        <div class="vehicle-image-wrap">
+                            <img src="@if($convoy->officialTruckTuning) /images/tuning/{{ $convoy->officialTruckTuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
+                                 class="w-100" id="truck_image-preview">
+                            @if($convoy->truck_image)
+                                <button type="button" class="delete-img" data-target="truck_image" data-action="{{ route('evoque.convoy.deleteImg', $convoy->id) }}"><i class="fas fa-trash"></i></button>
+                            @endif
+                        </div>
                         @if($errors->has('truck_image'))
                             <small class="form-text">{{ $errors->first('truck_image') }}</small>
                         @endif
@@ -310,8 +315,13 @@
                             <label class="custom-file-label" for="trailer_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="@if($convoy->officialTrailerTuning) /images/tuning/{{ $convoy->officialTrailerTuning->image }} @else /images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }} @endif"
-                            class="w-100" id="trailer_image-preview">
+                        <div class="vehicle-image-wrap">
+                            <img src="@if($convoy->officialTrailerTuning) /images/tuning/{{ $convoy->officialTrailerTuning->image }} @else /images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }} @endif"
+                                class="w-100" id="trailer_image-preview">
+                            @if($convoy->trailer_image)
+                                <button type="button" class="delete-img" data-target="trailer_image" data-action="{{ route('evoque.convoy.deleteImg', $convoy->id) }}"><i class="fas fa-trash"></i></button>
+                            @endif
+                        </div>
                         @if($errors->has('trailer_image'))
                             <small class="form-text">{{ $errors->first('trailer_image') }}</small>
                         @endif
@@ -374,7 +384,12 @@
                             <label class="custom-file-label" for="alt_trailer_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
-                        <img src="/images/convoys/{{ $convoy->alt_trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
+                        <div class="vehicle-image-wrap">
+                            <img src="/images/convoys/{{ $convoy->alt_trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">
+                            @if($convoy->alt_trailer_image)
+                                <button type="button" class="delete-img" data-target="alt_trailer_image" data-action="{{ route('evoque.convoy.deleteImg', $convoy->id) }}"><i class="fas fa-trash"></i></button>
+                            @endif
+                        </div>
                         @if($errors->has('alt_trailer_image'))
                             <small class="form-text">{{ $errors->first('alt_trailer_image') }}</small>
                         @endif

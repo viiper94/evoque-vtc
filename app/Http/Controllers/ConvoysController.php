@@ -7,6 +7,7 @@ use App\DLC;
 use App\Member;
 use App\Tuning;
 use Carbon\Carbon;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
@@ -62,49 +63,39 @@ class ConvoysController extends Controller{
             $query->limit(10)->orderBy('created_at', 'desc');
         }])->where('id', $id)->firstOrFail() : new Convoy();
         $id ? $this->authorize('updateOne', $convoy) : $this->authorize('create', Convoy::class);
-        if($request->ajax() && $request->input('action') == 'remove_img'){
-            if($id){
-                $attr = $request->input('target');
-                $convoy->$attr = null;
-                $result = $convoy->save();
-            }else $result = true;
-            return response()->json([
-                'status' => $result ? 'OK' : 'Не удалось удалить изображение из-за ошибки в БД...'
-            ]);
-        }
-        if($request->post()){
+        if($request->ajax() && $request->post()){
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
-            $convoy->visible = $request->input('visible') === 'on' ? 1 : 0;
-            $convoy->public = $request->input('public') === 'on' ? 1 : 0;
-            $convoy->truck_public = $request->input('truck_public') === 'on' ? 1 : 0;
-            $convoy->trailer_public = $request->input('trailer_public') === 'on' ? 1 : 0;
-            foreach($request->files as $key => $file){
-                if($id) $convoy->deleteImages(public_path('/images/convoys/'), [$key]);
-                if($key === 'route' && is_array($file)){
-                    foreach($file as $i => $image){
-                        $route_images[] = $convoy->saveImage($image, '/images/convoys/', $i);
-                    }
-                    $convoy->route = $route_images;
+            $route_images = [];
+            foreach(explode(',', $request->post('imageList')) as $image){
+                if(is_file(public_path('images/convoys/'. $image))){
+                    $route_images[] = $image;
                 }else{
-                    $convoy->$key = $convoy->saveImage($file);
+                    if(isset($request->file('route')[$image])){
+                        $route_images[] = $convoy->saveImage($request->file('route')[$image]);
+                    }
                 }
             }
+            $convoy->route = $route_images;
+            if($request->hasFile('truck_image')) $convoy->truck_image = $convoy->saveImage($request->file('truck_image'));
+            if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'));
+            if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'));
             $convoy->booking = !Auth::user()->can('update', Convoy::class);
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             if($convoy->save()){
                 $convoy->DLC()->sync($request->input('dlc'));
-                return redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно '.($id ? 'отредактирован!' : 'создан!')]);
+                return response()->json([
+                    'redirect' => route('convoys.private'),
+                    'message' => 'Конвой сохранён'
+                ]);
             }else{
-                return redirect()->back()->withErrors(['Возникла ошибка =(']);
+                return response()->json(['neok' => ['message' => 'Возникла ошибка']]);
             }
         }
         $servers = $convoy->defaultServers;
         if(!$id){
             $convoy->start_time = Carbon::now();
-            $convoy->trailer_public = true;
-            $convoy->route = ['1' => null];
         }
         $booking = Auth::user()->cant('update', Convoy::class) && Auth::user()->can('updateOne', $convoy);
         return view('evoque.convoys.edit', [
@@ -126,6 +117,27 @@ class ConvoysController extends Controller{
         return $convoy->delete() ?
             redirect()->route('convoys.private', 'all')->with(['success' => 'Конвой успешно удалён!']) :
             redirect()->back()->withErrors(['Возникла ошибка =(']);
+    }
+
+    public function deleteImage(Request $request, $id){
+        $convoy = Convoy::find($id);
+        $id ? $this->authorize('updateOne', $convoy) : $this->authorize('create', Convoy::class);
+        if($request->ajax()){
+            try{
+                $attr = $request->input('target');
+                $convoy->$attr = null;
+                $convoy->save();
+            }catch(QueryException $e){
+                return response()->json([
+                    'status' => 'Не удалось удалить изображение из-за ошибки в БД...',
+                    'message' => $e
+                ], 400);
+            }
+            return response()->json([
+                'status' => 'OK'
+            ]);
+        }
+        return false;
     }
 
     public function toggle(Request $request, $id){

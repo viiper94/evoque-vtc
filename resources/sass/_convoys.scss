@@ -139,3 +139,129 @@
         }
     }
 }
+// Edit convoys
+#list-scrollspy{
+    @media (max-width: 1530px) {
+        display: none;
+    }
+    position: fixed;
+    width: 202px;
+    margin-top: 60px;
+    border-radius: 0;
+    .list-group-item{
+        background-color: $background;
+        border: none;
+        border-left: 2px $background solid;
+        color: $primary;
+        &.active{
+            border-left: 2px solid $primary;
+            font-weight: bold;
+        }
+    }
+}
+
+.convoy-images-uploader{
+    border: dashed $primary 1px;
+    border-radius: .25rem;
+    @media (max-width: $sm) {
+        flex-direction: column;
+    }
+    .convoy-images{
+        flex-wrap: wrap;
+        @media (max-width: $sm) {
+            flex-direction: column;
+            width: 100%;
+        }
+        .convoy-image-preview{
+            position: relative;
+            border-radius: 0.25rem;
+            border: solid 1px $primary;
+            overflow: hidden;
+            width: 168px;
+            cursor: move;
+            @media (max-width: $sm) {
+                flex-direction: column;
+                width: 95%;
+            }
+            img{
+                object-fit: cover;
+                height: 130px;
+                width: 100%;
+            }
+            &:hover .delete-route-img{
+                display: inline-block;
+            }
+            & .delete-route-img{
+                position: absolute;
+                display: none;
+                padding: 3px;
+                top: 0;
+                right: 0;
+                background-color: #fff;
+                border-radius: 50%;
+                width: 30px;
+                height: 30px;
+                cursor: pointer;
+                text-align: center;
+                box-shadow: $box-shadow;
+                &::after{
+                    color: $danger;
+                    content: "\F1F8";
+                    font-size: 14px;
+                    font-style: normal;
+                    font-variant: normal;
+                    text-rendering: auto;
+                    line-height: 1;
+                    font-family: "Font Awesome 5 Free";
+                }
+            }
+        }
+    }
+    .add-convoy-image{
+        height: 76px;
+        width: 76px;
+        min-width: 76px;
+        input{
+            height: 100%;
+            cursor: pointer;
+        }
+        label{
+            border-radius: 0.25rem;
+            border: solid 1px $primary;
+            background-color: transparent;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            i{
+                font-size: 0;
+                &::before{
+                    font-size: 50px;
+                    color: $primary;
+                }
+            }
+            &::after{
+                display: none;
+                content: '';
+            }
+        }
+    }
+}
+.vehicle-image-wrap{
+    position: relative;
+    &:hover button{
+        display: block;
+    }
+    button{
+        position: absolute;
+        display: none;
+        top: 8px;
+        right: 8px;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        box-shadow: $box-shadow;
+        color: $danger;
+        font-size: 18px;
+    }
+}

@@ -1,7 +1,10 @@
 // Convoy page
 
-import {readURL, spinner} from './_functions.js';
+import {readURLFile, addToast, spinner} from './_functions.js';
 import bsCustomFileInput from "bs-custom-file-input";
+import 'jquery-ui/ui/core';
+import 'jquery-ui/ui/widgets/mouse';
+import 'jquery-ui/ui/widgets/sortable';
 
 $(document).ready(function(){
 
@@ -10,37 +13,124 @@ $(document).ready(function(){
     });
 
     // Edit page
-    bsCustomFileInput.init();
+    var formFiles = [];
 
-    $(document).on('change', '.new-convoy .custom-file-input', function(){
-        let _URL = window.URL || window.webkitURL;
-        console.log(this.files[0].size);
-        if(this.files[0].size > 5200000){
-            alert('Превышен лимит размера файла. Максимум 5 МБ!');
-            $(this).val('');
-            $(this).parent().find('label').html('Виберите изображение');
-            $(this).parent().parent().find('img').removeAttr('src');
-            return false;
-        }
-        let file, img;
-        if ((file = this.files[0])) {
-            img = new Image();
-            img.src = _URL.createObjectURL(file);
-        }
-        readURL(this, '#' + $(this).attr('id') + '-preview');
+    bsCustomFileInput.init();
+    $('.convoy-images').sortable();
+    $('body').scrollspy({
+        target: '#list-scrollspy',
+        offset: 120
     });
 
-    $('#add-convoy-img').click(function(){
-        if($('input[id^=route-]').length >= 6){
-            $(this).html('<i class="fas fa-times"></i> Угомонись уже, хватит!');
+    $(document).on('change', '.convoy-images-uploader .custom-file-input', function(){
+        // handling adding image to list
+        let files = $(this)[0].files;
+        let nextId = $('.convoy-image-preview').length;
+        let maxFiles = $(this).data('allowed') > files.length ? files.length : $(this).data('allowed');
+        if($(this).data('allowed') < files.length) alert('Чёт перебор... Оставил только '+ maxFiles + ' шт.');
+        for(let i = 0; i < maxFiles; i++){
+            if(files[i].size > 3200000){
+                alert('Превышен лимит размера одного из файлов. Максимум 3 МБ!');
+                return false;
+            }
+        }
+        for(let i = 0; i < maxFiles; i++){
+            formFiles.push(files[i]);
+            $('.convoy-images').append('<div class="convoy-image-preview m-2"><div class="delete-route-img"></div><img data-name="'+files[i].name+'"></div>');
+            readURLFile(files[i], '.convoy-image-preview:nth-child('+(i+nextId+1)+') img');
+        }
+        let allowed = 6-$('.convoy-image-preview').length;
+        $('.new-convoy .custom-file-input').attr('data-allowed', allowed).data('allowed', allowed);
+        if($('.convoy-image-preview').length >= 6){
+            $('.add-convoy-image').hide();
+        }
+        $(this).val('');
+    });
+
+    $(document).on('click', '.convoy-image-preview .delete-route-img', function(){
+        // deleting image from list
+        if(confirm('Удалить изображение?')){
+            let deletedName = $(this).parent().find('img').data('name');
+            $(formFiles).each(function(index){
+                if(this.name === deletedName) formFiles.splice(index, 1);
+            });
+            $(this).parent().remove();
+        }
+        if($('.convoy-image-preview').length >= 6){
+            $('.add-convoy-image').hide()
+        }else{
+            $('.add-convoy-image').show();
+            let allowed = 6-$('.convoy-image-preview').length;
+            $('.new-convoy .custom-file-input').attr('data-allowed', allowed).data('allowed', allowed);
+        }
+    });
+
+    $('.new-convoy form').submit(function(e){
+        e.preventDefault();
+        let data = new FormData();
+        $('form input[id]:not([type=radio]), form textarea[id], form select[id], form input[id][type=radio]:checked').each(function(){
+            if($(this).attr('name') === 'dlc[]'){
+                for(let i = 0; i < $(this).val().length; i++){
+                    data.append('dlc[]', $(this).val()[i]);
+                }
+            }else if($(this).attr('type') === 'file' && this.files[0] !== undefined){
+                data.append($(this).attr('name'), this.files[0]);
+            }else if($(this).attr('type') === 'checkbox'){
+                data.append($(this).attr('name'), ($(this).prop('checked') ? '1' : '0'));
+            }else{
+                data.append($(this).attr('name'), $(this).val());
+            }
+        });
+        let convoyImagesList = [];
+        $('.convoy-image-preview img').each(function(){
+            convoyImagesList.push($(this).data('name'));
+        });
+        if(convoyImagesList.length  === 0){
+            $('.new-convoy').append(addToast('Ошибка!', 'Нужны скриншоты маршрута', 'danger', 3000));
+            $('.toast').toast('show');
+            $('.toast-warning').toast('hide');
+            $('[type=submit]').attr('disabled', false);
             return false;
         }
-        let index = $(this).data('index')+1;
-        $(this).data('index', index);
-        let template = $('#'+$(this).data('target')+'_template').html().replace(/%i%/g, index);
-        $(this).before(template);
-        bsCustomFileInput.init();
-        return true;
+        data.append('imageList', convoyImagesList);
+        $(formFiles).each(function(){
+            data.append('route['+this.name+']', this);
+        });
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            method : 'POST',
+            dataType : 'json',
+            contentType: false,
+            processData: false,
+            data: data,
+            beforeSend: function(){
+                $('.toast').remove();
+                $('[type=submit]').attr('disabled', 'true');
+                $('.new-convoy').append(addToast('Секундочку...', 'Проверяем и сохраняем данные', 'warning'));
+                $('.toast').toast({'delay': 999999}).toast('show');
+            },
+            success: function(response){
+                if(response.redirect){
+                    $('.new-convoy').append(addToast('Успех!', response.message));
+                    $('.toast').toast({'delay': 999999}).toast('show');
+                    $('.toast-warning').toast('hide');
+                    setTimeout(function(){
+                        window.location = response.redirect;
+                    }, 2000);
+                }
+            },
+            error: function(jqXHR){
+                if(jqXHR.responseJSON.errors){
+                    $('.new-convoy').append(addToast('Ошибка!', jqXHR.responseJSON.message, 'danger'));
+                    $('.toast').toast({'delay': 5000}).toast('show');
+                    $('.toast-warning').toast('hide');
+                    $('[type=submit]').attr('disabled', false);
+                    $.each(jqXHR.responseJSON.errors, function(key){
+                        $('#'+key).addClass('is-invalid');
+                    });
+                }
+            },
+        });
     });
 
     $('#delete-convoy-img').click(function(){

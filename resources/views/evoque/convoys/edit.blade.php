@@ -97,55 +97,34 @@
                     @endif
                 </div>
             </div>
-{{--            @if(!$booking)--}}
-{{--                <div class="links">--}}
-{{--                    <h3 class="text-primary mt-3">@lang('attributes.links')</h3>--}}
-{{--                    <h5>Для нашего открытого конвоя</h5>--}}
-{{--                    <div class="custom-control custom-checkbox mb-2">--}}
-{{--                        <input type="checkbox" class="custom-control-input" id="links[public]" name="links[public]" @if(isset($convoy->links['public']) || old('public') === 'on') checked @endif>--}}
-{{--                        <label class="custom-control-label" for="links[public]">Показывать ссылки</label>--}}
-{{--                    </div>--}}
-{{--                    <div class="row">--}}
-{{--                        <div class="form-group col">--}}
-{{--                            <label for="links[TruckersMP]">@lang('attributes.links_truckersmp')</label>--}}
-{{--                            <input type="text" class="form-control" id="links[TruckersMP]" name="links[TruckersMP]"--}}
-{{--                                   value="{{ old('links[TruckersMP]') ?? ($convoy->links['TruckersMP'] ?? '') }}" placeholder="Подписаться на TruckersMP">--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group col">--}}
-{{--                            <label for="links[TrucksBook]">@lang('attributes.links_trucksbook')</label>--}}
-{{--                            <input type="text" class="form-control" id="links[TrucksBook]" name="links[TrucksBook]"--}}
-{{--                                   value="{{ old('links[TrucksBook]') ?? ($convoy->links['TrucksBook'] ?? '') }}" placeholder="Подписаться на TrucksBook">--}}
-{{--                        </div>--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="links[VTCWorld]">Ссылка на мероприятие в VTCWorld</label>--}}
-{{--                            <input type="text" class="form-control" id="links[VTCWorld]" name="links[VTCWorld]" value="{{ old('links[VTCWorld]') ?? ($convoy->links['VTCWorld'] ?? '') }}">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-            <h3 class="text-primary">@lang('attributes.route')</h3>
-            <div class="row">
-                <div class="col-md-5 route-images">
-                    @if($convoy->start_city && $convoy->route)
-                        <h6>{{ trans_choice('Текущее изображение|Текущие изображения', $convoy->route) }}</h6>
-                        <div class="fotorama mb-3 text-shadow-m" data-allowfullscreen="true" data-nav="thumbs" data-maxheight="740px">
-                            @foreach($convoy->route as $item)
-                                <img src="/images/convoys/{{ $item }}" class="w-100">
-                            @endforeach
-                        </div>
-                    @endif
-                    <div class="form-group">
-                        <h6>Новые изображения</h6>
-                        <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input" id="route-0" name="route[]" accept="image/*">
-                            <label class="custom-file-label" for="route-0">{{ $convoy->route ? 'Загрузить новое изображение' : 'Выберите изображение' }}</label>
-                            <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
-                        </div>
-                        <img class="w-100" id="route-0-preview">
+            <h3 class="text-primary mt-3" id="route">@lang('attributes.route')</h3>
+            <h6>Изображения</h6>
+            <small class="text-primary">Макс. размер файла: <b>3 Мб</b></small>
+            <div class="convoy-images-uploader d-flex align-items-center mb-3">
+                @if($convoy->route)
+                    <div class="convoy-images d-flex flex-grow-1">
+                        @foreach($convoy->route as $item)
+                            <div class="convoy-image-preview m-2">
+                                <div class="delete-route-img"></div>
+                                <img src="/images/convoys/{{ $item }}" data-name="{{ $item }}">
+                            </div>
+                        @endforeach
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-warning" id="add-convoy-img" data-target="route_images" data-index="0"><i class="fas fa-plus"></i> Еще картинку</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" id="delete-convoy-img" data-target="route_images"><i class="fas fa-trash"></i> Очистить все слоты</button>
-                </div>
+                    @if(count($convoy->route) < 6)
+                            <div class="custom-file add-convoy-image mx-sm-2 my-2">
+                                <input type="file" class="custom-file-input" accept="image/*" data-allowed="{{ 6 - count($convoy->route) }}" multiple>
+                                <label class="custom-file-label"><i class="fas fa-plus"></i></label>
+                            </div>
+                    @endif
+                @else
+                    <div class="convoy-images d-flex flex-grow-1"></div>
+                    <div class="custom-file add-convoy-image mx-sm-2 my-2">
+                        <input type="file" class="custom-file-input" accept="image/*" data-allowed="6" multiple>
+                        <label class="custom-file-label"><i class="fas fa-plus"></i></label>
+                    </div>
+                @endif
+            </div>
+            <div class="row">
                 <div class="col-md-7">
                     <div class="form-row">
                         <div class="form-group col-7">

@@ -88,26 +88,28 @@ class PlansController extends Controller{
             'trailer_public' => false,
             'truck_public' => false,
             'public' => false,
-            'route' => ['1' => null],
             'communication' => 'Discord',
             'communication_link' => 'https://discord.gg/Gj53a8d',
             'communication_channel' => 'Комната для конвоев',
             'lead' => Auth::user()->member->nickname,
         ]);
-        if($request->post()){
+        if($request->ajax() && $request->post()){
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
-            foreach($request->files as $key => $file){
-                if($key === 'route' && is_array($file)){
-                    $route_images = array();
-                    foreach($file as $i => $route){
-                        $route_images[] = $convoy->saveImage($route);
-                    }
-                    $convoy->route = $route_images;
+            $route_images = [];
+            foreach(explode(',', $request->post('imageList')) as $image){
+                if(is_file(public_path('images/convoys/'. $image))){
+                    $route_images[] = $image;
                 }else{
-                    $convoy->$key = $convoy->saveImage($file);
+                    if(isset($request->file('route')[$image])){
+                        $route_images[] = $convoy->saveImage($request->file('route')[$image]);
+                    }
                 }
             }
+            $convoy->route = $route_images;
+            if($request->hasFile('truck_image')) $convoy->truck_image = $convoy->saveImage($request->file('truck_image'));
+            if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'));
+            if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'));
             $convoy->visible = $offset == 0;
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
@@ -115,11 +117,14 @@ class PlansController extends Controller{
             $convoy->booked_by_id = Auth::user()->member->id;
             if($convoy->save()){
                 $convoy->DLC()->sync($request->input('dlc'));
-                return redirect()->route('evoque.convoys.plans')->with(['success' => $offset == 0 ?
-                    'Внеплановый конвой создан, не забудь продублировать регламент в чате в ВК!' :
-                    'Регламент отправлен на модерацию и появится в планах после одобрения логистом!']);
+                return response()->json([
+                    'redirect' => route('evoque.convoys.plans'),
+                    'message' => $offset == 0 ?
+                        'Внеплановый конвой создан, не забудь продублировать регламент в чате в ВК!' :
+                        'Регламент отправлен на модерацию и появится в планах после одобрения логистом!'
+                ]);
             }else{
-                return redirect()->back()->withErrors(['Возникла ошибка =(']);
+                return response()->json(['neok' => ['message' => 'Возникла ошибка']]);
             }
         }
         $convoy->start_time = Carbon::today()->addDays($offset)->addHours($type == 0 ? 16 : ($type == 2 ? 22 : 19))->addMinutes($type == 1 ? 30 : 0);

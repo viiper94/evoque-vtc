@@ -111,6 +111,7 @@ Route::post('/evoque/convoys/addcargoman', 'ConvoysController@addCargoMan')->nam
 Route::any('/evoque/convoys/toggle/{id}', 'ConvoysController@toggle')->name('evoque.admin.convoy.toggle');
 Route::get('/evoque/convoys/delete/{id}', 'ConvoysController@delete')->name('evoque.admin.convoy.delete');
 Route::any('/evoque/convoys/edit/{id}/{booking?}', 'ConvoysController@edit')->name('evoque.admin.convoy.edit');
+Route::any('/evoque/convoys/deleteImg/{id}', 'ConvoysController@deleteImage')->name('evoque.convoy.deleteImg');
 
 Route::get('/evoque/convoys/tab', 'TabsController@index')->name('evoque.convoys.tab');
 Route::any('/evoque/convoys/tab/add', 'TabsController@edit')->name('evoque.convoys.tab.add');

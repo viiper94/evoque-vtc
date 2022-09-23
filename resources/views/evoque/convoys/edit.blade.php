@@ -268,7 +268,6 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="truck_image"><i class="fas fa-trash"></i> Удалить картинку</button>
                 </div>
                 <div class="col-md-7">
                     <h6>Описание</h6>
@@ -340,7 +339,6 @@
                             @endforeach
                         </select>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>
                 <div class="col-md-7">
                     <h6>Описание</h6>
@@ -399,7 +397,6 @@
                             <small class="form-text">{{ $errors->first('alt_trailer_image') }}</small>
                         @endif
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="alt_trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>
                 <div class="col-md-7">
                     <h6>Описание</h6>

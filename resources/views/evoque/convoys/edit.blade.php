@@ -468,15 +468,4 @@
         });
     </script>
 
-    <script type="text/html" id="route_images_template">
-        <div class="form-group">
-            <div class="custom-file custom-file-dark mb-3">
-                <input type="file" class="custom-file-input" id="route-%i%" name="route[%i%]" accept="image/*">
-                <label class="custom-file-label" for="route-%i%">Выберите изображение</label>
-                <small class="text-primary"><b>Макс. размер файла:</b> 3 Мб, 3000x3000px</small>
-            </div>
-            <img class="w-100" id="route-%i%-preview">
-        </div>
-    </script>
-
 @endsection

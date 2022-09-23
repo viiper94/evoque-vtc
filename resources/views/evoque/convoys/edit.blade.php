@@ -6,20 +6,26 @@
 @endsection
 
 @section('assets')
-    <link rel="stylesheet" type="text/css" href="/js/fotorama-4.6.4/fotorama.css">
-    <script src="/js/fotorama-4.6.4/fotorama.js"></script>
     <link rel="stylesheet" type="text/css" href="/js/simplemde/dist/simplemde-dark.min.css">
     <script src="/js/simplemde/dist/simplemde.min.js"></script>
 @endsection
 
 @section('content')
 
-    <div class="container new-convoy pt-5">
+    <div id="list-scrollspy" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#info">Общая информация</a>
+        <a class="list-group-item list-group-item-action" href="#route">Маршрут</a>
+        <a class="list-group-item list-group-item-action" href="#dlc_info">DLC</a>
+        <a class="list-group-item list-group-item-action" href="#communication-info">Связь</a>
+        <a class="list-group-item list-group-item-action" href="#truck_info">Тягач</a>
+        <a class="list-group-item list-group-item-action" href="#trailer_info">Прицеп</a>
+    </div>
+    <div class="container new-convoy pt-5" >
         @include('layout.alert')
         <form method="post" enctype="multipart/form-data" class="mb-5">
             @csrf
             <div class="mt-3 row justify-content-between">
-                <h2 class="text-primary col-md-6">@if($convoy->id)Редактирование конвоя@elseНовый конвой@endif</h2>
+                <h2 class="text-primary col-md-6" id="info">@if($convoy->id)Редактирование конвоя@elseНовый конвой@endif</h2>
                 <div class="btn-wrapper col-md-6 text-md-right">
                     <button class="btn btn-outline-warning mx-1" type="submit"><i class="fas fa-save"></i> Сохранить конвой</button>
                 </div>
@@ -239,8 +245,8 @@
                     @endforeach
                 </select>
             </div>
-            <div class="row truck-section">
-                <h3 class="text-primary mt-5 col-12">@lang('attributes.truck')</h3>
+            <div class="row truck-section" id="truck_info">
+                <h3 class="text-primary mt-3 col-12">@lang('attributes.truck')</h3>
                 <div class="col-md-5">
                     <div class="form-group truck_image">
                         <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->officialTruckTuning) style="display: none" @endif>
@@ -304,7 +310,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row trailer-section">
+            <div class="row trailer-section" id="trailer_info">
                 <h3 class="text-primary mt-5 col-12">@lang('attributes.trailer')</h3>
                 <div class="col-md-5">
                     <div class="form-group trailer_image">

@@ -4,6 +4,10 @@
         background-color: hsl(0deg 0% 0% / 70%);
         color: $primary-text;
     }
+    &.toast-warning .toast-header{
+        background-color: $primary;
+        color: $text-on-primary;
+    }
     &.toast-success .toast-header{
         background-color: $success;
         color: #fff;

@@ -133,45 +133,41 @@ $(document).ready(function(){
         });
     });
 
-    $('#delete-convoy-img').click(function(){
-        if(confirm('Очистить все слоты для изображений?')){
-            $('.route-images .form-group').remove();
-            let index = 0;
-            $('#add-convoy-img').data('index', index).html('<i class="fas fa-plus"></i> Еще картинку');
-            let template = $('#' + $(this).data('target') + '_template').html().replace(/%i%/g, index).replace('Еще одно ', '');
-            $('#add-convoy-img').before(template);
-            bsCustomFileInput.init();
-            return true;
-        }
-        return false;
-    });
 
     $('.delete-img').click(function(){
         if(confirm('Удалить изображение?')){
             let button = $(this);
             $.ajax({
-                cache: false,
-                dataType : 'json',
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: button.data('action'),
                 type : 'POST',
                 data : {
-                    '_token' : $('form [name=_token]').val(),
                     'target' : button.data('target'),
-                    'action' : 'remove_img'
                 },
                 beforeSend : function(){
-                    button.after(spinner());
+                    button.attr('disabled', 'true');
+                    $('.toast').remove();
+                    $('.new-convoy').append(addToast('Секундочку...', 'Удаляем картинку', 'warning'));
+                    $('.toast').toast('show');
                 },
                 success : function(response){
-                    if(response.status != 'OK') console.log(response);
+                    if(response.status !== 'OK') console.log(response);
                     else{
+                        $('.new-convoy').append(addToast('Успех!', 'Картинка удалена', 'success'));
+                        $('.toast').toast({'delay': 3000}).toast('show');
+                        $('.toast-warning').toast('hide');
+                        button.hide();
                         $('#'+button.data('target')).val('');
                         $('label[for='+button.data('target')+']').html('Изображение');
                         $('#'+button.data('target')+'-preview').attr('src', '/images/convoys/image-placeholder.jpg');
                     }
                 },
-                complete : function(){
-                    $('.spinner-border').remove();
-                }
+                error: function(jqXHR){
+                    $('.new-convoy').append(addToast('Ошибка!', jqXHR.responseJSON.status, 'danger'));
+                    $('.toast').toast({'delay': 5000}).toast('show');
+                    $('.toast-warning').toast('hide');
+                    button.show().attr('disabled', false);
+                },
             });
         }
         return false;

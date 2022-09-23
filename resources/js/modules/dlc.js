@@ -7,7 +7,7 @@ import {spinner} from './_functions.js';
 
 $(document).ready(function(){
 
-    $('.sortable').sortable({
+    $('.dlc-list .sortable').sortable({
         handle: '.sort-handle',
         stop: function(event, ui){
             let data = {};

@@ -242,7 +242,7 @@
                     <h6>Изображение</h6>
                     <div class="form-group truck_image">
                         <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->officialTruckTuning) style="display: none" @endif>
-                            <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*" @if($convoy->officialTruckTuning) disabled @endif>
+                            <input type="file" class="custom-file-input uploader" id="truck_image" name="truck_image" accept="image/*" @if($convoy->officialTruckTuning) disabled @endif>
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
@@ -314,7 +314,7 @@
                     <h6>Изображение</h6>
                     <div class="form-group trailer_image">
                         <div class="custom-file custom-file-dark mb-3" @if($convoy->officialTrailerTuning) style="display: none" @endif>
-                            <input type="file" class="custom-file-input" id="trailer_image" name="trailer_image" accept="image/*" @if($convoy->officialTrailerTuning) disabled @endif>
+                            <input type="file" class="custom-file-input uploader" id="trailer_image" name="trailer_image" accept="image/*" @if($convoy->officialTrailerTuning) disabled @endif>
                             <label class="custom-file-label" for="trailer_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>
@@ -385,7 +385,7 @@
                     <h6>Изображение</h6>
                     <div class="form-group alt_trailer_image">
                         <div class="custom-file custom-file-dark mb-3">
-                            <input type="file" class="custom-file-input" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
+                            <input type="file" class="custom-file-input uploader" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
                             <label class="custom-file-label" for="alt_trailer_image">Выберите изображение</label>
                             <small class="text-primary"><b>Макс. размер файла:</b> 5 Мб, 3000x3000px</small>
                         </div>

@@ -282,7 +282,7 @@
                     <div class="form-group">
                         <input type="text" class="form-control" id="truck" name="truck"
                                value="{{ old('truck') ?? $convoy->truck }}"
-                               placeholder="Марка"  @if($convoy->officialTruckTuning) readonly @endif>
+                               placeholder="Марка" @if($convoy->officialTruckTuning) readonly @endif>
                         @if($errors->has('truck'))
                             <small class="form-text">{{ $errors->first('truck') }}</small>
                         @endif
@@ -312,7 +312,7 @@
                 <div class="col-md-5">
                     <h6>Изображение</h6>
                     <div class="form-group trailer_image">
-                        <div class="custom-file custom-file-dark mb-3" @if($convoy->officialTrailerTuning) style="display: none" @endif>
+                        <div class="custom-file custom-file-dark mb-3 trailer_image-input" @if($convoy->officialTrailerTuning) style="display: none" @endif>
                             <input type="file" class="custom-file-input uploader" id="trailer_image" name="trailer_image" accept="image/*" @if($convoy->officialTrailerTuning) disabled @endif>
                             <label class="custom-file-label" for="trailer_image">Выберите изображение</label>
                             <small class="text-primary">Макс. размер файла: <b>5 Мб</b></small>
@@ -349,7 +349,9 @@
                         </div>
                     @endif
                     <div class="form-group">
-                        <input type="text" class="form-control" id="trailer" name="trailer" value="{{ old('trailer') ?? $convoy->trailer }}" placeholder="Тип">
+                        <input type="text" class="form-control" id="trailer" name="trailer"
+                               value="{{ old('trailer') ?? $convoy->trailer }}" placeholder="Тип"
+                               @if($convoy->officialTruckTuning) readonly @endif>
                         @if($errors->has('trailer'))
                             <small class="form-text">{{ $errors->first('trailer') }}</small>
                         @endif
@@ -363,7 +365,10 @@
                     </div>
                     <div class="form-group">
                         <label for="trailer_paint">@lang('attributes.trailer_paint')</label>
-                        <input type="text" class="form-control" id="trailer_paint" name="trailer_paint" value="{{ old('trailer_paint') ?? $convoy->trailer_paint }}" placeholder="Не обязательно">
+                        <input type="text" class="form-control" id="trailer_paint" name="trailer_paint"
+                               value="{{ old('trailer_paint') ?? $convoy->trailer_paint }}"
+                               @if($convoy->officialTruckTuning) readonly @endif
+                               placeholder="Не обязательно">
                         @if($errors->has('trailer_paint'))
                             <small class="form-text">{{ $errors->first('trailer_paint') }}</small>
                         @endif

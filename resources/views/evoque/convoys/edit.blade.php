@@ -180,70 +180,61 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="dlc">
-                            @lang('attributes.dlc')
-                            @can('editDLCList', \App\Convoy::class)
-                                <a href="{{ route('evoque.convoys.dlc') }}">
-                                    <i class="fas fa-pen"></i>
-                                </a>
-                            @endcan
-                        </label>
-                        <select class="form-control" size="22" name="dlc[]" id="dlc" multiple>
-                            @foreach($dlc as $game => $list)
-                                <optgroup label="{{ strtoupper($game) }}">
-                                    @foreach($list as $item)
-                                        <option value="{{ $item->id }}" @selected((is_array(old('dlc')) && in_array($item->id, old('dlc'))) || $convoy->DLC->contains($item->id))>{{ $item->title }}</option>
-                                    @endforeach
-                                    <option disabled></option>
-                                </optgroup>
-                            @endforeach
-                        </select>
-                        @if($errors->has('dlc'))
-                            <small class="form-text">{{ $errors->first('dlc') }}</small>
+                    <h3 class="mt-5 text-primary" id="communication-info">@lang('attributes.communication')</h3>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3"
+                               @checked((old('communication') ?? $convoy->communication) === 'TeamSpeak 3') @if($booking) disabled @endif>
+                        <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord"
+                               @checked((old('communication') ?? $convoy->communication) === 'Discord' || (old('communication') ?? $convoy->communication) == '') @if($booking) disabled @endif>
+                        <label class="custom-control-label" for="communication-discord">Discord</label>
+                        @if($booking)
+                            <input type="hidden" name="communication" value="{{ $convoy->communication }}">
                         @endif
-                        <small class="text-muted">удерживать Ctrl для выбора нескольких или снятия выбора</small>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-sm-6">
+                            <label for="communication_program">@lang('attributes.communication_link')</label>
+                            <input type="text" class="form-control" id="communication_link" name="communication_link" value="{{ old('communication_link') ?? $convoy->communication_link }}" required @if($booking) readonly @endif>
+                            @if($errors->has('communication_link'))
+                                <small class="form-text">{{ $errors->first('communication_link') }}</small>
+                            @endif
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <label for="communication_channel">@lang('attributes.communication_channel')</label>
+                            <input type="text" class="form-control" id="communication_channel" name="communication_channel" value="{{ old('communication_channel') ?? $convoy->communication_channel }}" @if($booking) readonly @endif>
+                            @if($errors->has('communication_channel'))
+                                <small class="form-text">{{ $errors->first('communication_channel') }}</small>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            <h3 class="mt-5 text-primary">@lang('attributes.communication')</h3>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-ts3" name="communication" class="custom-control-input" value="TeamSpeak 3"
-                   @checked((old('communication') ?? $convoy->communication) === 'TeamSpeak 3') @if($booking) disabled @endif>
-                <label class="custom-control-label" for="communication-ts3">TeamSpeak 3</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="communication-discord" name="communication" class="custom-control-input" value="Discord"
-                   @checked((old('communication') ?? $convoy->communication) === 'Discord' || (old('communication') ?? $convoy->communication) == '') @if($booking) disabled @endif>
-                <label class="custom-control-label" for="communication-discord">Discord</label>
-                @if($booking)
-                    <input type="hidden" name="communication" value="{{ $convoy->communication }}">
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="communication_program">@lang('attributes.communication_link')</label>
-                <input type="text" class="form-control" id="communication_link" name="communication_link" value="{{ old('communication_link') ?? $convoy->communication_link }}" required @if($booking) readonly @endif>
-                @if($errors->has('communication_link'))
-                    <small class="form-text">{{ $errors->first('communication_link') }}</small>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="communication_channel">@lang('attributes.communication_channel')</label>
-                <input type="text" class="form-control" id="communication_channel" name="communication_channel" value="{{ old('communication_channel') ?? $convoy->communication_channel }}" @if($booking) readonly @endif>
-                @if($errors->has('communication_channel'))
-                    <small class="form-text">{{ $errors->first('communication_channel') }}</small>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="lead">@lang('attributes.lead')</label>
-                <select class="form-control" id="lead" name="lead">
-                    @if(!$booking)
-                        <option value="На месте разберёмся" @selected((old('lead') ?? $convoy->lead) === 'На месте разберёмся')>На месте разберёмся</option>
+                <div class="col-md-5 form-group" id="dlc_info">
+                    <label for="dlc">
+                        @lang('attributes.dlc')
+                        @can('editDLCList', \App\Convoy::class)
+                            <a href="{{ route('evoque.convoys.dlc') }}">
+                                <i class="fas fa-pen"></i>
+                            </a>
+                        @endcan
+                    </label>
+                    <select class="form-control" size="19" name="dlc[]" id="dlc" multiple>
+                        @foreach($dlc as $game => $list)
+                            <optgroup label="{{ strtoupper($game) }}">
+                                @foreach($list as $item)
+                                    <option value="{{ $item->id }}" @selected((is_array(old('dlc')) && in_array($item->id, old('dlc'))) || $convoy->DLC->contains($item->id))>{{ $item->title }}</option>
+                                @endforeach
+                                <option disabled></option>
+                            </optgroup>
+                        @endforeach
+                    </select>
+                    @if($errors->has('dlc'))
+                        <small class="form-text">{{ $errors->first('dlc') }}</small>
                     @endif
-                    @foreach($members as $member)
-                        <option value="{{ $member->nickname }}" @selected($member->nickname === (old('lead') ?? $convoy->lead))>{{ $member->nickname }}</option>
-                    @endforeach
-                </select>
+                    <small class="text-muted">удерживать Ctrl для выбора нескольких или снятия выбора</small>
+                </div>
             </div>
             <div class="row truck-section" id="truck_info">
                 <h3 class="text-primary mt-3 col-12">@lang('attributes.truck')</h3>

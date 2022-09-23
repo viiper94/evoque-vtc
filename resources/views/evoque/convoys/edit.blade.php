@@ -272,7 +272,7 @@
                 <div class="col-md-7">
                     <h6>Описание</h6>
                     @if(!$booking)
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="custom-control custom-checkbox mb-2" @if(!$convoy->public) style="display: none" @endif>
                             <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public"
                                    @if(!$convoy->officialTruckTuning && ($convoy->truck_public || old('truck_public') === 'on')) checked @endif
                                    @if($convoy->officialTruckTuning) disabled @endif>
@@ -343,7 +343,7 @@
                 <div class="col-md-7">
                     <h6>Описание</h6>
                     @if(!$booking)
-                        <div class="custom-control custom-checkbox mb-2">
+                        <div class="custom-control custom-checkbox mb-2" @if(!$convoy->public) style="display: none" @endif>
                             <input type="checkbox" class="custom-control-input" id="trailer_public" name="trailer_public" @if($convoy->trailer_public || old('trailer_public') === 'on') checked @endif>
                             <label class="custom-control-label" for="trailer_public">@lang('attributes.trailer_public')</label>
                         </div>
@@ -377,7 +377,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row alt_trailer-section" style="display: @if($convoy->officialTrailerTuning)none @else flex @endif ;">
+            <div class="row alt_trailer-section" style="display: @if($convoy->officialTrailerTuning)none @else flex @endif ;" id="alt_trailer_info">
                 <h3 class="text-primary mt-5 col-12">@lang('attributes.alt_trailer')</h3>
                 <div class="col-md-5">
                     <h6>Изображение</h6>

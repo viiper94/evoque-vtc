@@ -239,6 +239,7 @@
             <div class="row truck-section" id="truck_info">
                 <h3 class="text-primary mt-3 col-12">@lang('attributes.truck')</h3>
                 <div class="col-md-5">
+                    <h6>Изображение</h6>
                     <div class="form-group truck_image">
                         <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->officialTruckTuning) style="display: none" @endif>
                             <input type="file" class="custom-file-input" id="truck_image" name="truck_image" accept="image/*" @if($convoy->officialTruckTuning) disabled @endif>
@@ -270,6 +271,7 @@
                     <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="truck_image"><i class="fas fa-trash"></i> Удалить картинку</button>
                 </div>
                 <div class="col-md-7">
+                    <h6>Описание</h6>
                     @if(!$booking)
                         <div class="custom-control custom-checkbox mb-2">
                             <input type="checkbox" class="custom-control-input" id="truck_public" name="truck_public"
@@ -309,6 +311,7 @@
             <div class="row trailer-section" id="trailer_info">
                 <h3 class="text-primary mt-5 col-12">@lang('attributes.trailer')</h3>
                 <div class="col-md-5">
+                    <h6>Изображение</h6>
                     <div class="form-group trailer_image">
                         <div class="custom-file custom-file-dark mb-3" @if($convoy->officialTrailerTuning) style="display: none" @endif>
                             <input type="file" class="custom-file-input" id="trailer_image" name="trailer_image" accept="image/*" @if($convoy->officialTrailerTuning) disabled @endif>
@@ -340,6 +343,7 @@
                     <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>
                 <div class="col-md-7">
+                    <h6>Описание</h6>
                     @if(!$booking)
                         <div class="custom-control custom-checkbox mb-2">
                             <input type="checkbox" class="custom-control-input" id="trailer_public" name="trailer_public" @if($convoy->trailer_public || old('trailer_public') === 'on') checked @endif>
@@ -378,6 +382,7 @@
             <div class="row alt_trailer-section" style="display: @if($convoy->officialTrailerTuning)none @else flex @endif ;">
                 <h3 class="text-primary mt-5 col-12">@lang('attributes.alt_trailer')</h3>
                 <div class="col-md-5">
+                    <h6>Изображение</h6>
                     <div class="form-group alt_trailer_image">
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
@@ -397,6 +402,7 @@
                     <button type="button" class="btn btn-sm btn-outline-danger delete-img" data-target="alt_trailer_image"><i class="fas fa-trash"></i> Удалить картинку прицепа</button>
                 </div>
                 <div class="col-md-7">
+                    <h6>Описание</h6>
                     <div class="form-group">
                         <input type="text" class="form-control" id="alt_trailer" name="alt_trailer" value="{{ old('alt_trailer') ?? $convoy->alt_trailer }}" placeholder="Тип, не обязательно">
                         @if($errors->has('alt_trailer'))

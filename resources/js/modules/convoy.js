@@ -187,9 +187,10 @@ $(document).ready(function(){
                     select.after(spinner());
                 },
                 success : function(response){
+                    select.parent().find('.delete-img').hide();
                     $('#'+target+'_image').val('').attr('disabled', true).hide();
                     $('.'+target+'_image-input').hide();
-                    $('#'+target+'_image-preview').attr('src', response.path);
+                    $('#'+target+'_image-preview').attr('data-replaces', $('#'+target+'_image-preview').attr('src')).attr('src', response.path);
                     $('#'+target+'').val(select.find(':selected').text()).attr('readonly', true);
                     $('#'+target+'_tuning').val('Официальный из мода');
                     $('#'+target+'_paint').val('Официальный').attr('readonly', true);
@@ -205,7 +206,7 @@ $(document).ready(function(){
         }else{
             $('#'+target+'_image').val('').attr('disabled', false).show();
             $('.'+target+'_image-input').show();
-            $('#'+target+'_image-preview').attr('src', '/images/tuning/image-placeholder.jpg');
+            $('#'+target+'_image-preview').attr('src', $('#'+target+'_image-preview').data('replaces'));
             $('#'+target+'').val('').attr('readonly', false);
             $('#'+target+'_tuning').val('');
             $('#'+target+'_paint').val('').attr('readonly', false);
@@ -213,7 +214,40 @@ $(document).ready(function(){
             if(target === 'trailer'){
                 $('.alt_trailer-section').show();
             }
+            if(select.parent().find('.delete-img').length > 0){
+                select.parent().find('.delete-img').attr('style', false);
+            }
         }
+    });
+
+    $('[name=truck_image], [name=trailer_image], [name=alt_trailer_image]').change(function(){
+        if($(this)[0].files){
+            let replaces = $('#'+$(this).attr('name')+'-preview').attr('src');
+            $(this).parent().parent().find('.delete-img').hide();
+            $('#'+$(this).attr('name')+'-preview').after('<button type="button" class="delete-local-img" data-replaces="'+replaces+'" data-target="'+$(this).attr('name')+'"><i class="fas fa-undo"></i></button>');
+        }
+    });
+
+    $(document).on('click', '.delete-local-img', function(){
+        $('#'+$(this).data('target')+'-preview').attr('src', $(this).data('replaces'));
+        $('#'+$(this).data('target')).val('');
+        $('#'+$(this).data('target')+' + label').html('Выберите изображение');
+        if($(this).parent().find('.delete-img').length > 0){
+            $(this).parent().find('.delete-img').attr('style', false);
+        }
+        $(this).remove();
+    });
+
+    $('input#public').change(function(){
+        let $checkboxes = $('input#truck_public, input#trailer_public').parent();
+        $(this).prop('checked') ? $checkboxes.show() : $checkboxes.hide();
+    });
+
+    $('#list-scrollspy a').click(function(e){
+        e.preventDefault();
+        $([document.documentElement, document.body]).animate({
+            scrollTop: ($($(this).attr('href')).offset().top - 60)
+        }, 300);
     });
 
 });

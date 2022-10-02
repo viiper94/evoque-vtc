@@ -39,7 +39,7 @@
                         <td><a href="https://truckersmp.com/user/{{ $user->truckersmp_id }}" target="_blank">{{ $user->truckersmp_id }}</a></td>
                         <td>
                             @if($user->member)
-                                @if($user->member->visible)
+                                @if(!$user->member->trashed())
                                     @can('update', \App\Member::class)
                                         <a href="{{ route('evoque.admin.members.edit', $user->member->id) }}"><i class="fontello icon-evoque text-primary"></i></a>
                                     @else

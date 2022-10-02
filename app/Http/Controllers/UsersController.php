@@ -23,7 +23,7 @@ class UsersController extends Controller{
     public function index(){
         $this->authorize('view', User::class);
         return view('evoque.users', [
-            'users' => User::with('member')->orderBy('created_at', 'desc')->get()
+            'users' => User::with(['member' => function($q){$q->withTrashed();}])->orderBy('created_at', 'desc')->get()
         ]);
     }
 

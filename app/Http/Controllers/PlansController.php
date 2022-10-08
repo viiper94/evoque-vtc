@@ -96,6 +96,12 @@ class PlansController extends Controller{
         if($request->ajax() && $request->post()){
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
+            if(!in_array($request->input('start_time'), Convoy::$timesToType[$type])){
+                return response()->json([
+                    'errors' => ['start_time' => 'Выбранное время не соответствует типу конвоя'],
+                    'message' => 'Выбранное время не соответствует типу конвоя'
+                ], 422);
+            }
             $route_images = [];
             foreach(explode(',', $request->post('imageList')) as $image){
                 if(is_file(public_path('images/convoys/'. $image))){
@@ -111,10 +117,11 @@ class PlansController extends Controller{
             if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'));
             if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'));
             $convoy->visible = $offset == 0;
-            $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->start_time = Carbon::parse(Carbon::today()->addDays($offset)->format('Y-m-d').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
             $convoy->booking = true;
             $convoy->booked_by_id = Auth::user()->member->id;
+            $convoy->lead = Auth::user()->member->nickname;
             if($convoy->save()){
                 $convoy->DLC()->sync($request->input('dlc'));
                 return response()->json([

@@ -106,6 +106,7 @@ $(document).ready(function(){
             beforeSend: function(){
                 $('.toast').remove();
                 $('[type=submit]').attr('disabled', 'true');
+                $('.is-invalid').removeClass('is-invalid');
                 $('.new-convoy').append(addToast('Секундочку...', 'Проверяем и сохраняем данные', 'warning'));
                 $('.toast').toast({'delay': 999999}).toast('show');
             },

@@ -9,10 +9,8 @@ use App\Tuning;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
-use TruckersMP\APIClient\Client;
 use Woeler\DiscordPhp\Exception\DiscordInvalidResponseException;
 use Woeler\DiscordPhp\Message\DiscordEmbedMessage;
 use Woeler\DiscordPhp\Webhook\DiscordWebhook;
@@ -21,30 +19,22 @@ class ConvoysController extends Controller{
 
     public function view(Request $request, $all = false){
         if(!Auth::user()?->member) abort(404);
-        $list = array();
         $convoys = Convoy::with('DLC', 'leadMember', 'leadMember.user', 'officialTruckTuning', 'officialTrailerTuning');
         if(Auth::user()->cant('viewAny', Convoy::class) || !$all){
             $operator = '<';
-            if(Carbon::now()->format('H') >= '21') $operator = '<=';
-            $convoys = $convoys->whereDate('start_time', $operator, Carbon::tomorrow())
+            if(now()->format('H') >= '21') $operator = '<=';
+            $convoys = $convoys->whereDate('start_date', $operator, Carbon::tomorrow())
                 ->where('visible', '1')
                 ->orWhere(function($query){
                     $query->where('start_time', '>', Carbon::now())
                         ->where('booked_by_id', Auth::user()->member->id);
                 });
         }
-        $convoys = $convoys->orderBy('start_time')->get();
-        foreach($convoys as $convoy){
-            $list[$convoy->start_time->format('Y-m-d')][] = $convoy;
-        }
-        $list = collect(array_reverse($list));
+        $convoys = $convoys->orderBy('start_time', 'desc')->paginate(16);
         return view('evoque.convoys.index', [
             'all' => $all,
-            'convoys' => $list->forPage($request->input('page'), 8),
-            'paginator' => new LengthAwarePaginator($list, count($list), 8, $request->input('page'), [
-                'path' => url()->current(),
-                'pageName' => 'page'
-            ])
+            'convoys' => $convoys->groupBy('start_date'),
+            'paginator' => $convoys
         ]);
     }
 

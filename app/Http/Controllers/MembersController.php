@@ -18,8 +18,8 @@ class MembersController extends Controller{
         return view('evoque.members.index', [
             'roles' => Role::with([
                 'members' => function($query){
-                                $query->where('visible', 1)->orderBy('sort', 'desc')->orderBy('scores', 'desc')->orderBy('join_date', 'asc');
-                            },
+                        $query->where('visible', 1)->orderBy('sort', 'desc')->orderBy('scores', 'desc')->orderBy('join_date', 'asc');
+                    },
                 'members.user',
                 'members.role' => function($query){
                                     $query->where('visible', '1');
@@ -77,7 +77,7 @@ class MembersController extends Controller{
         }
         $member = Member::with(['role', 'user', 'audits' => function($query){
             $query->limit(10)->orderBy('created_at', 'desc');
-        }, 'audits.user.member' => function($query){
+        }, 'audits.user', 'audits.user.member' => function($query){
             $query->withTrashed();
         }, 'stats'])->where('id', $id)->withTrashed()->firstOrFail();
         return view('evoque.members.edit', [

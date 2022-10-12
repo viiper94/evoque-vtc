@@ -16,46 +16,26 @@ class RpController extends Controller{
     public function index(){
         if(!Auth::user()?->member) abort(404);
         return view('evoque.rp.index', [
-            'roles' => [
-                'ets2' => Role::with([
-                    'members' => function($query){
-                        $query->where('visible', '1');
-                    },
+            'roles' => Role::with([
+                    'members',
                     'members.role' => function($query){
                         $query->where('visible', '1');
                     },
-                    'members.stat' => function($query){
-                        $query->where('game', 'ets2')->whereNotNull('level');
-                    }
+                    'members.stats' => function($query){
+                        $query->whereNotNull('level');
+                    },
+                    'members.stats.rewards'
                 ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
                     foreach($group as $role){
                         foreach($role->members as $member){
-                            $has = $member->stat && $member->topRole() == $role->id;
+                            foreach($member->stats as $stat){
+                                $has = $stat && $member->topRole() == $role->id;
+                            }
                             if($has) return true;
                         }
                     }
                     return false;
                 }),
-                'ats' => Role::with([
-                    'members' => function($query){
-                        $query->where('visible', '1');
-                    },
-                    'members.role' => function($query){
-                        $query->where('visible', '1');
-                    },
-                    'members.stat' => function($query){
-                        $query->where('game', 'ats')->whereNotNull('level');
-                    }
-                ])->where('visible', 1)->get()->groupBy('group')->filter(function($group){
-                    foreach($group as $role){
-                        foreach($role->members as $member){
-                            $has = $member->stat && $member->topRole() == $role->id;
-                            if($has) return true;
-                        }
-                    }
-                    return false;
-                })
-            ],
             'rewards' => RpReward::all()->groupBy('game')
         ]);
     }

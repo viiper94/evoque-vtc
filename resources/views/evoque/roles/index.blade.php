@@ -31,7 +31,7 @@
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td class="role-title">{{ $role->title }}</td>
                         <td class="">{{ $role->group }}</td>
-                        <td class="text-center">{{ count($role->members) }}</td>
+                        <td class="text-center">{{ $role->members_count }}</td>
                         <td><i @class(['fas', 'fa-eye' => $role->visible, 'fa-eye-slash' => !$role->visible])></i></td>
                         <td>
                             @can('update', \App\Role::class)

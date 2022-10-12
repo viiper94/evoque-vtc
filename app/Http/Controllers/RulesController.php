@@ -13,7 +13,7 @@ class RulesController extends Controller{
     public function index($type = 'public'){
         if(!Auth::user()?->member) $type = 'public';
         return view('rules', [
-            'rules' => Rules::with('audits')->where('public', $type === 'public' ? '1' : '0')->orderBy('paragraph')->get(),
+            'rules' => Rules::withCount('audits')->where('public', $type === 'public' ? '1' : '0')->orderBy('paragraph')->get(),
             'public' => $type === 'public'
         ]);
     }
@@ -50,10 +50,10 @@ class RulesController extends Controller{
 
     public function changelog(Request $request, $id){
         $this->authorize('viewChangelog', Rules::class);
-        $paragraph = Rules::with(['audits' => function($query){
-            $query->orderBy('created_at', 'desc');
-        }])->find($id);
+        $paragraph = Rules::find($id);
+        $audits = $paragraph->audits()->with('user')->latest()->get();
         return view('evoque.rules.changelog', [
+            'audits' => $audits,
             'paragraph' => $paragraph,
         ]);
     }

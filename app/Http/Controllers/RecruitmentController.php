@@ -19,7 +19,7 @@ class RecruitmentController extends Controller{
             ]);
         }
         return view('evoque.recruitments.index', [
-            'applications' => Recruitment::orderBy('created_at', 'desc')->paginate(15),
+            'applications' => Recruitment::withCount('comments')->latest()->paginate(15),
             'apps' => Application::where('status', 0)->count()
         ]);
     }

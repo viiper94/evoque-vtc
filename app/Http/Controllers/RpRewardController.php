@@ -20,7 +20,7 @@ class RpRewardController extends Controller{
             ]);
             $reward->fill($request->input());
             return $reward->save() ?
-                redirect()->route('evoque.rp', )->with(['success' => 'Награда успешно отредактирована!']) :
+                redirect()->route('evoque.rp')->with(['success' => 'Награда успешно отредактирована!']) :
                 redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.rp.edit_reward', [

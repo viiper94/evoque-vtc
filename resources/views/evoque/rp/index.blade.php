@@ -10,7 +10,7 @@
     <h2 class="pt-5 mt-3 text-center text-primary">Статистика рейтинговых перевозок</h2>
     <div class="row justify-content-center mb-3 mr-0 ml-0">
         <ul class="nav nav-pills justify-content-center">
-            @foreach($roles as $game => $game_roles)
+            @foreach(['ets2', 'ats'] as $game)
                 <li class="nav-item">
                     <a @class(['nav-link', 'active' => $loop->first]) data-toggle="tab" href="#{{ $game }}">@lang('general.'.$game)</a>
                 </li>
@@ -18,7 +18,7 @@
         </ul>
     </div>
     <div class="tab-content">
-        @foreach($roles as $game => $game_roles)
+        @foreach(['ets2', 'ats'] as $game)
             <div @class(['tab-pane', 'show active' => $loop->first]) id="{{ $game }}" role="tabpanel">
                 <div class="container-fluid members-table">
                     <div class="table-responsive">
@@ -48,37 +48,41 @@
                             </thead>
                             <tbody>
                             @php $i = 1; @endphp
-                            @foreach($game_roles as $role_group)
+                            @foreach($roles as $role_group)
                                 <tr>
                                     <th colspan="12" class="text-center text-primary">{{ $role_group[0]->group }}</th>
                                 </tr>
                                 @foreach($role_group as $role)
                                     @foreach($role->members as $member)
-                                        @if($member->topRole() == $role->id && $member->stat)
-                                            <tr>
-                                                <td>{{ $i++ }}</td>
-                                                <td class="stage-{{ $member->stat->getStage() }}">
-                                                    @can('updateRpStats', \App\Member::class)
-                                                        <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><b>{{ $member->nickname }}</b></a>
-                                                    @else
-                                                        <b>{{ $member->nickname }}</b>
-                                                    @endcan
-                                                </td>
-                                                <td>{{ $member->stat->level }}</td>
-                                                <td>
-                                                @if($member->stat->game === 'ets2')
-                                                    {{ $member->stat->level_promods }}
-                                                    @endif
-                                                </td>
-                                                <td><b>{{ $member->stat->getStage() }}</b></td>
-                                                <td class="border-left-5">{{ $member->stat->distance_total }} км</td>
-                                                <td>{{ $member->stat->weight_total }} т</td>
-                                                <td class="border-right-5">{{ $member->stat->quantity_total }}</td>
-                                                <td>{{ $member->stat->distance }} км</td>
-                                                <td>{{ $member->stat->bonus }} км</td>
-                                                <td>{{ $member->stat->weight }} т</td>
-                                                <td>{{ $member->stat->quantity }}</td>
-                                            </tr>
+                                        @if($member->topRole() == $role->id && $member->stats)
+                                            @foreach($member->stats as $stat)
+                                                @if($stat->game === $game)
+                                                    <tr>
+                                                        <td>{{ $i++ }}</td>
+                                                        <td class="stage-{{ $stat->getStage() }}">
+                                                            @can('updateRpStats', \App\Member::class)
+                                                                <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><b>{{ $member->nickname }}</b></a>
+                                                            @else
+                                                                <b>{{ $member->nickname }}</b>
+                                                            @endcan
+                                                        </td>
+                                                        <td>{{ $stat->level }}</td>
+                                                        <td>
+                                                            @if($stat->game === 'ets2')
+                                                                {{ $stat->level_promods }}
+                                                            @endif
+                                                        </td>
+                                                        <td><b>{{ $stat->getStage() }}</b></td>
+                                                        <td class="border-left-5">{{ $stat->distance_total }} км</td>
+                                                        <td>{{ $stat->weight_total }} т</td>
+                                                        <td class="border-right-5">{{ $stat->quantity_total }}</td>
+                                                        <td>{{ $stat->distance }} км</td>
+                                                        <td>{{ $stat->bonus }} км</td>
+                                                        <td>{{ $stat->weight }} т</td>
+                                                        <td>{{ $stat->quantity }}</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
                                         @endif
                                     @endforeach
                                 @endforeach

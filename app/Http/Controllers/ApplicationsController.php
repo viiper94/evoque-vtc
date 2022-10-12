@@ -19,7 +19,7 @@ class ApplicationsController extends Controller{
     public function app(Request $request, $id = null){
         if(!Auth::user()?->member) abort(404);
         if(($id = $request->get('id')) && $request->ajax()){
-            $app = Application::with('member')->where('id', $id)->firstOrFail();
+            $app = Application::with('member')->withCount('comments')->where('id', $id)->firstOrFail();
             $this->authorize('view', $app);
             $rp = null;
             if($app->new_rp_profile) $rp = RpStats::where(['member_id' => $app->member_id, 'game' => $app->new_rp_profile[0]])->first();

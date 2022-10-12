@@ -12,7 +12,7 @@
 @section('content')
     <div class="container-fluid pt-5">
         <h3 class="text-primary text-center mt-3">История изменений параграфа №{{ $paragraph->paragraph }}</h3>
-        @include('layout.changelog', ['items' => $paragraph->audits, 'granularity' => new cogpowered\FineDiff\Granularity\Word])
+        @include('layout.changelog', ['items' => $audits, 'granularity' => new cogpowered\FineDiff\Granularity\Word])
     </div>
 
 @endsection

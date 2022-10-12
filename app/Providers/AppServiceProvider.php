@@ -42,7 +42,6 @@ class AppServiceProvider extends ServiceProvider
 
             $convoys_badge = 0;
             $applications_badge = 0;
-            $gallery_badge = 0;
 
             $tabs_c = 0;
             $bookings_c = 0;
@@ -55,22 +54,18 @@ class AppServiceProvider extends ServiceProvider
                 $bookings_c = Convoy::where(['booking' => '1', 'visible' => '0'])->count();
                 $convoys_badge += $bookings_c;
             }
-            View::share('convoys_c', $convoys_badge);
-            View::share('tabs_c', $tabs_c);
-            View::share('bookings_c', $bookings_c);
 
             $applications_c = Application::where('status', 0)->count();
             $recruitments_c = Recruitment::where('status', 0)->count();
-            $gallery_c = Gallery::where('visible', 0)->count();
-            if(Auth::user()?->can('toggle', \App\Gallery::class)) $gallery_badge += $gallery_c;
             if(Auth::user()?->can('accept', Application::class)) $applications_badge += $applications_c;
             if(Auth::user()?->can('accept', Recruitment::class)) $applications_badge += $recruitments_c;
-            View::share('applications_badge', $applications_badge);
-            View::share('applications_c', $applications_c);
-            View::share('recruitments_c', $recruitments_c);
-            View::share('gallery_c', $gallery_badge);
-
-            View::share('reports_c', RpReport::where('status', '0')->count());
+            View::share([
+                'convoys_c' => $convoys_badge,
+                'tabs_c' => $tabs_c,
+                'bookings_c' => $bookings_c,
+                'applications_badge' => $applications_badge,
+                'reports_c' => RpReport::where('status', 0)->count()
+            ]);
         });
     }
 }

@@ -12,7 +12,7 @@ class RolesController extends Controller{
     public function roles(){
         $this->authorize('view', Role::class);
         return view('evoque.roles.index', [
-            'roles' => Role::with('members')->get()
+            'roles' => Role::withCount('members')->get()
         ]);
     }
 

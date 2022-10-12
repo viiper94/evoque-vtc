@@ -21,7 +21,7 @@
                             <a href="{{ route('evoque.rules.edit', $paragraph->id) }}" class="btn btn-outline-primary"><i class="fas fa-edit"></i> Редактировать</a>
                         @endcan
                         @can('viewChangelog', \App\Rules::class)
-                            @if(count($paragraph->audits) > 0)
+                            @if($paragraph->audits_count > 0)
                                 <a href="{{ route('evoque.rules.changelog', $paragraph->id) }}" class="btn btn-outline-info"><i class="fas fa-history"></i></a>
                             @endif
                         @endcan

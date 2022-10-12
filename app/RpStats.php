@@ -27,15 +27,19 @@ class RpStats extends Model{
         'quantity_total',
     ];
 
+    public function rewards(){
+        return $this->hasMany(RpReward::class, 'game', 'game');
+    }
+
     public function member(){
         return $this->belongsTo('App\Member');
     }
 
     public function getStage($km = null, $game = null){
-        $stages = RpReward::select(['stage', 'km'])->whereGame($game ?? $this->game)->get()->keyBy('stage');
         $distance = $km ?? $this->distance_total;
-        foreach($stages as $stage => $reward){
-            if($distance >= $reward->km && (!isset($stages[$stage+1]) || $distance < $stages[$stage+1]->km)) return $stage;
+        $rewards = $this->rewards->keyBy('stage');
+        foreach($rewards as $stage => $reward){
+            if($distance >= $reward->km && (!isset($rewards[$stage+1]) || $distance < $rewards[$stage+1]->km)) return $stage;
         }
         return 0;
     }

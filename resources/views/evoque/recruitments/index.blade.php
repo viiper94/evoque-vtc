@@ -73,9 +73,9 @@
                         </div>
                         <div class="card-footer row text-muted">
                             <span class="col">{{ $application->created_at->isoFormat('LLL') }}</span>
-                            @if(count($application->comments) > 0)
+                            @if($application->comments_count > 0)
                                 <div class="comments-count col-auto text-muted">
-                                    <i class="fas fa-comment-dots"></i> {{ count($application->comments) }}
+                                    <i class="fas fa-comment-dots"></i> {{ $application->comments_count }}
                                 </div>
                             @endif
                         </div>

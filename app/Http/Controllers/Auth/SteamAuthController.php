@@ -11,6 +11,7 @@ use Invisnik\LaravelSteamAuth\SteamAuth;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use TruckersMP\APIClient\Client;
+use TruckersMP\APIClient\Exceptions\ApiErrorException;
 use TruckersMP\APIClient\Exceptions\RequestException;
 
 class SteamAuthController extends Controller
@@ -61,8 +62,12 @@ class SteamAuthController extends Controller
 
             if (!is_null($steam_info)) {
 
-                $tmp = new Client();
-                $tmp_info= $tmp->player($steam_info->steamID64)->get();
+                try{
+                    $tmp = new Client();
+                    $tmp_info= $tmp->player($steam_info->steamID64)->get();
+                }catch(ApiErrorException $e){
+                    return redirect()->route('home')->withErrors(['Игрок с таким ID не найден.']);
+                }
 
                 if(!$tmp_info || $tmp_info->getCompanyId() !== 11682){
                     return redirect(route('apply'))

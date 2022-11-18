@@ -145,3 +145,12 @@ Route::get('/evoque/tuning/delete/{id}', 'TuningController@delete')->name('evoqu
 Route::get('/evoque/tuning/{q?}', 'TuningController@index')->name('evoque.tuning');
 
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');
+
+Route::get('/action', function(){
+    $convoys = \App\Convoy::all();
+    foreach($convoys as $convoy){
+        $convoy->start_date = $convoy->start_time->format('Y-m-d');
+//        dd($convoy);
+        $convoy->save();
+    }
+});

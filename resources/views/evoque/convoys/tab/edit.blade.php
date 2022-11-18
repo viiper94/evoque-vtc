@@ -51,7 +51,7 @@
             </div>
             <div class="form-group pt-3">
                 <div class="custom-file custom-file-dark mb-3">
-                    <input type="file" class="custom-file-input uploader" id="screenshot" name="screenshot" accept="image/*">
+                    <input type="file" class="custom-file-input uploader" id="screenshot" name="screenshot" accept="image/*" required>
                     <label class="custom-file-label" for="screenshot">Выберите скрин</label>
                 </div>
                 <img src="{{ $tab->screenshot ? '/images/convoys/tab/'.$tab->screenshot : '' }}" class="w-100" id="screenshot-preview">

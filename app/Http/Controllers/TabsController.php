@@ -30,7 +30,7 @@ class TabsController extends Controller{
                 'convoy_title' => 'required|string',
                 'lead_id' => 'required|numeric',
                 'date' => 'required|date',
-                'screenshot' => 'nullable|image|max:5000',
+                'screenshot' => 'required|image|max:5000',
                 'description' => 'nullable|string',
             ]);
             $tab->fill($request->post());

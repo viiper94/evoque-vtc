@@ -47,15 +47,11 @@ class MemberPolicy extends Policy{
             if(is_bool($result = $this->checkMemberPermission($user, 'manage_roles', 'edit_roles_permissions'))){
                 return $result;
             }
-            if(is_bool($result = $this->checkMemberPermission($user, 'manage_members', 'manage_members'))){
-                return $result && $member->topRole() >= $user->member?->topRole();
-            }
             foreach($user->member->role as $role){
-                if($role->manage_roles || $role->edit_roles_permissions ||
-                    ($role->manage_members && $member->topRole() >= $user->member?->topRole())) return true;
+                if(($role->manage_roles || $role->edit_roles_permissions) && $member->topRole() > $user->member?->topRole()) return true;
             }
         }
-        return true;
+        return false;
     }
 
     public function fire(User $user, Member $member){

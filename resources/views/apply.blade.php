@@ -144,7 +144,7 @@
             <div class="custom-control custom-checkbox mb-2">
                 <input type="checkbox" class="custom-control-input" id="rules_agreed" name="rules_agreed">
                 <label class="custom-control-label" for="rules_agreed">
-                    <a href="https://truckersmp.com/kb/744" target="_blank" class="text-primary">Правила мультиплеера</a>
+                    <a href="https://truckersmp.com/rules" target="_blank" class="text-primary">Правила мультиплеера</a>
                     и <a href="{{ route('rules') }}" target="_blank" class="text-primary">основные правила ВТК</a> обязуюсь соблюдать!
                 </label>
                     @if($errors->has('rules_agreed'))

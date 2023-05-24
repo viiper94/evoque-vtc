@@ -41,7 +41,7 @@ class KbController extends Controller{
             $kb->fill($request->post());
             $kb->visible = $request->input('visible') === 'on';
             $kb->public = $request->input('public') === 'on';
-            $kb->author ?? Auth::id();
+            $kb->author = $kb->author ?? Auth::id();
             if($kb->save()){
                 if(!$id) $kb->sort = $kb->id;
                 return $kb->save() ?

@@ -105,7 +105,7 @@
             </div>
             <h3 class="text-primary mt-3" id="route">@lang('attributes.route')</h3>
             <h6>Изображения</h6>
-            <small class="text-primary">Макс. размер файла: <b>3 Мб</b></small>
+            <small class="text-primary">Макс. размер файла: <b>7 Мб</b></small>
             <div class="convoy-images-uploader d-flex align-items-center mb-3">
                 @if($convoy->route)
                     <div class="convoy-images d-flex flex-grow-1">
@@ -244,7 +244,7 @@
                         <div class="custom-file custom-file-dark mb-3 truck_image-input" @if($convoy->officialTruckTuning) style="display: none" @endif>
                             <input type="file" class="custom-file-input uploader" id="truck_image" name="truck_image" accept="image/*" @if($convoy->officialTruckTuning) disabled @endif>
                             <label class="custom-file-label" for="truck_image">Выберите изображение</label>
-                            <small class="text-primary">Макс. размер файла: <b>5 Мб</b></small>
+                            <small class="text-primary">Макс. размер файла: <b>7 Мб</b></small>
                         </div>
                         <div class="vehicle-image-wrap">
                             <img src="@if($convoy->officialTruckTuning) /images/tuning/{{ $convoy->officialTruckTuning->image }} @else /images/convoys/{{ $convoy->truck_image ?? "image-placeholder.jpg" }} @endif"
@@ -315,7 +315,7 @@
                         <div class="custom-file custom-file-dark mb-3 trailer_image-input" @if($convoy->officialTrailerTuning) style="display: none" @endif>
                             <input type="file" class="custom-file-input uploader" id="trailer_image" name="trailer_image" accept="image/*" @if($convoy->officialTrailerTuning) disabled @endif>
                             <label class="custom-file-label" for="trailer_image">Выберите изображение</label>
-                            <small class="text-primary">Макс. размер файла: <b>5 Мб</b></small>
+                            <small class="text-primary">Макс. размер файла: <b>7 Мб</b></small>
                         </div>
                         <div class="vehicle-image-wrap">
                             <img src="@if($convoy->officialTrailerTuning) /images/tuning/{{ $convoy->officialTrailerTuning->image }} @else /images/convoys/{{ $convoy->trailer_image ?? "image-placeholder.jpg" }} @endif"
@@ -390,7 +390,7 @@
                         <div class="custom-file custom-file-dark mb-3">
                             <input type="file" class="custom-file-input uploader" id="alt_trailer_image" name="alt_trailer_image" accept="image/*">
                             <label class="custom-file-label" for="alt_trailer_image">Выберите изображение</label>
-                            <small class="text-primary">Макс. размер файла: <b>5 Мб</b></small>
+                            <small class="text-primary">Макс. размер файла: <b>7 Мб</b></small>
                         </div>
                         <div class="vehicle-image-wrap">
                             <img src="/images/convoys/{{ $convoy->alt_trailer_image ?? "image-placeholder.jpg" }}" class="w-100" id="alt_trailer_image-preview">

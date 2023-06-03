@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ConvoysController;
 use Illuminate\Support\Facades\Route;
 
 /*

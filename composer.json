@@ -17,6 +17,7 @@
         "laravel/ui": "^3.3",
         "owen-it/laravel-auditing": "^13.0",
         "socialiteproviders/discord": "^4.1",
+        "spatie/image": "^2.2",
         "truckersmp/api-client": "^2.0",
         "woeler/phpdiscord": "^3.0"
     },

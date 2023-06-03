@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConvoysController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -145,6 +146,10 @@ Route::get('/evoque/tuning/delete/{id}', 'TuningController@delete')->name('evoqu
 Route::get('/evoque/tuning/{q?}', 'TuningController@index')->name('evoque.tuning');
 
 Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord');
+
+
+
+Route::get('/evoque/compress', [ConvoysController::class, 'compress']);
 
 Route::get('/action', function(){
     $convoys = \App\Convoy::all();

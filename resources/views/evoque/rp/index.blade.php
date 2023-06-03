@@ -48,9 +48,9 @@
                             </thead>
                             <tbody>
                             @php $i = 1; @endphp
-                            @foreach($roles as $role_group)
+                            @foreach($roles as $name => $role_group)
                                 <tr>
-                                    <th colspan="12" class="text-center text-primary">{{ $role_group[0]->group }}</th>
+                                    <th colspan="12" class="text-center text-primary">{{ $name }}</th>
                                 </tr>
                                 @foreach($role_group as $role)
                                     @foreach($role->members as $member)

@@ -59,20 +59,6 @@ class ConvoysController extends Controller{
         if($request->ajax() && $request->post()){
             $this->validate($request, $convoy->attributes_validation);
             $convoy->fill($request->post());
-            $route_images = [];
-            foreach(explode(',', $request->post('imageList')) as $image){
-                if(is_file(public_path('images/convoys/'. $image))){
-                    $route_images[] = $image;
-                }else{
-                    if(isset($request->file('route')[$image])){
-                        $route_images[] = $convoy->saveImage($request->file('route')[$image]);
-                    }
-                }
-            }
-            $convoy->route = $route_images;
-            if($request->hasFile('truck_image')) $convoy->truck_image = $convoy->saveImage($request->file('truck_image'));
-            if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'));
-            if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'));
             $convoy->booking = !Auth::user()->can('update', Convoy::class);
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();

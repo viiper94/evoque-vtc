@@ -29,9 +29,8 @@ class RpController extends Controller{
                     foreach($group as $role){
                         foreach($role->members as $member){
                             foreach($member->stats as $stat){
-                                $has = $stat && $member->topRole() == $role->id;
+                                if($stat && $member->topRole() == $role->id) return true;
                             }
-                            if($has) return true;
                         }
                     }
                     return false;

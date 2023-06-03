@@ -5,6 +5,8 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class Convoy extends Model implements Auditable{
@@ -175,10 +177,27 @@ class Convoy extends Model implements Auditable{
         return $this->hasOne('App\Tuning', 'id', 'trailer_with_tuning');
     }
 
-    public function saveImage(UploadedFile $file, $path = '/images/convoys/', $key = null){
-        $name = substr(md5(time().$file->getClientOriginalName().$key), 0, 5).'.'. $file->getClientOriginalExtension();
-        $file->move(public_path($path), $name);
+    public function saveImage(UploadedFile $file, $path = '/images/convoys/', $suffix = null){
+        $name = $this->start_time->format('Y-m-d')
+            . '_'
+            . $this->id
+            . ($suffix ? '_'.$suffix.'_' : '_')
+            . \Illuminate\Support\Str::random(5)
+            . '.jpg';
+        $img = Image::load($file->getPathName());
+        if($img->getWidth() > 3000) $img->width(3000);
+        $img->format(Manipulations::FORMAT_JPG)
+            ->quality(85)
+            ->save(public_path($path).$name);
         return $name;
+    }
+
+    public function syncImages($old, $new) :void{
+        foreach(array_diff($old, $new) as $file_name){
+            if(is_file(public_path('images/convoys/').$file_name)){
+                unlink(public_path('images/convoys/').$file_name);
+            }
+        }
     }
 
     public function deleteImages($folder, $attr = ['route', 'truck_image', 'trailer_image', 'alt_trailer_image']){

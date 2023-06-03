@@ -76,7 +76,7 @@ class Convoy extends Model implements Auditable{
 
         'imageList' => 'required|string',
         'route' => 'nullable|array',
-        'route.*' => 'image|max:3000',
+        'route.*' => 'image|max:7000',
         'start_city' => 'required|string',
         'start_company' => 'nullable|string',
         'rest_city' => 'nullable|string',
@@ -90,20 +90,20 @@ class Convoy extends Model implements Auditable{
         'communication_channel' => 'nullable|string',
         'lead' => 'nullable|string',
 
-        'truck_image' => 'nullable|image|max:5000',
+        'truck_image' => 'nullable|image|max:7000',
         'truck_with_tuning' => 'nullable|numeric',
         'truck' => 'nullable|string',
         'truck_tuning' => 'nullable|string',
         'truck_paint' => 'nullable|string',
 
-        'trailer_image' => 'nullable|image|max:5000',
+        'trailer_image' => 'nullable|image|max:7000',
         'trailer_with_tuning' => 'nullable|numeric',
         'trailer' => 'nullable|string',
         'trailer_tuning' => 'nullable|string',
         'trailer_paint' => 'nullable|string',
         'cargo' => 'nullable|string',
 
-        'alt_trailer_image' => 'nullable|image|max:5000',
+        'alt_trailer_image' => 'nullable|image|max:7000',
         'alt_trailer' => 'nullable|string',
         'alt_trailer_tuning' => 'nullable|string',
         'alt_trailer_paint' => 'nullable|string',

@@ -29,8 +29,8 @@ $(document).ready(function(){
         let maxFiles = $(this).data('allowed') > files.length ? files.length : $(this).data('allowed');
         if($(this).data('allowed') < files.length) alert('Чёт перебор... Оставил только '+ maxFiles + ' шт.');
         for(let i = 0; i < maxFiles; i++){
-            if(files[i].size > 3200000){
-                alert('Превышен лимит размера одного из файлов. Максимум 3 МБ!');
+            if(files[i].size > 7200000){
+                alert('Превышен лимит размера одного из файлов. Максимум 7 МБ!');
                 return false;
             }
         }

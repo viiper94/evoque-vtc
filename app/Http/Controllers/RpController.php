@@ -10,6 +10,8 @@ use App\RpStats;
 use App\Rules\RpLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Image\Image;
+use Spatie\Image\Manipulations;
 
 class RpController extends Controller{
 
@@ -81,17 +83,25 @@ class RpController extends Controller{
                 'note' => 'nullable|string'
             ]);
             $report->fill($request->post());
-            $images = array();
-            foreach($request->files as $file){
-                $name = md5(time().$file->getClientOriginalName()).'.'. $file->getClientOriginalExtension();
-                $file->move(public_path('/images/rp/'), $name);
-                $images[] = $name;
-            }
-            $report->images = $images;
+            $report->images = [];
             $report->member_id = Auth::user()->member->id;
-            return $report->save() ?
-                redirect()->route('evoque.rp.reports')->with(['success' => 'Отчёт успешно отправлен на модерацию!']) :
-                redirect()->back()->withErrors(['Возникла ошибка =(']);
+            if($report->save()){
+                $images = array();
+                foreach($request->files as $file){
+                    $img = Image::load($file->getPathName());
+                    $name = $report->created_at->format('Y-m-d')
+                        . '_'
+                        . $report->id
+                        . '_'
+                        . \Illuminate\Support\Str::random(5)
+                        . '.jpg';
+                    $img->format(Manipulations::FORMAT_JPG)->save(public_path('images/rp/').$name);
+                    $images[] = $name;
+                }
+                $report->images = $images;
+                if($report->save()) return redirect()->route('evoque.rp.reports')->with(['success' => 'Отчёт успешно отправлен на модерацию!']);
+            }
+            return redirect()->back()->withErrors(['Возникла ошибка =(']);
         }
         return view('evoque.rp.add', [
             'report' => $report,

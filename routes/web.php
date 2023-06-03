@@ -150,12 +150,3 @@ Route::get('/evoque/discord', 'DiscordController@index')->name('evoque.discord')
 
 
 Route::get('/evoque/compress', [ConvoysController::class, 'compress']);
-
-Route::get('/action', function(){
-    $convoys = \App\Convoy::all();
-    foreach($convoys as $convoy){
-        $convoy->start_date = $convoy->start_time->format('Y-m-d');
-//        dd($convoy);
-        $convoy->save();
-    }
-});

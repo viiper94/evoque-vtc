@@ -121,15 +121,18 @@ $(document).ready(function(){
                 }
             },
             error: function(jqXHR){
-                if(jqXHR.responseJSON.errors){
-                    $('.new-convoy').append(addToast('Ошибка!', jqXHR.responseJSON.message, 'danger'));
-                    $('.toast').toast({'delay': 5000}).toast('show');
-                    $('.toast-warning').toast('hide');
-                    $('[type=submit]').attr('disabled', false);
+                let message = jqXHR.hasOwnProperty('responseJSON') && jqXHR.responseJSON.hasOwnProperty('errors')
+                    ? jqXHR.responseJSON.message
+                    : 'При создании конвоя возникла ошибка. Просьба написать об этой ошибке в наш Дискорд в канал #баги';
+                if(jqXHR.hasOwnProperty('responseJSON') && jqXHR.responseJSON.hasOwnProperty('errors')){
                     $.each(jqXHR.responseJSON.errors, function(key){
                         $('#'+key).addClass('is-invalid');
                     });
                 }
+                $('.new-convoy').append(addToast('Ошибка!', message, 'danger'));
+                $('.toast').toast({'delay': 99000}).toast('show');
+                $('.toast-warning').toast('hide');
+                $('[type=submit]').attr('disabled', false);
             },
         });
     });

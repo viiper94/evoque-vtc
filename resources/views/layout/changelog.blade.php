@@ -21,13 +21,21 @@
                                     foreach($values['old'] as $k => $v){
                                         $old_value .= trans('changelog.'.$k) .': '. $v .'; ';
                                     }
+                                }else if(preg_match('/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6})Z$/', ($values['old'] ?? ''))){
+                                    $date = \Carbon\Carbon::parse($values['old']);
+                                    $old_value .= $date->format('H:i:s') === '00:00:00' ? $date->isoFormat('LL') : $date->isoFormat('LLL');
                                 }else{
                                     $old_value .= $values['old'] ?? '';
-                                }$new_value = '';
+                                }
+
+                                $new_value = '';
                                 if(isset($values['new']) && is_array($values['new'])){
                                     foreach($values['new'] as $k => $v){
                                         $new_value .= trans('changelog.'.$k) .': '. $v .'; ';
                                     }
+                                }else if(preg_match('/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6})Z$/', ($values['new'] ?? ''))){
+                                    $date = \Carbon\Carbon::parse($values['new']);
+                                    $new_value .= $date->format('H:i:s') === '00:00:00' ? $date->isoFormat('LL') : $date->isoFormat('LLL');
                                 }else{
                                     $new_value .= $values['new'] ?? '';
                                 }

@@ -2,7 +2,9 @@
 
 namespace App\Console;
 
+use App\Convoy;
 use App\Member;
+use App\RpReport;
 use App\TestResult;
 use App\User;
 use Illuminate\Console\Scheduling\Schedule;
@@ -33,11 +35,16 @@ class Kernel extends ConsoleKernel
 
         $schedule->call(function(){
             User::deleteOldUsers();
+            TestResult::deleteOldResults();
         })->daily();
 
         $schedule->call(function(){
-            TestResult::deleteOldResults();
-        })->daily();
+            Convoy::compressOldImages();
+        })->dailyAt('4:27');
+
+        $schedule->call(function(){
+            RpReport::compressOldImages();
+        })->dailyAt('3:27');
 
     }
 

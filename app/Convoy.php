@@ -256,4 +256,47 @@ class Convoy extends Model implements Auditable{
         return (bool) $this->start_city;
     }
 
+    public static function compressOldImages(){
+        $convoys = Convoy::select('*')
+            ->whereDate('start_date', '=', Carbon::today()->subMonths(3))
+            ->get();
+        // compressing route images
+        foreach($convoys as $convoy){
+            if($convoy->route){
+                foreach($convoy->route as $image_name){
+                    if(is_file(public_path('images/convoys/').$image_name)){
+                        Image::load(public_path('images/convoys/').$image_name)
+                            ->width(1280)
+                            ->quality(70)
+                            ->save(public_path('images/convoys/').$image_name);
+                    }
+                }
+            }
+            // compressing truck image
+            if($convoy->truck_image && is_file(public_path('images/convoys/').$convoy->truck_image)){
+                Image::load(public_path('images/convoys/').$convoy->truck_image)
+                    ->width(1280)
+                    ->quality(70)
+                    ->save(public_path('images/convoys/').$convoy->truck_image);
+
+            }
+            // compressing trailer image
+            if ($convoy->trailer_image && is_file(public_path('images/convoys/').$convoy->trailer_image)){
+                Image::load(public_path('images/convoys/').$convoy->trailer_image)
+                    ->width(1280)
+                    ->quality(70)
+                    ->save(public_path('images/convoys/').$convoy->trailer_image);
+
+            }
+            // compressing alt trailer image
+            if ($convoy->alt_trailer_image && is_file(public_path('images/convoys/').$convoy->alt_trailer_image)){
+                Image::load(public_path('images/convoys/').$convoy->alt_trailer_image)
+                    ->width(1280)
+                    ->quality(70)
+                    ->save(public_path('images/convoys/').$convoy->alt_trailer_image);
+
+            }
+        }
+    }
+
 }

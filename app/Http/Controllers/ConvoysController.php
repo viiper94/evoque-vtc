@@ -61,6 +61,7 @@ class ConvoysController extends Controller{
             $convoy->fill($request->post());
             $convoy->booking = !Auth::user()->can('update', Convoy::class);
             $convoy->start_time = Carbon::parse($request->input('start_date').' '.$request->input('start_time'))->format('Y-m-d H:i');
+            $convoy->start_date = Carbon::parse($request->input('start_date'))->format('Y-m-d');
             $convoy->setTypeByTime();
             if($convoy->save()){
                 $old_images = $convoy->route;
@@ -75,7 +76,7 @@ class ConvoysController extends Controller{
                     }
                 }
                 $convoy->route = $route_images;
-                $convoy->syncImages($old_images, $convoy->route);
+                if($id) $convoy->syncImages($old_images, $convoy->route);
                 if($request->hasFile('truck_image')) $convoy->truck_image = $convoy->saveImage($request->file('truck_image'), suffix: 'truck');
                 if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'), suffix: 'trailer');
                 if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'), suffix: 'truck');

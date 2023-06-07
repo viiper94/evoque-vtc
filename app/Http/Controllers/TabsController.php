@@ -51,7 +51,7 @@ class TabsController extends Controller{
         }
         return view('evoque.convoys.tab.edit', [
             'tab' => $tab,
-            'members' => Member::where('visible', '1')->get()
+            'members' => Member::where('visible', '1')->orderBy('nickname')->get()
         ]);
     }
 

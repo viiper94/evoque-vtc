@@ -14,49 +14,20 @@ use TruckersMP\APIClient\Client;
 use TruckersMP\APIClient\Exceptions\ApiErrorException;
 use TruckersMP\APIClient\Exceptions\RequestException;
 
-class SteamAuthController extends Controller
-{
-    /**
-     * The SteamAuth instance.
-     *
-     * @var SteamAuth
-     */
-    protected $steam;
+class SteamAuthController extends Controller{
 
-    /**
-     * The redirect URL.
-     *
-     * @var string
-     */
+    protected $steam;
     protected $redirectURL = '/';
 
-    /**
-     * AuthController constructor.
-     *
-     * @param SteamAuth $steam
-     */
-    public function __construct(SteamAuth $steam)
-    {
+    public function __construct(SteamAuth $steam){
         $this->steam = $steam;
     }
 
-    /**
-     * Redirect the user to the authentication page
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function redirectToSteam()
-    {
+    public function redirectToSteam(){
         return $this->steam->redirect();
     }
 
-    /**
-     * Get user info and log in
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function handle()
-    {
+    public function handle(){
         if ($this->steam->validate()) {
             $steam_info = $this->steam->getUserInfo();
 
@@ -69,13 +40,13 @@ class SteamAuthController extends Controller
                     return redirect()->route('home')->withErrors(['Игрок с таким ID не найден.']);
                 }
 
-                if(!$tmp_info || $tmp_info->getCompanyId() !== 11682){
+                if(!$tmp_info || ($tmp_info->getCompanyId() !== 11682 && $tmp_info->getId() !== 131815)){
                     return redirect(route('apply'))
                         ->withErrors([trans('general.not_member')]);
                 }
 
                 $user = $this->findOrNewUser($steam_info, $tmp_info);
-                if($user->member && $user->member->trashed() && $user->member->restore)
+                if($user->member && $user->member->trashed() && $user->member->restore && $tmp_info->getId() !== 131815)
                     return redirect(route('apply'))
                     ->withErrors([trans('general.not_visible_member')]);
 
@@ -87,12 +58,6 @@ class SteamAuthController extends Controller
         return $this->redirectToSteam();
     }
 
-    /**
-     * Getting user by info or created if not exists
-     *
-     * @param $steam_info
-     * @param $tmp_info
-     */
     protected function findOrNewUser($steam_info, $tmp_info){
         $user = User::with(['member' => function($query){
             $query->withTrashed();
@@ -101,7 +66,7 @@ class SteamAuthController extends Controller
         if(!is_null($user)){
             if(!is_null($user->member)){
                 if($user->member->trashed()){
-                    if(!$user->member->restore){
+                    if(!$user->member->restore && $tmp_info->getId() !== 131815){
                         $user->update([
                             'fired_at' => null
                         ]);

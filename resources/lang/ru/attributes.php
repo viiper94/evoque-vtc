@@ -64,6 +64,7 @@ return [
     'links_trucksbook' => 'Ссылка на мероприятие в TrucksBook',
     'truck_with_tuning' => 'Официальный тюнинг тягача',
     'trailer_with_tuning' => 'Официальный тюнинг прицепа',
+    'DLC' => 'DLC',
 
     // member
     'nickname' => 'Ник в игре',
@@ -83,5 +84,6 @@ return [
     'tmp_bans_hidden' => 'Баны скрыты',
     'restore' => 'Уволен с восстановлением',
     'permissions' => 'Права на сайте',
+    'role' => 'Должности',
 
 ];

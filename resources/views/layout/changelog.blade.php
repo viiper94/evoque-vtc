@@ -19,7 +19,7 @@
                                 $old_value = '';
                                 if(isset($values['old']) && is_array($values['old'])){
                                     foreach($values['old'] as $k => $v){
-                                        $old_value .= trans('changelog.'.$k) .': '. $v .'; ';
+                                        $old_value .= trans('changelog.'.$k) .': '. (is_array($v) ? $v['title'] : $v) ."; \n\r";
                                     }
                                 }else if(preg_match('/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6})Z$/', ($values['old'] ?? ''))){
                                     $date = \Carbon\Carbon::parse($values['old']);
@@ -31,7 +31,7 @@
                                 $new_value = '';
                                 if(isset($values['new']) && is_array($values['new'])){
                                     foreach($values['new'] as $k => $v){
-                                        $new_value .= trans('changelog.'.$k) .': '. $v .'; ';
+                                        $new_value .= trans('changelog.'.$k) .': '. (is_array($v) ? $v['title'] : $v) ."; \n\r";
                                     }
                                 }else if(preg_match('/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6})Z$/', ($values['new'] ?? ''))){
                                     $date = \Carbon\Carbon::parse($values['new']);
@@ -58,10 +58,10 @@
                                 @endif
                                 <td class="nowrap">{{ trans('attributes.'.$key) }}</td>
                                 <td class="font-weight-bold no-ins">
-                                    {!! $diff->render($old_value, $new_value) !!}
+                                    {!! nl2br($diff->render($old_value, $new_value)) !!}
                                 </td>
                                 <td class="font-weight-bold no-del">
-                                    {!! $diff->render($old_value, $new_value) !!}
+                                    {!! nl2br($diff->render($old_value, $new_value)) !!}
                                 </td>
                             </tr>
                         @endforeach

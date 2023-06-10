@@ -80,7 +80,7 @@ class ConvoysController extends Controller{
                 if($request->hasFile('truck_image')) $convoy->truck_image = $convoy->saveImage($request->file('truck_image'), suffix: 'truck');
                 if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'), suffix: 'trailer');
                 if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'), suffix: 'truck');
-                $convoy->DLC()->sync($request->input('dlc'));
+                $convoy->auditSync('DLC', $request->input('dlc'));
                 $convoy->save();
                 return response()->json([
                     'redirect' => route('convoys.private'),

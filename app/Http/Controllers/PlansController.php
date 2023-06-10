@@ -123,7 +123,7 @@ class PlansController extends Controller{
             $convoy->booked_by_id = Auth::user()->member->id;
             $convoy->lead = Auth::user()->member->nickname;
             if($convoy->save()){
-                $convoy->DLC()->sync($request->input('dlc'));
+                $convoy->auditSync('DLC', $request->input('dlc'));
                 return response()->json([
                     'redirect' => route('evoque.convoys.plans'),
                     'message' => $offset == 0 ?

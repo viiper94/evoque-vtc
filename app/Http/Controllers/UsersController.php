@@ -37,7 +37,7 @@ class UsersController extends Controller{
         $tmp_info= $tmp->player($user->steamid64)->get();
         $member->nickname = str_replace('[EVOQUE] ', '', $tmp_info->getName());
         if($member->save()){
-            $member->role()->attach('14');
+            $member->auditSync('role', ['14']);
             $member->update();
             return redirect()->route('evoque.admin.users')->with(['success' => 'Сотрудник успешно добавлен!']);
         }

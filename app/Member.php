@@ -124,7 +124,7 @@ class Member extends Model implements Auditable{
                     ($role->min_scores && $this->scores < $role->min_scores)){
                     $new_role = Role::where('min_scores', '<=', $this->scores)->orWhere('min_scores', 'null')
                         ->where('max_scores', '>=', $this->scores)->orWhere('max_scores', 'null')->first();
-                    $this->role()->sync($new_role->id);
+                    $this->auditSync('role', $new_role->id);
                 }
             }
         }

@@ -82,8 +82,7 @@ class TabsController extends Controller{
                     $member->convoys += 1;
                     if($member->isTrainee()){
                         if($member->trainee_convoys === 3){
-                            $member->role()->detach(14);
-                            $member->role()->attach(13);
+                            $member->auditSync('role', [13]);
                         }else{
                             $member->trainee_convoys += 1;
                         }

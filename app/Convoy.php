@@ -143,6 +143,7 @@ class Convoy extends Model implements Auditable{
 
     protected $auditExclude = [
         'id',
+        'start_date',
     ];
 
     public function isUpcoming(){

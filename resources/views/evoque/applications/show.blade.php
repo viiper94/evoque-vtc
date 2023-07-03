@@ -102,7 +102,7 @@
                 <form method="post" action="{{ route('evoque.applications.comment', $app->id) }}">
                     @csrf
                     <div class="new-comment mt-3">
-                        <textarea class="form-control simple-mde" id="comment" name="comment">{{ $app->comment }}</textarea>
+                        <textarea class="form-control simple-mde" id="comment" name="comment" required>{{ $app->comment }}</textarea>
                         @if($errors->has('comment'))
                             <small class="form-text">{{ $errors->first('comment') }}</small>
                         @endif

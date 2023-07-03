@@ -102,20 +102,6 @@ class PlansController extends Controller{
                     'message' => 'Выбранное время не соответствует типу конвоя'
                 ], 422);
             }
-            $route_images = [];
-            foreach(explode(',', $request->post('imageList')) as $image){
-                if(is_file(public_path('images/convoys/'. $image))){
-                    $route_images[] = $image;
-                }else{
-                    if(isset($request->file('route')[$image])){
-                        $route_images[] = $convoy->saveImage($request->file('route')[$image]);
-                    }
-                }
-            }
-            $convoy->route = $route_images;
-            if($request->hasFile('truck_image')) $convoy->truck_image = $convoy->saveImage($request->file('truck_image'));
-            if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'));
-            if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'));
             $convoy->visible = $offset == 0;
             $convoy->start_time = Carbon::parse(Carbon::today()->addDays($offset)->format('Y-m-d').' '.$request->input('start_time'))->format('Y-m-d H:i');
             $convoy->setTypeByTime();
@@ -123,7 +109,18 @@ class PlansController extends Controller{
             $convoy->booked_by_id = Auth::user()->member->id;
             $convoy->lead = Auth::user()->member->nickname;
             if($convoy->save()){
+                $route_images = [];
+                foreach(explode(',', $request->post('imageList')) as $image){
+                    if(isset($request->file('route')[$image])){
+                        $route_images[] = $convoy->saveImage($request->file('route')[$image]);
+                    }
+                }
+                $convoy->route = $route_images;
+                if($request->hasFile('truck_image')) $convoy->truck_image = $convoy->saveImage($request->file('truck_image'));
+                if($request->hasFile('trailer_image')) $convoy->trailer_image = $convoy->saveImage($request->file('trailer_image'));
+                if($request->hasFile('alt_trailer_image')) $convoy->alt_trailer_image = $convoy->saveImage($request->file('alt_trailer_image'));
                 $convoy->auditSync('DLC', $request->input('dlc'));
+                $convoy->save();
                 return response()->json([
                     'redirect' => route('evoque.convoys.plans'),
                     'message' => $offset == 0 ?

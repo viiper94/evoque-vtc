@@ -196,11 +196,11 @@ class Member extends Model implements Auditable{
         if($this->onVacation(true)) return false;
         $todaysDay = (int) Carbon::now()->format('j');
 //        $todaysDay = (int) Carbon::parse('2022-10-30')->format('j');
-        $endOfMonth = Carbon::now()->endOfMonth();
+//        $endOfMonth = Carbon::now()->endOfMonth();
 //        $endOfMonth = Carbon::parse('2022-10-30')->endOfMonth();
         $days = [
-            0 => [9, 19, (int) $endOfMonth->subDay()->format('j')],
-            1 => [10, 20, (int) $endOfMonth->format('j')]
+            0 => [9, 19, (int) Carbon::now()->endOfMonth()->subDay()->format('j')],
+            1 => [10, 20, (int) Carbon::now()->endOfMonth()->format('j')]
         ];
         if(in_array($todaysDay, $days[0])){
             return $this->convoys === 0;

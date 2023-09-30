@@ -167,7 +167,7 @@
                                                 @if($convoy->DLC)
                                                     <div class="d-lg-none">
                                                         <p class="mb-0 text-muted">Для участия требуется</p>
-                                                        <h5>@foreach($convoy->DLC as $item) <span class="nowrap font-weight-bold">{{ $item }}</span> @endforeach</h5>
+                                                        <h5>@foreach($convoy->DLC as $item) <span class="nowrap d-block font-weight-bold">{{ $item->title }}</span> @endforeach</h5>
                                                     </div>
                                                 @endif
                                             </div>

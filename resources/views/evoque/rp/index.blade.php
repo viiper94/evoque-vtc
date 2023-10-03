@@ -59,7 +59,7 @@
                                                 @if($stat->game === $game)
                                                     <tr>
                                                         <td>{{ $i++ }}</td>
-                                                        <td class="stage-{{ $stat->getStage() }}">
+                                                        <td class="stage-{{ $stat->getStage(game: $stat->game) }}">
                                                             @can('updateRpStats', \App\Member::class)
                                                                 <a href="{{ route('evoque.admin.members.edit', $member->id) }}" class="ml-3"><b>{{ $member->nickname }}</b></a>
                                                             @else
@@ -72,7 +72,7 @@
                                                                 {{ $stat->level_promods }}
                                                             @endif
                                                         </td>
-                                                        <td><b>{{ $stat->getStage() }}</b></td>
+                                                        <td><b>{{ $stat->getStage(game: $stat->game) }}</b></td>
                                                         <td class="border-left-5">{{ $stat->distance_total }} км</td>
                                                         <td>{{ $stat->weight_total }} т</td>
                                                         <td class="border-right-5">{{ $stat->quantity_total }}</td>

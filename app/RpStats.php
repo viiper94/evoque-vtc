@@ -35,9 +35,9 @@ class RpStats extends Model{
         return $this->belongsTo('App\Member');
     }
 
-    public function getStage($km = null, $game = null){
+    public function getStage($km = null, $game = 'ets2'){
         $distance = $km ?? $this->distance_total;
-        $rewards = $this->rewards->keyBy('stage');
+        $rewards = RpReward::whereGame($game)->get()->keyBy('stage');
         foreach($rewards as $stage => $reward){
             if($distance >= $reward->km && (!isset($rewards[$stage+1]) || $distance < $rewards[$stage+1]->km)) return $stage;
         }

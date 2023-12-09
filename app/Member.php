@@ -3,6 +3,8 @@
 namespace App;
 
 use Carbon\Carbon;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Arr;
@@ -140,20 +142,24 @@ class Member extends Model implements Auditable{
         }])->get();
         $tmp = new Client();
         foreach($members as $member){
-            $player = $tmp->player($member->user->truckersmp_id)->get();
-            if($player->hasBansHidden()){
-                $member->tmp_bans_hidden = true;
-            }else{
-                $member->tmp_bans_hidden = false;
-            }
-            if($player->isBanned()){
-                $member->tmp_banned_until = $player->getBannedUntilDate()->format('Y-m-d H:i');
-                $member->tmp_banned = true;
-            }else{
-                $member->tmp_banned_until = null;
-                $member->tmp_banned = false;
-            }
-            $member->save();
+            try{
+                $player = $tmp->player($member->user->truckersmp_id)->get();
+                if($player->hasBansHidden()){
+                    $member->tmp_bans_hidden = true;
+                }else{
+                    $member->tmp_bans_hidden = false;
+                }
+                if($player->isBanned()){
+                    if(isset($member->tmp_banned_until)){
+                        $member->tmp_banned_until = $player->getBannedUntilDate()->format('Y-m-d H:i');
+                    }
+                    $member->tmp_banned = true;
+                }else{
+                    $member->tmp_banned_until = null;
+                    $member->tmp_banned = false;
+                }
+                $member->save();
+            }catch(ClientException|ServerException $e){}
         }
     }
 

@@ -7,6 +7,8 @@ use App\Member;
 use App\Recruitment;
 use App\RpStats;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Invisnik\LaravelSteamAuth\SteamAuth;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -36,7 +38,7 @@ class SteamAuthController extends Controller{
                 try{
                     $tmp = new Client();
                     $tmp_info= $tmp->player($steam_info->steamID64)->get();
-                }catch(ApiErrorException $e){
+                }catch(ClientException|ServerException $e){
                     return redirect()->route('home')->withErrors(['Игрок с таким ID не найден.']);
                 }
 

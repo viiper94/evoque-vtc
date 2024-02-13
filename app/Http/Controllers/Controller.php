@@ -43,9 +43,9 @@ class Controller extends BaseController{
             $this->validate($request, [
                 'name' => 'required|string',
                 'age' => 'required|numeric',
-                'vk_link' => ['required', 'url', 'regex:/((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/'],
+                'vk_link' => ['required', 'url', 'regex:/^((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/'],
                 'discord_name' => 'nullable|string',
-                'tmp_link' => ['required', 'url', 'regex:/((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/'],
+                'tmp_link' => ['required', 'url', 'regex:/^((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)\/?$/'],
                 'rules_agreed' => 'required',
                 'requirements_agreed' => 'required',
                 'terms_agreed' => 'required',
@@ -53,7 +53,7 @@ class Controller extends BaseController{
 
             $tmp = new Client();
             $steam = new Steam();
-            $tmp_data = $tmp->player(explode('user/', $request->input('tmp_link'))[1])->get();
+            $tmp_data = $tmp->player(explode('/', parse_url($request->input('tmp_link'))['path'])[2])->get();
             $steam_data = $steam->getPlayerData($tmp_data->getSteamID64());
             if(isset($steam_data['error'])) return redirect()->back()->withErrors([$steam_data['message']]);
             $steam_games = $steam->getSCSGamesData($tmp_data->getSteamID64());

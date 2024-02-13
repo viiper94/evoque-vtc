@@ -1,5 +1,12 @@
 <?php
 
+// Mod is generating file structure for truck accessories with price 1 and unlock 1 based on truck_dealer file
+
+// original_vehicle - put inside entire "truck" folder from decryptred files
+// truck_dealer - modified dealer files
+// vehicle 
+// vehicle/truck - where
+
 require 'kint.phar';
 
 $dirname = 'truck_dealer';

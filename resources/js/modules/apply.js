@@ -14,8 +14,8 @@ $(document).ready(function(){
     $('#vk_link, #tmp_link, #discord_name').keyup(function(){
         let value = $(this).val();
         let regex = {
-            'vk_link': /((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/,
-            'tmp_link': /((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)/,
+            'vk_link': /^((http|https):\/\/)?vk\.com\/([0-9a-zA-Z_\.-]+)/,
+            'tmp_link': /^((http|https):\/\/)?truckersmp\.com\/user\/([0-9]+)\/?$/,
             'discord_name': /^.+#[0-9]{4}$/,
         }
         let result = value.match(regex[this.id]);

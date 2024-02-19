@@ -87,14 +87,17 @@ class TestController extends Controller{
     public function results(){
         $this->authorize('view', TestResult::class);
         $total = TestQuestion::count();
-        $test_results = TestResult::with(['question', 'member'])
+        $test_results = TestResult::with(['question', 'member' => function($q){
+            $q->withTrashed();
+        }])
             ->where('created_at', '>', \Carbon\Carbon::now()->subMonth()->format('Y-m-d H:i'))
             ->get();
-
         // sorting results by member
         $results = array();
         foreach($test_results as $item){
-            $results[$item->member->nickname][] = $item;
+            if($item->member){
+                $results[$item->member->nickname][] = $item;
+            }
         }
 
         // parsing data
@@ -126,7 +129,7 @@ class TestController extends Controller{
             ->get();
         return view('evoque.test.member_results', [
             'results' => $results,
-            'member' => Member::findOrFail($id)
+            'member' => Member::withTrashed()->findOrFail($id)
         ]);
     }
 

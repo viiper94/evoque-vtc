@@ -1,0 +1,42 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: evoque
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+      - /var/www/html/vendor         # don't sync vendor
+      - /var/www/html/node_modules  # don't sync node_modules
+      - /var/www/html/storage       # optional, speeds up file writes
+      - ./docker/apache/vhost.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    networks:
+      - laravel_network
+
+  db:
+    image: mysql:9.3.0
+    container_name: evoque-db
+    restart: unless-stopped
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: viiper94_evoque
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - laravel_network
+
+      
+networks:
+  laravel_network:
+    driver: bridge
+
+volumes:
+  dbdata:

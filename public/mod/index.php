@@ -29,6 +29,7 @@ foreach(scandir($dirname) as $brand){
                     // Copy accessory def into final folder
                     $folders = explode('/', $accessory);
                     $path = 'vehicle/truck';
+					if(!is_dir($path)) mkdir($path);
                     foreach($folders as $folder){
                         $path .= '/'. $folder;
                         if(stripos($folder, '.sii') === false){

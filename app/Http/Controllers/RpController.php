@@ -128,6 +128,7 @@ class RpController extends Controller{
                 'level' => [new RpLevel('level_promods'), 'nullable', 'numeric'],
                 'level_promods' => [new RpLevel('level'), 'nullable', 'numeric'],
                 'comment' => 'nullable|string',
+                'distance_unit' => 'required|string',
             ]);
             $accept = $request->input('accept') ?? false;
             $decline = $request->input('decline') ?? false;
@@ -138,7 +139,11 @@ class RpController extends Controller{
                     $stat = new RpStats();
                     $stat->member_id = $report->member_id;
                 }
-                $stat->distance += $request->input('distance');
+                if($request->input('distance_unit') == 'mi'){
+                    $stat->distance = $this->convert_mi_to_km($request->input('distance'));
+                }else{
+                    $stat->distance += $request->input('distance');
+                }
                 $stat->weight += $request->input('weight');
                 $stat->bonus += $request->input('bonus');
                 if($request->input('level') && !$request->input('level_promods')){
@@ -208,6 +213,10 @@ class RpController extends Controller{
             $stat->save();
         }
         return redirect()->back()->with(['success' => 'Готово!']);
+    }
+
+    private function convert_mi_to_km($mi){
+        return floor($mi * 1.60934);
     }
 
 }

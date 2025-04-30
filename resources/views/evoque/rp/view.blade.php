@@ -92,8 +92,17 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="distance">Пройденая дистанция, км</label>
-                        <input type="number" class="form-control" id="distance" name="distance" value="{{ old('distance') }}">
+                        <label for="distance">Пройденая дистанция</label>
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" id="distance" name="distance" value="{{ old('distance') }}">
+                            <input type="hidden" name="distance_unit" value="km" class="distance-unit">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-outline-primary distance-btn" type="button" data-unit="km">км</button>
+                                @if ($report->game === 'ats')
+                                    <button class="btn btn-sm btn-outline-primary text-secondary distance-btn" type="button" data-unit="mi">миль</button>
+                                @endif
+                            </div>
+                        </div>
                         @if($errors->has('distance'))
                             <small class="form-text">{{ $errors->first('distance') }}</small>
                         @endif

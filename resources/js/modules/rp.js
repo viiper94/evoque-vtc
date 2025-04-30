@@ -14,6 +14,14 @@ $(document).ready(function(){
             let bonus = distance * k;
             $('.report-accept #bonus').val(bonus);
         }
+
+    });
+
+    $('.distance-btn').click(function(){
+        let clicked = $(this);
+        $('.distance-btn').addClass('text-secondary');
+        clicked.removeClass('text-secondary');
+        $('.distance-unit').val(clicked.data('unit'));
     });
 
 });

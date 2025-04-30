@@ -1,16 +1,45 @@
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
+# Laravel & PHP
+/vendor/
 .env
-.env.backup
+.env.*
 .phpunit.result.cache
-Homestead.json
-Homestead.yaml
+.phpunit.cache
+Homestead.*
+storage/
+storage/logs/*
+storage/framework/*
+!storage/framework/.gitignore
+!storage/logs/.gitignore
+bootstrap/cache/*
+!bootstrap/cache/.gitignore
+
+# Node.js / Frontend Build
+/node_modules/
 npm-debug.log
 yarn-error.log
-/.idea
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs & Locks
+*.log
+*.lock
+package-lock.json
+
+# Test & Coverage
+/coverage/
+
+# Public assets - media, user content
+# (Keep default images, ignore everything else)
 /public/images/*
 !/public/images/plates
 /public/dumps/*
-/vendor
+/public/mod/
+!/public/mod/index.php

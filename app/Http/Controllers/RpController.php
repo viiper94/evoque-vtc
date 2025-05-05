@@ -140,7 +140,7 @@ class RpController extends Controller{
                     $stat->member_id = $report->member_id;
                 }
                 if($request->input('distance_unit') == 'mi'){
-                    $stat->distance = $this->convert_mi_to_km($request->input('distance'));
+                    $stat->distance += $this->convert_mi_to_km($request->input('distance'));
                 }else{
                     $stat->distance += $request->input('distance');
                 }

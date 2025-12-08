@@ -2,7 +2,7 @@
 
 import {readURLFile, addToast, spinner} from './_functions.js';
 import bsCustomFileInput from "bs-custom-file-input";
-import 'jquery-ui/ui/core';
+// import 'jquery-ui/ui/core';
 import 'jquery-ui/ui/widgets/mouse';
 import 'jquery-ui/ui/widgets/sortable';
 

@@ -1,6 +1,6 @@
 // DLC page
 
-import 'jquery-ui/ui/core';
+// import 'jquery-ui/ui/core';
 import 'jquery-ui/ui/widgets/mouse';
 import 'jquery-ui/ui/widgets/sortable';
 import {spinner} from './_functions.js';

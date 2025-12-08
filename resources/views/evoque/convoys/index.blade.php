@@ -185,7 +185,7 @@
                                                     <p class="mb-0 text-muted">@lang('attributes.truck')</p>
                                                     <h5 class="mb-1">
                                                         {{ $convoy->truck ?? 'Любой' }}
-                                                        @if($convoy->officialTruckTuning)
+                                                        {{-- @if($convoy->officialTruckTuning)
                                                              <a class="text-success px-1" target="_blank"
                                                                 @if($convoy->officialTruckTuning->game === 'ats')
                                                                     href="https://bit.ly/3oTNWBc"
@@ -194,7 +194,7 @@
                                                                 @endif>
                                                                 <i class="fas fa-download"></i>
                                                              </a>
-                                                        @endif
+                                                        @endif --}}
                                                     </h5>
                                                     @if($convoy->truck_tuning)
                                                         <p class="mb-0 text-muted">Тюнинг:</p>
@@ -228,7 +228,7 @@
                                                         <p class="mb-0 text-muted">@lang('attributes.trailer')</p>
                                                         <h5 class="mb-1">
                                                             {{ $convoy->trailer ?? 'Любой' }}
-                                                            @if($convoy->officialTrailerTuning)
+                                                            {{-- @if($convoy->officialTrailerTuning)
                                                                 <a class="text-success px-1" target="_blank"
                                                                    @if($convoy->officialTrailerTuning->game === 'ats')
                                                                        href="https://bit.ly/3oTNWBc"
@@ -237,7 +237,7 @@
                                                                     @endif>
                                                                     <i class="fas fa-download"></i>
                                                                 </a>
-                                                            @endif
+                                                            @endif --}}
                                                         </h5>
                                                         @if($convoy->trailer_tuning)
                                                             <p class="mb-0 text-muted">Тюнинг:</p>

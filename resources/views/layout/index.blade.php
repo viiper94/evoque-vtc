@@ -24,11 +24,11 @@
 </head>
 <body>
 
-    @include('layout.navbar')
+    {{-- @include('layout.navbar') --}}
 
     @yield('content')
 
-    @include('layout.footer')
+    {{-- @include('layout.footer') --}}
 
 
 </body>

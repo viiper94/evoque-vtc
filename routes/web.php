@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', 'Controller@home')->name('home');
+Route::any('{any}', function () {
+    return redirect(route('home'));
+})->where('any', '.*');
+
 Auth::routes();
 Route::get('auth/steam', 'Auth\SteamAuthController@redirectToSteam')->name('auth.steam');
 Route::get('auth/steam/handle', 'Auth\SteamAuthController@handle');
@@ -20,7 +25,6 @@ Route::get('auth/steam/handle', 'Auth\SteamAuthController@handle');
 Route::get('auth/discord', 'Auth\DiscordAuthController@redirect')->name('auth.discord');
 Route::get('auth/discord/handle', 'Auth\DiscordAuthController@handle');
 
-Route::get('/', 'Controller@home')->name('home');
 Route::any('/apply', 'Controller@apply')->name('apply');
 Route::get('/rules/{type?}', 'RulesController@index')->name('rules');
 Route::get('/privacy-policy', 'Controller@privacy')->name('privacy');
